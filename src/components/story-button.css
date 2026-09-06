@@ -44,7 +44,7 @@
   transition: transform 230ms cubic-bezier(.2, .85, .25, 1);
 }
 
-.story-button-label {
+.story-button .story-button-label {
   grid-area: label;
   font-size: 14px;
   line-height: 1.15;
@@ -52,7 +52,7 @@
   letter-spacing: .004em;
 }
 
-.story-button-hint {
+.story-button .story-button-hint {
   grid-area: hint;
   margin-top: 3px;
   color: color-mix(in srgb, currentColor 58%, transparent);
@@ -62,7 +62,7 @@
   letter-spacing: .01em;
 }
 
-.story-button-icon {
+.story-button .story-button-icon {
   grid-area: icon;
   display: inline-grid;
   place-items: center;
@@ -191,7 +191,7 @@
 @media (prefers-reduced-motion: reduce) {
   .story-button,
   .story-button::before,
-  .story-button-icon,
+  .story-button .story-button-icon,
   .story-icon-button,
   .story-icon-button > span {
     transition-duration: 0.001ms !important;
