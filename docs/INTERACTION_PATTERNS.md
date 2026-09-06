@@ -47,11 +47,11 @@ The implementation-level catalog lives in `src/patterns/catalog.ts` and marks ev
 - object-as-control
 
 ### Inspection
-- details on demand
+- details on demand — `Hotspot` is ready for diagrams/screenshots
 - focus lens
 - isolate while preserving context
 - annotation in context
-- interactive hotspot
+- interactive hotspot — `Hotspot`
 - ghost preview
 - zoom / pan exploration
 
@@ -82,7 +82,7 @@ The implementation-level catalog lives in `src/patterns/catalog.ts` and marks ev
 - scroll-linked video
 - image / diagram mask
 - image-sequence scrub
-- media hotspots
+- media hotspots — `Hotspot`
 
 ### Spatial
 - depth / parallax
@@ -98,7 +98,7 @@ A pattern is not refined merely because it animates smoothly.
 For every interaction check:
 
 1. **Affordance** — can the viewer tell what can be touched without a tutorial overlay?
-2. **Locality** — is the control next to the thing it affects?
+2. **Locality** — is the control next to the thing it affects? Use `ControlCluster` when several controls belong to one object.
 3. **Anticipation** — can hover, ghost state, cursor change, or spatial placement suggest what will happen?
 4. **Immediate feedback** — does the system react on the same beat as the action?
 5. **Continuity** — can the viewer follow what changed and why?
