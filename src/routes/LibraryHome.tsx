@@ -23,6 +23,7 @@ export default function LibraryHome() {
           <p className="library-subtitle">
             This route is only a module library. Real video pages stay out of the router until the actual script and story are known.
           </p>
+          <p className="library-lab-hint">Inside any lab: <kbd>L</kbd> or <kbd>⌘K</kbd> opens controls.</p>
         </div>
 
         <div className="library-links">
