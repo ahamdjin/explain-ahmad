@@ -3,12 +3,12 @@ import { SceneFrame } from '../engine/SceneFrame'
 import { SketchAnnotation } from '../visuals/SketchAnnotation'
 
 const destinations = [
-  { to: '/attention', title: 'Attention', meta: 'Clean technical · token relationships' },
-  { to: '/moe', title: 'MoE', meta: 'Paper sketch · router → experts' },
-  { to: '/hermes-agent', title: 'Hermes Agent', meta: 'Editorial · agent + tools' },
-  { to: '/styles', title: 'Style Gallery', meta: 'Same engine, different art directions' },
-  { to: '/lab/trust', title: 'Interaction Lab', meta: 'Trust, simulations, gesture paging, scrolly' },
-  { to: '/lab/navigation', title: 'Navigation Lab', meta: 'Snap, gesture, scene replacement' },
+  { to: '/styles', title: 'Art directions', meta: 'Paper, clean, editorial, technical' },
+  { to: '/lab/trust', title: 'Click stories', meta: 'Ncase-style reveal and choice patterns' },
+  { to: '/lab/navigation', title: 'Navigation', meta: 'Snap, exact gesture paging, scene replacement' },
+  { to: '/lab/flow', title: 'Diagrams', meta: 'Signal flow, nodes, edges, visual systems' },
+  { to: '/lab/drag', title: 'Interaction', meta: 'Drag, manipulate, compare, simulate' },
+  { to: '/lab/reveal', title: 'Reveals', meta: 'Masks, focus, progressive disclosure' },
 ]
 
 export default function LibraryHome() {
@@ -16,10 +16,12 @@ export default function LibraryHome() {
     <SceneFrame art="paper" className="library-home">
       <div className="library-home-inner">
         <div>
-          <p className="route-kicker">EXPLAIN AHMAD · STORYTELLING SYSTEM</p>
-          <h1 className="library-title">An <SketchAnnotation type="circle" color="#55a99e">arsenal</SketchAnnotation>, not a template.</h1>
+          <p className="route-kicker">INTERNAL STORYTELLING LIBRARY</p>
+          <h1 className="library-title">
+            Build the <SketchAnnotation type="underline" color="#55a99e">explanation</SketchAnnotation>, not the website.
+          </h1>
           <p className="library-subtitle">
-            Every video gets its own URL, art direction and interaction language. Paper/sketch is a favorite—not a prison.
+            This route is only a module library. Real video pages stay out of the router until the actual script and story are known.
           </p>
         </div>
 
