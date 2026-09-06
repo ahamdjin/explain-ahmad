@@ -1,42 +1,40 @@
-import type { ComponentType } from 'react'
+import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from 'react'
 import { useParams } from 'react-router'
-import ContinuityExample from '../examples/continuity-style/ContinuityExample'
-import DragGridExample from '../examples/drag-style/DragGridExample'
-import SignalFlowExample from '../examples/flow-style/SignalFlowExample'
-import FocusExample from '../examples/focus-style/FocusExample'
-import NavigationLabExample from '../examples/navigation-style/NavigationLabExample'
-import PolygonsExample from '../examples/polygons-style/PolygonsExample'
-import PremiumScrollyExample from '../examples/premium-scrolly/PremiumScrollyExample'
-import MaskRevealExample from '../examples/reveal-style/MaskRevealExample'
-import ScrollyExample from '../examples/scrolly-style/ScrollyExample'
-import SequenceExample from '../examples/sequence-style/SequenceExample'
-import TrustExample from '../examples/trust-style/TrustExample'
-import TypographyExample from '../examples/typography-style/TypographyExample'
 import { LabCommandMenu } from '../lab/LabCommandMenu'
 
-const demos: Record<string, ComponentType> = {
-  continuity: ContinuityExample,
-  premium: PremiumScrollyExample,
-  navigation: NavigationLabExample,
-  reveal: MaskRevealExample,
-  typography: TypographyExample,
-  trust: TrustExample,
-  polygons: PolygonsExample,
-  scrolly: ScrollyExample,
-  flow: SignalFlowExample,
-  sequence: SequenceExample,
-  drag: DragGridExample,
-  focus: FocusExample,
+type DemoComponent = LazyExoticComponent<ComponentType>
+
+const demos: Record<string, DemoComponent> = {
+  continuity: lazy(() => import('../examples/continuity-style/ContinuityExample')),
+  premium: lazy(() => import('../examples/premium-scrolly/PremiumScrollyExample')),
+  navigation: lazy(() => import('../examples/navigation-style/NavigationLabExample')),
+  reveal: lazy(() => import('../examples/reveal-style/MaskRevealExample')),
+  typography: lazy(() => import('../examples/typography-style/TypographyExample')),
+  trust: lazy(() => import('../examples/trust-style/TrustExample')),
+  polygons: lazy(() => import('../examples/polygons-style/PolygonsExample')),
+  scrolly: lazy(() => import('../examples/scrolly-style/ScrollyExample')),
+  flow: lazy(() => import('../examples/flow-style/SignalFlowExample')),
+  sequence: lazy(() => import('../examples/sequence-style/SequenceExample')),
+  drag: lazy(() => import('../examples/drag-style/DragGridExample')),
+  focus: lazy(() => import('../examples/focus-style/FocusExample')),
+}
+
+const fallbackDemo = demos.trust
+
+function DemoLoadingStage() {
+  return <div className="lab-demo-loading" role="status" aria-label="Loading demo" />
 }
 
 export default function LabDemoPage() {
   const { demo = 'trust' } = useParams()
-  const Demo = demos[demo] ?? TrustExample
+  const Demo = demos[demo] ?? fallbackDemo
 
   return (
     <main className="demo-route-shell">
       <LabCommandMenu currentDemo={demo} />
-      <Demo />
+      <Suspense fallback={<DemoLoadingStage />}>
+        <Demo />
+      </Suspense>
     </main>
   )
 }
