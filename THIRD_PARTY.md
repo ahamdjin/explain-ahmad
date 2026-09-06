@@ -8,6 +8,7 @@ This project intentionally uses open-source modules as opt-in capabilities.
 - Lucide — ISC — generic SVG icon system — https://lucide.dev/
 - React Flow / XYFlow — MIT — node/edge graph and workflow rendering — https://reactflow.dev/
 - React Router — MIT — route-per-video navigation — https://reactrouter.com/
+- cmdk — MIT — unstyled accessible command menu used only by the internal lab — https://www.npmjs.com/package/cmdk
 - Motion — MIT — animation and scroll-linked motion — https://motion.dev/
 - Lenis — MIT — optional smooth scrolling — https://lenis.darkroom.engineering/
 - GSAP — used only by explicitly opted-in components in this project.
