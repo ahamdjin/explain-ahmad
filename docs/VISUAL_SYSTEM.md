@@ -1,5 +1,11 @@
 # Explain Ahmad — Visual System
 
+## North star
+
+> The interface should disappear into the explanation.
+
+See `EXPLANATION_DESIGN.md` for the full scene standard.
+
 ## Non-negotiable rules
 
 1. One authored scene = one `100vw × 100vh` `SceneFrame`.
@@ -8,7 +14,9 @@
 4. Readability and conceptual clarity beat visual novelty.
 5. Art direction is chosen per video or scene. The engine does not force one look.
 6. Heavy libraries are capabilities, not global dependencies at runtime. Import them only in routes/scenes that use them.
-7. Every real video gets its own URL (`/attention`, `/moe`, `/hermes-agent`, ...).
+7. Real video pages are created only after the actual script/story is known.
+8. Diagrams, simulations and visual objects should usually carry more explanatory weight than text.
+9. Visible UI exists only when it teaches, compares, controls, reveals or explores the concept.
 
 ## Art directions
 
@@ -19,7 +27,7 @@ Warm paper, black ink, imperfect geometry, hand-drawn annotations. This is the c
 Pure white, crisp black geometry, minimal accent. Best for high-density technical explanations.
 
 ### `editorial`
-Large typography, asymmetry and magazine-like composition. Best for argument, narrative and creator-led videos.
+Asymmetry and magazine-like composition when narrative presentation genuinely benefits from it. Large typography is optional, not assumed.
 
 ### `technical`
 Light grid, structured diagrams, systematic spacing. Best for architecture, algorithms, model internals and data flow.
@@ -50,6 +58,10 @@ Keep opt-in. Motion for authored animation and scroll-linked values; GSAP for ca
 
 - `SceneFrame` — full-screen authored scene and art direction boundary.
 - `VideoPage` — route-level video wrapper.
+- `DiagramStage` — open diagram-first canvas with no fake card/chrome.
+- `DiagramLabel` — small readable label placed beside the thing it explains.
+- `StoryNote` — short narration that supports the visual.
+- `StoryButton` — contextual action; placement belongs to the story, not a global toolbar.
 - `VisualIcon` — semantic icon registry over Lucide.
 - `SketchShape` — Rough.js geometry.
 - `SketchArrow` — sketch connector.
@@ -72,17 +84,15 @@ A paper scene can use continuous scroll. A clean scene can use click-to-continue
 
 ## Route policy
 
-`/` = library / launchpad
+`/` = internal library / launchpad
 
-`/lab/:demo` = capability demos
+`/styles` = art-direction reference library
 
-`/<video-slug>` = a real video page
+`/lab/:demo` = capability demos and tutorials
 
-Starter examples:
-- `/attention`
-- `/moe`
-- `/hermes-agent`
-- `/styles`
+`/<video-slug>` = a real video page, registered in `src/videos/registry.tsx` only after the script is known
+
+The real-video registry intentionally stays empty while we are building the library.
 
 ## Future opt-in visual engines
 
