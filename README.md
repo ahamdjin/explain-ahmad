@@ -1,129 +1,105 @@
-# Explain Ahmad — Explainer Engine
+# Explain Ahmad — Storytelling Engine
 
 A reusable React/Vite system for building deeply polished interactive YouTube explainers.
 
-The target is not "good enough UI." The target is explorable-storytelling quality with premium, Framer-like motion: continuous scroll response, cinematic focus, strong hierarchy, and interaction that helps prove the idea being narrated.
+The goal is not one visual template. The goal is a reusable **storytelling arsenal**: navigation modes, motion systems, simulations, diagrams, sketch tools, icons, media layers and art directions that each video can combine differently.
 
-## Motion foundation
+## Core rules
+
+- One authored scene = one `100vw × 100vh` `SceneFrame`.
+- Every real video gets its own route: `/attention`, `/moe`, `/hermes-agent`, etc.
+- White / off-white + black ink is the default visual foundation; accents are restrained.
+- Paper/sketch is a preferred art direction, not a global style lock.
+- No neon glow, purple ambience, glass effects or tiny unreadable diagram labels by default.
+- Navigation, art direction and visual engine are separate decisions.
+- Heavy capabilities are imported only by scenes/routes that need them.
+
+## Routes
 
 ```text
-SmoothScroll (Lenis)
-  ↓
-MotionSystem (Motion)
-  ↓
-PremiumScrolly
-  ├── continuous 0→1 scene progress
-  ├── smoothed scroll values
-  ├── scroll velocity
-  ├── shared spring/easing tokens
-  ├── GPU-friendly transforms
-  └── reduced-motion fallback
-       ↓
-Story-specific choreography
+/                 library / launchpad
+/lab/:demo        capability demos
+/attention        real video starter
+/moe              real video starter
+/hermes-agent     real video starter
+/styles           art-direction gallery
 ```
 
-Premium scrollytelling is deliberately different from basic IntersectionObserver scrollytelling. Story beats can blend continuously through position, scale, blur, path drawing, depth, and camera movement instead of snapping between discrete states.
+React Router is used in SPA/declarative mode. Route components are lazy-loaded so video pages do not automatically pull every demo into their initial chunk.
 
-## Storytelling modes
+## Art directions
 
-1. **Premium scrollytelling** — cinematic continuous scroll choreography.
-2. **Trust-style click stories** — one idea per click / Space press.
-3. **Polygon-style simulations** — manipulate variables and see the system respond.
-4. **SignalFlow / system diagrams** — information visibly travels through nodes and edges.
-5. **Sequence / Timeline** — narration controlled beat by beat.
-6. **DragGrid** — drag → drop → system reaction.
-7. **Camera / Focus** — zoom, pan, and dim the rest of the scene.
+`SceneFrame` currently supports:
 
-The older step-based scrollytelling implementation remains as a simple reference, but it is no longer the quality target.
+- `paper` — warm paper, black ink, rough/sketch accents.
+- `clean` — pure white, crisp technical geometry.
+- `editorial` — large type and magazine-like composition.
+- `technical` — light grid and systematic diagram language.
 
-## Premium primitives
+Add a new style pack when a real video earns one. Do not rewrite the engine to create a look.
 
-- `SmoothScroll` — Lenis inertial scroll layer.
-- `MotionSystem` — global Motion configuration and reduced-motion policy.
-- `PremiumScrolly` — continuous scene progress + velocity context.
-- `ScrollBeat` — narration choreography with opacity, travel, scale, and blur.
-- `ScrollProgress` — progress rail driven directly by scene progress.
-- `motionTokens` — shared spring, easing, blur, and travel values so scenes feel related.
+## Visual library
 
-The flagship demo uses progress-linked camera motion, velocity-sensitive tilt, animated SVG signal paths, layered ambient depth, translucent stage surfaces, progressive expert selection, and a resolving output state.
+Installed real modules:
 
-## Run it
+- **Rough.js** — hand-drawn SVG/canvas geometry.
+- **Rough Notation** — animated underline/circle/box/highlight/bracket annotations.
+- **perfect-freehand** — organic pressure-like strokes.
+- **Lucide React** — large generic SVG icon source, wrapped by semantic `VisualIcon` names.
+- **XYFlow / React Flow** — large node/edge graphs and interactive workflow diagrams.
+
+Reusable adapters/primitives include:
+
+- `VisualIcon`
+- `SketchShape`
+- `SketchArrow`
+- `SketchAnnotation`
+- `HandDrawnStroke`
+- `FlowDiagram`
+- `VisualStage`, `VisualLayer`, `MediaVisual`, `VisualMask`, `VisualScrim`
+- `SignalFlow`, `Camera`, `DragGrid`
+
+See `docs/VISUAL_SYSTEM.md` for usage policy.
+
+## Navigation languages
+
+- **Click / Continue** — `StoryButton`, `StepController`, `Sequence` for Ncase-style exact beats.
+- **Native Snap** — `SnapStory` for full-screen section snapping.
+- **Exact Gesture Paging** — `GesturePager`; one wheel/swipe gesture = one authored scene.
+- **Scene Replacement** — `SceneDeck` + `SharedElement` for page changes that preserve visual continuity.
+- **Continuous Scrollytelling** — `PremiumScrolly` for scrubbed 0→1 progress, camera, masks and depth.
+
+## Motion policy
+
+Motion, GSAP and Lenis are not the identity of the engine.
+
+- Motion is used where authored animation/scroll-linked values help explain.
+- GSAP is lazy-loaded only by specialist primitives that currently need Observer or SplitText.
+- Lenis is lazy-loaded only inside `SmoothScroll` when a scene deliberately opts in.
+- Native browser behavior remains the default.
+
+## Existing explorable references
+
+The engine also studies/reuses selected CC0 interaction patterns from Nicky Case:
+
+- *The Evolution of Trust*
+- *Parable of the Polygons*
+- *LOOPY*
+
+See `NCASE_CREDITS.md` for provenance and `THIRD_PARTY.md` for the broader module list.
+
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Recording controls
+## Recording
 
 - `P` — presenter mode
-- `F` — fullscreen
-- `?present=1` — start directly in clean presentation mode
-- `Space` / `→` — next beat in click/sequence scenes
-- `←` — previous beat
-- `Home` — reset
+- `F` — fullscreen while presenting
+- `?present=1` — start in presenter mode
+- `Space` / arrows — supported by exact-step scenes
 
-## Main structure
-
-```text
-src/
-  motion/
-    tokens.ts
-
-  engine/
-    SmoothScroll.tsx
-    MotionSystem.tsx
-    PremiumScrolly.tsx
-    StepController.tsx
-    SceneController.tsx
-    ScrollController.tsx
-    Sequence.tsx
-    PresenterMode.tsx
-    ScrollKit.ts
-
-  components/
-    ScrollBeat.tsx
-    ScrollProgress.tsx
-    Reveal.tsx
-    Arrow.tsx
-    Node.tsx
-    Character.tsx
-    SpeechBubble.tsx
-    Counter.tsx
-    Slider.tsx
-    Graph.tsx
-    SignalFlow.tsx
-    DragGrid.tsx
-    Camera.tsx
-
-  examples/
-    premium-scrolly/
-    trust-style/
-    polygons-style/
-    scrolly-style/
-    flow-style/
-    sequence-style/
-    drag-style/
-    focus-style/
-```
-
-## Motion rules
-
-- Movement must explain or direct attention; decorative motion is secondary.
-- Prefer continuous scroll-linked choreography over abrupt state switching when the concept benefits from it.
-- Keep transforms GPU-friendly (`transform`, `opacity`, selective `filter`, SVG path progress) and avoid layout thrashing during scroll.
-- Use one motion language across scenes: shared springs, easing, blur, travel, and depth ranges.
-- Inactive information should often recede rather than disappear. Context matters.
-- Respect `prefers-reduced-motion`.
-- Test real explainers, not component demos alone.
-
-## Upstream / inspiration
-
-- Nicky Case — *The Evolution of Trust* (CC0-1.0)
-- Nicky Case — *Parable of the Polygons* (CC0-1.0)
-- Nicky Case — *LOOPY* (CC0-1.0)
-- Motion (MIT) — primary premium animation layer
-- Lenis (MIT) — smooth-scroll layer
-- react-kino (MIT) — optional scroll-storytelling helpers
-
-See `NCASE_CREDITS.md` for Ncase provenance and reuse notes.
+Compilation is only the first gate. Final quality still requires rendered visual QA: spacing, type, icon choice, diagram scale, transitions, timing and composition are tuned per video.
