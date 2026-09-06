@@ -16,6 +16,10 @@ type SceneDeckContextValue = {
   previous: () => void
 }
 
+type ViewAnimationControls = {
+  finished: Promise<unknown>
+}
+
 const SceneDeckContext = createContext<SceneDeckContextValue | null>(null)
 
 type SceneDeckProps = {
@@ -83,7 +87,10 @@ export function SceneDeck({ children, initialIndex = 0, className = '' }: SceneD
 
       void (async () => {
         try {
-          const controls = await view
+          // Motion's builder is awaitable at runtime. Current package typings
+          // narrow the chained builder incorrectly, so keep the cast at this
+          // single integration boundary rather than weakening app-level types.
+          const controls = await (view as unknown as Promise<ViewAnimationControls>)
           await controls.finished
         } finally {
           setTransitioning(false)
