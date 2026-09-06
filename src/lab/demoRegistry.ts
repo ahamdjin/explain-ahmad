@@ -1,4 +1,5 @@
 export const labDemos = [
+  { id: 'continuity', label: 'Continuity', hint: 'Same actors evolve across beats and sections', keywords: ['actor', 'shared element', 'beat', 'section', 'portal', 'token'] },
   { id: 'trust', label: 'Trust story', hint: 'Click / reveal / consequence', keywords: ['ncase', 'click', 'step', 'choice'] },
   { id: 'polygons', label: 'Polygons', hint: 'Manipulate a system', keywords: ['simulation', 'slider', 'emergence'] },
   { id: 'drag', label: 'Drag routing', hint: 'Direct manipulation', keywords: ['drag', 'drop', 'router', 'expert'] },
