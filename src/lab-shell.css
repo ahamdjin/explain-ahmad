@@ -7,6 +7,13 @@
   background: #f7f1e6;
 }
 
+.lab-demo-loading {
+  width: 100vw;
+  height: 100svh;
+  min-height: 100svh;
+  background: #f7f1e6;
+}
+
 /*
  * Lab controls are deliberately invisible until invoked with L or Cmd/Ctrl+K.
  * The demo owns the viewport. The library chrome never competes with it.
