@@ -13,6 +13,7 @@ import {
   useVelocity,
 } from 'motion/react'
 import { motionTokens } from '../motion/tokens'
+import { MotionSystem } from './MotionSystem'
 
 type PremiumScrollyContextValue = {
   progress: MotionValue<number>
@@ -28,11 +29,11 @@ type PremiumScrollyProps = {
   className?: string
 }
 
-export function PremiumScrolly({
+function PremiumScrollyRuntime({
   children,
-  lengthVh = 540,
-  className = '',
-}: PremiumScrollyProps) {
+  lengthVh,
+  className,
+}: Required<Pick<PremiumScrollyProps, 'lengthVh' | 'className'>> & { children: ReactNode }) {
   const rootRef = useRef<HTMLElement | null>(null)
   const reducedMotion = Boolean(useReducedMotion())
   const { scrollYProgress, scrollY } = useScroll({
@@ -59,6 +60,20 @@ export function PremiumScrolly({
         <div className="premium-scrolly-sticky">{children}</div>
       </section>
     </PremiumScrollyContext.Provider>
+  )
+}
+
+export function PremiumScrolly({
+  children,
+  lengthVh = 540,
+  className = '',
+}: PremiumScrollyProps) {
+  return (
+    <MotionSystem>
+      <PremiumScrollyRuntime lengthVh={lengthVh} className={className}>
+        {children}
+      </PremiumScrollyRuntime>
+    </MotionSystem>
   )
 }
 
