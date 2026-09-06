@@ -1,7 +1,9 @@
 import { motion, type MotionValue, useTransform } from 'motion/react'
 import { ScrollBeat } from '../../components/ScrollBeat'
 import { ScrollProgress } from '../../components/ScrollProgress'
+import { VisualLayer, VisualStage } from '../../components/VisualStage'
 import { PremiumScrolly, usePremiumScrolly } from '../../engine/PremiumScrolly'
+import './premium-visuals.css'
 
 const beats = [
   {
@@ -91,6 +93,9 @@ function PremiumStory() {
   const outputX = useTransform(progress, [0.72, 0.9], [42, 0])
   const ambientY = useTransform(progress, [0, 1], ['-12%', '16%'])
   const ambientScale = useTransform(progress, [0, 0.55, 1], [0.9, 1.18, 1.04])
+  const visualOrbX = useTransform(progress, [0, 0.5, 1], ['-18%', '6%', '22%'])
+  const visualOrbScale = useTransform(progress, [0, 0.52, 1], [0.72, 1.08, 0.9])
+  const visualGridOpacity = useTransform(progress, [0, 0.25, 0.7, 1], [0.08, 0.22, 0.12, 0.04])
 
   return (
     <div className="premium-story">
@@ -121,49 +126,61 @@ function PremiumStory() {
               rotateZ: reducedMotion ? 0 : velocityTilt,
             }}
           >
-            <div className="premium-stage-chrome">
-              <span>LIVE SYSTEM</span>
-              <span className="premium-stage-dot" />
-            </div>
+            <VisualStage className="premium-visual-stage" aspectRatio="auto">
+              <VisualLayer className="premium-visual-atmosphere" z={0}>
+                <motion.div
+                  className="premium-visual-orb"
+                  style={{ x: reducedMotion ? 0 : visualOrbX, scale: reducedMotion ? 1 : visualOrbScale }}
+                />
+                <motion.div className="premium-visual-grid-layer" style={{ opacity: visualGridOpacity }} />
+              </VisualLayer>
 
-            <svg className="premium-flow-svg" viewBox="0 0 820 520" aria-hidden="true">
-              <FlowPath progress={progress} range={[0.12, 0.28]} d="M150 260 L245 260" />
-              <FlowPath progress={progress} range={[0.36, 0.57]} d="M350 260 C410 260 425 145 485 145" />
-              <FlowPath progress={progress} range={[0.38, 0.55]} d="M350 260 L485 260" muted />
-              <FlowPath progress={progress} range={[0.4, 0.6]} d="M350 260 C410 260 425 375 485 375" />
-              <FlowPath progress={progress} range={[0.62, 0.84]} d="M565 145 C635 145 640 260 695 260" />
-              <FlowPath progress={progress} range={[0.64, 0.82]} d="M565 260 L695 260" muted />
-              <FlowPath progress={progress} range={[0.66, 0.86]} d="M565 375 C635 375 640 260 695 260" />
-            </svg>
+              <VisualLayer className="premium-visual-diagram" z={5} interactive>
+                <div className="premium-stage-chrome">
+                  <span>LIVE SYSTEM</span>
+                  <span className="premium-stage-dot" />
+                </div>
 
-            <motion.div
-              className="premium-flow-node premium-token"
-              style={{ x: reducedMotion ? 0 : tokenX, opacity: tokenOpacity }}
-            >
-              <span>INPUT</span>
-              <strong>Prompt</strong>
-            </motion.div>
+                <svg className="premium-flow-svg" viewBox="0 0 820 520" aria-hidden="true">
+                  <FlowPath progress={progress} range={[0.12, 0.28]} d="M150 260 L245 260" />
+                  <FlowPath progress={progress} range={[0.36, 0.57]} d="M350 260 C410 260 425 145 485 145" />
+                  <FlowPath progress={progress} range={[0.38, 0.55]} d="M350 260 L485 260" muted />
+                  <FlowPath progress={progress} range={[0.4, 0.6]} d="M350 260 C410 260 425 375 485 375" />
+                  <FlowPath progress={progress} range={[0.62, 0.84]} d="M565 145 C635 145 640 260 695 260" />
+                  <FlowPath progress={progress} range={[0.64, 0.82]} d="M565 260 L695 260" muted />
+                  <FlowPath progress={progress} range={[0.66, 0.86]} d="M565 375 C635 375 640 260 695 260" />
+                </svg>
 
-            <motion.div
-              className="premium-flow-node premium-router"
-              style={{ scale: reducedMotion ? 1 : routerScale }}
-            >
-              <motion.i className="premium-router-glow" style={{ opacity: routerGlow }} />
-              <span>ROUTER</span>
-              <strong>Intent</strong>
-            </motion.div>
+                <motion.div
+                  className="premium-flow-node premium-token"
+                  style={{ x: reducedMotion ? 0 : tokenX, opacity: tokenOpacity }}
+                >
+                  <span>INPUT</span>
+                  <strong>Prompt</strong>
+                </motion.div>
 
-            <ExpertNode progress={progress} start={0.39} label="A" selected className="expert-a" />
-            <ExpertNode progress={progress} start={0.43} label="B" className="expert-b" />
-            <ExpertNode progress={progress} start={0.47} label="C" selected className="expert-c" />
+                <motion.div
+                  className="premium-flow-node premium-router"
+                  style={{ scale: reducedMotion ? 1 : routerScale }}
+                >
+                  <motion.i className="premium-router-glow" style={{ opacity: routerGlow }} />
+                  <span>ROUTER</span>
+                  <strong>Intent</strong>
+                </motion.div>
 
-            <motion.div
-              className="premium-flow-node premium-output"
-              style={{ opacity: outputOpacity, x: reducedMotion ? 0 : outputX }}
-            >
-              <span>OUTPUT</span>
-              <strong>Answer</strong>
-            </motion.div>
+                <ExpertNode progress={progress} start={0.39} label="A" selected className="expert-a" />
+                <ExpertNode progress={progress} start={0.43} label="B" className="expert-b" />
+                <ExpertNode progress={progress} start={0.47} label="C" selected className="expert-c" />
+
+                <motion.div
+                  className="premium-flow-node premium-output"
+                  style={{ opacity: outputOpacity, x: reducedMotion ? 0 : outputX }}
+                >
+                  <span>OUTPUT</span>
+                  <strong>Answer</strong>
+                </motion.div>
+              </VisualLayer>
+            </VisualStage>
           </motion.div>
         </div>
       </div>
