@@ -5,7 +5,7 @@ import { LabCommandMenu } from '../lab/LabCommandMenu'
 type DemoComponent = LazyExoticComponent<ComponentType>
 
 const demos: Record<string, DemoComponent> = {
-  continuity: lazy(() => import('../examples/continuity-style/ContinuityExample')),
+  continuity: lazy(() => import('../examples/continuity-style')),
   premium: lazy(() => import('../examples/premium-scrolly/PremiumScrollyExample')),
   navigation: lazy(() => import('../examples/navigation-style/NavigationLabExample')),
   reveal: lazy(() => import('../examples/reveal-style/MaskRevealExample')),
