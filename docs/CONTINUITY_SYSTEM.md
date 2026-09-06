@@ -7,6 +7,7 @@ Video
   └─ Section / World
       └─ Beat
           └─ Actor
+              └─ Portal (when an actor bridges into the next world)
 ```
 
 ### Section / World
@@ -25,8 +26,8 @@ Examples inside one tokenization section:
 1. prompt exists
 2. prompt splits into tokens
 3. each token receives an ID
-4. vocabulary/library structure appears
-5. IDs move toward embedding
+4. vocabulary/index structure appears
+5. IDs look up embeddings
 
 Those are beats, not separate pages.
 
@@ -48,7 +49,7 @@ An actor that becomes the bridge into the next conceptual world.
 
 Example:
 - a closed embedding book appears in the tokenization section
-- the viewer opens it
+- the viewer opens the book itself
 - the same book survives the transition
 - it expands into the next full-screen embedding section
 
@@ -73,15 +74,37 @@ Simple scenes may still use `Sequence` / `StepController`. XState is not mandato
 Motion `LayoutGroup` boundary for a conceptual section.
 
 ### `ContinuityActor`
-A Motion layout actor with a stable `layoutId`. Use it when an object needs to retain visual identity across layout/state changes.
+A Motion layout actor with a stable `layoutId`.
+
+The primitive supports subtle curved layout trajectories when spatial continuity benefits from them and removes large layout motion for users who prefer reduced motion.
 
 ### `ActorPresence`
-For actors that enter/leave while preserving authored entrance and exit behavior.
+For actors that genuinely enter/leave while preserving authored entrance and exit behavior.
 
 ### `SceneDeck` + `SharedElement`
-Section/world transition layer. Uses the View Transition API where supported and degrades to immediate state replacement where it is not.
+Section/world transition layer.
 
-Use shared elements for portal objects that must survive the section change.
+`SceneDeck` uses Motion's `animateView()` integration for View Transitions when motion is appropriate. The deck:
+- exposes transition/busy state
+- ignores repeated section-transition requests while one is active
+- uses shared-element geometry for portal objects
+- uses spring-driven view motion
+- falls back to immediate replacement for reduced motion / unsupported cases
+
+`SharedElement` marks the conceptual object; the transition engine owns temporary browser view-transition naming rather than permanently leaking that concern into scene code.
+
+### `useActionGate`
+Small opt-in guard for authored beat timing. Prevents repeated clicks, held keys or rapid mixed input from skipping across several visual beats before the current beat has settled.
+
+It is not a substitute for state-machine guards. It is the interaction-level timing guard.
+
+## Reference visual primitives
+
+### `IndexBoard`
+An open physical catalog/index surface for vocabularies, lookup tables, registries and datasets. It avoids turning every lookup explanation into a dashboard card.
+
+### `BookVisual`
+Reusable closed/open book object. A book can be a meaningful surface and, when appropriate, an object-as-control portal into a new conceptual world.
 
 ## Rules
 
@@ -90,28 +113,42 @@ Use shared elements for portal objects that must survive the section change.
 3. **Persist actors whenever the viewer should understand them as the same thing.**
 4. **Move the object instead of replacing the diagram whenever continuity teaches causality.**
 5. **Only create a new section when the conceptual coordinate system changes.**
-6. **Use a portal object when the next world is naturally 'inside', 'through', or 'downstream of' an existing object.**
+6. **Use a portal object when the next world is naturally inside, through, or downstream of an existing object.**
 7. **Minimal text.** Labels and tiny narration support the visual; they do not become the scene.
 8. **Controls remain local.** A Continue/Open/Choose action belongs near the object or decision it affects.
-9. **Transitions must be reversible when the story allows it.** Going backward should restore orientation rather than hard-resetting the world.
-10. **Reduced motion must preserve the logic.** The explanation still works even if shared motion becomes an immediate state change.
+9. **Prefer object-as-control** when the object itself makes the action obvious.
+10. **Transitions must be reversible when the story allows it.** Going backward should restore orientation rather than hard-resetting the world.
+11. **Repeated input must not skip authored beats.** Handle click, keyboard repeat and section-transition interruption deliberately.
+12. **Reduced motion must preserve the logic.** The explanation still works even if shared motion becomes an immediate state change.
 
 ## Reference lab
 
 `/lab/continuity`
 
-The reference demonstrates:
+The benchmark demonstrates:
 
 ```text
-Prompt
+plain prompt
   ↓ same actors
-Tokens
+separate token objects
   ↓ same actors
-Token IDs + vocabulary/library
-  ↓ book enters same world
-Embedding book
-  ↓ shared-object portal
-Embedding section / open book
+selected rows inside token index + IDs
+  ↓ same world rearranges
+index lookup → embedding book
+  ↓ book itself is the control / shared portal
+open embedding book world
 ```
 
-This is a structural reference, not a finished real video page.
+The visual benchmark intentionally tests:
+- plain content becoming UI only when the concept earns a boundary
+- local controls rather than bottom navigation
+- meaningful physical surfaces
+- actor continuity
+- curved layout paths
+- object-as-control
+- guarded repeated input
+- shared portal transition
+- reversal back to the previous stable beat
+- reduced-motion behavior
+
+See `docs/REFINEMENT_STANDARD.md` for the broader quality gate.
