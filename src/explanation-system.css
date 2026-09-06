@@ -113,6 +113,130 @@
   opacity: .28;
 }
 
+/* Contextual controls: local, lightweight, and not a card unless a surface is meaningful. */
+.control-cluster {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+}
+
+.control-cluster[data-surface='paper'] {
+  padding: 8px;
+  border: 1.5px solid var(--scene-line, #28231c);
+  border-radius: 13px;
+  background: var(--surface-2, #fffaf1);
+  box-shadow: 3px 4px 0 var(--scene-line, #28231c);
+}
+
+/* Details-on-demand point. Put it on the visual, not in a detached legend. */
+.explanation-hotspot {
+  position: absolute;
+  z-index: 8;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 0;
+  background: transparent;
+  color: var(--scene-ink, #17130f);
+  cursor: pointer;
+  outline: none;
+}
+
+.explanation-hotspot-dot {
+  position: absolute;
+  inset: 5px;
+  border: 1.8px solid currentColor;
+  border-radius: 50%;
+  background: var(--surface-2, #fffaf1);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--scene-accent, #79c8bd) 42%, transparent);
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.explanation-hotspot-dot::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--scene-accent, #79c8bd);
+}
+
+.explanation-hotspot:hover .explanation-hotspot-dot,
+.explanation-hotspot:focus-visible .explanation-hotspot-dot,
+.explanation-hotspot[data-active='true'] .explanation-hotspot-dot {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--scene-accent, #79c8bd) 24%, transparent);
+}
+
+.explanation-hotspot-label {
+  position: absolute;
+  width: max-content;
+  max-width: 220px;
+  padding: 6px 8px;
+  border: 1.4px solid var(--scene-line, #28231c);
+  border-radius: 8px;
+  background: var(--surface-2, #fffaf1);
+  color: var(--scene-ink, #17130f);
+  box-shadow: 2px 3px 0 var(--scene-line, #28231c);
+  font-size: 12px;
+  font-weight: 720;
+  line-height: 1.25;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 100ms ease, transform 120ms ease;
+}
+
+.explanation-hotspot[data-side='top'] .explanation-hotspot-label {
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 4px);
+}
+
+.explanation-hotspot[data-side='bottom'] .explanation-hotspot-label {
+  left: 50%;
+  top: calc(100% + 8px);
+  transform: translate(-50%, -4px);
+}
+
+.explanation-hotspot[data-side='left'] .explanation-hotspot-label {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translate(4px, -50%);
+}
+
+.explanation-hotspot[data-side='right'] .explanation-hotspot-label {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translate(-4px, -50%);
+}
+
+.explanation-hotspot:hover .explanation-hotspot-label,
+.explanation-hotspot:focus-visible .explanation-hotspot-label,
+.explanation-hotspot[data-active='true'] .explanation-hotspot-label {
+  opacity: 1;
+}
+
+.explanation-hotspot[data-side='top']:hover .explanation-hotspot-label,
+.explanation-hotspot[data-side='top']:focus-visible .explanation-hotspot-label,
+.explanation-hotspot[data-side='top'][data-active='true'] .explanation-hotspot-label,
+.explanation-hotspot[data-side='bottom']:hover .explanation-hotspot-label,
+.explanation-hotspot[data-side='bottom']:focus-visible .explanation-hotspot-label,
+.explanation-hotspot[data-side='bottom'][data-active='true'] .explanation-hotspot-label {
+  transform: translate(-50%, 0);
+}
+
+.explanation-hotspot[data-side='left']:hover .explanation-hotspot-label,
+.explanation-hotspot[data-side='left']:focus-visible .explanation-hotspot-label,
+.explanation-hotspot[data-side='left'][data-active='true'] .explanation-hotspot-label,
+.explanation-hotspot[data-side='right']:hover .explanation-hotspot-label,
+.explanation-hotspot[data-side='right']:focus-visible .explanation-hotspot-label,
+.explanation-hotspot[data-side='right'][data-active='true'] .explanation-hotspot-label {
+  transform: translate(0, -50%);
+}
+
 /* Internal library can be navigational; it is not a video scene. */
 .library-title {
   max-width: 12ch;
@@ -151,4 +275,9 @@
   .scene-grid.is-diagram-first .scene-visual {
     min-height: 62vh;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explanation-hotspot-dot,
+  .explanation-hotspot-label { transition: none; }
 }
