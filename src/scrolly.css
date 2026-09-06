@@ -1,0 +1,5 @@
+/* Keep the scrollytelling scene out of an overflow container so its sticky visual
+   can stay pinned to the viewport while the story steps move past it. */
+.scrolly-scene {
+  overflow: visible;
+}
