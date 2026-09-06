@@ -72,9 +72,9 @@ export function SnapStory({ children, initialIndex = 0, className = '', keyboard
     <SnapStoryContext.Provider value={value}>
       <div ref={rootRef} className={`snap-story ${className}`.trim()}>
         {slides.map((slide, slideIndex) => (
-          <section key={slideIndex} className="snap-story-section" data-snap-index={slideIndex}>
+          <div key={slideIndex} className="snap-story-section" data-snap-index={slideIndex}>
             {slide}
-          </section>
+          </div>
         ))}
       </div>
     </SnapStoryContext.Provider>
