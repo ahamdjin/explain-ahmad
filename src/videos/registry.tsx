@@ -1,4 +1,4 @@
-import { type ComponentType, type LazyExoticComponent } from 'react'
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
 
 export type VideoRouteDefinition = {
   slug: string
@@ -6,16 +6,16 @@ export type VideoRouteDefinition = {
   component: LazyExoticComponent<ComponentType>
 }
 
+const Glm320bVideo = lazy(() => import('./glm-320b/Glm320bVideo'))
+
 /**
- * Real video pages live here only after the story/script is known.
- *
- * Example when we actually build one:
- *
- * const MoeVideo = lazy(() => import('./moe/MoeVideo'))
- * export const videoRoutes = [
- *   { slug: 'moe', title: 'Mixture of Experts', component: MoeVideo },
- * ]
- *
- * Keep this empty while we are building the library itself.
+ * Real video pages are registered only after their story is known.
+ * Each route owns its full-screen production experience and stays lazy-loaded.
  */
-export const videoRoutes: VideoRouteDefinition[] = []
+export const videoRoutes: VideoRouteDefinition[] = [
+  {
+    slug: 'why-320b-uses-18b',
+    title: 'Why Does a 320B AI Only Use 18B Parameters?',
+    component: Glm320bVideo,
+  },
+]
