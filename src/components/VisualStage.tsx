@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { motion, type MotionStyle } from 'motion/react'
+import '../visuals.css'
 
 type VisualStageProps = {
   children: ReactNode
