@@ -1,0 +1,184 @@
+.book-visual {
+  --book-ink: var(--scene-ink, #17130f);
+  --book-paper: #fffdf7;
+  position: relative;
+  color: var(--book-ink);
+}
+
+.book-visual-closed {
+  width: 100%;
+  height: 100%;
+  min-width: 190px;
+  min-height: 260px;
+  isolation: isolate;
+  transform: rotate(.8deg);
+}
+
+.book-visual-pages {
+  position: absolute;
+  z-index: 0;
+  inset: 7px -7px -7px 7px;
+  border: 1.5px solid var(--book-ink);
+  border-radius: 9px 17px 17px 9px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 6px, rgba(23, 19, 15, .12) 6px 7px),
+    var(--book-paper);
+  box-shadow: 6px 8px 0 rgba(23, 19, 15, .9);
+}
+
+.book-visual-cover {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  border: 2px solid var(--book-ink);
+  border-radius: 9px 18px 18px 9px;
+  background: color-mix(in srgb, var(--book-accent) 90%, #fff 10%);
+  box-shadow: inset -8px 0 0 rgba(23, 19, 15, .06);
+}
+
+.book-visual-spine {
+  position: absolute;
+  z-index: 4;
+  inset: 0 auto 0 0;
+  width: 19px;
+  border-right: 2px solid var(--book-ink);
+  border-radius: 8px 0 0 8px;
+  background: color-mix(in srgb, var(--book-accent) 72%, #5f432d 28%);
+}
+
+.book-visual-cover-frame {
+  position: absolute;
+  inset: 18px 18px 18px 34px;
+  border: 1.4px solid color-mix(in srgb, var(--book-ink) 58%, transparent);
+  border-radius: 11px 15px 13px 10px;
+  opacity: .62;
+}
+
+.book-visual-cover-copy {
+  position: absolute;
+  inset: 0 0 0 19px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.book-visual-cover-copy strong {
+  max-width: 8ch;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(25px, 2.25vw, 38px);
+  line-height: .98;
+  font-weight: 700;
+  letter-spacing: -.035em;
+}
+
+.book-visual-cover-copy small {
+  margin-top: 7px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.book-visual-ribbon {
+  position: absolute;
+  z-index: 5;
+  right: 17%;
+  bottom: -13px;
+  width: 13px;
+  height: 72px;
+  border: 1.5px solid var(--book-ink);
+  border-top: 0;
+  background: #b96359;
+  transform: rotate(-1.2deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%);
+}
+
+.book-visual-open {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+  border: 2px solid var(--book-ink);
+  border-radius: 24px 25px 17px 18px;
+  background: var(--book-paper);
+  box-shadow: 10px 13px 0 rgba(23, 19, 15, .92);
+  isolation: isolate;
+}
+
+.book-visual-underlay {
+  position: absolute;
+  z-index: -2;
+  inset: 7px -8px -9px 8px;
+  border: 1.5px solid var(--book-ink);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--book-accent) 58%, #fff 42%);
+}
+
+.book-visual-page {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 58px);
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 30px, rgba(23, 19, 15, .035) 30px 31px),
+    var(--book-paper);
+}
+
+.book-visual-page-left {
+  border-radius: 22px 0 0 15px;
+}
+
+.book-visual-page-right {
+  border-radius: 0 22px 15px 0;
+}
+
+.book-visual-gutter {
+  position: relative;
+  z-index: 3;
+  margin-block: 4px;
+  background: linear-gradient(90deg, rgba(23, 19, 15, .18), transparent 44%, rgba(23, 19, 15, .14));
+}
+
+.book-visual-gutter::before {
+  content: '';
+  position: absolute;
+  inset: 0 8px;
+  background: rgba(23, 19, 15, .04);
+  filter: blur(4px);
+}
+
+.book-visual-page-edge {
+  position: absolute;
+  z-index: 5;
+  right: -7px;
+  top: 14px;
+  bottom: 11px;
+  width: 8px;
+  border: 1px solid rgba(23, 19, 15, .42);
+  border-left: 0;
+  border-radius: 0 12px 12px 0;
+  background: repeating-linear-gradient(0deg, #fbf7ec 0 4px, #d9d1c2 4px 5px);
+}
+
+@media (max-width: 760px) {
+  .book-visual-open {
+    grid-template-columns: 1fr;
+    overflow: auto;
+  }
+
+  .book-visual-gutter,
+  .book-visual-page-edge {
+    display: none;
+  }
+
+  .book-visual-page {
+    min-height: 50%;
+    padding: 24px;
+  }
+}
