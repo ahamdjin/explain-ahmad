@@ -1,17 +1,26 @@
 import { useState } from 'react'
-import TrustExample from './examples/trust-style/TrustExample'
+import DragGridExample from './examples/drag-style/DragGridExample'
+import SignalFlowExample from './examples/flow-style/SignalFlowExample'
+import FocusExample from './examples/focus-style/FocusExample'
 import PolygonsExample from './examples/polygons-style/PolygonsExample'
 import ScrollyExample from './examples/scrolly-style/ScrollyExample'
+import SequenceExample from './examples/sequence-style/SequenceExample'
+import TrustExample from './examples/trust-style/TrustExample'
+import { PresenterControls, PresenterMode } from './engine/PresenterMode'
 
-type Demo = 'trust' | 'polygons' | 'scrolly'
+type Demo = 'trust' | 'polygons' | 'scrolly' | 'flow' | 'sequence' | 'drag' | 'focus'
 
 const demos: Array<{ id: Demo; label: string; hint: string }> = [
   { id: 'trust', label: 'Trust style', hint: 'Click / Space to reveal' },
   { id: 'polygons', label: 'Polygon style', hint: 'Manipulate the system' },
   { id: 'scrolly', label: 'Scrollytelling', hint: 'Scroll to build the idea' },
+  { id: 'flow', label: 'Signal flow', hint: 'Watch information travel' },
+  { id: 'sequence', label: 'Sequence', hint: 'Narration beat by beat' },
+  { id: 'drag', label: 'Drag grid', hint: 'Drag → drop → react' },
+  { id: 'focus', label: 'Camera', hint: 'Zoom and direct attention' },
 ]
 
-export default function App() {
+function ExplainerApp() {
   const [demo, setDemo] = useState<Demo>('trust')
 
   return (
@@ -21,7 +30,10 @@ export default function App() {
           <p className="eyebrow">EXPLAINER ENGINE · V1</p>
           <h1>Explain Ahmad</h1>
         </div>
-        <p className="header-note">Three storytelling modes. One reusable stage.</p>
+        <div className="header-actions">
+          <p className="header-note">Seven reusable storytelling primitives. One recording stage.</p>
+          <PresenterControls />
+        </div>
       </header>
 
       <nav className="demo-tabs" aria-label="Explainer demos">
@@ -40,6 +52,18 @@ export default function App() {
       {demo === 'trust' && <TrustExample />}
       {demo === 'polygons' && <PolygonsExample />}
       {demo === 'scrolly' && <ScrollyExample />}
+      {demo === 'flow' && <SignalFlowExample />}
+      {demo === 'sequence' && <SequenceExample />}
+      {demo === 'drag' && <DragGridExample />}
+      {demo === 'focus' && <FocusExample />}
     </main>
+  )
+}
+
+export default function App() {
+  return (
+    <PresenterMode>
+      <ExplainerApp />
+    </PresenterMode>
   )
 }

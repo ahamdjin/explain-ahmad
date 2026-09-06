@@ -1,6 +1,6 @@
 # Ncase upstream credits
 
-This project deliberately learns from and reuses selected source code from Nicky Case's explorable explanations.
+This project deliberately learns from and reuses selected source code and interaction designs from Nicky Case's explorable explanations.
 
 ## The Evolution of Trust
 
@@ -16,6 +16,14 @@ This project deliberately learns from and reuses selected source code from Nicky
 - Author: Nicky Case and contributors
 - License: CC0-1.0
 - Upstream architecture inspected/reused: draggable agents, local-neighbor satisfaction calculation, emergent simulation behavior.
+
+## LOOPY
+
+- Upstream: https://github.com/ncase/loopy
+- Author: Nicky Case and contributors
+- License: CC0-1.0
+- Upstream architecture inspected/reused: node/edge system diagrams and visibly travelling signals.
+- Our React `SignalFlow` is a modern primitive built for reusable explainer scenes rather than embedding LOOPY's old global runtime directly.
 
 ## Project policy
 
