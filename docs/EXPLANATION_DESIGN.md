@@ -75,6 +75,8 @@ Prefer:
 
 Use a box only when the box means something: a model boundary, context window, browser, memory store, terminal, expert, document, etc.
 
+Rounded cards and shadows are not banned. They are valid when they represent a real surface, object, window, control cluster, or deliberately elevated layer. They should not be the default wrapper for empty space.
+
 ## Motion
 
 Motion must reveal causality, hierarchy, continuity, or focus.
@@ -88,6 +90,33 @@ Useful:
 
 Decorative motion is secondary.
 
+## Interaction vocabulary
+
+Do not start with an animation technique. Start with the teaching need.
+
+Examples:
+- **direct manipulation** when touching the object is clearer than a detached control
+- **details on demand** when permanent labels would clutter the overview
+- **causal trace** when the viewer needs to follow what travels through a system
+- **progressive disclosure** when hierarchy matters
+- **comparison** when differences are the lesson
+- **shared-object continuity** when an object survives a scene change
+- **scrubbing** when understanding depends on seeing continuous change
+- **focus lens** when one region needs attention without losing context
+
+The full research-backed catalog lives in `src/patterns/catalog.ts` and `docs/INTERACTION_PATTERNS.md`.
+
+## Refinement test for every interaction
+
+1. Can the viewer tell what can be touched without a tutorial overlay?
+2. Is the control near the thing it affects?
+3. Does the action respond immediately?
+4. Can the viewer visually follow what changed and why?
+5. Is the current state obvious without tiny metadata?
+6. Can the action be reversed, compared, or reset without losing orientation?
+7. Does complexity appear only when it becomes useful?
+8. Does it still make sense with mouse, touch, keyboard, and presenter mode?
+
 ## Art direction
 
 Paper/sketch is a favored art direction, not a global lock.
@@ -97,6 +126,8 @@ The engine may use paper, clean, editorial, technical, or future visual language
 ## Library vs video pages
 
 `/`, `/styles`, and `/lab/:demo` are internal library/tutorial surfaces. They may use navigation cards, tabs, indexes, and module selectors because those controls explain the library itself.
+
+The lab itself has no persistent demo chrome. Press `L` or `Cmd/Ctrl+K` to open the internal command palette; presenter mode removes that surface completely.
 
 Real video pages are different. A real route is created only after the actual video/script is known. It should not inherit library chrome.
 
