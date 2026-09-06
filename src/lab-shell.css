@@ -1,0 +1,263 @@
+.demo-route-shell {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: auto;
+  background: #f7f1e6;
+}
+
+.lab-demo-loading {
+  width: 100vw;
+  height: 100svh;
+  min-height: 100svh;
+  background: #f7f1e6;
+}
+
+/*
+ * Lab controls are deliberately invisible until invoked with L or Cmd/Ctrl+K.
+ * The demo owns the viewport. The library chrome never competes with it.
+ */
+.lab-command-overlay {
+  position: fixed;
+  z-index: 7000;
+  inset: 0;
+  background: rgba(23, 19, 15, .16);
+  backdrop-filter: blur(2px);
+  animation: lab-overlay-in 120ms ease-out;
+}
+
+.lab-command-dialog {
+  position: fixed;
+  z-index: 7001;
+  top: 12vh;
+  left: 50%;
+  width: min(570px, calc(100vw - 32px));
+  max-height: min(680px, 76vh);
+  transform: translateX(-50%);
+  overflow: hidden;
+  border: 1.5px solid #28231c;
+  border-radius: 20px;
+  background: #fffaf1;
+  color: #17130f;
+  box-shadow: 6px 7px 0 #28231c, 0 30px 90px rgba(31, 25, 18, .22);
+  outline: none;
+  animation: lab-dialog-in 150ms cubic-bezier(.2, .85, .3, 1);
+}
+
+.lab-command-dialog [cmdk-root] {
+  width: 100%;
+  background: transparent;
+}
+
+.lab-command-heading {
+  min-height: 62px;
+  padding: 13px 16px 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid rgba(40, 35, 28, .14);
+}
+
+.lab-command-heading > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.lab-command-heading span {
+  color: #756e63;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.lab-command-heading strong {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lab-command-dialog kbd,
+.lab-command-footer span,
+.lab-command-item small {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.lab-command-heading kbd {
+  padding: 4px 7px;
+  border: 1px solid rgba(40, 35, 28, .26);
+  border-radius: 7px;
+  background: #f5ede0;
+  color: #6c6459;
+  font-size: 10px;
+  box-shadow: 0 1px 0 rgba(40, 35, 28, .2);
+}
+
+.lab-command-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 17px;
+  border: 0;
+  border-bottom: 1px solid rgba(40, 35, 28, .14);
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: 16px;
+}
+
+.lab-command-input::placeholder { color: #968f84; }
+
+.lab-command-list {
+  max-height: min(500px, 58vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  scroll-padding-block: 8px;
+}
+
+.lab-command-group [cmdk-group-heading] {
+  padding: 10px 9px 6px;
+  color: #81796e;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.lab-command-item {
+  min-height: 54px;
+  padding: 9px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-radius: 10px;
+  cursor: default;
+  user-select: none;
+  outline: none;
+}
+
+.lab-command-item > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.lab-command-item strong {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lab-command-item span {
+  overflow: hidden;
+  color: #766f65;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lab-command-item small {
+  flex: 0 0 auto;
+  color: #7a7267;
+  font-size: 9px;
+}
+
+.lab-command-item[data-selected='true'] {
+  background: #eee5d7;
+}
+
+.lab-command-item[data-current='true'] strong::before {
+  content: '•';
+  margin-right: 7px;
+  color: #55a99e;
+}
+
+.lab-command-separator {
+  height: 1px;
+  margin: 7px 9px;
+  background: rgba(40, 35, 28, .14);
+}
+
+.lab-command-empty {
+  padding: 28px 14px;
+  color: #776f64;
+  text-align: center;
+  font-size: 12px;
+}
+
+.lab-command-footer {
+  min-height: 38px;
+  padding: 8px 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 13px;
+  border-top: 1px solid rgba(40, 35, 28, .14);
+  color: #81796e;
+  font-size: 9px;
+}
+
+@keyframes lab-overlay-in { from { opacity: 0; } }
+@keyframes lab-dialog-in {
+  from { opacity: 0; transform: translate(-50%, -8px) scale(.985); }
+}
+
+/* Legacy demo containers used to be cards. Inside the lab they are the viewport. */
+.demo-route-shell > .simulation-scene,
+.demo-route-shell > .scene-controller {
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+
+.demo-route-shell > .simulation-scene {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.demo-route-shell .scene-stage {
+  min-height: 0;
+  height: 100%;
+}
+
+.demo-route-shell > .scrolly-scene,
+.demo-route-shell > .premium-pattern-page,
+.demo-route-shell > .premium-story {
+  width: 100%;
+  min-height: 100svh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* A scene may scroll internally, but there is never an accidental page gutter. */
+.demo-route-shell > *:not(.lab-command-dialog) {
+  max-width: none;
+}
+
+body[data-presenter='true'] .lab-command-overlay,
+body[data-presenter='true'] .lab-command-dialog { display: none; }
+
+@media (max-width: 640px) {
+  .lab-command-dialog {
+    top: 7vh;
+    max-height: 84vh;
+    border-radius: 16px;
+    box-shadow: 4px 5px 0 #28231c, 0 24px 70px rgba(31, 25, 18, .2);
+  }
+
+  .lab-command-footer span:first-child { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-command-overlay,
+  .lab-command-dialog { animation: none; }
+}

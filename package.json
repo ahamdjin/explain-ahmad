@@ -9,14 +9,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
+    "@xstate/react": "^6.1.0",
+    "@xyflow/react": "^12.11.6",
+    "cmdk": "^1.1.1",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.0",
+    "lucide-react": "^1.41.0",
+    "motion": "^13.0.0",
+    "perfect-freehand": "^1.2.3",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-kino": "^0.5.0",
+    "react-router": "^8.3.1",
+    "rough-notation": "^0.5.1",
+    "roughjs": "^4.6.6",
+    "xstate": "^5.32.6"
   },
   "devDependencies": {
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "typescript": "latest",
+    "vite": "latest"
   }
 }
