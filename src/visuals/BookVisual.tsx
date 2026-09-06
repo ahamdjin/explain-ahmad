@@ -29,7 +29,7 @@ export function BookVisual({
       <div
         className={`book-visual book-visual-open ${className}`.trim()}
         style={style}
-        role="img"
+        role="group"
         aria-label={label}
       >
         <div className="book-visual-underlay" aria-hidden="true" />
