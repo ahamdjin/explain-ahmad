@@ -11,7 +11,7 @@ import ScrollyExample from '../examples/scrolly-style/ScrollyExample'
 import SequenceExample from '../examples/sequence-style/SequenceExample'
 import TrustExample from '../examples/trust-style/TrustExample'
 import TypographyExample from '../examples/typography-style/TypographyExample'
-import { PresenterControls } from '../engine/PresenterMode'
+import { usePresenterMode } from '../engine/PresenterMode'
 
 const demos: Record<string, ComponentType> = {
   premium: PremiumScrollyExample,
@@ -27,17 +27,29 @@ const demos: Record<string, ComponentType> = {
   focus: FocusExample,
 }
 
+const demoOrder = Object.keys(demos)
+
 export default function LabDemoPage() {
   const { demo = 'trust' } = useParams()
   const Demo = demos[demo] ?? TrustExample
+  const { presenting, toggle, toggleFullscreen } = usePresenterMode()
+  const currentIndex = Math.max(0, demoOrder.indexOf(demo))
+  const nextDemo = demoOrder[(currentIndex + 1) % demoOrder.length]
 
   return (
     <main className="demo-route-shell">
-      <div className="lab-floating-nav">
-        <Link to="/">← Library</Link>
-        <Link to={`/lab/${demo === 'trust' ? 'premium' : 'trust'}`}>Switch demo</Link>
-        <PresenterControls />
-      </div>
+      {!presenting && (
+        <details className="lab-chrome">
+          <summary aria-label="Lab controls">•••</summary>
+          <div className="lab-chrome-menu">
+            <Link to="/">← Library</Link>
+            <Link to={`/lab/${nextDemo}`}>Next demo</Link>
+            <button type="button" onClick={toggle}>Present</button>
+            <button type="button" onClick={toggleFullscreen}>Fullscreen</button>
+            <small>P · present &nbsp; F · fullscreen</small>
+          </div>
+        </details>
+      )}
       <Demo />
     </main>
   )
