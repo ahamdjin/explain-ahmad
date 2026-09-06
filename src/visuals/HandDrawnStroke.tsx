@@ -1,6 +1,6 @@
 import { getStroke } from 'perfect-freehand'
 
-type Point = [number, number, number?]
+type Point = [number, number] | [number, number, number]
 
 type HandDrawnStrokeProps = {
   points: Point[]
