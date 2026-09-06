@@ -1,20 +1,51 @@
 # Explain Ahmad — Explainer Engine
 
-A reusable React/Vite playground for building interactive YouTube explainers.
+A reusable React/Vite system for building deeply polished interactive YouTube explainers.
 
-## V1 is intentionally small
+The target is not "good enough UI." The target is explorable-storytelling quality with premium, Framer-like motion: continuous scroll response, cinematic focus, strong hierarchy, and interaction that helps prove the idea being narrated.
 
-The library is considered good enough to start producing real explainers once these seven storytelling modes work:
+## Motion foundation
 
-1. **Trust-style click stories** — one idea per click / Space press.
-2. **Polygon-style simulations** — manipulate a variable and immediately see the system respond.
-3. **Scrollytelling** — a persistent visual evolves as the story scrolls.
-4. **SignalFlow** — animated information visibly travels through nodes and edges.
-5. **Sequence / Timeline** — narration advances exactly one controlled animation beat at a time.
-6. **DragGrid** — drag an object into meaningful targets and let the system react.
-7. **Camera / Focus** — zoom into a concept and dim the rest of the scene.
+```text
+SmoothScroll (Lenis)
+  ↓
+MotionSystem (Motion)
+  ↓
+PremiumScrolly
+  ├── continuous 0→1 scene progress
+  ├── smoothed scroll values
+  ├── scroll velocity
+  ├── shared spring/easing tokens
+  ├── GPU-friendly transforms
+  └── reduced-motion fallback
+       ↓
+Story-specific choreography
+```
 
-Presenter mode turns any active scene into a clean recording stage.
+Premium scrollytelling is deliberately different from basic IntersectionObserver scrollytelling. Story beats can blend continuously through position, scale, blur, path drawing, depth, and camera movement instead of snapping between discrete states.
+
+## Storytelling modes
+
+1. **Premium scrollytelling** — cinematic continuous scroll choreography.
+2. **Trust-style click stories** — one idea per click / Space press.
+3. **Polygon-style simulations** — manipulate variables and see the system respond.
+4. **SignalFlow / system diagrams** — information visibly travels through nodes and edges.
+5. **Sequence / Timeline** — narration controlled beat by beat.
+6. **DragGrid** — drag → drop → system reaction.
+7. **Camera / Focus** — zoom, pan, and dim the rest of the scene.
+
+The older step-based scrollytelling implementation remains as a simple reference, but it is no longer the quality target.
+
+## Premium primitives
+
+- `SmoothScroll` — Lenis inertial scroll layer.
+- `MotionSystem` — global Motion configuration and reduced-motion policy.
+- `PremiumScrolly` — continuous scene progress + velocity context.
+- `ScrollBeat` — narration choreography with opacity, travel, scale, and blur.
+- `ScrollProgress` — progress rail driven directly by scene progress.
+- `motionTokens` — shared spring, easing, blur, and travel values so scenes feel related.
+
+The flagship demo uses progress-linked camera motion, velocity-sensitive tilt, animated SVG signal paths, layered ambient depth, translucent stage surfaces, progressive expert selection, and a resolving output state.
 
 ## Run it
 
@@ -23,11 +54,26 @@ npm install
 npm run dev
 ```
 
+## Recording controls
+
+- `P` — presenter mode
+- `F` — fullscreen
+- `?present=1` — start directly in clean presentation mode
+- `Space` / `→` — next beat in click/sequence scenes
+- `←` — previous beat
+- `Home` — reset
+
 ## Main structure
 
 ```text
 src/
+  motion/
+    tokens.ts
+
   engine/
+    SmoothScroll.tsx
+    MotionSystem.tsx
+    PremiumScrolly.tsx
     StepController.tsx
     SceneController.tsx
     ScrollController.tsx
@@ -36,6 +82,8 @@ src/
     ScrollKit.ts
 
   components/
+    ScrollBeat.tsx
+    ScrollProgress.tsx
     Reveal.tsx
     Arrow.tsx
     Node.tsx
@@ -48,16 +96,8 @@ src/
     DragGrid.tsx
     Camera.tsx
 
-  scenes/
-    ClickStory.tsx
-    Simulation.tsx
-    ScrollyStory.tsx
-    Comparison.tsx
-    Diagram.tsx
-    SystemFlow.tsx
-    Timeline.tsx
-
   examples/
+    premium-scrolly/
     trust-style/
     polygons-style/
     scrolly-style/
@@ -67,30 +107,23 @@ src/
     focus-style/
 ```
 
-## Recording controls
+## Motion rules
 
-- `P` — toggle presenter mode
-- `F` — fullscreen while presenting
-- `Space` or `→` — next beat in step-driven scenes
-- `←` — previous beat
-- `Home` — reset
-- `?present=1` — start in presenter mode
+- Movement must explain or direct attention; decorative motion is secondary.
+- Prefer continuous scroll-linked choreography over abrupt state switching when the concept benefits from it.
+- Keep transforms GPU-friendly (`transform`, `opacity`, selective `filter`, SVG path progress) and avoid layout thrashing during scroll.
+- Use one motion language across scenes: shared springs, easing, blur, travel, and depth ranges.
+- Inactive information should often recede rather than disappear. Context matters.
+- Respect `prefers-reduced-motion`.
+- Test real explainers, not component demos alone.
 
-Presenter mode hides navigation, headings, debug controls, borders, and other authoring chrome so the active visual can be recorded cleanly in 16:9.
+## Upstream / inspiration
 
-## ScrollKit
+- Nicky Case — *The Evolution of Trust* (CC0-1.0)
+- Nicky Case — *Parable of the Polygons* (CC0-1.0)
+- Nicky Case — *LOOPY* (CC0-1.0)
+- Motion (MIT) — primary premium animation layer
+- Lenis (MIT) — smooth-scroll layer
+- react-kino (MIT) — optional scroll-storytelling helpers
 
-`src/engine/ScrollKit.ts` is a thin adapter over **react-kino** (MIT). It exposes sticky scenes, parallax, scroll transforms, text reveals, compare sliders, video scroll, and progress without tying explainers directly to that dependency.
-
-## Upstream design/code references
-
-- Nicky Case — *The Evolution of Trust* (CC0)
-- Nicky Case — *Parable of the Polygons* (CC0)
-- Nicky Case — *LOOPY* (CC0)
-- react-kino by Bilal Tahir (MIT)
-
-See `NCASE_CREDITS.md` for Ncase provenance.
-
-## The rule
-
-Do not keep building framework components just because they might be useful someday. Build a real explainer. Add a primitive only when a real scene proves it is missing.
+See `NCASE_CREDITS.md` for Ncase provenance and reuse notes.
