@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import { useParams } from 'react-router'
+import ContinuityExample from '../examples/continuity-style/ContinuityExample'
 import DragGridExample from '../examples/drag-style/DragGridExample'
 import SignalFlowExample from '../examples/flow-style/SignalFlowExample'
 import FocusExample from '../examples/focus-style/FocusExample'
@@ -14,6 +15,7 @@ import TypographyExample from '../examples/typography-style/TypographyExample'
 import { LabCommandMenu } from '../lab/LabCommandMenu'
 
 const demos: Record<string, ComponentType> = {
+  continuity: ContinuityExample,
   premium: PremiumScrollyExample,
   navigation: NavigationLabExample,
   reveal: MaskRevealExample,
