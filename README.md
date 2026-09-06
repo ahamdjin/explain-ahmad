@@ -59,6 +59,8 @@ Reusable adapters/primitives include:
 - `VisualStage`, `VisualLayer`, `MediaVisual`, `VisualMask`, `VisualScrim`
 - `SignalFlow`, `Camera`, `DragGrid`
 
+Lucide icons are direct tree-shaken imports. The project does **not** import Lucide's full runtime icon registry into every video. The first implementation accidentally produced a 555 KB icon chunk; the corrected semantic adapter is ~39 KB minified in the current production build.
+
 See `docs/VISUAL_SYSTEM.md` for usage policy.
 
 ## Navigation languages
