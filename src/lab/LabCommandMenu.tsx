@@ -16,8 +16,12 @@ export function LabCommandMenu({ currentDemo }: { currentDemo: string }) {
   const { presenting, toggle, toggleFullscreen } = usePresenterMode()
 
   useEffect(() => {
+    if (presenting) setOpen(false)
+  }, [presenting])
+
+  useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (isTypingTarget(event.target)) return
+      if (presenting || isTypingTarget(event.target)) return
 
       const commandK = event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)
       const labKey = event.key.toLowerCase() === 'l' && !event.metaKey && !event.ctrlKey && !event.altKey
@@ -29,7 +33,7 @@ export function LabCommandMenu({ currentDemo }: { currentDemo: string }) {
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [])
+  }, [presenting])
 
   const run = (action: () => void) => {
     setOpen(false)
@@ -38,7 +42,7 @@ export function LabCommandMenu({ currentDemo }: { currentDemo: string }) {
 
   return (
     <Command.Dialog
-      open={open}
+      open={!presenting && open}
       onOpenChange={setOpen}
       label="Explainer lab commands"
       loop
@@ -85,7 +89,7 @@ export function LabCommandMenu({ currentDemo }: { currentDemo: string }) {
             <small>↵</small>
           </Command.Item>
           <Command.Item className="lab-command-item" value="Presenter mode" keywords={['present', 'record', 'clean']} onSelect={() => run(toggle)}>
-            <div><strong>{presenting ? 'Exit presenter mode' : 'Enter presenter mode'}</strong><span>Hide all lab chrome for recording</span></div>
+            <div><strong>Enter presenter mode</strong><span>Hide all lab chrome for recording</span></div>
             <small>P</small>
           </Command.Item>
           <Command.Item className="lab-command-item" value="Fullscreen" keywords={['screen', 'record']} onSelect={() => run(toggleFullscreen)}>
