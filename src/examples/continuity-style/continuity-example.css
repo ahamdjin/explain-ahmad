@@ -1,0 +1,386 @@
+.continuity-demo,
+.continuity-demo > .scene-deck {
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+}
+
+.continuity-demo > .scene-deck {
+  position: relative;
+  overflow: hidden;
+}
+
+.continuity-section {
+  --scene-pad: clamp(24px, 4vw, 64px);
+  padding: var(--scene-pad);
+}
+
+.continuity-caption {
+  position: absolute;
+  z-index: 20;
+  top: clamp(28px, 5vh, 58px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 70vw;
+  text-align: center;
+}
+
+.continuity-caption .story-note {
+  color: #29241e;
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 650;
+}
+
+.token-journey-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.continuity-token-layout {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-token {
+  min-width: 92px;
+  min-height: 62px;
+  padding: 13px 18px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border: 2px solid #211c17;
+  border-radius: 13px;
+  background: #fffdf7;
+  color: #181410;
+  box-shadow: 4px 5px 0 rgba(33, 28, 23, .92);
+  font-size: clamp(18px, 1.7vw, 27px);
+  font-weight: 780;
+}
+
+.journey-token small {
+  margin-top: 5px;
+  color: #756d63;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: .06em;
+}
+
+.continuity-token-layout-prompt {
+  gap: 0;
+}
+
+.continuity-token-layout-prompt .journey-token {
+  min-width: 0;
+  min-height: 70px;
+  padding-inline: 8px;
+  border-radius: 0;
+  border-right-width: 0;
+  box-shadow: 0 6px 0 #211c17;
+}
+
+.continuity-token-layout-prompt .journey-token:first-child {
+  padding-left: 24px;
+  border-radius: 18px 0 0 18px;
+}
+
+.continuity-token-layout-prompt .journey-token:last-child {
+  padding-right: 24px;
+  border-right-width: 2px;
+  border-radius: 0 18px 18px 0;
+}
+
+.continuity-token-layout-tokens {
+  gap: clamp(14px, 2.2vw, 32px);
+}
+
+.vocabulary-library {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 76vw);
+  height: min(430px, 52vh);
+  padding: 26px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 18px;
+  border: 2px solid #211c17;
+  border-radius: 22px;
+  background: #efe6d7;
+  box-shadow: 8px 10px 0 #211c17;
+}
+
+.vocabulary-library::before {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 2px;
+  background: #211c17;
+  opacity: .45;
+}
+
+.vocabulary-library i {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border: 1.5px dashed rgba(33, 28, 23, .36);
+  border-radius: 13px;
+  color: rgba(33, 28, 23, .34);
+  font-style: normal;
+}
+
+.vocabulary-library i span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.vocabulary-library i small {
+  margin-top: 4px;
+  font-size: 10px;
+  letter-spacing: .06em;
+}
+
+.continuity-token-layout-ids {
+  width: min(760px, 66vw);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.continuity-token-layout-ids .journey-token {
+  width: 100%;
+  min-height: 96px;
+}
+
+.continuity-section-book .vocabulary-library {
+  left: 29%;
+  width: min(620px, 52vw);
+  height: min(360px, 44vh);
+  opacity: .28 !important;
+  box-shadow: 5px 7px 0 #211c17;
+}
+
+.continuity-token-layout-book {
+  left: 28%;
+  width: min(430px, 36vw);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.continuity-token-layout-book .journey-token {
+  min-width: 0;
+  min-height: 78px;
+  padding: 10px;
+  font-size: 18px;
+  box-shadow: 3px 4px 0 #211c17;
+}
+
+.embedding-book {
+  position: relative;
+  color: #17130f;
+}
+
+.continuity-section-book .shared-element {
+  position: absolute;
+  z-index: 12;
+  left: 68%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+}
+
+.embedding-book-closed {
+  width: clamp(210px, 18vw, 300px);
+  aspect-ratio: .72;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  border: 2px solid #17130f;
+  border-radius: 10px 19px 19px 10px;
+  overflow: hidden;
+  background: #d8a86a;
+  box-shadow: 10px 12px 0 #17130f;
+  transform: rotate(1.3deg);
+}
+
+.embedding-book-spine {
+  border-right: 2px solid #17130f;
+  background: #bd8850;
+}
+
+.embedding-book-cover {
+  display: grid;
+  place-items: center;
+  align-content: center;
+}
+
+.embedding-book-cover span {
+  font-size: clamp(24px, 2.4vw, 38px);
+  font-weight: 780;
+  letter-spacing: -.03em;
+}
+
+.embedding-book-cover small {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.continuity-action {
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  bottom: clamp(26px, 7vh, 70px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.continuity-action-book {
+  left: 68%;
+}
+
+.continuity-back {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #211c17;
+  border-radius: 50%;
+  background: #fffdf7;
+  color: #211c17;
+  cursor: pointer;
+  font-weight: 780;
+  transition: transform 140ms ease;
+}
+
+.continuity-back:hover { transform: translateX(-2px); }
+.continuity-back:active { transform: translateX(-1px) scale(.96); }
+
+.embedding-section {
+  background: #f4ecdf;
+}
+
+.embedding-world {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.embedding-world .shared-element {
+  width: min(1120px, 82vw);
+  height: min(720px, 70vh);
+}
+
+.embedding-book-open {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 18px 1fr;
+  border: 2px solid #17130f;
+  border-radius: 24px 24px 16px 16px;
+  overflow: hidden;
+  background: #fffdf7;
+  box-shadow: 12px 15px 0 #17130f;
+}
+
+.embedding-page {
+  padding: clamp(28px, 4vw, 58px);
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  background:
+    linear-gradient(rgba(23, 19, 15, .035) 1px, transparent 1px),
+    #fffdf7;
+  background-size: 100% 30px;
+}
+
+.embedding-page-left {
+  border-right: 1px solid rgba(23, 19, 15, .18);
+}
+
+.embedding-page-right {
+  border-left: 1px solid rgba(23, 19, 15, .18);
+}
+
+.embedding-book-gutter {
+  background: linear-gradient(90deg, rgba(23, 19, 15, .16), transparent 45%, rgba(23, 19, 15, .12));
+}
+
+.embedding-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 13px 15px;
+  border: 1.5px solid #211c17;
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 3px 4px 0 #211c17;
+  font-weight: 760;
+}
+
+.embedding-row small {
+  color: #746c62;
+  font-size: 11px;
+  letter-spacing: .06em;
+}
+
+.vector-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 7px;
+}
+
+.vector-strip i {
+  height: clamp(42px, 6vh, 64px);
+  border: 1.5px solid #211c17;
+  border-radius: 7px;
+  background: #dbe9e4;
+}
+
+.vector-strip i:nth-child(2n) { background: #ead9c5; }
+.vector-strip i:nth-child(3n) { background: #e5d3ce; }
+
+.continuity-section-back {
+  position: absolute;
+  z-index: 30;
+  left: clamp(24px, 4vw, 60px);
+  bottom: clamp(24px, 5vh, 54px);
+}
+
+::view-transition-old(embedding-book),
+::view-transition-new(embedding-book) {
+  animation-duration: .72s;
+  animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+}
+
+@media (max-width: 760px) {
+  .continuity-token-layout-ids { width: 84vw; gap: 10px; }
+  .vocabulary-library { width: 88vw; }
+  .continuity-section-book .vocabulary-library { display: none; }
+  .continuity-token-layout-book { left: 24%; width: 38vw; grid-template-columns: 1fr; }
+  .continuity-section-book .shared-element { left: 70%; }
+  .continuity-action-book { left: 70%; }
+  .embedding-world .shared-element { width: 90vw; height: 68vh; }
+  .embedding-book-open { grid-template-columns: 1fr; overflow: auto; }
+  .embedding-book-gutter { display: none; }
+  .embedding-page { min-height: 50%; padding: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continuity-back,
+  .journey-token { transition: none !important; }
+}
