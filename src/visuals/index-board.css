@@ -1,0 +1,58 @@
+.index-board {
+  --index-ink: var(--scene-ink, #17130f);
+  --index-paper: color-mix(in srgb, var(--surface-2, #fffdf7) 88%, #eee4d5 12%);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 360px;
+  min-height: 320px;
+  border: 1.7px solid var(--index-ink);
+  border-radius: 8px 11px 9px 7px;
+  background:
+    linear-gradient(to right, rgba(23, 19, 15, .05) 1px, transparent 1px) 42px 0 / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent calc(100% - 1px), rgba(23, 19, 15, .18) 0) 0 0 / 100% calc(100% / var(--index-rows)),
+    var(--index-paper);
+  box-shadow: 5px 7px 0 rgba(23, 19, 15, .78);
+}
+
+.index-board::before,
+.index-board::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  bottom: 16px;
+  width: 4px;
+  border: 1px solid rgba(23, 19, 15, .22);
+  background: color-mix(in srgb, var(--index-paper) 74%, #cdbca7 26%);
+}
+
+.index-board::before { left: 12px; }
+.index-board::after { right: 12px; }
+
+.index-board-tab {
+  position: absolute;
+  z-index: 3;
+  top: -18px;
+  left: 28px;
+  padding: 5px 9px 4px;
+  border: 1.4px solid var(--index-ink);
+  border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+  background: var(--index-paper);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: .14em;
+}
+
+.index-board-content {
+  position: absolute;
+  inset: 0;
+}
+
+@media (max-width: 760px) {
+  .index-board {
+    min-width: 0;
+    min-height: 280px;
+  }
+}
