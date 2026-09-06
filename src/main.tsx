@@ -7,6 +7,7 @@ import './scrolly.css'
 import './premium-scroll.css'
 import './premium-patterns.css'
 import './design-system.css'
+import './paper-refinement.css'
 import './explanation-system.css'
 import './lab-shell.css'
 
