@@ -14,7 +14,7 @@ type ScrollControllerProps = {
 
 export function ScrollController({ steps, renderVisual }: ScrollControllerProps) {
   const [activeStep, setActiveStep] = useState(0)
-  const stepRefs = useRef<Array<HTMLDivElement | null>>([])
+  const stepRefs = useRef<Array<HTMLElement | null>>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
