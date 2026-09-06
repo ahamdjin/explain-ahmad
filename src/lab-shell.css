@@ -1,0 +1,121 @@
+.demo-route-shell {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: auto;
+  background: #f7f1e6;
+}
+
+/* Lab chrome floats above a demo. It never owns layout space. */
+.lab-chrome {
+  position: fixed;
+  z-index: 5000;
+  top: 14px;
+  right: 14px;
+  width: max-content;
+  color: #17130f;
+}
+
+.lab-chrome > summary {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #28231c;
+  border-radius: 999px;
+  background: rgba(255, 250, 241, .94);
+  box-shadow: 2px 3px 0 #28231c;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  user-select: none;
+}
+
+.lab-chrome > summary::-webkit-details-marker { display: none; }
+
+.lab-chrome[open] > summary {
+  margin-left: auto;
+  transform: translateY(1px);
+  box-shadow: 1px 2px 0 #28231c;
+}
+
+.lab-chrome-menu {
+  width: 190px;
+  margin-top: 8px;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+  border: 1.5px solid #28231c;
+  border-radius: 14px;
+  background: #fffaf1;
+  box-shadow: 4px 5px 0 #28231c;
+}
+
+.lab-chrome-menu a,
+.lab-chrome-menu button {
+  width: 100%;
+  padding: 8px 9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.lab-chrome-menu a:hover,
+.lab-chrome-menu button:hover { background: #f1e9dc; }
+
+.lab-chrome-menu small {
+  padding: 6px 9px 4px;
+  color: #776f64;
+  font-size: 10px;
+}
+
+/* Legacy demo containers used to be cards. Inside the lab they are the viewport. */
+.demo-route-shell > .simulation-scene,
+.demo-route-shell > .scene-controller {
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+
+.demo-route-shell > .simulation-scene {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.demo-route-shell .scene-stage {
+  min-height: 0;
+  height: 100%;
+}
+
+.demo-route-shell > .scrolly-scene,
+.demo-route-shell > .premium-pattern-page,
+.demo-route-shell > .premium-story {
+  width: 100%;
+  min-height: 100svh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* A scene may scroll internally, but there is never an accidental page gutter. */
+.demo-route-shell > *:not(.lab-chrome) {
+  max-width: none;
+}
+
+body[data-presenter='true'] .lab-chrome { display: none; }
