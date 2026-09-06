@@ -1,0 +1,154 @@
+/*
+ * Explanation-first defaults.
+ * The interface should disappear into the explanation.
+ * Website chrome is opt-in; diagrams and story objects are the default heroes.
+ */
+
+.scene-title {
+  max-width: 20ch;
+  font-size: clamp(30px, 3.4vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -.025em;
+  font-weight: 760;
+}
+
+.scene-body {
+  max-width: 34rem;
+  margin-top: 16px;
+  font-size: clamp(15px, 1.15vw, 19px);
+  line-height: 1.58;
+  letter-spacing: .002em;
+}
+
+.scene-kicker,
+.route-kicker {
+  letter-spacing: .11em;
+}
+
+/* Diagram is allowed to own most of the frame. */
+.diagram-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.diagram-label {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  max-width: 24ch;
+  color: var(--scene-ink, var(--ink));
+  font-size: clamp(12px, .95vw, 15px);
+  line-height: 1.25;
+  font-weight: 720;
+  letter-spacing: .01em;
+}
+
+.story-note {
+  width: max-content;
+  max-width: min(34rem, 72vw);
+  margin: 0;
+  color: var(--scene-muted, var(--muted-ink));
+  font-size: clamp(15px, 1.15vw, 19px);
+  line-height: 1.5;
+  letter-spacing: .003em;
+}
+
+/* Story controls are story objects, not an app toolbar. Placement belongs to the scene. */
+.story-button {
+  min-width: 0;
+  padding: 9px 12px 9px 14px;
+  display: inline-grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "label icon" "hint icon";
+  gap: 1px 11px;
+  border: 1.6px solid currentColor;
+  border-radius: 11px;
+  color: var(--scene-ink, #17130f);
+  background: color-mix(in srgb, var(--surface-2, #fff) 92%, transparent);
+  box-shadow: none;
+  backdrop-filter: none;
+  cursor: pointer;
+  transition: transform 130ms ease, background-color 130ms ease;
+}
+
+.story-button:hover:not(:disabled) {
+  transform: translateY(-1px) rotate(-.25deg);
+  background: color-mix(in srgb, var(--scene-accent, #79c8bd) 14%, var(--surface-2, #fff));
+  border-color: currentColor;
+}
+
+.story-button:active:not(:disabled) {
+  transform: translateY(0) scale(.985);
+}
+
+.story-button span {
+  font-size: 14px;
+  font-weight: 760;
+  letter-spacing: .005em;
+}
+
+.story-button small {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.25;
+  opacity: .58;
+}
+
+.story-button b {
+  width: auto;
+  height: auto;
+  padding-left: 3px;
+  border-radius: 0;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.story-button:disabled {
+  opacity: .28;
+}
+
+/* Internal library can be navigational; it is not a video scene. */
+.library-title {
+  max-width: 12ch;
+  font-size: clamp(44px, 5.4vw, 82px);
+  line-height: .98;
+  letter-spacing: -.035em;
+  font-weight: 760;
+}
+
+.library-subtitle {
+  max-width: 42rem;
+  margin-top: 20px;
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.58;
+}
+
+/* Opt-in composition helper: visual gets the majority of the frame. */
+.scene-grid.is-diagram-first {
+  grid-template-columns: minmax(210px, .48fr) minmax(620px, 1.72fr);
+  gap: clamp(28px, 5vw, 84px);
+}
+
+.scene-grid.is-diagram-first .scene-copy {
+  align-self: center;
+}
+
+.scene-grid.is-diagram-first .scene-visual {
+  min-height: 76vh;
+}
+
+@media (max-width: 820px) {
+  .scene-grid.is-diagram-first {
+    grid-template-columns: 1fr;
+  }
+
+  .scene-grid.is-diagram-first .scene-visual {
+    min-height: 62vh;
+  }
+}
