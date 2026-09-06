@@ -1,0 +1,35 @@
+.continuity-local-controls,
+.continuity-book-back {
+  pointer-events: auto;
+}
+
+.journey-token-id,
+.vocabulary-filler-grid span,
+.embedding-row small,
+.embedding-page-label {
+  font-variant-numeric: tabular-nums;
+}
+
+.journey-token-word,
+.journey-token-id,
+.embedding-row,
+.vector-strip {
+  text-rendering: geometricPrecision;
+}
+
+.embedding-book-control,
+.story-button,
+.story-icon-button {
+  user-select: none;
+}
+
+.continuity-section-ids .vocabulary-index,
+.continuity-section-book .vocabulary-index {
+  transform-origin: 50% 55%;
+}
+
+@media (hover: none) {
+  .book-open-cue {
+    color: #3f3933;
+  }
+}
