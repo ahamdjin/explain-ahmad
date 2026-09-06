@@ -9,12 +9,18 @@ export function useActionGate(durationMs = 360) {
   const busyRef = useRef(false)
   const timerRef = useRef<number | null>(null)
 
-  const reset = useCallback(() => {
-    if (timerRef.current !== null) window.clearTimeout(timerRef.current)
+  const clearTimer = useCallback(() => {
+    if (timerRef.current !== null && typeof window !== 'undefined') {
+      window.clearTimeout(timerRef.current)
+    }
     timerRef.current = null
+  }, [])
+
+  const reset = useCallback(() => {
+    clearTimer()
     busyRef.current = false
     setBusy(false)
-  }, [])
+  }, [clearTimer])
 
   const run = useCallback((action: () => void, overrideDurationMs?: number) => {
     if (busyRef.current) return false
@@ -23,9 +29,18 @@ export function useActionGate(durationMs = 360) {
     setBusy(true)
     action()
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const delay = reducedMotion ? Math.min(80, overrideDurationMs ?? durationMs) : (overrideDurationMs ?? durationMs)
+    if (typeof window === 'undefined') {
+      busyRef.current = false
+      setBusy(false)
+      return true
+    }
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const delay = reducedMotion
+      ? Math.min(80, overrideDurationMs ?? durationMs)
+      : (overrideDurationMs ?? durationMs)
+
+    clearTimer()
     timerRef.current = window.setTimeout(() => {
       busyRef.current = false
       timerRef.current = null
@@ -33,9 +48,12 @@ export function useActionGate(durationMs = 360) {
     }, Math.max(0, delay))
 
     return true
-  }, [durationMs])
+  }, [clearTimer, durationMs])
 
-  useEffect(() => reset, [reset])
+  useEffect(() => () => {
+    clearTimer()
+    busyRef.current = false
+  }, [clearTimer])
 
   return { busy, run, reset }
 }
