@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { StoryButton } from '../../components/StoryButton'
 import { StoryNote } from '../../components/DiagramStage'
 import { ContinuityActor, ContinuityStage } from '../../continuity/ContinuityActor'
@@ -64,14 +64,18 @@ function ClosedEmbeddingBook() {
   )
 }
 
-function TokenizationWorld() {
+function TokenizationWorld({ onOpenEmbedding }: { onOpenEmbedding: () => void }) {
   const director = useSceneDirector()
   const deck = useSceneDeck()
   const beat = director.beat as (typeof beats)[number]
 
   const advance = () => {
-    if (beat === 'book') deck.next()
-    else director.next()
+    if (beat === 'book') {
+      onOpenEmbedding()
+      deck.next()
+    } else {
+      director.next()
+    }
   }
 
   useEffect(() => {
@@ -91,7 +95,7 @@ function TokenizationWorld() {
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [beat, director, deck])
+  }, [beat, director, deck, onOpenEmbedding])
 
   return (
     <SceneFrame art="paper" className={`continuity-section continuity-section-${beat}`}>
@@ -127,10 +131,10 @@ function TokenizationWorld() {
   )
 }
 
-function TokenizationSection() {
+function TokenizationSection({ resumeAtBook, onOpenEmbedding }: { resumeAtBook: boolean; onOpenEmbedding: () => void }) {
   return (
-    <SceneDirector beats={beats}>
-      <TokenizationWorld />
+    <SceneDirector beats={beats} initialIndex={resumeAtBook ? beats.length - 1 : 0}>
+      <TokenizationWorld onOpenEmbedding={onOpenEmbedding} />
     </SceneDirector>
   )
 }
@@ -169,10 +173,12 @@ function EmbeddingSection() {
 }
 
 export default function ContinuityExample() {
+  const [openedEmbedding, setOpenedEmbedding] = useState(false)
+
   return (
     <div className="continuity-demo">
       <SceneDeck>
-        <TokenizationSection />
+        <TokenizationSection resumeAtBook={openedEmbedding} onOpenEmbedding={() => setOpenedEmbedding(true)} />
         <EmbeddingSection />
       </SceneDeck>
     </div>
