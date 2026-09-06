@@ -2,17 +2,23 @@ import { useState } from 'react'
 import DragGridExample from './examples/drag-style/DragGridExample'
 import SignalFlowExample from './examples/flow-style/SignalFlowExample'
 import FocusExample from './examples/focus-style/FocusExample'
+import NavigationLabExample from './examples/navigation-style/NavigationLabExample'
 import PolygonsExample from './examples/polygons-style/PolygonsExample'
 import PremiumScrollyExample from './examples/premium-scrolly/PremiumScrollyExample'
+import MaskRevealExample from './examples/reveal-style/MaskRevealExample'
 import ScrollyExample from './examples/scrolly-style/ScrollyExample'
 import SequenceExample from './examples/sequence-style/SequenceExample'
 import TrustExample from './examples/trust-style/TrustExample'
+import TypographyExample from './examples/typography-style/TypographyExample'
 import { PresenterControls, PresenterMode } from './engine/PresenterMode'
 
-type Demo = 'premium' | 'trust' | 'polygons' | 'scrolly' | 'flow' | 'sequence' | 'drag' | 'focus'
+type Demo = 'premium' | 'navigation' | 'reveal' | 'type' | 'trust' | 'polygons' | 'scrolly' | 'flow' | 'sequence' | 'drag' | 'focus'
 
 const demos: Array<{ id: Demo; label: string; hint: string }> = [
   { id: 'premium', label: 'Premium scrolly', hint: 'Continuous motion + depth' },
+  { id: 'navigation', label: 'Navigation lab', hint: 'Gesture paging + scene transitions' },
+  { id: 'reveal', label: 'Visual reveal', hint: 'Scroll-linked masks + camera' },
+  { id: 'type', label: 'Typography', hint: 'Responsive line + word choreography' },
   { id: 'trust', label: 'Trust style', hint: 'Click / Space to reveal' },
   { id: 'polygons', label: 'Polygon style', hint: 'Manipulate the system' },
   { id: 'scrolly', label: 'Basic scrolly', hint: 'Step-based reference' },
@@ -29,11 +35,11 @@ function ExplainerApp() {
     <main className="app-shell">
       <header className="app-header">
         <div>
-          <p className="eyebrow">EXPLAINER ENGINE · V1</p>
+          <p className="eyebrow">EXPLAINER ENGINE · PREMIUM LAB</p>
           <h1>Explain Ahmad</h1>
         </div>
         <div className="header-actions">
-          <p className="header-note">Premium motion foundation + reusable interactive storytelling primitives.</p>
+          <p className="header-note">Every capability is opt-in. The story decides the interaction, motion engine and visual stack.</p>
           <PresenterControls />
         </div>
       </header>
@@ -52,6 +58,9 @@ function ExplainerApp() {
       </nav>
 
       {demo === 'premium' && <PremiumScrollyExample />}
+      {demo === 'navigation' && <NavigationLabExample />}
+      {demo === 'reveal' && <MaskRevealExample />}
+      {demo === 'type' && <TypographyExample />}
       {demo === 'trust' && <TrustExample />}
       {demo === 'polygons' && <PolygonsExample />}
       {demo === 'scrolly' && <ScrollyExample />}

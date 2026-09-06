@@ -4,6 +4,7 @@ import App from './App'
 import './styles.css'
 import './scrolly.css'
 import './premium-scroll.css'
+import './premium-patterns.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
