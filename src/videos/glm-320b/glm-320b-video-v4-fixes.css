@@ -1,0 +1,252 @@
+/*
+ * Production v4 corrective layer.
+ *
+ * Two jobs:
+ * 1. Keep Motion's inline transform animations from destroying CSS centering.
+ * 2. Make the teaching hierarchy legible: persistent journey context, larger required
+ *    explanatory text, and deliberate emphasis inside the opening dossier.
+ */
+
+/* --------------------------------------------------------------------------
+   MOTION-SAFE CENTERING
+   CSS `transform: translate(...)` and Motion's animated `transform` compete for
+   the same property. Use the independent CSS `translate` property for centering,
+   leaving `transform` free for Motion's scale/x/y/rotate animation.
+   -------------------------------------------------------------------------- */
+
+.prod4-model-dossier,
+.prod4-chat,
+.prod4-sentence-actor,
+.prod4-token-row,
+.prod4-token-kinds,
+.prod4-id-explainer,
+.prod4-hero-actor,
+.prod4-book-button,
+.prod4-attention-question,
+.prod4-qkv,
+.prod4-attention-sentence,
+.prod4-attention-result,
+.prod4-moe-layer,
+.prod4-building-layer,
+.prod4-output-layer {
+  transform: none;
+}
+
+.prod4-model-dossier,
+.prod4-chat,
+.prod4-sentence-actor,
+.prod4-token-row,
+.prod4-hero-actor,
+.prod4-book-button,
+.prod4-attention-question,
+.prod4-qkv,
+.prod4-attention-sentence,
+.prod4-moe-layer,
+.prod4-building-layer,
+.prod4-output-layer {
+  translate: -50% -50%;
+}
+
+.prod4-token-kinds,
+.prod4-id-explainer,
+.prod4-attention-result {
+  translate: -50% 0;
+}
+
+/* Keep the recording composition bounded by BOTH viewport axes. */
+.prod4-safe-frame {
+  width: min(96dvw, calc(92dvh * 16 / 9));
+  max-width: 1920px;
+  max-height: 1080px;
+}
+
+/* --------------------------------------------------------------------------
+   WHERE AM I? — persistent story map
+   The current stage remains visually dominant while the whole journey stays faintly
+   visible. MODEL and JOURNEY keep the compact badge because the walkthrough has not
+   started yet.
+   -------------------------------------------------------------------------- */
+
+.prod4-stage-badge:not([aria-label="Current stage: MODEL"]):not([aria-label="Current stage: JOURNEY"]) {
+  left: 50%;
+  right: auto;
+  top: 1.5%;
+  width: min(76%, 1080px);
+  min-width: 0;
+  height: 34px;
+  padding: 0 8px 0 13px;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 12px;
+}
+
+.prod4-stage-badge:not([aria-label="Current stage: MODEL"]):not([aria-label="Current stage: JOURNEY"])::before {
+  content: "TEXT  →  TOKENS  →  ID  →  EMBEDDING  →  ATTENTION  →  MOE  →  LAYERS  →  OUTPUT";
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(25,22,17,.34);
+  font-size: clamp(7px, .48cqw, 9px);
+  font-weight: 720;
+  letter-spacing: .045em;
+}
+
+.prod4-stage-badge:not([aria-label="Current stage: MODEL"]):not([aria-label="Current stage: JOURNEY"]) strong {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border: 1px solid rgba(25,22,17,.28);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--p4-orange) 16%, var(--p4-paper-hi));
+  color: var(--p4-ink);
+  box-shadow: 2px 2px 0 rgba(25,22,17,.28);
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+/* --------------------------------------------------------------------------
+   OPENING DOSSIER — information should remain available without competing.
+   -------------------------------------------------------------------------- */
+
+.prod4-model-facts {
+  opacity: .58;
+  transition: opacity .28s ease;
+}
+
+.prod4-model-dossier[data-parameters="true"] .prod4-model-facts {
+  opacity: .26;
+}
+
+.prod4-model-dossier[data-architecture="true"] .prod4-model-facts {
+  opacity: 1;
+}
+
+.prod4-model-dossier[data-payoff="true"] .prod4-model-facts {
+  opacity: .24;
+}
+
+/* Multimodality/context-window details are true, but they do not help answer this
+   video's question. Keep them in source/research, not in the viewer's first scan. */
+.prod4-dossier-tags span:nth-child(2),
+.prod4-dossier-tags span:nth-child(3),
+.prod4-attention-facts,
+.prod4-context-fact {
+  opacity: .28;
+}
+
+.prod4-model-dossier[data-architecture="true"] .prod4-dossier-tags span:first-child {
+  background: color-mix(in srgb, var(--p4-orange) 14%, var(--p4-paper-hi));
+  border-color: rgba(25,22,17,.36);
+}
+
+/* Required teaching text cannot live at decorative-label size. */
+.prod4-model-description small,
+.prod4-facts-heading small,
+.prod4-hook-question small,
+.prod4-param-explainer small,
+.prod4-moe-definition small,
+.prod4-page-key small,
+.prod4-id-explainer small,
+.prod4-attention-question small,
+.prod4-moe-heading small,
+.prod4-router small,
+.prod4-output-layer > small,
+.prod4-generated small {
+  font-size: clamp(9px, .58cqw, 11px);
+}
+
+.prod4-param-card span,
+.prod4-param-explainer span,
+.prod4-moe-definition span,
+.prod4-fact-grid span,
+.prod4-id-explainer span,
+.prod4-page-key span,
+.prod4-qkv span,
+.prod4-attention-result span,
+.prod4-moe-heading span,
+.prod4-router span,
+.prod4-top8 span,
+.prod4-shared span,
+.prod4-refine-explainer span,
+.prod4-output-loop span {
+  font-size: clamp(9px, .62cqw, 11px);
+}
+
+.prod4-fact-grid > div {
+  min-height: 8.8cqh;
+}
+
+.prod4-fact-grid b {
+  font-size: clamp(18px, 1.45cqw, 25px);
+}
+
+/* Make the chosen 320B / ~18B contrast the first scan, not the surrounding chrome. */
+.prod4-param-card.is-total,
+.prod4-param-card.is-active {
+  isolation: isolate;
+}
+
+.prod4-param-card.is-active {
+  outline: 2px solid color-mix(in srgb, var(--p4-orange) 52%, rgba(25,22,17,.38));
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   CLARITY / SAFE EDGES
+   -------------------------------------------------------------------------- */
+
+.prod4-dossier-action,
+.prod4-token-action,
+.prod4-book-action,
+.prod4-attention-action,
+.prod4-moe-action,
+.prod4-building-action {
+  max-width: 94%;
+}
+
+/* The v4 building previously placed its explanation outside the building itself.
+   Keep the explanatory note inside the safe frame, beside the building. */
+.prod4-refine-explainer {
+  left: 101%;
+  width: 52%;
+}
+
+@container (max-width: 1250px) {
+  .prod4-stage-badge:not([aria-label="Current stage: MODEL"]):not([aria-label="Current stage: JOURNEY"]) {
+    width: 84%;
+  }
+
+  .prod4-model-dossier {
+    width: 94%;
+    height: 89%;
+  }
+
+  .prod4-dossier-body {
+    grid-template-columns: 1.48fr .92fr;
+  }
+
+  .prod4-dossier-tags span:nth-child(2),
+  .prod4-dossier-tags span:nth-child(3) {
+    display: none;
+  }
+}
+
+@container (max-width: 980px) {
+  .prod4-stage-badge:not([aria-label="Current stage: MODEL"]):not([aria-label="Current stage: JOURNEY"])::before {
+    content: "TEXT → TOKENS → ID → EMBED → ATTENTION → MOE → LAYERS → OUTPUT";
+    font-size: 7px;
+  }
+
+  .prod4-dossier-body {
+    grid-template-columns: 1fr .78fr;
+  }
+}
+
+@media (max-height: 620px) {
+  .prod4-safe-frame {
+    width: min(96dvw, calc(90dvh * 16 / 9));
+  }
+}
