@@ -6,7 +6,7 @@ const WHEEL_THRESHOLD = 48
 
 /**
  * Some beats communicate cause through motion and need enough protected time to finish.
- * This is deliberately sparse: most beats stay quick and presenter-controlled.
+ * Prediction beats also get a deliberate thinking pause before the answer can replace them.
  */
 const BEAT_HOLD_MS: Partial<Record<number, number>> = {
   14: 760,
@@ -16,7 +16,7 @@ const BEAT_HOLD_MS: Partial<Record<number, number>> = {
   22: 720,
   24: 620,
   27: 720,
-  30: 720,
+  30: 1100,
   33: 920,
   37: 820,
   39: 920,
@@ -24,9 +24,11 @@ const BEAT_HOLD_MS: Partial<Record<number, number>> = {
   44: 720,
   45: 760,
   46: 700,
+  47: 1400,
   49: 650,
   50: 900,
   53: 850,
+  54: 680,
   55: 620,
   56: 620,
   58: 620,
@@ -36,20 +38,23 @@ const BEAT_HOLD_MS: Partial<Record<number, number>> = {
   66: 820,
   67: 720,
   72: 760,
-  74: 720,
+  73: 1400,
+  74: 760,
   76: 680,
   77: 650,
   79: 760,
   81: 820,
+  82: 720,
   83: 680,
   85: 820,
   86: 850,
   92: 3000,
-  96: 650,
+  94: 1400,
+  96: 700,
   97: 620,
   98: 760,
   99: 2200,
-  100: 900,
+  100: 1100,
 }
 
 function holdForBeat(beatNumber: number) {
