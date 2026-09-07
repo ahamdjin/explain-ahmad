@@ -8,7 +8,7 @@ on:
       - ".github/workflows/visual-qa.yml"
 
 jobs:
-  capture-glm-opening:
+  capture-glm-v12:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,43 +42,54 @@ jobs:
           cat /tmp/explain-ahmad-preview.log
           exit 1
 
-      - name: Capture Page 1 beats
+      - name: Capture v12 journey
         run: |
           mkdir -p visual-qa
           node --input-type=module <<'NODE'
           import { chromium } from 'playwright'
 
           const browser = await chromium.launch({ headless: true })
-          const viewports = [
-            { name: '1920x1080', width: 1920, height: 1080 },
-            { name: '1440x900', width: 1440, height: 900 },
-            { name: '1366x768', width: 1366, height: 768 },
-          ]
+          const route = 'http://127.0.0.1:4173/why-320b-uses-18b'
+          const shortViewportBeats = new Set([
+            1, 4, 7, 10, 14,
+            15, 17, 18, 19, 20,
+            21, 24, 28, 31, 32, 34, 37, 40, 41, 43, 44,
+            45, 47, 48, 49, 53, 56, 58, 60, 61, 62,
+            63, 64, 65, 67, 68, 70, 72, 73, 74, 75, 76, 79, 81, 82, 83, 84,
+            85, 86, 87, 91, 92, 93,
+            94, 95, 96, 97, 98, 99, 100,
+          ])
+          const specialWait = new Map([[17, 1700], [39, 1300], [92, 3300], [99, 2500]])
 
-          for (const viewport of viewports) {
-            const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } })
-            await page.goto('http://127.0.0.1:4173/why-320b-uses-18b', { waitUntil: 'networkidle' })
-            await page.waitForTimeout(500)
+          async function captureViewport(name, width, height, shouldCapture) {
+            const page = await browser.newPage({ viewport: { width, height } })
+            await page.goto(route, { waitUntil: 'networkidle' })
+            await page.waitForTimeout(600)
 
-            for (let beat = 1; beat <= 14; beat += 1) {
+            for (let beat = 1; beat <= 100; beat += 1) {
               if (beat > 1) {
                 await page.keyboard.press('ArrowRight')
-                await page.waitForTimeout(1150)
+                await page.waitForTimeout(specialWait.get(beat) ?? 900)
               }
+              if (!shouldCapture(beat)) continue
               await page.screenshot({
-                path: `visual-qa/${viewport.name}-beat-${String(beat).padStart(2, '0')}.png`,
+                path: `visual-qa/${name}-beat-${String(beat).padStart(3, '0')}.jpg`,
+                type: 'jpeg',
+                quality: 82,
                 fullPage: true,
               })
             }
             await page.close()
           }
 
+          await captureViewport('1920x1080', 1920, 1080, () => true)
+          await captureViewport('1366x768', 1366, 768, (beat) => shortViewportBeats.has(beat))
           await browser.close()
           NODE
 
       - name: Upload visual QA frames
         uses: actions/upload-artifact@v4
         with:
-          name: glm-page1-visual-qa
-          path: visual-qa/*.png
+          name: glm-v12-visual-qa
+          path: visual-qa/*.jpg
           retention-days: 7
