@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
-import { ATTENTION_WEIGHTS, ATTENTION_WORDS, FUTURE_GHOST_WORDS, IT_TOKEN_INDEX, MODEL, SENTENCE } from '../data'
+import { ATTENTION_WEIGHTS, ATTENTION_WORDS, FUTURE_GHOST_WORDS, IT_TOKEN_INDEX, MODEL } from '../data'
 import { ChapterHeading, HeroVector, PaperNote } from '../shared'
 
 const operation: Record<number, string> = {
@@ -99,7 +99,7 @@ export function AttentionRoom({ beat }: { beat: number }) {
           <motion.div className="v9-attention-question" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
             <p>The embedding gives the model numbers for <b>it</b>.</p>
             <strong>But which earlier words are useful <em>here</em>?</strong>
-            <div className="v9-question-sentence"><span>{SENTENCE.replace('ball', '')}</span><mark>ball</mark><span>, and </span><b>it</b><em> → rolled away .</em></div>
+            <div className="v9-question-sentence"><span>The dog dropped the </span><mark>ball</mark><span>, and </span><b>it</b><em> → rolled away .</em></div>
             <small>The gray continuation is not in the prompt yet. It is what we will eventually generate.</small>
           </motion.div>
         ) : null}
