@@ -1,6 +1,6 @@
 /*
  * v12 — Page 1 deep refinement.
- * Full-viewport composition. Causal order: total → BUT active → compare → question → clue → BUT parts list → SO follow one token.
+ * Full-viewport cold open: one complete model sheet, then focus the contradiction and its question.
  * No detached narrative overlay layer and no overlapping scene phases.
  */
 
@@ -104,7 +104,7 @@
   min-width: 0;
   padding: 2cqh 0 1.1cqh;
   display: grid;
-  grid-template-rows: auto auto minmax(14cqh, 1fr);
+  grid-template-rows: auto auto auto;
   align-content: start;
   gap: 1.4cqh;
 }
@@ -305,15 +305,15 @@
 }
 
 .v12-model-question {
-  min-height: 14cqh;
-  padding: 1.1cqh 0 0;
+  min-height: 11.5cqh;
+  padding: 1.35cqh 0 .5cqh;
   display: grid;
-  align-items: center;
+  align-items: start;
   border-top: 1px solid rgba(23,19,15,.18);
 }
 
 .v12-question-state {
-  align-self: center;
+  align-self: start;
 }
 
 .v12-question-next small { color: #a46141; }
@@ -579,7 +579,7 @@
   .v12-stat > p { margin-top: .6cqh; }
   .v12-local-definition { margin-top: .4cqh; }
   .v12-scale-compare { min-height: 7.2cqh; padding-block: .55cqh; }
-  .v12-model-question { min-height: 11cqh; padding-top: .6cqh; }
+  .v12-model-question { min-height: 9.5cqh; padding-top: .8cqh; }
   .v12-model-question h2 { margin-top: .25cqh; font-size: clamp(28px,2.1cqw,40px); }
   .v12-architecture { gap: .8cqh; }
   .v12-layer-anatomy { min-height: 25cqh; padding-block: .65cqh; }
