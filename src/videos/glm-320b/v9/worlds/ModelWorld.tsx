@@ -31,14 +31,15 @@ export function ModelWorld({ beat }: { beat: number }) {
         <header className="v9-model-name">
           <motion.small animate={{ opacity: showName ? 1 : 0 }}>{MODEL.maker}</motion.small>
           <motion.h1 animate={{ opacity: showName ? 1 : 0, y: showName ? 0 : 8 }}>{MODEL.name}</motion.h1>
-          <motion.p animate={{ opacity: showType ? 1 : 0 }}>Mixture-of-Experts language model</motion.p>
+          <motion.p animate={{ opacity: showType ? 1 : 0 }}>Large language model · Mixture of Experts (MoE)</motion.p>
+          {showType ? <motion.span className="v10-model-plain" initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}>Plain version: a big model with many learned expert blocks inside.</motion.span> : null}
         </header>
 
         <div className="v9-model-hero">
           <motion.div className="v9-model-number" data-kind="total" animate={{ opacity: showTotal ? 1 : 0, y: showTotal ? 0 : 12 }}>
             <span>{highlight ? <SketchAnnotation type="highlight" color="#f3cd64" padding={5}>TOTAL PARAMETERS</SketchAnnotation> : 'TOTAL PARAMETERS'}</span>
             <strong>{MODEL.totalParamsB}B</strong>
-            <p>learned numbers stored across the whole model</p>
+            <p>all learned parameter values stored across the model</p>
             {defineParameter ? <motion.aside initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}><b>Parameter</b> = one learned number inside the model.</motion.aside> : null}
           </motion.div>
 
@@ -47,18 +48,18 @@ export function ModelWorld({ beat }: { beat: number }) {
           <motion.div className="v9-model-number" data-kind="active" animate={{ opacity: showActive ? 1 : 0, y: showActive ? 0 : 12 }}>
             <span>{highlight ? <SketchAnnotation type="highlight" color="#efaa78" padding={5}>ACTIVE FOR ONE TOKEN</SketchAnnotation> : 'ACTIVE FOR ONE TOKEN'}</span>
             <strong>~{MODEL.activeParamsB}B</strong>
-            <p>the parameters participating in this token's active path</p>
+            <p>the approximate parameter path participating for one token</p>
             {defineActive ? <motion.aside initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }}><b>Active</b> = being used for this token right now.</motion.aside> : null}
           </motion.div>
         </div>
 
         <motion.aside className="v9-model-margin" animate={{ opacity: architecture ? 1 : 0, x: architecture ? 0 : 14 }}>
-          <small>WHAT WE WILL NEED LATER</small>
+          <small>THE ARCHITECTURE FACTS WE WILL USE</small>
           <div><b>{MODEL.layers}</b><span>Transformer layers</span></div>
           <div><b>{MODEL.moeLayers}</b><span>sparse-MoE layers</span></div>
           <div><b>{MODEL.routedExperts}</b><span>routed experts / MoE layer</span></div>
-          <div><b>top-{MODEL.expertsPerToken} + {MODEL.sharedExperts}</b><span>routed + shared path</span></div>
-          <em>{MODEL.vocabSize.toLocaleString()} vocabulary · {MODEL.hiddenSize.toLocaleString()}-value representation</em>
+          <div><b>top-{MODEL.expertsPerToken} + {MODEL.sharedExperts}</b><span>routed + shared expert path</span></div>
+          <em>{MODEL.vocabSize.toLocaleString()} vocabulary entries · {MODEL.hiddenSize.toLocaleString()} values in the main representation</em>
         </motion.aside>
 
         <motion.div className="v9-hook" animate={{ opacity: hook ? 1 : 0, y: hook ? 0 : 10 }}>
