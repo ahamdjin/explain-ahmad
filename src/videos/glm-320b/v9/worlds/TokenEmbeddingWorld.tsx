@@ -1,8 +1,8 @@
 import { motion } from 'motion/react'
 import { BookVisual } from '../../../../visuals/BookVisual'
 import { SketchAnnotation } from '../../../../visuals/SketchAnnotation'
-import { EMBEDDING_PREVIEW, IT_TOKEN_INDEX, MODEL, SENTENCE, TEACHING_TOKENS } from '../data'
-import { HeroVector, VectorStrip } from '../shared'
+import { EMBEDDING_PREVIEW, IT_TOKEN_INDEX, MODEL, TEACHING_TOKENS } from '../data'
+import { HeroVector, NarrativeCue, VectorStrip } from '../shared'
 
 function stageFor(beat: number) {
   if (beat <= 28) return 'TOKENS'
@@ -33,12 +33,24 @@ export function TokenEmbeddingWorld({ beat }: { beat: number }) {
   const scale = beat >= 43
   const carry = beat >= 44
 
+  const heading = stage === 'TOKENS'
+    ? 'What does the model make from our sentence first?'
+    : stage === 'TOKEN ID'
+      ? 'Tokens are still text. How does the model point to one?'
+      : 'An address is not a representation. What does it open?'
+
+  const note = stage === 'TOKENS'
+    ? 'Watch the boundaries appear before we name the pieces.'
+    : stage === 'TOKEN ID'
+      ? `Each token gets a lookup address inside ${MODEL.vocabSize.toLocaleString()} possible vocabulary entries.`
+      : `The address selects one learned row with ${MODEL.hiddenSize.toLocaleString()} values.`
+
   return (
     <motion.section className="v9-world v9-token-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <header className="v9-token-heading">
         <small>{stage === 'TOKENS' ? '02 · TOKENS' : stage === 'TOKEN ID' ? '03 · TOKEN ID' : '04 · EMBEDDING'}</small>
-        <h2>{stage === 'TOKENS' ? 'The sentence becomes small pieces.' : stage === 'TOKEN ID' ? 'Each piece gets a lookup address.' : 'The address opens a numerical page.'}</h2>
-        <p>{stage === 'TOKENS' ? 'We only need to follow one piece.' : stage === 'TOKEN ID' ? `The vocabulary contains ${MODEL.vocabSize.toLocaleString()} possible entries.` : `Each embedding starts as ${MODEL.hiddenSize.toLocaleString()} learned values.`}</p>
+        <h2>{heading}</h2>
+        <p>{note}</p>
       </header>
 
       {!vocab && !book ? (
@@ -75,7 +87,7 @@ export function TokenEmbeddingWorld({ beat }: { beat: number }) {
           )}
 
           {boundaries && !separated ? <div className="v9-token-instruction">first find the boundaries</div> : null}
-          {separated && beat === 24 ? <div className="v9-token-instruction">then the pieces separate</div> : null}
+          {separated && beat === 24 ? <div className="v9-token-instruction"><b>ANSWER:</b> those pieces are tokens</div> : null}
           {kinds ? (
             <motion.aside className="v9-token-kinds" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
               <small>A TOKEN CAN BE</small>
@@ -86,8 +98,20 @@ export function TokenEmbeddingWorld({ beat }: { beat: number }) {
           ) : null}
           {count ? <motion.div className="v9-token-count" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><b>{TEACHING_TOKENS.length}</b><span>teaching pieces in this view</span></motion.div> : null}
           {beat === 28 ? <motion.div className="v9-follow-it" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><SketchAnnotation type="circle" color="#d89a55" padding={7}>Let's follow <b>it</b>.</SketchAnnotation></motion.div> : null}
-          {idDefinition ? <motion.div className="v9-id-definition" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><strong>Token ID</strong><span>= a lookup number, not the token's meaning.</span></motion.div> : null}
+          {idDefinition ? <motion.div className="v9-id-definition" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><strong>Answer: no.</strong><span>Token ID = a lookup number, not the token's meaning.</span></motion.div> : null}
         </motion.div>
+      ) : null}
+
+      {beat === 29 ? (
+        <NarrativeCue kind="but" className="v11-token-bridge">
+          We have tokens now, <b>but they are still text.</b> The network needs a numerical address for each one.
+        </NarrativeCue>
+      ) : null}
+
+      {beat === 30 ? (
+        <NarrativeCue kind="prediction" className="v11-token-prediction">
+          The number under <b>it</b> has appeared. Is that number what <b>it means</b>?
+        </NarrativeCue>
       ) : null}
 
       {vocab ? (
@@ -108,9 +132,20 @@ export function TokenEmbeddingWorld({ beat }: { beat: number }) {
           {idLands ? <motion.div className="v9-index-target" layoutId="v9-id-key" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}><small>LOOKUP ADDRESS</small><strong>{TEACHING_TOKENS[IT_TOKEN_INDEX].id}</strong><span>→ it</span></motion.div> : null}
           {beat === 32 ? <div className="v9-vocab-caption">Our handful of tokens is tiny compared with the model's full index.</div> : null}
           {beat === 33 ? <div className="v9-vocab-caption">Keep the token still. Move the index until the address reaches its row.</div> : null}
-          {beat === 34 ? <div className="v9-vocab-caption">The highlighted row is the lookup target.</div> : null}
-          {beat === 35 ? <div className="v9-vocab-caption">Now the <b>number</b> becomes the useful key.</div> : null}
+          {beat === 34 ? <div className="v9-vocab-caption"><b>ANSWER:</b> the ID points to this row. It still does not describe meaning.</div> : null}
         </motion.div>
+      ) : null}
+
+      {beat === 35 ? (
+        <NarrativeCue kind="but" className="v11-token-bridge">
+          We found the address, <b>but an address is not something the network can richly transform.</b> What is stored there?
+        </NarrativeCue>
+      ) : null}
+
+      {beat === 36 ? (
+        <NarrativeCue kind="therefore" className="v11-token-bridge">
+          Use the ID as a key and <b>look up one learned numerical row.</b>
+        </NarrativeCue>
       ) : null}
 
       {book ? (
@@ -142,6 +177,12 @@ export function TokenEmbeddingWorld({ beat }: { beat: number }) {
           <motion.div className="v9-carry-vector" initial={{ y: '8cqh', opacity: 0 }} animate={{ y: 0, opacity: 1 }}><HeroVector note="embedding carried forward" /></motion.div>
           <p>Every token gets a numerical representation. <b>We keep following only “it”.</b></p>
         </motion.div>
+      ) : null}
+
+      {beat === 44 ? (
+        <NarrativeCue kind="but" className="v11-embedding-bridge">
+          Now <b>it</b> has 4,096 numbers — <b>but those numbers alone do not say which earlier words matter here.</b> Therefore it needs context.
+        </NarrativeCue>
       ) : null}
     </motion.section>
   )
