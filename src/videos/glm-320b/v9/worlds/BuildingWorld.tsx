@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
 import { MODEL } from '../data'
-import { ChapterHeading, PaperNote, VectorStrip } from '../shared'
+import { ChapterHeading, NarrativeCue, PaperNote, VectorStrip } from '../shared'
 
 function activeFloorForBeat(beat: number) {
   if (beat === 88) return 1
@@ -21,15 +21,15 @@ export function BuildingWorld({ beat }: { beat: number }) {
 
   return (
     <motion.section className="v9-world v9-building-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-      <ChapterHeading eyebrow="07 · LAYERS · REPEAT AND REFINE" note="The layer we just opened is not the whole model. It is one floor in a much taller stack.">
-        One MoE room becomes one floor of <mark>{MODEL.layers} Transformer layers</mark>.
+      <ChapterHeading eyebrow="07 · LAYERS · WHY REPEAT?" note="We just proved what one Transformer floor can do. But one floor is not the whole model.">
+        If one floor already changes <mark>“it”</mark>, why repeat this <mark>{MODEL.layers} times</mark>?
       </ChapterHeading>
 
       {seedFloor ? (
         <motion.div className="v9-seed-floor" layoutId="v9-moe-floor" initial={{ scale: 1 }} animate={{ scale: 0.74, y: '4cqh' }} transition={{ type: 'spring', stiffness: 85, damping: 22 }}>
           <small>ONE SPARSE TRANSFORMER FLOOR</small>
-          <div><span><b>Attention</b><em>gather context</em></span><i>→</i><span><b>MoE</b><em>top-8 + shared</em></span></div>
-          <p>The exact room we just studied.</p>
+          <div><span><b>Attention</b><em>gather context</em></span><i>→</i><span><b>MoE</b><em>select + transform</em></span></div>
+          <p>Useful — <b>but only one step of the full computation.</b></p>
         </motion.div>
       ) : null}
 
@@ -63,7 +63,7 @@ export function BuildingWorld({ beat }: { beat: number }) {
 
           {bracket ? (
             <motion.aside className="v9-building-bracket" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
-              <div className="is-moe"><i /><span><b>Layers 4–45</b><strong>Attention + sparse MoE</strong><em>router can choose a new top-8 on every sparse floor</em></span></div>
+              <div className="is-moe"><i /><span><b>Layers 4–45</b><strong>Attention + sparse MoE</strong><em>representation changes → router can choose again</em></span></div>
               <div className="is-dense"><i /><span><b>Layers 1–3</b><strong>Attention + dense MLP</strong><em>same dense feed-forward block for every token</em></span></div>
             </motion.aside>
           ) : null}
@@ -88,18 +88,24 @@ export function BuildingWorld({ beat }: { beat: number }) {
         </motion.div>
       ) : null}
 
-      {beat === 86 ? <div className="v9-building-caption"><b>{MODEL.layers} layers.</b><span>The camera pulls back so the one MoE room finally has scale.</span></div> : null}
-      {beat === 87 ? <div className="v9-building-caption"><b>First 3 dense. Next 42 sparse MoE.</b><span>This is the feed-forward schedule we need for the 320B → 18B story.</span></div> : null}
-      {activeFloor ? <div className="v9-building-caption"><b>Layer {activeFloor}</b><span>{activeFloor <= 3 ? 'Attention runs, then the dense MLP transforms the representation.' : 'Attention runs, then the router selects top-8 routed experts + the shared expert.'}</span></div> : null}
-      {timelapse ? <div className="v9-building-caption"><b>5 → 6 → 7 → … → 45</b><span>On sparse floors the selection fingerprint can change because the representation changed.</span></div> : null}
+      {beat === 86 ? <div className="v9-building-caption"><b>BUT one floor was only one layer.</b><span>Pull back: the same kind of computation lives inside a 45-layer stack.</span></div> : null}
+      {beat === 87 ? <div className="v9-building-caption"><b>First 3 dense. Next 42 sparse MoE.</b><span>Now the one-floor mechanism has a place inside the real architecture.</span></div> : null}
+      {activeFloor ? <div className="v9-building-caption"><b>Layer {activeFloor}</b><span>{activeFloor <= 3 ? 'Attention runs, therefore the dense MLP receives an already contextual representation.' : 'Attention runs, therefore the router sees a changed representation and selects a fresh sparse path.'}</span></div> : null}
+      {timelapse ? <div className="v9-building-caption"><b>5 → 6 → 7 → … → 45</b><span>Each floor inherits a representation changed by the floor before it.</span></div> : null}
 
       {why ? (
         <motion.div className="v9-why-layers" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-          <small>WHY SO MANY REPETITIONS?</small>
+          <small>ANSWER · WHY SO MANY LAYERS?</small>
           <h3>Each floor receives a representation already changed by the floor before it.</h3>
           <div><span><VectorStrip compact /><b>earlier</b></span><i>→</i><span><VectorStrip compact changed /><b>more refined</b></span><i>→</i><span><VectorStrip compact changed /><b>refined again</b></span></div>
-          <PaperNote tone="yellow">We do <b>not</b> claim “floor 4 understands the ball” and “floor 5 understands the dog”. Exact layer jobs are not that clean. The safe idea is progressive refinement.</PaperNote>
+          <PaperNote tone="yellow">The safe mental model is <b>progressive refinement</b>. We do not invent exact jobs like “floor 4 understands the ball” and “floor 5 understands the dog”.</PaperNote>
         </motion.div>
+      ) : null}
+
+      {why ? (
+        <NarrativeCue kind="but" className="v11-building-bridge">
+          After layer 45 we finally have a highly processed representation — <b>but it is still a vector, not the next word.</b> Therefore the model needs one last conversion.
+        </NarrativeCue>
       ) : null}
     </motion.section>
   )
