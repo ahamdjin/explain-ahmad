@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { type CSSProperties } from 'react'
 import { SketchAnnotation } from '../../../../visuals/SketchAnnotation'
 import { MODEL } from '../data'
 import { CHAPTERS } from '../story'
@@ -7,67 +8,150 @@ const journeyIcons: Record<string, string> = {
   TEXT: '▤', TOKENS: '▦', 'TOKEN ID': '#', EMBEDDING: '▱', ATTENTION: '◎', MOE: '⋔', LAYERS: '▥', OUTPUT: '→',
 }
 
+const ACTIVE_RATIO = (MODEL.activeParamsB / MODEL.totalParamsB) * 100
+
 export function ModelWorld({ beat }: { beat: number }) {
-  const showName = beat >= 2
-  const showType = beat >= 3
-  const showTotal = beat >= 4
-  const showActive = beat >= 5
-  const highlight = beat >= 6
+  const typeFocus = beat === 3
+  const totalFocus = beat === 4 || beat === 7
+  const activeFocus = beat === 5 || beat === 8
+  const bothFocus = beat === 6 || beat === 10
+  const highlightTotal = beat >= 4
+  const highlightActive = beat >= 5
   const defineParameter = beat >= 7
   const defineActive = beat >= 8
-  const architecture = beat >= 9
+  const architectureFocus = beat === 9
   const hook = beat >= 10
   const follow = beat >= 11
   const journey = beat >= 12
   const icons = beat >= 13
   const collapse = beat >= 14
 
-  return (
-    <motion.section className="v9-world v9-model-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-      <motion.div className="v9-model-sheet" animate={{ y: collapse ? '-7cqh' : 0, scale: collapse ? 0.94 : 1, opacity: journey ? 0.3 : 1 }} transition={{ type: 'spring', stiffness: 105, damping: 23 }}>
-        <motion.i className="v9-sheet-rule v9-sheet-rule-top" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.75 }} />
-        <motion.i className="v9-sheet-rule v9-sheet-rule-side" initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.65, delay: 0.1 }} />
+  const pageOpacity = journey ? 0.1 : follow ? 0.18 : 1
+  const pageScale = follow ? 0.965 : 1
 
-        <header className="v9-model-name">
-          <motion.small animate={{ opacity: showName ? 1 : 0 }}>{MODEL.maker}</motion.small>
-          <motion.h1 animate={{ opacity: showName ? 1 : 0, y: showName ? 0 : 8 }}>{MODEL.name}</motion.h1>
-          <motion.p animate={{ opacity: showType ? 1 : 0 }}>Large language model · Mixture of Experts (MoE)</motion.p>
-          {showType ? <motion.span className="v10-model-plain" initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}>Plain version: a big model with many learned expert blocks inside.</motion.span> : null}
+  return (
+    <motion.section className="v9-world v9-model-world v12-model-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <motion.article
+        className="v12-model-page"
+        data-leaving={follow ? 'true' : undefined}
+        initial={{ opacity: 0, y: '1.4cqh' }}
+        animate={{ opacity: pageOpacity, y: follow ? '-3cqh' : 0, scale: pageScale }}
+        transition={{ type: 'spring', stiffness: 105, damping: 24 }}
+      >
+        <header className="v12-model-header">
+          <div className="v12-model-kicker"><span>{MODEL.maker}</span><i /><span>MODEL STUDY</span></div>
+          <motion.h1
+            animate={{ opacity: beat <= 3 ? 1 : 0.88, x: beat === 2 ? '.35cqw' : 0 }}
+            transition={{ type: 'spring', stiffness: 140, damping: 24 }}
+          >
+            {beat === 2 ? <SketchAnnotation type="underline" color="#7b6b5e" strokeWidth={1.5} padding={3}>{MODEL.name}</SketchAnnotation> : MODEL.name}
+          </motion.h1>
+          <div className="v12-model-type-line">
+            <span>Large language model</span><span>·</span>
+            <motion.b animate={{ opacity: typeFocus ? 1 : 0.82, scale: typeFocus ? 1.025 : 1 }}>Mixture of Experts (MoE)</motion.b>
+          </div>
+          <motion.p className="v12-model-plain" animate={{ opacity: typeFocus ? 1 : beat >= 3 ? 0.82 : 0.48 }}>
+            Many learned feed-forward expert blocks are available inside its sparse layers.
+          </motion.p>
         </header>
 
-        <div className="v9-model-hero">
-          <motion.div className="v9-model-number" data-kind="total" animate={{ opacity: showTotal ? 1 : 0, y: showTotal ? 0 : 12 }}>
-            <span>{highlight ? <SketchAnnotation type="highlight" color="#f3cd64" padding={5}>TOTAL PARAMETERS</SketchAnnotation> : 'TOTAL PARAMETERS'}</span>
+        <div className="v12-capacity" style={{ '--active-ratio': `${ACTIVE_RATIO}%` } as CSSProperties}>
+          <motion.section
+            className="v12-stat"
+            data-kind="total"
+            data-focus={totalFocus || bothFocus ? 'true' : undefined}
+            animate={{ opacity: totalFocus || bothFocus ? 1 : 0.68, scale: totalFocus ? 1.018 : 1 }}
+            transition={{ type: 'spring', stiffness: 125, damping: 23 }}
+          >
+            <div className="v12-stat-label">
+              {highlightTotal ? <SketchAnnotation type="highlight" color="#f3cd64" padding={4}>TOTAL PARAMETERS</SketchAnnotation> : 'TOTAL PARAMETERS'}
+            </div>
             <strong>{MODEL.totalParamsB}B</strong>
-            <p>all learned parameter values stored across the model</p>
-            {defineParameter ? <motion.aside initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}><b>Parameter</b> = one learned number inside the model.</motion.aside> : null}
-          </motion.div>
+            <div className="v12-stat-copy">
+              <p>all learned parameter values stored across the whole model</p>
+              <div className="v12-definition-slot">
+                <motion.aside className="v12-stat-definition" animate={{ opacity: defineParameter ? 1 : 0, x: defineParameter ? 0 : '-.4cqw' }}>
+                  <b>Parameter</b> = one learned value stored in the model.
+                </motion.aside>
+              </div>
+            </div>
+            <div className="v12-scale" aria-label="Full 320B parameter-capacity scale">
+              <motion.i initial={{ scaleX: 0.18 }} animate={{ scaleX: beat >= 4 ? 1 : 0.28, opacity: beat >= 4 ? 1 : 0.3 }} transition={{ duration: 0.75, ease: [0.2, 0.7, 0.2, 1] }} />
+              <small>same scale below</small>
+            </div>
+          </motion.section>
 
-          <motion.div className="v9-model-vs" animate={{ opacity: showActive ? 1 : 0 }}><span>but</span><i /></motion.div>
-
-          <motion.div className="v9-model-number" data-kind="active" animate={{ opacity: showActive ? 1 : 0, y: showActive ? 0 : 12 }}>
-            <span>{highlight ? <SketchAnnotation type="highlight" color="#efaa78" padding={5}>ACTIVE FOR ONE TOKEN</SketchAnnotation> : 'ACTIVE FOR ONE TOKEN'}</span>
+          <motion.section
+            className="v12-stat"
+            data-kind="active"
+            data-focus={activeFocus || bothFocus ? 'true' : undefined}
+            animate={{ opacity: activeFocus || bothFocus ? 1 : beat >= 5 ? 0.78 : 0.48, scale: activeFocus ? 1.018 : 1 }}
+            transition={{ type: 'spring', stiffness: 125, damping: 23 }}
+          >
+            <div className="v12-stat-label">
+              {highlightActive ? <SketchAnnotation type="highlight" color="#efaa78" padding={4}>ACTIVE FOR ONE TOKEN</SketchAnnotation> : 'ACTIVE FOR ONE TOKEN'}
+            </div>
             <strong>~{MODEL.activeParamsB}B</strong>
-            <p>the approximate parameter path participating for one token</p>
-            {defineActive ? <motion.aside initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }}><b>Active</b> = being used for this token right now.</motion.aside> : null}
+            <div className="v12-stat-copy">
+              <p>the approximate parameter path participating for one token</p>
+              <div className="v12-definition-slot">
+                <motion.aside className="v12-stat-definition" animate={{ opacity: defineActive ? 1 : 0, x: defineActive ? 0 : '.4cqw' }}>
+                  <b>Active</b> = participating in this token's computation path now.
+                </motion.aside>
+              </div>
+            </div>
+            <div className="v12-scale" aria-label={`Active parameter scale: about ${ACTIVE_RATIO.toFixed(1)} percent of the 320B total by parameter count`}>
+              <motion.i initial={{ scaleX: 0 }} animate={{ scaleX: beat >= 5 ? 1 : 0, opacity: beat >= 5 ? 1 : 0 }} transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }} />
+              <small>length compares 18B with 320B</small>
+            </div>
+          </motion.section>
+
+          <motion.div className="v12-model-question" animate={{ opacity: hook ? 1 : 0.12 }}>
+            <div className="v12-question-equation">
+              <span><b>{MODEL.totalParamsB}B</b> stored</span><i /><strong>?</strong><i /><span><b>~{MODEL.activeParamsB}B</b> active / token</span>
+            </div>
+            <motion.h2 animate={{ y: hook ? 0 : '1cqh', opacity: hook ? 1 : 0 }}>
+              {hook ? <SketchAnnotation type="underline" color="#b56e49" strokeWidth={2} padding={4}>How can both numbers be true?</SketchAnnotation> : 'How can both numbers be true?'}
+            </motion.h2>
           </motion.div>
         </div>
 
-        <motion.aside className="v9-model-margin" animate={{ opacity: architecture ? 1 : 0, x: architecture ? 0 : 14 }}>
-          <small>THE ARCHITECTURE FACTS WE WILL USE</small>
-          <div><b>{MODEL.layers}</b><span>Transformer layers</span></div>
-          <div><b>{MODEL.moeLayers}</b><span>sparse-MoE layers</span></div>
-          <div><b>{MODEL.routedExperts}</b><span>routed experts / MoE layer</span></div>
-          <div><b>top-{MODEL.expertsPerToken} + {MODEL.sharedExperts}</b><span>routed + shared expert path</span></div>
-          <em>{MODEL.vocabSize.toLocaleString()} vocabulary entries · {MODEL.hiddenSize.toLocaleString()} values in the main representation</em>
-        </motion.aside>
+        <motion.aside
+          className="v12-architecture"
+          data-focus={architectureFocus ? 'true' : undefined}
+          animate={{ opacity: architectureFocus ? 1 : hook ? 0.58 : 0.64, scale: architectureFocus ? 1.018 : 1 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 23 }}
+        >
+          <small>MODEL ANATOMY</small>
+          <h3>{MODEL.layers} Transformer layers</h3>
+          <p>The feed-forward side changes after the first three layers.</p>
 
-        <motion.div className="v9-hook" animate={{ opacity: hook ? 1 : 0, y: hook ? 0 : 10 }}>
-          <small>THE QUESTION</small>
-          <div><b>320B</b><i /><strong>?</strong><i /><b>~18B</b></div>
-          <p>How can both numbers be true?</p>
-        </motion.div>
-      </motion.div>
+          <div className="v12-layer-anatomy">
+            <motion.div className="v12-layer-stack" animate={{ opacity: architectureFocus ? 1 : 0.72 }} aria-label={`${MODEL.layers} layers: first ${MODEL.denseLayers} dense, next ${MODEL.moeLayers} sparse MoE`}>
+              {Array.from({ length: MODEL.layers }, (_, index) => (
+                <motion.i
+                  key={index}
+                  data-kind={index < MODEL.denseLayers ? 'dense' : 'moe'}
+                  initial={{ scaleX: 0.25 }}
+                  animate={{ scaleX: architectureFocus ? 1 : 0.72 }}
+                  transition={{ delay: architectureFocus ? index * 0.008 : 0, duration: 0.25 }}
+                />
+              ))}
+            </motion.div>
+            <div className="v12-layer-legend">
+              <div><b>{MODEL.denseLayers}</b><span>first layers use a dense MLP</span></div>
+              <div><b>{MODEL.moeLayers}</b><span>later layers use sparse MoE feed-forward blocks</span></div>
+            </div>
+          </div>
+
+          <div className="v12-expert-facts">
+            <div><b>{MODEL.routedExperts}</b><span>routed experts available in each sparse MoE layer</span></div>
+            <div><b>top-{MODEL.expertsPerToken}</b><span>routed experts selected per token in that sparse layer</span></div>
+            <div><b>+ {MODEL.sharedExperts}</b><span>shared expert also participates</span></div>
+          </div>
+          <p className="v12-architecture-note">These are the architecture facts we need later. We have not explained the routing mechanism yet.</p>
+        </motion.aside>
+      </motion.article>
 
       {follow ? (
         <motion.div className="v9-follow-copy" initial={{ opacity: 0, y: 14 }} animate={{ opacity: journey ? 0.45 : 1, y: 0 }}>

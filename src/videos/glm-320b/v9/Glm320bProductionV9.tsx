@@ -12,6 +12,7 @@ import { useBeatDirector } from './useBeatDirector'
 import './production-v9.css'
 import './production-v9-fixes.css'
 import './production-v10.css'
+import './production-v12-page1.css'
 
 function World({ world, beat }: { world: string; beat: number }) {
   if (world === 'model') return <ModelWorld beat={beat} />
