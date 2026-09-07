@@ -1,25 +1,27 @@
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
 import { type PointerEvent as ReactPointerEvent, useEffect } from 'react'
 import { SceneFrame, VideoPage } from '../../../engine/SceneFrame'
-import { BuildingWorld } from './worlds/BuildingWorld'
-import { ChatWorld } from './worlds/ChatWorld'
 import { ModelWorld } from './worlds/ModelWorld'
-import { OutputWorld } from './worlds/OutputWorld'
-import { TokenEmbeddingWorld } from './worlds/TokenEmbeddingWorld'
-import { TransformerWorld } from './worlds/TransformerWorld'
+import { ChatWorldV12 } from './v12/ChatWorldV12'
+import { TokenEmbeddingWorldV12 } from './v12/TokenEmbeddingWorldV12'
+import { TransformerWorldV12 } from './v12/TransformerWorldV12'
+import { BuildingWorldV12 } from './v12/BuildingWorldV12'
+import { OutputWorldV12 } from './v12/OutputWorldV12'
 import { ChapterRail, DebugBeat, PaperBackdrop } from './shared'
 import { useBeatDirector } from './useBeatDirector'
 import './production-v9.css'
 import './production-v9-fixes.css'
 import './production-v10.css'
+import './production-v12-page1.css'
+import './production-v12-journey.css'
 
 function World({ world, beat }: { world: string; beat: number }) {
   if (world === 'model') return <ModelWorld beat={beat} />
-  if (world === 'chat') return <ChatWorld beat={beat} />
-  if (world === 'token') return <TokenEmbeddingWorld beat={beat} />
-  if (world === 'transformer') return <TransformerWorld beat={beat} />
-  if (world === 'building') return <BuildingWorld beat={beat} />
-  return <OutputWorld beat={beat} />
+  if (world === 'chat') return <ChatWorldV12 beat={beat} />
+  if (world === 'token') return <TokenEmbeddingWorldV12 beat={beat} />
+  if (world === 'transformer') return <TransformerWorldV12 beat={beat} />
+  if (world === 'building') return <BuildingWorldV12 beat={beat} />
+  return <OutputWorldV12 beat={beat} />
 }
 
 export default function Glm320bProductionV9() {
