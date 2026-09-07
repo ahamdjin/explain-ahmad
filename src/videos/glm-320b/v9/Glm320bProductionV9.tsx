@@ -1,5 +1,5 @@
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
-import { useEffect } from 'react'
+import { type PointerEvent as ReactPointerEvent, useEffect } from 'react'
 import { SceneFrame, VideoPage } from '../../../engine/SceneFrame'
 import { BuildingWorld } from './worlds/BuildingWorld'
 import { ChatWorld } from './worlds/ChatWorld'
@@ -36,7 +36,7 @@ export default function Glm320bProductionV9() {
     }
   }, [])
 
-  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.button !== 0) return
     const target = event.target as HTMLElement
     if (target.closest('button, a, input, textarea, select, [data-no-advance]')) return
