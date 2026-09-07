@@ -6,7 +6,7 @@ export type VideoRouteDefinition = {
   component: LazyExoticComponent<ComponentType>
 }
 
-const Glm320bVideo = lazy(() => import('./glm-320b/Glm320bVideoV6'))
+const Glm320bVideo = lazy(() => import('./glm-320b/Glm320bVideoV7'))
 
 /**
  * Real video pages are registered only after their story is known.
