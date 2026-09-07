@@ -10,6 +10,7 @@ import './design-system.css'
 import './paper-refinement.css'
 import './explanation-system.css'
 import './lab-shell.css'
+import './videos/glm-320b/glm-320b-video-v8-diagram-fixes.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

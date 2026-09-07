@@ -1,0 +1,255 @@
+/* GLM v8 — diagram grammar + collision correction.
+   This layer does not add more decoration. It makes each teaching operation spatially explicit. */
+
+/* --------------------------------------------------------------------------
+   ATTENTION — one operation per beat, anchored to the object that causes it.
+   -------------------------------------------------------------------------- */
+
+.prod7-world[data-step^='attention-'] .prod7-attention-workbench::before {
+  position: absolute;
+  z-index: 120;
+  left: 1%;
+  top: -2.8cqh;
+  padding: .35cqh .45cqw .3cqh;
+  border-left: 2px solid rgba(23, 19, 15, .45);
+  color: var(--p6-ink);
+  background: rgba(247, 240, 226, .86);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(10px, .68cqw, 13px);
+  font-weight: 800;
+  letter-spacing: .035em;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+.prod7-world[data-step='attention-problem'] .prod7-attention-workbench::before { content: 'GOAL  ·  update “it” using useful earlier context'; }
+.prod7-world[data-step='attention-qkv'] .prod7-attention-workbench::before { content: '1  ·  make three learned views of the current representation'; }
+.prod7-world[data-step='attention-kv'] .prod7-attention-workbench::before { content: '2  ·  each visible token offers a Key to match and a Value to carry'; }
+.prod7-world[data-step='attention-match'] .prod7-attention-workbench::before { content: '3  ·  Query(“it”) compares with each allowed Key'; }
+.prod7-world[data-step='attention-weights'] .prod7-attention-workbench::before { content: '4  ·  stronger matches become larger attention weights'; }
+.prod7-world[data-step='attention-values'] .prod7-attention-workbench::before { content: '5  ·  those weights decide how much of each Value comes back'; }
+.prod7-world[data-step='attention-update'] .prod7-attention-workbench::before { content: '6  ·  add the weighted Values together and update “it”'; }
+.prod7-world[data-step='attention-heads'] .prod7-attention-workbench::before { content: 'ZOOM OUT  ·  this was one simplified attention view'; }
+
+/* Keep the Q actor physically attached to the token that created it.
+   In the 9-column token row, “it” is column 7. */
+.prod7-world[data-step='attention-match'] .prod7-query-chip {
+  left: 72.2%;
+  right: auto;
+  top: 17.3%;
+  width: 14.4cqw;
+  min-height: 8.6cqh;
+  transform: translateX(-50%);
+  box-shadow: 2px 3px 0 rgba(23,19,15,.09);
+}
+.prod7-world[data-step='attention-match'] .prod7-query-chip::after {
+  content: '↓';
+  position: absolute;
+  left: 50%;
+  bottom: -2.8cqh;
+  translate: -50% 0;
+  color: var(--v7-query);
+  font-size: clamp(18px, 1.4cqw, 26px);
+  font-weight: 900;
+}
+
+/* The old fan of curves looked impressive but obscured the operation.
+   The comparison is now shown locally under each Key instead. */
+.prod7-world[data-step='attention-match'] .prod7-match-lines,
+.prod7-world[data-step='attention-weights'] .prod7-match-lines,
+.prod7-world[data-step='attention-values'] .prod7-match-lines,
+.prod7-world[data-step='attention-update'] .prod7-match-lines,
+.prod7-world[data-step='attention-heads'] .prod7-match-lines {
+  opacity: 0 !important;
+}
+
+/* During matching, Key is the hero; Value stays present only as future-useful context. */
+.prod7-world[data-step='attention-match'] .prod7-qkv-lens { opacity: .16 !important; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table .prod7-k {
+  transform: scale(1.08);
+  background: rgba(208,165,60,.42);
+  box-shadow: 0 0 0 1px rgba(151,111,18,.2);
+}
+.prod7-world[data-step='attention-match'] .prod7-attention-table .prod7-v { opacity: .22; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:not(.prod7-causal-note):not([data-future='true'])::before {
+  position: absolute;
+  left: 50%;
+  bottom: -3.5cqh;
+  translate: -50% 0;
+  min-width: 4.4cqw;
+  padding: .25cqh .25cqw;
+  border-top: 1px solid rgba(23,19,15,.22);
+  color: var(--p6-pencil);
+  background: rgba(247,240,226,.9);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(8px, .52cqw, 10px);
+  font-weight: 750;
+  text-align: center;
+  white-space: nowrap;
+}
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(1)::before { content: 'match 2'; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(2)::before { content: 'match 8'; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(3)::before { content: 'match 10'; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(4)::before { content: 'match 4'; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(5)::before {
+  content: 'match 46';
+  color: var(--p6-ink);
+  border-top-color: rgba(23,19,15,.58);
+  background: linear-gradient(transparent 0 52%, rgba(244,201,93,.42) 52% 100%);
+  font-weight: 900;
+}
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(6)::before { content: 'match 12'; }
+.prod7-world[data-step='attention-match'] .prod7-attention-table > div:nth-child(7)::before { content: 'self 18'; }
+
+/* Make the causal note belong to the token table instead of floating under unrelated lines. */
+.prod7-causal-note { bottom: -6.3cqh; }
+.prod7-world[data-step='attention-match'] .prod7-causal-note { opacity: .48; }
+
+/* Once weights exist, stop asking the viewer to keep reading the Q/K/V legend. */
+.prod7-world[data-step='attention-weights'] .prod7-qkv-lens,
+.prod7-world[data-step='attention-values'] .prod7-qkv-lens,
+.prod7-world[data-step='attention-update'] .prod7-qkv-lens,
+.prod7-world[data-step='attention-heads'] .prod7-qkv-lens { opacity: .08 !important; }
+.prod7-world[data-step='attention-weights'] .prod7-query-chip,
+.prod7-world[data-step='attention-values'] .prod7-query-chip,
+.prod7-world[data-step='attention-update'] .prod7-query-chip,
+.prod7-world[data-step='attention-heads'] .prod7-query-chip { opacity: 0 !important; }
+
+/* WEIGHTS: words and percentages align vertically for one-pass scanning. */
+.prod7-world[data-step='attention-weights'] .prod7-attention-table { opacity: .26; }
+.prod7-world[data-step='attention-weights'] .prod7-weight-board {
+  left: 2%;
+  right: 2%;
+  bottom: 1%;
+  min-height: 18.5cqh;
+  box-shadow: 0 -8px 24px rgba(55,42,29,.025);
+}
+.prod7-world[data-step='attention-weights'] .prod7-weight-board > div > span[data-strong='true'] {
+  background: linear-gradient(transparent 58%, rgba(244,201,93,.28) 58% 100%);
+}
+.prod7-world[data-step='attention-weights'] .prod7-weight-board > div > span[data-strong='true'] b,
+.prod7-world[data-step='attention-weights'] .prod7-weight-board > div > span[data-strong='true'] em {
+  font-weight: 900;
+  color: var(--p6-ink);
+}
+
+/* VALUES: Key has finished its job; Value is now the hero. */
+.prod7-world[data-step='attention-values'] .prod7-attention-table .prod7-k,
+.prod7-world[data-step='attention-update'] .prod7-attention-table .prod7-k { opacity: .12; }
+.prod7-world[data-step='attention-values'] .prod7-attention-table .prod7-v,
+.prod7-world[data-step='attention-update'] .prod7-attention-table .prod7-v {
+  transform: scale(1.08);
+  background: rgba(93,158,149,.35);
+  box-shadow: 0 0 0 1px rgba(63,126,118,.14);
+}
+.prod7-world[data-step='attention-values'] .prod7-attention-table,
+.prod7-world[data-step='attention-update'] .prod7-attention-table { opacity: .42; }
+.prod7-world[data-step='attention-values'] .prod7-weight-board,
+.prod7-world[data-step='attention-update'] .prod7-weight-board { opacity: .16; }
+
+/* Give the weighted-Value mixer an explicit operation label. */
+.prod7-world[data-step='attention-values'] .prod7-value-mix::before,
+.prod7-world[data-step='attention-update'] .prod7-value-mix::before {
+  content: 'attention weight × Value';
+  position: absolute;
+  left: 2%;
+  top: -2.3cqh;
+  color: var(--p6-pencil);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(9px, .58cqw, 11px);
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+/* UPDATE: reduce old machinery so the changed representation is unmistakable. */
+.prod7-world[data-step='attention-update'] .prod7-attention-table,
+.prod7-world[data-step='attention-update'] .prod7-weight-board { opacity: .08; }
+.prod7-world[data-step='attention-update'] .prod7-context-result { box-shadow: 4px 5px 0 rgba(23,19,15,.08); }
+.prod7-world[data-step='attention-update'] .prod7-attention-rep { z-index: 70; }
+.prod7-world[data-step='attention-update'] .prod7-attention-rep::after {
+  content: '↑ same token, now carrying context from this layer';
+  margin-top: .4cqh;
+  color: var(--v7-value);
+  font-size: clamp(10px, .68cqw, 12px);
+  font-weight: 800;
+}
+
+/* HEADS: the caveat is the whole point of this beat, so suppress old machinery. */
+.prod7-world[data-step='attention-heads'] .prod7-attention-table,
+.prod7-world[data-step='attention-heads'] .prod7-weight-board,
+.prod7-world[data-step='attention-heads'] .prod7-value-mix,
+.prod7-world[data-step='attention-heads'] .prod7-context-result,
+.prod7-world[data-step='attention-heads'] .prod7-attention-rep { opacity: .05 !important; }
+
+/* --------------------------------------------------------------------------
+   MOE — keep the current operation explicit as the diagram grows.
+   -------------------------------------------------------------------------- */
+
+.prod7-world[data-step^='moe-'] .prod7-moe-workbench::before {
+  position: absolute;
+  z-index: 130;
+  left: 0;
+  top: -2.8cqh;
+  padding: .35cqh .45cqw .3cqh;
+  border-left: 2px solid rgba(23,19,15,.45);
+  background: rgba(247,240,226,.88);
+  color: var(--p6-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(10px, .68cqw, 13px);
+  font-weight: 800;
+  letter-spacing: .035em;
+  pointer-events: none;
+}
+.prod7-world[data-step='moe-where'] .prod7-moe-workbench::before { content: '1  ·  locate the feed-forward block inside one transformer layer'; }
+.prod7-world[data-step='moe-dense'] .prod7-moe-workbench::before { content: '2  ·  dense baseline: every token uses the same MLP block'; }
+.prod7-world[data-step='moe-experts'] .prod7-moe-workbench::before { content: '3  ·  sparse MoE replaces one dense block with 288 possible expert blocks'; }
+.prod7-world[data-step='moe-router'] .prod7-moe-workbench::before { content: '4  ·  the router reads this token’s current representation'; }
+.prod7-world[data-step='moe-scores'] .prod7-moe-workbench::before { content: '5  ·  score all 288 routed experts for this token'; }
+.prod7-world[data-step='moe-top8'] .prod7-moe-workbench::before { content: '6  ·  keep only the top 8 routed experts'; }
+.prod7-world[data-step='moe-shared'] .prod7-moe-workbench::before { content: '7  ·  add the one shared expert that always participates'; }
+.prod7-world[data-step='moe-process'] .prod7-moe-workbench::before { content: '8  ·  selected experts transform the same representation in parallel'; }
+.prod7-world[data-step='moe-mix'] .prod7-moe-workbench::before { content: '9  ·  weight + combine routed outputs, then include the shared path'; }
+.prod7-world[data-step='moe-token-compare'] .prod7-moe-workbench::before { content: '10  ·  a different token can choose a different expert set'; }
+.prod7-world[data-step='moe-reroute'] .prod7-moe-workbench::before { content: '11  ·  the next sparse layer routes again because the representation changed'; }
+.prod7-world[data-step='moe-active-path'] .prod7-moe-workbench::before { content: '12  ·  selective routing across the whole forward pass creates the smaller active path'; }
+
+.prod7-world[data-step='moe-experts'] .prod7-expert-wall,
+.prod7-world[data-step='moe-router'] .prod7-expert-wall { opacity: .58; }
+.prod7-world[data-step='moe-scores'] .prod7-router {
+  box-shadow: 4px 5px 0 rgba(23,19,15,.08), 0 0 0 4px rgba(244,201,93,.08);
+}
+.prod7-world[data-step='moe-top8'] .prod7-top8-note strong {
+  background: linear-gradient(transparent 55%, rgba(244,201,93,.45) 55% 90%, transparent 90%);
+}
+.prod7-world[data-step='moe-top8'] .prod7-router,
+.prod7-world[data-step='moe-shared'] .prod7-router,
+.prod7-world[data-step='moe-process'] .prod7-router { opacity: .38; }
+.prod7-world[data-step='moe-top8'] .prod7-expert-wall > i[data-on='true'],
+.prod7-world[data-step='moe-shared'] .prod7-expert-wall > i[data-on='true'] {
+  transform: scale(1.2);
+  z-index: 2;
+}
+
+/* Readability floor for text that carries actual teaching meaning. */
+.prod7-query-chip small,
+.prod7-score-note > span,
+.prod7-top8-note > span,
+.prod7-router > span,
+.prod7-expert-processing header span,
+.prod7-route-compare > p,
+.prod7-reroute p {
+  font-size: clamp(11px, .74cqw, 14px);
+  line-height: 1.38;
+}
+
+@media (max-aspect-ratio: 4 / 3), (max-height: 620px) {
+  .prod7-world[data-step^='attention-'] .prod7-attention-workbench::before,
+  .prod7-world[data-step^='moe-'] .prod7-moe-workbench::before {
+    top: -2.2cqh;
+    font-size: 10px;
+  }
+  .prod7-world[data-step='attention-match'] .prod7-query-chip {
+    top: 16.5%;
+    width: 16cqw;
+  }
+}
