@@ -1,0 +1,69 @@
+/* v9 corrective layer — keep causal continuation and supporting teaching text legible. */
+
+.v9-question-sentence {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .16em;
+}
+.v9-question-sentence > em {
+  margin-left: .45cqw;
+  color: #aaa094;
+  font-style: normal;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(23,19,15,.18);
+}
+.v9-attention-question > small {
+  max-width: 64ch;
+  color: #756b61;
+  font-size: clamp(12px,.76cqw,15px);
+  line-height: 1.35;
+}
+
+.v9-future-ghosts {
+  position: absolute;
+  right: 0;
+  bottom: -10.5cqh;
+  display: flex;
+  align-items: center;
+  gap: .55cqw;
+  padding: .65cqh .7cqw;
+  color: #a79d91;
+  border-top: 1px dashed rgba(23,19,15,.14);
+  opacity: .72;
+}
+.v9-future-ghosts small {
+  margin-right: .3cqw;
+  color: #998f84;
+  font: 800 clamp(9px,.55cqw,11px)/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .08em;
+}
+.v9-future-ghosts span {
+  padding: .25cqh .35cqw;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(12px,.8cqw,15px);
+  text-decoration: line-through;
+  text-decoration-color: rgba(23,19,15,.15);
+}
+
+/* Required teaching text should never collapse into decorative microcopy. */
+.v9-floor-note,
+.v9-building-caption span,
+.v9-capacity-question,
+.v9-output-note,
+.v9-reroute-story p,
+.v9-moe-payoff p,
+.v9-paper-note {
+  text-wrap: pretty;
+}
+
+/* Short-height screens: preserve the 16:9 composition and compress outer whitespace only. */
+@media (max-height: 700px) {
+  .v9-chapter-rail { top: 1.1cqh; }
+  .v9-heading { top: 9.5cqh; }
+  .v9-operation-cue { top: 22.5cqh; }
+  .v9-attention-canvas,
+  .v9-moe-canvas { top: 27cqh; bottom: 5.5cqh; }
+}
