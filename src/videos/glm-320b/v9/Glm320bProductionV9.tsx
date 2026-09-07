@@ -14,6 +14,7 @@ import './production-v9-fixes.css'
 import './production-v10.css'
 import './opening-v1.css'
 import './opening-v2-art.css'
+import './opening-v2-labels.css'
 
 function World({ world, beat }: { world: string; beat: number }) {
   if (world === 'model') return <OpeningWorld beat={beat} />
