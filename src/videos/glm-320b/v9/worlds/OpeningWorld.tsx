@@ -76,7 +76,7 @@ function ParameterField({ beat }: { beat: number }) {
 }
 
 function ExpertWall({ beat }: { beat: number }) {
-  const visible = beat >= 5 && beat <= 10
+  const visible = beat >= 5 && beat <= 12
   const selectFew = beat >= 6
   const memoryHeadache = beat >= 7
   const temptingSmallSet = beat >= 8
