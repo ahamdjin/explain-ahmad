@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
 import { ATTENTION_WEIGHTS, ATTENTION_WORDS, FUTURE_GHOST_WORDS, IT_TOKEN_INDEX, MODEL } from '../data'
 import { ProcessSpine } from '../ProcessSpine'
-import { ChapterHeading, HeroVector, PaperNote } from '../shared'
+import { ChapterHeading, HeroVector, NarrativeCue, PaperNote } from '../shared'
 
 const ATTENTION_STEPS = [
   { label: 'Make Q / K / V', detail: 'Create three learned views of the current representation.' },
@@ -12,23 +12,24 @@ const ATTENTION_STEPS = [
   { label: 'Mix context back', detail: 'Add the weighted Values and return the context to the same token position.' },
 ] as const
 
-const action: Record<number, string> = {
-  47: 'Start with the problem: the embedding still needs context.',
-  48: 'Keep the same “it” representation physically attached to the same token.',
-  49: 'Create three learned numerical views from that one representation.',
-  50: 'Query looks, Key matches, Value carries information.',
-  51: 'Give every available prompt position a Key and a Value.',
-  52: 'Keep Q visibly anchored to “it”.',
-  53: 'Compare Q(it) with each Key, one at a time.',
-  54: 'In this teaching example, “ball” produces the strongest match.',
-  55: 'Collect the local match results into one clean score row.',
-  56: 'Turn those match scores into normalized attention weights.',
-  57: 'More weight means more of that position can contribute in this view.',
-  58: 'Keys have finished matching. Now read the Values.',
-  59: 'Scale each Value by its attention weight.',
-  60: 'Add the weighted Values together.',
-  61: 'Return the mixed context to the same “it” position.',
-  62: 'Zoom out: keep the idea, not this exact drawing of GLM attention.',
+type AttentionActionKind = 'NOW' | 'QUESTION' | 'BUT' | 'THEREFORE' | 'ANSWER'
+const action: Record<number, { kind: AttentionActionKind; text: string }> = {
+  47: { kind: 'QUESTION', text: '“it” has numbers now — but which earlier words should matter here?' },
+  48: { kind: 'QUESTION', text: 'Pick one earlier word in your head before the mechanism reveals anything.' },
+  49: { kind: 'THEREFORE', text: 'Create Query, Key and Value views from the current representation.' },
+  50: { kind: 'NOW', text: 'Query looks, Key matches, Value carries information.' },
+  51: { kind: 'THEREFORE', text: 'Give every available prompt position a Key and a Value.' },
+  52: { kind: 'NOW', text: 'Keep Q visibly anchored to the same “it” representation.' },
+  53: { kind: 'THEREFORE', text: 'Compare Q(it) with each available Key and keep the local result beside its word.' },
+  54: { kind: 'ANSWER', text: 'In this teaching view, “ball” produces the strongest match.' },
+  55: { kind: 'NOW', text: 'Collect the separate match results into one aligned score row.' },
+  56: { kind: 'THEREFORE', text: 'Turn those match scores into normalized attention weights.' },
+  57: { kind: 'ANSWER', text: 'More weight means more of that position can contribute in this view.' },
+  58: { kind: 'BUT', text: 'A score only says how much to use. It does not carry the information itself.' },
+  59: { kind: 'THEREFORE', text: 'Use each weight to scale the Value that actually carries information.' },
+  60: { kind: 'THEREFORE', text: 'Add the weighted Values together into one context mixture.' },
+  61: { kind: 'ANSWER', text: 'Useful context returns to the same “it” position and changes its representation.' },
+  62: { kind: 'NOW', text: 'Keep the causal idea, then add the truthful GLM-specific attention caveat.' },
 }
 
 function attentionStage(beat: number) {
@@ -103,10 +104,10 @@ export function AttentionRoom({ beat }: { beat: number }) {
   return (
     <motion.div className="v9-room v9-attention-room" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <ChapterHeading
-        eyebrow="05 · ATTENTION · BUILD CONTEXT"
-        note={caveat ? 'We used a familiar Q/K/V picture to teach the operation. GLM-5.3-Flash uses a hybrid attention architecture internally.' : 'Stay with one token: “it”. The diagram will keep every intermediate step visible.'}
+        eyebrow="05 · ATTENTION · THE CONTEXT PROBLEM"
+        note={caveat ? 'We used a familiar Q/K/V picture to teach the operation. GLM-5.3-Flash uses a hybrid attention architecture internally.' : 'We will answer one question at a time: which earlier positions matter, and how does their information get back to “it”?' }
       >
-        {problem ? <>What should <mark>“it”</mark> use from the prompt?</> : <>Attention</>}
+        {problem ? <>Which earlier words should <mark>“it”</mark> use?</> : <>Attention</>}
       </ChapterHeading>
 
       <ProcessSpine steps={ATTENTION_STEPS} active={attentionStage(beat)} action={action[beat]} tone="attention" />
@@ -114,10 +115,13 @@ export function AttentionRoom({ beat }: { beat: number }) {
       <div className="v9-attention-canvas">
         {beat === 47 ? (
           <motion.div className="v9-attention-question" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-            <p>The embedding gives the model numbers for <b>it</b>.</p>
-            <strong>But which earlier words are useful <em>here</em>?</strong>
+            <p>The embedding gives the model 4,096 numbers for <b>it</b>.</p>
+            <strong>But those numbers alone do not say which earlier words matter <em>here</em>.</strong>
             <div className="v9-question-sentence"><span>The dog dropped the </span><mark>ball</mark><span>, and </span><b>it</b><em> → rolled away .</em></div>
             <small>The gray continuation is not in the prompt yet. It is what we will eventually generate.</small>
+            <NarrativeCue kind="prediction" className="v11-attention-prediction">
+              Before we reveal the mechanism: <b>which earlier word would you bet should matter most for “it”?</b>
+            </NarrativeCue>
           </motion.div>
         ) : null}
 
@@ -148,7 +152,7 @@ export function AttentionRoom({ beat }: { beat: number }) {
 
         {values ? (
           <motion.div className="v9-value-lesson" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <div className="v9-value-rule"><b>MATCHING IS DONE</b><span>Keys can step back. Values are the information we read.</span></div>
+            <div className="v9-value-rule"><b>BUT MATCHING IS NOT INFORMATION</b><span>Keys helped decide how much to use. Values are the information that can actually come back.</span></div>
             {beat >= 59 ? (
               <div className="v9-value-gates">
                 {ATTENTION_WORDS.map((word, index) => {
@@ -168,8 +172,8 @@ export function AttentionRoom({ beat }: { beat: number }) {
                 return <motion.div key={`${word}-${index}`} style={{ '--w': weight / 46 } as CSSProperties} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: index * 0.05 }}><b>{word}</b><i /><span>{weight}% × V</span></motion.div>
               })}
             </div>
-            <div className="v9-sigma"><small>WEIGHTED MIX</small><strong>Σ</strong><span>add the weighted Values</span></div>
-            {update ? <div className="v9-context-return"><i /><HeroVector note="same token position · richer context" changed /><p>Useful context is mixed back into the representation of <b>it</b>.</p></div> : null}
+            <div className="v9-sigma"><small>THEREFORE · WEIGHTED MIX</small><strong>Σ</strong><span>add the weighted Values</span></div>
+            {update ? <div className="v9-context-return"><i /><HeroVector note="same token position · richer context" changed /><p><b>Answer:</b> useful context is mixed back into the representation of <b>it</b>.</p></div> : null}
           </motion.div>
         ) : null}
 
@@ -178,7 +182,7 @@ export function AttentionRoom({ beat }: { beat: number }) {
             <div className="v9-head-fan">{Array.from({ length: 16 }, (_, i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</div>
             <strong>We drew one teaching view.</strong>
             <p>GLM-5.3-Flash is configured with <b>{MODEL.attentionHeads} attention heads</b> and a hybrid schedule: <b>{MODEL.linearAttentionLayers} linear-attention layers</b> + <b>{MODEL.sparseAttentionLayers} sparse-attention layers</b>.</p>
-            <small>The point we carry forward: attention lets the current representation gather useful context. We are not claiming one attention map explains all model reasoning.</small>
+            <small>The causal lesson we carry forward is narrower: attention lets the current representation gather useful context. We are not claiming one attention map explains all model reasoning.</small>
           </motion.div>
         ) : null}
       </div>
