@@ -55,6 +55,36 @@ export function PaperNote({ title, children, tone = 'pencil', className = '' }: 
   )
 }
 
+export type NarrativeKind = 'question' | 'but' | 'therefore' | 'answer' | 'prediction' | 'next'
+
+const NARRATIVE_LABELS: Record<NarrativeKind, string> = {
+  question: 'QUESTION',
+  but: 'BUT',
+  therefore: 'THEREFORE',
+  answer: 'ANSWER',
+  prediction: 'PLACE YOUR BET',
+  next: 'NEXT QUESTION',
+}
+
+/**
+ * A small causal-story marker. It should never become another dashboard card.
+ * It exists to make the explanation dependency visible: problem → consequence → answer.
+ */
+export function NarrativeCue({ kind, children, className = '' }: { kind: NarrativeKind; children: ReactNode; className?: string }) {
+  return (
+    <motion.aside
+      className={`v11-narrative-cue ${className}`.trim()}
+      data-kind={kind}
+      initial={{ opacity: 0, y: 7 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28 }}
+    >
+      <small>{NARRATIVE_LABELS[kind]}</small>
+      <div>{children}</div>
+    </motion.aside>
+  )
+}
+
 export function VectorStrip({ numbers = false, changed = false, compact = false }: { numbers?: boolean; changed?: boolean; compact?: boolean }) {
   return (
     <div className={`v9-vector ${compact ? 'is-compact' : ''}`} data-changed={changed ? 'true' : undefined}>
