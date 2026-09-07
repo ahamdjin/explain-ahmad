@@ -1,8 +1,61 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { BEATS, beatAt, chapterAt } from './story'
 
-const LOCK_MS = 430
+const DEFAULT_LOCK_MS = 430
 const WHEEL_THRESHOLD = 48
+
+/**
+ * Some beats communicate cause through motion and need enough protected time to finish.
+ * This is deliberately sparse: most beats stay quick and presenter-controlled.
+ */
+const BEAT_HOLD_MS: Partial<Record<number, number>> = {
+  14: 760,
+  17: 1450,
+  18: 520,
+  20: 900,
+  22: 720,
+  24: 620,
+  27: 720,
+  30: 720,
+  33: 920,
+  37: 820,
+  39: 920,
+  43: 900,
+  44: 720,
+  45: 760,
+  46: 700,
+  49: 650,
+  50: 900,
+  53: 850,
+  55: 620,
+  56: 620,
+  58: 620,
+  60: 820,
+  61: 700,
+  63: 720,
+  66: 820,
+  67: 720,
+  72: 760,
+  74: 720,
+  76: 680,
+  77: 650,
+  79: 760,
+  81: 820,
+  83: 680,
+  85: 820,
+  86: 850,
+  92: 3000,
+  96: 650,
+  97: 620,
+  98: 760,
+  99: 2200,
+  100: 900,
+}
+
+function holdForBeat(beatNumber: number) {
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 180
+  return BEAT_HOLD_MS[beatNumber] ?? DEFAULT_LOCK_MS
+}
 
 export function useBeatDirector() {
   const [index, setIndex] = useState(0)
@@ -13,14 +66,18 @@ export function useBeatDirector() {
   const move = useCallback((delta: number, force = false) => {
     const now = performance.now()
     if (!force && now < lockUntil.current) return
-    lockUntil.current = now + LOCK_MS
-    setIndex((current) => Math.max(0, Math.min(BEATS.length - 1, current + delta)))
+
+    setIndex((current) => {
+      const nextIndex = Math.max(0, Math.min(BEATS.length - 1, current + delta))
+      lockUntil.current = now + holdForBeat(nextIndex + 1)
+      return nextIndex
+    })
   }, [])
 
   const next = useCallback(() => move(1), [move])
   const previous = useCallback(() => move(-1), [move])
   const jump = useCallback((beatNumber: number) => {
-    lockUntil.current = performance.now() + LOCK_MS
+    lockUntil.current = performance.now() + holdForBeat(beatNumber)
     setIndex(Math.max(0, Math.min(BEATS.length - 1, beatNumber - 1)))
   }, [])
 

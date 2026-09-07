@@ -1,0 +1,528 @@
+/*
+ * Production v10 refinement layer.
+ * v9 owns the 100-beat structure; this file tightens readability, focus, paper language,
+ * and the two difficult process chapters without turning the explainer back into an app.
+ */
+
+/* --------------------------------------------------------------------------
+   Global composition / paper
+   -------------------------------------------------------------------------- */
+.v9-frame {
+  background:
+    linear-gradient(90deg, rgba(176, 116, 70, .035), transparent 4.5cqw),
+    rgba(247, 240, 227, .22);
+}
+
+.v9-frame::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 2.8cqw;
+  top: 10.5cqh;
+  bottom: 4cqh;
+  width: 1px;
+  background: rgba(184, 103, 69, .14);
+  transform: rotate(.08deg);
+  pointer-events: none;
+}
+
+.v9-frame::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 1cqh 1cqw;
+  border: 1px solid rgba(67, 50, 35, .035);
+  pointer-events: none;
+}
+
+.v9-world-host { z-index: 10; }
+
+/* Required teaching copy must be readable; tiny type is reserved for texture only. */
+.v9-heading > p,
+.v9-token-heading > p,
+.v9-paper-note,
+.v9-chat-intro p,
+.v9-book-right p,
+.v9-context-return p,
+.v9-floor-room span,
+.v9-building-caption span,
+.v9-output-vocab header span,
+.v9-final-paper > p {
+  font-size: clamp(15px, .92cqw, 18px);
+  line-height: 1.42;
+}
+
+.v9-heading {
+  top: 11.2cqh;
+  padding-bottom: 1.15cqh;
+  border-bottom-color: rgba(23, 19, 15, .22);
+}
+
+.v9-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 13cqw;
+  bottom: -2px;
+  height: 1px;
+  background: rgba(23, 19, 15, .32);
+  transform: rotate(-.28deg);
+}
+
+.v9-heading > small,
+.v9-token-heading > small {
+  font-size: clamp(11px, .7cqw, 14px);
+  letter-spacing: .09em;
+}
+
+.v9-heading h2 {
+  margin-top: .35cqh;
+  font-size: clamp(34px, 2.55cqw, 49px);
+}
+
+.v9-paper-note {
+  padding: .9cqh .85cqw;
+  background: linear-gradient(90deg, rgba(255,250,240,.5), rgba(255,250,240,.12));
+  border-left-width: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Persistent chapter rail — chapter names, not metadata, are the hero.
+   -------------------------------------------------------------------------- */
+.v9-chapter-rail {
+  top: 1.1cqh;
+  height: 8.4cqh;
+  left: 3.5cqw;
+  right: 3.5cqw;
+  gap: .3cqw;
+  padding: .45cqh .45cqw;
+  background: rgba(247, 240, 227, .94);
+  backdrop-filter: blur(8px);
+  border-top-color: rgba(23, 19, 15, .22);
+  border-bottom-color: rgba(23, 19, 15, .24);
+  box-shadow: 0 6px 14px rgba(65, 44, 28, .035);
+}
+
+.v9-chapter {
+  padding: .45cqh .45cqw;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  column-gap: .36cqw;
+}
+
+.v9-chapter small {
+  font-size: clamp(10px, .62cqw, 12px);
+}
+
+.v9-chapter strong {
+  align-self: center;
+  font-size: clamp(15px, .92cqw, 18px);
+  line-height: 1;
+  letter-spacing: -.01em;
+}
+
+/* Hints are useful only for the current chapter; otherwise they dilute the chapter names. */
+.v9-chapter > span {
+  display: none;
+}
+
+.v9-chapter[data-active='true'] {
+  background: linear-gradient(180deg, rgba(243,205,100,.03), rgba(243,205,100,.18));
+}
+
+.v9-chapter[data-active='true'] strong {
+  font-size: clamp(17px, 1.05cqw, 20px);
+}
+
+.v9-chapter[data-active='true'] > span {
+  display: block;
+  grid-column: 2;
+  margin-top: .22cqh;
+  color: #5e554b;
+  font-size: clamp(11px, .68cqw, 13px);
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.v9-chapter[data-passed='true'] { opacity: .7; }
+.v9-chapter[data-active='true']::after { height: 4px; }
+
+/* --------------------------------------------------------------------------
+   Persistent process spine for Attention + MoE.
+   -------------------------------------------------------------------------- */
+.v10-process-spine {
+  position: absolute;
+  z-index: 145;
+  left: 6cqw;
+  right: 6cqw;
+  top: 22.1cqh;
+  min-height: 8.2cqh;
+  padding: .55cqh .65cqw .65cqh;
+  border-top: 1px solid rgba(23,19,15,.2);
+  border-bottom: 1px solid rgba(23,19,15,.14);
+  background: rgba(247,240,227,.9);
+}
+
+.v10-process-spine > p {
+  margin: 0 0 .55cqh;
+  min-height: 2.1cqh;
+  display: flex;
+  align-items: baseline;
+  gap: .55cqw;
+  color: #5c534a;
+}
+
+.v10-process-spine > p b {
+  color: #9a5f3f;
+  font: 900 clamp(10px,.62cqw,12px) ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.v10-process-spine > p span {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(14px, .9cqw, 17px);
+  font-weight: 600;
+}
+
+.v10-process-spine ol {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  gap: .28cqw;
+}
+
+.v10-process-spine li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 3.5cqh;
+  padding: .35cqh .4cqw .42cqh;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: .35cqw;
+  color: #7c7166;
+  border-left: 1px solid rgba(23,19,15,.1);
+}
+
+.v10-process-spine li:first-child { border-left: 0; }
+.v10-process-spine li > small {
+  grid-row: 1 / 3;
+  align-self: center;
+  width: 1.35cqw;
+  height: 1.35cqw;
+  min-width: 20px;
+  min-height: 20px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(23,19,15,.22);
+  border-radius: 50%;
+  font: 800 clamp(9px,.55cqw,11px) ui-monospace, monospace;
+}
+.v10-process-spine li > strong {
+  min-width: 0;
+  font-size: clamp(11px,.73cqw,14px);
+  line-height: 1.05;
+}
+.v10-process-spine li > span {
+  margin-top: .12cqh;
+  color: #61584f;
+  font-size: clamp(10px,.62cqw,12px);
+  line-height: 1.15;
+}
+.v10-process-spine li > i {
+  position: absolute;
+  left: calc(100% - .15cqw);
+  top: 50%;
+  width: .55cqw;
+  height: 1px;
+  background: rgba(23,19,15,.2);
+}
+.v10-process-spine li[data-done='true'] { color: #665d54; opacity: .74; }
+.v10-process-spine li[data-done='true'] > small { background: rgba(114,168,159,.13); border-color: rgba(70,124,116,.38); }
+.v10-process-spine li[data-active='true'] {
+  color: var(--ink);
+  background: linear-gradient(transparent 4%, rgba(243,205,100,.08) 4%, rgba(243,205,100,.22) 88%, transparent 88%);
+}
+.v10-process-spine li[data-active='true'] > small {
+  border-color: rgba(23,19,15,.52);
+  background: var(--paper-2);
+  box-shadow: 1px 1px 0 rgba(23,19,15,.14);
+}
+.v10-process-spine li[data-active='true'] > strong { font-size: clamp(13px,.82cqw,16px); }
+.v10-process-spine[data-tone='moe'] li[data-active='true'] {
+  background: linear-gradient(transparent 4%, rgba(233,157,107,.06) 4%, rgba(233,157,107,.19) 88%, transparent 88%);
+}
+
+/* Process spine replaces the old tiny operation label in the hard chapters. */
+.v9-attention-room > .v9-operation-cue,
+.v9-moe-room > .v9-operation-cue { display: none; }
+.v9-floor-location { display: none; }
+.v9-attention-canvas,
+.v9-moe-canvas { top: 32cqh; bottom: 5.5cqh; }
+
+/* --------------------------------------------------------------------------
+   Opening / model paper
+   -------------------------------------------------------------------------- */
+.v10-model-plain {
+  display: block;
+  max-width: 38ch;
+  margin-top: .55cqh;
+  padding-left: .65cqw;
+  border-left: 2px solid rgba(23,19,15,.24);
+  color: #564e46;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(14px,.9cqw,17px);
+  line-height: 1.35;
+}
+
+.v9-model-number > p { font-size: clamp(15px,.9cqw,17px); }
+.v9-model-number > span { font-size: clamp(11px,.7cqw,14px); }
+.v9-model-number[data-kind='active'] {
+  background:
+    linear-gradient(177deg, transparent 0 16%, rgba(233,157,107,.045) 16% 84%, transparent 84%);
+}
+.v9-model-margin > small { font-size: clamp(11px,.67cqw,13px); }
+.v9-model-margin span,
+.v9-model-margin em { font-size: clamp(12px,.76cqw,15px); line-height: 1.3; }
+.v9-model-margin > div { padding-top: .85cqh; }
+.v9-hook > small { font-size: 12px; }
+.v9-hook p { font-size: clamp(25px,1.9cqw,35px); }
+
+.v9-journey-node {
+  min-height: 18cqh;
+  padding-inline: .6cqw;
+  background: transparent;
+  border-bottom-color: rgba(23,19,15,.12);
+}
+.v9-journey-node strong { font-size: clamp(15px,.96cqw,19px); }
+.v9-journey-node small { font-size: clamp(11px,.7cqw,14px); line-height: 1.25; }
+.v9-journey-node[data-first='true'] {
+  background: linear-gradient(transparent 8%, rgba(243,205,100,.12) 8% 90%, transparent 90%);
+}
+
+/* --------------------------------------------------------------------------
+   Chat — the only conventional UI in the explainer because the UI is the object.
+   -------------------------------------------------------------------------- */
+.v9-chat-intro { width: 50cqw; }
+.v9-chat-intro h2 { font-size: clamp(34px,2.6cqw,50px); }
+.v9-chat-shell {
+  width: 64cqw;
+  height: 58cqh;
+  border-radius: 1.45cqw;
+  box-shadow: 6px 7px 0 rgba(23,19,15,.075), 0 18px 38px rgba(54,39,27,.045);
+}
+.v9-chat-shell > header strong { font-size: clamp(16px,1.03cqw,20px); }
+.v9-chat-shell > header span { font-size: clamp(11px,.7cqw,14px); }
+.v9-user-message p,
+.v9-chat-typed { font-size: clamp(18px,1.15cqw,22px); }
+.v9-chat-input { min-height: 7.8cqh; }
+.v9-chat-input[data-focus='true'] {
+  border-color: rgba(90,72,55,.58);
+  box-shadow: 0 0 0 3px rgba(243,205,100,.12);
+}
+.v9-assistant-processing { isolation: isolate; }
+.v9-assistant-processing[data-entering='true']::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 15cqw;
+  height: 15cqw;
+  translate: -50% -50%;
+  border: 1.5px solid rgba(122,88,57,.28);
+  border-radius: 52% 48% 46% 54%;
+  box-shadow: 0 0 0 9px rgba(243,205,100,.035), 0 0 0 19px rgba(243,205,100,.018);
+  animation: v10-processing-ring 1.6s ease-in-out infinite;
+}
+@keyframes v10-processing-ring {
+  0%,100% { transform: scale(.88) rotate(-1deg); opacity: .25; }
+  50% { transform: scale(1.06) rotate(1deg); opacity: .75; }
+}
+.v9-enter-model-label strong { font-size: clamp(30px,2.25cqw,43px); }
+
+/* --------------------------------------------------------------------------
+   Token → ID → Embedding: simple concepts, large labels, little prose.
+   -------------------------------------------------------------------------- */
+.v9-token-heading h2 { font-size: clamp(34px,2.55cqw,49px); }
+.v9-token-heading > p { max-width: 64ch; }
+.v9-token-card strong { font-size: clamp(17px,1.05cqw,21px); }
+.v9-token-id { font-size: clamp(11px,.7cqw,14px); }
+.v9-token-instruction,
+.v9-vocab-caption { font-size: clamp(13px,.82cqw,16px); }
+.v9-id-definition strong { font-size: clamp(20px,1.35cqw,26px); }
+.v9-id-definition span { font-size: clamp(14px,.9cqw,17px); }
+.v9-vocab-scale-label b { font-size: clamp(43px,3.6cqw,66px); }
+.v9-vocab-scale-label span { font-size: clamp(14px,.9cqw,17px); }
+.v9-index-target strong { font-size: clamp(28px,2.1cqw,40px); }
+.v9-book-left p { font-size: clamp(14px,.88cqw,17px); }
+.v9-book-right small,
+.v9-book-left small { font-size: clamp(10px,.62cqw,12px); }
+.v9-embedding-unfold > small { font-size: clamp(12px,.76cqw,15px); }
+.v9-all-embeddings > p { font-size: clamp(16px,1cqw,20px); }
+
+/* --------------------------------------------------------------------------
+   Attention — make the causal chain read left-to-right / top-to-bottom.
+   -------------------------------------------------------------------------- */
+.v9-attention-question { top: 5.5cqh; }
+.v9-attention-question p { font-size: clamp(16px,1cqw,19px); }
+.v9-attention-question > strong { font-size: clamp(30px,2.3cqw,44px); }
+.v9-question-sentence { font-size: clamp(24px,1.75cqw,34px); }
+.v9-question-sentence > em {
+  color: #a89b8e;
+  font-style: normal;
+  margin-left: .5cqw;
+}
+.v9-attention-question > small { font-size: clamp(11px,.7cqw,13px); color: #7b7065; }
+
+.v9-attention-source { top: 1cqh; }
+.v9-qkv-branch { top: 18.5cqh; left: 10cqw; right: 10cqw; gap: 1.5cqw; }
+.v9-qkv-branch > div {
+  min-height: 16.5cqh;
+  background: transparent;
+  border-top-width: 2px;
+}
+.v9-qkv-branch > div strong { font-size: clamp(17px,1.08cqw,21px); }
+.v9-qkv-branch > div span { font-size: clamp(13px,.82cqw,16px); }
+.v9-qkv-branch > div small { font-size: clamp(10px,.6cqw,12px); }
+.v9-qkv-note { top: 18cqh; left: 19cqw; right: 19cqw; }
+
+.v9-attention-token-grid { top: 1cqh; height: 35cqh; gap: .55cqw; }
+.v9-attention-token { min-height: 25cqh; gap: .65cqh; }
+.v9-attention-token > strong { font-size: clamp(17px,1.05cqw,21px); }
+.v9-kv-stack > span { min-width: 2.2cqw; font-size: clamp(11px,.68cqw,13px); }
+.v9-query-anchor {
+  top: 8.2cqh;
+  width: 7.6cqw;
+  padding: .7cqh .55cqw .85cqh;
+  box-shadow: 2px 3px 0 rgba(23,19,15,.07);
+}
+.v9-query-anchor span { font-size: clamp(11px,.66cqw,13px); }
+.v9-local-match span { font-size: clamp(10px,.62cqw,12px); }
+.v9-local-match b { font-size: clamp(17px,1.08cqw,21px); }
+.v9-score-row-value { font-size: clamp(13px,.82cqw,16px); }
+.v9-weight-under-token b { font-size: clamp(11px,.66cqw,13px); }
+.v9-causal-bracket { font-size: clamp(11px,.69cqw,13px); }
+
+.v9-future-ghosts {
+  position: absolute;
+  right: 0;
+  bottom: -8.2cqh;
+  display: flex;
+  align-items: center;
+  gap: .5cqw;
+  color: #a09487;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+.v9-future-ghosts small {
+  margin-right: .25cqw;
+  font: 800 clamp(9px,.56cqw,11px) ui-monospace, monospace;
+  letter-spacing: .08em;
+}
+.v9-future-ghosts span {
+  padding: .25cqh .35cqw;
+  border-bottom: 1px dashed rgba(23,19,15,.18);
+  font-size: clamp(13px,.82cqw,16px);
+}
+
+.v9-value-rule b { font-size: clamp(11px,.68cqw,13px); }
+.v9-value-rule span { font-size: clamp(14px,.88cqw,17px); }
+.v9-value-gates strong { font-size: clamp(15px,.95cqw,18px); }
+.v9-value-gates small { font-size: clamp(10px,.62cqw,12px); }
+.v9-value-stream-list b,
+.v9-value-stream-list span { font-size: clamp(11px,.7cqw,14px); }
+.v9-sigma small,
+.v9-sigma span { font-size: clamp(11px,.68cqw,13px); }
+.v9-context-return p { max-width: 34ch; }
+.v9-attention-caveat p { font-size: clamp(15px,.92cqw,18px); }
+.v9-attention-caveat > small { font-size: clamp(12px,.75cqw,15px); }
+
+/* --------------------------------------------------------------------------
+   MoE — the main event gets the strongest focus hierarchy.
+   -------------------------------------------------------------------------- */
+.v9-floor-pan { inset: 4cqh 2cqw 3cqh; }
+.v9-floor-room small { font-size: clamp(10px,.62cqw,12px); }
+.v9-floor-room span { font-size: clamp(14px,.88cqw,17px); }
+.v9-dense-mlp span { font-size: clamp(13px,.82cqw,16px); }
+.v9-dense-mlp small { font-size: clamp(10px,.62cqw,12px); }
+.v9-moe-field > header small { font-size: clamp(10px,.62cqw,12px); }
+.v9-moe-field > header > div:first-child span { font-size: clamp(13px,.82cqw,16px); }
+.v9-shared-expert strong { font-size: clamp(13px,.82cqw,16px); }
+.v9-shared-expert span { font-size: clamp(11px,.68cqw,13px); }
+
+.v9-expert-wall {
+  border-top-color: rgba(23,19,15,.3);
+  background: rgba(255,250,240,.15);
+}
+.v9-expert-wall > i[data-leading='true'] {
+  outline: 2px solid rgba(184,116,62,.72);
+  outline-offset: 1px;
+}
+.v9-expert-wall > i[data-selected='true'] {
+  background: #f1c957;
+  border-color: rgba(23,19,15,.72);
+  box-shadow: 1px 2px 0 rgba(23,19,15,.23), 0 0 0 2px rgba(243,205,100,.15);
+}
+
+.v9-router-box {
+  width: 17.5cqw;
+  padding: 1.25cqh 1.05cqw;
+  box-shadow: 3px 4px 0 rgba(23,19,15,.08);
+}
+.v9-router-box > small { font-size: clamp(10px,.62cqw,12px); }
+.v9-router-box > strong { font-size: clamp(20px,1.45cqw,27px); }
+.v9-router-box > span { font-size: clamp(12px,.75cqw,15px); }
+.v9-field-caption b { font-size: clamp(16px,1cqw,20px); }
+.v9-field-caption span { font-size: clamp(13px,.82cqw,16px); }
+.v9-top8-callout strong { font-size: clamp(35px,2.8cqw,52px); }
+.v9-top8-callout span,
+.v9-shared-callout span { font-size: clamp(13px,.82cqw,16px); }
+.v9-shared-callout strong { font-size: clamp(22px,1.55cqw,30px); }
+.v9-active-experts > header strong { font-size: clamp(18px,1.15cqw,22px); }
+.v9-active-experts > header span { font-size: clamp(12px,.76cqw,15px); }
+.v9-open-expert p { font-size: clamp(14px,.88cqw,17px); }
+.v9-route-compare p,
+.v9-reroute-story p { font-size: clamp(15px,.92cqw,18px); }
+.v9-18b-correction { font-size: clamp(15px,.92cqw,18px); }
+
+/* --------------------------------------------------------------------------
+   Building / output — keep scale legible without turning texture into labels.
+   -------------------------------------------------------------------------- */
+.v9-building-caption {
+  padding: 1cqh 1cqw;
+  background: rgba(247,240,227,.95);
+}
+.v9-building-caption b { font-size: clamp(18px,1.15cqw,22px); }
+.v9-building-bracket strong { font-size: clamp(13px,.82cqw,16px); }
+.v9-building-bracket em { font-size: clamp(11px,.68cqw,13px); }
+.v9-building-floor[data-active='true'] > span,
+.v9-building-floor[data-active='true'] > small { font-size: clamp(10px,.62cqw,12px); }
+.v9-why-layers h3 { font-size: clamp(25px,1.85cqw,35px); }
+
+.v9-output-vocab header span { margin-top: .45cqh; }
+.v9-candidate-list > div strong { font-size: clamp(18px,1.15cqw,22px); }
+.v9-candidate-list > div b { font-size: clamp(12px,.75cqw,15px); }
+.v9-candidate-list em { font-size: clamp(10px,.62cqw,12px); }
+.v9-output-note { width: 32cqw; }
+.v9-growing-sentence p { font-size: clamp(25px,1.85cqw,35px); }
+.v9-loop-formula span { font-size: clamp(13px,.82cqw,16px); }
+.v9-final-numbers span { font-size: clamp(13px,.82cqw,16px); }
+.v9-final-mechanism span { font-size: clamp(10px,.62cqw,12px); }
+.v9-final-paper > p { max-width: 76ch; }
+
+/* The recording frame itself is already always 16:9. On genuinely tiny screens,
+   simplify secondary prose rather than squeezing required labels into dust. */
+@container (max-width: 900px) {
+  .v9-chapter > span,
+  .v10-process-spine li > span,
+  .v9-model-margin em { display: none !important; }
+  .v10-process-spine li > strong { font-size: 11px; }
+  .v10-process-spine > p span { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v9-assistant-processing[data-entering='true']::after { animation: none; }
+}
