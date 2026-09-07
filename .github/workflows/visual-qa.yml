@@ -1,0 +1,84 @@
+name: Visual QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/videos/glm-320b/**"
+      - ".github/workflows/visual-qa.yml"
+
+jobs:
+  capture-glm-opening:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install app dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Playwright for visual capture
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start preview server
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/explain-ahmad-preview.log 2>&1 &
+          for i in {1..40}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/explain-ahmad-preview.log
+          exit 1
+
+      - name: Capture Page 1 beats
+        run: |
+          mkdir -p visual-qa
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright'
+
+          const browser = await chromium.launch({ headless: true })
+          const viewports = [
+            { name: '1920x1080', width: 1920, height: 1080 },
+            { name: '1440x900', width: 1440, height: 900 },
+            { name: '1366x768', width: 1366, height: 768 },
+          ]
+
+          for (const viewport of viewports) {
+            const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } })
+            await page.goto('http://127.0.0.1:4173/why-320b-uses-18b', { waitUntil: 'networkidle' })
+            await page.waitForTimeout(500)
+
+            for (let beat = 1; beat <= 14; beat += 1) {
+              if (beat > 1) {
+                await page.keyboard.press('ArrowRight')
+                await page.waitForTimeout(1150)
+              }
+              await page.screenshot({
+                path: `visual-qa/${viewport.name}-beat-${String(beat).padStart(2, '0')}.png`,
+                fullPage: true,
+              })
+            }
+            await page.close()
+          }
+
+          await browser.close()
+          NODE
+
+      - name: Upload visual QA frames
+        uses: actions/upload-artifact@v4
+        with:
+          name: glm-page1-visual-qa
+          path: visual-qa/*.png
+          retention-days: 7
