@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { SketchAnnotation } from '../../../../visuals/SketchAnnotation'
 import { MODEL } from '../data'
+import { NarrativeCue } from '../shared'
 import { CHAPTERS } from '../story'
 
 const journeyIcons: Record<string, string> = {
@@ -9,14 +10,14 @@ const journeyIcons: Record<string, string> = {
 
 export function ModelWorld({ beat }: { beat: number }) {
   const showName = beat >= 2
-  const showType = beat >= 3
-  const showTotal = beat >= 4
-  const showActive = beat >= 5
-  const highlight = beat >= 6
+  const showTotal = beat >= 3
+  const showActive = beat >= 4
+  const highlight = beat >= 5
+  const hook = beat >= 6
   const defineParameter = beat >= 7
   const defineActive = beat >= 8
-  const architecture = beat >= 9
-  const hook = beat >= 10
+  const showType = beat >= 9
+  const architecture = beat >= 10
   const follow = beat >= 11
   const journey = beat >= 12
   const icons = beat >= 13
@@ -31,8 +32,8 @@ export function ModelWorld({ beat }: { beat: number }) {
         <header className="v9-model-name">
           <motion.small animate={{ opacity: showName ? 1 : 0 }}>{MODEL.maker}</motion.small>
           <motion.h1 animate={{ opacity: showName ? 1 : 0, y: showName ? 0 : 8 }}>{MODEL.name}</motion.h1>
-          <motion.p animate={{ opacity: showType ? 1 : 0 }}>Large language model · Mixture of Experts (MoE)</motion.p>
-          {showType ? <motion.span className="v10-model-plain" initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}>Plain version: a big model with many learned expert blocks inside.</motion.span> : null}
+          <motion.p animate={{ opacity: showType ? 1 : 0 }}>Mixture of Experts (MoE) · the clue we will eventually unpack</motion.p>
+          {showType ? <motion.span className="v10-model-plain" initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}>Many learned expert blocks exist, <b>but</b> one token does not need all of them at once.</motion.span> : null}
         </header>
 
         <div className="v9-model-hero">
@@ -54,7 +55,7 @@ export function ModelWorld({ beat }: { beat: number }) {
         </div>
 
         <motion.aside className="v9-model-margin" animate={{ opacity: architecture ? 1 : 0, x: architecture ? 0 : 14 }}>
-          <small>THE ARCHITECTURE FACTS WE WILL USE</small>
+          <small>ONLY THE FACTS WE WILL NEED LATER</small>
           <div><b>{MODEL.layers}</b><span>Transformer layers</span></div>
           <div><b>{MODEL.moeLayers}</b><span>sparse-MoE layers</span></div>
           <div><b>{MODEL.routedExperts}</b><span>routed experts / MoE layer</span></div>
@@ -63,17 +64,23 @@ export function ModelWorld({ beat }: { beat: number }) {
         </motion.aside>
 
         <motion.div className="v9-hook" animate={{ opacity: hook ? 1 : 0, y: hook ? 0 : 10 }}>
-          <small>THE QUESTION</small>
+          <small>THE HEADACHE</small>
           <div><b>320B</b><i /><strong>?</strong><i /><b>~18B</b></div>
-          <p>How can both numbers be true?</p>
+          <p>If 320B parameters exist, why are only ~18B active for one token?</p>
         </motion.div>
       </motion.div>
 
+      {showType && !follow ? (
+        <NarrativeCue kind="question" className="v11-model-clue">
+          If the active path is smaller, <b>what inside the model is choosing it?</b>
+        </NarrativeCue>
+      ) : null}
+
       {follow ? (
         <motion.div className="v9-follow-copy" initial={{ opacity: 0, y: 14 }} animate={{ opacity: journey ? 0.45 : 1, y: 0 }}>
-          <small>BEFORE WE ANSWER IT</small>
-          <h2>Follow one tiny piece of text.</h2>
-          <p>We will open the model one chapter at a time.</p>
+          <small>THEREFORE</small>
+          <h2>Don’t memorize the architecture. Follow one token.</h2>
+          <p>If selective compute is really the answer, the token’s path should prove it.</p>
         </motion.div>
       ) : null}
 

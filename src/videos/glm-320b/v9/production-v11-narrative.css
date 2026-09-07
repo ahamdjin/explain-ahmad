@@ -1,0 +1,200 @@
+/*
+ * v11 — Ncase narrative layer
+ *
+ * This file makes the causal story visible without turning the explainer into a UI.
+ * The visual grammar is intentionally paper-like: margin labels, underlines, pencil rules,
+ * and small highlighted phrases rather than rounded cards.
+ */
+
+.v11-narrative-cue {
+  position: relative;
+  z-index: 180;
+  max-width: 42cqw;
+  padding: .7cqh .85cqw .75cqh 1cqw;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: .65cqw;
+  border-left: 2px solid rgba(23,19,15,.36);
+  background: linear-gradient(90deg, rgba(255,250,240,.82), rgba(255,250,240,.18));
+  box-shadow: none;
+}
+
+.v11-narrative-cue::after {
+  content: '';
+  position: absolute;
+  left: .55cqw;
+  right: 2.4cqw;
+  bottom: .22cqh;
+  height: 1px;
+  background: rgba(23,19,15,.14);
+  transform: rotate(-.15deg);
+}
+
+.v11-narrative-cue > small {
+  color: #786c61;
+  font: 900 clamp(10px,.62cqw,12px)/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .11em;
+  white-space: nowrap;
+}
+
+.v11-narrative-cue > div {
+  color: #4f4740;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(15px,.94cqw,18px);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.v11-narrative-cue > div b { color: var(--ink); }
+.v11-narrative-cue[data-kind='question'] { border-left-color: rgba(111,90,63,.55); }
+.v11-narrative-cue[data-kind='but'] { border-left-color: #c8784e; }
+.v11-narrative-cue[data-kind='therefore'] { border-left-color: #579b91; }
+.v11-narrative-cue[data-kind='answer'] {
+  border-left-color: #aa8130;
+  background: linear-gradient(90deg, rgba(243,205,100,.22), rgba(255,250,240,.12));
+}
+.v11-narrative-cue[data-kind='prediction'] {
+  border-left-color: #a77a43;
+  border-top: 1px dashed rgba(23,19,15,.22);
+  background: linear-gradient(90deg, rgba(243,205,100,.09), rgba(255,250,240,.08));
+}
+.v11-narrative-cue[data-kind='prediction'] > small { color: #9a5f3f; }
+.v11-narrative-cue[data-kind='next'] { opacity: .82; border-left-color: rgba(118,154,174,.5); }
+
+/* Process spines: the relationship word is part of the lesson, not generic metadata. */
+.v10-process-spine > p[data-kind='question'] b { color: #6f5b48; }
+.v10-process-spine > p[data-kind='but'] b { color: #b86843; }
+.v10-process-spine > p[data-kind='therefore'] b { color: #3f7f76; }
+.v10-process-spine > p[data-kind='answer'] b { color: #946c1f; }
+.v10-process-spine > p[data-kind='but'] { background: linear-gradient(90deg, rgba(233,157,107,.09), transparent 55%); }
+.v10-process-spine > p[data-kind='therefore'] { background: linear-gradient(90deg, rgba(87,155,145,.08), transparent 55%); }
+.v10-process-spine > p[data-kind='answer'] { background: linear-gradient(90deg, rgba(243,205,100,.13), transparent 55%); }
+
+/* Opening: contradiction first, jargon later. */
+.v11-model-question {
+  position: absolute;
+  left: 3cqw;
+  bottom: 1.2cqh;
+  width: 51cqw;
+}
+.v11-model-clue {
+  position: absolute;
+  right: 3cqw;
+  bottom: 3.2cqh;
+  width: 27cqw;
+}
+
+/* Text / token / ID / embedding bridges. */
+.v11-chat-bridge {
+  position: absolute;
+  left: 8cqw;
+  bottom: 4.5cqh;
+  width: 47cqw;
+}
+.v11-token-bridge {
+  position: absolute;
+  left: 7cqw;
+  bottom: 5.2cqh;
+  width: 46cqw;
+}
+.v11-token-prediction {
+  position: absolute;
+  right: 7cqw;
+  bottom: 5cqh;
+  width: 36cqw;
+}
+.v11-embedding-bridge {
+  position: absolute;
+  left: 6cqw;
+  bottom: 3.5cqh;
+  width: 48cqw;
+}
+
+/* Attention prediction lives inside the same sentence world as the reveal. */
+.v11-attention-prediction {
+  margin: 2cqh auto 0;
+  width: min(48cqw, 760px);
+  text-align: left;
+}
+.v11-attention-answer {
+  position: absolute;
+  z-index: 130;
+  left: 9cqw;
+  bottom: 1.4cqh;
+  width: 38cqw;
+}
+
+/* MoE prediction must not leak the top-8 count before the reveal. */
+.v11-moe-prediction {
+  position: absolute;
+  z-index: 80;
+  left: 2cqw;
+  bottom: 1cqh;
+  width: 31cqw;
+}
+.v11-moe-answer {
+  position: absolute;
+  z-index: 95;
+  left: 2cqw;
+  bottom: .6cqh;
+  width: 34cqw;
+}
+.v11-moe-followup {
+  position: absolute;
+  z-index: 90;
+  right: 4cqw;
+  bottom: 2cqh;
+  width: 36cqw;
+}
+
+/* Layer answer → output headache. */
+.v11-building-bridge {
+  position: absolute;
+  z-index: 120;
+  left: 8cqw;
+  bottom: 3cqh;
+  width: 46cqw;
+}
+
+/* Output bet and final next hill. */
+.v11-output-prediction {
+  position: absolute;
+  z-index: 75;
+  left: 10cqw;
+  bottom: 1.4cqh;
+  width: 31cqw;
+}
+.v11-output-answer {
+  position: absolute;
+  z-index: 80;
+  left: 10cqw;
+  bottom: 1.2cqh;
+  width: 31cqw;
+}
+.v11-final-next {
+  position: absolute;
+  right: 3cqw;
+  bottom: 2.2cqh;
+  width: 31cqw;
+  opacity: .7;
+}
+
+/* A stronger hand-written-looking question mark / blank for prediction moments. */
+.v11-blank {
+  display: inline-block;
+  min-width: 5.4em;
+  margin-left: .25em;
+  border-bottom: 2px solid rgba(23,19,15,.42);
+  color: transparent;
+  transform: rotate(-.4deg);
+}
+
+@media (max-height: 700px) {
+  .v11-narrative-cue { padding-block: .45cqh; }
+  .v11-narrative-cue > div { font-size: clamp(13px,.82cqw,16px); }
+  .v11-chat-bridge,
+  .v11-token-bridge,
+  .v11-token-prediction,
+  .v11-embedding-bridge { bottom: 2.2cqh; }
+}

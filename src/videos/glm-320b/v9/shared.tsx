@@ -4,6 +4,17 @@ import { SketchAnnotation } from '../../../visuals/SketchAnnotation'
 import { CHAPTERS, type Beat, type ChapterId } from './story'
 import { EMBEDDING_PREVIEW } from './data'
 
+const NARRATIVE_HINTS: Partial<Record<ChapterId, string>> = {
+  TEXT: 'what actually enters?',
+  TOKENS: 'how text becomes pieces',
+  'TOKEN ID': 'address, not meaning',
+  EMBEDDING: 'numbers, but no context yet',
+  ATTENTION: 'which context matters?',
+  MOE: 'how compute is chosen',
+  LAYERS: 'why repeat 45 times?',
+  OUTPUT: 'how vector becomes text',
+}
+
 export function PaperBackdrop() {
   return (
     <div className="v9-paper-bg" aria-hidden="true">
@@ -28,7 +39,7 @@ export function ChapterRail({ beatNumber, chapter }: { beatNumber: number; chapt
           <motion.div layoutId={`v9-chapter-${item.id}`} className="v9-chapter" key={item.id} data-active={active ? 'true' : undefined} data-passed={passed ? 'true' : undefined} transition={{ type: 'spring', stiffness: 100, damping: 24 }}>
             <small>{String(index + 1).padStart(2, '0')}</small>
             <strong>{active ? <SketchAnnotation type="highlight" color="#f3cd64" strokeWidth={2} padding={4}>{item.label}</SketchAnnotation> : item.label}</strong>
-            <span>{item.hint}</span>
+            <span>{NARRATIVE_HINTS[item.id] ?? item.hint}</span>
           </motion.div>
         )
       })}
@@ -51,6 +62,36 @@ export function PaperNote({ title, children, tone = 'pencil', className = '' }: 
     <motion.aside className={`v9-paper-note ${className}`.trim()} data-tone={tone} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
       {title ? <strong>{title}</strong> : null}
       <span>{children}</span>
+    </motion.aside>
+  )
+}
+
+export type NarrativeKind = 'question' | 'but' | 'therefore' | 'answer' | 'prediction' | 'next'
+
+const NARRATIVE_LABELS: Record<NarrativeKind, string> = {
+  question: 'QUESTION',
+  but: 'BUT',
+  therefore: 'THEREFORE',
+  answer: 'ANSWER',
+  prediction: 'PLACE YOUR BET',
+  next: 'NEXT QUESTION',
+}
+
+/**
+ * A small causal-story marker. It should never become another dashboard card.
+ * It exists to make the explanation dependency visible: problem → consequence → answer.
+ */
+export function NarrativeCue({ kind, children, className = '' }: { kind: NarrativeKind; children: ReactNode; className?: string }) {
+  return (
+    <motion.aside
+      className={`v11-narrative-cue ${className}`.trim()}
+      data-kind={kind}
+      initial={{ opacity: 0, y: 7 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28 }}
+    >
+      <small>{NARRATIVE_LABELS[kind]}</small>
+      <div>{children}</div>
     </motion.aside>
   )
 }

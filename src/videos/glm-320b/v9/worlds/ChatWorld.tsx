@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { MODEL, SENTENCE } from '../data'
+import { NarrativeCue } from '../shared'
 
 export function ChatWorld({ beat }: { beat: number }) {
   const focus = beat >= 16
@@ -30,8 +31,8 @@ export function ChatWorld({ beat }: { beat: number }) {
     <motion.section className="v9-world v9-chat-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <motion.div className="v9-chat-intro" animate={{ opacity: entering ? 0 : 1, y: entering ? -14 : 0 }}>
         <small>01 · TEXT</small>
-        <h2>Ask GLM to continue one simple sentence.</h2>
-        <p>We type the sentence fragment, then press Enter.</p>
+        <h2>What does a 320B model actually receive?</h2>
+        <p>Not an architecture diagram. Just the text you type.</p>
       </motion.div>
 
       <motion.div
@@ -82,9 +83,14 @@ export function ChatWorld({ beat }: { beat: number }) {
       </motion.div>
 
       {entering ? (
-        <motion.div className="v9-enter-model-label" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-          <small>GOING INSIDE THE PROCESSING</small><strong>What happens to the text first?</strong>
-        </motion.div>
+        <>
+          <motion.div className="v9-enter-model-label" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+            <small>GOING INSIDE THE PROCESSING</small><strong>What happens to the text first?</strong>
+          </motion.div>
+          <NarrativeCue kind="but" className="v11-chat-bridge">
+            The user gives the model <b>text</b>, but the network needs machine-friendly numerical structure. What does it make first?
+          </NarrativeCue>
+        </>
       ) : null}
     </motion.section>
   )
