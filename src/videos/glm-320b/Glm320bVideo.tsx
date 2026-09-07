@@ -1,5 +1,5 @@
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
-import { type CSSProperties, type MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { type CSSProperties, type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { StoryButton, StoryIconButton } from '../../components/StoryButton'
 import { SceneFrame, VideoPage } from '../../engine/SceneFrame'
 import { useActionGate } from '../../engine/useActionGate'
@@ -10,9 +10,9 @@ import './glm-320b-video.css'
 const sentence = 'The dog chased the ball because it rolled away.'
 
 /**
- * GLM-5.3-Flash facts verified from the published model config/model card.
- * The tokenizer row values below are intentionally NOT presented as exact model
- * weights/IDs until we can pin them from the official tokenizer + checkpoint.
+ * GLM-5.3-Flash architecture facts are grounded in the published config/model card.
+ * Example token boundaries, token IDs, attention weights, routing weights and visible
+ * embedding values below are teaching illustrations unless explicitly labeled as model facts.
  */
 const MODEL = {
   name: 'GLM-5.3-Flash',
@@ -27,74 +27,117 @@ const MODEL = {
   firstDenseLayers: 3,
 } as const
 
-const readableTokens = [
-  'The',
-  ' dog',
-  ' chased',
-  ' the',
-  ' ball',
-  ' because',
-  ' it',
-  ' rolled',
-  ' away',
-  '.',
+const tokens = [
+  { text: 'The', id: '17,2…' },
+  { text: ' dog', id: '91,4…' },
+  { text: ' chased', id: '36,8…' },
+  { text: ' the', id: '4,1…' },
+  { text: ' ball', id: '68,7…' },
+  { text: ' because', id: '31,5…' },
+  { text: ' it', id: '82,4…' },
+  { text: ' rolled', id: '73,1…' },
+  { text: ' away', id: '49,6…' },
+  { text: '.', id: '13' },
 ] as const
 
 const itIndex = 6
-
-const illustrativeVector = [0.12, -0.37, 0.08, 0.91, -0.22, 0.44, 0.03, -0.68, 0.51, 0.17, -0.09, 0.73]
+const illustrativeVector = [0.29, -0.14, 0.83, 0.07, -0.62, 0.41, 0.11, -0.35, 0.74, 0.18, -0.08, 0.52]
 
 const STEPS = [
-  'chat',
-  'freeze',
+  'model-hook',
+  'journey-map',
+  'chat-empty',
+  'chat-ready',
   'tokens',
+  'token-kinds',
+  'token-ids',
   'focus-it',
-  'token-id',
   'book-arrives',
   'book-open',
-  'vector-scale',
-  'vector-lift',
-  'question',
-  'attention-search',
+  'all-embeddings',
+  'carry-it',
+  'qkv',
+  'attention-scores',
   'attention-answer',
-  'layers-enter',
-  'layers-climb',
-  'dense-question',
-  'sparse-reveal',
-  'router-arrives',
-  'experts-route',
+  'moe-intro',
+  'expert-layer',
+  'router-token',
+  'router-top8',
+  'shared-expert',
   'experts-merge',
+  'building-reveal',
+  'floor-repeat',
+  'floor-refine',
+  'next-token',
+  'output-build',
   'payoff',
 ] as const
 
 type Step = (typeof STEPS)[number]
-
-type Section = 'input' | 'attention' | 'layers' | 'sparse' | 'moe' | 'payoff'
+type Section = 'hook' | 'input' | 'attention' | 'moe' | 'layers' | 'output' | 'payoff'
+type Stage = 'MODEL' | 'MAP' | 'TEXT' | 'TOKENS' | 'TOKEN ID' | 'EMBEDDING' | 'ATTENTION' | 'MOE' | 'LAYERS' | 'OUTPUT'
 
 const SECTION_FOR_STEP: Record<Step, Section> = {
-  chat: 'input',
-  freeze: 'input',
+  'model-hook': 'hook',
+  'journey-map': 'hook',
+  'chat-empty': 'input',
+  'chat-ready': 'input',
   tokens: 'input',
+  'token-kinds': 'input',
+  'token-ids': 'input',
   'focus-it': 'input',
-  'token-id': 'input',
   'book-arrives': 'input',
   'book-open': 'input',
-  'vector-scale': 'input',
-  'vector-lift': 'input',
-  question: 'input',
-  'attention-search': 'attention',
+  'all-embeddings': 'input',
+  'carry-it': 'attention',
+  qkv: 'attention',
+  'attention-scores': 'attention',
   'attention-answer': 'attention',
-  'layers-enter': 'layers',
-  'layers-climb': 'layers',
-  'dense-question': 'sparse',
-  'sparse-reveal': 'sparse',
-  'router-arrives': 'moe',
-  'experts-route': 'moe',
+  'moe-intro': 'moe',
+  'expert-layer': 'moe',
+  'router-token': 'moe',
+  'router-top8': 'moe',
+  'shared-expert': 'moe',
   'experts-merge': 'moe',
+  'building-reveal': 'layers',
+  'floor-repeat': 'layers',
+  'floor-refine': 'layers',
+  'next-token': 'output',
+  'output-build': 'output',
   payoff: 'payoff',
 }
 
-const SECTION_ORDER: Section[] = ['input', 'attention', 'layers', 'sparse', 'moe', 'payoff']
+const STAGE_FOR_STEP: Record<Step, Stage> = {
+  'model-hook': 'MODEL',
+  'journey-map': 'MAP',
+  'chat-empty': 'TEXT',
+  'chat-ready': 'TEXT',
+  tokens: 'TOKENS',
+  'token-kinds': 'TOKENS',
+  'token-ids': 'TOKEN ID',
+  'focus-it': 'TOKEN ID',
+  'book-arrives': 'EMBEDDING',
+  'book-open': 'EMBEDDING',
+  'all-embeddings': 'EMBEDDING',
+  'carry-it': 'ATTENTION',
+  qkv: 'ATTENTION',
+  'attention-scores': 'ATTENTION',
+  'attention-answer': 'ATTENTION',
+  'moe-intro': 'MOE',
+  'expert-layer': 'MOE',
+  'router-token': 'MOE',
+  'router-top8': 'MOE',
+  'shared-expert': 'MOE',
+  'experts-merge': 'MOE',
+  'building-reveal': 'LAYERS',
+  'floor-repeat': 'LAYERS',
+  'floor-refine': 'LAYERS',
+  'next-token': 'OUTPUT',
+  'output-build': 'OUTPUT',
+  payoff: 'OUTPUT',
+}
+
+const JOURNEY = ['Text', 'Tokens', 'IDs', 'Embeddings', 'Attention', 'Router', 'Experts', '×45', 'Output'] as const
 
 function stepIndex(step: Step) {
   return STEPS.indexOf(step)
@@ -104,537 +147,6 @@ function stepAt(index: number): Step {
   return STEPS[Math.max(0, Math.min(STEPS.length - 1, index))]
 }
 
-function TinyFact({ children }: { children: React.ReactNode }) {
-  return <span className="prod-tiny-fact">{children}</span>
-}
-
-function StageNote({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.p
-      className="prod-stage-note"
-      initial={{ opacity: 0, y: 7 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -5 }}
-      transition={{ duration: 0.22 }}
-    >
-      {children}
-    </motion.p>
-  )
-}
-
-function InputSection({ step, next, previous, busy }: SectionProps) {
-  const reducedMotion = useReducedMotion()
-  const index = stepIndex(step)
-  const showChat = step === 'chat'
-  const showSentence = index >= stepIndex('freeze')
-  const showTokens = index >= stepIndex('tokens') && index <= stepIndex('token-id')
-  const focusIt = index >= stepIndex('focus-it')
-  const showId = index >= stepIndex('token-id')
-  const showBook = index >= stepIndex('book-arrives') && index <= stepIndex('vector-lift')
-  const bookOpen = index >= stepIndex('book-open')
-  const showScale = index >= stepIndex('vector-scale')
-  const vectorLift = index >= stepIndex('vector-lift')
-  const showQuestion = step === 'question'
-
-  const note = useMemo(() => {
-    switch (step) {
-      case 'chat': return 'Start with a normal sentence.'
-      case 'freeze': return 'The chat UI can disappear. The words are what matter.'
-      case 'tokens': return 'The model first turns text into small pieces called tokens.'
-      case 'focus-it': return 'Follow just one piece: “it”.'
-      case 'token-id': return 'Every token points to one numbered row in the vocabulary.'
-      case 'book-arrives': return 'That number is a lookup key.'
-      case 'book-open': return 'It opens one learned number row: the token embedding.'
-      case 'vector-scale': return `That row is ${MODEL.hiddenSize.toLocaleString()} numbers wide.`
-      case 'vector-lift': return 'We can carry that whole row forward as one vector.'
-      case 'question': return 'But this vector still needs context.'
-      default: return ''
-    }
-  }, [step])
-
-  return (
-    <SceneFrame art="paper" className={`prod-scene prod-input-scene prod-step-${step}`}>
-      <PaperAtmosphere />
-      <AnimatePresence mode="wait">
-        <StageNote key={step}>{note}</StageNote>
-      </AnimatePresence>
-
-      <div className="prod-input-world">
-        <AnimatePresence>
-          {showChat && (
-            <motion.div
-              className="prod-chat-window"
-              initial={{ opacity: 0, y: 20, scale: 0.985 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.98, filter: 'blur(5px)' }}
-              transition={reducedMotion ? { duration: 0.12 } : { type: 'spring', stiffness: 160, damping: 22 }}
-            >
-              <div className="prod-chat-top"><i /><i /><i /><span>chat</span></div>
-              <div className="prod-chat-compose">
-                <span>{sentence}</span>
-                <StoryButton onClick={next} disabled={busy} emphasis="strong">Send</StoryButton>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {showSentence && !showTokens && !showBook && !showQuestion && (
-          <motion.div
-            layoutId="sentence-line"
-            className="prod-floating-sentence"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {sentence}
-          </motion.div>
-        )}
-
-        {showTokens && (
-          <div className="prod-token-stage">
-            <motion.div layout className="prod-token-row">
-              {readableTokens.map((token, tokenIndex) => {
-                const selected = tokenIndex === itIndex
-                return (
-                  <motion.div
-                    layout
-                    layoutId={`real-token-${tokenIndex}`}
-                    key={`${token}-${tokenIndex}`}
-                    className="prod-token"
-                    data-selected={selected && focusIt ? 'true' : undefined}
-                    data-dimmed={focusIt && !selected ? 'true' : undefined}
-                    animate={{
-                      opacity: focusIt && !selected ? 0.16 : 1,
-                      y: selected && focusIt ? -12 : 0,
-                      scale: selected && focusIt ? 1.08 : 1,
-                    }}
-                    transition={{ type: 'spring', stiffness: 170, damping: 23, mass: 0.65 }}
-                  >
-                    <span>{token.replace(/^ /, '·')}</span>
-                    {selected && showId && <strong>token ID</strong>}
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-
-            {showId && (
-              <motion.div
-                className="prod-index-wall-wrap"
-                initial={{ opacity: 0, x: 60, scale: 0.985 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ type: 'spring', stiffness: 150, damping: 24 }}
-              >
-                <IndexBoard rows={9} label="TOKEN INDEX" ariaLabel="GLM token vocabulary index metaphor">
-                  <div className="prod-index-rows" aria-hidden="true">
-                    {Array.from({ length: 9 }, (_, row) => (
-                      <div className="prod-index-row" data-focus={row === 5 ? 'true' : undefined} key={row}>
-                        <small>{String(18200 + row * 311).slice(0, 3)}…</small>
-                        <span>{row === 5 ? 'it' : ['walk', ' blue', ' because', ' tiny', ' after', 'it', ' dog', ' code', ' then'][row]}</span>
-                        <b>{row === 5 ? 'ID' : '·'}</b>
-                      </div>
-                    ))}
-                  </div>
-                </IndexBoard>
-                <TinyFact>{MODEL.vocabSize.toLocaleString()} possible token entries</TinyFact>
-              </motion.div>
-            )}
-          </div>
-        )}
-
-        {showBook && (
-          <div className={`prod-book-world ${bookOpen ? 'is-open' : ''} ${vectorLift ? 'vector-lifted' : ''}`}>
-            <AnimatePresence>
-              {!bookOpen && (
-                <motion.div
-                  className="prod-lookup-key"
-                  initial={{ opacity: 0, x: -18 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.85 }}
-                >
-                  <small>TOKEN</small>
-                  <strong>it</strong>
-                  <span>→ row</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <motion.button
-              type="button"
-              className="prod-book-button"
-              onClick={bookOpen ? undefined : next}
-              disabled={busy || bookOpen}
-              whileHover={!bookOpen && !reducedMotion ? { y: -5, rotate: -0.4 } : undefined}
-              whileTap={!bookOpen && !reducedMotion ? { scale: 0.985, y: 1 } : undefined}
-              aria-label={bookOpen ? 'Embedding book open' : 'Open embedding book'}
-            >
-              <motion.div layoutId="production-embedding-book" className="prod-book-shell">
-                <BookVisual
-                  state={bookOpen ? 'open' : 'closed'}
-                  title="Embedding"
-                  subtitle="lookup table"
-                  label="Embedding lookup book"
-                  leftPage={bookOpen ? <EmbeddingIdentityPage /> : undefined}
-                  rightPage={bookOpen ? <EmbeddingVectorPage expanded={showScale} lifted={vectorLift} /> : undefined}
-                />
-              </motion.div>
-              {!bookOpen && <span className="prod-object-cue">open ↗</span>}
-            </motion.button>
-
-            {bookOpen && !vectorLift && (
-              <div className="prod-book-actions">
-                <StoryIconButton label="Back" icon="←" onClick={previous} disabled={busy} />
-                <StoryButton onClick={next} disabled={busy} emphasis={showScale ? 'strong' : 'normal'}>
-                  {showScale ? 'Lift the vector' : 'How big is it?'}
-                </StoryButton>
-              </div>
-            )}
-
-            {vectorLift && (
-              <motion.div
-                layoutId="hero-vector"
-                className="prod-hero-vector"
-                initial={{ opacity: 0, y: 80, scaleX: 0.72 }}
-                animate={{ opacity: 1, y: -120, scaleX: 1 }}
-                transition={{ type: 'spring', stiffness: 110, damping: 20 }}
-                onClick={next}
-                role="button"
-                tabIndex={0}
-              >
-                {illustrativeVector.map((value, i) => <VectorCell key={i} value={value} index={i} />)}
-                <span className="prod-vector-ellipsis">…</span>
-              </motion.div>
-            )}
-          </div>
-        )}
-
-        {showQuestion && (
-          <div className="prod-question-world">
-            <motion.div layoutId="hero-vector" className="prod-hero-vector prod-question-vector">
-              {illustrativeVector.slice(0, 8).map((value, i) => <VectorCell key={i} value={value} index={i} />)}
-              <span className="prod-vector-ellipsis">…</span>
-            </motion.div>
-            <motion.p className="prod-context-sentence" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              The dog chased the <b>ball</b> because <strong>it</strong> rolled away.
-            </motion.p>
-            <motion.h2 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }}>
-              How does the model know what <em>“it”</em> means here?
-            </motion.h2>
-            <StoryButton onClick={next} disabled={busy} emphasis="strong">Follow “it” inside</StoryButton>
-          </div>
-        )}
-      </div>
-
-      {!showChat && !showQuestion && !bookOpen && !vectorLift && (
-        <SceneAdvance onNext={next} onPrevious={previous} busy={busy} showPrevious={step !== 'freeze'} />
-      )}
-
-      <AccuracyNote section="input" />
-    </SceneFrame>
-  )
-}
-
-function EmbeddingIdentityPage() {
-  return (
-    <div className="prod-book-page-copy prod-book-id-page">
-      <small>LOOKUP</small>
-      <b>token</b>
-      <strong>it</strong>
-      <span>one row in the embedding table</span>
-    </div>
-  )
-}
-
-function EmbeddingVectorPage({ expanded, lifted }: { expanded: boolean; lifted: boolean }) {
-  return (
-    <div className="prod-book-page-copy prod-book-vector-page" data-expanded={expanded ? 'true' : undefined} data-lifted={lifted ? 'true' : undefined}>
-      <small>EMBEDDING</small>
-      <strong>{MODEL.hiddenSize.toLocaleString()} values</strong>
-      <div className="prod-number-strip">
-        {illustrativeVector.slice(0, expanded ? 10 : 5).map((value, index) => (
-          <span key={index}>{value.toFixed(2)}</span>
-        ))}
-        <b>…</b>
-      </div>
-      <p>This is the token’s learned numerical identity.</p>
-    </div>
-  )
-}
-
-function VectorCell({ value, index }: { value: number; index: number }) {
-  const strength = Math.min(1, Math.abs(value))
-  return (
-    <i
-      className="prod-vector-cell"
-      style={{ '--cell-strength': strength, '--cell-index': index } as CSSProperties}
-      title={value.toFixed(2)}
-    />
-  )
-}
-
-function AttentionSection({ step, next, previous, busy }: SectionProps) {
-  const answered = step === 'attention-answer'
-  const words = ['The', 'dog', 'chased', 'the', 'ball', 'because', 'it', 'rolled', 'away.']
-
-  return (
-    <SceneFrame art="paper" className="prod-scene prod-attention-scene">
-      <PaperAtmosphere />
-      <StageNote>{answered ? 'Context changes what a token means.' : '“it” can look at the words around it.'}</StageNote>
-
-      <div className="prod-attention-world">
-        <motion.div layoutId="hero-vector" className="prod-hero-vector prod-attention-vector">
-          {illustrativeVector.slice(0, 8).map((value, i) => <VectorCell key={i} value={value} index={i} />)}
-          <span className="prod-vector-ellipsis">…</span>
-        </motion.div>
-
-        <div className="prod-attention-sentence">
-          <svg className="prod-attention-lines" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
-            <motion.path
-              d="M 690 190 C 630 62 518 70 474 164"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={answered ? 7 : 3}
-              strokeLinecap="round"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: answered ? 0.88 : 0.34 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            />
-            <motion.path
-              d="M 690 190 C 585 112 302 120 215 165"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: answered ? 0.12 : 0.24 }}
-              transition={{ duration: 0.72, delay: 0.08 }}
-            />
-          </svg>
-          {words.map((word) => (
-            <motion.span
-              key={word}
-              data-word={word.replace('.', '')}
-              data-focus={word === 'it' || (answered && word === 'ball') ? 'true' : undefined}
-              animate={{ opacity: answered && !['it', 'ball'].includes(word.replace('.', '')) ? 0.25 : 1 }}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div className="prod-attention-answer" key={answered ? 'answer' : 'search'} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            {answered ? <><strong>it → ball</strong><small>context gives the token a better meaning</small></> : <><strong>“What am I talking about?”</strong><small>attention compares this token with the others</small></>}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <SceneAdvance onNext={next} onPrevious={previous} busy={busy} showPrevious />
-      <AccuracyNote section="attention" />
-    </SceneFrame>
-  )
-}
-
-function LayersSection({ step, next, previous, busy }: SectionProps) {
-  const climbing = step === 'layers-climb'
-  const floors = Array.from({ length: 9 }, (_, i) => i)
-
-  return (
-    <SceneFrame art="paper" className="prod-scene prod-layers-scene">
-      <PaperAtmosphere />
-      <StageNote>{climbing ? 'The same representation is refined again and again.' : 'Now the vector enters the model.'}</StageNote>
-
-      <div className="prod-layer-world">
-        <div className="prod-layer-tower" aria-label={`${MODEL.layers} transformer layers, visually compressed`}>
-          {floors.map((floor) => (
-            <motion.div
-              className="prod-layer-floor"
-              data-active={climbing && floor <= 7 ? 'true' : undefined}
-              key={floor}
-              animate={{ x: floor % 2 === 0 ? 0 : 4, opacity: climbing ? 0.45 + floor * 0.06 : 0.55 }}
-              transition={{ delay: climbing ? floor * 0.07 : 0 }}
-            >
-              <small>{floor === 0 ? '1' : floor === floors.length - 1 ? '45' : '·'}</small>
-              <span />
-            </motion.div>
-          ))}
-          <TinyFact>{MODEL.layers} layers</TinyFact>
-        </div>
-
-        <motion.div
-          layoutId="hero-vector"
-          className="prod-hero-vector prod-layer-vector"
-          animate={{ y: climbing ? -250 : 210, scale: climbing ? 0.82 : 1 }}
-          transition={{ type: 'spring', stiffness: 80, damping: 19, mass: 0.9 }}
-        >
-          {illustrativeVector.slice(0, 8).map((value, i) => <VectorCell key={i} value={value} index={i} />)}
-          <span className="prod-vector-ellipsis">…</span>
-        </motion.div>
-
-        <div className="prod-layer-caption">
-          <b>same token</b>
-          <span>richer context</span>
-        </div>
-      </div>
-
-      <SceneAdvance onNext={next} onPrevious={previous} busy={busy} showPrevious />
-      <AccuracyNote section="layers" />
-    </SceneFrame>
-  )
-}
-
-function SparseSection({ step, next, previous, busy }: SectionProps) {
-  const sparse = step === 'sparse-reveal'
-  const rooms = Array.from({ length: 18 }, (_, i) => i)
-
-  return (
-    <SceneFrame art="paper" className="prod-scene prod-sparse-scene">
-      <PaperAtmosphere />
-      <StageNote>{sparse ? 'No. A Mixture-of-Experts layer can wake only a few specialist blocks.' : `Does every part of a ${MODEL.totalParamsB}B model work for every token?`}</StageNote>
-
-      <div className="prod-sparse-world">
-        <div className="prod-room-grid" data-sparse={sparse ? 'true' : undefined}>
-          {rooms.map((room) => {
-            const active = !sparse || [1, 4, 6, 9, 11, 14].includes(room)
-            return (
-              <motion.div
-                className="prod-room"
-                key={room}
-                data-active={active ? 'true' : undefined}
-                animate={{ opacity: active ? 1 : 0.16, scale: active ? 1 : 0.96 }}
-                transition={{ duration: 0.28, delay: sparse ? room * 0.012 : 0 }}
-              >
-                <span />
-                <small>{active && sparse ? 'on' : ''}</small>
-              </motion.div>
-            )
-          })}
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div className="prod-sparse-label" key={sparse ? 'few' : 'all'} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <strong>{sparse ? 'only some wake up' : 'imagine all of them waking up'}</strong>
-            {sparse && <small>this is the idea behind sparse MoE compute</small>}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <SceneAdvance onNext={next} onPrevious={previous} busy={busy} showPrevious />
-      <AccuracyNote section="sparse" />
-    </SceneFrame>
-  )
-}
-
-function MoeSection({ step, next, previous, busy }: SectionProps) {
-  const routing = step === 'experts-route' || step === 'experts-merge'
-  const merged = step === 'experts-merge'
-  const experts = Array.from({ length: 36 }, (_, i) => i)
-  const activeExperts = new Set([2, 6, 10, 15, 21, 25, 31, 34])
-
-  return (
-    <SceneFrame art="paper" className="prod-scene prod-moe-scene">
-      <PaperAtmosphere />
-      <StageNote>
-        {step === 'router-arrives' && 'A tiny router scores the token and chooses which expert doors to use.'}
-        {step === 'experts-route' && `For GLM-5.3-Flash, each token is routed to ${MODEL.expertsPerToken} of ${MODEL.routedExperts} routed experts in a sparse layer.`}
-        {step === 'experts-merge' && 'Those selected experts work, then their outputs are combined.'}
-      </StageNote>
-
-      <div className="prod-moe-world">
-        <div className="prod-router" data-routing={routing ? 'true' : undefined}>
-          <motion.div layoutId="hero-vector" className="prod-router-token">it</motion.div>
-          <div className="prod-router-junction">
-            <small>ROUTER</small>
-            <span className="prod-router-needle" />
-          </div>
-        </div>
-
-        <div className="prod-expert-wall" aria-label={`${MODEL.routedExperts} routed experts, visually sampled`}>
-          {experts.map((expert) => {
-            const active = routing && activeExperts.has(expert)
-            return (
-              <motion.div
-                className="prod-expert-door"
-                data-active={active ? 'true' : undefined}
-                key={expert}
-                animate={{ opacity: routing && !active ? 0.24 : 1, y: active ? -5 : 0 }}
-                transition={{ type: 'spring', stiffness: 180, damping: 20, delay: active ? expert * 0.006 : 0 }}
-              >
-                <i />
-                <small>E{expert + 1}</small>
-              </motion.div>
-            )
-          })}
-          <TinyFact>{MODEL.routedExperts} routed experts total — wall visually sampled</TinyFact>
-        </div>
-
-        {routing && (
-          <svg className="prod-route-lines" viewBox="0 0 1200 650" preserveAspectRatio="none" aria-hidden="true">
-            {[90, 210, 330, 455, 610, 760, 940, 1090].map((x, i) => (
-              <motion.path
-                key={x}
-                d={`M 600 160 C 600 250 ${x} 235 ${x} 430`}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: merged ? 0.3 : 0.68 }}
-                transition={{ duration: 0.55, delay: i * 0.045, ease: [0.22, 1, 0.36, 1] }}
-              />
-            ))}
-          </svg>
-        )}
-
-        {merged && (
-          <motion.div className="prod-merge-output" initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}>
-            <div className="prod-hero-vector">
-              {illustrativeVector.slice(0, 8).map((value, i) => <VectorCell key={i} value={value} index={i} />)}
-              <span className="prod-vector-ellipsis">…</span>
-            </div>
-            <small>combined result</small>
-          </motion.div>
-        )}
-      </div>
-
-      <SceneAdvance onNext={next} onPrevious={previous} busy={busy} showPrevious label={merged ? 'See the answer' : undefined} />
-      <AccuracyNote section="moe" />
-    </SceneFrame>
-  )
-}
-
-function PayoffSection({ previous }: SectionProps) {
-  return (
-    <SceneFrame art="paper" className="prod-scene prod-payoff-scene">
-      <PaperAtmosphere />
-      <div className="prod-payoff-world">
-        <div className="prod-payoff-model">
-          {Array.from({ length: 84 }, (_, i) => (
-            <motion.i
-              key={i}
-              data-active={i % 17 === 0 || i % 23 === 0 ? 'true' : undefined}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: i % 17 === 0 || i % 23 === 0 ? 1 : 0.14 }}
-              transition={{ delay: Math.min(0.6, i * 0.004) }}
-            />
-          ))}
-        </div>
-
-        <div className="prod-payoff-copy">
-          <small>{MODEL.name}</small>
-          <div className="prod-payoff-numbers">
-            <div><strong>{MODEL.totalParamsB}B</strong><span>total parameters</span></div>
-            <b>→</b>
-            <div><strong>{MODEL.activeParamsB}B</strong><span>active per token</span></div>
-          </div>
-          <h2>Big model. Small active path.</h2>
-          <p>That is the trick behind <b>Mixture of Experts.</b></p>
-          <StoryIconButton label="Go back" icon="←" onClick={previous} />
-        </div>
-      </div>
-      <AccuracyNote section="payoff" />
-    </SceneFrame>
-  )
-}
-
 type SectionProps = {
   step: Step
   next: () => void
@@ -642,42 +154,656 @@ type SectionProps = {
   busy: boolean
 }
 
-function SceneAdvance({
-  onNext,
-  onPrevious,
-  busy,
-  showPrevious,
-  label = 'Continue',
-}: {
-  onNext: () => void
-  onPrevious: () => void
-  busy: boolean
-  showPrevious: boolean
-  label?: string
-}) {
-  return (
-    <div className="prod-scene-controls">
-      {showPrevious && <StoryIconButton label="Previous beat" icon="←" onClick={onPrevious} disabled={busy} />}
-      <StoryButton onClick={onNext} disabled={busy}>{label}</StoryButton>
-    </div>
-  )
-}
-
 function PaperAtmosphere() {
   return <div className="prod-paper-atmosphere" aria-hidden="true"><i /><i /><i /></div>
 }
 
-function AccuracyNote({ section }: { section: Section }) {
-  const copy: Record<Section, string> = {
-    input: `GLM-5.3-Flash: vocab ${MODEL.vocabSize.toLocaleString()} · hidden size ${MODEL.hiddenSize.toLocaleString()}. Token boundaries/visible vector values are simplified for teaching; no fake checkpoint values are claimed.`,
-    attention: 'Conceptual attention view: the real model uses a hybrid attention architecture. This beat teaches contextual token relationships, not an exact attention map.',
-    layers: `${MODEL.layers} model layers. The tower is visually compressed.`,
-    sparse: `GLM-5.3-Flash uses dense MLPs in the first ${MODEL.firstDenseLayers} layers, then sparse MoE MLPs.`,
-    moe: `${MODEL.routedExperts} routed experts · top-${MODEL.expertsPerToken} routing · ${MODEL.sharedExperts} shared expert. Expert wall is visually sampled.`,
-    payoff: `${MODEL.totalParamsB}B total / ${MODEL.activeParamsB}B active per token are published model figures. Active parameters are not the same thing as model memory footprint.`,
-  }
+function StageBadge({ stage, previousStage }: { stage: Stage; previousStage?: Stage }) {
+  return (
+    <div className="prod-stage-badge" aria-label={`Current stage: ${stage}`}>
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={stage}
+          initial={{ opacity: 0, y: 7 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -7 }}
+          transition={{ duration: 0.18 }}
+        >
+          {previousStage && previousStage !== stage ? <small>{previousStage} →</small> : null}
+          <strong>{stage}</strong>
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  )
+}
 
-  return <span className="prod-accuracy-note">{copy[section]}</span>
+function BackControl({ onClick, disabled }: { onClick: () => void; disabled: boolean }) {
+  return (
+    <div className="prod-back-control">
+      <StoryIconButton label="Previous beat" icon="←" onClick={onClick} disabled={disabled} />
+    </div>
+  )
+}
+
+function LocalContinue({ children, onClick, disabled, emphasis = 'normal' }: { children: ReactNode; onClick: () => void; disabled: boolean; emphasis?: 'quiet' | 'normal' | 'strong' }) {
+  return <StoryButton onClick={onClick} disabled={disabled} emphasis={emphasis}>{children}</StoryButton>
+}
+
+function ModelHook({ next, busy }: SectionProps) {
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-hook-scene">
+      <PaperAtmosphere />
+      <div className="prod-hook-world">
+        <motion.div className="prod-model-card" initial={{ opacity: 0, y: 18, rotate: -0.4 }} animate={{ opacity: 1, y: 0, rotate: 0 }}>
+          <div className="prod-model-card-head">
+            <span>Z.ai</span>
+            <strong>{MODEL.name}</strong>
+            <i>MoE</i>
+          </div>
+
+          <div className="prod-model-card-hero">
+            <div className="prod-param-stat is-total">
+              <small>TOTAL PARAMETERS</small>
+              <strong>{MODEL.totalParamsB}B</strong>
+            </div>
+            <div className="prod-param-arrow" aria-hidden="true">↘</div>
+            <div className="prod-param-stat is-active">
+              <small>ACTIVE / TOKEN</small>
+              <strong>{MODEL.activeParamsB}B</strong>
+            </div>
+          </div>
+
+          <div className="prod-model-card-facts">
+            <span><b>{MODEL.layers}</b> layers</span>
+            <span><b>{MODEL.routedExperts}</b> routed experts</span>
+            <span><b>top-{MODEL.expertsPerToken}</b> / token</span>
+            <span><b>{MODEL.sharedExperts}</b> shared expert</span>
+          </div>
+        </motion.div>
+
+        <motion.div className="prod-hook-question" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }}>
+          <span>320B exists.</span>
+          <strong>Why does one token activate only ~18B?</strong>
+          <LocalContinue onClick={next} disabled={busy} emphasis="strong">Look inside</LocalContinue>
+        </motion.div>
+      </div>
+    </SceneFrame>
+  )
+}
+
+function JourneyMap({ next, previous, busy }: SectionProps) {
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-map-scene">
+      <PaperAtmosphere />
+      <div className="prod-map-world">
+        <div className="prod-map-intro">
+          <small>ONE SIMPLE PROMPT</small>
+          <strong>follow it through the model</strong>
+        </div>
+
+        <div className="prod-journey-map">
+          {JOURNEY.map((item, index) => (
+            <div className="prod-journey-node-wrap" key={item}>
+              {index > 0 && <motion.i className="prod-journey-connector" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: index * 0.05 }} />}
+              {index === 0 ? (
+                <motion.button
+                  type="button"
+                  className="prod-journey-node is-start"
+                  onClick={next}
+                  disabled={busy}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 }}
+                  whileHover={{ y: -4, rotate: -0.4 }}
+                  whileTap={{ y: 1, scale: 0.98 }}
+                >
+                  <span>✎</span>
+                  <strong>{item}</strong>
+                  <small>start here</small>
+                </motion.button>
+              ) : (
+                <motion.div className="prod-journey-node" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 0.45, y: 0 }} transition={{ delay: index * 0.045 }}>
+                  <span>{['▦', '#', '≈', '◎', '◇', '▥', '↻', '→'][index - 1]}</span>
+                  <strong>{item}</strong>
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p className="prod-map-reassure">We only need one piece at a time.</p>
+      </div>
+      <BackControl onClick={previous} disabled={busy} />
+    </SceneFrame>
+  )
+}
+
+function ChatWorld({ step, next, previous, busy }: SectionProps) {
+  const ready = step === 'chat-ready'
+  const reducedMotion = useReducedMotion()
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-chat-scene">
+      <PaperAtmosphere />
+      <div className="prod-chat-world">
+        <motion.div className="prod-chat-window prod-chat-window-v2" initial={{ opacity: 0, y: 20, scale: 0.985 }} animate={{ opacity: 1, y: 0, scale: 1 }}>
+          <div className="prod-chat-brand">
+            <div className="prod-chat-mark">✦</div>
+            <div><strong>Chat</strong><small>send a prompt</small></div>
+          </div>
+
+          <div className="prod-chat-history">
+            {ready && (
+              <motion.div className="prod-chat-preview" initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                {sentence}
+              </motion.div>
+            )}
+          </div>
+
+          <div className="prod-chat-input-shell" data-ready={ready ? 'true' : undefined}>
+            <div className="prod-chat-input-copy">
+              {ready ? (
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{sentence}</motion.span>
+              ) : (
+                <span className="is-placeholder">Ask anything…</span>
+              )}
+            </div>
+            {ready ? (
+              <button className="prod-enter-key" type="button" onClick={next} disabled={busy} aria-label="Send prompt">
+                <span>ENTER</span><b>↵</b>
+              </button>
+            ) : (
+              <LocalContinue onClick={next} disabled={busy}>Type example</LocalContinue>
+            )}
+          </div>
+        </motion.div>
+      </div>
+      <BackControl onClick={previous} disabled={busy} />
+    </SceneFrame>
+  )
+}
+
+function TokenWorld({ step, next, previous, busy }: SectionProps) {
+  const index = stepIndex(step)
+  const showKinds = index >= stepIndex('token-kinds')
+  const showIds = index >= stepIndex('token-ids')
+  const focusIt = index >= stepIndex('focus-it')
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-token-scene">
+      <PaperAtmosphere />
+      <div className="prod-token-world">
+        <div className="prod-token-source">
+          <span>{sentence}</span>
+          <motion.i initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} />
+        </div>
+
+        <div className="prod-token-row-v2">
+          {tokens.map((token, tokenIndex) => {
+            const selected = tokenIndex === itIndex
+            return (
+              <motion.div
+                layout
+                layoutId={`prod-token-${tokenIndex}`}
+                className="prod-token-v2"
+                data-selected={focusIt && selected ? 'true' : undefined}
+                data-dimmed={focusIt && !selected ? 'true' : undefined}
+                key={`${token.text}-${tokenIndex}`}
+                initial={{ opacity: 0, x: -8 }}
+                animate={{
+                  opacity: focusIt && !selected ? 0.18 : 1,
+                  x: 0,
+                  y: focusIt && selected ? -18 : 0,
+                  scale: focusIt && selected ? 1.12 : 1,
+                }}
+                transition={{ type: 'spring', stiffness: 170, damping: 22, delay: tokenIndex * 0.025 }}
+              >
+                <span>{token.text.replace(/^ /, '·')}</span>
+                {showIds && <small>ID {token.id}</small>}
+              </motion.div>
+            )
+          })}
+        </div>
+
+        <AnimatePresence mode="wait">
+          {showKinds && !showIds && (
+            <motion.div className="prod-token-kinds" key="kinds" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <div><b>dog</b><small>can be a whole word</small></div>
+              <div><b>word + piece</b><small>can be part of a word</small></div>
+              <div><b>.</b><small>can be punctuation</small></div>
+            </motion.div>
+          )}
+
+          {showIds && !focusIt && (
+            <motion.div className="prod-id-range" key="ids" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <small>GLM-5.3-Flash vocabulary</small>
+              <strong>IDs 0 → {MODEL.vocabSize - 1}</strong>
+            </motion.div>
+          )}
+
+          {focusIt && (
+            <motion.div className="prod-focus-token-callout" key="focus" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+              <small>follow one token</small>
+              <strong>it</strong>
+              <span>ID 82,4…</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="prod-context-actions">
+        <StoryIconButton label="Previous beat" icon="←" onClick={previous} disabled={busy} />
+        <LocalContinue onClick={next} disabled={busy} emphasis={focusIt ? 'strong' : 'normal'}>
+          {step === 'tokens' ? 'What counts as a token?' : step === 'token-kinds' ? 'Give them IDs' : step === 'token-ids' ? 'Follow “it”' : 'Use its ID'}
+        </LocalContinue>
+      </div>
+    </SceneFrame>
+  )
+}
+
+function EmbeddingIdentityPage() {
+  return (
+    <div className="prod-book-page-v2 prod-book-identity-v2">
+      <small>PAGE / TOKEN ID</small>
+      <strong>82,4…</strong>
+      <b>“it”</b>
+      <span>one token → one lookup row</span>
+    </div>
+  )
+}
+
+function EmbeddingVectorPage() {
+  return (
+    <div className="prod-book-page-v2 prod-book-vector-v2">
+      <small>EMBEDDING</small>
+      <div className="prod-book-equation"><b>it</b><span>→</span><strong>[ 0.29, −0.14, 0.83, 0.07, … ]</strong></div>
+      <div className="prod-book-width"><b>{MODEL.hiddenSize.toLocaleString()}</b><span>values</span></div>
+      <p>This is the numerical representation the model carries for this token.</p>
+    </div>
+  )
+}
+
+function EmbeddingWorld({ step, next, previous, busy }: SectionProps) {
+  const opened = step === 'book-open' || step === 'all-embeddings'
+  const all = step === 'all-embeddings'
+  const reducedMotion = useReducedMotion()
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-embedding-scene">
+      <PaperAtmosphere />
+      <div className="prod-embedding-world">
+        <motion.div className="prod-embedding-key" initial={{ opacity: 0, x: -18 }} animate={{ opacity: opened ? 0.25 : 1, x: 0 }}>
+          <small>TOKEN ID</small>
+          <strong>82,4…</strong>
+          <span>acts like the page number</span>
+        </motion.div>
+
+        <motion.button
+          className="prod-book-button-v2"
+          type="button"
+          onClick={!opened ? next : undefined}
+          disabled={busy || opened}
+          whileHover={!opened && !reducedMotion ? { y: -5, rotate: -0.5 } : undefined}
+          whileTap={!opened && !reducedMotion ? { scale: 0.985 } : undefined}
+        >
+          <motion.div layoutId="production-embedding-book" className="prod-book-shell-v2">
+            <BookVisual
+              state={opened ? 'open' : 'closed'}
+              title="Embeddings"
+              subtitle="token lookup"
+              label="Embedding book"
+              leftPage={opened ? <EmbeddingIdentityPage /> : undefined}
+              rightPage={opened ? <EmbeddingVectorPage /> : undefined}
+            />
+          </motion.div>
+          {!opened && <span className="prod-object-cue-v2">open page 82,4… ↗</span>}
+        </motion.button>
+
+        <AnimatePresence>
+          {all && (
+            <motion.div className="prod-all-embeddings" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              {tokens.slice(0, 7).map((token, i) => (
+                <motion.div key={token.text} initial={{ opacity: 0, y: 14 }} animate={{ opacity: i === itIndex ? 1 : 0.5, y: 0 }} transition={{ delay: i * 0.055 }} data-focus={i === itIndex ? 'true' : undefined}>
+                  <b>{token.text.trim()}</b>
+                  <span>[{(0.11 + i * 0.03).toFixed(2)}, …]</span>
+                </motion.div>
+              ))}
+              <small>every token gets its own embedding</small>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="prod-context-actions">
+        <StoryIconButton label="Previous beat" icon="←" onClick={previous} disabled={busy} />
+        {opened && <LocalContinue onClick={next} disabled={busy} emphasis={all ? 'strong' : 'normal'}>{all ? 'Carry “it” forward' : 'Do this for every token'}</LocalContinue>}
+      </div>
+    </SceneFrame>
+  )
+}
+
+function VectorCells({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={`prod-vector-cells ${compact ? 'is-compact' : ''}`}>
+      {illustrativeVector.slice(0, compact ? 7 : 10).map((value, index) => {
+        const strength = Math.min(1, Math.abs(value))
+        return <i key={index} style={{ '--cell-strength': strength } as CSSProperties}><span>{value.toFixed(2)}</span></i>
+      })}
+      <b>…</b>
+    </div>
+  )
+}
+
+function AttentionWorld({ step, next, previous, busy }: SectionProps) {
+  const showQkv = step === 'qkv' || step === 'attention-scores' || step === 'attention-answer'
+  const scores = step === 'attention-scores' || step === 'attention-answer'
+  const answered = step === 'attention-answer'
+  const attentionWeights = [2, 5, 6, 4, 38, 8, 10, 22, 5]
+  const words = ['The', 'dog', 'chased', 'the', 'ball', 'because', 'it', 'rolled', 'away']
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-attention-scene-v2">
+      <PaperAtmosphere />
+      <div className="prod-attention-world-v2">
+        <motion.div layoutId="hero-it-embedding" className="prod-carry-vector" initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}>
+          <div className="prod-carry-tag"><small>EMBEDDING FOR</small><strong>it</strong></div>
+          <VectorCells compact />
+        </motion.div>
+
+        {showQkv && (
+          <motion.div className="prod-qkv-board" initial={{ opacity: 0, y: 16 }} animate={{ opacity: scores ? 0.42 : 1, y: 0 }}>
+            <div className="is-q"><b>Q</b><strong>Query</strong><span>What am I looking for?</span></div>
+            <div className="is-k"><b>K</b><strong>Key</strong><span>What do I match?</span></div>
+            <div className="is-v"><b>V</b><strong>Value</strong><span>What information do I bring?</span></div>
+          </motion.div>
+        )}
+
+        {scores && (
+          <motion.div className="prod-attention-score-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <div className="prod-attention-question">“it” looks across the sentence</div>
+            <div className="prod-attention-score-row">
+              {words.map((word, i) => (
+                <motion.div
+                  className="prod-attention-score-token"
+                  key={word}
+                  data-focus={answered && word === 'ball' ? 'true' : word === 'it' ? 'source' : undefined}
+                  animate={{ opacity: answered && !['ball', 'it'].includes(word) ? 0.25 : 1, y: answered && word === 'ball' ? -10 : 0 }}
+                >
+                  <strong>{word}</strong>
+                  <span>{attentionWeights[i]}%</span>
+                  <i style={{ '--attention': attentionWeights[i] / 40 } as CSSProperties} />
+                </motion.div>
+              ))}
+            </div>
+            {answered && (
+              <motion.div className="prod-attention-resolution" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                <strong>“it” ↔ “ball”</strong>
+                <span>context makes the representation more useful</span>
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </div>
+
+      <div className="prod-context-actions">
+        <StoryIconButton label="Previous beat" icon="←" onClick={previous} disabled={busy} />
+        <LocalContinue onClick={next} disabled={busy} emphasis={answered ? 'strong' : 'normal'}>
+          {step === 'carry-it' ? 'Meet Q, K and V' : step === 'qkv' ? 'Compare the words' : step === 'attention-scores' ? 'What matters most?' : 'Now the main topic'}
+        </LocalContinue>
+      </div>
+      {scores && <span className="prod-simplified-label">simplified attention view</span>}
+    </SceneFrame>
+  )
+}
+
+const sampledExperts = Array.from({ length: 48 }, (_, i) => i)
+const activeExperts = new Set([2, 7, 13, 19, 25, 31, 38, 44])
+const routingWeights = [24, 18, 15, 13, 11, 8, 6, 5]
+
+function MoeWorld({ step, next, previous, busy }: SectionProps) {
+  const index = stepIndex(step)
+  const showLayer = index >= stepIndex('expert-layer')
+  const showRouter = index >= stepIndex('router-token')
+  const showTop8 = index >= stepIndex('router-top8')
+  const showShared = index >= stepIndex('shared-expert')
+  const merged = step === 'experts-merge'
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-moe-scene-v2">
+      <PaperAtmosphere />
+      <div className="prod-moe-world-v2">
+        {step === 'moe-intro' && (
+          <motion.div className="prod-moe-intro-card" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}>
+            <small>THE MAIN IDEA</small>
+            <strong>Mixture of Experts</strong>
+            <div><span>{MODEL.routedExperts}</span> routed experts <b>+</b> <span>{MODEL.sharedExperts}</span> shared expert</div>
+            <p>They are learned specialist blocks — not hand-labelled “math” or “coding” rooms.</p>
+          </motion.div>
+        )}
+
+        {showLayer && (
+          <motion.div className="prod-one-moe-layer" initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }}>
+            <div className="prod-moe-layer-label"><small>ONE SPARSE TRANSFORMER LAYER</small><strong>MoE feed-forward block</strong></div>
+
+            <AnimatePresence>
+              {showRouter && (
+                <motion.div className="prod-token-queue" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+                  {['dog', 'ball', 'it'].map((word, i) => (
+                    <div key={word} data-current={word === 'it' ? 'true' : undefined}><span>{word}</span><small>embedding</small><i>{i === 2 ? '→' : '·'}</i></div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <motion.div className="prod-router-box" data-on={showRouter ? 'true' : undefined}>
+              <small>ROUTER</small>
+              <strong>{showTop8 ? `pick ${MODEL.expertsPerToken}` : 'score experts'}</strong>
+              <i />
+            </motion.div>
+
+            <div className="prod-expert-surface">
+              <IndexBoard rows={8} label={`${MODEL.routedExperts} ROUTED EXPERTS`} ariaLabel="Sampled expert wall">
+                <div className="prod-expert-grid-v2">
+                  {sampledExperts.map((expert) => {
+                    const active = showTop8 && activeExperts.has(expert)
+                    return (
+                      <motion.div
+                        key={expert}
+                        className="prod-expert-v2"
+                        data-active={active ? 'true' : undefined}
+                        animate={{ opacity: showTop8 && !active ? 0.16 : 1, y: active ? -4 : 0 }}
+                      >
+                        <i />
+                        <small>E{expert + 1}</small>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </IndexBoard>
+              <span className="prod-wall-sample">48 shown · {MODEL.routedExperts} exist</span>
+            </div>
+
+            {showTop8 && (
+              <svg className="prod-route-lines-v2" viewBox="0 0 1200 650" preserveAspectRatio="none" aria-hidden="true">
+                {[125, 250, 378, 505, 688, 818, 945, 1080].map((x, i) => (
+                  <motion.path
+                    key={x}
+                    d={`M 330 315 C 470 315 ${x} 330 ${x} 470`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2 + routingWeights[i] / 11}
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: merged ? 0.28 : 0.72 }}
+                    transition={{ duration: 0.52, delay: i * 0.035 }}
+                  />
+                ))}
+              </svg>
+            )}
+
+            {showTop8 && !merged && (
+              <motion.div className="prod-top8-label" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                <strong>{MODEL.expertsPerToken} doors open</strong>
+                <span>for this token, in this layer</span>
+              </motion.div>
+            )}
+
+            {showShared && (
+              <motion.div className="prod-shared-expert" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }}>
+                <span>★</span><div><small>SHARED EXPERT</small><strong>always on</strong></div>
+              </motion.div>
+            )}
+
+            {merged && (
+              <motion.div className="prod-expert-merge-v2" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="prod-routing-weight-list">
+                  {routingWeights.map((weight, i) => <span key={i}>{weight}%</span>)}
+                </div>
+                <b>weighted mix + shared path</b>
+                <VectorCells compact />
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </div>
+
+      <div className="prod-context-actions">
+        <StoryIconButton label="Previous beat" icon="←" onClick={previous} disabled={busy} />
+        <LocalContinue onClick={next} disabled={busy} emphasis={step === 'experts-merge' ? 'strong' : 'normal'}>
+          {step === 'moe-intro' ? 'Open one MoE layer' : step === 'expert-layer' ? 'Send in “it”' : step === 'router-token' ? 'Let the router choose' : step === 'router-top8' ? 'Add the shared expert' : step === 'shared-expert' ? 'Combine the outputs' : 'Zoom out'}
+        </LocalContinue>
+      </div>
+      {showTop8 && <span className="prod-simplified-label">routing weights are illustrative</span>}
+    </SceneFrame>
+  )
+}
+
+function BuildingWorld({ step, next, previous, busy }: SectionProps) {
+  const repeating = step === 'floor-repeat' || step === 'floor-refine'
+  const refine = step === 'floor-refine'
+  const floors = Array.from({ length: 15 }, (_, i) => i)
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-building-scene">
+      <PaperAtmosphere />
+      <div className="prod-building-world">
+        <motion.div className="prod-building" initial={{ opacity: 0, scale: 0.9, y: 70 }} animate={{ opacity: 1, scale: 1, y: 0 }}>
+          <div className="prod-building-roof"><span>{MODEL.name}</span><strong>{MODEL.layers} transformer layers</strong></div>
+          <div className="prod-building-floors">
+            {floors.map((floor, i) => {
+              const realFloor = i < 3 ? i + 1 : i === floors.length - 1 ? 45 : 4 + (i - 3) * 3
+              const dense = realFloor <= MODEL.firstDenseLayers
+              const active = repeating && (i === 4 || i === 7 || i === 10 || i === 13)
+              return (
+                <motion.div className="prod-building-floor" key={floor} data-dense={dense ? 'true' : undefined} data-active={active ? 'true' : undefined}>
+                  <small>{realFloor}</small>
+                  <span>{dense ? 'dense' : 'attention + MoE'}</span>
+                  {!dense && <div className="prod-mini-experts">{Array.from({ length: 8 }, (_, e) => <i key={e} data-on={active && (e + i) % 3 === 0 ? 'true' : undefined} />)}</div>}
+                </motion.div>
+              )
+            })}
+          </div>
+          <div className="prod-building-legend"><span>layers 1–3: dense</span><span>layers 4–45: sparse MoE</span></div>
+        </motion.div>
+
+        <motion.div className="prod-building-vector" animate={{ y: repeating ? -250 : 230 }} transition={{ type: 'spring', stiffness: 70, damping: 19, mass: 1 }}>
+          <div className="prod-carry-tag"><small>“it”</small><strong>representation</strong></div>
+          <VectorCells compact />
+        </motion.div>
+
+        {refine && (
+          <div className="prod-refinement-cards">
+            {['it ↔ ball', 'dog → chased', 'rolled → ball', 'richer sentence context'].map((label, i) => (
+              <motion.div key={label} initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.13 }}><small>refine</small><strong>{label}</strong></motion.div>
+            ))}
+          </div>
+        )}
+
+        <div className="prod-repeat-callout">
+          <strong>{repeating ? 'refine → route → mix → repeat' : 'That MoE scene was only one floor.'}</strong>
+          {repeating && <span>different tokens and layers can wake different experts</span>}
+        </div>
+      </div>
+
+      <div className="prod-context-actions">
+        <StoryIconButton label="Previous beat" icon="←" onClick={previous} disabled={busy} />
+        <LocalContinue onClick={next} disabled={busy} emphasis={refine ? 'strong' : 'normal'}>
+          {step === 'building-reveal' ? 'Run through the floors' : step === 'floor-repeat' ? 'What gets refined?' : 'Generate output'}
+        </LocalContinue>
+      </div>
+    </SceneFrame>
+  )
+}
+
+function OutputWorld({ step, next, previous, busy }: SectionProps) {
+  const build = step === 'output-build'
+  const candidates = [
+    { token: 'The', p: 46 },
+    { token: 'Because', p: 21 },
+    { token: 'It', p: 14 },
+    { token: 'A', p: 8 },
+  ]
+
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-output-scene">
+      <PaperAtmosphere />
+      <div className="prod-output-world">
+        <div className="prod-output-stack">
+          <small>AFTER THE LAST LAYER</small>
+          <strong>Which token comes next?</strong>
+          <div className="prod-candidate-list">
+            {candidates.map((item, i) => (
+              <motion.div key={item.token} initial={{ opacity: 0, x: -10 }} animate={{ opacity: build && i > 0 ? 0.25 : 1, x: 0 }}>
+                <span>{item.token}</span><i style={{ '--probability': item.p / 50 } as CSSProperties} /><b>{item.p}%</b>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {build && (
+          <motion.div className="prod-generated-answer" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}>
+            <small>OUTPUT GROWS ONE TOKEN AT A TIME</small>
+            <p><span>The</span> <span>ball</span> <span>rolled</span> <span>away</span><b>.</b></p>
+            <div className="prod-output-loop">whole 45-layer stack runs again → next token → again</div>
+          </motion.div>
+        )}
+      </div>
+
+      <div className="prod-context-actions">
+        <StoryIconButton label="Previous beat" icon="←" onClick={previous} disabled={busy} />
+        <LocalContinue onClick={next} disabled={busy} emphasis={build ? 'strong' : 'normal'}>{build ? 'Back to 320B vs 18B' : 'Generate it'}</LocalContinue>
+      </div>
+      <span className="prod-simplified-label">candidate probabilities are illustrative</span>
+    </SceneFrame>
+  )
+}
+
+function PayoffWorld({ previous }: SectionProps) {
+  return (
+    <SceneFrame art="paper" className="prod-scene prod-payoff-scene-v2">
+      <PaperAtmosphere />
+      <div className="prod-payoff-world-v2">
+        <div className="prod-payoff-network">
+          {Array.from({ length: 144 }, (_, i) => {
+            const active = i % 19 === 0 || i % 31 === 0 || i % 47 === 0
+            return <motion.i key={i} data-active={active ? 'true' : undefined} initial={{ opacity: 0 }} animate={{ opacity: active ? 1 : 0.12 }} transition={{ delay: Math.min(0.5, i * 0.003) }} />
+          })}
+        </div>
+
+        <div className="prod-payoff-card-v2">
+          <small>{MODEL.name}</small>
+          <div className="prod-payoff-equation-v2">
+            <div><strong>{MODEL.totalParamsB}B</strong><span>available in the model</span></div>
+            <b>≠</b>
+            <div><strong>~{MODEL.activeParamsB}B</strong><span>active for one token</span></div>
+          </div>
+          <p>The model owns the whole library. Each token only walks through a small active path.</p>
+          <div className="prod-payoff-foot">Different tokens can wake different experts — so more of the 320B can be used across a whole answer.</div>
+          <StoryIconButton label="Go back" icon="←" onClick={previous} />
+        </div>
+      </div>
+    </SceneFrame>
+  )
 }
 
 export default function Glm320bVideo() {
@@ -685,15 +811,21 @@ export default function Glm320bVideo() {
   const { busy, run } = useActionGate(430)
   const step = stepAt(index)
   const section = SECTION_FOR_STEP[step]
+  const stage = STAGE_FOR_STEP[step]
+  const previousStage = index > 0 ? STAGE_FOR_STEP[stepAt(index - 1)] : undefined
 
   const next = useCallback(() => {
     if (index >= STEPS.length - 1) return
-    run(() => setIndex((current) => Math.min(STEPS.length - 1, current + 1)), section === SECTION_FOR_STEP[stepAt(index + 1)] ? 390 : 720)
+    const nextStep = stepAt(index + 1)
+    const sectionChanges = SECTION_FOR_STEP[nextStep] !== section
+    run(() => setIndex((current) => Math.min(STEPS.length - 1, current + 1)), sectionChanges ? 680 : 390)
   }, [index, run, section])
 
   const previous = useCallback(() => {
     if (index <= 0) return
-    run(() => setIndex((current) => Math.max(0, current - 1)), section === SECTION_FOR_STEP[stepAt(index - 1)] ? 340 : 650)
+    const previousStep = stepAt(index - 1)
+    const sectionChanges = SECTION_FOR_STEP[previousStep] !== section
+    run(() => setIndex((current) => Math.max(0, current - 1)), sectionChanges ? 620 : 340)
   }, [index, run, section])
 
   useEffect(() => {
@@ -720,38 +852,38 @@ export default function Glm320bVideo() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [busy, next, previous])
 
-  const onRootClick = useCallback((event: MouseEvent<HTMLElement>) => {
-    const target = event.target as HTMLElement
-    if (target.closest('button, a, [role="button"]')) return
-  }, [])
+  const scene = useMemo(() => {
+    const props = { step, next, previous, busy }
+    if (step === 'model-hook') return <ModelHook {...props} />
+    if (step === 'journey-map') return <JourneyMap {...props} />
+    if (step === 'chat-empty' || step === 'chat-ready') return <ChatWorld {...props} />
+    if (['tokens', 'token-kinds', 'token-ids', 'focus-it'].includes(step)) return <TokenWorld {...props} />
+    if (['book-arrives', 'book-open', 'all-embeddings'].includes(step)) return <EmbeddingWorld {...props} />
+    if (['carry-it', 'qkv', 'attention-scores', 'attention-answer'].includes(step)) return <AttentionWorld {...props} />
+    if (['moe-intro', 'expert-layer', 'router-token', 'router-top8', 'shared-expert', 'experts-merge'].includes(step)) return <MoeWorld {...props} />
+    if (['building-reveal', 'floor-repeat', 'floor-refine'].includes(step)) return <BuildingWorld {...props} />
+    if (['next-token', 'output-build'].includes(step)) return <OutputWorld {...props} />
+    return <PayoffWorld {...props} />
+  }, [busy, next, previous, step])
 
   return (
     <VideoPage className="glm-production-page">
-      <LayoutGroup id="glm-320b-production">
-        <main className="prod-story-root" onClick={onRootClick} data-section={section} data-step={step}>
+      <LayoutGroup id="glm-320b-production-v2">
+        <main className="prod-story-root" data-section={section} data-step={step}>
+          {step !== 'model-hook' && <StageBadge stage={stage} previousStage={previousStage} />}
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
               key={section}
               className="prod-section-transition"
-              initial={{ opacity: 0, scale: 0.992 }}
+              initial={{ opacity: 0, scale: 0.993 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.008 }}
+              exit={{ opacity: 0, scale: 1.007 }}
               transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
             >
-              {section === 'input' && <InputSection step={step} next={next} previous={previous} busy={busy} />}
-              {section === 'attention' && <AttentionSection step={step} next={next} previous={previous} busy={busy} />}
-              {section === 'layers' && <LayersSection step={step} next={next} previous={previous} busy={busy} />}
-              {section === 'sparse' && <SparseSection step={step} next={next} previous={previous} busy={busy} />}
-              {section === 'moe' && <MoeSection step={step} next={next} previous={previous} busy={busy} />}
-              {section === 'payoff' && <PayoffSection step={step} next={next} previous={previous} busy={busy} />}
+              {scene}
             </motion.div>
           </AnimatePresence>
-
-          <div className="prod-hidden-progress" aria-label={`Story progress ${index + 1} of ${STEPS.length}`}>
-            {SECTION_ORDER.map((name) => <i key={name} data-active={SECTION_ORDER.indexOf(name) <= SECTION_ORDER.indexOf(section) ? 'true' : undefined} />)}
-          </div>
-
-          {index <= 1 && <span className="prod-key-hint">SPACE / → to move · ← to go back</span>}
+          <div className="prod-beat-progress" aria-label={`Beat ${index + 1} of ${STEPS.length}`}><i style={{ '--progress': (index + 1) / STEPS.length } as CSSProperties} /></div>
         </main>
       </LayoutGroup>
     </VideoPage>
