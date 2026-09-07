@@ -31,7 +31,7 @@ export function ModelWorld({ beat }: { beat: number }) {
   const activeFocus = beat === 4
   const compareFocus = beat >= 5 && beat <= 7
   const definitions = beat >= 6
-  const question = beat >= 7
+  const question = beat >= 7 && beat <= 9
   const architectureFocus = beat >= 8 && beat <= 9
   const partsLimit = beat >= 9
   const pathNext = beat >= 10
@@ -61,8 +61,8 @@ export function ModelWorld({ beat }: { beat: number }) {
               </div>
             </motion.header>
 
-            <motion.main className="v12-capacity" animate={{ opacity: architectureFocus ? 0.58 : pathNext ? 0.46 : 1 }}>
-              <div className="v12-stat-row">
+            <main className="v12-capacity">
+              <motion.div className="v12-stat-row" animate={{ opacity: architectureFocus ? 0.58 : pathNext ? 0.42 : 1 }}>
                 <motion.section
                   className="v12-stat"
                   data-kind="total"
@@ -94,9 +94,9 @@ export function ModelWorld({ beat }: { beat: number }) {
                     <b>active</b> = participating in this computation now
                   </motion.span>
                 </motion.section>
-              </div>
+              </motion.div>
 
-              <motion.div className="v12-scale-compare" animate={{ opacity: beat >= 3 ? 1 : 0.28 }} style={{ '--active-ratio': `${ACTIVE_RATIO}%` } as CSSProperties}>
+              <motion.div className="v12-scale-compare" animate={{ opacity: architectureFocus ? 0.46 : pathNext ? 0.36 : beat >= 3 ? 1 : 0.28 }} style={{ '--active-ratio': `${ACTIVE_RATIO}%` } as CSSProperties}>
                 <div className="v12-scale-meta">
                   <small>SAME SCALE</small>
                   <motion.strong animate={{ opacity: beat >= 5 ? 1 : 0 }}>{ACTIVE_RATIO.toFixed(1)}%</motion.strong>
@@ -112,12 +112,24 @@ export function ModelWorld({ beat }: { beat: number }) {
                 </div>
               </motion.div>
 
-              <motion.div className="v12-model-question" animate={{ opacity: question ? 1 : 0, y: question ? 0 : '1cqh' }}>
-                <small>THE HEADACHE</small>
-                <h2>How can both numbers be true?</h2>
-                <p>The model contains 320B parameters, <b>but</b> one token follows a much smaller active path.</p>
-              </motion.div>
-            </motion.main>
+              <div className="v12-model-question">
+                <AnimatePresence mode="wait" initial={false}>
+                  {pathNext ? (
+                    <motion.div key="next-step" className="v12-question-state v12-question-next" initial={{ opacity: 0, y: '1cqh' }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                      <small>SO</small>
+                      <h2>Follow one token’s path.</h2>
+                      <p>Instead of memorizing the parts list, watch where this token actually sends compute.</p>
+                    </motion.div>
+                  ) : (
+                    <motion.div key="headache" className="v12-question-state" initial={false} animate={{ opacity: question ? architectureFocus ? 0.56 : 1 : 0, y: question ? 0 : '1cqh' }} exit={{ opacity: 0, y: '-.6cqh' }}>
+                      <small>THE HEADACHE</small>
+                      <h2>How can both numbers be true?</h2>
+                      <p>The model contains 320B parameters, <b>but</b> one token follows a much smaller active path.</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </main>
 
             <motion.aside className="v12-architecture" animate={{ opacity: architectureFocus ? 1 : pathNext ? 0.62 : 0.32 }}>
               <div className="v12-anatomy-heading">
@@ -159,14 +171,6 @@ export function ModelWorld({ beat }: { beat: number }) {
                 <span>It does not show the path one token actually takes.</span>
               </motion.div>
             </motion.aside>
-
-            <motion.footer className="v12-next-step" animate={{ opacity: pathNext ? 1 : 0, y: pathNext ? 0 : '1cqh' }}>
-              <small>SO</small>
-              <div>
-                <h2>Follow one token’s path.</h2>
-                <p>Instead of memorizing the architecture, watch where the token actually sends compute.</p>
-              </div>
-            </motion.footer>
           </motion.article>
         ) : (
           <motion.div

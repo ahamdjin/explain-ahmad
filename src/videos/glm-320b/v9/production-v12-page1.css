@@ -29,7 +29,7 @@
   padding: 2.1cqh 2.1cqw 1.5cqh 3cqw;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(22rem, 29cqw);
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   column-gap: 3cqw;
   border-top: 1.4px solid rgba(23,19,15,.42);
   border-bottom: 1px solid rgba(23,19,15,.15);
@@ -104,7 +104,7 @@
   min-width: 0;
   padding: 2cqh 0 1.1cqh;
   display: grid;
-  grid-template-rows: auto auto minmax(8cqh, auto);
+  grid-template-rows: auto auto minmax(14cqh, 1fr);
   align-content: start;
   gap: 1.4cqh;
 }
@@ -305,10 +305,20 @@
 }
 
 .v12-model-question {
-  min-height: 9.2cqh;
+  min-height: 14cqh;
   padding: 1.1cqh 0 0;
+  display: grid;
+  align-items: center;
   border-top: 1px solid rgba(23,19,15,.18);
 }
+
+.v12-question-state {
+  align-self: center;
+}
+
+.v12-question-next small { color: #a46141; }
+
+.v12-question-next h2 { color: var(--ink); }
 
 .v12-model-question small {
   color: #8b5b43;
@@ -319,7 +329,7 @@
 .v12-model-question h2 {
   margin: .45cqh 0 .3cqh;
   font-family: Georgia,'Times New Roman',serif;
-  font-size: clamp(28px,2.05cqw,42px);
+  font-size: clamp(34px,2.6cqw,52px);
   line-height: 1;
   letter-spacing: -.04em;
 }
@@ -366,23 +376,31 @@
 }
 
 .v12-layer-anatomy {
+  min-height: 30cqh;
   padding: 1.1cqh 0 1.2cqh;
+  display: grid;
+  grid-template-columns: 7.2cqw minmax(0,1fr);
+  gap: 1.2cqw;
+  align-items: stretch;
   border-top: 1px solid rgba(23,19,15,.17);
   border-bottom: 1px solid rgba(23,19,15,.12);
 }
 
 .v12-layer-strip {
-  height: 6.4cqh;
-  min-height: 48px;
+  height: 28cqh;
+  min-height: 210px;
   display: grid;
-  grid-template-columns: repeat(45, minmax(1px,1fr));
-  align-items: end;
+  grid-template-rows: repeat(45, minmax(1px,1fr));
+  align-items: stretch;
   gap: 1px;
+  padding: .35cqh .35cqw;
+  border-left: 1px solid rgba(23,19,15,.12);
+  border-right: 1px solid rgba(23,19,15,.08);
 }
 
 .v12-layer-strip i {
-  height: 100%;
-  transform-origin: bottom;
+  width: 100%;
+  transform-origin: left center;
   background: rgba(23,19,15,.14);
 }
 
@@ -395,10 +413,11 @@
 }
 
 .v12-layer-split {
-  margin-top: .8cqh;
+  margin-top: 0;
   display: grid;
-  grid-template-columns: 1fr 1.7fr;
-  gap: .8cqw;
+  grid-template-rows: auto 1fr;
+  gap: .9cqh;
+  align-content: start;
 }
 
 .v12-layer-split > div {
@@ -492,39 +511,6 @@
   line-height: 1.28;
 }
 
-.v12-next-step {
-  grid-column: 1 / -1;
-  grid-row: 3;
-  min-height: 7.2cqh;
-  padding: 1cqh 0 .2cqh;
-  display: grid;
-  grid-template-columns: 4.8cqw minmax(0,1fr);
-  align-items: start;
-  gap: .9cqw;
-  border-top: 1.4px solid rgba(23,19,15,.32);
-}
-
-.v12-next-step > small {
-  padding-top: .45cqh;
-  color: #a46141;
-  font: 950 clamp(11px,.7cqw,14px)/1 ui-monospace,monospace;
-  letter-spacing: .12em;
-}
-
-.v12-next-step h2 {
-  margin: 0;
-  font-family: Georgia,'Times New Roman',serif;
-  font-size: clamp(27px,2cqw,40px);
-  line-height: .95;
-  letter-spacing: -.04em;
-}
-
-.v12-next-step p {
-  margin: .4cqh 0 0;
-  color: #655c53;
-  font-size: clamp(12px,.75cqw,15px);
-}
-
 /* The journey is a separate phase. The model page is gone before this enters, so the two
    compositions can never stack on top of one another. */
 .v12-journey-phase {
@@ -593,14 +579,13 @@
   .v12-stat > p { margin-top: .6cqh; }
   .v12-local-definition { margin-top: .4cqh; }
   .v12-scale-compare { min-height: 7.2cqh; padding-block: .55cqh; }
-  .v12-model-question { min-height: 7.4cqh; padding-top: .6cqh; }
-  .v12-model-question h2 { margin-top: .25cqh; font-size: clamp(24px,1.8cqw,34px); }
+  .v12-model-question { min-height: 11cqh; padding-top: .6cqh; }
+  .v12-model-question h2 { margin-top: .25cqh; font-size: clamp(28px,2.1cqw,40px); }
   .v12-architecture { gap: .8cqh; }
-  .v12-layer-anatomy { padding-block: .65cqh; }
-  .v12-layer-strip { height: 5cqh; min-height: 32px; }
+  .v12-layer-anatomy { min-height: 25cqh; padding-block: .65cqh; }
+  .v12-layer-strip { height: 23cqh; min-height: 150px; }
   .v12-sparse-flow > div { min-height: 6.1cqh; padding-block: .45cqh; }
   .v12-anatomy-limit { padding-block: .55cqh; }
-  .v12-next-step { min-height: 6cqh; padding-top: .65cqh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
