@@ -15,7 +15,7 @@ export function PaperBackdrop() {
 }
 
 export function ChapterRail({ beatNumber, chapter }: { beatNumber: number; chapter: ChapterId }) {
-  if (beatNumber < 14 || beatNumber >= 100) return null
+  if (beatNumber < 15 || beatNumber >= 100) return null
   const chapters = CHAPTERS.filter((item) => item.id !== 'MODEL')
   const current = chapters.findIndex((item) => item.id === chapter)
 
@@ -25,11 +25,11 @@ export function ChapterRail({ beatNumber, chapter }: { beatNumber: number; chapt
         const active = item.id === chapter
         const passed = index < current
         return (
-          <div className="v9-chapter" key={item.id} data-active={active ? 'true' : undefined} data-passed={passed ? 'true' : undefined}>
+          <motion.div layoutId={`v9-chapter-${item.id}`} className="v9-chapter" key={item.id} data-active={active ? 'true' : undefined} data-passed={passed ? 'true' : undefined} transition={{ type: 'spring', stiffness: 100, damping: 24 }}>
             <small>{String(index + 1).padStart(2, '0')}</small>
             <strong>{active ? <SketchAnnotation type="highlight" color="#f3cd64" strokeWidth={2} padding={4}>{item.label}</SketchAnnotation> : item.label}</strong>
             <span>{item.hint}</span>
-          </div>
+          </motion.div>
         )
       })}
     </motion.nav>
