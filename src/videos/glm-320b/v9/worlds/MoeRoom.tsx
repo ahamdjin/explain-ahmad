@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
 import { MODEL, ROUTE_WEIGHTS, SELECTED_EXPERTS } from '../data'
 import { ProcessSpine } from '../ProcessSpine'
-import { ChapterHeading, HeroVector, NarrativeCue, PaperNote, VectorStrip } from '../shared'
+import { ChapterHeading, HeroVector, PaperNote, VectorStrip } from '../shared'
 
 const selected = new Set<number>(SELECTED_EXPERTS)
 const SELECTED_SCORES = [0.94, 0.91, 0.88, 0.85, 0.82, 0.79, 0.76, 0.73] as const
@@ -14,33 +14,32 @@ const MOE_STEPS = [
   { label: 'Top-8 + shared', detail: 'Keep only the eight highest routed experts, plus the shared expert that always participates.' },
   { label: 'Run selected', detail: 'The same current representation is sent to the active expert paths.' },
   { label: 'Weight + mix', detail: 'Weight the routed expert outputs, combine them, and add the shared output.' },
-  { label: 'Repeat + payoff', detail: 'Routing repeats for tokens and sparse layers; the selective path connects back to ~18B active.' },
+  { label: 'Repeat + payoff', detail: 'Routing is repeated for tokens and sparse layers; that selective path is what connects back to ~18B active.' },
 ] as const
 
-type MoeActionKind = 'NOW' | 'QUESTION' | 'BUT' | 'THEREFORE' | 'ANSWER'
-const action: Record<number, { kind: MoeActionKind; text: string }> = {
-  63: { kind: 'NOW', text: 'Carry the same contextual “it” representation across the same Transformer floor.' },
-  64: { kind: 'NOW', text: 'Start with the ordinary dense version: one feed-forward MLP runs for every token.' },
-  65: { kind: 'QUESTION', text: 'How do we add far more learned capacity without running all of that capacity every time?' },
-  66: { kind: 'THEREFORE', text: 'Replace one possible MLP with many possible learned MLP blocks.' },
-  67: { kind: 'NOW', text: 'Pull back until the scale is visible: 288 routed experts plus one shared expert.' },
-  68: { kind: 'NOW', text: 'Open one block so “expert” stops being a mysterious word.' },
-  69: { kind: 'BUT', text: 'Many experts exist, but the token still needs a rule for deciding which ones should run.' },
-  70: { kind: 'THEREFORE', text: 'A learned router reads the current contextual representation — not the token ID.' },
-  71: { kind: 'NOW', text: 'Understand one expert score before asking the router to score all 288.' },
-  72: { kind: 'THEREFORE', text: 'Repeat that same scoring operation across every routed expert.' },
-  73: { kind: 'QUESTION', text: 'The 288 scores are frozen. How many expert paths do you think survive?' },
-  74: { kind: 'ANSWER', text: 'Only the top 8 routed experts stay active here; the other 280 remain available but inactive for this token.' },
-  75: { kind: 'NOW', text: 'Add the shared expert path that always participates.' },
-  76: { kind: 'BUT', text: 'Choosing experts is not enough. The chosen experts still need to actually transform the representation.' },
-  77: { kind: 'THEREFORE', text: 'Send the same current input representation to every active expert path.' },
-  78: { kind: 'NOW', text: 'Open one expert: it is a learned feed-forward neural-network transform.' },
-  79: { kind: 'THEREFORE', text: 'Run the selected expert transforms in parallel.' },
-  80: { kind: 'BUT', text: 'Their outputs need not contribute equally.' },
-  81: { kind: 'THEREFORE', text: 'Weight the routed outputs, combine them, then add the shared expert output.' },
-  82: { kind: 'ANSWER', text: 'No: a different token representation can produce a different routing fingerprint.' },
-  83: { kind: 'ANSWER', text: 'No guarantee again: the next sparse layer sees a changed representation and routes afresh.' },
-  84: { kind: 'ANSWER', text: 'This selective path is the missing bridge between huge total capacity and much smaller active compute.' },
+const action: Record<number, string> = {
+  63: 'Carry the same contextual “it” representation across the same Transformer floor.',
+  64: 'Start with the normal dense feed-forward block.',
+  65: 'Ask how we can add much more capacity without running all of it every time.',
+  66: 'Unfold one possible MLP into many possible learned MLP blocks.',
+  67: 'Pull back until the full scale is visible: 288 routed experts + one shared expert.',
+  68: 'Open one expert so “expert” stops being a mysterious word.',
+  69: 'Bring back the exact current representation we carried out of Attention.',
+  70: 'The learned router reads that current representation — not the token ID.',
+  71: 'Understand one router score before seeing all 288.',
+  72: 'Repeat that same scoring operation across every routed expert.',
+  73: 'Freeze the scores so the ranking can be seen.',
+  74: 'Keep the eight highest routed experts; the other 280 stay available but inactive here.',
+  75: 'Add the shared expert path that always participates.',
+  76: 'Dispatch the current representation only to the active paths.',
+  77: 'Every selected expert receives the same current input representation.',
+  78: 'Open one expert: it is a learned feed-forward neural-network transform.',
+  79: 'Run the active expert transforms in parallel.',
+  80: 'Give the routed expert outputs different mixture weights.',
+  81: 'Combine the weighted routed outputs, then add the shared expert output.',
+  82: 'Change the token representation and the routing pattern can change.',
+  83: 'Move to the next sparse layer: the router makes a fresh decision again.',
+  84: 'Now connect selective routing back to the 320B total / ~18B active puzzle.',
 }
 
 function moeStage(beat: number) {
@@ -72,6 +71,7 @@ function ExpertWall({ beat }: { beat: number }) {
           <motion.i
             key={index}
             data-selected={top8 && on ? 'true' : undefined}
+            data-leading={beat === 73 && on ? 'true' : undefined}
             style={{ '--score': score } as CSSProperties}
             animate={{
               opacity: quiet ? (on ? 0.3 : 0.045) : top8 ? (on ? 1 : 0.07) : scores ? 0.18 + score * 0.72 : 0.34,
@@ -94,7 +94,7 @@ function ActiveExpertRow({ beat }: { beat: number }) {
 
   return (
     <motion.div className="v9-active-experts" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      <header><strong>The selected 8 now have to do work.</strong><span>We lift them out of the 288-expert field only so the transformation stays readable.</span></header>
+      <header><strong>8 routed experts selected</strong><span>We lift them out of the 288-expert field only so the transformation is readable.</span></header>
       <div className="v9-active-expert-grid">
         {SELECTED_EXPERTS.map((expert, index) => (
           <motion.div className="v9-active-expert" key={expert} data-focus={openOne && index === 0 ? 'true' : undefined} animate={{ opacity: openOne && index !== 0 ? 0.12 : 1, scale: openOne && index === 0 ? 1.12 : 1 }}>
@@ -132,19 +132,13 @@ export function MoeRoom({ beat }: { beat: number }) {
   const reroute = beat === 83
   const payoff = beat === 84
 
-  const chapterNote = beat <= 65
-    ? 'A dense feed-forward block is easy: every token uses one MLP. But how do we buy much more capacity without running all of it?'
-    : beat <= 73
-      ? 'Many possible expert blocks now exist. The next problem is selection: which ones should work for the current representation?'
-      : 'The answer is emerging from the mechanism: score many possibilities, activate a small route, then combine the selected work.'
-
   return (
     <motion.div className="v9-room v9-moe-room" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <ChapterHeading
-        eyebrow="06 · MIXTURE OF EXPERTS · THE CAPACITY PROBLEM"
-        note={chapterNote}
+        eyebrow="06 · MIXTURE OF EXPERTS · SELECTIVE COMPUTE"
+        note="This is the main answer to the video: many expert blocks exist, but the active route for a token uses only a small selected subset in each sparse MoE layer."
       >
-        {beat === 63 ? <>Attention gave <mark>“it”</mark> context. But the layer is not finished.</> : <>How do we get <mark>more capacity</mark> without using all of it?</>}
+        {beat === 63 ? <>Now cross the same Transformer floor.</> : <>Which feed-forward blocks should work <mark>for this token</mark>?</>}
       </ChapterHeading>
       <ProcessSpine steps={MOE_STEPS} active={moeStage(beat)} action={action[beat]} tone="moe" />
 
@@ -162,10 +156,10 @@ export function MoeRoom({ beat }: { beat: number }) {
           <motion.div className="v9-dense-baseline" animate={{ scale: beat === 65 ? 1.15 : beat === 66 ? 0.72 : 1, x: beat === 66 ? '-23cqw' : 0, opacity: beat === 66 ? 0.42 : 1 }}>
             <HeroVector note="input" compact changed />
             <b className="v9-simple-arrow">→</b>
-            <div className="v9-dense-mlp"><small>NORMAL DENSE VERSION</small><strong>ONE MLP</strong><i /><i /><i /><span>every token uses this feed-forward block</span></div>
+            <div className="v9-dense-mlp"><small>DENSE BASELINE</small><strong>ONE MLP</strong><i /><i /><i /><span>every token uses this feed-forward block</span></div>
             <b className="v9-simple-arrow">→</b>
             <VectorStrip compact changed />
-            {beat === 65 ? <PaperNote className="v9-capacity-question" tone="yellow"><b>The headache:</b> more learned capacity is useful, but running all of that capacity for every token would spend much more compute.</PaperNote> : null}
+            {beat === 65 ? <PaperNote className="v9-capacity-question" tone="yellow">What if we want <b>much more learned capacity</b> without running all of it for every token?</PaperNote> : null}
           </motion.div>
         ) : null}
 
@@ -181,15 +175,14 @@ export function MoeRoom({ beat }: { beat: number }) {
             {vector ? <motion.div className="v9-router-input" layoutId="v9-router-input"><HeroVector note="current contextual representation" compact changed /></motion.div> : null}
             {router ? (
               <motion.div className="v9-router-box" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-                <small>LEARNED ROUTER</small><strong>read the current vector</strong><span>288 possibilities · choose by score · not by token ID</span>
+                <small>LEARNED ROUTER</small><strong>read the current vector</strong><span>not the token ID</span>
                 {scoreOne ? <motion.div className="v9-one-score" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><b>E{SELECTED_EXPERTS[0] + 1}</b><i /><strong>{SELECTED_SCORES[0].toFixed(2)}</strong><small>“how suitable is this expert now?”</small></motion.div> : null}
               </motion.div>
             ) : null}
 
             {beat === 72 ? <div className="v9-field-caption"><b>Same scoring operation × 288</b><span>Brightness carries the scale so we do not print 288 unreadable numbers.</span></div> : null}
-            {beat === 73 ? <div className="v9-field-caption"><b>Scores frozen.</b><span>No answer highlighted yet.</span></div> : null}
-            {beat === 73 ? <NarrativeCue kind="prediction" className="v11-moe-prediction"><b>288 experts exist.</b> How many of these scored routes do you think the token will actually use?</NarrativeCue> : null}
-            {beat === 74 ? <motion.div className="v9-top8-callout" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}><strong>TOP 8</strong><span><b>Answer:</b> 8 work · 280 routed experts stay available but inactive for this token in this layer</span></motion.div> : null}
+            {beat === 73 ? <div className="v9-field-caption"><b>Scores frozen.</b><span>The circled candidates are leading.</span></div> : null}
+            {beat === 74 ? <motion.div className="v9-top8-callout" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}><strong>TOP 8</strong><span>8 work · 280 routed experts stay available but inactive for this token in this layer</span></motion.div> : null}
             {beat === 75 ? <motion.div className="v9-shared-callout" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><strong>+ 1 shared expert</strong><span>this path is always on</span></motion.div> : null}
 
             {process ? <ActiveExpertRow beat={beat} /> : null}
@@ -204,15 +197,13 @@ export function MoeRoom({ beat }: { beat: number }) {
                 <small className="v9-illustrative">routing weights shown here are illustrative</small>
               </motion.div>
             ) : null}
-
-            {beat === 81 ? <NarrativeCue kind="next" className="v11-moe-followup"><b>Does every token use this same top 8?</b> Keep the expert field; change only the current representation.</NarrativeCue> : null}
           </motion.div>
         ) : null}
 
         {compare ? (
           <motion.div className="v9-route-compare" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <h3><b>Answer: no.</b> The router decides <em>per token</em>.</h3>
-            <p>Keep the same 288-expert field. Change only the current representation, and a different routing fingerprint can emerge.</p>
+            <h3>The router decides <em>per token</em>.</h3>
+            <p>Keep the same 288-expert field. Change only the current representation.</p>
             {['it', 'ball', 'dog'].map((token, row) => (
               <div key={token}><strong>{token}</strong><span>{Array.from({ length: 32 }, (_, index) => <i key={index} data-on={(index * 5 + row * 7) % 13 < 4 ? 'true' : undefined} />)}</span><small>different routing fingerprint</small></div>
             ))}
@@ -222,18 +213,18 @@ export function MoeRoom({ beat }: { beat: number }) {
 
         {reroute ? (
           <motion.div className="v9-reroute-story" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-            <h3>But does <b>“it”</b> keep the same eight on the next sparse layer?</h3>
-            <div className="v9-reroute-line"><span><small>LAYER N</small><b>8 selected</b></span><i>→ representation changes →</i><span><small>LAYER N+1</small><b>score again</b></span></div>
-            <p><b>Answer: no guarantee.</b> Attention + the previous feed-forward block changed the representation, therefore the next router makes a fresh decision.</p>
+            <h3>The next sparse layer asks again.</h3>
+            <div className="v9-reroute-line"><span><small>LAYER N</small><b>8 selected</b></span><i>→ representation changes →</i><span><small>LAYER N+1</small><b>possibly a different 8</b></span></div>
+            <p>The router's input is different because Attention + the previous feed-forward block already changed the representation.</p>
           </motion.div>
         ) : null}
 
         {payoff ? (
           <motion.div className="v9-moe-payoff" layoutId="v9-moe-floor" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
-            <small>THE MECHANICAL PLOT TWIST</small>
+            <small>NOW CONNECT THE MECHANISM TO THE TITLE</small>
             <div className="v9-total-capacity"><strong>{MODEL.totalParamsB}B</strong><span>TOTAL PARAMETERS</span><p>everything stored and available across the whole model</p><div className="v9-capacity-grid">{Array.from({ length: 96 }, (_, i) => <i key={i} />)}</div></div>
             <div className="v9-active-capacity"><strong>~{MODEL.activeParamsB}B</strong><span>ACTIVE / TOKEN</span><p>the approximate parameter path touched by one token through the whole model</p><div className="v9-active-path-line"><i /><i /><i /><i /><i /><i /></div></div>
-            <PaperNote className="v9-18b-correction" tone="orange"><b>The other parameters did not vanish.</b> They remain stored capacity available to other routing decisions. And ~18B does <b>not</b> mean “the eight experts in one layer equal 18B”; it describes the broader active path through the model.</PaperNote>
+            <PaperNote className="v9-18b-correction" tone="orange"><b>18B does not mean “the 8 experts in one layer equal 18B”.</b> It describes the broader active path through the model.</PaperNote>
           </motion.div>
         ) : null}
       </div>

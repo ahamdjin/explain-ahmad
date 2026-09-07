@@ -5,28 +5,18 @@ type ProcessStep = {
   detail: string
 }
 
-type ActionKind = 'NOW' | 'QUESTION' | 'BUT' | 'THEREFORE' | 'ANSWER'
-
-type ProcessAction = string | {
-  kind: ActionKind
-  text: string
-}
-
 type ProcessSpineProps = {
   steps: readonly ProcessStep[]
   active: number
-  action: ProcessAction
+  action: string
   tone?: 'attention' | 'moe'
 }
 
 /**
  * Persistent process orientation for the two cognitively-heavy chapters.
  * The viewer should never need to remember the algorithm from narration alone.
- * v11 also makes the causal story explicit: QUESTION / BUT / THEREFORE / ANSWER.
  */
 export function ProcessSpine({ steps, active, action, tone = 'attention' }: ProcessSpineProps) {
-  const current = typeof action === 'string' ? { kind: 'NOW' as const, text: action } : action
-
   return (
     <motion.aside
       className="v10-process-spine"
@@ -53,9 +43,9 @@ export function ProcessSpine({ steps, active, action, tone = 'attention' }: Proc
           )
         })}
       </ol>
-      <p key={`${current.kind}-${current.text}`} data-kind={current.kind.toLowerCase()}>
-        <b>{current.kind}</b>
-        <motion.span initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }}>{current.text}</motion.span>
+      <p key={action}>
+        <b>NOW</b>
+        <motion.span initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }}>{action}</motion.span>
       </p>
     </motion.aside>
   )
