@@ -1,16 +1,16 @@
 import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
-import { ATTENTION_WEIGHTS, ATTENTION_WORDS, IT_TOKEN_INDEX, MODEL } from '../data'
-import { ChapterHeading, HeroVector, PaperNote, VectorStrip } from '../shared'
+import { ATTENTION_WEIGHTS, ATTENTION_WORDS, FUTURE_GHOST_WORDS, IT_TOKEN_INDEX, MODEL, SENTENCE } from '../data'
+import { ChapterHeading, HeroVector, PaperNote } from '../shared'
 
 const operation: Record<number, string> = {
   47: 'THE PROBLEM · the numbers still need context',
   48: 'ANCHOR · keep the representation attached to “it”',
   49: 'MAKE VIEWS · one representation → Q, K, V',
   50: 'PRE-TRAIN · what Q, K and V are for',
-  51: 'PREPARE · allowed positions offer Keys and Values',
+  51: 'PREPARE · prompt positions offer Keys and Values',
   52: 'SOURCE · this Query comes from “it”',
-  53: 'COMPARE · Q(it) checks every allowed Key',
+  53: 'COMPARE · Q(it) checks every available Key',
   54: 'COMPARE · “ball” is a strong match in this teaching view',
   55: 'COLLECT · local matches become one score row',
   56: 'NORMALIZE · scores become attention weights',
@@ -33,7 +33,6 @@ function TokenContextGrid({ beat }: { beat: number }) {
   return (
     <div className="v9-attention-token-grid">
       {ATTENTION_WORDS.map((word, index) => {
-        const future = index > IT_TOKEN_INDEX
         const isIt = index === IT_TOKEN_INDEX
         const isBall = word === 'ball'
         const weight = ATTENTION_WEIGHTS[index]
@@ -41,23 +40,21 @@ function TokenContextGrid({ beat }: { beat: number }) {
           <motion.div
             className="v9-attention-token"
             key={`${word}-${index}`}
-            data-future={future ? 'true' : undefined}
             data-it={isIt ? 'true' : undefined}
             data-hero={beat === 57 && isBall ? 'true' : undefined}
-            animate={{ opacity: future ? 0.18 : beat === 57 && !isBall && !isIt ? 0.22 : 1 }}
+            animate={{ opacity: beat === 57 && !isBall && !isIt ? 0.22 : 1 }}
           >
             <strong>{word}</strong>
-            {future ? <small>not visible yet</small> : null}
-            {showKV && !future ? (
+            {showKV ? (
               <div className="v9-kv-stack">
-                {!valuesOnly ? <motion.span className="is-k" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0, rotateX: valuesOnly ? 84 : 0 }}>K</motion.span> : null}
+                {!valuesOnly ? <motion.span className="is-k" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}>K</motion.span> : null}
                 <motion.span className="is-v" initial={{ opacity: 0, y: 4 }} animate={{ opacity: valuesOnly ? 1 : 0.66, y: 0, scale: valuesOnly ? 1.08 : 1 }}>V</motion.span>
               </div>
             ) : null}
             {query && isIt ? <motion.div layoutId="v9-query-it" className="v9-query-anchor" initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}><b>Q</b><span>from it</span><i /></motion.div> : null}
-            {comparing && !future && !isIt ? <motion.div className="v9-local-match" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: isBall && beat === 54 ? 1.15 : 1 }} transition={{ delay: index * 0.08 }}><span>Q·K</span><b>{weight}</b></motion.div> : null}
-            {scores && !future ? <motion.span className="v9-score-row-value" initial={{ y: -9, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{weight}</motion.span> : null}
-            {weights && !future ? (
+            {comparing && !isIt ? <motion.div className="v9-local-match" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: isBall && beat === 54 ? 1.15 : 1 }} transition={{ delay: index * 0.08 }}><span>Q·K</span><b>{weight}</b></motion.div> : null}
+            {scores ? <motion.span className="v9-score-row-value" initial={{ y: -9, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{weight}</motion.span> : null}
+            {weights ? (
               <motion.div className="v9-weight-under-token" initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}>
                 <i style={{ '--weight': `${weight}%` } as CSSProperties} />
                 <b>{weight}%</b>
@@ -66,7 +63,12 @@ function TokenContextGrid({ beat }: { beat: number }) {
           </motion.div>
         )
       })}
-      {showKV ? <div className="v9-causal-bracket"><span>available to “it” now</span><i /><b>future positions are masked</b></div> : null}
+      {showKV ? (
+        <div className="v9-causal-bracket">
+          <span>the prompt available at this moment ends at “it”</span><i /><b>future tokens do not exist yet</b>
+        </div>
+      ) : null}
+      {showKV ? <div className="v9-future-ghosts"><small>NOT GENERATED YET</small>{FUTURE_GHOST_WORDS.map((word) => <span key={word}>{word}</span>)}</div> : null}
     </div>
   )
 }
@@ -87,7 +89,7 @@ export function AttentionRoom({ beat }: { beat: number }) {
         eyebrow="05 · ATTENTION · BUILD CONTEXT"
         note={caveat ? 'We used a familiar Q/K/V picture to teach the operation. GLM-5.3-Flash uses a hybrid attention architecture internally.' : 'Stay with one token: “it”. Every object below has one job.'}
       >
-        {problem ? <>What should <mark>“it”</mark> use from the sentence?</> : <>Attention</>}
+        {problem ? <>What should <mark>“it”</mark> use from the prompt?</> : <>Attention</>}
       </ChapterHeading>
 
       <motion.div className="v9-operation-cue" key={operation[beat]} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}><b>{operation[beat]}</b></motion.div>
@@ -97,7 +99,8 @@ export function AttentionRoom({ beat }: { beat: number }) {
           <motion.div className="v9-attention-question" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
             <p>The embedding gives the model numbers for <b>it</b>.</p>
             <strong>But which earlier words are useful <em>here</em>?</strong>
-            <div className="v9-question-sentence">The dog dropped the <mark>ball</mark>, and <b>it</b> rolled away.</div>
+            <div className="v9-question-sentence"><span>{SENTENCE.replace('ball', '')}</span><mark>ball</mark><span>, and </span><b>it</b><em> → rolled away .</em></div>
+            <small>The gray continuation is not in the prompt yet. It is what we will eventually generate.</small>
           </motion.div>
         ) : null}
 
@@ -131,7 +134,7 @@ export function AttentionRoom({ beat }: { beat: number }) {
             <div className="v9-value-rule"><b>MATCHING IS DONE</b><span>Keys can step back. Values are the information we read.</span></div>
             {beat >= 59 ? (
               <div className="v9-value-gates">
-                {ATTENTION_WORDS.slice(0, IT_TOKEN_INDEX + 1).map((word, index) => {
+                {ATTENTION_WORDS.map((word, index) => {
                   const weight = ATTENTION_WEIGHTS[index]
                   return <div key={`${word}-${index}`}><strong>{word}</strong><span>V</span><i><b style={{ height: `${Math.max(6, weight * 1.65)}%` }} /></i><small>{weight}% open</small></div>
                 })}
@@ -143,7 +146,7 @@ export function AttentionRoom({ beat }: { beat: number }) {
         {mix ? (
           <motion.div className="v9-attention-mixer" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}>
             <div className="v9-value-stream-list">
-              {ATTENTION_WORDS.slice(0, IT_TOKEN_INDEX + 1).map((word, index) => {
+              {ATTENTION_WORDS.map((word, index) => {
                 const weight = ATTENTION_WEIGHTS[index]
                 return <motion.div key={`${word}-${index}`} style={{ '--w': weight / 46 } as CSSProperties} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: index * 0.05 }}><b>{word}</b><i /><span>{weight}% × V</span></motion.div>
               })}
