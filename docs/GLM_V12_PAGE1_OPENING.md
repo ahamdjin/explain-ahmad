@@ -1,8 +1,18 @@
-# GLM v12 — Page 1 Opening Model World
+# GLM v12 — Page 1 Cold Open
 
-Page 1 is rebuilt under the production loop:
+Page 1 is **not** the start of the technical journey.
 
-**research → read teaching docs → define learner state → write the causal chain → design the static composition → map narration to focus/motion → code → visual QA → revise before Page 2**
+The technical journey begins at **TEXT**.
+
+Page 1 has one job:
+
+> **Create the 320B vs ~18B headache strongly enough that the viewer wants to follow the token and discover the answer.**
+
+Production loop for this page:
+
+**research → reread teaching docs → define the learner's question → design one complete frame → map narration to focus → code → capture every state → inspect → revise**
+
+---
 
 ## Research lock
 
@@ -11,30 +21,35 @@ Official model sources rechecked:
 - https://huggingface.co/zai-org/GLM-5.3-Flash
 - https://huggingface.co/zai-org/GLM-5.3-Flash/blob/main/config.json
 
-Facts used on Page 1:
+Facts allowed on the page:
 
 - GLM-5.3-Flash by Z.ai
 - 320B total parameters
 - ~18B active parameters
+- Mixture of Experts (MoE)
 - 45 language layers
 - first 3 feed-forward layers are dense
-- remaining 42 feed-forward layers are sparse MoE
+- next 42 feed-forward layers are sparse MoE
 - 288 routed experts per sparse MoE layer
 - top-8 routed experts per token
 - 1 shared expert
 
-Facts deliberately kept off Page 1 because they do not help the opening question yet:
+Facts deliberately deferred:
 
 - 154,880 vocabulary size
 - 4,096 hidden size
 - attention subtype split
 - max context
 - multimodal details
-- router scoring implementation
+- router scoring details
+
+These are true, but they do not improve the opening question.
+
+---
 
 ## Teaching references reread
 
-Project docs:
+Relevant project docs:
 
 - `EXPLANATION_DESIGN.md`
 - `CONTINUITY_SYSTEM.md`
@@ -52,276 +67,216 @@ Ncase studies:
 - `NCASE_I_DO_AND_I_UNDERSTAND.md`
 - `NCASE_4_MORE_DESIGN_PATTERNS.md`
 - `NCASE_POP_UP_TEXTBOOKS.md`
+- `NCASE_NUTSHELL_EXPANDABLE_EXPLANATIONS.md`
 
-External learning research checked again:
+The strongest rules for this page are:
 
-- Mayer / Cambridge spatial contiguity: corresponding words and visuals should be physically close.
-- Signaling: visual cues should direct attention to the relevant relation instead of adding a second explanatory layer.
-- Coherence: remove information that does not help the current learning goal.
-- Temporal contiguity: the visual change should happen while the narration describes the relation.
+1. **Question before explanation.**
+2. **Purpose before terminology.**
+3. **One new connection does not mean one visible fact.**
+4. **The whole visual world can already exist; signaling controls attention.**
+5. **Keep the primary causal story lean.**
+6. **BUT / THEREFORE should describe real causal relations, not become decorative labels.**
+7. **Do not make the learner study a parts list before they have a reason to care.**
 
-## The correction from the first v12 pass
+---
 
-The first pass improved animation and composition, but it still mostly followed a chronology:
+## Main correction
 
-`model → model type → total → active → definitions → architecture → question`
+The earlier Page 1 still behaved too much like a tutorial:
 
-That is cleaner than the old page, but it is not a strong **BUT / THEREFORE** story.
+`name → model type → 320B → 18B → parameter definition → active definition → architecture → question`
 
-The new causal spine is:
+That is still mostly **AND THEN**.
 
-**GLM-5.3-Flash**
+The new page is a **fully composed cold open**.
 
-→ **320B total capacity**
+From the first frame, the viewer can already see:
 
-→ **BUT ~18B active for one token**
+- the model identity;
+- 320B total;
+- ~18B active for one token;
+- the same-scale comparison;
+- the model anatomy as quiet support;
+- the central question as quiet context.
 
-→ **same-scale comparison makes the mismatch felt**
+Nothing has to be "unlocked" one fact at a time.
 
-→ **define only the two terms needed to understand the mismatch**
+Narration changes the hierarchy of the same page.
 
-→ **HEADACHE: how can both numbers be true?**
+---
 
-→ **architecture becomes a clue**
+## Page 1 causal spine
 
-→ **BUT a parts list still does not show a token's actual path**
+### State A — orient
 
-→ **SO follow one token and watch the path form**
+The complete model sheet exists.
 
-The words `BUT` and `SO` are not floating UI. They live inside the relation that creates them.
+Hero:
 
-## Important interpretation rule
+`GLM-5.3-Flash`
 
-**One new connection at a time does not mean one fact on screen at a time.**
+Support:
 
-The page is a stable visual world. Relevant information can coexist. Narration and signaling decide what is hero, support, and texture at each moment.
+`320B BUT ~18B`
 
-## Learner state
+Texture/support:
 
-### Before Page 1
+architecture facts.
 
-The viewer only has the promise of the video: a huge model somehow has a much smaller active parameter count for a token.
+No teaching sequence yet. The viewer simply understands what object we are opening.
 
-### After Page 1
+### State B — contradiction
 
-The viewer should be able to say:
+Narration moves to the two numbers.
 
-> GLM-5.3-Flash contains 320B parameters, but one token has an active path of about 18B. The architecture contains many possible expert blocks, but the architecture facts alone do not yet show which path one token takes. To understand the 320B → 18B gap, I need to follow a token through the model.
+The relationship becomes hero:
 
-That final need is what causes Page 2.
+`320B total` **BUT** `~18B active / token`
+
+Both numbers are emphasized together. We do **not** teach 320B on one screen and 18B on another.
+
+### State C — make the mismatch visible
+
+The same-scale ruler becomes more prominent:
+
+`18 / 320 ≈ 5.6%`
+
+This is a **size intuition**, not a new chapter.
+
+It must be labelled as a size comparison only. It must never imply that the active path is one contiguous 5.6% slice of the model.
+
+### State D — headache
+
+The question directly beneath the numbers becomes hero:
+
+> **How can both numbers be true?**
+
+The architecture becomes quieter.
+
+The viewer should now own the question.
+
+### State E — causal bridge
+
+The question transforms in the same physical area into:
+
+> **SO — Follow one token's path.**
+
+This is not the answer.
+
+It tells the viewer how we are going to earn the answer.
+
+---
+
+## Architecture rule
+
+The architecture is present on Page 1 because it makes the model sheet feel real and gives useful context:
+
+- 45 layers
+- 3 dense + 42 sparse MoE
+- 288 routed experts
+- top-8 routed / token
+- +1 shared expert
+
+But Page 1 does **not** require the learner to understand or memorize these numbers.
+
+They are support.
+
+We will teach them again only when the token reaches the mechanism where they matter.
+
+This follows the Nutshell / progressive-depth rule:
+
+> Required causal knowledge belongs on the main path. Extra rigor/context may remain visible without becoming required attention.
+
+---
+
+## Definitions rule
+
+`parameter = one learned value`
+
+`active = participating in this computation now`
+
+These may live as quiet local notes from the start.
+
+They do **not** deserve separate beats.
+
+If the narration needs them, the notes can receive a small focus cue. Otherwise the viewer may safely ignore them.
+
+---
+
+## The real journey
+
+The journey begins only after the cold open exits:
+
+**TEXT → TOKENS → TOKEN ID → EMBEDDING → ATTENTION → MoE → LAYERS → OUTPUT**
+
+`MODEL` is not part of that journey rail.
+
+The learner is no longer touring architecture diagrams.
+
+They are following one concrete example through a continuous process.
+
+---
+
+## Transition to TEXT
+
+After the cold open, Page 1 leaves completely.
+
+Then a new phase says:
+
+> **Start with ordinary text.**
+
+The route appears:
+
+`TEXT → TOKENS → TOKEN ID → EMBEDDING → ATTENTION → MoE → LAYERS → OUTPUT`
+
+The route then collapses into the persistent chapter rail.
+
+This is a change of mental world, so a new composition is justified.
+
+---
 
 ## Full-screen rule
 
-The old production stage fitted a 16:9 rectangle inside the browser viewport. That produced letterboxing and created a second artificial coordinate system.
-
-For this route, the production frame now uses:
+The explainer frame fills the actual viewport:
 
 - `width: 100%`
 - `height: 100%`
-- no fixed 16:9 aspect-ratio constraint
+- no fitted/letterboxed 16:9 stage
 
-The composition itself still has to be safe at 1920×1080 for recording, but it must fill the actual viewport instead of sitting inside a fitted frame.
+1920×1080 remains the primary recording target, but the visual world must adapt to the viewport rather than sit inside a smaller fixed rectangle.
 
-## Static composition
+---
 
-The first ten beats use one stable technical-paper spread with three reserved zones. Nothing important is absolutely stacked over another teaching object.
+## Collision rules
 
-### Zone A — identity
+1. No new teaching layer may be stacked over an existing composition just to save space.
+2. Important objects own reserved geometry.
+3. The question is physically attached to the 320B/~18B comparison area.
+4. Architecture has its own support column.
+5. The opening and journey phases are mutually exclusive.
+6. Focus uses opacity/highlight/line emphasis, not container scaling that can collide with neighbors.
+7. If two complete compositions overlap, the overlap itself must teach a transformation. Otherwise they must not coexist.
 
-Top-left:
+---
 
-- Z.ai
-- GLM-5.3-Flash
-- `Large language model · Mixture of Experts (MoE)`
+## Visual QA gate
 
-This establishes what we are opening. It is not the answer to the puzzle yet.
+Capture every opening state at:
 
-### Zone B — the contradiction
+- 1920×1080
+- 1440×900
+- 1366×768
 
-Main-left:
+Reject the page if any capture has:
 
-`320B TOTAL PARAMETERS`
+- overlap or clipping;
+- required text too small to read;
+- two competing heroes;
+- the architecture becoming louder than the contradiction;
+- the question visually detached from the two numbers;
+- the full page looking incomplete before narration starts;
+- a focus change that adds a new mini-lesson instead of simply steering attention;
+- the transition to TEXT feeling like a disconnected slide replacement.
 
-**BUT**
-
-`~18B ACTIVE FOR ONE TOKEN`
-
-The numbers occupy the same row so the contrast is spatial, not remembered.
-
-Directly beneath them is a same-scale ruler:
-
-- 320B = full width
-- 18B = 5.625% of that width
-- label: `18 ÷ 320 ≈ 5.6%`
-- explicit note: `size comparison only`
-
-This is a ratio metaphor, not a literal claim that the active path is one contiguous 5.6% slice of the model.
-
-Definitions are local to the terms they explain:
-
-- `parameter = one learned value`
-- `active = participating in this computation now`
-
-### Zone C — architecture clue
-
-Right side:
-
-- 45-layer strip
-- 3 dense first
-- 42 sparse MoE after
-- inside one sparse MoE layer: `288 available → top-8 routed/token + 1 shared`
-
-At first this area is visible but quiet. It becomes hero only after the opening question exists.
-
-The architecture then creates another limitation:
-
-> **But this is still only the parts list. It does not show the path one token actually takes.**
-
-That limitation directly creates the next step.
-
-### Footer — causal bridge
-
-Reserved bottom strip:
-
-**SO → Follow one token’s path.**
-
-This footer is part of the page geometry from the beginning, but stays invisible until the narration earns it. It does not appear on top of anything.
-
-## Narration choreography
-
-These are logic slots, not locked voiceover wording.
-
-### Beat 1 — orient
-
-Narration role:
-
-> “This is the model we are going to open up.”
-
-The full page exists. Identity is hero. Other facts are quiet support.
-
-### Beat 2 — name the concrete example
-
-> “GLM-5.3-Flash, from Z.ai.”
-
-The name receives a restrained underline. No new panel appears.
-
-### Beat 3 — establish total capacity
-
-> “The whole model contains 320 billion learned parameters.”
-
-320B becomes hero. The full 320B ruler draws.
-
-### Beat 4 — create the BUT
-
-> “But for one token, only about 18 billion are active.”
-
-The word **BUT** sits physically between the two existing number objects. ~18B becomes hero and its same-scale ruler draws.
-
-This is the first real plot turn.
-
-### Beat 5 — make the mismatch felt
-
-> “On the same scale, 18 billion is only about 5.6% of 320 billion.”
-
-No new concept. We simply let the scale comparison become legible enough to create the headache.
-
-### Beat 6 — define only what is needed
-
-> “A parameter is one learned value. Active means participating in this token’s computation right now.”
-
-Both definitions appear beside their own terms at the same time. We do not waste separate screens on definitions.
-
-### Beat 7 — ask the question the viewer now owns
-
-> “So how can both numbers be true?”
-
-The question is directly below the numbers that created it. The viewer does not have to search for its referents.
-
-### Beat 8 — reveal the clue
-
-> “The clue is in how GLM is built.”
-
-Right-side anatomy becomes hero:
-
-- 45 layers
-- 3 dense
-- 42 sparse MoE
-- 288 routed experts per sparse layer
-- top-8 routed per token
-- one shared expert
-
-The left-side contradiction remains visible but quieter so the learner remembers why this architecture matters.
-
-### Beat 9 — create the next BUT
-
-> “But those numbers are still just a parts list. They don’t show which path this token actually takes.”
-
-This limitation appears inside the architecture area that caused it, not in a detached banner.
-
-### Beat 10 — THEREFORE / SO
-
-> “So instead of memorizing the architecture, let’s follow one token and watch the path form.”
-
-The reserved footer becomes hero:
-
-**SO → Follow one token’s path.**
-
-That is the causal bridge into the journey.
-
-### Beat 11 onward — separate phase
-
-The model page exits completely before the journey intro enters.
-
-The old implementation dimmed the page and placed the next composition over it. That created visual collision and split attention.
-
-The new rule is strict:
-
-> **Two complete compositions may not occupy the same teaching space at once unless their overlap itself explains a transformation.**
-
-## Collision-prevention rules
-
-1. No teaching object may rely on `z-index` to solve a layout problem.
-2. New information gets a reserved grid area before it becomes visible.
-3. Definitions reserve height even while invisible, so later appearance cannot push into neighboring objects.
-4. The question has its own row beneath the scale comparison.
-5. Architecture is a separate grid column.
-6. The causal footer is a separate grid row.
-7. The opening and journey phases are mutually exclusive with `AnimatePresence`.
-8. Emphasis uses opacity, line drawing, highlights, and small movement — not container scaling that can collide with neighbors.
-
-## Motion rules
-
-Motion on this page may teach only:
-
-- **focus** — narration moved to an existing fact
-- **scale** — 320B vs 18B
-- **causality** — BUT and SO connect existing objects
-- **hierarchy** — architecture becomes relevant only after the question
-- **phase transition** — opening page leaves before the journey begins
-
-No decorative scaling, floating annotation panels, or unrelated page effects.
-
-## Visual QA process
-
-A green TypeScript build is not visual approval.
-
-For this branch, visual QA should capture every opening beat at multiple viewport sizes and inspect:
-
-- 1920×1080 — recording target
-- 1440×900 — taller desktop
-- 1366×768 — shorter desktop
-
-Check every captured beat for:
-
-1. overlap / collision
-2. clipping
-3. unreadable text
-4. two simultaneous heroes
-5. labels far from their source
-6. unexpected layout jumps
-7. scale bars losing common origin
-8. architecture becoming too dominant too early
-9. question becoming detached from 320B / 18B
-10. Beat 10 failing to make the next action feel inevitable
-
-Do not start Page 2 until Page 1 survives this review.
+Do not begin the TEXT redesign until Page 1 survives this review.
