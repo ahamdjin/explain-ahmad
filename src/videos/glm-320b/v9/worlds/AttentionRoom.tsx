@@ -1,25 +1,42 @@
 import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
 import { ATTENTION_WEIGHTS, ATTENTION_WORDS, FUTURE_GHOST_WORDS, IT_TOKEN_INDEX, MODEL } from '../data'
+import { ProcessSpine } from '../ProcessSpine'
 import { ChapterHeading, HeroVector, PaperNote } from '../shared'
 
-const operation: Record<number, string> = {
-  47: 'THE PROBLEM · the numbers still need context',
-  48: 'ANCHOR · keep the representation attached to “it”',
-  49: 'MAKE VIEWS · one representation → Q, K, V',
-  50: 'PRE-TRAIN · what Q, K and V are for',
-  51: 'PREPARE · prompt positions offer Keys and Values',
-  52: 'SOURCE · this Query comes from “it”',
-  53: 'COMPARE · Q(it) checks every available Key',
-  54: 'COMPARE · “ball” is a strong match in this teaching view',
-  55: 'COLLECT · local matches become one score row',
-  56: 'NORMALIZE · scores become attention weights',
-  57: 'INTERPRET · more weight means more contribution',
-  58: 'SWITCH JOBS · Keys matched; now read Values',
-  59: 'WEIGHT VALUES · open each Value gate by its weight',
-  60: 'MIX · weighted Values flow into one sum',
-  61: 'RETURN · context changes the representation of “it”',
-  62: 'ZOOM OUT · this was one familiar attention lens',
+const ATTENTION_STEPS = [
+  { label: 'Make Q / K / V', detail: 'Create three learned views of the current representation.' },
+  { label: 'Match Q with K', detail: 'Use Query and Keys to measure which earlier positions match.' },
+  { label: 'Make weights', detail: 'Turn the match scores into attention weights.' },
+  { label: 'Read Values', detail: 'Use those weights to decide how much information to take from each Value.' },
+  { label: 'Mix context back', detail: 'Add the weighted Values and return the context to the same token position.' },
+] as const
+
+const action: Record<number, string> = {
+  47: 'Start with the problem: the embedding still needs context.',
+  48: 'Keep the same “it” representation physically attached to the same token.',
+  49: 'Create three learned numerical views from that one representation.',
+  50: 'Query looks, Key matches, Value carries information.',
+  51: 'Give every available prompt position a Key and a Value.',
+  52: 'Keep Q visibly anchored to “it”.',
+  53: 'Compare Q(it) with each Key, one at a time.',
+  54: 'In this teaching example, “ball” produces the strongest match.',
+  55: 'Collect the local match results into one clean score row.',
+  56: 'Turn those match scores into normalized attention weights.',
+  57: 'More weight means more of that position can contribute in this view.',
+  58: 'Keys have finished matching. Now read the Values.',
+  59: 'Scale each Value by its attention weight.',
+  60: 'Add the weighted Values together.',
+  61: 'Return the mixed context to the same “it” position.',
+  62: 'Zoom out: keep the idea, not this exact drawing of GLM attention.',
+}
+
+function attentionStage(beat: number) {
+  if (beat <= 50) return 0
+  if (beat <= 55) return 1
+  if (beat <= 57) return 2
+  if (beat <= 59) return 3
+  return 4
 }
 
 function TokenContextGrid({ beat }: { beat: number }) {
@@ -87,12 +104,12 @@ export function AttentionRoom({ beat }: { beat: number }) {
     <motion.div className="v9-room v9-attention-room" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <ChapterHeading
         eyebrow="05 · ATTENTION · BUILD CONTEXT"
-        note={caveat ? 'We used a familiar Q/K/V picture to teach the operation. GLM-5.3-Flash uses a hybrid attention architecture internally.' : 'Stay with one token: “it”. Every object below has one job.'}
+        note={caveat ? 'We used a familiar Q/K/V picture to teach the operation. GLM-5.3-Flash uses a hybrid attention architecture internally.' : 'Stay with one token: “it”. The diagram will keep every intermediate step visible.'}
       >
         {problem ? <>What should <mark>“it”</mark> use from the prompt?</> : <>Attention</>}
       </ChapterHeading>
 
-      <motion.div className="v9-operation-cue" key={operation[beat]} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}><b>{operation[beat]}</b></motion.div>
+      <ProcessSpine steps={ATTENTION_STEPS} active={attentionStage(beat)} action={action[beat]} tone="attention" />
 
       <div className="v9-attention-canvas">
         {beat === 47 ? (
