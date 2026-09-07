@@ -10,6 +10,7 @@ import { TransformerWorld } from './worlds/TransformerWorld'
 import { ChapterRail, DebugBeat, PaperBackdrop } from './shared'
 import { useBeatDirector } from './useBeatDirector'
 import './production-v9.css'
+import './production-v9-fixes.css'
 
 function World({ world, beat }: { world: string; beat: number }) {
   if (world === 'model') return <ModelWorld beat={beat} />
