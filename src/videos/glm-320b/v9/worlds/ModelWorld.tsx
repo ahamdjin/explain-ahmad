@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { type CSSProperties } from 'react'
-import { SketchAnnotation } from '../../../../visuals/SketchAnnotation'
 import { MODEL } from '../data'
 import { CHAPTERS } from '../story'
 
@@ -10,34 +9,19 @@ const journeyIcons: Record<string, string> = {
 
 const ACTIVE_RATIO = (MODEL.activeParamsB / MODEL.totalParamsB) * 100
 
-function statOpacity(beat: number, kind: 'total' | 'active') {
-  if (beat >= 8) return 0.54
-  if (kind === 'total') {
-    if (beat < 3) return 0.52
-    if (beat === 3) return 1
-    if (beat >= 4) return 0.92
-  }
-  if (kind === 'active') {
-    if (beat < 4) return 0.3
-    if (beat === 4) return 1
-    if (beat >= 5) return 0.92
-  }
-  return 0.7
-}
-
 export function ModelWorld({ beat }: { beat: number }) {
   const opening = beat <= 10
-  const totalFocus = beat === 3
-  const activeFocus = beat === 4
-  const compareFocus = beat >= 5 && beat <= 7
-  const definitions = beat >= 6
-  const question = beat >= 7 && beat <= 9
-  const architectureFocus = beat >= 8 && beat <= 9
-  const partsLimit = beat >= 9
-  const pathNext = beat >= 10
+  const comparisonFocus = beat >= 2 && beat <= 7
+  const ratioFocus = beat >= 3 && beat <= 7
+  const questionFocus = beat >= 4 && beat <= 8
+  const pathNext = beat >= 9 && beat <= 10
   const journey = beat >= 12
   const icons = beat >= 13
   const collapse = beat >= 14
+
+  const supportOpacity = questionFocus ? 0.28 : pathNext ? 0.2 : 0.42
+  const identityOpacity = comparisonFocus || questionFocus ? 0.68 : pathNext ? 0.5 : 1
+  const comparisonOpacity = pathNext ? 0.44 : questionFocus ? 0.82 : 1
 
   return (
     <motion.section className="v9-world v9-model-world v12-model-world" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -51,64 +35,52 @@ export function ModelWorld({ beat }: { beat: number }) {
             exit={{ opacity: 0, y: '-2.2cqh' }}
             transition={{ duration: 0.42, ease: [0.2, 0.7, 0.2, 1] }}
           >
-            <motion.header className="v12-model-header" animate={{ opacity: architectureFocus || pathNext ? 0.58 : 1 }}>
+            <motion.header className="v12-model-header" animate={{ opacity: identityOpacity }}>
               <div className="v12-model-kicker"><span>{MODEL.maker}</span><i /><span>MODEL STUDY</span></div>
-              <h1>
-                {beat === 2 ? <SketchAnnotation type="underline" color="#7b6b5e" strokeWidth={1.5} padding={3}>{MODEL.name}</SketchAnnotation> : MODEL.name}
-              </h1>
+              <h1>{MODEL.name}</h1>
               <div className="v12-model-type-line">
                 <span>Large language model</span><span>·</span><b>Mixture of Experts (MoE)</b>
               </div>
             </motion.header>
 
             <main className="v12-capacity">
-              <motion.div className="v12-stat-row" animate={{ opacity: architectureFocus ? 0.58 : pathNext ? 0.42 : 1 }}>
-                <motion.section
-                  className="v12-stat"
-                  data-kind="total"
-                  data-focus={totalFocus || compareFocus || question ? 'true' : undefined}
-                  animate={{ opacity: statOpacity(beat, 'total') }}
-                >
+              <motion.div className="v12-stat-row" animate={{ opacity: comparisonOpacity }}>
+                <motion.section className="v12-stat" data-kind="total" data-focus={comparisonFocus || questionFocus ? 'true' : undefined}>
                   <div className="v12-stat-label">TOTAL PARAMETERS</div>
                   <strong>{MODEL.totalParamsB}B</strong>
                   <p>all learned parameter values stored across the whole model</p>
-                  <motion.span className="v12-local-definition" animate={{ opacity: definitions ? 1 : 0 }}>
-                    <b>parameter</b> = one learned value
-                  </motion.span>
+                  <span className="v12-local-definition"><b>parameter</b> = one learned value</span>
                 </motion.section>
 
-                <motion.div className="v12-but" animate={{ opacity: beat >= 4 ? 1 : 0.12, y: beat === 4 ? -3 : 0 }}>
+                <motion.div className="v12-but" animate={{ opacity: 1, scale: comparisonFocus ? 1.06 : 1 }}>
                   <span>BUT</span><i />
                 </motion.div>
 
-                <motion.section
-                  className="v12-stat"
-                  data-kind="active"
-                  data-focus={activeFocus || compareFocus || question ? 'true' : undefined}
-                  animate={{ opacity: statOpacity(beat, 'active') }}
-                >
+                <motion.section className="v12-stat" data-kind="active" data-focus={comparisonFocus || questionFocus ? 'true' : undefined}>
                   <div className="v12-stat-label">ACTIVE FOR ONE TOKEN</div>
                   <strong>~{MODEL.activeParamsB}B</strong>
                   <p>the approximate parameter path participating for this token</p>
-                  <motion.span className="v12-local-definition" animate={{ opacity: definitions ? 1 : 0 }}>
-                    <b>active</b> = participating in this computation now
-                  </motion.span>
+                  <span className="v12-local-definition"><b>active</b> = participating in this computation now</span>
                 </motion.section>
               </motion.div>
 
-              <motion.div className="v12-scale-compare" animate={{ opacity: architectureFocus ? 0.46 : pathNext ? 0.36 : beat >= 3 ? 1 : 0.28 }} style={{ '--active-ratio': `${ACTIVE_RATIO}%` } as CSSProperties}>
+              <motion.div
+                className="v12-scale-compare"
+                animate={{ opacity: pathNext ? 0.36 : questionFocus ? 0.82 : ratioFocus ? 1 : 0.72 }}
+                style={{ '--active-ratio': `${ACTIVE_RATIO}%` } as CSSProperties}
+              >
                 <div className="v12-scale-meta">
                   <small>SAME SCALE</small>
-                  <motion.strong animate={{ opacity: beat >= 5 ? 1 : 0 }}>{ACTIVE_RATIO.toFixed(1)}%</motion.strong>
-                  <motion.span animate={{ opacity: beat >= 5 ? 1 : 0 }}>18 ÷ 320 · size comparison only</motion.span>
+                  <motion.strong animate={{ opacity: ratioFocus || questionFocus ? 1 : 0.72 }}>{ACTIVE_RATIO.toFixed(1)}%</motion.strong>
+                  <span>18 ÷ 320 · size comparison only</span>
                 </div>
                 <div className="v12-ruler-row" data-kind="total">
                   <b>320B</b>
-                  <div><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: beat >= 3 ? 1 : 0 }} transition={{ duration: 0.72, ease: [0.2, 0.7, 0.2, 1] }} /></div>
+                  <div><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.82, ease: [0.2, 0.7, 0.2, 1] }} /></div>
                 </div>
                 <div className="v12-ruler-row" data-kind="active">
                   <b>~18B</b>
-                  <div><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: beat >= 4 ? 1 : 0 }} transition={{ duration: 0.68, ease: [0.2, 0.7, 0.2, 1] }} /></div>
+                  <div><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.08, duration: 0.78, ease: [0.2, 0.7, 0.2, 1] }} /></div>
                 </div>
               </motion.div>
 
@@ -118,11 +90,17 @@ export function ModelWorld({ beat }: { beat: number }) {
                     <motion.div key="next-step" className="v12-question-state v12-question-next" initial={{ opacity: 0, y: '1cqh' }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                       <small>SO</small>
                       <h2>Follow one token’s path.</h2>
-                      <p>Instead of memorizing the parts list, watch where this token actually sends compute.</p>
+                      <p>The real journey starts with ordinary text, then we watch the same token move through the model.</p>
                     </motion.div>
                   ) : (
-                    <motion.div key="headache" className="v12-question-state" initial={false} animate={{ opacity: question ? architectureFocus ? 0.56 : 1 : 0, y: question ? 0 : '1cqh' }} exit={{ opacity: 0, y: '-.6cqh' }}>
-                      <small>THE HEADACHE</small>
+                    <motion.div
+                      key="headache"
+                      className="v12-question-state"
+                      initial={false}
+                      animate={{ opacity: questionFocus ? 1 : 0.3, y: questionFocus ? 0 : '.35cqh' }}
+                      exit={{ opacity: 0, y: '-.6cqh' }}
+                    >
+                      <small>THE QUESTION</small>
                       <h2>How can both numbers be true?</h2>
                       <p>The model contains 320B parameters, <b>but</b> one token follows a much smaller active path.</p>
                     </motion.div>
@@ -131,22 +109,16 @@ export function ModelWorld({ beat }: { beat: number }) {
               </div>
             </main>
 
-            <motion.aside className="v12-architecture" animate={{ opacity: architectureFocus ? 1 : pathNext ? 0.62 : 0.32 }}>
+            <motion.aside className="v12-architecture" animate={{ opacity: supportOpacity }}>
               <div className="v12-anatomy-heading">
-                <small>THE CLUE IS IN THE ARCHITECTURE</small>
+                <small>MODEL ANATOMY</small>
                 <h3>{MODEL.layers} Transformer layers</h3>
               </div>
 
               <div className="v12-layer-anatomy">
                 <div className="v12-layer-strip" aria-label={`${MODEL.layers} layers: first ${MODEL.denseLayers} dense and next ${MODEL.moeLayers} sparse MoE`}>
                   {Array.from({ length: MODEL.layers }, (_, index) => (
-                    <motion.i
-                      key={index}
-                      data-kind={index < MODEL.denseLayers ? 'dense' : 'moe'}
-                      initial={{ scaleY: 0.28 }}
-                      animate={{ scaleY: architectureFocus ? 1 : 0.58 }}
-                      transition={{ delay: architectureFocus ? index * 0.007 : 0, duration: 0.2 }}
-                    />
+                    <i key={index} data-kind={index < MODEL.denseLayers ? 'dense' : 'moe'} />
                   ))}
                 </div>
                 <div className="v12-layer-split">
@@ -165,11 +137,6 @@ export function ModelWorld({ beat }: { beat: number }) {
                   <div><b>{MODEL.sharedExperts}</b><span>shared expert</span></div>
                 </div>
               </div>
-
-              <motion.div className="v12-anatomy-limit" animate={{ opacity: partsLimit ? 1 : 0 }}>
-                <b>But this is still only the parts list.</b>
-                <span>It does not show the path one token actually takes.</span>
-              </motion.div>
             </motion.aside>
           </motion.article>
         ) : (
@@ -182,9 +149,9 @@ export function ModelWorld({ beat }: { beat: number }) {
             transition={{ duration: 0.38 }}
           >
             <motion.div className="v12-journey-intro" animate={{ opacity: collapse ? 0.2 : journey ? 0.58 : 1, y: collapse ? '-5cqh' : 0 }}>
-              <small>TO ANSWER THE QUESTION</small>
-              <h2>Follow one tiny piece of text.</h2>
-              <p>We will watch the path form instead of asking you to memorize a parts list.</p>
+              <small>THE JOURNEY STARTS HERE</small>
+              <h2>Start with ordinary text.</h2>
+              <p>From this point forward, we follow the same example through the model instead of touring disconnected diagrams.</p>
             </motion.div>
 
             {journey ? (
