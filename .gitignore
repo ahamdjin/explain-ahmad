@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# visual QA output
+frames/
+
+.DS_Store
+*.local

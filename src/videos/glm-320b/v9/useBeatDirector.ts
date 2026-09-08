@@ -57,8 +57,15 @@ function holdForBeat(beatNumber: number) {
   return BEAT_HOLD_MS[beatNumber] ?? DEFAULT_LOCK_MS
 }
 
+function initialIndex() {
+  if (typeof window === 'undefined') return 0
+  const requested = Number(new URLSearchParams(window.location.search).get('beat'))
+  if (!Number.isFinite(requested) || requested < 1) return 0
+  return Math.min(BEATS.length, Math.trunc(requested)) - 1
+}
+
 export function useBeatDirector() {
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(initialIndex)
   const lockUntil = useRef(0)
   const wheelTotal = useRef(0)
   const wheelReset = useRef<number | null>(null)
