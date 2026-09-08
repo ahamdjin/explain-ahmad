@@ -4,7 +4,7 @@ import { Expert, SharedExpert } from './cast/Expert'
 import { Narrator } from './cast/Narrator'
 import { Router } from './cast/Router'
 import { Archway, Blocker, ModelInfoCard, RamTray, WeightShelf, WordCard } from './cast/Objects'
-import { MacBox } from './cast/MacBox'
+import { GhostBoxes, MacBox, Parcel } from './cast/MacBox'
 import { ExpertField } from './ExpertField'
 import { type Feel } from './motion'
 import { type SceneState } from './scene'
@@ -112,6 +112,14 @@ export function Stage({
 
       <Slot on={scene.blocker.on} at={scene.blocker.at} scale={scene.blocker.scale} z={4} feel={feel}>
         <Blocker scale={0.86} />
+      </Slot>
+
+      <Slot on={scene.ghosts.on} at={scene.ghosts.at} scale={scene.ghosts.scale} z={1} feel={feel}>
+        <GhostBoxes count={scene.ghosts.count} />
+      </Slot>
+
+      <Slot on={scene.parcel.on} at={scene.parcel.at} scale={scene.parcel.scale} z={2} feel={feel}>
+        <Parcel />
       </Slot>
 
       <Slot on={scene.mac.on} at={scene.mac.at} scale={scene.mac.scale} z={3} feel={feel}>

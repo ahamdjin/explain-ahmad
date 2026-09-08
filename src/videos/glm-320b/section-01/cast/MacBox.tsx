@@ -51,3 +51,37 @@ export function MacBox({
     </motion.div>
   )
 }
+
+/**
+ * Faint copies of the machine, so a size can be read as "this many of mine".
+ *
+ * A gigabyte figure is a unit the viewer has never held. Ten of their own box
+ * is a unit they were handed two beats ago.
+ */
+export function GhostBoxes({ count, scale = 1 }: { count: number; scale?: number }) {
+  return (
+    <div className="s1-ghosts" style={{ '--scale': scale } as React.CSSProperties}>
+      {Array.from({ length: count }, (_, index) => (
+        <motion.span
+          key={index}
+          className="s1-ghost"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.07, duration: 0.26 }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/** The thing, before it is opened. Deliberately featureless and unnamed. */
+export function Parcel({ scale = 1 }: { scale?: number }) {
+  return (
+    <motion.div className="s1-parcel" style={{ '--scale': scale } as React.CSSProperties}>
+      <svg viewBox="0 0 220 160" filter="url(#s1-ink-soft)" aria-hidden="true">
+        <rect x="10" y="10" width="200" height="140" rx="16" fill="#E4DED0" stroke={INK} strokeWidth="3.4" />
+        <path d="M110 10v140M10 80h200" stroke={INK} strokeWidth="2" opacity="0.35" />
+      </svg>
+    </motion.div>
+  )
+}

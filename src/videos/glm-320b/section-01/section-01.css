@@ -290,6 +290,33 @@
   border-color: var(--red);
 }
 
+/* Ghost boxes: a size expressed as "this many of mine". */
+.s1-ghosts {
+  display: flex;
+  gap: 0.8cqw;
+  align-items: flex-end;
+}
+
+.s1-ghost {
+  width: calc(7cqw * var(--scale, 1));
+  aspect-ratio: 240 / 176;
+  border: 2.4px dashed rgba(43, 41, 38, 0.32);
+  border-radius: 8px;
+  background: rgba(231, 234, 234, 0.4);
+}
+
+/* The thing, unopened. */
+.s1-parcel {
+  width: calc(22cqw * var(--scale, 1));
+}
+
+.s1-parcel svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
 /* Byte size stamped on the parameter mass. */
 .s1-field-size {
   position: absolute;

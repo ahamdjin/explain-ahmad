@@ -110,7 +110,7 @@ export function ExpertField({
         x: '-50%',
         y: '-50%',
         scale,
-        opacity: on ? (dim ? 0.5 : 1) : 0,
+        opacity: on ? (dim && !slice ? 0.5 : 1) : 0,
       }}
       transition={{ ...feel, opacity: { duration: on ? 0.34 : 0.18, ease: 'easeOut' } }}
       aria-hidden={!on}
@@ -148,7 +148,9 @@ export function ExpertField({
                     : active
                       ? 1
                       : slice && !asExperts
-                        ? 0.62
+                        ? dim
+                          ? 0.24
+                          : 0.62
                         : 0.78,
               scale: isExpert ? 2.55 : active ? 1.04 : 1,
             }}

@@ -42,6 +42,10 @@ export type SceneState = {
   picked: { on: boolean; at: Spot; scale: number }
   blocker: { on: boolean; at: Spot; scale: number }
   mac: { on: boolean; at: Spot; scale: number; capacity: string; holds: number; strained: boolean }
+  /** The thing, before it is opened. Unnamed on purpose. */
+  parcel: { on: boolean; at: Spot; scale: number }
+  /** Faint copies of the Mac, so "306 GiB" is expressed in boxes the viewer owns. */
+  ghosts: { on: boolean; at: Spot; scale: number; count: number }
   arch: { on: boolean; at: Spot; scale: number }
   sheet: { on: boolean; at: Spot; scale: number; pushed: boolean }
   narrator: { on: boolean; at: Spot; pose: NarratorPose; flip: boolean; scale: number }
@@ -73,6 +77,8 @@ export const INITIAL: SceneState = {
   picked: { on: false, at: { x: 66, y: 30 }, scale: 1 },
   blocker: { on: false, at: { x: 67, y: 48 }, scale: 1 },
   mac: { on: false, at: { x: 12, y: 52 }, scale: 1, capacity: '32 GB', holds: 0, strained: false },
+  parcel: { on: false, at: { x: 60, y: 46 }, scale: 1 },
+  ghosts: { on: false, at: { x: 60, y: 50 }, scale: 1, count: 0 },
   arch: { on: false, at: { x: 84, y: 52 }, scale: 1 },
   sheet: { on: false, at: { x: 26, y: 48 }, scale: 1, pushed: false },
   narrator: { on: false, at: OFF, pose: 'wonder', flip: false, scale: 0.9 },
@@ -204,6 +210,18 @@ export const picked = {
 export const blocker = {
   drop: (at: Spot = { x: 67, y: 48 }) => ({ blocker: { on: true, at, scale: 1 } }),
   park: () => ({ blocker: { on: true, ...PARK.blocked } }),
+}
+
+export const parcel = {
+  arrive: (at: Spot, scale = 1) => ({ parcel: { on: true, at, scale } }),
+  /** Opens into the parameter mass. The grid takes its place, same spot. */
+  open: () => ({ parcel: { on: false } }),
+}
+
+export const ghosts = {
+  /** How many of the viewer's own box the mass would need. */
+  show: (count: number, at: Spot, scale = 1) => ({ ghosts: { on: true, count, at, scale } }),
+  hide: () => ({ ghosts: { on: false } }),
 }
 
 export const mac = {
