@@ -68,19 +68,13 @@
   inset: 0;
 }
 
-/* Actor placement ------------------------------------------------------- */
+/* Actor placement -------------------------------------------------------
+ * Every actor lives in a persistent slot. Beats animate left/top/scale;
+ * slots are never unmounted, so objects move instead of being rebuilt. */
 
-.s1-at {
+.s1-slot {
   position: absolute;
-  transform: translate(-50%, -50%);
-}
-
-.s1-at[data-origin='left'] {
-  transform: translate(0, -50%);
-}
-
-.s1-at[data-origin='right'] {
-  transform: translate(-100%, -50%);
+  transform-origin: center;
 }
 
 /* Characters ------------------------------------------------------------ */
@@ -163,12 +157,14 @@
 
 /* Parameter grid ------------------------------------------------------- */
 
-/* 66cqw keeps the grid inside the 90% safe width at every scale. */
-.s1-grid {
+/* The one persistent field. 66cqw keeps it inside the 90% safe width. */
+.s1-field {
+  position: absolute;
+  transform-origin: center;
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
-  gap: calc(0.42cqw * var(--scale, 1));
-  width: calc(66cqw * var(--scale, 1));
+  gap: 0.42cqw;
+  width: 66cqw;
 }
 
 .s1-cell {
@@ -182,6 +178,35 @@
 .s1-cell[data-active='true'] {
   background: var(--orange);
   border-color: rgba(43, 41, 38, 0.6);
+}
+
+/* A cell that has become an expert keeps its own grid slot and scales up into
+   the space its faded neighbours left behind. */
+.s1-cell[data-expert='true'] {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  z-index: 2;
+}
+
+.s1-cell[data-expert='true'] svg {
+  position: absolute;
+  inset: -14%;
+  width: 128%;
+  height: 128%;
+  overflow: visible;
+}
+
+.s1-cell[data-chosen='true'] {
+  z-index: 4;
+}
+
+.s1-field-title {
+  position: absolute;
+  top: 9%;
+  font: 400 clamp(11px, 1.05cqw, 20px) / 1 var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--graphite);
 }
 
 /* A reacting parameter has to read as a face, not a smudge, so it lifts well
@@ -201,14 +226,6 @@
   width: 88%;
   height: 88%;
   overflow: visible;
-}
-
-.s1-grid-header {
-  position: absolute;
-  top: 9%;
-  font: 400 clamp(11px, 1.05cqw, 20px) / 1 var(--mono);
-  letter-spacing: 0.1em;
-  color: var(--graphite);
 }
 
 /* Handwritten marks ---------------------------------------------------- */
@@ -409,110 +426,114 @@
   color: var(--orange-ink);
 }
 
+/* Team, selection, routing controls ------------------------------------ */
+
+.s1-team-group {
+  display: grid;
+  justify-items: center;
+  gap: 1.2cqh;
+}
+
 .s1-team-grid {
   display: grid;
   grid-template-columns: repeat(5, auto);
-  gap: 1.6cqh 1.3cqw;
+  gap: 1.6cqh 1.1cqw;
   justify-items: center;
+  align-items: end;
 }
 
-.s1-team-slot {
+.s1-team-caption {
   display: grid;
   justify-items: center;
-  gap: 3px;
-}
-
-.s1-team-label,
-.s1-fan-label {
-  font: 400 clamp(10px, 1cqw, 19px) / 1.15 var(--mono);
-  color: var(--graphite);
+  font: 400 clamp(11px, 1.15cqw, 22px) / 1.25 var(--mono);
+  letter-spacing: 0.06em;
   text-align: center;
   white-space: nowrap;
 }
 
-.s1-expert-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.7cqw;
+.s1-team-caption em {
+  font-style: normal;
+  font-family: var(--hand);
+  letter-spacing: 0;
+  color: var(--graphite);
 }
 
-.s1-router-fan {
-  position: absolute;
-  left: 71%;
-  top: 50%;
-  translate: 0 -50%;
-  display: grid;
-  gap: 1.4cqh;
-}
-
-.s1-fan-item {
-  display: flex;
-  align-items: center;
-  gap: 0.7cqw;
-}
-
-.s1-store-grid,
-.s1-pick-row {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 1.2cqh 0.8cqw;
-}
-
-.s1-pick-row {
-  grid-template-columns: repeat(4, auto);
-}
-
-.s1-selected-column {
+.s1-picked {
   display: grid;
   justify-items: center;
-  gap: 0.9cqh;
+  gap: 0.8cqh;
+  padding: 1.4cqh 1.2cqw;
+  border: 2.2px dashed rgba(200, 123, 69, 0.8);
+  border-radius: 12px;
+  background: rgba(251, 243, 232, 0.72);
 }
 
-.s1-more-dots,
+.s1-picked-title {
+  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
+  letter-spacing: 0.06em;
+  color: var(--orange-ink);
+  white-space: nowrap;
+}
+
+.s1-picked-row {
+  display: flex;
+  gap: 0.7cqw;
+}
+
 .s1-shelf-more {
   font: 400 clamp(13px, 1.4cqw, 26px) / 0.6 var(--mono);
   color: var(--graphite);
   letter-spacing: 0.14em;
 }
 
-.s1-split,
-.s1-divider {
+/* The routing experiment: the only controls in the section. */
+.s1-route-controls {
   position: absolute;
-  top: 22%;
-  bottom: 22%;
-  width: 0;
-  border-left: 2px dashed var(--line);
+  left: 6%;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  gap: 1.6cqh;
+  justify-items: start;
+  z-index: 6;
 }
 
-.s1-split {
-  left: 50%;
+.s1-route-card {
+  padding: 1cqh 1.6cqw;
+  background: linear-gradient(#f6e6c8, #f0dcb8);
+  border: 2px solid rgba(43, 41, 38, 0.45);
+  border-radius: 3px;
+  box-shadow: 2px 3px 0 rgba(43, 41, 38, 0.12);
+  font: 400 clamp(15px, 2cqw, 38px) / 1 var(--hand);
+  color: var(--ink);
+  cursor: pointer;
+  rotate: -2deg;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
 }
 
-.s1-divider {
-  left: 37%;
+.s1-route-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 5px 0 rgba(43, 41, 38, 0.16);
 }
 
-/* Crowd ----------------------------------------------------------------- */
-
-.s1-crowd-host {
-  width: 34cqw;
-  height: 44cqh;
+.s1-route-card[data-picked='true'] {
+  border-color: var(--orange-ink);
+  box-shadow:
+    0 0 0 3px rgba(231, 154, 99, 0.4),
+    2px 3px 0 rgba(43, 41, 38, 0.14);
 }
 
-.s1-crowd {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: rgba(43, 41, 38, 0.045);
-  border-radius: 20px;
+.s1-route-card:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
 }
 
-.s1-crowd-slot {
-  position: absolute;
-  left: calc(var(--x) * 0.88 + 5%);
-  top: calc(var(--y) * 0.82 + 8%);
-  translate: -50% -50%;
-  rotate: var(--tilt);
+.s1-route-hint {
+  font: 400 clamp(12px, 1.4cqw, 26px) / 1.3 var(--hand);
+  color: var(--graphite);
 }
 
 /* Shelf, RAM, machine --------------------------------------------------- */

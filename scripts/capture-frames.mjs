@@ -8,7 +8,7 @@ import { spawn } from 'node:child_process'
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { chromium } from 'playwright'
-import { transform } from 'esbuild'
+
 
 const args = new Map()
 for (const raw of process.argv.slice(2)) {
@@ -22,16 +22,34 @@ const SETTLE = Number(args.get('settle') ?? 1500)
 const DEBUG = args.get('debug') === 'true'
 const OUT = path.resolve(args.get('out') ?? 'frames/section-01')
 
+/**
+ * Reads beat metadata by scanning the source rather than importing it: beats.ts
+ * imports the story verbs, so it cannot be transpiled and evaluated standalone.
+ */
 async function loadFrameMeta() {
-  const source = await readFile(path.resolve('src/videos/glm-320b/section-01/frames.tsx'), 'utf8')
-  const table = source.match(/export const FRAMES[\s\S]*?\n\]/)
-  if (!table) throw new Error('Could not locate the FRAMES table')
+  const source = await readFile(path.resolve('src/videos/glm-320b/section-01/beats.ts'), 'utf8')
+  const blocks = source.split(/\n {2}\{\n/).slice(1)
+  const frames = []
 
-  // Keep only the serialisable metadata; render() pulls in React components.
-  const stripped = table[0].replace(/render: \(\) => \([\s\S]*?\n {4}\),\n/g, '')
-  const { code } = await transform(`${stripped}\nexport default FRAMES`, { loader: 'ts', format: 'esm' })
-  const module = await import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`)
-  return module.default
+  for (const block of blocks) {
+    const n = block.match(/^ {4}n: (\d+),/)
+    if (!n) continue
+    const id = block.match(/\n {4}id: '([^']*)',/)
+    const title = block.match(/\n {4}title: (['"])(.*?)\1,/)
+    const vo = block.match(/\n {4}vo: (['"])(.*?)\1,/)
+    const weight = block.match(/\n {4}weight: '([^']*)',/)
+    frames.push({
+      n: Number(n[1]),
+      id: id?.[1] ?? `beat-${n[1]}`,
+      title: title?.[2] ?? '',
+      vo: vo?.[2] ?? '',
+      weight: weight?.[1] ?? 'normal',
+      interactive: /\n {4}interactive: true,/.test(block),
+    })
+  }
+
+  if (!frames.length) throw new Error('Could not read any beats from beats.ts')
+  return frames
 }
 
 function parseRange(spec, all) {
