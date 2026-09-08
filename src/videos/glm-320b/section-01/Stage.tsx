@@ -3,7 +3,8 @@ import { type CSSProperties, type ReactNode } from 'react'
 import { Expert, SharedExpert } from './cast/Expert'
 import { Narrator } from './cast/Narrator'
 import { Router } from './cast/Router'
-import { Archway, Blocker, ModelInfoCard, RamTray, SmallMachine, WeightShelf, WordCard } from './cast/Objects'
+import { Archway, Blocker, ModelInfoCard, RamTray, WeightShelf, WordCard } from './cast/Objects'
+import { MacBox } from './cast/MacBox'
 import { ExpertField } from './ExpertField'
 import { type Feel } from './motion'
 import { type SceneState } from './scene'
@@ -40,7 +41,7 @@ function Slot({
       // See ExpertField: centring must be animated, not set in CSS, because
       // Motion's inline transform replaces any CSS transform.
       animate={{ left: `${at.x}%`, top: `${at.y}%`, x: '-50%', y: '-50%', scale, opacity: on ? 1 : 0 }}
-      transition={feel}
+      transition={{ ...feel, opacity: { duration: on ? 0.32 : 0.18, ease: 'easeOut' } }}
       aria-hidden={!on}
       // Keeps hidden actors from swallowing clicks meant for the stage.
       inert={!on || undefined}
@@ -71,6 +72,7 @@ export function Stage({
         lead={scene.grid.lead}
         scoring={scene.grid.scoring}
         dim={scene.grid.dim}
+        size={scene.grid.size}
         selected={selected}
         feel={feel}
       />
@@ -112,8 +114,8 @@ export function Stage({
         <Blocker scale={0.86} />
       </Slot>
 
-      <Slot on={scene.machine.on} at={scene.machine.at} scale={scene.machine.scale} z={3} feel={feel}>
-        <SmallMachine scale={0.86} />
+      <Slot on={scene.mac.on} at={scene.mac.at} scale={scene.mac.scale} z={3} feel={feel}>
+        <MacBox capacity={scene.mac.capacity} holds={scene.mac.holds} strained={scene.mac.strained} />
       </Slot>
 
       <Slot on={scene.arch.on} at={scene.arch.at} scale={scene.arch.scale} z={2} feel={feel}>

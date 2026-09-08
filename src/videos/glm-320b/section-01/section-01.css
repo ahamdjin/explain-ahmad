@@ -238,6 +238,67 @@
   overflow: visible;
 }
 
+/* The machine: the stake, with a visible interior and spare room. */
+.s1-mac {
+  position: relative;
+  width: calc(26cqw * var(--scale, 1));
+}
+
+.s1-mac svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-mac-label {
+  font: 400 30px/1 var(--hand);
+}
+
+.s1-mac-bay {
+  position: absolute;
+  left: 10.5%;
+  top: 26%;
+  width: 79%;
+  height: 44%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6%;
+  padding: 3% 3.4%;
+  align-content: center;
+}
+
+.s1-mac-slot {
+  aspect-ratio: 1;
+  border: 1.4px dashed rgba(43, 41, 38, 0.22);
+  border-radius: 22%;
+}
+
+.s1-mac-slot[data-filled='true'] {
+  border-style: solid;
+  border-color: rgba(43, 41, 38, 0.5);
+}
+
+.s1-mac-slot i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 20%;
+}
+
+.s1-mac[data-strained='true'] .s1-mac-slot[data-filled='true'] {
+  border-color: var(--red);
+}
+
+/* Byte size stamped on the parameter mass. */
+.s1-field-size {
+  position: absolute;
+  left: 0;
+  top: -7%;
+  font: 400 clamp(14px, 1.7cqw, 34px) / 1 var(--hand);
+  color: var(--ink);
+}
+
 /* Handwritten marks ---------------------------------------------------- */
 
 .s1-note {

@@ -76,6 +76,7 @@ export function ExpertField({
   lead,
   scoring,
   dim,
+  size,
   selected,
   feel,
 }: {
@@ -88,6 +89,7 @@ export function ExpertField({
   lead: boolean
   scoring: boolean
   dim: boolean
+  size: string
   selected: readonly number[]
   feel: Feel
 }) {
@@ -110,9 +112,10 @@ export function ExpertField({
         scale,
         opacity: on ? (dim ? 0.5 : 1) : 0,
       }}
-      transition={feel}
+      transition={{ ...feel, opacity: { duration: on ? 0.34 : 0.18, ease: 'easeOut' } }}
       aria-hidden={!on}
     >
+      {size ? <span className="s1-field-size">{size}</span> : null}
       {Array.from({ length: COLS * ROWS }, (_, index) => {
         const slot = expertSlot(index)
         const isLead = lead && slot === LEAD_SLOT

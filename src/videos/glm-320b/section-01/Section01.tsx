@@ -42,7 +42,12 @@ export default function Section01() {
 
   /** Restart the beat clock on every move; stepping back skips the staging. */
   useEffect(() => {
-    const spans = beat.stages?.map((stage) => stage.at) ?? []
+    // Must include lateOverlays: the clock previously stopped after the last
+    // stage, so any annotation scheduled past that point never appeared.
+    const spans = [
+      ...(beat.stages?.map((stage) => stage.at) ?? []),
+      ...(beat.lateOverlays ? [beat.lateOverlays.at] : []),
+    ]
     if (!spans.length) {
       setElapsed(Number.POSITIVE_INFINITY)
       return

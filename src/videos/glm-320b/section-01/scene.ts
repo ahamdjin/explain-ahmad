@@ -31,6 +31,8 @@ export type SceneState = {
     /** Router sweeps a score across the population before anything is chosen. */
     scoring: boolean
     dim: boolean
+    /** Byte size stamped on the mass, so the wall is a number not a vibe. */
+    size: string
   }
   word: { on: boolean; at: Spot; scale: number }
   router: { on: boolean; at: Spot; scale: number; gesturing: boolean; fan: boolean }
@@ -39,7 +41,7 @@ export type SceneState = {
   ram: { on: boolean; at: Spot; scale: number; count: number; note: string }
   picked: { on: boolean; at: Spot; scale: number }
   blocker: { on: boolean; at: Spot; scale: number }
-  machine: { on: boolean; at: Spot; scale: number }
+  mac: { on: boolean; at: Spot; scale: number; capacity: string; holds: number; strained: boolean }
   arch: { on: boolean; at: Spot; scale: number }
   sheet: { on: boolean; at: Spot; scale: number; pushed: boolean }
   narrator: { on: boolean; at: Spot; pose: NarratorPose; flip: boolean; scale: number }
@@ -61,6 +63,7 @@ export const INITIAL: SceneState = {
     lead: false,
     scoring: false,
     dim: false,
+    size: '',
   },
   word: { on: false, at: { x: 10, y: 32 }, scale: 1 },
   router: { on: false, at: { x: 43, y: 54 }, scale: 0.92, gesturing: false, fan: false },
@@ -69,7 +72,7 @@ export const INITIAL: SceneState = {
   ram: { on: false, at: { x: 42, y: 50 }, scale: 1, count: 9, note: '' },
   picked: { on: false, at: { x: 66, y: 30 }, scale: 1 },
   blocker: { on: false, at: { x: 67, y: 48 }, scale: 1 },
-  machine: { on: false, at: { x: 81, y: 43 }, scale: 1 },
+  mac: { on: false, at: { x: 12, y: 52 }, scale: 1, capacity: '32 GB', holds: 0, strained: false },
   arch: { on: false, at: { x: 84, y: 52 }, scale: 1 },
   sheet: { on: false, at: { x: 26, y: 48 }, scale: 1, pushed: false },
   narrator: { on: false, at: OFF, pose: 'wonder', flip: false, scale: 0.9 },
@@ -132,7 +135,9 @@ export const card = {
 }
 
 export const grid = {
-  show: (at: Spot = { x: 56, y: 50 }, scale = 1) => ({ grid: { on: true, at, scale } }),
+  show: (at: Spot = { x: 56, y: 50 }, scale = 1, size = '') => ({ grid: { on: true, at, scale, size } }),
+  /** Quantization: the same mass, physically smaller, still far too big. */
+  squeeze: (scale: number, size: string) => ({ grid: { scale, size } }),
   lightActiveSlice: () => ({ grid: { slice: true } }),
   letInactiveAsk: () => ({ grid: { reacting: true } }),
   stopAsking: () => ({ grid: { reacting: false } }),
@@ -201,9 +206,15 @@ export const blocker = {
   park: () => ({ blocker: { on: true, ...PARK.blocked } }),
 }
 
-export const machine = {
-  show: (at: Spot = { x: 81, y: 43 }) => ({ machine: { on: true, at, scale: 1 } }),
-  park: () => ({ machine: { on: true, ...PARK.machine } }),
+export const mac = {
+  /** On screen from beat 1. The want, made physical. */
+  show: (at: Spot, scale = 1) => ({ mac: { on: true, at, scale } }),
+  moveTo: (at: Spot, scale: number) => ({ mac: { at, scale } }),
+  /** Experts resident in memory. Spare room stays visible on purpose. */
+  load: (holds: number) => ({ mac: { holds } }),
+  strain: () => ({ mac: { strained: true } }),
+  relax: () => ({ mac: { strained: false } }),
+  park: () => ({ mac: { on: true, ...PARK.machine } }),
 }
 
 export const arch = {
