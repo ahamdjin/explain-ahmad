@@ -18,6 +18,13 @@ Source notes and factual research used to understand a topic or study other expl
 
 Research informs the work; it is not the current script.
 
+## `art-direction/`
+The authoritative visual language for a video/project before storyboard and implementation.
+
+This is where we lock things such as palette, paper/material treatment, character personality, line style, motion language, visual semantics, composition rules, and what must be avoided.
+
+For the current GLM explainer, `art-direction/GLM_PAPER_WORLD.md` is the source of truth. Once locked, do not repeatedly reinvent the style while storyboarding or coding.
+
 ## `video-script/`
 The current spoken YouTube script.
 
@@ -31,4 +38,4 @@ Useful for history, but **not authoritative for the current video**.
 ## `src/`
 The actual React/Vite implementation and reusable visual components.
 
-Changing `skills/`, `research/`, `video-script/`, or `archive/` does not mean the production UI should automatically be redesigned.
+Changing `skills/`, `research/`, `art-direction/`, `video-script/`, or `archive/` does not mean the production UI should automatically be redesigned.
