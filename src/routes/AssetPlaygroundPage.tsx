@@ -6,7 +6,7 @@ import './asset-playground.css'
 const openPeeps = new Style(openPeepsDefinition)
 
 function peepDataUri(seed: string) {
-  const svg = new Avatar(openPeeps, { seed: [seed] }).toString()
+  const svg = new Avatar(openPeeps, { seed }).toString()
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
 }
 
