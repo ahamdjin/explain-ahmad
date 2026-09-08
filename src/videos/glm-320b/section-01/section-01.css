@@ -201,6 +201,16 @@
   z-index: 4;
 }
 
+/* The router's scoring pulse, one per expert, sweeping left to right. */
+.s1-score {
+  position: absolute;
+  inset: -18%;
+  border: 2.4px solid var(--blue);
+  border-radius: 30%;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .s1-field-title {
   position: absolute;
   top: 9%;

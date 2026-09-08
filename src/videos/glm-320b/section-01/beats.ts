@@ -14,6 +14,7 @@ import {
   word,
   type Patch,
 } from './scene'
+import { HOLD, type Relation } from './motion'
 
 export type Overlay = {
   kind: 'note' | 'bubble' | 'brace' | 'arrow' | 'sparks' | 'cross' | 'title'
@@ -37,16 +38,26 @@ export type Overlay = {
   anchor?: 'grid-total' | 'grid-active'
 }
 
+/**
+ * A staged reveal inside one beat. Teachers show a thing, then name it, then let
+ * you react -- they do not do all three at once. `at` is ms after the beat opens.
+ */
+export type Stage = { at: number; commands: Patch[] }
+
 export type Beat = {
   n: number
   id: string
   title: string
   vo: string
-  /** Commands issued to the persistent scene. Cumulative across beats. */
+  /** What this beat IS in the story. Drives motion feel and hold time. */
+  relation: Relation
+  /** Fires immediately when the beat opens. */
   commands: Patch[]
+  /** Fires later, on a timeline, so one beat can teach in sequence. */
+  stages?: Stage[]
   overlays?: Overlay[]
-  /** Weight drives hold time and transition energy, so the frames aren't equal. */
-  weight?: 'quiet' | 'normal' | 'peak'
+  /** Overlays held back until `at` ms, so a label can follow its object. */
+  lateOverlays?: { at: number; overlays: Overlay[] }
   /** Marks the beat where the viewer routes a word themselves. */
   interactive?: boolean
 }
@@ -63,9 +74,9 @@ export const BEATS: Beat[] = [
   {
     n: 1,
     id: 'meet-the-model',
+    relation: 'want',
     title: 'Meet the model',
     vo: 'So, GLM-5.3-Flash has 320 billion parameters and only 18 billion are active.',
-    weight: 'quiet',
     commands: [card.show({ x: 54, y: 50 }), narrator.at({ x: 12, y: 60 }, 'point', 1.02)],
     overlays: [
       H("This is the model\nwe'll look at!", { x: '3%', y: '35%' }, { size: 'md', rotate: -3 }),
@@ -78,14 +89,15 @@ export const BEATS: Beat[] = [
   {
     n: 2,
     id: 'word-comes-in',
+    relation: 'so',
     title: 'A word comes in',
     vo: 'For any one word, only about 18 billion parameters are active.',
-    commands: [
-      card.putAway(),
-      grid.show({ x: 56, y: 50 }),
-      grid.lightActiveSlice(),
-      word.arrive({ x: 10, y: 32 }),
-      narrator.at({ x: 10, y: 72 }, 'wonder', 0.88),
+    commands: [card.putAway(), grid.show({ x: 56, y: 50 }), narrator.at({ x: 10, y: 72 }, 'wonder', 0.88)],
+    // Show the mass. Then send the word in. Then let the slice light as a
+    // consequence of the word arriving -- cause before effect, in time.
+    stages: [
+      { at: 620, commands: [word.arrive({ x: 10, y: 32 })] },
+      { at: 1180, commands: [grid.lightActiveSlice()] },
     ],
     overlays: [
       { kind: 'title', text: 'MODEL PARAMETERS (320,000,000,000)' },
@@ -97,6 +109,7 @@ export const BEATS: Beat[] = [
   {
     n: 3,
     id: 'tiny-part-used',
+    relation: 'so',
     title: 'A tiny part is used',
     vo: 'The model owns 320 billion parameters, but uses only a small fraction of them for that word.',
     commands: [narrator.pose('think')],
@@ -117,10 +130,11 @@ export const BEATS: Beat[] = [
   {
     n: 4,
     id: 'obvious-question',
+    relation: 'and-yet',
     title: 'The obvious question',
     vo: 'Okay. So why have the other 300 billion?',
-    weight: 'peak',
-    commands: [grid.letInactiveAsk(), narrator.hide()],
+    commands: [narrator.hide()],
+    stages: [{ at: 420, commands: [grid.letInactiveAsk()] }],
     overlays: [
       { kind: 'brace', text: '320B TOTAL PARAMETERS', anchor: 'grid-total', at: { x: '0%', y: '16%' }, side: 'top' },
       { kind: 'brace', text: '~18B ACTIVE', anchor: 'grid-active', at: { x: '0%', y: '77%' }, tone: 'orange' },
@@ -133,13 +147,15 @@ export const BEATS: Beat[] = [
   {
     n: 5,
     id: 'not-useless',
+    relation: 'so',
     title: "The inactive part isn't useless",
     vo: 'The rest are organized into 288 experts. They stay inactive until they are needed.',
-    weight: 'peak',
-    commands: [
-      grid.stopAsking(),
-      grid.becomeExperts({ x: 58, y: 48 }, 0.95),
-      narrator.at({ x: 7, y: 62 }, 'wonder', 0.8),
+    commands: [grid.stopAsking(), narrator.at({ x: 7, y: 62 }, 'wonder', 0.8)],
+    // One cell becomes an expert on its own and is allowed to land, THEN the
+    // rest follow as a wave outward from it. Show one, then all.
+    stages: [
+      { at: 380, commands: [grid.showOneExpert({ x: 58, y: 48 }, 0.95)] },
+      { at: 1500, commands: [grid.becomeExperts({ x: 58, y: 48 }, 0.95)] },
     ],
     overlays: [
       H('So where do the\nother 300B go?', { x: '1.5%', y: '40%' }, { rotate: -3 }),
@@ -150,14 +166,16 @@ export const BEATS: Beat[] = [
   {
     n: 6,
     id: 'meet-the-router',
+    relation: 'so',
     title: 'Meet the router',
     vo: 'A router reads what the word has become, scores every expert, and takes the top few.',
-    commands: [
-      grid.moveTo({ x: 64, y: 48 }, 0.72),
-      router.appear({ x: 34, y: 54 }, 0.86),
-      router.fanOut(),
-      word.moveTo({ x: 17, y: 54 }),
-      narrator.at({ x: 6, y: 76 }, 'wonder', 0.74),
+    commands: [grid.moveTo({ x: 64, y: 48 }, 0.72), word.moveTo({ x: 17, y: 54 })],
+    // The router has to arrive and be seen before it does anything, and it has
+    // to visibly score before eight light up, or selection reads as magic.
+    stages: [
+      { at: 420, commands: [router.appear({ x: 34, y: 54 }, 0.86)] },
+      { at: 1050, commands: [narrator.at({ x: 6, y: 76 }, 'wonder', 0.74)] },
+      { at: 1400, commands: [grid.score(), router.fanOut()] },
     ],
     overlays: [
       H('How does it choose\nthe right experts?', { x: '13%', y: '70%' }, { rotate: -3 }),
@@ -174,10 +192,11 @@ export const BEATS: Beat[] = [
   {
     n: 7,
     id: 'small-team',
+    relation: 'hope',
     title: 'One word, a small team',
     vo: 'For this word, the router selects 8 experts plus 1 shared expert that is always active.',
-    weight: 'peak',
     commands: [router.foldFan()],
+    stages: [{ at: 520, commands: [grid.stopScoring()] }],
     overlays: [
       H('The router picks a small\nteam for this word.', { x: '13%', y: '70%' }, { rotate: -2 }),
       { kind: 'arrow', from: { x: 690, y: 560 }, to: { x: 800, y: 548 }, bow: -12, tone: 'orange' },
@@ -187,9 +206,9 @@ export const BEATS: Beat[] = [
   {
     n: 8,
     id: 'route-it-yourself',
+    relation: 'hope',
     title: 'Different words, different experts',
     vo: 'A different word is routed to a different set of experts. Try it.',
-    weight: 'peak',
     interactive: true,
     commands: [word.hide()],
     overlays: [
@@ -200,6 +219,7 @@ export const BEATS: Beat[] = [
   {
     n: 9,
     id: 'new-question',
+    relation: 'and-yet',
     title: 'A new question',
     vo: 'But then I had another question.',
     commands: [
@@ -219,9 +239,9 @@ export const BEATS: Beat[] = [
   {
     n: 10,
     id: 'memory-problem',
+    relation: 'wall',
     title: 'The memory problem',
     vo: 'If only a few experts are being used, why deal with hundreds of gigabytes of weights?',
-    weight: 'peak',
     commands: [
       grid.hide(),
       shelf.relabel('MODEL WEIGHTS (ON DISK / STORAGE)', 'Hundreds of GB (e.g. 200-400GB)'),
@@ -237,6 +257,7 @@ export const BEATS: Beat[] = [
   {
     n: 11,
     id: 'keep-small-part',
+    relation: 'hope',
     title: 'Keep only the small part?',
     vo: "Why can't I keep just the small part I need?",
     commands: [
@@ -262,6 +283,7 @@ export const BEATS: Beat[] = [
   {
     n: 12,
     id: 'router-already-knows',
+    relation: 'hope',
     title: 'The router already knows',
     vo: 'The router already knows which experts this word should go to.',
     commands: [
@@ -286,9 +308,9 @@ export const BEATS: Beat[] = [
   {
     n: 13,
     id: 'something-stops-this',
+    relation: 'wall',
     title: 'Something is stopping this',
     vo: 'Could this make the model fit on a smaller machine? And if not, what is stopping us?',
-    weight: 'peak',
     commands: [
       router.settle(),
       router.moveTo({ x: 32, y: 42 }, 0.58),
@@ -317,6 +339,7 @@ export const BEATS: Beat[] = [
   {
     n: 14,
     id: 'follow-word-inside',
+    relation: 'therefore',
     title: 'Follow one word inside',
     vo: "Staring at the final architecture isn't enough. Let's see what happens inside the model.",
     commands: [
@@ -341,8 +364,15 @@ export const BEATS: Beat[] = [
   },
 ]
 
-const HOLD = { quiet: 380, normal: 520, peak: 900 } as const
-
 export function holdFor(beat: Beat) {
-  return HOLD[beat.weight ?? 'normal']
+  const staged = beat.stages?.length ? Math.max(...beat.stages.map((stage) => stage.at)) : 0
+  return HOLD[beat.relation] + staged
+}
+
+/** Longest staged offset, so the recorder knows how long a beat really needs. */
+export function stageSpan(beat: Beat) {
+  const stages = beat.stages?.map((stage) => stage.at) ?? []
+  const late = beat.lateOverlays ? [beat.lateOverlays.at] : []
+  const all = [...stages, ...late]
+  return all.length ? Math.max(...all) : 0
 }

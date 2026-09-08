@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { type CSSProperties } from 'react'
+import { type Feel } from './motion'
 import { INK, expertColor } from './paper'
 
 export const COLS = 30
@@ -52,6 +53,13 @@ function expertSlot(index: number) {
 /** One expert always participates. Fixed slot so it reads as the same one. */
 export const SHARED_SLOT = 9
 
+/**
+ * The worked example. One cell becomes an expert on its own, is understood, and
+ * only then does the rest of the population follow -- rather than 60 characters
+ * arriving simultaneously, which teaches nothing.
+ */
+export const LEAD_SLOT = 24
+
 export const EXPERT_COUNT = (() => {
   let count = 0
   for (let index = 0; index < COLS * ROWS; index += 1) if (expertSlot(index) >= 0) count += 1
@@ -65,8 +73,11 @@ export function ExpertField({
   slice,
   reacting,
   asExperts,
+  lead,
+  scoring,
   dim,
   selected,
+  feel,
 }: {
   on: boolean
   at: { x: number; y: number }
@@ -74,8 +85,11 @@ export function ExpertField({
   slice: boolean
   reacting: boolean
   asExperts: boolean
+  lead: boolean
+  scoring: boolean
   dim: boolean
   selected: readonly number[]
+  feel: Feel
 }) {
   const reactingSet = new Set(reacting ? REACTING : [])
   const selectedSet = new Set(selected)
@@ -96,13 +110,17 @@ export function ExpertField({
         scale,
         opacity: on ? (dim ? 0.5 : 1) : 0,
       }}
-      transition={{ type: 'spring', stiffness: 74, damping: 20 }}
+      transition={feel}
       aria-hidden={!on}
     >
       {Array.from({ length: COLS * ROWS }, (_, index) => {
         const slot = expertSlot(index)
-        const isExpert = asExperts && slot >= 0
+        const isLead = lead && slot === LEAD_SLOT
+        const isExpert = (asExperts && slot >= 0) || isLead
         const fades = asExperts && slot < 0
+        // During the worked example the grid stays put and recedes, so the one
+        // expert reads as having come OUT of it.
+        const recedesForLead = lead && !asExperts && slot !== LEAD_SLOT
         const active = !asExperts && slice && isActive(index)
         const asks = !asExperts && reactingSet.has(index)
         const isShared = isExpert && slot === SHARED_SLOT
@@ -118,18 +136,36 @@ export function ExpertField({
             data-chosen={chosen ? 'true' : undefined}
             data-shared={isShared ? 'true' : undefined}
             animate={{
-              opacity: fades ? 0 : isExpert && hasSelection && !chosen ? 0.3 : active ? 1 : slice && !asExperts ? 0.62 : 0.78,
+              opacity: fades
+                ? 0
+                : recedesForLead
+                  ? 0.28
+                  : isExpert && hasSelection && !chosen
+                    ? 0.3
+                    : active
+                      ? 1
+                      : slice && !asExperts
+                        ? 0.62
+                        : 0.78,
               scale: isExpert ? 2.55 : active ? 1.04 : 1,
             }}
             transition={{
               type: 'spring',
-              stiffness: 90,
-              damping: 18,
-              delay: isExpert ? (slot % 11) * 0.014 : active ? (index % COLS) * 0.012 : 0,
+              stiffness: isLead ? 70 : 90,
+              damping: isLead ? 14 : 18,
+              // Experts arrive as a wave from the lead outwards, not all at once.
+              delay: isLead
+                ? 0
+                : isExpert
+                  ? Math.abs(slot - LEAD_SLOT) * 0.009
+                  : active
+                    ? (index % COLS) * 0.012
+                    : 0,
             }}
           >
             {isExpert ? <ExpertFace index={slot} chosen={chosen} shared={isShared} /> : null}
             {asks ? <AskingFace /> : null}
+            {isExpert && scoring ? <ScoreSweep column={index % COLS} /> : null}
           </motion.span>
         )
       })}
@@ -167,6 +203,22 @@ function ExpertFace({ index, chosen, shared }: { index: number; chosen: boolean;
         strokeLinecap="round"
       />
     </svg>
+  )
+}
+
+/**
+ * The router scoring every expert. Sweeps left to right so the viewer sees the
+ * router *doing* something before eight of them light up -- otherwise selection
+ * looks like magic.
+ */
+function ScoreSweep({ column }: { column: number }) {
+  return (
+    <motion.i
+      className="s1-score"
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: [0, 1, 0], scale: [0.7, 1.15, 0.9] }}
+      transition={{ duration: 0.62, delay: column * 0.02, ease: 'easeOut' }}
+    />
   )
 }
 

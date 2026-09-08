@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "frames": "node scripts/capture-beats.mjs",
     "frames:opening": "node scripts/capture-beats.mjs --beats=1-14",
-    "frames:s1": "node scripts/capture-frames.mjs"
+    "frames:s1": "node scripts/capture-frames.mjs",
+    "record:s1": "node scripts/record-section.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

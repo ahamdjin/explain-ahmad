@@ -5,6 +5,7 @@ import { Narrator } from './cast/Narrator'
 import { Router } from './cast/Router'
 import { Archway, Blocker, ModelInfoCard, RamTray, SmallMachine, WeightShelf, WordCard } from './cast/Objects'
 import { ExpertField } from './ExpertField'
+import { type Feel } from './motion'
 import { type SceneState } from './scene'
 
 /**
@@ -20,6 +21,7 @@ function Slot({
   at,
   scale = 1,
   z = 1,
+  feel,
   children,
   className = '',
 }: {
@@ -27,6 +29,7 @@ function Slot({
   at: { x: number; y: number }
   scale?: number
   z?: number
+  feel: Feel
   children: ReactNode
   className?: string
 }) {
@@ -37,7 +40,7 @@ function Slot({
       // See ExpertField: centring must be animated, not set in CSS, because
       // Motion's inline transform replaces any CSS transform.
       animate={{ left: `${at.x}%`, top: `${at.y}%`, x: '-50%', y: '-50%', scale, opacity: on ? 1 : 0 }}
-      transition={{ type: 'spring', stiffness: 78, damping: 20 }}
+      transition={feel}
       aria-hidden={!on}
       // Keeps hidden actors from swallowing clicks meant for the stage.
       inert={!on || undefined}
@@ -47,7 +50,15 @@ function Slot({
   )
 }
 
-export function Stage({ scene, selected }: { scene: SceneState; selected: readonly number[] }) {
+export function Stage({
+  scene,
+  selected,
+  feel,
+}: {
+  scene: SceneState
+  selected: readonly number[]
+  feel: Feel
+}) {
   return (
     <>
       <ExpertField
@@ -57,35 +68,38 @@ export function Stage({ scene, selected }: { scene: SceneState; selected: readon
         slice={scene.grid.slice}
         reacting={scene.grid.reacting}
         asExperts={scene.grid.asExperts}
+        lead={scene.grid.lead}
+        scoring={scene.grid.scoring}
         dim={scene.grid.dim}
         selected={selected}
+        feel={feel}
       />
 
-      <Slot on={scene.card.on} at={scene.card.at} scale={scene.card.scale} z={3}>
+      <Slot on={scene.card.on} at={scene.card.at} scale={scene.card.scale} z={3} feel={feel}>
         <ModelInfoCard highlight={scene.card.highlight} />
       </Slot>
 
-      <Slot on={scene.word.on} at={scene.word.at} scale={scene.word.scale} z={4}>
+      <Slot on={scene.word.on} at={scene.word.at} scale={scene.word.scale} z={4} feel={feel}>
         <WordCard />
       </Slot>
 
-      <Slot on={scene.router.on} at={scene.router.at} scale={scene.router.scale} z={3}>
+      <Slot on={scene.router.on} at={scene.router.at} scale={scene.router.scale} z={3} feel={feel}>
         <Router gesturing={scene.router.gesturing} />
       </Slot>
 
-      <Slot on={scene.team.on} at={scene.team.at} z={3}>
+      <Slot on={scene.team.on} at={scene.team.at} z={3} feel={feel}>
         <TeamGroup size={scene.team.size} label={scene.team.label} sub={scene.team.sub} />
       </Slot>
 
-      <Slot on={scene.picked.on} at={scene.picked.at} z={3}>
+      <Slot on={scene.picked.on} at={scene.picked.at} z={3} feel={feel}>
         <PickedGroup />
       </Slot>
 
-      <Slot on={scene.ram.on} at={scene.ram.at} z={3}>
+      <Slot on={scene.ram.on} at={scene.ram.at} z={3} feel={feel}>
         <RamTray count={scene.ram.count} note={scene.ram.note} />
       </Slot>
 
-      <Slot on={scene.shelf.on} at={scene.shelf.at} scale={scene.shelf.scale} z={2}>
+      <Slot on={scene.shelf.on} at={scene.shelf.at} scale={scene.shelf.scale} z={2} feel={feel}>
         <WeightShelf
           title={scene.shelf.title}
           size={scene.shelf.size}
@@ -94,23 +108,23 @@ export function Stage({ scene, selected }: { scene: SceneState; selected: readon
         />
       </Slot>
 
-      <Slot on={scene.blocker.on} at={scene.blocker.at} z={4}>
+      <Slot on={scene.blocker.on} at={scene.blocker.at} z={4} feel={feel}>
         <Blocker scale={0.86} />
       </Slot>
 
-      <Slot on={scene.machine.on} at={scene.machine.at} z={3}>
+      <Slot on={scene.machine.on} at={scene.machine.at} z={3} feel={feel}>
         <SmallMachine scale={0.86} />
       </Slot>
 
-      <Slot on={scene.arch.on} at={scene.arch.at} z={2}>
+      <Slot on={scene.arch.on} at={scene.arch.at} z={2} feel={feel}>
         <Archway />
       </Slot>
 
-      <Slot on={scene.sheet.on} at={scene.sheet.at} z={3}>
+      <Slot on={scene.sheet.on} at={scene.sheet.at} z={3} feel={feel}>
         <ArchitectureSheet pushed={scene.sheet.pushed} />
       </Slot>
 
-      <Slot on={scene.narrator.on} at={scene.narrator.at} z={5}>
+      <Slot on={scene.narrator.on} at={scene.narrator.at} z={5} feel={feel}>
         <Narrator pose={scene.narrator.pose} flip={scene.narrator.flip} scale={scene.narrator.scale} />
       </Slot>
     </>

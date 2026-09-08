@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { BEATS, holdFor } from './beats'
+import { FEEL } from './motion'
 import { Overlays } from './Overlays'
 import { PaperDefs } from './paper'
 import { ROUTES, applyPatches, INITIAL } from './scene'
@@ -22,12 +23,44 @@ export default function Section01() {
   const lockUntil = useRef(0)
 
   const beat = BEATS[index]
+  /** How far into the current beat we are, so staged reveals can fire in order. */
+  const [elapsed, setElapsed] = useState(Number.POSITIVE_INFINITY)
 
-  /** Scene state is the merge of every beat up to here, so actors persist. */
+  /**
+   * Scene state is every completed beat, plus the stages of the current beat
+   * that have come due. Actors therefore persist and reveals arrive in sequence
+   * rather than all at once.
+   */
   const scene = useMemo(() => {
-    const patches = BEATS.slice(0, index + 1).flatMap((item) => item.commands)
-    return applyPatches(INITIAL, patches)
-  }, [index])
+    const previous = BEATS.slice(0, index).flatMap((item) => [
+      ...item.commands,
+      ...(item.stages ?? []).flatMap((stage) => stage.commands),
+    ])
+    const due = (beat.stages ?? []).filter((stage) => stage.at <= elapsed).flatMap((stage) => stage.commands)
+    return applyPatches(INITIAL, [...previous, ...beat.commands, ...due])
+  }, [beat, index, elapsed])
+
+  /** Restart the beat clock on every move; stepping back skips the staging. */
+  useEffect(() => {
+    const spans = beat.stages?.map((stage) => stage.at) ?? []
+    if (!spans.length) {
+      setElapsed(Number.POSITIVE_INFINITY)
+      return
+    }
+    setElapsed(0)
+    const started = performance.now()
+    let frame = 0
+    const tick = () => {
+      setElapsed(performance.now() - started)
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    const stop = setTimeout(() => cancelAnimationFrame(frame), Math.max(...spans) + 120)
+    return () => {
+      cancelAnimationFrame(frame)
+      clearTimeout(stop)
+    }
+  }, [beat])
 
   const move = useCallback((delta: number) => {
     const now = performance.now()
@@ -77,8 +110,14 @@ export default function Section01() {
             move(1)
           }}
         >
-          <Stage scene={scene} selected={selected} />
-          <Overlays overlays={beat.overlays ?? []} scene={scene} />
+          <Stage scene={scene} selected={selected} feel={FEEL[beat.relation]} />
+          <Overlays
+            overlays={[
+              ...(beat.overlays ?? []),
+              ...(beat.lateOverlays && beat.lateOverlays.at <= elapsed ? beat.lateOverlays.overlays : []),
+            ]}
+            scene={scene}
+          />
 
           {beat.interactive ? (
             <RouteControls
@@ -94,7 +133,7 @@ export default function Section01() {
           {debug ? (
             <div className="s1-debug">
               <b>
-                {beat.n}/{BEATS.length} · {beat.id} · {beat.weight ?? 'normal'}
+                {beat.n}/{BEATS.length} · {beat.id} · {beat.relation}
               </b>
               <span>{beat.title}</span>
               <span>VO: {beat.vo}</span>

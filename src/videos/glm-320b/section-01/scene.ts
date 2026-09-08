@@ -26,6 +26,10 @@ export type SceneState = {
     reacting: boolean
     /** Cells lift out of the grid and become expert characters in place. */
     asExperts: boolean
+    /** One expert first, as a worked example, before the whole population. */
+    lead: boolean
+    /** Router sweeps a score across the population before anything is chosen. */
+    scoring: boolean
     dim: boolean
   }
   word: { on: boolean; at: Spot; scale: number }
@@ -47,7 +51,17 @@ const OFF: Spot = { x: 50, y: 50 }
 
 export const INITIAL: SceneState = {
   card: { on: false, highlight: false, at: { x: 52, y: 50 }, scale: 1 },
-  grid: { on: false, at: { x: 56, y: 50 }, scale: 1, slice: false, reacting: false, asExperts: false, dim: false },
+  grid: {
+    on: false,
+    at: { x: 56, y: 50 },
+    scale: 1,
+    slice: false,
+    reacting: false,
+    asExperts: false,
+    lead: false,
+    scoring: false,
+    dim: false,
+  },
   word: { on: false, at: { x: 10, y: 32 }, scale: 1 },
   router: { on: false, at: { x: 43, y: 54 }, scale: 0.92, gesturing: false, fan: false },
   team: { on: false, at: { x: 66, y: 50 }, count: 9, size: 54, label: '', sub: '' },
@@ -95,8 +109,13 @@ export const grid = {
   lightActiveSlice: () => ({ grid: { slice: true } }),
   letInactiveAsk: () => ({ grid: { reacting: true } }),
   stopAsking: () => ({ grid: { reacting: false } }),
+  /** Worked example: one cell becomes an expert before the rest follow. */
+  showOneExpert: (at: Spot, scale: number) => ({ grid: { lead: true, at, scale } }),
   /** Beat 5: the same cells lift out and become the expert population. */
-  becomeExperts: (at: Spot, scale: number) => ({ grid: { asExperts: true, at, scale } }),
+  becomeExperts: (at: Spot, scale: number) => ({ grid: { asExperts: true, lead: false, at, scale } }),
+  /** The router scores every expert before any is selected. */
+  score: () => ({ grid: { scoring: true } }),
+  stopScoring: () => ({ grid: { scoring: false } }),
   moveTo: (at: Spot, scale: number) => ({ grid: { at, scale } }),
   recede: () => ({ grid: { dim: true } }),
   hide: () => ({ grid: { on: false } }),
