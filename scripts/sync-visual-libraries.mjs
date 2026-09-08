@@ -1,102 +1,174 @@
 import { createHash } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 
 const EXCALIDRAW_COMMIT = '297a349eaff859e678f78d4dbc8e68df5fce42e5';
 const DICEBEAR_VERSION = '10.6.0';
+const EXCALIDRAW_ROOT = `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}`;
 
-const sources = [
-  {
-    id: 'excalidraw-stick-figures',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/youritjang/stick-figures.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/stick-figures.excalidrawlib',
-    license: 'MIT',
-    use: 'Quick emotional poses: happy, sad, shrug, child/adult silhouettes.',
-  },
-  {
-    id: 'excalidraw-stick-people',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/dhtoran/stick-people.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/stick-people.excalidrawlib',
-    license: 'MIT',
-    use: 'Primary editable stick-person source; eyes, mouths and arms can be moved for reactions.',
-  },
-  {
-    id: 'excalidraw-robots',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/kaligule/robots.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/robots.excalidrawlib',
-    license: 'MIT',
-    use: 'Router/dispatcher inspiration and robot mood states.',
-  },
-  {
-    id: 'excalidraw-office-items',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/m47812/office-items.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/office-items.excalidrawlib',
-    license: 'MIT',
-    use: 'Desk/workplace props for expert stations, workbenches and ordinary-world metaphors.',
-  },
-  {
-    id: 'excalidraw-system-icons',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/xxxdeveloper/system-icons.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/system-icons.excalidrawlib',
-    license: 'MIT',
-    use: 'Generic book/document/tool/device symbols; use when a metaphor needs a simple prop.',
-  },
-  {
-    id: 'excalidraw-software-architecture',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/youritjang/software-architecture.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/software-architecture.excalidrawlib',
-    license: 'MIT',
-    use: 'Servers, databases, caches, pipelines, documents and generic system props.',
-  },
-  {
-    id: 'excalidraw-deep-learning',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/yuelfei/deep-learning.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/deep-learning.excalidrawlib',
-    license: 'MIT',
-    use: 'Neural-network/deep-learning diagram primitives; use selectively, not as the visual style.',
-  },
-  {
-    id: 'excalidraw-data-processing',
-    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/erlina/data-processing.excalidrawlib`,
-    output: 'visual-assets/vendor/excalidraw/data-processing.excalidrawlib',
-    license: 'MIT',
-    use: 'Data collection, transformation, storage, analysis and visualization metaphors.',
-  },
-  {
-    id: 'open-peeps-definition',
-    url: `https://cdn.hopjs.net/npm/@dicebear/styles@${DICEBEAR_VERSION}/dist/open-peeps.min.json`,
-    output: 'visual-assets/vendor/open-peeps/open-peeps.min.json',
-    license: 'CC0-1.0 artwork; DiceBear packaging MIT',
-    use: 'Primary hand-drawn character system. Runtime generation is also available through @dicebear/core + @dicebear/styles.',
-  },
+const PRIORITY_LIBRARY_NAMES = [
+  'Stick people',
+  'Stick Figures',
+  'Robots',
+  'Office Items',
+  'System Icons',
+  'Software Architecture',
+  'Information Architecture',
+  'Deep learning',
+  'Data processing',
+  'Data sources',
+  'Data Flow',
+  'Data Viz',
+  'Charts',
+  'Gadgets',
+  'Computers',
+  'Simple Sticky Notes',
+  'Some handdrawn signs',
+  'Random Figure Drawings',
+  'Storytelling',
+  'Data Science',
+  'Logic Gates',
+  'Schematic Symbols',
+  'Printers',
+  'Event Storming',
+  'Forms',
+  'Software Logos',
+  'Medias',
 ];
 
-async function download(source) {
-  const response = await fetch(source.url, {
+function normalize(value) {
+  return value.trim().toLowerCase();
+}
+
+function slugify(value) {
+  return normalize(value)
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+async function fetchBuffer(url, id) {
+  const response = await fetch(url, {
     headers: { 'user-agent': 'explain-ahmad-asset-sync' },
   });
   if (!response.ok) {
-    throw new Error(`${source.id}: ${response.status} ${response.statusText}`);
+    throw new Error(`${id}: ${response.status} ${response.statusText}`);
   }
+  return Buffer.from(await response.arrayBuffer());
+}
 
-  const data = Buffer.from(await response.arrayBuffer());
-  await mkdir(dirname(source.output), { recursive: true });
-  await writeFile(source.output, data);
-
+async function saveFile(url, output, id) {
+  const data = await fetchBuffer(url, id);
+  await mkdir(dirname(output), { recursive: true });
+  await writeFile(output, data);
   return {
-    ...source,
+    output,
     bytes: data.length,
     sha256: createHash('sha256').update(data).digest('hex'),
   };
 }
 
-const results = [];
-for (const source of sources) {
-  process.stdout.write(`sync ${source.id}... `);
-  const result = await download(source);
-  results.push(result);
-  console.log(`${result.bytes} bytes`);
+async function loadExcalidrawCatalog() {
+  const data = await fetchBuffer(`${EXCALIDRAW_ROOT}/libraries.json`, 'excalidraw-catalog');
+  return JSON.parse(data.toString('utf8'));
 }
+
+function resolvePriorityLibraries(catalog) {
+  const used = new Set();
+  const resolved = [];
+  const missing = [];
+
+  for (const wanted of PRIORITY_LIBRARY_NAMES) {
+    const needle = normalize(wanted);
+    const match = catalog.find((entry) => {
+      if (used.has(entry.id)) return false;
+      const name = normalize(entry.name);
+      return name === needle || name.includes(needle) || needle.includes(name);
+    });
+
+    if (!match) {
+      missing.push(wanted);
+      continue;
+    }
+
+    used.add(match.id);
+    resolved.push(match);
+  }
+
+  return { resolved, missing };
+}
+
+async function syncExcalidrawLibrary(entry) {
+  const slug = slugify(entry.name);
+  const libraryUrl = `${EXCALIDRAW_ROOT}/libraries/${entry.source}`;
+  const libraryOutput = join('visual-assets', 'vendor', 'excalidraw', slug, basename(entry.source));
+
+  process.stdout.write(`sync Excalidraw: ${entry.name}... `);
+  const libraryFile = await saveFile(libraryUrl, libraryOutput, `excalidraw-${slug}`);
+  console.log(`${libraryFile.bytes} bytes`);
+
+  let previewFile = null;
+  if (entry.preview) {
+    const previewUrl = `${EXCALIDRAW_ROOT}/libraries/${entry.preview}`;
+    const previewOutput = join('visual-assets', 'vendor', 'excalidraw', slug, basename(entry.preview));
+    try {
+      previewFile = await saveFile(previewUrl, previewOutput, `excalidraw-${slug}-preview`);
+    } catch (error) {
+      console.warn(`warning: preview failed for ${entry.name}: ${error.message}`);
+    }
+  }
+
+  return {
+    id: `excalidraw-${slug}`,
+    name: entry.name,
+    description: entry.description ?? '',
+    source: entry.source,
+    preview: entry.preview ?? null,
+    itemNames: entry.itemNames ?? [],
+    license: 'MIT',
+    upstreamCommit: EXCALIDRAW_COMMIT,
+    library: {
+      url: libraryUrl,
+      ...libraryFile,
+    },
+    previewFile,
+  };
+}
+
+async function syncOpenPeeps() {
+  const url = `https://cdn.hopjs.net/npm/@dicebear/styles@${DICEBEAR_VERSION}/dist/open-peeps.min.json`;
+  const output = join('visual-assets', 'vendor', 'open-peeps', 'open-peeps.min.json');
+  process.stdout.write('sync Open Peeps (future videos)... ');
+  const file = await saveFile(url, output, 'open-peeps-definition');
+  console.log(`${file.bytes} bytes`);
+  return {
+    id: 'open-peeps-definition',
+    name: 'Open Peeps',
+    license: 'CC0-1.0 artwork; DiceBear packaging MIT',
+    use: 'General/future-video character source. Not the primary GLM character system.',
+    diceBearVersion: DICEBEAR_VERSION,
+    url,
+    ...file,
+  };
+}
+
+const catalog = await loadExcalidrawCatalog();
+const { resolved, missing } = resolvePriorityLibraries(catalog);
+
+console.log(`Resolved ${resolved.length}/${PRIORITY_LIBRARY_NAMES.length} GLM-priority Excalidraw libraries.`);
+if (missing.length) {
+  console.warn(`Unresolved priority names (non-fatal): ${missing.join(', ')}`);
+}
+
+const excalidrawLibraries = [];
+for (const entry of resolved) {
+  try {
+    excalidrawLibraries.push(await syncExcalidrawLibrary(entry));
+  } catch (error) {
+    console.warn(`warning: library failed for ${entry.name}: ${error.message}`);
+  }
+}
+
+const openPeeps = await syncOpenPeeps();
 
 const manifestPath = join('visual-assets', 'vendor', 'manifest.json');
 await mkdir(dirname(manifestPath), { recursive: true });
@@ -105,8 +177,10 @@ await writeFile(
   `${JSON.stringify({
     generatedAt: new Date().toISOString(),
     excalidrawCommit: EXCALIDRAW_COMMIT,
-    diceBearVersion: DICEBEAR_VERSION,
-    sources: results,
+    requestedExcalidrawLibraries: PRIORITY_LIBRARY_NAMES,
+    unresolvedExcalidrawLibraries: missing,
+    excalidrawLibraries,
+    generalSources: [openPeeps],
   }, null, 2)}\n`,
 );
 
