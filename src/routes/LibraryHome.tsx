@@ -3,6 +3,7 @@ import { SceneFrame } from '../engine/SceneFrame'
 import { SketchAnnotation } from '../visuals/SketchAnnotation'
 
 const destinations = [
+  { to: '/assets', title: 'Asset playground', meta: 'Characters, source libraries, permanent living behaviors' },
   { to: '/styles', title: 'Art directions', meta: 'Paper, clean, editorial, technical' },
   { to: '/lab/trust', title: 'Click stories', meta: 'Ncase-style reveal and choice patterns' },
   { to: '/lab/navigation', title: 'Navigation', meta: 'Snap, exact gesture paging, scene replacement' },
