@@ -11,6 +11,8 @@ Reference sheets (authoritative for style, character design and layout):
 
 Narration source: `../../video-script/01-opening-narration.md`
 Art direction: `../../art-direction/GLM_PAPER_WORLD.md`
+Implementation: `src/videos/glm-320b/section-01/` — route `/section-01`, `?frame=N` to jump
+Review: `npm run frames:s1` writes `frames/section-01/index.html`
 
 ---
 
