@@ -3,7 +3,7 @@ import { type PointerEvent as ReactPointerEvent, useEffect } from 'react'
 import { SceneFrame, VideoPage } from '../../../engine/SceneFrame'
 import { BuildingWorld } from './worlds/BuildingWorld'
 import { ChatWorld } from './worlds/ChatWorld'
-import { ModelWorld } from './worlds/ModelWorld'
+import { OpeningWorld } from './worlds/OpeningWorld'
 import { OutputWorld } from './worlds/OutputWorld'
 import { TokenEmbeddingWorld } from './worlds/TokenEmbeddingWorld'
 import { TransformerWorld } from './worlds/TransformerWorld'
@@ -12,9 +12,12 @@ import { useBeatDirector } from './useBeatDirector'
 import './production-v9.css'
 import './production-v9-fixes.css'
 import './production-v10.css'
+import './opening-v1.css'
+import './opening-v2-art.css'
+import './opening-v2-labels.css'
 
 function World({ world, beat }: { world: string; beat: number }) {
-  if (world === 'model') return <ModelWorld beat={beat} />
+  if (world === 'model') return <OpeningWorld beat={beat} />
   if (world === 'chat') return <ChatWorld beat={beat} />
   if (world === 'token') return <TokenEmbeddingWorld beat={beat} />
   if (world === 'transformer') return <TransformerWorld beat={beat} />
@@ -26,6 +29,7 @@ export default function Glm320bProductionV9() {
   const director = useBeatDirector()
   const reducedMotion = useReducedMotion()
   const beatNumber = director.index + 1
+  const opening = beatNumber <= 14
 
   useEffect(() => {
     const oldOverflow = document.documentElement.style.overflow
@@ -53,6 +57,7 @@ export default function Glm320bProductionV9() {
           <div className="v9-viewport">
             <motion.div
               className="v9-frame"
+              data-opening={opening ? 'true' : undefined}
               onPointerUp={onPointerUp}
               role="application"
               aria-label="Why a 320B AI can use about 18B active parameters — interactive visual explanation"

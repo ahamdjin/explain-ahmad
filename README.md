@@ -2,6 +2,16 @@
 
 A reusable React/Vite system for building deeply authored interactive YouTube explainers.
 
+## Repository map
+
+See `PROJECT_STRUCTURE.md` first.
+
+- `skills/` — reusable explanation/design rules
+- `research/` — source and technical research
+- `video-script/` — the current spoken YouTube script
+- `archive/` — old/superseded planning material
+- `src/` — implementation code
+
 ## Current phase
 
 We are building the **library and structure only**.
@@ -42,7 +52,7 @@ Video
 
 Persist conceptual actors whenever continuity teaches causality. A token that moves, gains an ID and enters a lookup surface should still feel like the same token.
 
-See `docs/CONTINUITY_SYSTEM.md`.
+See `skills/CONTINUITY_SYSTEM.md`.
 
 ## Scene rules
 
@@ -59,11 +69,11 @@ See `docs/CONTINUITY_SYSTEM.md`.
 - paper/sketch is a favored art direction, not a global lock
 
 See:
-- `docs/EXPLANATION_DESIGN.md`
-- `docs/REFINEMENT_STANDARD.md`
-- `docs/CONTINUITY_SYSTEM.md`
-- `docs/INTERACTION_PATTERNS.md`
-- `docs/VISUAL_SYSTEM.md`
+- `skills/EXPLANATION_DESIGN.md`
+- `skills/REFINEMENT_STANDARD.md`
+- `skills/CONTINUITY_SYSTEM.md`
+- `skills/INTERACTION_PATTERNS.md`
+- `skills/VISUAL_SYSTEM.md`
 
 ## Core interaction languages
 
