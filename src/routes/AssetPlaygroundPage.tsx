@@ -17,33 +17,47 @@ const manifestUrl = `${repoBase}/libraries.json`
 const previewBase = `${repoBase}/libraries`
 
 const glmPriorityNames = [
+  // Strongest hand-drawn / stick / expressive character systems first.
+  'Simple Characters',
   'Stick people',
   'Stick Figures',
+  'Body Builder Kit 1',
+  'Head Builder Kit 1',
+  'Male Heads Diverse 1',
+  'Female Heads Diverse',
+  'Storytelling',
+  'Random figure drawings',
   'Robots',
+  'Bubbles',
+  'Sticky Notes',
+  'Simple Sticky Notes',
+
+  // Everyday paper-world props and system pieces.
   'Office Items',
   'System Icons',
+  'System Design Components',
+  'System Design Icons',
   'Software Architecture',
   'Information Architecture',
+  'Gadgets',
+  'Computers',
+  'Printers',
+  'Medias',
+  'some-handdrawn-signs',
+
+  // Technical visual vocabulary for the model internals.
   'Deep learning',
   'Data processing',
   'Data sources',
   'Data Flow',
   'Data Viz',
   'Charts',
-  'Gadgets',
-  'Computers',
-  'Simple Sticky Notes',
-  'Some handdrawn signs',
-  'Random Figure Drawings',
-  'Storytelling',
   'Data Science',
   'Logic Gates',
   'Schematic Symbols',
-  'Printers',
   'Event Storming',
   'Forms',
   'Software Logos',
-  'Medias',
 ]
 
 const behaviorExamples: Array<{ behavior: LivingBehavior; label: string; note: string }> = [
@@ -59,12 +73,13 @@ function normalize(value: string) {
 
 function roleFor(library: ExcalidrawLibrary) {
   const text = normalize(`${library.name} ${library.description ?? ''} ${(library.itemNames ?? []).join(' ')}`)
-  if (/stick|figure|people|storytelling/.test(text)) return 'characters / reactions'
+  if (/simple characters|stick|figure|people|storytelling|body builder|head builder|heads diverse/.test(text)) return 'characters / reactions'
   if (/robot/.test(text)) return 'router / personality'
+  if (/bubble/.test(text)) return 'speech / reactions'
   if (/office|computer|gadget|printer|media|form/.test(text)) return 'workplace / props'
   if (/sticky|sign|book|document|information architecture/.test(text)) return 'notes / books / labels'
   if (/deep learning|data science|data viz|chart/.test(text)) return 'AI / technical visuals'
-  if (/data|software|architecture|flow|event/.test(text)) return 'process / systems'
+  if (/data|software|system design|architecture|flow|event/.test(text)) return 'process / systems'
   if (/logic|schematic/.test(text)) return 'mechanism pieces'
   return 'source pool'
 }
@@ -80,7 +95,7 @@ function LibraryCard({ library }: { library: ExcalidrawLibrary }) {
         <span>{roleFor(library)}</span>
         <h3>{library.name}</h3>
         <p>{library.description || 'Excalidraw source library.'}</p>
-        {library.itemNames?.length ? <small>{library.itemNames.slice(0, 8).join(' · ')}</small> : null}
+        {library.itemNames?.length ? <small>{library.itemNames.slice(0, 10).join(' · ')}</small> : null}
       </div>
     </article>
   )
@@ -141,10 +156,10 @@ export default function AssetPlaygroundPage() {
 
   const searchResults = useMemo(() => {
     const needle = normalize(query)
-    if (!needle) return libraries.slice(0, 48)
+    if (!needle) return libraries.slice(0, 96)
     return libraries
       .filter((library) => normalize(`${library.name} ${library.description ?? ''} ${(library.itemNames ?? []).join(' ')}`).includes(needle))
-      .slice(0, 48)
+      .slice(0, 96)
   }, [libraries, query])
 
   return (
@@ -157,8 +172,8 @@ export default function AssetPlaygroundPage() {
 
       <section className="asset-playground__section">
         <div className="asset-playground__section-title">
-          <div><span>01</span><h2>GLM candidate source pools</h2></div>
-          <p>Characters, reactions, office props, books/notes, diagrams, devices and mechanism pieces.</p>
+          <div><span>01</span><h2>Best GLM source pools</h2></div>
+          <p>The first rows now bias hard toward large stick/doodle character systems, expressive poses, speech bubbles and paper-world props.</p>
         </div>
         {loadError ? <p className="asset-playground__status">Could not load the Excalidraw manifest.</p> : null}
         {!libraries.length && !loadError ? <p className="asset-playground__status">Loading official Excalidraw libraries…</p> : null}
@@ -170,11 +185,11 @@ export default function AssetPlaygroundPage() {
       <section className="asset-playground__section">
         <div className="asset-playground__section-title">
           <div><span>02</span><h2>Search the full Excalidraw library catalog</h2></div>
-          <p>Not six hard-coded pools anymore. Search the official pinned catalog directly.</p>
+          <p>Search up to 96 libraries at once. The catalog itself remains the source of truth.</p>
         </div>
         <label className="asset-search">
           <span>Find assets</span>
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try: book, worker, machine, storage, diagram, computer…" />
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try: character, stick, thinking, confused, sticky, bubble, book, machine…" />
         </label>
         <p className="asset-search__count">Showing {searchResults.length} of {libraries.length} libraries</p>
         <div className="source-grid source-grid--dense">
