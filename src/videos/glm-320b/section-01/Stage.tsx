@@ -87,15 +87,15 @@ export function Stage({
         <Router gesturing={scene.router.gesturing} />
       </Slot>
 
-      <Slot on={scene.team.on} at={scene.team.at} z={3} feel={feel}>
+      <Slot on={scene.team.on} at={scene.team.at} scale={scene.team.scale} z={3} feel={feel}>
         <TeamGroup size={scene.team.size} label={scene.team.label} sub={scene.team.sub} />
       </Slot>
 
-      <Slot on={scene.picked.on} at={scene.picked.at} z={3} feel={feel}>
+      <Slot on={scene.picked.on} at={scene.picked.at} scale={scene.picked.scale} z={3} feel={feel}>
         <PickedGroup />
       </Slot>
 
-      <Slot on={scene.ram.on} at={scene.ram.at} z={3} feel={feel}>
+      <Slot on={scene.ram.on} at={scene.ram.at} scale={scene.ram.scale} z={3} feel={feel}>
         <RamTray count={scene.ram.count} note={scene.ram.note} />
       </Slot>
 
@@ -108,19 +108,19 @@ export function Stage({
         />
       </Slot>
 
-      <Slot on={scene.blocker.on} at={scene.blocker.at} z={4} feel={feel}>
+      <Slot on={scene.blocker.on} at={scene.blocker.at} scale={scene.blocker.scale} z={4} feel={feel}>
         <Blocker scale={0.86} />
       </Slot>
 
-      <Slot on={scene.machine.on} at={scene.machine.at} z={3} feel={feel}>
+      <Slot on={scene.machine.on} at={scene.machine.at} scale={scene.machine.scale} z={3} feel={feel}>
         <SmallMachine scale={0.86} />
       </Slot>
 
-      <Slot on={scene.arch.on} at={scene.arch.at} z={2} feel={feel}>
+      <Slot on={scene.arch.on} at={scene.arch.at} scale={scene.arch.scale} z={2} feel={feel}>
         <Archway />
       </Slot>
 
-      <Slot on={scene.sheet.on} at={scene.sheet.at} z={3} feel={feel}>
+      <Slot on={scene.sheet.on} at={scene.sheet.at} scale={scene.sheet.scale} z={3} feel={feel}>
         <ArchitectureSheet pushed={scene.sheet.pushed} />
       </Slot>
 

@@ -92,7 +92,7 @@ export const BEATS: Beat[] = [
     relation: 'so',
     title: 'A word comes in',
     vo: 'For any one word, only about 18 billion parameters are active.',
-    commands: [card.putAway(), grid.show({ x: 56, y: 50 }), narrator.at({ x: 10, y: 72 }, 'wonder', 0.88)],
+    commands: [card.park(), grid.show({ x: 56, y: 50 }), narrator.at({ x: 10, y: 72 }, 'wonder', 0.88)],
     // Show the mass. Then send the word in. Then let the slice light as a
     // consequence of the word arriving -- cause before effect, in time.
     stages: [
@@ -133,7 +133,7 @@ export const BEATS: Beat[] = [
     relation: 'and-yet',
     title: 'The obvious question',
     vo: 'Okay. So why have the other 300 billion?',
-    commands: [narrator.hide()],
+    commands: [narrator.at({ x: 7, y: 78 }, 'think', 0.7)],
     stages: [{ at: 420, commands: [grid.letInactiveAsk()] }],
     overlays: [
       { kind: 'brace', text: '320B TOTAL PARAMETERS', anchor: 'grid-total', at: { x: '0%', y: '16%' }, side: 'top' },
@@ -210,7 +210,7 @@ export const BEATS: Beat[] = [
     title: 'Different words, different experts',
     vo: 'A different word is routed to a different set of experts. Try it.',
     interactive: true,
-    commands: [word.hide()],
+    commands: [word.park()],
     overlays: [
       H('Pick a word. Watch which experts light up.', { x: '30%', y: '9%' }, { size: 'md', rotate: -1 }),
       H('Same model.\nDifferent experts.', { x: '30%', y: '74%' }, { rotate: -2 }),
@@ -243,15 +243,14 @@ export const BEATS: Beat[] = [
     title: 'The memory problem',
     vo: 'If only a few experts are being used, why deal with hundreds of gigabytes of weights?',
     commands: [
-      grid.hide(),
+      grid.park(),
       shelf.relabel('MODEL WEIGHTS (ON DISK / STORAGE)', 'Hundreds of GB (e.g. 200-400GB)'),
       memory.open({ x: 43, y: 50 }, 9),
-      narrator.hide(),
+      narrator.at({ x: 17, y: 76 }, 'wonder', 0.72),
     ],
     overlays: [
       H('…but a huge\namount of weights!', { x: '52%', y: '14%' }, { rotate: 2 }),
       { kind: 'arrow', from: { x: 1090, y: 230 }, to: { x: 1272, y: 320 }, bow: -24 },
-      { kind: 'brace', text: '8 EXPERTS + 1 SHARED', sub: '(active compute)', at: { x: '5%', y: '76%' }, width: '20%' },
     ],
   },
   {
@@ -314,18 +313,18 @@ export const BEATS: Beat[] = [
     commands: [
       router.settle(),
       router.moveTo({ x: 32, y: 42 }, 0.58),
-      word.hide(),
+      word.park(),
       team.moveTo({ x: 13, y: 42 }, 36),
       team.relabel('Stored experts (on disk / CPU)'),
       picked.show({ x: 49, y: 42 }),
-      memory.hide(),
-      shelf.hide(),
+      memory.park(),
+      shelf.park(),
       blocker.drop({ x: 67, y: 48 }),
       machine.show({ x: 81, y: 43 }),
       narrator.at({ x: 14, y: 80 }, 'think', 0.76),
     ],
     overlays: [
-      H('We only load the\nexperts we need!', { x: '7%', y: '13%' }, { rotate: -2 }),
+      H('We only load the\nexperts we need!', { x: '25%', y: '20%' }, { rotate: -2 }),
       { kind: 'note', text: 'But something\nis blocking it…', at: { x: '63%', y: '12%' }, size: 'md', rotate: 2, tone: 'red' },
       H('Pick the right\nexperts for this word', { x: '26%', y: '58%' }, { rotate: -1 }),
       { kind: 'arrow', from: { x: 430, y: 454 }, to: { x: 512, y: 454 }, bow: 0 },
@@ -343,11 +342,11 @@ export const BEATS: Beat[] = [
     title: 'Follow one word inside',
     vo: "Staring at the final architecture isn't enough. Let's see what happens inside the model.",
     commands: [
-      team.hide(),
-      picked.hide(),
-      router.hide(),
-      blocker.hide(),
-      machine.hide(),
+      team.park(),
+      picked.park(),
+      router.park(),
+      blocker.park(),
+      machine.park(),
       sheet.present({ x: 26, y: 48 }),
       sheet.pushAside(),
       arch.open({ x: 84, y: 52 }),
@@ -358,7 +357,7 @@ export const BEATS: Beat[] = [
       H("That's a lot\nfor now…", { x: '47%', y: '30%' }, { rotate: -2 }),
       H("Let's look inside instead.", { x: '55%', y: '73%' }, { rotate: 1 }),
       { kind: 'arrow', from: { x: 1130, y: 760 }, to: { x: 1420, y: 650 }, bow: 70 },
-      { kind: 'note', text: 'Inside the model', at: { x: '78%', y: '14%' }, size: 'lg', rotate: 0 },
+      { kind: 'note', text: 'Inside the model', at: { x: '79%', y: '73%' }, size: 'lg', rotate: 0 },
       { kind: 'arrow', from: { x: 1330, y: 562 }, to: { x: 1470, y: 562 }, bow: 0 },
     ],
   },
