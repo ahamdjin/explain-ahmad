@@ -158,8 +158,14 @@ export const BEATS: Beat[] = [
       { at: 1500, commands: [grid.becomeExperts({ x: 58, y: 48 }, 0.95)] },
     ],
     overlays: [
-      H('So where do the\nother 300B go?', { x: '1.5%', y: '40%' }, { rotate: -3 }),
-      { kind: 'note', text: 'They are Experts!', at: { x: '68%', y: '13%' }, size: 'md', rotate: 3, tone: 'orange' },
+      {
+        kind: 'note',
+        text: 'Most of the parameters are\ndivided into experts.',
+        at: { x: '62%', y: '11%' },
+        size: 'md',
+        rotate: 2,
+        tone: 'orange',
+      },
       { kind: 'brace', text: '288 EXPERTS', sub: '(inactive until needed)', at: { x: '27%', y: '85%' }, width: '62%' },
     ],
   },
@@ -175,7 +181,6 @@ export const BEATS: Beat[] = [
     stages: [
       { at: 420, commands: [router.appear({ x: 34, y: 54 }, 0.86)] },
       { at: 1050, commands: [narrator.at({ x: 6, y: 76 }, 'wonder', 0.74)] },
-      { at: 1400, commands: [grid.score(), router.fanOut()] },
     ],
     overlays: [
       H('How does it choose\nthe right experts?', { x: '13%', y: '70%' }, { rotate: -3 }),
@@ -195,8 +200,12 @@ export const BEATS: Beat[] = [
     relation: 'hope',
     title: 'One word, a small team',
     vo: 'For this word, the router selects 8 experts plus 1 shared expert that is always active.',
-    commands: [router.foldFan()],
-    stages: [{ at: 520, commands: [grid.stopScoring()] }],
+    commands: [],
+    // Scores every expert first, THEN eight land. Selection has to be earned.
+    stages: [
+      { at: 200, commands: [grid.score(), router.fanOut()] },
+      { at: 1500, commands: [grid.stopScoring(), router.foldFan()] },
+    ],
     overlays: [
       H('The router picks a small\nteam for this word.', { x: '13%', y: '70%' }, { rotate: -2 }),
       { kind: 'arrow', from: { x: 690, y: 560 }, to: { x: 800, y: 548 }, bow: -12, tone: 'orange' },

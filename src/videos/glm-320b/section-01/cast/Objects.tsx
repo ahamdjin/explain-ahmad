@@ -10,7 +10,7 @@ import { Expert } from './Expert'
  * Motion treat them as one shared element, and only one of them renders.
  */
 export function WordCard({
-  word = 'scared',
+  word = 'a word',
   scale = 1,
   layoutId = 's1-word',
   className = '',
@@ -29,7 +29,7 @@ export function WordCard({
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: 'spring', stiffness: 110, damping: 20 }}
     >
-      <span>&ldquo;{word}&rdquo;</span>
+      <span>{word.startsWith('a ') ? word : `\u201c${word}\u201d`}</span>
     </motion.div>
   )
 }
