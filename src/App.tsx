@@ -6,6 +6,7 @@ import { videoRoutes } from './videos/registry'
 const LibraryHome = lazy(() => import('./routes/LibraryHome'))
 const LabDemoPage = lazy(() => import('./routes/LabDemoPage'))
 const StyleGalleryPage = lazy(() => import('./routes/StyleGalleryPage'))
+const AssetHomePage = lazy(() => import('./routes/AssetHomePage'))
 const AssetPlaygroundPage = lazy(() => import('./routes/AssetPlaygroundPage'))
 
 function RouteFallback() {
@@ -20,7 +21,8 @@ export default function App() {
           <Route index element={<LibraryHome />} />
           <Route path="lab/:demo" element={<LabDemoPage />} />
           <Route path="styles" element={<StyleGalleryPage />} />
-          <Route path="assets" element={<AssetPlaygroundPage />} />
+          <Route path="assets" element={<AssetHomePage />} />
+          <Route path="assets/:category" element={<AssetPlaygroundPage />} />
 
           {videoRoutes.map(({ slug, component: VideoComponent }) => (
             <Route key={slug} path={slug} element={<VideoComponent />} />
