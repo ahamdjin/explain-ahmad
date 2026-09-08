@@ -290,7 +290,89 @@
   border-color: var(--red);
 }
 
-/* Ghost boxes: a size expressed as "this many of mine". */
+/* The office: memory as a room with desks. One desk = one gigabyte. */
+.s1-office {
+  width: calc(30cqw * var(--scale, 1));
+  display: grid;
+  gap: 0.9cqh;
+  justify-items: center;
+}
+
+.s1-office-head {
+  display: grid;
+  justify-items: center;
+}
+
+.s1-office-head strong {
+  font: 400 clamp(14px, 1.75cqw, 34px) / 1.1 var(--hand);
+}
+
+.s1-office-head small {
+  font: 400 clamp(10px, 1.1cqw, 21px) / 1.2 var(--mono);
+  letter-spacing: 0.04em;
+  color: var(--graphite);
+}
+
+.s1-office-room {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 5%;
+  padding: 4% 4.5%;
+  background: #f4f0e6;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 3px 4px 0 rgba(43, 41, 38, 0.12);
+}
+
+.s1-desk {
+  position: relative;
+  aspect-ratio: 1;
+  border-bottom: 2.4px solid rgba(43, 41, 38, 0.34);
+  border-radius: 2px;
+  background: rgba(43, 41, 38, 0.04);
+}
+
+.s1-desk[data-occupied='true'] {
+  background: none;
+}
+
+.s1-desk svg {
+  position: absolute;
+  inset: -12% 0 12%;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.s1-office[data-strained='true'] .s1-office-room {
+  border-color: var(--red);
+}
+
+/* Where idle workers could wait instead of occupying a desk. */
+.s1-home {
+  width: calc(11cqw * var(--scale, 1));
+  display: grid;
+  justify-items: center;
+}
+
+.s1-home svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-home-label {
+  font: 400 clamp(12px, 1.5cqw, 29px) / 1.1 var(--hand);
+}
+
+.s1-home-count {
+  font: 400 clamp(10px, 1.15cqw, 22px) / 1.2 var(--hand);
+  color: var(--graphite);
+}
+
+/* Ghost offices: a size expressed as "this many offices". */
 .s1-ghosts {
   display: flex;
   gap: 0.8cqw;
@@ -298,8 +380,8 @@
 }
 
 .s1-ghost {
-  width: calc(7cqw * var(--scale, 1));
-  aspect-ratio: 240 / 176;
+  width: calc(9cqw * var(--scale, 1));
+  aspect-ratio: 5 / 4;
   border: 2.4px dashed rgba(43, 41, 38, 0.32);
   border-radius: 8px;
   background: rgba(231, 234, 234, 0.4);

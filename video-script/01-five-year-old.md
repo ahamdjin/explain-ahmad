@@ -176,3 +176,61 @@ New points: 280 did nothing · take them out · it fits · it doesn't work
 2. Beat 39 (the always-on shared expert) is the fifth point in its chunk. Cut to
    Section 07, or keep?
 3. Do you want the model *named* anywhere in Section 01, or genuinely not?
+
+---
+
+# v4 — the office (BUILT)
+
+Ahmad's revision, and it supersedes the box-with-slots entirely.
+
+**RAM = the office. Storage = home. Experts = workers. 1 desk = 1 GB.**
+
+Why it's better than the box: the real constraint on running a model is not
+storage, it's **presence** — a worker has to be at a desk to do any work. A box
+with slots says "container". A room with desks says "everyone has to be here",
+which is exactly why the whole model must be resident while most of it idles.
+
+## It also solves Section 08
+
+The answer to "why can't we send them home?" becomes, in the same metaphor with
+no new concepts:
+
+> Because which eight you need changes with **every word** — and again at every
+> one of the **42 layers**. You'd spend the whole day phoning people in and out.
+> **The commute takes longer than the work.**
+
+That is transfer-bandwidth-bound, explained to a five-year-old. Rewrite
+`08-why-it-cannot-fit.md` in this language.
+
+## The beat I had missed entirely
+
+**"What does active mean?"** — active is the hinge of the whole video and it was
+never defined. It now gets its own beat: *active just means that's the only
+knowledge actually being used, for one word.*
+
+## Built sequence — 18 beats
+
+1–3 the model, 320B parameters, parameters = its knowledge
+4–6 only 18B active · what active means · so why keep the rest?
+7–9 experts exist · experts do the work, 288 of them · only 8 work
+10–11 my office, 32 desks, 1 desk = 1 GB · it would need 306
+12–13 to work you have to be here · so the rest sit at desks asleep
+14–16 send them home · call in the eight · it fits · would that work?
+17–18 it doesn't · go inside
+
+## Metaphor constraint — do not break this
+
+Desks are a **space** unit (1 desk = 1 GB, from the 306 GiB checkpoint).
+Experts are an **organisation** unit (288 per sparse layer). They are not the
+same count and must never be cross-multiplied on screen.
+
+An expert is roughly 26 MB, so ~40 experts fit in one desk. Never say "288
+experts need 288 desks", and never claim a specific number of experts is sitting
+in the 32-desk office. Say the *model* needs 306 desks, and separately that
+experts must be present to work.
+
+## Dropped from earlier drafts
+
+- The model spec card. Named once at beat 1, then never again.
+- Quantization. It was doing the wall's work; the office does it better.
+- The 47-beat chunked version above — right about density, wrong about pacing.

@@ -41,7 +41,20 @@ export type SceneState = {
   ram: { on: boolean; at: Spot; scale: number; count: number; note: string }
   picked: { on: boolean; at: Spot; scale: number }
   blocker: { on: boolean; at: Spot; scale: number }
-  mac: { on: boolean; at: Spot; scale: number; capacity: string; holds: number; strained: boolean }
+  /** Memory as a room with desks. One desk = one gigabyte. */
+  office: {
+    on: boolean
+    at: Spot
+    scale: number
+    desks: number
+    seated: number
+    working: number
+    label: string
+    capacity: string
+    strained: boolean
+  }
+  /** Where idle workers could wait instead of occupying a desk. */
+  home: { on: boolean; at: Spot; scale: number; count: number }
   /** The thing, before it is opened. Unnamed on purpose. */
   parcel: { on: boolean; at: Spot; scale: number }
   /** Faint copies of the Mac, so "306 GiB" is expressed in boxes the viewer owns. */
@@ -76,7 +89,18 @@ export const INITIAL: SceneState = {
   ram: { on: false, at: { x: 42, y: 50 }, scale: 1, count: 9, note: '' },
   picked: { on: false, at: { x: 66, y: 30 }, scale: 1 },
   blocker: { on: false, at: { x: 67, y: 48 }, scale: 1 },
-  mac: { on: false, at: { x: 12, y: 52 }, scale: 1, capacity: '32 GB', holds: 0, strained: false },
+  office: {
+    on: false,
+    at: { x: 22, y: 56 },
+    scale: 1,
+    desks: 32,
+    seated: 0,
+    working: 0,
+    label: 'my office',
+    capacity: '32 desks · 1 desk = 1 GB',
+    strained: false,
+  },
+  home: { on: false, at: { x: 84, y: 74 }, scale: 1, count: 0 },
   parcel: { on: false, at: { x: 60, y: 46 }, scale: 1 },
   ghosts: { on: false, at: { x: 60, y: 50 }, scale: 1, count: 0 },
   arch: { on: false, at: { x: 84, y: 52 }, scale: 1 },
@@ -224,15 +248,18 @@ export const ghosts = {
   hide: () => ({ ghosts: { on: false } }),
 }
 
-export const mac = {
-  /** On screen from beat 1. The want, made physical. */
-  show: (at: Spot, scale = 1) => ({ mac: { on: true, at, scale } }),
-  moveTo: (at: Spot, scale: number) => ({ mac: { at, scale } }),
-  /** Experts resident in memory. Spare room stays visible on purpose. */
-  load: (holds: number) => ({ mac: { holds } }),
-  strain: () => ({ mac: { strained: true } }),
-  relax: () => ({ mac: { strained: false } }),
-  park: () => ({ mac: { on: true, ...PARK.machine } }),
+export const office = {
+  show: (at: Spot, scale = 1) => ({ office: { on: true, at, scale } }),
+  moveTo: (at: Spot, scale: number) => ({ office: { at, scale } }),
+  /** Workers present at desks, and how many of them are actually working. */
+  staff: (seated: number, working = 0) => ({ office: { seated, working } }),
+  strain: () => ({ office: { strained: true } }),
+  park: () => ({ office: { on: true, ...PARK.machine } }),
+}
+
+export const home = {
+  open: (at: Spot, scale = 1) => ({ home: { on: true, at, scale } }),
+  waiting: (count: number) => ({ home: { count } }),
 }
 
 export const arch = {

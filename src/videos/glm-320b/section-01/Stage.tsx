@@ -4,7 +4,8 @@ import { Expert, SharedExpert } from './cast/Expert'
 import { Narrator } from './cast/Narrator'
 import { Router } from './cast/Router'
 import { Archway, Blocker, ModelInfoCard, RamTray, WeightShelf, WordCard } from './cast/Objects'
-import { GhostBoxes, MacBox, Parcel } from './cast/MacBox'
+import { Parcel } from './cast/MacBox'
+import { GhostOffices, Home, Office } from './cast/Office'
 import { ExpertField } from './ExpertField'
 import { type Feel } from './motion'
 import { type SceneState } from './scene'
@@ -115,15 +116,26 @@ export function Stage({
       </Slot>
 
       <Slot on={scene.ghosts.on} at={scene.ghosts.at} scale={scene.ghosts.scale} z={1} feel={feel}>
-        <GhostBoxes count={scene.ghosts.count} />
+        <GhostOffices count={scene.ghosts.count} />
+      </Slot>
+
+      <Slot on={scene.home.on} at={scene.home.at} scale={scene.home.scale} z={2} feel={feel}>
+        <Home count={scene.home.count} />
       </Slot>
 
       <Slot on={scene.parcel.on} at={scene.parcel.at} scale={scene.parcel.scale} z={2} feel={feel}>
         <Parcel />
       </Slot>
 
-      <Slot on={scene.mac.on} at={scene.mac.at} scale={scene.mac.scale} z={3} feel={feel}>
-        <MacBox capacity={scene.mac.capacity} holds={scene.mac.holds} strained={scene.mac.strained} />
+      <Slot on={scene.office.on} at={scene.office.at} scale={scene.office.scale} z={3} feel={feel}>
+        <Office
+          desks={scene.office.desks}
+          seated={scene.office.seated}
+          working={scene.office.working}
+          label={scene.office.label}
+          capacity={scene.office.capacity}
+          strained={scene.office.strained}
+        />
       </Slot>
 
       <Slot on={scene.arch.on} at={scene.arch.at} scale={scene.arch.scale} z={2} feel={feel}>
