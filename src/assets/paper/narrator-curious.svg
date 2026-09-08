@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 180" role="img" aria-label="Curious paper narrator">
+  <g fill="none" stroke="#2c2925" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M55 45c-1-24 34-34 48-13 14 21-2 52-27 50-23-1-34-17-21-37z" fill="#fffaf0"/>
+    <path d="M63 87c5 14 4 34 2 51M91 87c-2 13-1 34 2 51"/>
+    <path d="M66 139l-15 25M92 139l15 24"/>
+    <path d="M65 98c-14 4-22 14-27 27M94 97c13 2 20 11 24 22"/>
+    <path d="M38 125c7-3 13-3 18 2"/>
+  </g>
+  <circle cx="69" cy="53" r="3.6" fill="#2c2925"/>
+  <circle cx="90" cy="52" r="3.6" fill="#2c2925"/>
+  <path d="M74 66c6 2 11 2 15-1" fill="none" stroke="#2c2925" stroke-width="3" stroke-linecap="round"/>
+  <path d="M112 77c5-8 9-15 11-24" fill="none" stroke="#2c2925" stroke-width="3" stroke-linecap="round"/>
+  <path d="M120 45l4 7 7-2" fill="none" stroke="#2c2925" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
