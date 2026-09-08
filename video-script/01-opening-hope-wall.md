@@ -66,20 +66,44 @@ If you do add it later, the drawn protagonist **shrinks or shifts** rather than
 being deleted — but two protagonists needs a deliberate call, so let's make it
 once you've seen this working.
 
-## The numbers — DERIVED, NEEDS YOUR SIGN-OFF
+## The numbers — VERIFIED 2026-09-09
 
-`research/glm/` gives parameter counts but no checkpoint size in bytes. These are
-my arithmetic, not published figures. **Verify before recording.**
+Checked against the model card, `config.json`, and the vLLM recipe. My earlier
+figures were wrong: **the shipped checkpoint is native FP8, not bf16.**
 
-| | at bf16 (2 bytes) | at 4-bit | vs 32GB Mac |
-| --- | --- | --- | --- |
-| 320B total | ~640 GB | ~160 GB | 5–20x too big |
-| ~18B active | ~36 GB | ~9 GB | **fits at 4-bit** |
+| | figure | source |
+| --- | --- | --- |
+| Default checkpoint on disk | **~306 GiB** | vLLM recipe, "before runtime and KV-cache overhead" |
+| BF16 variant | ~2x that (~612 GiB) | vLLM recipe |
+| Total parameters | 321B (marketed 320B) | model card |
+| Active per token | 18B | model card |
+| Weight format | native FP8 (`e4m3`) | `config.json` quantization_config |
 
-The hope is not a strawman: 9GB genuinely fits in 32GB. That's what makes the
-wall interesting. Note `~18B active` is the path across the whole model, not
-eight experts in one layer (`GLM_V7_ATTENTION_MOE_RESEARCH.md` M13) — the deeper
-reason the obvious fix fails, and Section 08's material.
+Recomputed against your 32GB Mac:
+
+| | size | vs 32GB |
+| --- | --- | --- |
+| Full checkpoint, as shipped (FP8) | ~306 GiB | **~10x too big** |
+| Full checkpoint, squeezed to 4-bit | ~153 GiB | **~5x too big** |
+| ~18B active, at shipped FP8 | **~18 GB** | **fits, ~14GB spare** |
+| ~18B active, at 4-bit | ~9 GB | fits easily |
+
+**This makes the hope stronger, and simpler.** At the precision the weights
+actually ship in, the active 18B is ~18GB and fits on your Mac with room to
+spare — no quantization trick needed to make the case. So beat 6 gets to say
+"that fits, right now, as-is."
+
+Consequence for beat 3: quantization is no longer load-bearing for the *hope*.
+It now does the *wall's* work — even squeezed to 4 bits the full thing is still
+~5x too big. Keep it (you said you'll carry the explanation there), but its job
+has changed.
+
+Note `~18B active` is the path across the whole model, not eight experts in one
+layer (`GLM_V7_ATTENTION_MOE_RESEARCH.md` M13). That is the crux of Section 08.
+
+Also verified and previously unrecorded: 1,048,576 max context, native
+multimodal, hybrid KDA + sparse MLA attention. The 1M context matters here —
+the 306 GiB is weights *only*, before KV cache.
 
 ---
 
@@ -95,11 +119,11 @@ reason the obvious fix fails, and Section 08's material.
 
 ### 2 · WALL — and not by a little
 
-- **VO:** "It has 320 billion parameters. That's something like 640 gigabytes of weights."
+- **VO:** "It has 320 billion parameters. The download is about 306 gigabytes."
 - **Screen:** The parameter mass arrives and dwarfs the machine. The 32GB box
   stays in frame for scale. First real image of the video.
 - **Narrator:** small, looking up at it.
-- **Notes:** `640 GB` on the mass. `32 GB` still on the machine. Let the two
+- **Notes:** `306 GiB` on the mass. `32 GB` still on the machine. Let the two
   numbers sit near each other and do the work.
 - **Weight:** peak
 
@@ -108,7 +132,7 @@ reason the obvious fix fails, and Section 08's material.
 - **VO:** "Okay, so squeeze them. Store every parameter in four bits instead of sixteen." `[new]`
 - **Screen:** The mass visibly compresses.
 - **Narrator:** push pose — he's doing the squeezing.
-- **Notes:** `4-bit` tag, `640 GB → 160 GB`.
+- **Notes:** `4-bit` tag, `306 GiB → ~153 GiB`.
 - **Weight:** normal
 - **⚠ Your call:** introduces quantization at beat 3. Strengthens the wall a lot,
   but `GLM_V6_RESEARCH_NOTES.md` says plain language before technical terms. The
@@ -116,7 +140,7 @@ reason the obvious fix fails, and Section 08's material.
 
 ### 4 · AND STILL — the wall holds
 
-- **VO:** "Still 160. Still five times more than I have. So that's just… not happening."
+- **VO:** "Still 153. Still about five times more than I have. So that's just… not happening."
 - **Screen:** Compressed mass still dwarfs the machine.
 - **Narrator:** deflated.
 - **Notes:** a brace spanning mass and machine: `5×`. Just the number.
@@ -132,11 +156,11 @@ reason the obvious fix fails, and Section 08's material.
 
 ### 6 · SO — the hope becomes concrete
 
-- **VO:** "18 billion. Squeezed down, that's about 9 gigabytes. That fits. That fits with room to spare."
+- **VO:** "18 billion parameters, at the precision they actually ship in, is about 18 gigabytes. That fits. On the machine I already own, with room to spare."
 - **Screen:** The active slice detaches and sits *inside* the machine, visibly,
   with space left. Best feeling so far.
 - **Narrator:** hopeful.
-- **Notes:** `9 GB` on the slice, inside `32 GB`. A small tick. No sentence.
+- **Notes:** `~18 GB` on the slice, inside `32 GB`. A small tick. No sentence.
 - **Weight:** peak
 
 ### 7 · AND YET — the contradiction
@@ -176,7 +200,7 @@ reason the obvious fix fails, and Section 08's material.
 - **Screen:** The eight lift out and move toward the machine. They fit.
   Everything else greys to storage. The frame *argues yes*.
 - **Narrator:** leaning in — most hopeful point in the section.
-- **Notes:** `9 GB / 32 GB` on the machine. The numbers make the case.
+- **Notes:** `~18 GB / 32 GB` on the machine. The numbers make the case.
 - **Presenter action:** pause here, then click.
 - **Weight:** peak
 
@@ -216,11 +240,9 @@ reason the obvious fix fails, and Section 08's material.
 
 ## Open questions for you
 
-1. **Verify the byte numbers.** My arithmetic. Use the real checkpoint size if published.
-2. **Keep or cut beat 3** (quantization)? Flagged above.
+1. ~~Verify the byte numbers.~~ Done 2026-09-09 — see above. My bf16 figure was wrong; shipped checkpoint is FP8, ~306 GiB.
+2. ~~Keep or cut beat 3?~~ Keeping it; you carry the explanation there. Its job changed from hope to wall.
 3. **Does the spec card really go?** You kept it last time. With the Mac as beat
    1 it has no job, but it's your opening and your call.
-4. **Beat 11 needs Section 08 to exist.** This chain promises a bigger payoff
-   than the old version, because the hope is stronger. Beat 11's wall must be the
-   same object Section 08 later explains.
+4. ~~Beat 11 needs Section 08 to exist.~~ Drafted — see `08-why-it-cannot-fit.md`.
 5. **Does beat 10's "would that work?" pause suit your delivery?**

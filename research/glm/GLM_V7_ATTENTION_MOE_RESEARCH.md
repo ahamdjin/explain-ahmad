@@ -28,6 +28,31 @@ Sources:
 - https://huggingface.co/zai-org/GLM-5.3-Flash
 - https://huggingface.co/zai-org/GLM-5.3-Flash/blob/main/config.json
 
+### Verified additions — checked 2026-09-09
+
+Everything above re-confirmed against the model card and `config.json`. These
+were missing and are load-bearing for the memory argument:
+
+- **Weights ship natively in FP8** (`quantization_config`, `fmt: e4m3`,
+  `activation_scheme: dynamic`). `torch_dtype` still reads `bfloat16`, so do not
+  infer precision from that field alone.
+- **Default checkpoint is ~306 GiB on disk**, "before runtime and KV-cache
+  overhead". A BF16 variant needs roughly twice the weight memory.
+  Source: https://recipes.vllm.ai/zai-org/GLM-5.3-Flash
+- **321B** in the model metadata; **320B** is the figure used in prose.
+- `max_position_embeddings: 1048576` — 1M context, so KV cache is a separate and
+  substantial memory cost beyond weights.
+- Natively multimodal; attention is **hybrid KDA + sparse MLA**, which reinforces
+  the existing rule not to imply vanilla softmax self-attention throughout.
+
+Derived from the above, used in `video-script/08-why-it-cannot-fit.md`:
+
+- 45 layers − 3 dense = **42 sparse routing layers**.
+- 42 × 288 = **12,096 routed experts** in the model.
+- 8 × 42 = **336 expert visits per token** ≈ 2.8% of the pool.
+- ~94% of experts touched over a ~100-token prompt — **illustrative only**,
+  assumes uniform routing spread. Label it as such on screen.
+
 ### Attention
 
 For the beginner teaching lens, use the standard Q/K/V view from Transformer literature:
