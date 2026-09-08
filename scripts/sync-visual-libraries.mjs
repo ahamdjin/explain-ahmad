@@ -28,6 +28,20 @@ const sources = [
     use: 'Router/dispatcher inspiration and robot mood states.',
   },
   {
+    id: 'excalidraw-office-items',
+    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/m47812/office-items.excalidrawlib`,
+    output: 'visual-assets/vendor/excalidraw/office-items.excalidrawlib',
+    license: 'MIT',
+    use: 'Desk/workplace props for expert stations, workbenches and ordinary-world metaphors.',
+  },
+  {
+    id: 'excalidraw-system-icons',
+    url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/xxxdeveloper/system-icons.excalidrawlib`,
+    output: 'visual-assets/vendor/excalidraw/system-icons.excalidrawlib',
+    license: 'MIT',
+    use: 'Generic book/document/tool/device symbols; use when a metaphor needs a simple prop.',
+  },
+  {
     id: 'excalidraw-software-architecture',
     url: `https://raw.githubusercontent.com/excalidraw/excalidraw-libraries/${EXCALIDRAW_COMMIT}/libraries/youritjang/software-architecture.excalidrawlib`,
     output: 'visual-assets/vendor/excalidraw/software-architecture.excalidrawlib',
