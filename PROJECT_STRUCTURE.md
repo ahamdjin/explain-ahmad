@@ -30,6 +30,13 @@ The current spoken YouTube script.
 
 This folder should contain what Ahmad plans to **say**. Visuals should only be added here after they are deliberately locked sentence-by-sentence.
 
+## `storyboard/`
+The pre-production bridge between script and implementation.
+
+Start with large visual sections/pages before creating individual storyboard frames. One section is one stable mental world and can contain several narration sentences and several frames.
+
+For the current GLM explainer, `storyboard/SECTION_MAP.md` is the authoritative high-level visual/story structure. Detailed frames are created only inside a section after that section is understood.
+
 ## `archive/`
 Old experiments, previous-version plans, audits, rollback notes, and superseded visual attempts.
 
@@ -38,4 +45,4 @@ Useful for history, but **not authoritative for the current video**.
 ## `src/`
 The actual React/Vite implementation and reusable visual components.
 
-Changing `skills/`, `research/`, `art-direction/`, `video-script/`, or `archive/` does not mean the production UI should automatically be redesigned.
+Changing `skills/`, `research/`, `art-direction/`, `video-script/`, `storyboard/`, or `archive/` does not mean the production UI should automatically be redesigned.
