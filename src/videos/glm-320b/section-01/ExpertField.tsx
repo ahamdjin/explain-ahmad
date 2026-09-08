@@ -154,13 +154,18 @@ export function ExpertField({
               stiffness: isLead ? 70 : 90,
               damping: isLead ? 14 : 18,
               // Experts arrive as a wave from the lead outwards, not all at once.
+              // The in-between cells clear only AFTER the experts have grown,
+              // so it reads as "these stood up, the rest stepped back" rather
+              // than the whole field washing out at once.
               delay: isLead
                 ? 0
                 : isExpert
                   ? Math.abs(slot - LEAD_SLOT) * 0.009
-                  : active
-                    ? (index % COLS) * 0.012
-                    : 0,
+                  : fades
+                    ? 0.34 + (index % COLS) * 0.004
+                    : active
+                      ? (index % COLS) * 0.012
+                      : 0,
             }}
           >
             {isExpert ? <ExpertFace index={slot} chosen={chosen} shared={isShared} /> : null}
