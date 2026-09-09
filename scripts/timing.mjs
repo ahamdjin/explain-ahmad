@@ -1,6 +1,10 @@
 /**
  * Can the voice line actually be said in the time the beat gives it?
  *
+ *   npm run timing               # the built beats -- what the viewer hears
+ *   npm run timing -- --scripts  # the script markdown -- BEFORE anything is built
+ *
+ *
  * `skills/PRODUCTION_ORDER.md` §1: runtime is decided in the script, not
  * discovered in the edit. Word count / 145 wpm is the spoken length; a beat
  * whose line needs more seconds than it has is not a pacing problem to fix
@@ -26,25 +30,78 @@ const WPS = WPM / 60
 /** Below this, the line is being raced. */
 const MIN_SLACK = Number(args.get('slack') ?? 0.35)
 const SECTIONS = ['01', '02', '03', '04', '05', '06', '07', '08']
+const FROM_SCRIPTS = args.has('scripts')
+
+/**
+ * A script beat looks like:  > **12.** Some line. *(a stage direction)*
+ *
+ * Stage directions in italic parens are not spoken, so they do not count
+ * toward the time. Neither does bold or emphasis markup.
+ */
+function scriptBeats(markdown) {
+  const body = markdown.split('## The script')[1]
+  if (!body) return []
+  const upToJobs = body.split(/\n## Line jobs/)[0]
+  const out = []
+  const re = /^> \*\*(\d+)\.\*\*([\s\S]*?)(?=^> \*\*\d+\.\*\*|^#|^---|\Z)/gm
+  for (const m of upToJobs.matchAll(re)) {
+    const spoken = m[2]
+      .replace(/\*\([\s\S]*?\)\*/g, '')
+      .replace(/^>\s?/gm, '')
+      .replace(/[*_`]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+    out.push({ n: Number(m[1]), words: spoken ? spoken.split(' ').length : 0, line: spoken })
+  }
+  return out
+}
+
+/** Estimate: what the line needs, plus a beat of air, rounded to a half second. */
+function suggest(need) {
+  return Math.max(2.5, Math.round((need + 1.0) * 2) / 2)
+}
 
 const rows = []
-for (const n of SECTIONS) {
-  const source = await readFile(`src/videos/glm-320b/section-${n}/beats.ts`, 'utf8')
-  for (const block of source.split(/\n {2}\{\n/).slice(1)) {
-    const num = block.match(/^ {4}n: (\d+),/)
-    if (!num) continue
-    const vo = block.match(/\n {4}vo: (['"])([\s\S]*?)\1,\n/)?.[2] ?? ''
-    const secs = Number(block.match(/\n {4}secs: ([0-9.]+),/)?.[1] ?? 0)
-    const words = vo.trim() ? vo.trim().split(/\s+/).length : 0
-    rows.push({ sec: n, n: Number(num[1]), id: block.match(/\n {4}id: '([^']*)',/)?.[1] ?? '', words, secs, need: words / WPS })
+if (FROM_SCRIPTS) {
+  const { readdir } = await import('node:fs/promises')
+  const files = (await readdir('video-script')).filter((f) => /^\d\d-/.test(f)).sort()
+  const seen = new Set()
+  for (const file of files) {
+    const sec = file.slice(0, 2)
+    /* Two scripts for one section means one is superseded; take the newest only. */
+    if (seen.has(sec)) {
+      console.log(`  (skipping ${file} -- §${sec} already read from another file)`)
+      continue
+    }
+    const beats = scriptBeats(await readFile(`video-script/${file}`, 'utf8'))
+    if (!beats.length) continue
+    seen.add(sec)
+    for (const b of beats) {
+      const need = b.words / WPS
+      rows.push({ sec, n: b.n, id: b.line.slice(0, 30), words: b.words, secs: suggest(need), need })
+    }
+  }
+} else {
+  for (const n of SECTIONS) {
+    const source = await readFile(`src/videos/glm-320b/section-${n}/beats.ts`, 'utf8')
+    for (const block of source.split(/\n {2}\{\n/).slice(1)) {
+      const num = block.match(/^ {4}n: (\d+),/)
+      if (!num) continue
+      const vo = block.match(/\n {4}vo: (['"])([\s\S]*?)\1,\n/)?.[2] ?? ''
+      const secs = Number(block.match(/\n {4}secs: ([0-9.]+),/)?.[1] ?? 0)
+      const words = vo.trim() ? vo.trim().split(/\s+/).length : 0
+      rows.push({ sec: n, n: Number(num[1]), id: block.match(/\n {4}id: '([^']*)',/)?.[1] ?? '', words, secs, need: words / WPS })
+    }
   }
 }
 
-console.log(`At ${WPM} words per minute.\n`)
+console.log(`At ${WPM} words per minute, from ${FROM_SCRIPTS ? 'the script markdown' : 'the built beats'}.`)
+if (FROM_SCRIPTS) console.log('Seconds are a suggestion: what the line needs, plus a beat of air.')
+console.log()
 console.log('  §    beats  words   speaking   allotted   talking')
 let allWords = 0
 let allSecs = 0
-for (const n of SECTIONS) {
+for (const n of [...new Set(rows.map((r) => r.sec))].sort()) {
   const list = rows.filter((r) => r.sec === n)
   const words = list.reduce((t, r) => t + r.words, 0)
   const secs = list.reduce((t, r) => t + r.secs, 0)

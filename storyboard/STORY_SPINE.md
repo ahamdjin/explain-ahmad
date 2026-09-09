@@ -1,149 +1,143 @@
-# Story spine — the missing file
+# Story spine — v2
 
-Status: **AGREED 2026-09-09.** Both open decisions settled by Ahmad: one
-mystery in eight sections, and the want is the efficiency claim on trial.
+Status: **the promise is chosen; the chain is rewritten to pay it off.**
 
-This is the file the repo never had. `SECTION_MAP.md` specifies sections as
-**Purpose / Visual world / Key mechanism / Viewer leaves knowing** — a syllabus.
-Syllabi compose into lists, so nothing in the repo could detect a section that
-goes nowhere. See `skills/STORY_STRUCTURE.md` for the gates.
+Supersedes `archive/STORY_SPINE-claim-on-trial-v1.md` (the claim-on-trial
+version, 8 sections, built and shipped as 96 beats / 8:04). What forced the
+rewrite is in `research/glm/OFFLOADING_AND_LOCALITY.md`: v1's Section 07 was
+about to claim you cannot run this on less memory, and people run large MoE
+models on small cards every day. v1 also opened on a product name and reached
+its hook at 0:19, against research saying 30–40% of viewers are gone by 0:30
+(`research/RETENTION_AND_ANGLE.md`).
 
 ---
 
-## 1. The spine
+## 1. The promise
+
+Made in the first fifteen seconds, and it is the whole video:
+
+> **Two models. Both use about five percent of themselves to answer you. One
+> runs on a single graphics card. The other needs four.**
+>
+> So the number everybody quotes — *"only 18 billion active"* — is not telling
+> you what you think it is.
+
+| | gpt-oss-120b | GLM-5.3-Flash |
+| --- | --- | --- |
+| Total | 116.8B | 321B |
+| Active per word | 5.1B | 18B |
+| **Share active** | **4.4%** | **5.6%** |
+| Experts per sparse layer | 128 | **288** |
+| Routing | top-4 | **top-8** |
+| Footprint as shipped | ~58 GiB (MXFP4, 4.25 bit) | ~306 GiB (FP8) |
+| **Fits on** | **one 80 GB GPU** | **four** |
+| Squeezed to 4-bit | ~58 GiB | ~153 GiB — still two |
+
+Sources: [gpt-oss model card](https://arxiv.org/pdf/2508.10925) ·
+[gpt-oss repo](https://github.com/openai/gpt-oss) · `research/glm/GROUND_TRUTH.md`
+
+The contradiction is honest at either precision, which is what makes it safe to
+open on. Say "about five percent" — 4.4 and 5.6 are the same claim.
+
+## 2. The spine
 
 | | |
 | --- | --- |
-| **The want** | *They shipped a 320-billion-parameter model and called it efficient. I want to know whether that is true.* A claim on trial, not a curiosity. |
-| **The wall** | Which experts are needed is decided from the word's current numbers, and those numbers change at every one of the 42 sparse layers. So the set you need is unknowable in advance and changes 42 times per word — and fetching a set costs more than the work it does. |
-| **The thesis** | Sparse routing buys you **compute**, not **memory**. A 320B model doing 18B of work per word is still a 320B model that has to be reachable. |
+| **The want** | Everybody quotes *"320 billion parameters, only 18 billion active."* I want to know what that number actually buys — because two models with the same number need wildly different machines. |
+| **The wall** | Which experts are needed is decided from the word's *current* numbers, and those numbers change at every one of the 42 sparse layers. So the set is unknowable in advance and changes 42 times per word. And the trick that rescues this on other models — cache the ones that keep coming back — has almost nothing to grip when there are **288 experts per layer and 12,096 slots**. |
+| **The thesis** | **"Active parameters" is a compute number, not a memory number.** Sparse routing buys compute, not memory — and the finer you slice the experts, the more true that gets. |
 
-The wall is verified in `video-script/01-the-night-shift.md` §3 (336 expert
-visits per word, ~8 GB, cross-checked three ways). **It is written here even
-though Section 01 never says it** — a section built without knowing the answer
-ends on a hazard sign, because the author has nothing to aim at.
+### Why the thesis is worth eight minutes
 
----
+Fine-graining is not a mistake. More experts, smaller each, is *why* modern MoE
+models are good — better specialisation, better load balance. It is also
+precisely what defeats the caching trick that lets people run Mixtral on a
+laptop. **The better these models get at being sparse, the harder they get to
+hold.** Nobody has made that video.
 
-## 2. What the audit found
+## 3. What the viewer thinks they already know
 
-### The 11-section map serves two different videos
+This decides everything, because the audience for an MoE video believes it
+understands MoE:
 
-The central question is *why can't we load only the experts we need*. Check each
-section against the wall's causal chain — representation exists → it changes →
-router reads it → layers repeat → so the choice keeps changing → transfer costs
-more than compute:
+> *"Only a few parts run, so you only need to load a few parts. That's the
+> whole point. It's cheaper."*
 
-| Section | On the question? |
-| --- | --- |
-| 01 320B → 18B mystery | **yes** — poses it |
-| 02 Follow one prompt | **yes** — the turn inward |
-| 03 Text → tokens | **no** — needed only for a general LLM primer |
-| 04 Token → token ID | **no** |
-| 05 Token ID → embedding | **partly** — the *numbers* matter; the catalog lookup does not |
-| 06 Attention | **yes** — this is why the numbers change |
-| 07 Router + experts | **yes** — the mechanism |
-| 08 Why not load only those | **yes** — the answer |
-| 09 Repeat through layers | **yes** — this is the 42 |
-| 10 Next-token prediction | **no** |
-| 11 Return to the question | **yes** — the thesis |
+They are **right about the compute and wrong about the memory**, and they will
+not be moved by being told. They have to watch the reasonable version of their
+own idea get built, work, and then fail for a reason they can see. That is what
+Sections 6 and 7 are for, and it is why they get 27% of the runtime.
 
-**Four of eleven sections do not advance the central question.** Tokenization,
-token IDs and next-token prediction are prerequisites for *"how does an LLM
-generate text"* — a different, perfectly good video. Carrying them here is why
-Sections 02–07 never had a causal chain: they are not on the same journey, so no
-chain can be written for them.
+## 4. The chain — 8 sections
 
-This is the largest structural problem in the repo and it is not fixable at the
-beat level.
+Each section: `Enters on` = previous `Exits on`, and `Exits on` ≠ `Enters on`.
+Checked by `npm run check:chain`.
 
----
-
-## 3. The question chain — PROPOSED, 8 sections
-
-Each section must satisfy: `Exits on` ≠ `Enters on`, and `Enters on` equals the
-previous `Exits on`. Run the gates in `skills/STORY_STRUCTURE.md`.
-
-| # | Enters on | Answers | Event — what *happens* | Exits on |
+| # | Section | Answers | Event — what *happens* | Exits on |
 | --- | --- | --- | --- | --- |
-| 1 | *(cold open)* | Why does a 320B model only use 18B? → its knowledge is split into experts and only a few are picked per word | **Word two picks a completely different eight** | If the choice keeps changing, how could you ever hold just the ones you need? |
-| 2 | ↑ | nothing — setup, earned by the event | We stop looking from outside and follow one word in | What does the chooser actually look at? |
-| 3 | ↑ | It reads a list of numbers standing for the word | The word becomes numbers, and they are not fixed | If the numbers can change, does the choice change with them? |
-| 4 | ↑ | The numbers change because the word gathers context from its neighbours | The representation visibly changes in front of you | So with different numbers, would the same word pick a different team? |
-| 5 | ↑ | Yes. Same word, new numbers, new team | **The same word picks a different eight one floor up** | How many times does this happen? |
-| 6 | ↑ | 42 sparse layers, eight each — 336 expert visits per word | Count it on screen: 8 × 42 | Could you fetch 336 sets from storage, per word, fast enough? |
-| 7 | ↑ | No. The fetch costs more than the work it does | **The elegant plan from Section 1 jams** | Then what did "18B active" ever buy? |
-| 8 | ↑ | Compute, not memory | The whole journey folds back into the opening frame | *(none — thesis lands)* |
+| 1 | **The number that lies** | what "active" is, and why the other 300B isn't waste → **options** | a second word picks a different eight — **and some of the first eight stayed** | if some keep coming back, why not keep the popular ones close and fetch the rest? |
+| 2 | **What the chooser reads** | a long row of numbers standing for the word | **the router never looks at the word** — and the row is identical every time | the row never changes. So how did the team change? |
+| 3 | **Where the numbers change** | the word gathers context from its neighbours | "the dog barked" vs "a hot dog" → two different rows | would different numbers pick a different eight? |
+| 4 | **New numbers, new team** | yes — scored against the row, top eight | **the viewer picks, and watches the team change** | how many times does this happen? |
+| 5 | **Forty-two floors** | 42 sparse layers × 8 = **336 visits per word** | the room is one floor of 45; the counter runs to 336 | then how does anyone run one of these at home? |
+| 6 | **The plan, and the jam** | the naive fetch: ~8 GB per word, ~1.6 s, against milliseconds of work | **the plan from §1 is run, works once, then jams** | but people *do* run these. So what are they doing that we aren't? |
+| 7 | **The trick, and the exchange rate** | caching. Experts repeat, so keep the hot ones nearby — it genuinely works, and it is what people actually do | **the viewer drags a slider — how much do you keep close — and cannot find a setting that is both small and fast** | so what did "18 billion active" ever buy? |
+| 8 | **The verdict** | compute, not memory — and more so every generation | the two models from §1 return, side by side | *(none — the thesis lands)* |
 
-Note the shape: **Section 1's event is Section 7's weapon.** The different-eight
-reveal is planted in the opening and is the thing that breaks the tempting plan
-six sections later. That is setup and payoff, and it is what the current
-structure has none of.
+### The load-bearing structure
 
-Sections 3–6 are where tokenization and embeddings *may* appear — but only as
-much as the question needs. Section 3 needs "the word becomes numbers." It does
-not need a vocabulary catalog or token IDs.
+- **§1's promise is §8's payoff.** The two models open the video and close it.
+- **§1's event is §7's seed.** "Some of them stayed" is what makes caching the
+  obvious idea, and caching is what §7 has to defeat honestly.
+- **§7 is a trade, not a wall.** You *can* trade memory for speed — that is
+  exactly what offloading is. The video's job is to show the **exchange rate**,
+  and that on a model this fine-grained there is no setting that is both small
+  and fast. A slider the viewer cannot win is a stronger proof than any bar
+  chart, and it is the honest shape of the problem.
+- **§5 exits into §1's promise.** *How does anyone run these at home?* is the
+  question the opening planted, arriving on schedule.
+- **The payoff gets two sections, not one.** v1 spent 16% of runtime on the
+  answer. This spends 27%, because the answer is the only part that changes
+  someone's mind.
 
----
+## 5. What changed from v1, and why
 
-## 4. Decisions — settled
+| | v1 | v2 |
+| --- | --- | --- |
+| Open | *"This is GLM-5.3-Flash."* Hook at 0:19 | the two-model contradiction. Promise by 0:12 |
+| Want | the word "efficient" on trial | the number everyone quotes, and what it buys |
+| §1 event | "a **completely** different eight" | a different eight, **with the overlap shown** — true, and it seeds §7 |
+| Old §2 | 46 s, answered nothing, sat at the most fragile point in the video | **folded into §2** — its event survives, the corridor does not |
+| The answer | one section, 1:16 | **two sections** — the naive jam, then the clever fix and its limit |
+| Thesis | compute not memory | compute not memory, **and it worsens with granularity** |
+| Honesty | implied you cannot offload | concedes offloading works, then shows where it runs out |
 
-### Decision 1 — one video. Eight sections. `AGREED`
+The old §2's reveal — *the router never looks at the word* — was too good to
+lose and too thin to carry 46 seconds. It now opens §2 and buys its keep in ten.
 
-- **One mystery** (8 sections, the chain above). Tight, every section earns its
-  place, tokenization appears only as far as the question needs. Shorter.
-- **Primer + mystery** (11+ sections). Teaches how an LLM works *and* answers
-  the memory question. Then sections 3–5 and 10 need their own reason to exist,
-  and the mystery goes cold for several minutes in the middle.
+## 6. Two things we may not claim
 
-**Chosen: one mystery.** A viewer who stays for "why can't this fit" will not
-sit through token IDs, and a viewer who wants a primer is not hooked by a memory
-question. Tokenization and embeddings appear only as far as §3 of the chain
-needs them: *the word becomes numbers, and the numbers are not fixed.* No
-vocabulary catalog, no token IDs, no next-token prediction section.
+**We may not put a number on expert overlap for this model.** The 44.2%
+consecutive-token figure and the LRU hit rates are measured on Mixtral 8×7B —
+8 experts, top-2. Nobody has published the equivalent for 288 experts at top-8.
+So §1 says *"some of them keep coming back"* and shows a couple staying. It
+never says how many, and no on-screen number claims a fraction.
 
-### Decision 2 — the want. `AGREED`
+**We may not say the fetch is impossible.** It is a trade with a bad exchange
+rate, and §7 must be built as a trade. Anything stronger is contradicted by a
+`llama.cpp` flag — see `research/glm/OFFLOADING_AND_LOCALITY.md`.
 
-Every rejected version had a narrator who *noticed* things. A want is a blocked
-goal, and it is what the repo has never contained. Generic, no personal machine.
-Candidates:
+Both restrictions make the video better. A trade the viewer can operate is more
+convincing than a wall they have to accept.
 
-1. **"I want to run this myself and I can't."** Strongest stake, most concrete,
-   and the question ends exactly on your line. Risk: sounds like a hardware
-   video.
-2. **"They shipped a 320B model and called it efficient. I want to know if
-   that's true."** A claim to be tested. Keeps the whole video adversarial and
-   curious, and the thesis *(compute, not memory)* is literally the verdict.
-3. **"I want to understand why this thing is so big when it barely uses
-   itself."** Closest to the current draft — and the weakest, because it is a
-   curiosity dressed as a want. Included so the difference is visible.
-
-**Chosen: 2.** It gives the video a verdict to reach rather than a fact to
-deliver, it stays generic and does not date, and it makes the viewer a juror
-instead of a student.
-
-Consequences that now bind every section:
-
-- The video is **testing a claim**, so each section is evidence for or against
-  it. A section that is neither is off-mission.
-- The thesis is the **verdict**: *sparse routing buys compute, not memory.*
-  Section 8 delivers it as a ruling, not as a summary.
-- The tone is **curious and adversarial**, never debunking. The claim turns out
-  to be true about compute and false about memory, and that split is the point.
-- The protagonist is a **juror**, so the questions on screen are his, and he is
-  allowed to be convinced at beat 27 and unconvinced at beat 29.
-
----
-
-## 5. Foundation files
+## 7. Foundation files
 
 | File | Holds |
 | --- | --- |
-| `skills/STORY_STRUCTURE.md` | the four gates, run before any art |
-| `storyboard/STORY_SPINE.md` | this file — want, wall, thesis, question chain |
-| `storyboard/VOCABULARY_LEDGER.md` | what the viewer owns per section; banned terms |
-| `research/glm/GROUND_TRUTH.md` | every on-screen number, single source |
-| `storyboard/SECTION_MAP.md` | per-section detail, in question-chain format |
-
-Remaining: rebuild Section 01 against the chain — the different-eight event, and
-an exit question that differs from its entry.
+| `skills/STORY_STRUCTURE.md` | the five gates, run before any art |
+| `skills/PRODUCTION_ORDER.md` | script → frames → animation, and line jobs |
+| `research/RETENTION_AND_ANGLE.md` | why anyone stays; the competitive field |
+| `research/glm/OFFLOADING_AND_LOCALITY.md` | **the correction that produced v2** |
+| `research/glm/GROUND_TRUTH.md` | every on-screen number about this model |
+| `storyboard/VOCABULARY_LEDGER.md` | what the viewer owns per section |
+| `storyboard/SECTION_MAP.md` | per-section detail |
