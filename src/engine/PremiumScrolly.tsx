@@ -14,6 +14,7 @@ import {
 } from 'motion/react'
 import { motionTokens } from '../motion/tokens'
 import { MotionSystem } from './MotionSystem'
+import '../premium-scroll.css'
 
 type PremiumScrollyContextValue = {
   progress: MotionValue<number>

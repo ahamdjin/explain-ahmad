@@ -1,0 +1,48 @@
+/*
+ * The document reset and the root custom properties. The only stylesheet
+ * besides styles.css that every route pays for, because every route needs it.
+ *
+ * Split out of design-system.css: that file is the *page* design system and
+ * belongs to the routes that use it, but the reset underneath it is global.
+ * Moving the whole file route-side dropped `html, body, #root { min-height }`
+ * and every scene frame changed height -- invisible in the source, obvious in
+ * a screenshot diff.
+ */
+:root {
+  --paper: #f6f0e5;
+  --paper-2: #fbf8f1;
+  --ink: #17130f;
+  --muted-ink: #746c62;
+  --line: #241f19;
+  --accent: #79c8bd;
+  --accent-2: #efad67;
+  --accent-3: #d96d63;
+  --scene-pad: clamp(28px, 5vw, 84px);
+  --scene-radius: 0px;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+  background: #fff;
+  color: var(--ink);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}

@@ -17,3 +17,6 @@ public/vo/*.mp3
 public/vo/*.wav
 public/vo/*.m4a
 output/recordings/
+
+# smoke-test screenshots
+output/smoke/

@@ -14,9 +14,15 @@ See `PROJECT_STRUCTURE.md` first.
 
 ## Current phase
 
-We are building the **library and structure only**.
+**The video is built.** Eight sections, 96 beats, 8:04, click-to-advance.
+Remaining: voice-over, and a pacing pass once there is audio to cut against.
 
-Real video pages are not created until the actual script/story is supplied.
+Start at **`/watch`** — it runs all eight in order, which is the only way any
+of it makes sense. Individual `/section-0N` routes exist for review.
+
+The reusable library is `src/paper` (browse it at **`/paper`**). Everything
+else under `src/` is earlier exploration, kept for reference and reachable
+from `/`; none of it is loaded by the video.
 
 North star:
 
@@ -28,15 +34,17 @@ This library intentionally over-builds interaction quality and robustness. More 
 
 ## Library routes
 
-- `/` — internal module library
+- `/watch` — **the video**, all eight sections in order (`?play=1`, `?chrome=0`, `?section=N`)
+- `/paper` — every reusable piece and object in every state
+- `/section-01` … `/section-08` — one section, for review only
+- `/` — index of all of the above, plus the older studies
 - `/styles` — art-direction reference
-- `/lab/:demo` — capability demos/tutorials
-- `/lab/continuity` — first refinement benchmark
-- `/<video-slug>` — reserved for real videos, registered only when the story exists
+- `/lab/:demo` — capability demos
+- `/why-320b-uses-18b` — production v9, superseded by the eight sections
 
-The real-video registry lives in `src/videos/registry.tsx` and intentionally starts empty.
-
-Lab demos are lazy-loaded independently. Opening one demo does not automatically load every specialist engine used by the others.
+Every route is lazy-loaded and owns its own CSS, so opening one does not pay
+for any of the others. `npm run smoke` opens all 19 and fails on any console
+error, page error or failed request.
 
 ## Core story hierarchy
 
@@ -168,6 +176,21 @@ Lab chrome is invisible during normal viewing.
 npm install
 npm run dev
 ```
+
+## Commands
+
+| | |
+| --- | --- |
+| `npm run dev` | the app |
+| `npm run check` | typecheck, then the story-chain gates |
+| `npm run check:chain` | every section's links meet, and none is circular |
+| `npm run smoke` | open all 19 routes, fail on any error |
+| `npm run board` | regenerate `storyboard/BOARD.md` from the beats |
+| `npm run palette` | regenerate the CSS custom properties from `palette.ts` |
+| `npm run frames:all` | one still per beat, plus a contact sheet |
+| `npm run record` | the whole run to video, at authored timing |
+
+`BOARD.md` and the palette CSS are **generated**. Edit the source, not them.
 
 ## Upstream / inspiration
 

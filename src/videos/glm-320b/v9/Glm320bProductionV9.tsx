@@ -15,6 +15,7 @@ import './production-v10.css'
 import './opening-v1.css'
 import './opening-v2-art.css'
 import './opening-v2-labels.css'
+import '../glm-320b-video-v8-diagram-fixes.css'
 
 function World({ world, beat }: { world: string; beat: number }) {
   if (world === 'model') return <OpeningWorld beat={beat} />
