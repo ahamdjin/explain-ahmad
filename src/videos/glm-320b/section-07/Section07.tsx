@@ -2,17 +2,18 @@ import { SectionRunner, runtimeSeconds } from '../../../paper'
 import { BEATS } from './beats'
 import { INITIAL, applyPatches } from './scene'
 import { Stage } from './Stage'
+import './section-07.css'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 01 -- the claim on trial. Script: video-script/01-the-claim.md */
-export default function Section01() {
+/** Section 07 -- the answer. Script: video-script/07-the-answer.md */
+export default function Section07() {
   return (
     <SectionRunner
       beats={BEATS}
       initial={INITIAL}
       apply={applyPatches}
-      label="Is a 320 billion parameter model really efficient?"
+      label="Why the experts cannot just be loaded on demand"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}
     </SectionRunner>

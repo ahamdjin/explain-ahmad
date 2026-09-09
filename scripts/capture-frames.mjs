@@ -20,14 +20,15 @@ const WIDTH = Number(args.get('width') ?? 1920)
 const HEIGHT = Number(args.get('height') ?? 1080)
 const SETTLE = Number(args.get('settle') ?? 1500)
 const DEBUG = args.get('debug') === 'true'
-const OUT = path.resolve(args.get('out') ?? 'frames/section-01')
+const SECTION = args.get('section') ?? 'section-01'
+const OUT = path.resolve(args.get('out') ?? `frames/${SECTION}`)
 
 /**
  * Reads beat metadata by scanning the source rather than importing it: beats.ts
  * imports the story verbs, so it cannot be transpiled and evaluated standalone.
  */
 async function loadFrameMeta() {
-  const source = await readFile(path.resolve('src/videos/glm-320b/section-01/beats.ts'), 'utf8')
+  const source = await readFile(path.resolve(`src/videos/glm-320b/${SECTION}/beats.ts`), 'utf8')
   const blocks = source.split(/\n {2}\{\n/).slice(1)
   const frames = []
 
@@ -106,7 +107,7 @@ const captured = []
 try {
   for (const n of targets) {
     const frame = frames.find((item) => item.n === n)
-    await page.goto(`${server.url}/section-01?beat=${n}${DEBUG ? '&debug=1' : ''}`, { waitUntil: 'networkidle' })
+    await page.goto(`${server.url}/${SECTION}?beat=${n}${DEBUG ? '&debug=1' : ''}`, { waitUntil: 'networkidle' })
     await page.waitForTimeout(SETTLE)
     const file = `frame-${String(n).padStart(2, '0')}-${frame.id}.png`
     await page.screenshot({ path: path.join(OUT, file) })

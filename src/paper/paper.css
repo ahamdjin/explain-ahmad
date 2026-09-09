@@ -657,3 +657,45 @@
   filter: drop-shadow(0 10px 16px rgba(43, 41, 38, 0.13));
   transform: rotate(-1.1deg);
 }
+
+/* Storage, fast memory, the road between, and the verdict ---------------- */
+
+.s1-store { width: 30cqw; }
+.s1-fastmem { width: 20cqw; }
+.s1-fetch { width: 32cqw; }
+.s1-bars { width: 62cqw; }
+
+.s1-store svg,
+.s1-fastmem svg,
+.s1-fetch svg,
+.s1-bars svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-plate { font: 400 25px/1 var(--hand); }
+.s1-fetch-tag { font: 400 27px/1 var(--scrawl); }
+.s1-bar-name { font: 400 34px/1 var(--hand); }
+.s1-bar-fig { font: 400 40px/1 var(--hand); }
+.s1-bar-ratio { font: 400 46px/1 var(--hand); }
+
+.s1-fastmem[data-strained='true'] { filter: drop-shadow(0 0 10px rgba(200, 102, 88, 0.4)); }
+
+.s1-counter {
+  display: grid;
+  justify-items: center;
+  gap: 0.3cqh;
+}
+
+.s1-counter strong {
+  font: 400 clamp(28px, 5.6cqw, 108px) / 1 var(--hand);
+  font-variant-numeric: tabular-nums;
+  color: var(--orange-ink);
+}
+
+.s1-counter span {
+  font: 400 clamp(11px, 1.5cqw, 29px) / 1.2 var(--scrawl);
+  color: var(--graphite);
+}

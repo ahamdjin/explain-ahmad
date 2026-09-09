@@ -1,0 +1,9 @@
+.s7-floor {
+  display: block;
+  padding: 0.5cqh 1cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.6px var(--ink);
+  border-radius: 5px;
+  white-space: nowrap;
+  font: 400 clamp(12px, 1.7cqw, 33px) / 1.1 var(--hand);
+}

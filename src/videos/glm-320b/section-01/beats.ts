@@ -1,4 +1,4 @@
-import { HOLD, type Relation } from '../../../paper/motion'
+import { type Beat, type Overlay } from '../../../paper'
 import {
   CHOSEN,
   CHOSEN_B,
@@ -18,55 +18,6 @@ import {
   type Patch,
 } from './scene'
 
-export type Overlay = {
-  kind: 'note' | 'bubble' | 'brace' | 'arrow' | 'sparks' | 'title'
-  /** Percentages of the stage, except `arrow`, which uses 1920x1080 units. */
-  at?: { x: string; y: string }
-  from?: { x: number; y: number }
-  to?: { x: number; y: number }
-  text?: string
-  sub?: string
-  width?: string | number
-  rotate?: number
-  tone?: 'ink' | 'orange' | 'red' | 'blue'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  side?: 'top' | 'bottom'
-  bow?: number
-  dashed?: boolean
-  backed?: boolean
-  tail?: 'bottom-left' | 'bottom-center' | 'left'
-  label?: string
-  /**
-   * Survives into later beats until one sets `clearSticky`. Overlays are
-   * otherwise replaced wholesale each beat, which silently dropped the
-   * `hundreds of gigabytes` label one beat after it appeared -- taking the
-   * mismatch frame's whole point with it.
-   */
-  sticky?: boolean
-}
-
-/** A staged reveal inside one beat: show the thing, then name it, then react. */
-export type Stage = { at: number; commands: Patch[] }
-
-export type Beat = {
-  n: number
-  id: string
-  title: string
-  /** What Ahmad says over this beat. Notes on screen must never transcribe it. */
-  vo: string
-  /** What this beat IS in the story. Drives motion feel and hold time. */
-  relation: Relation
-  /** Seconds this beat holds in the recorded cut. Sums to the board's 2:12. */
-  secs: number
-  commands: Patch[]
-  stages?: Stage[]
-  overlays?: Overlay[]
-  /** Held back until `at` ms, so a label can arrive after its object. */
-  lateOverlays?: { at: number; overlays: Overlay[] }
-  /** Drops every sticky overlay carried in from earlier beats. */
-  clearSticky?: boolean
-}
-
 const H = (text: string, at: { x: string; y: string }, extra: Partial<Overlay> = {}): Overlay => ({
   kind: 'note',
   text,
@@ -82,7 +33,7 @@ const HOSP_S = 0.78
 const HOSP_LEFT = '33%'
 const HOSP_W = '48%'
 
-export const BEATS: Beat[] = [
+export const BEATS: Beat<Patch>[] = [
   /* ═══ ACT 1 · THE CLAIM ══════════════════════════════════════════════════
    * The want is a claim on trial, so the section opens on the claim and on
    * the machine *working* -- never on a specification table. */
@@ -431,19 +382,6 @@ export const BEATS: Beat[] = [
     },
   },
 ]
-
-export function holdFor(beat: Beat) {
-  const staged = beat.stages?.length ? Math.max(...beat.stages.map((stage) => stage.at)) : 0
-  return HOLD[beat.relation] + staged
-}
-
-/** Longest staged offset, so the recorder knows how long a beat really needs. */
-export function stageSpan(beat: Beat) {
-  const stages = beat.stages?.map((stage) => stage.at) ?? []
-  const late = beat.lateOverlays ? [beat.lateOverlays.at] : []
-  const all = [...stages, ...late]
-  return all.length ? Math.max(...all) : 0
-}
 
 /** Board runtime, so drift between the script and the code is visible. */
 export const RUNTIME_SECONDS = BEATS.reduce((total, beat) => total + beat.secs, 0)

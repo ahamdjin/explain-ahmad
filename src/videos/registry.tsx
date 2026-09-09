@@ -9,6 +9,7 @@ export type VideoRouteDefinition = {
 const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
 const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
 const Section01 = lazy(() => import('./glm-320b/section-01/Section01'))
+const Section07 = lazy(() => import('./glm-320b/section-07/Section07'))
 
 /**
  * Real video pages are registered only after their story is known.
@@ -23,7 +24,12 @@ export const videoRoutes: VideoRouteDefinition[] = [
   },
   {
     slug: 'section-01',
-    title: 'Section 01 — The 320B → 18B Mystery',
+    title: 'Section 01 — The claim on trial',
     component: Section01,
+  },
+  {
+    slug: 'section-07',
+    title: 'Section 07 — The answer',
+    component: Section07,
   },
 ]
