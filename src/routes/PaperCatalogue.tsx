@@ -76,10 +76,10 @@ export default function PaperCatalogue() {
         </Item>
         <Item name="Specialist" note="identity is a number, never a job title">
           <div className="pc-row">
-            <Specialist index={0} size={70} />
-            <Specialist index={3} size={70} lit />
-            <Specialist index={5} size={70} dimmed />
-            <Specialist index={2} size={70} asleep />
+            <Specialist index={0} size={58} />
+            <Specialist index={3} size={58} lit />
+            <Specialist index={5} size={58} dimmed />
+            <Specialist index={2} size={58} asleep />
           </div>
         </Item>
         <Item name="FrontDesk" note="the router — unlabelled until it is named">

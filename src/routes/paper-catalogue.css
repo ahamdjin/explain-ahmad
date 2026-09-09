@@ -41,7 +41,7 @@
 .pc-grid {
   display: grid;
   gap: 22px;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
 }
 
 .pc-item {
@@ -56,11 +56,17 @@
   grid-column: 1 / -1;
 }
 
-/* Pieces are authored against the 16:9 stage, so preview them on one. */
+/* Pieces are authored against the 16:9 stage, so preview them on one. A
+ * full-width card at 16:9 is over 800px tall and mostly empty, so wide items
+ * get a letterbox instead. */
 .pc-stage {
   position: relative;
   aspect-ratio: 16 / 9;
   border-bottom: 1px solid rgba(43, 41, 38, 0.12);
+}
+
+.pc-item[data-wide='true'] .pc-stage {
+  aspect-ratio: 30 / 9;
 }
 
 .pc-inner {
@@ -94,11 +100,11 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 3cqw, 44px);
+  gap: clamp(8px, 2.4cqw, 40px);
 }
 
 .pc-desks {
-  width: 70%;
+  width: 62%;
 }
 
 .pc-pose {
