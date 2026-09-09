@@ -51,6 +51,41 @@
 > Which means it is *exactly the same* every single time the word "dog" turns
 > up. Same word, same row, always.
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the first surface | — | `4021` sits alone; the bottom edge of a huge table rises into frame | `4021`, a table edge | `4021` |
+| 2 | the table | **pull back** | we back away and the table's full height comes into view, rows running past the top of frame | `EmbeddingTable` | 154,880 rows |
+| 3 | the table | — | the number travels up the table and stops at its own row | `4021` moving | row 4021 |
+| 4 | the table | — | that row slides out of the table and comes forward | `EmbeddingTable`, row extracted | row 4021 |
+| 5 | the table | — | the extracted row extends sideways past both edges of frame | `NumberRow` extending | 4096 values |
+| 6 | the table | — | the row holds; a handwritten label lands on it | `NumberRow`, `Note` | "embedding" |
+| 7 | the table | — | two more rows slide out and stack under it | 3 `NumberRow`s | `dog`, `cat` |
+| 8 | the table | — | the `dog` and `cat` rows align; the values that nearly match light up | `NumberRow` `compare` | many matches |
+| 9 | the table | — | a third row slides out and aligns; almost nothing lights | 3 rows aligned | `Tuesday` |
+| 10 | the table | — | the three rows collapse into three points, spaced by how alike they are | rows → `Space` points | dog·cat close, Tuesday far |
+| 11 | the table | — | the points hold; a brace measures the two distances | points, `Brace` | the two gaps |
+| 12 | the table | — | the points unfold back into the `dog` row, alone | one `NumberRow` | row for `dog` |
+| 13 | the table | — | the same row is pulled from the table twice more; all three are identical | 3 identical rows | identical, every time |
+
+### Board notes
+
+- **One camera move**, at beat 2, and it exists to make the table's height felt.
+  After that the section is still for eleven beats.
+- **Beats 8–11 are the carrying frames.** dog / cat / Tuesday. If that image
+  does not teach "meaning is where the row sits", the section fails and no
+  motion pass saves it.
+- Beat 10 turns rows into points. That is a **representation change**, so it
+  must be animated as a fold — the same objects rearranging, never a cut to a
+  scatter plot. See the truth note.
+- Beat 13 is the deposit. **Three identical rows on one frame** is the whole
+  setup for §4, so it is a picture and not a line of voice-over.
+
+---
+
 ## Line jobs
 
 | Beat | Job |
@@ -64,6 +99,11 @@
 | 13 | **but** — the row is fixed. **This is the setup for §4 and it must land flatly** |
 
 ## Truth notes
+
+- **Beat 10's two-dimensional placement is an analogy.** These rows live in
+  4096 dimensions and cannot be drawn. Show *relative distance only*, never
+  axes, never a grid, and never a coordinate. If a viewer could read a position
+  off it, the frame is lying.
 
 - **dog/cat close, dog/Tuesday far** is a real and standard property of learned
   embeddings. It is safe to show. Do **not** put a cosine-similarity number on

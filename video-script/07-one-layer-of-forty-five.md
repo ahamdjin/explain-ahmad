@@ -46,6 +46,43 @@
 > **13.** Three hundred and thirty-six choices, for one token — and every single
 > one of them needed the floor below to finish before it could be made.
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the room | — | the room holds, bounded, with the row inside it | the room, one row | — |
+| 2 | the tower | **pull back** | we keep backing away and the room shrinks until it is one floor with others above and below | `Tower`, room highlighted | one floor |
+| 3 | the tower | — | floors continue stacking upward until the count draws itself | `Tower`, 45 floors | 45 |
+| 4 | the tower | — | a marker carrying the row starts climbing from floor one | `Tower` + climbing marker | the token |
+| 5 | the tower | — | on each floor it passes, three quick flashes fire in order | flashes per floor | look · pick · work |
+| 6 | the tower | — | the row is shown at floor one and floor two — different values | two `NumberRow`s | floor 1 vs floor 2 |
+| 7 | the tower | — | the two rows hold side by side | two rows | different |
+| 8 | the tower | — | floor two's eight light, in different positions from floor one's | two floors, two teams | different eight |
+| 9 | the tower | — | the climb resumes; every floor lights a different eight as it passes | `Tower` climbing | fresh each floor |
+| 10 | the tower | — | the bottom three floors redraw themselves plain, without expert walls | `Tower`, 3 dense marked | 3 dense · 42 sparse |
+| 11 | the tower | — | 42 and 8 slide together and a multiplication draws itself | `Counter`, `8 × 42` | 8 × 42 |
+| 12 | the tower | — | the counter runs up the tower floor by floor and stops | `Counter` running | **336** |
+| 13 | the tower | — | 336 holds while a single line traces the whole climb bottom to top | `Counter`, trace line | every one needed the one below |
+
+### Board notes
+
+- **One camera move**, beat 2, and it is the biggest single moment in the video.
+  §6 gave the room edges for exactly this. The viewer can point at §6 beat 11
+  and say "we were in there."
+- Beat 5's three flashes must fire **in order** — attention, router, experts —
+  because that order is the whole causal argument, and out of order it teaches
+  the wrong thing.
+- **Beats 6–8 are the carrying frames.** Two floors, two rows, two different
+  eights, on one frame.
+- Beat 12: the counter climbs **with** the marker, so 336 is watched being
+  built rather than announced. A number the viewer saw assembled is a number
+  they trust.
+- Beat 10 has to happen *before* beat 11, or the arithmetic is 8 × 45.
+
+---
+
 ## Line jobs
 
 | Beat | Job |

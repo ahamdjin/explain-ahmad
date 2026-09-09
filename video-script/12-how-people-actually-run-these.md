@@ -55,6 +55,45 @@ already knows it.
 > **14.** So you **can** run it on less. It'll just be slow. That was never a
 > wall — it's a price.
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the plan | — | the bars clear; a small machine slides in and runs, steadily, producing words | `SmallMachine` running | it works |
+| 2 | the plan | — | the machine keeps running while the numbers from §11 hang over it, unchanged | machine + 8 GB label | both true at once |
+| 3 | the plan | — | a box appears in the path between the drive and the machine | `ExpertCache`, empty | "cache" |
+| 4 | the plan | — | two words run through; a couple of the same blocks are used both times | two teams, overlap lit | some repeat |
+| 5 | the plan | — | those repeating blocks stay in the box instead of returning to the drive | `ExpertCache` filling | kept close |
+| 6 | the plan | — | the next word's fetches split: most come from the box, a few from the drive | short hops + long hops | hit / miss |
+| 7 | the plan | — | the machine speeds up; a small model tag appears on the box | machine faster, tag | 8 experts per floor |
+| 8 | the plan | — | a slider rises out of the floor under the box | `TradeSlider` | how much do you keep? |
+| 9 | the plan | — | the slider is dragged up: the box swells, the machine races, the machine's frame grows huge | slider high | fast, but big |
+| 10 | the plan | — | dragged down: the box shrinks, long hops multiply, the machine crawls | slider low | small, but slow |
+| 11 | the plan | — | the 288 wall and the 42 floors ghost in behind the box, dwarfing it | `Hospital` + `Tower` ghosted | 288 × 42 |
+| 12 | the plan | — | a count assembles from them and lands on the box | `Counter` | **12,096** slots |
+| 13 | the plan | — | the slider is dragged across its whole range; neither end ever shows both | slider sweeping | no good setting |
+| 14 | the plan | — | the slider settles mid-range; the machine runs, slowly, and keeps running | machine, slow, working | a price, not a wall |
+
+### Board notes
+
+- **No camera moves.** We stay at the plan for the whole section, because the
+  section is a *modification* of the thing we are already looking at. Moving
+  would make the cache look like somewhere else.
+- Beat 1 is the concession and it must be **generous** — the machine visibly
+  works before any qualification arrives. We raise the objection ourselves,
+  before the comments do.
+- **The slider is the interaction of the video.** Ask before they drag —
+  *"where would you put it?"* — so failing to find a good setting is the
+  viewer's own discovery. `skills/ncase/NCASE_I_DO_AND_I_UNDERSTAND.md`.
+- Beat 7's tag is load-bearing honesty: the reassuring cache numbers are
+  measured on **8 experts per floor**, and beat 11 is what that means here.
+- **Beat 14 is the video's honesty and may not be cut.** The machine is still
+  running at the end of this section. Slowly, but running.
+
+---
+
 ## Line jobs
 
 | Beat | Job |

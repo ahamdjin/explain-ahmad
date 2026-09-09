@@ -52,6 +52,42 @@
 > **13.** And notice — none of that could have been worked out ahead of time. It
 > depends entirely on what you typed.
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the table | — | the three identical rows collapse back into one | `NumberRow` | the `dog` row |
+| 2 | the first surface | **pull back** | we back off and the other tokens' rows are all there, in a line | `Sentence` + one row each | 9 tokens, 9 rows |
+| 3 | the first surface | — | our row lifts slightly out of the line | `Sentence`, `dog` raised | `dog` |
+| 4 | the first surface | — | lines shoot from our row to every other row | `AttentionLines`, uniform | 8 lines |
+| 5 | the first surface | — | the lines thicken and thin — `ball` and `dropped` heavy, `the` almost nothing | `AttentionLines` weighted | weight by thickness |
+| 6 | the first surface | — | the lines running *forward* to later tokens fade out and go | forward lines leaving | only backward lines remain |
+| 7 | the first surface | — | material travels along the surviving lines into our row | flow along lines | the pull |
+| 8 | the first surface | — | our row's values visibly change where the flow landed | `NumberRow` value change | before → after |
+| 9 | the first surface | — | the lines withdraw; a label lands | `Note` | "attention" |
+| 10 | the first surface | — | the sentence slides left; a second sentence assembles beside it | two `Sentence`s | `the dog barked` / `a hot dog` |
+| 11 | the first surface | — | both `dog` rows lift out and align — clearly different | two `NumberRow`s | two different rows |
+| 12 | the first surface | — | the row they *started* from ghosts in behind both, identical | ghost row + two live | same start, two ends |
+| 13 | the first surface | — | the ghost fades; the two rows hold apart | two rows | the divergence |
+
+### Board notes
+
+- **One camera move**, at beat 2, and it does real work: it reveals that our
+  row was never alone. The whole section is that reveal.
+- Beat 6 is causal masking without the words. The forward lines **leave** —
+  they are not crossed out. Nothing in this video is crossed out.
+- **Beats 11–12 are the carrying frames.** Two different rows, with the
+  identical starting row ghosted behind them, on one frame. That single image
+  is the answer to §3's paradox.
+- Beat 5's weights are illustrative. Thickness only — no numbers on the lines,
+  or the frame claims a precision we do not have.
+- The two sentences are the video's one comparison example. They arrive here and
+  are reused by §5 beat 12.
+
+---
+
 ## Line jobs
 
 | Beat | Job |

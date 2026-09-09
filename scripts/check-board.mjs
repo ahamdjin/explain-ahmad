@@ -39,6 +39,7 @@ function boardRows(markdown) {
 
 const files = (await readdir('video-script')).filter((f) => /^\d\d-.+\.md$/.test(f)).sort()
 const problems = []
+const journey = []
 let checked = 0
 let boarded = 0
 
@@ -79,6 +80,28 @@ for (const file of files) {
       problems.push(`${file}  beat ${cur.n} — camera moves but the place is the same ("${cur.where}"). A camera that drifts for atmosphere destroys one that moves for a reason`)
     }
   }
+
+  journey.push({ file, first: ordered[0], last: ordered[ordered.length - 1] })
+}
+
+/*
+ * Rule 5: the same two rules, across a section boundary.
+ *
+ * A per-section check cannot see this, and it is where a teleport is most
+ * likely -- a new script starts and quietly assumes a new place. The video is
+ * one continuous space or it is a slideshow.
+ */
+for (let i = 1; i < journey.length; i += 1) {
+  const prev = journey[i - 1].last
+  const cur = journey[i].first
+  const moved = prev.where !== cur.where
+  const hasCamera = !isNone(cur.camera)
+  if (moved && !hasCamera) {
+    problems.push(`${journey[i].file}  beat ${cur.n} — the previous section left us at "${prev.where}" and this one opens at "${cur.where}" with no camera move. A section break is not permission to teleport`)
+  }
+  if (!moved && hasCamera) {
+    problems.push(`${journey[i].file}  beat ${cur.n} — camera moves but the previous section already left us at "${cur.where}"`)
+  }
 }
 
 console.log(`${boarded} of ${checked} sections boarded.\n`)
@@ -87,4 +110,14 @@ if (problems.length) {
   for (const p of problems) console.error(`  ! ${p}`)
   process.exit(1)
 }
-console.log('Every beat has a place and an event, and every change of place is a camera move.')
+console.log('Every beat has a place and an event, and every change of place is a camera move.\n')
+console.log('The journey:')
+let seen = null
+for (const { file, first, last } of journey) {
+  void last
+  if (first.where !== seen) {
+    const cam = first.camera.replace(/\*/g, '')
+    console.log(`  §${file.slice(0, 2)}  ${(isNone(cam) ? '(continues)' : cam).padEnd(12)} → ${first.where}`)
+    seen = first.where
+  }
+}

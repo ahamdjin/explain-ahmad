@@ -40,6 +40,40 @@
 >
 > **11.** Which means we can finally ask the question we started with properly.
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | outside the tower | — | the tower and the single word card hold, apart | `Tower`, `WordCard` | one word |
+| 2 | outside the tower | — | the card flies back down to the base and joins the end of the sentence | card → `Sentence` | `…and it bounced` |
+| 3 | outside the tower | — | the sentence is now one token longer; a tenth marker appears | `Sentence` +1, 10 markers | 10 tokens |
+| 4 | outside the tower | — | all ten markers enter at the base together | `Tower`, 10 climbing | again |
+| 5 | outside the tower | — | the whole climb replays, faster | `Tower`, fast climb | 45 floors again |
+| 6 | outside the tower | — | another card drops out at the top | `WordCard` | the next word |
+| 7 | outside the tower | — | the cycle repeats, accelerating each time | `GenerateLoop` | again, and again |
+| 8 | outside the tower | — | the produced words accumulate as a line of text beside the tower | growing sentence | the reply, appearing |
+| 9 | outside the tower | — | a counter beside each produced word ticks 336 per token | `Counter`s | 336, per token, per word |
+| 10 | outside the tower | — | the running total climbs and does not stop | `Counter`, unbounded | it never stops |
+| 11 | outside the tower | — | everything halts at once; the tower and the finished reply hold | `Tower` + full reply | — |
+
+### Board notes
+
+- **No camera moves.** We watch the loop from one fixed position for the whole
+  section, because the loop is the subject and a moving camera would make it
+  read as a montage rather than a cycle.
+- **Beat 7's acceleration is the one place speed itself is the message.** It
+  should become slightly uncomfortable. That discomfort is the argument.
+- Beat 8 connects it to something the viewer has literally watched happen — a
+  reply appearing a word at a time. The line of text must build **at the pace
+  of the loop**, not smoothly.
+- The KV-cache aside chips off **beat 5** and must open without stopping the
+  loop behind it.
+- Beat 11's total halt buys §11's opening. Stop everything, then ask.
+
+---
+
 ## Line jobs
 
 | Beat | Job |

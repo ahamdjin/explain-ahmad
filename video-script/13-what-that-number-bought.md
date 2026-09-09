@@ -59,6 +59,43 @@ The answer is split, and the split is the whole video:
 > that's the difference between something that's cheap to run — and something
 > that's small.
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the plan | — | the plan dissolves; `18` rises and holds alone | `BigNumber` | `18B` |
+| 2 | the sheet | **pan** | we slide back to the opening sheet, exactly as it was | `ModelSheet` | 320 / 18 |
+| 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking |
+| 4 | the sheet | — | the block from §1 returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable |
+| 5 | the sheet | — | a label lands between the bar and the block | `Note` in `claim` orange | "efficient" |
+| 6 | the sheet | — | the bar and the block separate into two labelled halves | two columns | compute / memory |
+| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `ModelSheet`s, 1 chip vs 4 | 117B → 1 · 321B → 4 |
+| 8 | the sheet | — | both sheets light their active share; the two shares match | two lit patches | ~5% both |
+| 9 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones | two `Block`s, different grain | 128 vs 288 |
+| 10 | the sheet | — | the fine-grained one's chip stack grows while its pieces get smaller | grain vs chips | better · harder |
+| 11 | the sheet | — | the second sheet withdraws; ours holds with its four chips | one sheet, 4 chips | the trend |
+| 12 | the sheet | — | everything clears to one card | `VerdictCard` | **cheap to run ≠ small** |
+
+### Board notes
+
+- **One camera move**, beat 2, back to where we opened. The sheet must be the
+  **same object** as §1 beat 1 — same tilt, same paper, same figures.
+- **Beat 3 concedes first.** The true half gets a frame of its own before any
+  qualification. A verdict that only convicts reads as a debunk.
+- Beat 5 is one of `claim` orange's three budgeted uses in the whole video.
+  `art-direction/PALETTE.md`.
+- **Beats 9–10 are the carrying frames** and the *oh-now-I-see*: two blocks,
+  one coarse and one fine, with the fine one carrying four chips. The trend, as
+  a picture, with no line of voice-over needed to explain it.
+- Beat 7 draws **four chips, not a rack.** A rack is an unquantified "lots";
+  four is the promise.
+- No new mechanism appears anywhere in this section. Anything needing
+  explanation belonged earlier.
+
+---
+
 ## Line jobs
 
 | Beat | Job |

@@ -39,6 +39,39 @@
 >
 > **11.** Which raises the obvious question — how many steps are there?
 
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the room | — | the eight lift forward out of the wall; the 280 recede into the background | 8 `Specialist`s forward | 8 |
+| 2 | the room | — | the row copies eight times, one copy travelling into each | 8 identical rows | same input |
+| 3 | the room | — | eight visibly different rows emerge on the far side | 8 different `NumberRow`s | 8 different outputs |
+| 4 | the room | — | each output takes on the size of its expert's score | 8 rows, weighted | bigger = higher score |
+| 5 | the room | — | the eight converge and merge into a single row, larger ones dominating | 8 → 1 `NumberRow` | the blend |
+| 6 | the room | — | the dashed shared expert's output joins the merge from the side | +1 joining | always on |
+| 7 | the room | — | one row settles, the same length as the one that went in | one `NumberRow` | one row out |
+| 8 | the room | — | the row that arrived ghosts in beside it for comparison | before + after | same length, new values |
+| 9 | the room | — | the ghost fades; a label lands on the survivor | `Note` | "thought about, once" |
+| 10 | the room | — | everything else clears; the row is alone in the room | one row, empty room | — |
+| 11 | the room | — | the room's walls, floor and ceiling draw themselves in around the row | the room, bounded | one step, done |
+
+### Board notes
+
+- **No camera moves at all.** This section is one continuous look at one
+  operation, and the stillness is what makes §7's pull-back land.
+- Beat 4 is why §5's scoring mattered. Without it, the blend looks like an
+  average and the scores were decoration.
+- **Beats 7–8 are the carrying frames**: the input row and the output row, same
+  length, obviously different values. If they look alike, the section taught
+  nothing.
+- Beat 11 is the setup for the entire next section. The room gets edges for the
+  first time, so that when we pull back it can become a floor. Nothing is said
+  over it — the frame is doing the work.
+
+---
+
 ## Line jobs
 
 | Beat | Job |
