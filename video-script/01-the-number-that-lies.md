@@ -44,9 +44,9 @@ named when the viewer already wants to know what it is — not before.
 >
 > **2.** Both of them use about five percent of themselves to answer you.
 >
-> **3.** *(left sheet)* This one runs on a single graphics card.
+> **3.** *(left sheet)* This one fits on one chip.
 >
-> **4.** *(right sheet — hold)* This one needs four.
+> **4.** *(right sheet — hold)* This one needs four of them.
 >
 > **5.** Same five percent. Four times the machine.
 >
@@ -110,7 +110,7 @@ Per `skills/PRODUCTION_ORDER.md` §1 — hook, answer, turn, or cut.
 | Beat | Job | |
 | --- | --- | --- |
 | 1–2 | **hook** | the pattern interrupt: a claim they will resist |
-| 3–4 | **hook** | the promise, made concrete and checkable |
+| 3–4 | **hook** | the promise, made concrete and checkable — see the truth note on "chip" |
 | 5 | **turn** | the two facts collide |
 | 6 | **hook** | the stakes — the number they trust is wrong |
 | 7 | setup | the doorway |
@@ -146,9 +146,17 @@ and they are why §7 can be honest later.
 - **"About five percent" covers both models.** 5.1B/116.8B = 4.4%;
   18B/321B = 5.6%. Saying "about five percent" of both is accurate; putting
   4.4% and 5.6% on screen invites a comparison the section does not need.
-- **One card versus four** is from footprint, not benchmarks: ~58 GiB at MXFP4
-  against ~306 GiB at FP8, on 80 GB accelerators. Honest at 4-bit too — ~58
-  against ~153, one against two. `GROUND_TRUTH.md`.
+- **Say "chip", not "graphics card".** The one-GPU figure for gpt-oss-120b is
+  a single **80 GB datacentre accelerator** (H100 class), not a gaming card.
+  "Graphics card" makes a viewer picture a consumer GPU, and that claim is
+  false — the 24 GB consumer figure exists only *with expert offloading*, which
+  is §7's material and must not be borrowed here. The comparison is one chip
+  against four, from footprint rather than benchmarks: ~58 GiB at MXFP4 against
+  ~306 GiB at FP8 on 80 GB accelerators. Honest at 4-bit too — ~58 against
+  ~153, one against two. `GROUND_TRUTH.md`.
+- **The 4× is the promise, so it may not be softened.** Four is the honest
+  number at shipped precision. If the frames show hardware, draw four chips,
+  not a server rack — a rack is an unquantified "lots".
 - **Say `word`, never `token`.** Token is earned in §2.
 - **Nothing is shown blocked.** No cross, no hazard mark. At beat 23 the plan
   looks correct, and the closing question is written *over* a plan that still
