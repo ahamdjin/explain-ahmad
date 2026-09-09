@@ -1,12 +1,13 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { PALETTE } from '../palette'
 
 /** The word entering the model. Called a word, never a token, in Section 01. */
 export function WordCard({ label }: { label: string }) {
   return (
     <div className="s1-word">
       <svg viewBox="0 0 240 96" filter="url(#s1-ink-soft)" aria-hidden="true">
-        <rect x="4" y="6" width="232" height="82" rx="5" fill="#FBF8F1" stroke={INK} strokeWidth="2.8" />
+        <rect x="4" y="6" width="232" height="82" rx="5" fill={PALETTE.paperLight} stroke={INK} strokeWidth="2.8" />
       </svg>
       <span className="s1-word-text">&ldquo;{label}&rdquo;</span>
     </div>
@@ -30,7 +31,7 @@ export function FrontDesk({ named, ringed }: { named: boolean; ringed: boolean }
             rx="118"
             ry="96"
             fill="none"
-            stroke="#C87B45"
+            stroke={PALETTE.orangeInk}
             strokeWidth="3"
             strokeDasharray="10 8"
             initial={{ opacity: 0, scale: 1.15 }}
@@ -42,11 +43,11 @@ export function FrontDesk({ named, ringed }: { named: boolean; ringed: boolean }
 
         <g fill="none" stroke={INK} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
           {/* the figure behind the desk */}
-          <circle cx="130" cy="52" r="26" fill="#FFFDF8" />
+          <circle cx="130" cy="52" r="26" fill={PALETTE.paperWhite} />
           {/* A coloured tunic, so this figure never reads as a second narrator.
               Two identical stick people twenty percent apart is a continuity
               bug, not a cast. */}
-          <path d="M116 84h28l6 30h-40z" fill="#9FC4BA" />
+          <path d="M116 84h28l6 30h-40z" fill={PALETTE.tealSoft} />
           <g fill={INK} stroke="none">
             <circle cx="122" cy="50" r="3.2" />
             <circle cx="139" cy="50" r="3.2" />
@@ -56,7 +57,7 @@ export function FrontDesk({ named, ringed }: { named: boolean; ringed: boolean }
           <path d="M130 92l30 12" />
 
           {/* the desk */}
-          <path d="M58 128h144v56H58z" fill="#EDE5D8" />
+          <path d="M58 128h144v56H58z" fill={PALETTE.paperShade} />
           <path d="M58 128h144" />
           <path d="M72 184v18" />
           <path d="M188 184v18" />
@@ -77,23 +78,23 @@ export function SmallMachine({ filled }: { filled: boolean }) {
     <div className="s1-machine">
       <svg viewBox="0 0 300 220" aria-hidden="true">
         <g fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M28 20h244a10 10 0 0 1 10 10v128a10 10 0 0 1-10 10H28a10 10 0 0 1-10-10V30a10 10 0 0 1 10-10Z" fill="#FBF8F1" />
-          <path d="M44 38h212v104H44z" fill={filled ? '#FDF3E4' : '#F2ECDF'} />
-          <path d="M96 168h108l14 30H82z" fill="#EDE5D8" />
+          <path d="M28 20h244a10 10 0 0 1 10 10v128a10 10 0 0 1-10 10H28a10 10 0 0 1-10-10V30a10 10 0 0 1 10-10Z" fill={PALETTE.paperLight} />
+          <path d="M44 38h212v104H44z" fill={filled ? PALETTE.glowTint : PALETTE.paper} />
+          <path d="M96 168h108l14 30H82z" fill={PALETTE.paperShade} />
           <path d="M64 198h172" />
         </g>
         {filled ? (
           <g>
             {[0, 1, 2, 3].map((i) => (
               <g key={i} transform={`translate(${74 + i * 42} 66)`}>
-                <rect width="26" height="26" rx="8" fill="#E79A63" stroke={INK} strokeWidth="2" />
+                <rect width="26" height="26" rx="8" fill={PALETTE.orange} stroke={INK} strokeWidth="2" />
                 <circle cx="9" cy="13" r="1.9" fill={INK} />
                 <circle cx="18" cy="13" r="1.9" fill={INK} />
               </g>
             ))}
             {[0, 1, 2, 3].map((i) => (
               <g key={`b${i}`} transform={`translate(${74 + i * 42} 104)`}>
-                <rect width="26" height="26" rx="8" fill="#8FBF9F" stroke={INK} strokeWidth="2" />
+                <rect width="26" height="26" rx="8" fill={PALETTE.green} stroke={INK} strokeWidth="2" />
                 <circle cx="9" cy="13" r="1.9" fill={INK} />
                 <circle cx="18" cy="13" r="1.9" fill={INK} />
               </g>
@@ -120,7 +121,7 @@ export function ArchSheet({ pushed }: { pushed: boolean }) {
       transition={{ type: 'spring', stiffness: 90, damping: 18 }}
     >
       <svg viewBox="0 0 560 700" aria-hidden="true">
-        <rect x="18" y="18" width="524" height="664" rx="4" fill="#FBF8F1" stroke={INK} strokeWidth="3" />
+        <rect x="18" y="18" width="524" height="664" rx="4" fill={PALETTE.paperLight} stroke={INK} strokeWidth="3" />
         <text x="280" y="62" textAnchor="middle" className="s1-arch-title" fill={INK}>
           Full model architecture
         </text>
@@ -136,7 +137,7 @@ export function ArchSheet({ pushed }: { pushed: boolean }) {
               width={58}
               height={34}
               rx="4"
-              fill={['#EDE5D8', '#E8EEF5', '#EDF3EA'][i % 3]}
+              fill={[PALETTE.paperShade, '#E8EEF5', '#EDF3EA'][i % 3]}
               stroke={INK}
               strokeWidth="1.6"
             />

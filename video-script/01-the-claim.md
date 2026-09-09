@@ -84,8 +84,8 @@ exits on a question that could not have been asked at the start.
 
 > **19.** Except — *which* eight? That changed the moment the word changed.
 >
-> **20.** So you'd need a new set. Every single word. **If we only load the
-> experts we need, why can't we run this on far less memory?**
+> **20.** So you can't know which eight until the word turns up. **If we only
+> load the experts we need, why can't we run this on far less memory?**
 >
 > **21.** To answer that, staring at the finished model won't help. Let's follow
 > one word inside.
@@ -133,3 +133,7 @@ No line is doing nothing.
 - The router is on screen from beat 8 as an unlabelled desk, and is named at
   16. Function before name.
 - The word is `dog`, then `cat`. Ordinary words the viewer owns instantly.
+- **Say nothing about repeating.** Section 1's point is that the choice is
+  *unpredictable*, not that it happens many times. That the choice is remade at
+  every one of the 42 sparse layers is §6's reveal, and hinting at it here
+  costs §6 its biggest moment. No "again", no "every time", no counting.

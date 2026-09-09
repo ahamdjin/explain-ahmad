@@ -17,6 +17,8 @@ export type SceneState = {
   tower: { on: boolean; at: At; scale: number; floor: number; label: string }
   row: { on: boolean; at: At; scale: number; seed: number; label: string }
   counter: { on: boolean; at: At; scale: number; value: number; label: string }
+  /** Owns the one thing in the chain that is not literally true. */
+  aside: { on: boolean; at: At }
   narrator: {
     on: boolean
     at: At
@@ -32,6 +34,7 @@ export const INITIAL: SceneState = {
   tower: { on: false, at: { x: 74, y: 50 }, scale: 1, floor: 1, label: '' },
   row: { on: false, at: { x: 22, y: 24 }, scale: 0.5, seed: 73, label: '' },
   counter: { on: false, at: { x: 26, y: 68 }, scale: 1, value: 8, label: 'expert visits so far' },
+  aside: { on: false, at: { x: 16, y: 90 } },
   narrator: { on: false, at: { x: 7, y: 86 }, scale: 0.44, pose: 'wonder', flip: false },
 }
 
@@ -45,6 +48,7 @@ export function applyPatches(base: SceneState, patches: Patch[]): SceneState {
     tower: { ...base.tower },
     row: { ...base.row },
     counter: { ...base.counter },
+    aside: { ...base.aside },
     narrator: { ...base.narrator },
   }
   for (const patch of patches) {
@@ -87,6 +91,8 @@ export const counter = {
   to: (value: number): Patch => ({ counter: { value } }),
   relabel: (label: string): Patch => ({ counter: { label } }),
 }
+
+export const aside = { show: (at: At): Patch => ({ aside: { on: true, at } }) }
 
 export const narrator = {
   at: (at: At, pose: SceneState['narrator']['pose'], scale = 0.44, flip = false): Patch => ({

@@ -63,6 +63,20 @@ Then the counter does the rest. 8 is a small number. 336 is not.
 | 9–10 | answer — the number, built rather than asserted |
 | 11 | **hook** — exit, and it hands §7 a question with arithmetic already in it |
 
+## The aside — do not remove it
+
+Beat 4 carries an expandable aside: **"what about the rest of the sentence?"**
+
+Following one word alone is the only thing in the whole chain that is not
+literally true. The real shape is that the entire prompt goes in at once and
+climbs together, each word carrying its own numbers and picking its own eight
+independently. See `research/glm/GROUND_TRUTH.md`.
+
+It belongs in an aside rather than in beats because it does not change the
+answer — and because it makes the problem §7 is about **worse**, not better.
+Following one word is the kind version. Beat 4 is where a viewer starts
+wondering, so that is where the chip goes.
+
 ## Truth notes
 
 - 45 layers: **3 dense, 42 sparse.** Only the sparse ones route. Say so at beat

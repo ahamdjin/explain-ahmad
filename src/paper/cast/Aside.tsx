@@ -11,11 +11,22 @@ import { useState, type ReactNode } from 'react'
  *
  * Marked data-no-advance so opening it does not also advance the beat.
  */
-export function Aside({ chip, title, children }: { chip: string; title: string; children: ReactNode }) {
+export function Aside({
+  chip,
+  title,
+  up = false,
+  children,
+}: {
+  chip: string
+  title: string
+  /** Open above the chip. Set it when the chip sits low in the frame. */
+  up?: boolean
+  children: ReactNode
+}) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="s1-aside" data-no-advance data-open={open ? 'true' : undefined}>
+    <div className="s1-aside" data-no-advance data-open={open ? 'true' : undefined} data-up={up ? 'true' : undefined}>
       <button type="button" onClick={() => setOpen((v) => !v)}>
         <i aria-hidden="true">{open ? '−' : '?'}</i>
         {chip}
@@ -24,7 +35,7 @@ export function Aside({ chip, title, children }: { chip: string; title: string; 
       {open ? (
         <motion.div
           className="s1-aside-panel"
-          initial={{ opacity: 0, y: -8 }}
+          initial={{ opacity: 0, y: up ? 8 : -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.26 }}
         >

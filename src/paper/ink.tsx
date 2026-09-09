@@ -1,3 +1,5 @@
+import { PALETTE } from './palette'
+
 /**
  * Shared SVG defs for the paper world.
  *
@@ -32,20 +34,7 @@ export function PaperDefs() {
   )
 }
 
-export const INK = '#2B2926'
-export const GRAPHITE = '#807A72'
-
-export const EXPERT_COLORS = [
-  '#E79A63',
-  '#7FA8D4',
-  '#8FBF9F',
-  '#B49AD1',
-  '#E3C45B',
-  '#E39BA8',
-  '#74A297',
-  '#C9A87C',
-] as const
-
-export function expertColor(index: number) {
-  return EXPERT_COLORS[index % EXPERT_COLORS.length]
-}
+/* Colour lives in one place. See palette.ts. */
+export { PALETTE, EXPERT_COLORS, expertColor, type PaletteKey } from './palette'
+export const INK = PALETTE.ink
+export const GRAPHITE = PALETTE.graphite

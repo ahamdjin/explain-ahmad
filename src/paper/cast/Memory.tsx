@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK, expertColor } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * Storage: where the experts are when nobody needs them.
@@ -16,7 +17,7 @@ export function Store({ label, count = 48 }: { label: string; count?: number }) 
     <div className="s1-store">
       <svg viewBox="0 0 480 380" aria-hidden="true">
         <g fill="none" stroke={INK} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M24 54h432v300H24z" fill="#F1EADC" strokeWidth="3.2" />
+          <path d="M24 54h432v300H24z" fill={PALETTE.paperFold} strokeWidth="3.2" />
           <path d="M12 58 240 26l228 32" fill="#E7DFCF" strokeWidth="3" />
           {Array.from({ length: rows }, (_, r) => (
             <path key={r} d={`M40 ${86 + r * 66}h400`} strokeWidth="2" opacity="0.4" />
@@ -32,7 +33,7 @@ export function Store({ label, count = 48 }: { label: string; count?: number }) 
                 <path d={`M${x + 6} ${y + 20}v8`} />
                 <path d={`M${x + 17} ${y + 20}v8`} />
               </g>
-              <rect x={x} y={y} width="23" height="21" rx="6.5" fill="#D6CCB8" stroke={INK} strokeWidth="2" />
+              <rect x={x} y={y} width="23" height="21" rx="6.5" fill={PALETTE.idleAsleep} stroke={INK} strokeWidth="2" />
               <g stroke={INK} strokeWidth="1.7" strokeLinecap="round" opacity="0.6">
                 <path d={`M${x + 4} ${y + 10}h5`} />
                 <path d={`M${x + 14} ${y + 10}h5`} />
@@ -42,7 +43,7 @@ export function Store({ label, count = 48 }: { label: string; count?: number }) 
         })}
 
         <g>
-          <path d="M120 358h240a4 4 0 0 1 4 4v30a4 4 0 0 1-4 4H120a4 4 0 0 1-4-4v-30a4 4 0 0 1 4-4Z" fill="#FBF8F1" stroke={INK} strokeWidth="2.6" />
+          <path d="M120 358h240a4 4 0 0 1 4 4v30a4 4 0 0 1-4 4H120a4 4 0 0 1-4-4v-30a4 4 0 0 1 4-4Z" fill={PALETTE.paperLight} stroke={INK} strokeWidth="2.6" />
           <text x="240" y="381" textAnchor="middle" className="s1-plate" fill={INK}>
             {label}
           </text>
@@ -73,9 +74,9 @@ export function FastMemory({ count, label, strained }: { count: number; label: s
           container with exactly eight places in it".
         */}
         <g fill="none" stroke={INK} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20 34h280v206H20z" fill="#FDF7EA" strokeWidth="3.4" />
-          <path d="M20 34 44 14h280l-24 20" fill="#F1EADC" strokeWidth="2.6" />
-          <path d="M300 34l24-20v206l-24 20" fill="#EDE5D8" strokeWidth="2.6" />
+          <path d="M20 34h280v206H20z" fill={PALETTE.glowPale} strokeWidth="3.4" />
+          <path d="M20 34 44 14h280l-24 20" fill={PALETTE.paperFold} strokeWidth="2.6" />
+          <path d="M300 34l24-20v206l-24 20" fill={PALETTE.paperShade} strokeWidth="2.6" />
         </g>
 
         {Array.from({ length: 8 }, (_, i) => {
@@ -112,7 +113,7 @@ export function FastMemory({ count, label, strained }: { count: number; label: s
         })}
 
         <g>
-          <path d="M60 254h200a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H60a4 4 0 0 1-4-4v-22a4 4 0 0 1 4-4Z" fill="#FBF8F1" stroke={INK} strokeWidth="2.4" />
+          <path d="M60 254h200a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H60a4 4 0 0 1-4-4v-22a4 4 0 0 1 4-4Z" fill={PALETTE.paperLight} stroke={INK} strokeWidth="2.4" />
           <text x="160" y="272" textAnchor="middle" className="s1-plate" fill={INK}>
             {label}
           </text>
@@ -162,10 +163,10 @@ export function FetchPath({ items, jammed }: { items: number; jammed: boolean })
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: 0.35 }}>
             {/* A queue bracket, so the bunching reads as a backlog and not as
                 a tidier arrangement of the same traffic. */}
-            <g fill="none" stroke="#C86658" strokeWidth="3" strokeLinecap="round">
+            <g fill="none" stroke={PALETTE.red} strokeWidth="3" strokeLinecap="round">
               <path d="M20 44v-12h318v12" />
             </g>
-            <text x="179" y="24" textAnchor="middle" className="s1-fetch-tag" fill="#C86658">
+            <text x="179" y="24" textAnchor="middle" className="s1-fetch-tag" fill={PALETTE.red}>
               backing up
             </text>
           </motion.g>
@@ -198,7 +199,7 @@ export function CostBars({ show, ratio }: { show: 'fetch' | 'both'; ratio: strin
           width={FULL}
           height="58"
           rx="4"
-          fill="#C86658"
+          fill={PALETTE.red}
           stroke={INK}
           strokeWidth="3"
           initial={{ scaleX: 0 }}
@@ -206,7 +207,7 @@ export function CostBars({ show, ratio }: { show: 'fetch' | 'both'; ratio: strin
           style={{ transformOrigin: '8px 48px' }}
           transition={{ type: 'spring', stiffness: 60, damping: 18 }}
         />
-        <text x={FULL + 26} y="88" className="s1-bar-fig" fill="#C86658">
+        <text x={FULL + 26} y="88" className="s1-bar-fig" fill={PALETTE.red}>
           ~1.5 s
         </text>
 
@@ -215,11 +216,11 @@ export function CostBars({ show, ratio }: { show: 'fetch' | 'both'; ratio: strin
             the actual work
           </text>
           <rect x="8" y="186" width={FULL} height="58" rx="4" fill="none" stroke={INK} strokeWidth="2" strokeDasharray="6 7" opacity="0.35" />
-          <rect x="8" y="186" width="20" height="58" rx="3" fill="#8FBF9F" stroke={INK} strokeWidth="3" />
+          <rect x="8" y="186" width="20" height="58" rx="3" fill={PALETTE.green} stroke={INK} strokeWidth="3" />
           <text x="54" y="226" className="s1-bar-fig" fill={INK}>
             milliseconds
           </text>
-          <text x={FULL + 26} y="226" className="s1-bar-ratio" fill="#C86658">
+          <text x={FULL + 26} y="226" className="s1-bar-ratio" fill={PALETTE.red}>
             {ratio}
           </text>
         </motion.g>

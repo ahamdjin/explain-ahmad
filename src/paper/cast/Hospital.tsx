@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK, expertColor } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * The world of Section 01.
@@ -81,7 +82,7 @@ export function Hospital({
             cy="566"
             rx="210"
             ry="86"
-            fill="#F0C98A"
+            fill={PALETTE.glow}
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.55 }}
             transition={{ duration: 0.5 }}
@@ -90,13 +91,13 @@ export function Hospital({
 
         <g fill="none" stroke={INK} strokeLinecap="round" strokeLinejoin="round">
           {/* body */}
-          <path d="M60 162h1000v422H60z" fill="#F7F2E7" strokeWidth="3.2" />
+          <path d="M60 162h1000v422H60z" fill={PALETTE.paperSheet} strokeWidth="3.2" />
 
           {/* roof */}
-          <path d="M44 166 560 56l516 110" fill="#EDE5D8" strokeWidth="3.2" />
+          <path d="M44 166 560 56l516 110" fill={PALETTE.paperShade} strokeWidth="3.2" />
 
           {/* sign band across the front */}
-          <path d="M344 100h432a5 5 0 0 1 5 5v50a5 5 0 0 1-5 5H344a5 5 0 0 1-5-5v-50a5 5 0 0 1 5-5Z" fill="#FBF8F1" strokeWidth="3" />
+          <path d="M344 100h432a5 5 0 0 1 5 5v50a5 5 0 0 1-5 5H344a5 5 0 0 1-5-5v-50a5 5 0 0 1 5-5Z" fill={PALETTE.paperLight} strokeWidth="3" />
 
           {/* floor lines */}
           {Array.from({ length: ROWS }, (_, r) => (
@@ -134,7 +135,7 @@ export function Hospital({
                   }}
                 >
                   {isLit ? (
-                    <rect x={x - 6} y={y - 6} width="31" height="31" rx="11" fill="#E79A63" opacity="0.42" />
+                    <rect x={x - 6} y={y - 6} width="31" height="31" rx="11" fill={PALETTE.orange} opacity="0.42" />
                   ) : null}
                   <g stroke={INK} strokeWidth="1.7" strokeLinecap="round">
                     <path d={`M${x + 5} ${y + 18}v7`} />
@@ -146,7 +147,7 @@ export function Hospital({
                     width="19"
                     height="18"
                     rx="5.5"
-                    fill={dim ? '#CDC1A9' : expertColor(i)}
+                    fill={dim ? PALETTE.idleDim : expertColor(i)}
                     stroke={INK}
                     strokeWidth="1.8"
                   />
@@ -178,7 +179,7 @@ export function Hospital({
                 width={COLS * STEP_X}
                 height="32"
                 rx="8"
-                fill="#5E83B8"
+                fill={PALETTE.blue}
                 opacity="0.1"
               />
             ))}
@@ -187,7 +188,7 @@ export function Hospital({
               y={Y0 - 10}
               width="34"
               height={ROWS * STEP_Y}
-              fill="#5E83B8"
+              fill={PALETTE.blue}
               opacity="0.28"
               animate={{ x: [X0 - 10, X0 + COLS * STEP_X - 24] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
@@ -209,7 +210,7 @@ export function Hospital({
                     height="29"
                     rx="10"
                     fill="none"
-                    stroke="#C86658"
+                    stroke={PALETTE.red}
                     strokeWidth="2.4"
                     strokeDasharray="4 4"
                   />
@@ -239,7 +240,7 @@ export function Hospital({
 
         {/* entrance */}
         <g fill="none" stroke={INK} strokeWidth="2.8" strokeLinejoin="round">
-          <path d="M486 534h148v50H486z" fill={doorsOpen ? '#FDF0D8' : '#EDE5D8'} />
+          <path d="M486 534h148v50H486z" fill={doorsOpen ? PALETTE.glowSoft : PALETTE.paperShade} />
           <motion.path
             d="M560 534v50"
             animate={{ opacity: doorsOpen ? 0 : 1 }}
@@ -254,7 +255,7 @@ export function Hospital({
         */}
         {heavy ? (
           <motion.g
-            stroke="#8A7F6E"
+            stroke={PALETTE.stone}
             strokeLinecap="round"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -269,7 +270,7 @@ export function Hospital({
 
         {plaque ? (
           <g>
-            <path d="M74 604h236a4 4 0 0 1 4 4v38a4 4 0 0 1-4 4H74a4 4 0 0 1-4-4v-38a4 4 0 0 1 4-4Z" fill="#FBF8F1" stroke={INK} strokeWidth="2.4" />
+            <path d="M74 604h236a4 4 0 0 1 4 4v38a4 4 0 0 1-4 4H74a4 4 0 0 1-4-4v-38a4 4 0 0 1 4-4Z" fill={PALETTE.paperLight} stroke={INK} strokeWidth="2.4" />
             <text x="192" y="632" textAnchor="middle" className="s1-hosp-plaque" fill={INK}>
               {plaque}
             </text>
@@ -293,7 +294,7 @@ export function ChosenTeam({ lit, boxed }: { lit: readonly number[]; boxed: bool
         {lit.map((index) => (
           <div className="s1-team-one" key={index}>
             <svg viewBox="0 0 40 52" aria-hidden="true">
-              <rect x="1" y="1" width="38" height="34" rx="11" fill="#E79A63" opacity="0.22" />
+              <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.orange} opacity="0.22" />
               <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
                 <path d="M14 33v10" />
                 <path d="M26 33v10" />

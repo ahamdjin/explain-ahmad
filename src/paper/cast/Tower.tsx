@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * The model as a building: 45 layers, the first 3 dense and the other 42 sparse.
@@ -21,8 +22,8 @@ export function Tower({ floor, label }: { floor: number; label?: string }) {
     <div className="s1-tower">
       <svg viewBox={`0 0 520 ${height}`} aria-hidden="true">
         <g fill="none" stroke={INK} strokeLinejoin="round">
-          <path d={`M96 ${TOP}h330v${FLOORS * H}H96z`} fill="#F7F2E7" strokeWidth="3" />
-          <path d={`M84 ${TOP} 261 ${TOP - 20} 438 ${TOP}`} fill="#EDE5D8" strokeWidth="2.6" />
+          <path d={`M96 ${TOP}h330v${FLOORS * H}H96z`} fill={PALETTE.paperSheet} strokeWidth="3" />
+          <path d={`M84 ${TOP} 261 ${TOP - 20} 438 ${TOP}`} fill={PALETTE.paperShade} strokeWidth="2.6" />
         </g>
 
         {Array.from({ length: FLOORS }, (_, i) => {
@@ -35,15 +36,15 @@ export function Tower({ floor, label }: { floor: number; label?: string }) {
                 y={y(n) + 1}
                 width={326}
                 height={H - 2}
-                fill={dense ? '#E4DCCC' : n === floor ? '#F6D9C0' : '#FBF8F1'}
+                fill={dense ? PALETTE.idleDeep : n === floor ? PALETTE.orangeWash : PALETTE.paperLight}
                 stroke={INK}
                 strokeWidth="1.1"
                 opacity={dense ? 0.9 : 1}
               />
               {n === floor ? (
                 <motion.g initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-                  <rect x={104} y={y(n) + 3} width={26} height={H - 6} rx="3" fill="#E79A63" stroke={INK} strokeWidth="1.6" />
-                  <text x={444} y={y(n) + 12} className="s1-tower-here" fill="#C87B45">
+                  <rect x={104} y={y(n) + 3} width={26} height={H - 6} rx="3" fill={PALETTE.orange} stroke={INK} strokeWidth="1.6" />
+                  <text x={444} y={y(n) + 12} className="s1-tower-here" fill={PALETTE.orangeInk}>
                     floor {n}
                   </text>
                 </motion.g>

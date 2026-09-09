@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * What a word actually looks like inside the model: a long row of numbers.
@@ -39,7 +40,7 @@ export function NumberRow({
   const W = 96
   const GAP = 6
   const width = shown * (W + GAP)
-  const stroke = tone === 'blue' ? '#4E74A8' : tone === 'orange' ? '#C87B45' : INK
+  const stroke = tone === 'blue' ? PALETTE.blueInk : tone === 'orange' ? PALETTE.orangeInk : INK
 
   return (
     <div className="s1-numrow" data-extend={extend ? 'true' : undefined}>
@@ -57,7 +58,7 @@ export function NumberRow({
               width={W}
               height={62}
               rx={4}
-              fill="#FBF8F1"
+              fill={PALETTE.paperLight}
               stroke={stroke}
               strokeWidth="2.6"
             />

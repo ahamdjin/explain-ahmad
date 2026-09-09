@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK, expertColor } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * Beats 1-5.
@@ -30,7 +31,7 @@ export function ModelSheet({ lit }: { lit: 'none' | 'total' | 'both' }) {
         whole point of this world is that things are physically somewhere.
       */}
       <svg viewBox="0 0 700 330" aria-hidden="true">
-        <path d="M14 14h672v302H14z" fill="#FBF8F1" stroke={INK} strokeWidth="3.4" />
+        <path d="M14 14h672v302H14z" fill={PALETTE.paperLight} stroke={INK} strokeWidth="3.4" />
         <path d="M52 92h596" stroke={INK} strokeWidth="2.2" opacity="0.55" />
         <g transform="rotate(-7 350 14)">
           <path d="M296 -2h108v30H296z" fill="#EFE3C8" stroke={INK} strokeWidth="2.2" opacity="0.92" />
@@ -94,13 +95,13 @@ export function ShareBar({
       <svg viewBox="0 0 1200 300" aria-hidden="true">
         {/* the pair */}
         <motion.g animate={{ opacity: mode === 'pair' ? 1 : 0 }} transition={{ duration: 0.34 }}>
-          <text x="330" y="150" textAnchor="middle" className="s1-bar-big" fill="#C87B45">
+          <text x="330" y="150" textAnchor="middle" className="s1-bar-big" fill={PALETTE.orangeInk}>
             320 billion
           </text>
           <text x="330" y="198" textAnchor="middle" className="s1-bar-sub" fill={INK}>
             parameters it has
           </text>
-          <text x="870" y="150" textAnchor="middle" className="s1-bar-big" fill="#4E74A8">
+          <text x="870" y="150" textAnchor="middle" className="s1-bar-big" fill={PALETTE.blueInk}>
             18 billion
           </text>
           <text x="870" y="198" textAnchor="middle" className="s1-bar-sub" fill={INK}>
@@ -116,7 +117,7 @@ export function ShareBar({
             width={W}
             height="94"
             rx="4"
-            fill={dark ? '#D9D0BE' : '#EDE5D8'}
+            fill={dark ? '#D9D0BE' : PALETTE.paperShade}
             stroke={INK}
             strokeWidth="3"
           />
@@ -129,7 +130,7 @@ export function ShareBar({
             width={litW}
             height="94"
             rx="4"
-            fill="#5E83B8"
+            fill={PALETTE.blue}
             stroke={INK}
             strokeWidth="3"
             initial={{ scaleX: 0 }}
@@ -147,10 +148,10 @@ export function ShareBar({
           </text>
 
           {/* the sliver, measured below */}
-          <g stroke="#4E74A8" strokeWidth="2.6" fill="none" strokeLinecap="round">
+          <g stroke={PALETTE.blueInk} strokeWidth="2.6" fill="none" strokeLinecap="round">
             <path d={`M20 238v-12h${litW}v12`} />
           </g>
-          <text x={20 + litW + 22} y="252" className="s1-bar-label" fill="#4E74A8">
+          <text x={20 + litW + 22} y="252" className="s1-bar-label" fill={PALETTE.blueInk}>
             18 billion active
           </text>
           {caption ? (
@@ -181,7 +182,7 @@ export function Plan() {
           <path
             key={i}
             d={`M${28 + i * 496} 20h436a6 6 0 0 1 6 6v320a6 6 0 0 1-6 6H${28 + i * 496 + 6}a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6Z`}
-            fill="#FBF8F1"
+            fill={PALETTE.paperLight}
             stroke={INK}
             strokeWidth="3"
           />
@@ -201,9 +202,9 @@ export function Plan() {
             1 &middot; the router picks eight
           </text>
           <g fill="none" stroke={INK} strokeWidth="2.4" strokeLinejoin="round">
-            <circle cx="120" cy="176" r="22" fill="#FFFDF8" />
+            <circle cx="120" cy="176" r="22" fill={PALETTE.paperWhite} />
             <path d="M120 198v28" />
-            <path d="M98 232h44v40H98z" fill="#EDE5D8" />
+            <path d="M98 232h44v40H98z" fill={PALETTE.paperShade} />
           </g>
           <g fill={INK}>
             <circle cx="113" cy="174" r="2.8" />
@@ -231,12 +232,12 @@ export function Plan() {
             2 &middot; only those eight come in
           </text>
           <g fill="none" stroke={INK} strokeWidth="2.6" strokeLinejoin="round">
-            <path d="M584 120h316v212H584z" fill="#F7F2E7" />
-            <path d="M572 122 742 96l170 26" fill="#EDE5D8" />
+            <path d="M584 120h316v212H584z" fill={PALETTE.paperSheet} />
+            <path d="M572 122 742 96l170 26" fill={PALETTE.paperShade} />
           </g>
           {eight.map((n, k) => (
             <g key={n} transform={`translate(${612 + (k % 4) * 68} ${168 + Math.floor(k / 4) * 68})`}>
-              <rect x="-4" y="-4" width="34" height="33" rx="10" fill="#E79A63" opacity="0.26" />
+              <rect x="-4" y="-4" width="34" height="33" rx="10" fill={PALETTE.orange} opacity="0.26" />
               <rect width="26" height="25" rx="8" fill={expertColor(n)} stroke={INK} strokeWidth="2" />
               <circle cx="8.5" cy="10" r="2.1" fill={INK} />
               <circle cx="18" cy="10" r="2.1" fill={INK} />
@@ -251,8 +252,8 @@ export function Plan() {
           </text>
           {Array.from({ length: 12 }, (_, k) => (
             <g key={k} transform={`translate(${1090 + (k % 4) * 76} ${140 + Math.floor(k / 4) * 66})`}>
-              <path d="M-6 24h44v10H-6z" fill="#EDE5D8" stroke={INK} strokeWidth="2" />
-              <rect width="26" height="22" rx="7" fill="#E7E0D2" stroke={INK} strokeWidth="2" />
+              <path d="M-6 24h44v10H-6z" fill={PALETTE.paperShade} stroke={INK} strokeWidth="2" />
+              <rect width="26" height="22" rx="7" fill={PALETTE.idle} stroke={INK} strokeWidth="2" />
               <path d="M4.5 11h6" stroke={INK} strokeWidth="1.8" strokeLinecap="round" opacity="0.6" />
               <path d="M16 11h6" stroke={INK} strokeWidth="1.8" strokeLinecap="round" opacity="0.6" />
             </g>

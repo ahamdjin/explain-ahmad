@@ -1,4 +1,5 @@
 import { INK, expertColor } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * One routed expert, drawn as a person.
@@ -31,7 +32,7 @@ export function Specialist({
       style={{ '--size': `${size}px` } as React.CSSProperties}
     >
       <svg viewBox="0 0 40 52" aria-hidden="true">
-        {lit ? <rect x="1" y="1" width="38" height="34" rx="11" fill="#E79A63" opacity="0.22" /> : null}
+        {lit ? <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.orange} opacity="0.22" /> : null}
         <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
           <path d="M14 33v10" />
           <path d="M26 33v10" />
@@ -42,7 +43,7 @@ export function Specialist({
           width="30"
           height="30"
           rx="9"
-          fill={dimmed ? '#E7E0D2' : expertColor(index)}
+          fill={dimmed ? PALETTE.idle : expertColor(index)}
           stroke={INK}
           strokeWidth="2.2"
         />

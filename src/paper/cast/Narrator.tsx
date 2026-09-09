@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { PALETTE } from '../palette'
 
 export type NarratorPose = 'wonder' | 'point' | 'think' | 'hopeful' | 'cheer' | 'push' | 'nod'
 
@@ -34,13 +35,13 @@ export function Narrator({
       <svg viewBox="0 0 130 200" aria-hidden="true">
         <g fill="none" stroke={INK} strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
           {/* head */}
-          <circle cx="65" cy="46" r="40" fill="#FFFDF8" />
+          <circle cx="65" cy="46" r="40" fill={PALETTE.paperWhite} />
 
           {/* neck */}
           <path d="M65 86v10" />
 
           {/* tunic */}
-          <path d="M49 96h32l6 50H43z" fill="#FFFDF8" />
+          <path d="M49 96h32l6 50H43z" fill={PALETTE.paperWhite} />
 
           {/* legs -- short and plain. Push braces: back leg trails. */}
           {pose === 'push' ? (
@@ -161,9 +162,9 @@ function Arms({ pose }: { pose: NarratorPose }) {
       return (
         <>
           <path d="M82 101 101 97" />
-          <circle cx="107" cy="96" r="5.5" fill="#FFFDF8" />
+          <circle cx="107" cy="96" r="5.5" fill={PALETTE.paperWhite} />
           <path d="M84 113 101 113" />
-          <circle cx="107" cy="114" r="5.5" fill="#FFFDF8" />
+          <circle cx="107" cy="114" r="5.5" fill={PALETTE.paperWhite} />
         </>
       )
     case 'nod':

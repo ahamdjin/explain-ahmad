@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * The machine doing its job: a word goes in, the next word comes out.
@@ -14,8 +15,8 @@ export function WordLoop({ showOut, inWord, outWord }: { showOut: boolean; inWor
     <div className="s1-loop">
       <svg viewBox="0 0 980 210" aria-hidden="true">
         <g fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 56h206a4 4 0 0 1 4 4v90a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V60a4 4 0 0 1 4-4Z" fill="#FBF8F1" />
-          <path d="M330 20h300a12 12 0 0 1 12 12v146a12 12 0 0 1-12 12H330a12 12 0 0 1-12-12V32a12 12 0 0 1 12-12Z" fill="#F7F2E7" />
+          <path d="M6 56h206a4 4 0 0 1 4 4v90a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V60a4 4 0 0 1 4-4Z" fill={PALETTE.paperLight} />
+          <path d="M330 20h300a12 12 0 0 1 12 12v146a12 12 0 0 1-12 12H330a12 12 0 0 1-12-12V32a12 12 0 0 1 12-12Z" fill={PALETTE.paperSheet} />
         </g>
 
         <text x="109" y="117" textAnchor="middle" className="s1-loop-word" fill={INK}>
@@ -39,7 +40,7 @@ export function WordLoop({ showOut, inWord, outWord }: { showOut: boolean; inWor
           <g fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <path d="M660 105h68" />
             <path d="M718 96l12 9-12 9" />
-            <path d="M762 56h206a4 4 0 0 1 4 4v90a4 4 0 0 1-4 4H762a4 4 0 0 1-4-4V60a4 4 0 0 1 4-4Z" fill="#FBF8F1" />
+            <path d="M762 56h206a4 4 0 0 1 4 4v90a4 4 0 0 1-4 4H762a4 4 0 0 1-4-4V60a4 4 0 0 1 4-4Z" fill={PALETTE.paperLight} />
           </g>
           <text x="865" y="117" textAnchor="middle" className="s1-loop-word" fill={INK}>
             &ldquo;{outWord}&rdquo;

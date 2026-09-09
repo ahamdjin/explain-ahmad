@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { PALETTE } from '../palette'
 
 /**
  * A sentence of word cards, with optional attention weights drawn from the
@@ -51,7 +52,7 @@ export function Sentence({
                   key={`w-${i}`}
                   d={`M${from} ${CARD_Y}Q${(from + to) / 2} ${CARD_Y - lift} ${to} ${CARD_Y}`}
                   fill="none"
-                  stroke="#C87B45"
+                  stroke={PALETTE.orangeInk}
                   strokeWidth={2 + weight * 14}
                   strokeLinecap="round"
                   opacity={0.28 + weight * 0.6}
@@ -71,8 +72,8 @@ export function Sentence({
               width={W}
               height={H}
               rx={5}
-              fill="#FBF8F1"
-              stroke={i === focus ? '#C87B45' : INK}
+              fill={PALETTE.paperLight}
+              stroke={i === focus ? PALETTE.orangeInk : INK}
               strokeWidth={i === focus ? 4.4 : 2.6}
             />
             <text
@@ -80,7 +81,7 @@ export function Sentence({
               y={CARD_Y + 57}
               textAnchor="middle"
               className="s1-sentence-w"
-              fill={i === focus ? '#C87B45' : INK}
+              fill={i === focus ? PALETTE.orangeInk : INK}
             >
               {word}
             </text>

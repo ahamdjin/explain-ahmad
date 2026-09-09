@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  PALETTE,
   ArchSheet,
   ChosenTeam,
   FrontDesk,
@@ -58,6 +59,22 @@ export default function PaperCatalogue() {
           section folder. Rules: <code>skills/ASSET_LIBRARY.md</code>.
         </p>
       </header>
+
+      <h2>Palette</h2>
+      <p className="pc-note">
+        Decided in one file: <code>src/paper/palette.ts</code>. Components never write a hex
+        literal, and <code>npm run palette</code> regenerates the CSS custom properties from it — so
+        retheming the whole video is a single edit.
+      </p>
+      <div className="pc-swatches">
+        {(Object.entries(PALETTE) as [string, string][]).map(([name, value]) => (
+          <div className="pc-swatch" key={name}>
+            <i style={{ background: value }} />
+            <b>{name}</b>
+            <span>{value}</span>
+          </div>
+        ))}
+      </div>
 
       <h2>Cast</h2>
       <div className="pc-grid">

@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { type CSSProperties, type ReactNode } from 'react'
 import { INK } from './ink'
+import { PALETTE } from './palette'
 
 /**
  * Handwritten annotation. Carries the questions in Section 01, so it must be
@@ -109,7 +110,7 @@ export function Brace({
         <path
           d={side === 'bottom' ? 'M2 2v9h396V2M200 11v4' : 'M2 14V5h396v9M200 5V1'}
           fill="none"
-          stroke={tone === 'orange' ? '#C87B45' : INK}
+          stroke={tone === 'orange' ? PALETTE.orangeInk : INK}
           strokeWidth="2.4"
           strokeLinecap="round"
         />
@@ -145,7 +146,7 @@ export function Arrow({
 }) {
   const midX = (from.x + to.x) / 2
   const midY = (from.y + to.y) / 2 - bow
-  const stroke = tone === 'orange' ? '#C87B45' : INK
+  const stroke = tone === 'orange' ? PALETTE.orangeInk : INK
   const id = `s1-head-${tone}`
 
   return (
@@ -188,7 +189,7 @@ export function Sparks({ at, tone = 'orange' }: { at: { x: string; y: string }; 
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
     >
-      <g stroke={tone === 'orange' ? '#E79A63' : INK} strokeWidth="3.2" strokeLinecap="round">
+      <g stroke={tone === 'orange' ? PALETTE.orange : INK} strokeWidth="3.2" strokeLinecap="round">
         <path d="M30 4v12" />
         <path d="M8 14l8 9" />
         <path d="M52 14l-8 9" />

@@ -38,7 +38,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 17 | `the-plan` | 6 | hope | So load those eight | So load those eight. Leave everybody else asleep. |
 | 18 | `it-fits` | 5 | hope | That fits on almost anything | Eight experts. That fits on almost anything. |
 | 19 | `which-eight` | 5 | and-yet | Except \u2014 which eight? | Except — which eight? That changed the moment the word changed. |
-| 20 | `the-question` | 7 | wall | The exit question ❄ | So you'd need a new set. Every single word. If we only load the experts we need, why can't we run this on far less memory? |
+| 20 | `the-question` | 7 | wall | The exit question ❄ | So you can't know which eight until the word turns up. If we only load the experts we need, why can't we run this on far less memory? |
 | 21 | `go-inside` | 5.5 | therefore | Follow one word inside | To answer that, staring at the finished model won't help. Let's follow one word inside. |
 
 ## Section 02 — Follow one word in

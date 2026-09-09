@@ -1,6 +1,6 @@
 import { type Beat, type Overlay } from '../../../paper'
 import { CHOSEN, CHOSEN_B } from '../section-01/scene'
-import { camera, counter, narrator, row, tower, wall, type Patch } from './scene'
+import { aside, camera, counter, narrator, row, tower, wall, type Patch } from './scene'
 
 const H = (text: string, at: { x: string; y: string }, extra: Partial<Overlay> = {}): Overlay => ({
   kind: 'note',
@@ -53,7 +53,9 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 4.5,
     vo: "The word doesn't get processed once. It climbs.",
-    commands: [row.show({ x: 24, y: 68 }, 0.5, 'floor 1')],
+    // The aside lands with the climb, because this is the beat where a viewer
+    // starts wondering where the rest of the sentence went.
+    commands: [row.show({ x: 24, y: 68 }, 0.5, 'floor 1'), aside.show({ x: 17, y: 90 })],
     stages: [{ at: 240, commands: [tower.climbTo(6)] }],
   },
   {

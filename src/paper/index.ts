@@ -7,7 +7,8 @@
  *
  * Browse every piece in every state at /paper.
  */
-export { PaperDefs, INK, GRAPHITE, EXPERT_COLORS, expertColor } from './ink'
+export { PaperDefs, INK, GRAPHITE } from './ink'
+export { PALETTE, EXPERT_COLORS, expertColor, type PaletteKey } from './palette'
 export { Note, Bubble, Brace, Arrow, Sparks } from './marks'
 export { FEEL, HOLD, type Relation, type Feel } from './motion'
 export { Overlays, type Overlay } from './overlays'

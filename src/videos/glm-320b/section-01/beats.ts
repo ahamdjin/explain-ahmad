@@ -340,7 +340,13 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'wall',
     secs: 7,
     // FROZEN FRAME 3 of 3. The working plan, with the question over it.
-    vo: "So you'd need a new set. Every single word. If we only load the experts we need, why can't we run this on far less memory?",
+    /*
+     * Deliberately says nothing about *repeating*. "You'd need a new set every
+     * word" edges into section 6's reveal -- that the choice is remade at all
+     * 42 sparse layers -- and spending it here costs section 6 its biggest
+     * moment. Section 1's point is only that the choice is unpredictable.
+     */
+    vo: "So you can't know which eight until the word turns up. If we only load the experts we need, why can't we run this on far less memory?",
     commands: [],
     overlays: [
       {

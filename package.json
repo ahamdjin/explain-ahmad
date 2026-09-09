@@ -23,7 +23,8 @@
     "frames:s6": "node scripts/capture-frames.mjs --section=section-06",
     "frames:s8": "node scripts/capture-frames.mjs --section=section-08",
     "frames:all": "for s in 01 02 03 04 05 06 07 08; do node scripts/capture-frames.mjs --section=section-$s; done",
-    "board": "node scripts/board.mjs"
+    "board": "node scripts/board.mjs",
+    "palette": "node scripts/palette.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

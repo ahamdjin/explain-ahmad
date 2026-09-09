@@ -4,18 +4,20 @@
  */
 
 .s1-page {
-  --paper: #f2ecdf;
-  --paper-light: #fbf8f1;
-  --paper-2: #ede5d8;
-  --ink: #2b2926;
-  --graphite: #807a72;
+  --paper: #F2ECDF;
+  --paper-light: #FBF8F1;
+  --paper-2: #EDE5D8;
+  --ink: #2B2926;
+  --graphite: #807A72;
+  --stone: #8A7F6E;
+  --orange: #E79A63;
+  --orange-ink: #C87B45;
+  --blue: #5E83B8;
+  --blue-ink: #4E74A8;
+  --teal: #74A297;
+  --yellow: #E3C45B;
+  --red: #C86658;
   --line: rgba(43, 41, 38, 0.2);
-  --orange: #e79a63;
-  --orange-ink: #c87b45;
-  --blue: #5e83b8;
-  --teal: #74a297;
-  --yellow: #e3c45b;
-  --red: #c86658;
 
   --hand: 'Patrick Hand', 'Bradley Hand', 'Noteworthy', cursive;
   --scrawl: 'Caveat', 'Bradley Hand', cursive;
@@ -778,6 +780,12 @@
   border-radius: 50%;
   background: rgba(94, 131, 184, 0.16);
   font-style: normal;
+}
+
+/* Opens above the chip when the chip is low, or the panel falls off frame. */
+.s1-aside[data-up='true'] .s1-aside-panel {
+  top: auto;
+  bottom: calc(100% + 1cqh);
 }
 
 .s1-aside-panel {

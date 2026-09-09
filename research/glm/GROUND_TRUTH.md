@@ -72,3 +72,40 @@ it from the residual.
   feed-forward block. Never label one "the maths expert"; identity is a number.
 - Figures like "94% of experts touched over ~100 words" are **illustrative**
   unless measured from checkpoint activations. Mark them as such.
+
+## How a prompt actually moves through the model
+
+The video follows one word climbing alone. That is a teaching simplification,
+and a sharp viewer will ask about it, so here is the real shape.
+
+**Prefill — the whole prompt at once.** Every token in the prompt is processed
+in parallel, layer by layer: all tokens through layer 1, then all through layer
+2, and so on to layer 45. Attention is what lets them see each other. Each
+token carries its *own* representation and, at each sparse layer, picks its
+*own* top-8 independently — positions do not share a team.
+
+**The output comes from one position.** At the top, only the last position's
+representation is used to choose the next token.
+
+**Decode — one token at a time.** The chosen token is appended, and only that
+new token is pushed through all 45 layers; earlier tokens' keys and values are
+reused from the KV cache. So per *generated* token: 42 sparse layers × 8 =
+**336 expert visits**.
+
+### What this means for the numbers on screen
+
+- **336 is per token**, and that is the figure the video uses. Correct.
+- During prefill, the *union* of experts needed across all prompt tokens is far
+  larger than any single token's 336 — in practice most of the pool gets
+  touched. So the fetch argument is **stronger** than the video claims, never
+  weaker. The video is deliberately conservative, which is the safe direction.
+- The KV cache is separate from weights and grows with context. The 306 GiB is
+  weights only, before any cache.
+
+### The simplification the video makes
+
+Sections 3–7 follow a single word so the mechanism stays legible. Section 6
+carries an expandable aside acknowledging that the rest of the sentence is
+travelling alongside it. Do not remove that aside: the "one word, alone"
+picture is the one thing in the chain that is not literally true, and the video
+should say so where a viewer would notice.
