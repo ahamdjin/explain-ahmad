@@ -43,7 +43,15 @@ function scriptBeats(markdown) {
   if (!body) return []
   const upToJobs = body.split(/\n## Line jobs/)[0]
   const out = []
-  const re = /^> \*\*(\d+)\.\*\*([\s\S]*?)(?=^> \*\*\d+\.\*\*|^#|^---|\Z)/gm
+  /*
+   * The end-of-input lookahead is `(?![\s\S])`, not `\Z`.
+   *
+   * JavaScript has no `\Z` -- it parses as a literal "Z" -- so the previous
+   * version silently dropped the last beat of every script that did not happen
+   * to end with a `---` separator. Silent data loss in a counting tool is
+   * worse than a crash, which is why the caller now verifies the count.
+   */
+  const re = /^> \*\*(\d+)\.\*\*([\s\S]*?)(?=^> \*\*\d+\.\*\*|^#|^---|(?![\s\S]))/gm
   for (const m of upToJobs.matchAll(re)) {
     const spoken = m[2]
       .replace(/\*\([\s\S]*?\)\*/g, '')
@@ -52,6 +60,12 @@ function scriptBeats(markdown) {
       .replace(/\s+/g, ' ')
       .trim()
     out.push({ n: Number(m[1]), words: spoken ? spoken.split(' ').length : 0, line: spoken })
+  }
+
+  /* If these disagree, a beat was dropped and every total below is wrong. */
+  const written = (upToJobs.match(/^> \*\*\d+\.\*\*/gm) ?? []).length
+  if (written !== out.length) {
+    throw new Error(`parsed ${out.length} beats but the script has ${written} -- the beat regex is dropping some`)
   }
   return out
 }

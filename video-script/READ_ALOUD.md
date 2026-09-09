@@ -11,30 +11,23 @@ edit the seconds. See `docs/VOICE_OVER.md`.
 
 Promise: `storyboard/STORY_SPINE.md` · Per-section detail: the numbered scripts
 
-> ## ⚠ Not all of this is the same video
->
-> These scripts no longer match the section the spine asks for, so they are
-> written to a superseded chain. Read them as history, not as the plan:
->
-> - **§03** is *"The word becomes numbers"* — the spine asks for *"The numbers change on the way"*
-> - **§04** is *"Where the numbers change"* — the spine asks for *"Who picks the experts"*
-> - **§05** is *"New numbers, new team"* — the spine asks for *"It happens 42 times per word"*
-> - **§06** is *"Forty-two floors"* — the spine asks for *"What if you only stored the 18 billion?"*
-> - **§07** is *"The answer"* — the spine asks for *"How people actually run these"*
-> - **§08** is *"The verdict"* — the spine asks for *"What the number actually bought"*
-
-**Total: 8 sections · 89 beats · 1005 words · 8:30**
+**Total: 13 sections · 163 beats · 2413 words · 19:20**
 
 | § | section | from | length | beats | words |
 | --- | --- | --- | --- | --- | --- |
 | 01 | What "18 billion active" means | `0:00` | 120s | 18 | 246 |
-| 02 | Your words become numbers | `1:59` | 78s | 12 | 159 |
-| 03 | The word becomes numbers | `3:17` | 47s | 10 | 87 |
-| 04 | Where the numbers change | `4:04` | 46s | 10 | 87 |
-| 05 | New numbers, new team | `4:50` | 49s | 10 | 90 |
-| 06 | Forty-two floors | `5:39` | 42s | 10 | 73 |
-| 07 | The answer | `6:21` | 76s | 12 | 152 |
-| 08 | The verdict | `7:37` | 53s | 7 | 111 |
+| 02 | Your words become tokens | `1:59` | 90s | 11 | 191 |
+| 03 | From an ID to a meaning | `3:29` | 96s | 13 | 201 |
+| 04 | The word looks around | `5:05` | 93s | 13 | 193 |
+| 05 | The router picks the eight | `6:37` | 117s | 13 | 251 |
+| 06 | The experts do the work | `8:34` | 67s | 11 | 136 |
+| 07 | That was one layer. There are 45. | `9:40` | 77s | 13 | 152 |
+| 08 | That was one token. Here's the sentence. | `10:57` | 84s | 11 | 176 |
+| 09 | Where the answer comes out | `12:21` | 60s | 10 | 121 |
+| 10 | And then it does the whole thing again | `13:20` | 67s | 11 | 135 |
+| 11 | So could you store only the 18 billion? | `14:27` | 78s | 13 | 155 |
+| 12 | How people actually run these | `15:44` | 113s | 14 | 236 |
+| 13 | What that number actually bought | `17:37` | 103s | 12 | 220 |
 
 ## §01 — What "18 billion active" means
 
@@ -61,134 +54,231 @@ Promise: `storyboard/STORY_SPINE.md` · Per-section detail: the numbered scripts
 | `1:38` | A word comes in, eight of them get used, and the other two hundred and eighty do nothing. |  |
 | `1:47` | So the question I actually have to answer is: who picks the eight, and why can't they tell us in advance? Let's follow one word through and watch. |  |
 
-## §02 — Your words become numbers
+## §02 — Your words become tokens
 
-`1:59` → `3:17` · 12 beats · 159 words · 78s · `02-your-words-become-numbers.md`
-
-| at | say | on screen |
-| --- | --- | --- |
-| `1:59` | So: who picks the eight. |  |
-| `2:02` | There's one thing in there that makes that choice. It's called a router, and we'll come back to it. | the desk, unlabelled |
-| `2:11` | Because the strange part is what it's looking at. |  |
-| `2:16` | Here's what you typed. | your sentence, on screen |
-| `2:18` | The model doesn't read that. First it gets chopped into pieces. |  |
-| `2:24` | Pieces roughly the size of a word. Sometimes a whole word, sometimes part of one. They're called tokens. | the sentence splits |
-| `2:32` | Let's take one and follow it. This one. | one token lifted out |
-| `2:37` | And then this happens. | the token becomes a row of numbers |
-| `2:39` | It gets swapped for a row of numbers. That row is the word, as far as the model is concerned. |  |
-| `2:49` | How long a row? Four thousand and ninety-six numbers. For that one small piece. | the row extends past the frame |
-| `2:56` | And none of them means anything on its own. There's no "dog" number in there. It's the whole row, together, that stands for the word. |  |
-| `3:07` | So the router never sees your words. It sees this row. Which means whatever happens to this row, happens to the choice. |  |
-
-## §03 — The word becomes numbers  ⚠ superseded
-
-`3:17` → `4:04` · 10 beats · 87 words · 47s · `03-the-word-becomes-numbers.md`
-
-> The spine asks for **"The numbers change on the way"** here. This script predates that.
+`1:59` → `3:29` · 11 beats · 191 words · 90s · `02-your-words-become-tokens.md`
 
 | at | say | on screen |
 | --- | --- | --- |
-| `3:17` | That sheet is what the word actually looks like in here. |  |
-| `3:23` | Not letters. Numbers. |  |
-| `3:25` | This word becomes a row of them. | the card comes apart |
-| `3:29` | How many? | the row extends |
-| `3:32` | Four thousand and ninety-six. | it keeps going, off the frame |
-| `3:34` | For one small word. |  |
-| `3:37` | And none of them means anything on its own. There's no "dog" number in there. It's the whole row, together, that stands for the word. |  |
-| `3:48` | Fine. So the router reads the row, and picks its eight. |  |
-| `3:54` | Except — hold on. |  |
-| `3:56` | This row is the same every single time this word turns up. Same word, same numbers. | two identical rows, side by side |
+| `1:59` | So: who picks the eight. There's one thing in there that does it, and we'll get to it — but first you have to see what it's actually looking at. |  |
+| `2:13` | Here's what you typed. | the prompt, on screen |
+| `2:15` | The model doesn't read that. Not as letters. |  |
+| `2:20` | First it gets chopped up. Into pieces about the size of a word — sometimes a whole word, sometimes half of one. | the sentence splits into uneven pieces |
+| `2:30` | These are called tokens. That's all a token is. A chunk of text. |  |
+| `2:36` | Longer words break into more pieces. "Understanding" is three of them. | the word "understanding" splits into three |
+| `2:42` | And every token the model knows about lives in one big list. |  |
+| `2:48` | This model's list has a hundred and fifty-four thousand, eight hundred and eighty entries in it. | the list scrolls |
+| `2:55` | So each token gets swapped for its position in that list. A row number. "Dog" is number four thousand and twenty-one. | dog → 4021 |
+| `3:05` | That number is called a token ID. And it's the only thing that goes in. |  |
+| `3:12` | But think about what that number actually is. It's a row number. Four thousand and twenty-one doesn't mean dog — it just means the four thousand and twenty-first thing on our list. There's no meaning in it at all. |  |
 
-## §04 — Where the numbers change  ⚠ superseded
+## §03 — From an ID to a meaning
 
-`4:04` → `4:50` · 10 beats · 87 words · 46s · `04-where-the-numbers-change.md`
-
-> The spine asks for **"Who picks the experts"** here. This script predates that.
-
-| at | say | on screen |
-| --- | --- | --- |
-| `4:04` | Because a word never arrives on its own. |  |
-| `4:08` | It arrives in a sentence. | a sentence assembles |
-| `4:11` | And before anything picks experts, the word gets to look around. |  |
-| `4:17` | It looks at every word it's allowed to see, and asks which of them matter to it. |  |
-| `4:25` | Some matter a lot. Most barely matter at all. | weighted lines appear |
-| `4:29` | Then it pulls a bit of them into itself — and its row changes. |  |
-| `4:36` | Same word. New numbers. | the row visibly shifts |
-| `4:39` | Watch it happen twice. | two sentences, side by side |
-| `4:41` | "The dog barked." And "a hot dog." |  |
-| `4:45` | Same word, both times. Two completely different rows. | both rows, clearly different |
-
-## §05 — New numbers, new team  ⚠ superseded
-
-`4:50` → `5:39` · 10 beats · 90 words · 49s · `05-new-numbers-new-team.md`
-
-> The spine asks for **"It happens 42 times per word"** here. This script predates that.
+`3:29` → `5:05` · 13 beats · 201 words · 96s · `03-from-an-id-to-a-meaning.md`
 
 | at | say | on screen |
 | --- | --- | --- |
-| `4:50` | Yes. And here's exactly how. |  |
-| `4:53` | The router has the row, and it has 288 experts to choose from. | the desk, the row, the 288 |
-| `4:59` | It gives every single one of them a score. All 288. |  |
-| `5:05` | How well does this expert fit these numbers. | a sweep across the wall |
-| `5:09` | Then it keeps the best eight. That's it. That's the whole decision. |  |
-| `5:15` | Eight, out of 288. | the eight land |
-| `5:18` | Oh — and one more always works, every time, whatever the word. |  |
-| `5:24` | So: eight chosen, plus one always on. |  |
-| `5:28` | Now you try it. Two sentences. Same word in both. Which team changes more — and how much? |  |
-| `5:36` | *(silence)* | viewer picks; the team re-lights |
+| `3:29` | Here's how it gets meaning out of a row number. |  |
+| `3:34` | The model has a table. One row for every token in that list — all hundred and fifty-four thousand of them. | a very tall table |
+| `3:43` | The ID is just which row to go and fetch. |  |
+| `3:48` | So token four thousand and twenty-one pulls out this row. | row 4021 slides out |
+| `3:53` | Four thousand and ninety-six numbers. For one small piece of text. | the row extends past the frame |
+| `3:59` | This row is called an embedding. And it's the first thing in the whole machine that actually means something. |  |
+| `4:08` | Here's why it means something. Let's pull out "dog", and "cat". | two rows, side by side |
+| `4:13` | They're not the same — but they're close. Lots of these numbers nearly match. | the rows line up, mostly similar |
+| `4:20` | Now "Tuesday". Not close to either of them. | a third row, clearly different |
+| `4:25` | Nobody sat down and made that happen. Training did it. Words that get used in similar ways ended up with similar rows. |  |
+| `4:35` | So the meaning isn't in any one number. It's in where the row sits relative to all the other rows. |  |
+| `4:44` | And that's what goes into the model. Not "dog". This. |  |
+| `4:49` | But here's the thing to hold on to. This row is stored in a table. Which means it is exactly the same every single time the word "dog" turns up. Same word, same row, always. |  |
 
-## §06 — Forty-two floors  ⚠ superseded
+## §04 — The word looks around
 
-`5:39` → `6:21` · 10 beats · 73 words · 42s · `06-forty-two-floors.md`
-
-> The spine asks for **"What if you only stored the 18 billion?"** here. This script predates that.
-
-| at | say | on screen |
-| --- | --- | --- |
-| `5:39` | No. |  |
-| `5:41` | That room is one floor. | the camera pulls back — the room is one floor |
-| `5:44` | There are forty-five. | the tower assembles |
-| `5:47` | The word doesn't get processed once. It climbs. |  |
-| `5:51` | And on every floor, the same thing happens again — it looks around, its numbers change… |  |
-| `5:59` | …and its numbers are different from the floor below. | the row changes at each floor |
-| `6:03` | Different numbers. Different scores. | beat |
-| `6:06` | Different eight. | a new eight lights on the next floor |
-| `6:08` | Forty-two of those floors work this way. Eight experts, every one. |  |
-| `6:14` | Which is not eight expert visits for this word. It's three hundred and thirty-six. | the counter runs |
-
-## §07 — The answer  ⚠ superseded
-
-`6:21` → `7:37` · 12 beats · 152 words · 76s · `07-the-answer.md`
-
-> The spine asks for **"How people actually run these"** here. This script predates that.
+`5:05` → `6:37` · 13 beats · 193 words · 93s · `04-the-word-looks-around.md`
 
 | at | say | on screen |
 | --- | --- | --- |
-| `6:21` | Let's actually try it. Here's the plan again, exactly as we had it. |  |
-| `6:27` | Everything in storage. The router calls in the eight it needs. |  |
-| `6:33` | First word. Eight experts in. Done. It works. | word one — it works |
-| `6:37` | Floor two. New numbers, new eight — fetch those as well. | and again |
-| `6:43` | Floor three. Again. |  |
-| `6:45` | And again, and again, forty-two times, for one word. | accelerating, the counter climbing |
-| `6:50` | So how much are we actually carrying in? | the counter stops at 336 |
-| `6:54` | One expert is about twenty-six megabytes. Three hundred and thirty-six of them is about eight gigabytes. For one word. |  |
-| `7:03` | Off a fast drive, that's roughly a second and a half. For one word. |  |
-| `7:10` | And the actual work those experts do? Milliseconds. | the two bars appear · beat |
-| `7:15` | That's the whole answer. The fetching costs more than the work. You'd spend all day carrying people in and out of the building. | the bars, to scale |
-| `7:25` | And you can't squeeze your way out of it either. Halve every number and the whole thing is still over a hundred and fifty gigabytes. |  |
+| `5:05` | So every "dog" starts out identical. Which can't be right — and it isn't, for long. |  |
+| `5:12` | Because a token never stays on its own. It's sitting in a sentence. |  |
+| `5:19` | And before anything else happens, every token gets to look at the others. | the full sentence, all rows visible |
+| `5:25` | Here's what looking means. Our token asks every other token one question: how much do you matter to me? | lines from our token to the rest |
+| `5:34` | Some matter a lot. Most barely matter at all. | the lines thicken and thin |
+| `5:39` | And it can only look backwards — at the words already there. Not at what's coming. |  |
+| `5:46` | Then it takes a bit of each one, in proportion, and mixes it into itself. |  |
+| `5:53` | And its row changes. Same token. New numbers. | the row visibly shifts |
+| `5:58` | That's attention. That's the whole idea — every token adjusting itself based on the company it's in. |  |
+| `6:06` | Now watch why that matters. "The dog barked." And "a hot dog." | two sentences, side by side |
+| `6:12` | Same word both times. Started as the exact same row. Ended up nothing like each other. | both rows, clearly different |
+| `6:19` | So the numbers don't belong to the word any more. They belong to the word in this sentence. |  |
+| `6:28` | And notice — none of that could have been worked out ahead of time. It depends entirely on what you typed. |  |
 
-## §08 — The verdict  ⚠ superseded
+## §05 — The router picks the eight
 
-`7:37` → `8:30` · 7 beats · 111 words · 53s · `08-the-verdict.md`
-
-> The spine asks for **"What the number actually bought"** here. This script predates that.
+`6:37` → `8:34` · 13 beats · 251 words · 117s · `05-the-router-picks-the-eight.md`
 
 | at | say | on screen |
 | --- | --- | --- |
-| `7:37` | So. Back to where we started. |  |
-| `7:40` | Three hundred and twenty billion parameters. Eighteen billion active. And the word "efficient". | the §1 sheet returns, tape and all |
-| `7:47` | Here's what that word is actually doing. |  |
-| `7:51` | Per word, it does the thinking of a model about a twentieth of the size. That's real. That's why it's fast, and why it's cheap to run per word. That part is true. | the work bar, tiny |
-| `8:05` | But all of it still has to be there, ready, because you never know which part you'll need next. That part is not. | the building, whole and heavy |
-| `8:16` | Sparse routing buys you compute. It doesn't buy you memory. | both, side by side |
-| `8:21` | A 320-billion-parameter model doing 18 billion of work is still a 320-billion-parameter model. It just isn't a 320-billion-parameter bill. |  |
+| `6:37` | So: we've now got a row of numbers that's specific to this sentence. This is what arrives here. |  |
+| `6:46` | This is the router. It's tiny compared to everything around it, and it has exactly one job. | the desk, named at last |
+| `6:54` | In front of it: two hundred and eighty-eight experts. | the 288 |
+| `6:58` | And I should say what an expert actually is, because the name oversells it. It's a block of numbers that takes a row in and puts a different row out. That's all. |  |
+| `7:12` | Nobody assigned them subjects. There's no French expert, no maths expert. They're just two hundred and eighty-eight different blocks that came out of training different from each other. |  |
+| `7:25` | The router gives every single one of them a score. All 288. |  |
+| `7:31` | And the question it's scoring is: how well does this expert fit these numbers? | a sweep across the wall |
+| `7:38` | Then it keeps the best eight. That's it. That's the whole decision. |  |
+| `7:44` | Eight, out of two hundred and eighty-eight. The other two hundred and eighty do nothing at all. | eight land |
+| `7:52` | Oh — and one extra that runs every time, no matter what the word is. So: eight chosen, plus one always on. |  |
+| `8:02` | But look at what those scores were made from. These numbers. The ones that only existed a moment ago, because attention had just finished making them. | the row |
+| `8:14` | Change the sentence and the row changes. Change the row and the scores change. Change the scores and you get a different eight. |  |
+| `8:24` | And notice — that choice could not have been made any earlier than this. It needed the row to exist first. |  |
+
+## §06 — The experts do the work
+
+`8:34` → `9:40` · 11 beats · 136 words · 67s · `06-the-experts-do-the-work.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `8:34` | Right. Eight experts picked. What do they actually do with it? |  |
+| `8:39` | Each one takes the row, and puts out a different row. | the row copies into eight |
+| `8:45` | Same numbers going in. Eight different answers coming out. |  |
+| `8:49` | And they don't get an equal say. The router already scored them, so the ones that scored higher count for more. |  |
+| `8:59` | The eight get blended together, in proportion to their scores. | the eight outputs, weighted, merging |
+| `9:04` | Plus the one that always runs. |  |
+| `9:07` | And out comes a single row. Same length as the one that went in. Completely different numbers. | one row emerges |
+| `9:15` | That's the token, thought about, once. |  |
+| `9:19` | It arrived as "dog, in this sentence". It leaves as something more like "dog, in this sentence, having had eight blocks of the model applied to it". |  |
+| `9:31` | And that is one step. Done. Finished. |  |
+| `9:35` | Which raises the obvious question — how many steps are there? |  |
+
+## §07 — That was one layer. There are 45.
+
+`9:40` → `10:57` · 13 beats · 152 words · 77s · `07-one-layer-of-forty-five.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `9:40` | Forty-five. |  |
+| `9:43` | That room we've been standing in this whole time is one floor. | the camera pulls back — the room becomes one floor |
+| `9:49` | There are forty-five of them. | the tower assembles |
+| `9:52` | The token doesn't get processed once. It climbs. |  |
+| `9:56` | And every floor does the same two things. Look around. Pick experts. Do the work. |  |
+| `10:03` | Which means the row arriving at floor two is not the row that arrived at floor one. | the row changing on each floor |
+| `10:11` | Different row. Different scores. | beat |
+| `10:14` | Different eight. | a new eight lights, one floor up |
+| `10:16` | Every floor picks fresh. Same token, same model, new team. |  |
+| `10:21` | Now — three of the forty-five don't have experts at all. They're plain blocks that everything goes through. The other forty-two are the ones that choose. Those are called the sparse ones. |  |
+| `10:35` | Forty-two floors. Eight experts each. |  |
+| `10:38` | Which means this isn't eight expert visits for this token. It's three hundred and thirty-six. | the counter runs |
+| `10:45` | Three hundred and thirty-six choices, for one token — and every single one of them needed the floor below to finish before it could be made. |  |
+
+## §08 — That was one token. Here's the sentence.
+
+`10:57` → `12:21` · 11 beats · 176 words · 84s · `08-that-was-one-token.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `10:57` | Now. I've been following one token this whole time, and I owe you a correction. |  |
+| `11:04` | It doesn't go in on its own. Your entire prompt goes in together. | the whole sentence enters at once |
+| `11:11` | Every token climbs at the same time. All of them, all forty-five floors, together. | all tokens climbing side by side |
+| `11:18` | And attention is the wiring between them. That's what connects them — every token, on every floor, looking at all the others. |  |
+| `11:28` | That's what makes it read your sentence as a sentence, instead of a list of separate words. |  |
+| `11:36` | And this whole arrangement — the stack of floors, attention wiring them together, experts doing the work on each one — this is what the word transformer actually means. |  |
+| `11:49` | That's it. It's not a mysterious thing. It's this shape. |  |
+| `11:54` | Which means each token in your prompt is doing its own three hundred and thirty-six. |  |
+| `12:01` | Ten tokens in your sentence? That's three thousand, three hundred and sixty expert visits. | counters multiplying |
+| `12:08` | And every one of them decided on the spot, from numbers that didn't exist until a moment before. |  |
+| `12:16` | So all of that happens. And what comes out? | beat |
+
+## §09 — Where the answer comes out
+
+`12:21` → `13:20` · 10 beats · 121 words · 60s · `09-where-the-answer-comes-out.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `12:21` | At the top of the stack we've got a row for every token in your prompt. |  |
+| `12:28` | But only one of them matters right now. The last one. |  |
+| `12:34` | Because the job is to work out what comes next — and next attaches to the end. | the final position lights |
+| `12:42` | So that final row gets compared against the whole list. All hundred and fifty-four thousand tokens. |  |
+| `12:49` | Every one of them gets a score. How likely are you to be the next thing. | scores spreading across the list |
+| `12:57` | Most are hopeless. A few are plausible. | the top few rise |
+| `13:01` | And one gets picked. |  |
+| `13:03` | That's your next word. That's the output. | a single token drops out |
+| `13:07` | All of that. Forty-five floors, three hundred and thirty-six experts per token, every token in your prompt. |  |
+| `13:15` | And what comes out the other end is one word. |  |
+
+## §10 — And then it does the whole thing again
+
+`13:20` → `14:27` · 11 beats · 135 words · 67s · `10-and-then-it-does-it-again.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `13:20` | So how do you get a paragraph out of a machine that produces one word? |  |
+| `13:27` | You run it again. |  |
+| `13:30` | The word it just made gets added onto the end of your sentence. | the new word joins the end of the sentence |
+| `13:36` | And the whole thing goes back in. From the beginning. |  |
+| `13:41` | New sentence — one word longer. Forty-five floors. Look around, pick experts, do the work. | the stack runs again |
+| `13:48` | And another word comes out. |  |
+| `13:51` | Then again. And again. One word at a time, until it decides to stop. | the loop, accelerating |
+| `13:58` | That's it. That's what's actually happening while you sit there watching a reply appear. |  |
+| `14:05` | Every single word of that reply. Full stack. Fresh choices. |  |
+| `14:10` | So it isn't three hundred and thirty-six choices. It's three hundred and thirty-six per token, per word it writes. It never stops choosing. |  |
+| `14:21` | Which means we can finally ask the question we started with properly. |  |
+
+## §11 — So could you store only the 18 billion?
+
+`14:27` → `15:44` · 13 beats · 155 words · 78s · `11-could-you-store-only-the-18.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `14:27` | Back to where we started. Eighteen billion out of three hundred and twenty. |  |
+| `14:33` | And here's the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on. |  |
+| `14:46` | First token, first floor. Eight experts fetched. It works. | word one, floor one — it works |
+| `14:51` | Second floor. New row, new eight. Fetch those as well. | floor two |
+| `14:56` | Third floor. Again. |  |
+| `14:58` | And again, and again — forty-two times, for one token. | accelerating, the counter climbing |
+| `15:03` | So how much did we actually carry in? | the counter stops at 336 |
+| `15:08` | One expert is about twenty-six megabytes. Three hundred and thirty-six of them is about eight gigabytes. |  |
+| `15:15` | For one word. |  |
+| `15:18` | Off a fast drive, that's roughly a second and a half. For one word. |  |
+| `15:25` | And the work those eight experts actually did? Milliseconds. | two bars appear · beat |
+| `15:29` | There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more. | the bars, to scale |
+| `15:38` | So, no. You can't just store the eighteen billion. Not like that. |  |
+
+## §12 — How people actually run these
+
+`15:44` → `17:37` · 14 beats · 236 words · 113s · `12-how-people-actually-run-these.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `15:44` | Except — people do run models like this on small machines. Right now. And they're not lying about it. |  |
+| `15:53` | So what are they doing that we just failed to do? |  |
+| `15:59` | Caching. | one word on screen |
+| `16:01` | Here's the thing we noticed all the way back at the start. Experts repeat. Not always — but often enough to matter. |  |
+| `16:11` | The next token quite often wants some of the same experts the last one did. | a couple stay lit between two words |
+| `16:18` | So you don't fetch every time. You keep the ones that keep coming back in fast memory, and you only go to the drive for the ones you're missing. |  |
+| `16:31` | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. | the cache filling |
+| `16:41` | Which turns the whole thing into one question. How much do you keep close? | a slider appears |
+| `16:48` | Keep more, and it's fast — but now you need a big machine again, which is the thing we were trying to avoid. | dragging up |
+| `16:59` | Keep less, the machine gets small — and the misses pile up, and it crawls. | dragging down |
+| `17:06` | And remember what we're choosing from. Two hundred and eighty-eight experts, on each of forty-two floors. |  |
+| `17:13` | Twelve thousand and ninety-six slots. | the number builds |
+| `17:16` | There's no setting on that slider where it's both. That's the trade, and on a model chopped this fine the exchange rate is brutal. |  |
+| `17:27` | So you can run it on less. It'll just be slow. That was never a wall — it's a price. |  |
+
+## §13 — What that number actually bought
+
+`17:37` → `19:20` · 12 beats · 220 words · 103s · `13-what-that-number-bought.md`
+
+| at | say | on screen |
+| --- | --- | --- |
+| `17:37` | So. Eighteen billion active. |  |
+| `17:39` | Here's what that number is actually telling you. |  |
+| `17:44` | Per word, this thing does the thinking of a model about a twentieth of its size. That's real. That's why it's quick, and why it's cheap to run per word. That part is completely true. | the work bar, small |
+| `17:59` | But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it. | the whole model, heavy |
+| `18:10` | So: "active parameters" is a compute number. It was never a memory number. |  |
+| `18:17` | Sparse routing buys you compute. It doesn't buy you memory. | both, side by side |
+| `18:22` | And here's the part I didn't expect. This model has a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs four. | two models appear |
+| `18:36` | Both of them use about five percent of themselves to answer you. |  |
+| `18:42` | The difference is that this one is chopped finer. More experts, smaller each. |  |
+| `18:48` | Which is exactly why it's better — and exactly why it's harder to hold. |  |
+| `18:55` | So the better these models get at using less of themselves, the more of them you have to keep lying around. |  |
+| `19:05` | A three-hundred-and-twenty-billion-parameter model doing eighteen billion of work is still a three-hundred-and-twenty-billion-parameter model. It just isn't a three-hundred-and-twenty-billion-parameter bill. And that's the difference between something that's cheap to run — and something that's small. |  |

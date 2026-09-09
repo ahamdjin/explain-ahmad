@@ -1,7 +1,20 @@
 # GLM-5.3-Flash — section map
 
-Status: **question-chain format, 8 sections.** Supersedes the 11-section
-syllabus, kept at `archive/SECTION_MAP-syllabus-v1.md`.
+> ## ⚠ SUPERSEDED — read `storyboard/STORY_SPINE.md` instead
+>
+> This file describes the **8-section claim-on-trial chain**. The video is now
+> the **13-section teach-then-payoff chain** in spine v4, and the per-section
+> detail that used to live here now lives in the scripts themselves
+> (`video-script/NN-*.md`), each of which carries its own contract, line jobs
+> and truth notes.
+>
+> Kept because the reasoning in §"Why the format changed" below is still the
+> best statement of why a syllabus cannot hold tension — that argument is what
+> produced the gates, and it survives the rewrite.
+
+Status: **superseded by `storyboard/STORY_SPINE.md` v4.** Formerly the
+question-chain format, 8 sections; itself superseded the 11-section syllabus
+kept at `archive/SECTION_MAP-syllabus-v1.md`.
 
 Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
 Numbers: `research/glm/GROUND_TRUTH.md` · Words: `storyboard/VOCABULARY_LEDGER.md`

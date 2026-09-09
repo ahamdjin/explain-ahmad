@@ -46,7 +46,15 @@ function parseScript(markdown) {
   const title = markdown.match(/^# Section \d+ — (.+)$/m)?.[1]?.trim() ?? '(untitled)'
   const body = markdown.split('## The script')[1]?.split(/\n## Line jobs/)[0] ?? ''
   const beats = []
-  const re = /^> \*\*(\d+)\.\*\*([\s\S]*?)(?=^> \*\*\d+\.\*\*|^#|^---|\Z)/gm
+  /*
+   * The end-of-input lookahead is `(?![\s\S])`, not `\Z`.
+   *
+   * JavaScript has no `\Z` -- it parses as a literal "Z" -- so the previous
+   * version silently dropped the last beat of every script that did not happen
+   * to end with a `---` separator. Silent data loss in a counting tool is
+   * worse than a crash, which is why the caller now verifies the count.
+   */
+  const re = /^> \*\*(\d+)\.\*\*([\s\S]*?)(?=^> \*\*\d+\.\*\*|^#|^---|(?![\s\S]))/gm
   for (const m of body.matchAll(re)) {
     const raw = m[2]
     /* Italic parens are stage directions: shown, never spoken, never timed. */
@@ -58,6 +66,12 @@ function parseScript(markdown) {
       .replace(/\s+/g, ' ')
       .trim()
     beats.push({ n: Number(m[1]), spoken, stage: stage.join(' · '), words: spoken ? spoken.split(' ').length : 0 })
+  }
+
+  /* If these disagree, a beat was dropped and the timecodes below are wrong. */
+  const written = (body.match(/^> \*\*\d+\.\*\*/gm) ?? []).length
+  if (written !== beats.length) {
+    throw new Error(`parsed ${beats.length} beats but the script has ${written} -- the beat regex is dropping some`)
   }
   return { title, beats }
 }

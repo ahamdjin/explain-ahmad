@@ -1,6 +1,23 @@
-# Story spine — v3
+# Story spine — v4
 
-Status: **v3 — plain, and answered as it goes.**
+Status: **v4 — the whole machine, taught, then the payoff.**
+
+v3 got the voice right and was still missing most of the machine. Ahmad's
+brief: token → token ID → embedding *with an example* → attention, so the model
+associates → the router chooses **based on what attention produced** → the
+experts do the work and produce an output → *"but that was one word?"* → and
+how does it combine into something that understands us — **that is where
+transformers come in.** Longer is fine as long as all of it makes sense.
+
+That is correct, and it reverses a decision I defended twice. The memory answer
+is only worth anything to someone who has seen the machine. So v4 teaches the
+full pipeline and uses the memory question as the **payoff**, not as a mystery
+running underneath.
+
+Runtime lands around **16–17 minutes**. The risk of that shape is a payoff at
+minute twelve, and the answer to it is in §4 below: every mechanism section
+must add one *reason you could not have known in advance*. The teaching is the
+answer being assembled, not a detour before it.
 
 v2 was a mystery: it opened a question and held it for eight minutes. Ahmad
 read it and said it was not simple, was not making sense, and *"eventually
@@ -87,45 +104,62 @@ not be moved by being told. They have to watch the reasonable version of their
 own idea get built, work, and then fail for a reason they can see. That is what
 Sections 6 and 7 are for, and it is why they get 27% of the runtime.
 
-## 4. The chain — 8 sections, plain
+## 4. The chain — 13 sections
 
-Every section: **answers its own question**, and the answer creates the next
-one. Read the *Therefore / But* column downward — it should read as one
-sentence with no "and then" in it.
+Every section answers its own question, and the answer raises the next. The
+last column is the load-bearing one: each mechanism section pays a little of
+the final answer, so the payoff is assembled in front of the viewer rather than
+withheld from them.
 
-| # | Section | Teaches | Answers, in plain words | Therefore / But |
-| --- | --- | --- | --- | --- |
-| 1 | **What "18 billion active" means** | parameter, expert, active | it uses a **different** 18 billion for every word, and it does not choose until the last moment | **Therefore** we need to watch it choose |
-| 2 | **Your words become numbers** | token, embedding | your text is cut into pieces, and each piece becomes a long row of numbers | **Therefore** the machine never sees your words, only numbers |
-| 3 | **The numbers change on the way** | attention, context | each piece looks at the pieces around it and its numbers change — "dog" in *the dog barked* is not "dog" in *hot dog* | **Therefore** the numbers are never the same twice |
-| 4 | **Who picks the experts** | router, top-8, 288 | a router scores all 288 experts against the numbers *as they are right now* and keeps the best 8 | **But** those numbers just changed — so the choice changes with them |
-| 5 | **It happens 42 times per word** | layer, sparse vs dense | 42 sparse layers × 8 experts = **336 expert visits for one word** | **Therefore** there are 336 choices per word and none can be known ahead |
-| 6 | **What if you only stored the 18 billion?** | memory vs storage | you would fetch about 8 GB per word — around a second and a half, against milliseconds of actual work | **Therefore** the fetching costs more than the thinking |
-| 7 | **How people actually run these** | caching, the trade | experts do repeat, so you keep the frequent ones close — and it genuinely works, up to a point | **But** with 12,096 expert slots the exchange rate is brutal: no setting is both small and fast |
-| 8 | **What the number actually bought** | — | **compute, not memory** — and the finer the experts, the wider the gap | *(the end)* |
+| # | Section | Teaches | Answers | → next | Adds to the answer |
+| --- | --- | --- | --- | --- | --- |
+| 1 | **What "18 billion active" means** | parameter, expert, active | a **different** 18B every word, chosen at the last moment | **therefore** watch it choose | the claim itself, stated plainly |
+| 2 | **Your words become tokens** | token, token ID, vocabulary | your text is cut into pieces; each piece has a row number in a list of 154,880 | **but** a row number is a name, not a meaning | — |
+| 3 | **From an ID to a meaning** | embedding | the number is looked up in a huge table and comes back as a row of 4096 values | **but** that row is identical every time the word appears | the row is *fixed per token* — the first half of the paradox |
+| 4 | **The word looks around** | attention, context | each token reads the others and pulls in what matters, and its row **changes** | **therefore** the same word has different numbers in different sentences | **the numbers depend on the whole sentence** |
+| 5 | **The router picks the eight** | router, top-8, shared expert | it scores all 288 against the row *as it is now* and keeps the best 8 | **therefore** the choice is made from numbers that only just existed | **the choice depends on those numbers** |
+| 6 | **The experts do the work** | expert output, weighting | each of the 8 transforms the row; the outputs are blended back into one | **therefore** the token leaves changed | — |
+| 7 | **That was one layer. There are 45.** | layer, sparse vs dense | 3 dense, 42 sparse; the token climbs, and every floor does attention and routing again | **therefore** 42 × 8 = **336 expert visits for one token** | **336 choices, not one** |
+| 8 | **That was one token. Here's the sentence.** | **transformer**, parallel processing | the whole prompt goes through together; attention is the wiring between them; this stack is what "transformer" names | **therefore** it reads your sentence as a whole, not word by word | **every token pays its own 336** |
+| 9 | **Where the answer comes out** | logits, next-token prediction | the top of the stack turns the last position into a score for all 154,880 tokens, and one is chosen | **therefore** one word comes out | — |
+| 10 | **And then it does the whole thing again** | autoregression | the new word is added to the end and the entire stack runs again | **therefore** every word of the reply pays 336 all over again | **it never stops re-choosing** |
+| 11 | **So could you store only the 18 billion?** | memory vs storage | you would fetch ~8 GB per word — about a second and a half, against milliseconds of thinking | **therefore** the fetching costs more than the work | the arithmetic |
+| 12 | **How people actually run these** | caching, the trade | experts do repeat, so keep the frequent ones close; it genuinely works | **but** with 12,096 slots there is no setting that is both small and fast | the honest limit |
+| 13 | **What that number actually bought** | — | **compute, not memory** — and the finer the experts, the wider the gap | *(the end)* | the verdict |
 
 ### Read as one sentence
 
 > A model uses a different 18 billion for every word, **therefore** we watch it
-> choose. Your words become numbers, **therefore** the machine works on numbers.
-> The numbers change as they travel, **therefore** they are never the same twice.
-> The router reads those numbers, **but** they just changed — so the choice
-> changes too. That happens 42 times per word, **therefore** there are 336
-> choices nobody can predict. **Therefore** storing only the active part means
-> fetching 8 GB per word. People do it anyway with caching, **but** the exchange
-> rate is brutal. **Therefore** "active parameters" saved you compute, not
-> memory.
+> choose. Your words become tokens with ID numbers, **but** an ID is a name and
+> not a meaning, **therefore** each one is looked up as a row of 4096 values.
+> That row is the same every time, **but** each token then reads the others and
+> its row changes, **therefore** the same word carries different numbers in
+> different sentences. The router scores the 288 experts against that row,
+> **therefore** the choice depends on numbers that only just existed. The eight
+> do their work and hand back a changed row, **therefore** the token leaves
+> different from how it arrived — and that is one floor of forty-five, **so**
+> one token costs 336 expert choices. The whole sentence climbs together, which
+> is what a transformer is, **therefore** every token pays its own 336. The top
+> turns the last position into one word, **and then** — no. **Therefore** the
+> word is appended and the entire thing runs again. **Therefore** storing only
+> the active part means fetching eight gigabytes per word. People do it anyway
+> with caching, **but** the exchange rate is brutal. **Therefore** "active
+> parameters" bought you compute, and never bought you memory.
 
-No "and then" anywhere. That is the test.
+The one "and then" is deliberate and is immediately refused. It marks the exact
+place a lesser video would coast.
 
-### What each section may NOT do
+### The running thread
 
-- **No cliffhanger.** A section that ends on a question it does not answer is
-  the v2 bug. A section ends on an answer that has a consequence.
-- **No withholding for a reveal.** The answer is given in §1. Everything after
-  is evidence, and evidence is more convincing when the claim is already known.
-- **No theory without the thing.** Show the numbers, the row, the desk, the
-  floors. "Representation" is a word; a row of 4096 values is a picture.
+The memory question is asked at 1:20 and answered at the end, which is a long
+way. It survives because **§3, §4, §5, §7, §8 and §10 each add one piece of the
+answer** — see the last column. Each of those sections carries one short line
+that banks it, e.g.:
+
+> *"And notice — nothing about that could have been worked out ahead of time."*
+
+Six deposits, then §11 spends them. A viewer at minute nine should feel the
+answer arriving, not waiting.
 
 ## 5. Style — plain, and out loud
 
