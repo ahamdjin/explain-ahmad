@@ -1,6 +1,6 @@
 # Video Script — Part 01: Opening
 
-Status: narration draft only. Visuals are **not locked** yet.
+Status: narration draft. The visual storyboard is now locked in `../storyboard/section-01/FRAMES.md`; exact wording can still be tightened to the finished visuals.
 
 ## Narration
 
