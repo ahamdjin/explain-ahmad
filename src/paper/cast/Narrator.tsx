@@ -28,7 +28,7 @@ export function Narrator({
       className="s1-narrator"
       data-pose={pose}
       style={{ '--flip': flip ? -1 : 1, '--scale': scale } as React.CSSProperties}
-      animate={{ y: pose === 'cheer' ? -6 : 0 }}
+      animate={{ y: pose === 'cheer' ? -6 : 0, rotate: pose === 'push' ? 5 : 0 }}
       transition={{ type: 'spring', stiffness: 150, damping: 14 }}
     >
       <svg viewBox="0 0 130 200" aria-hidden="true">
@@ -42,11 +42,22 @@ export function Narrator({
           {/* tunic */}
           <path d="M49 96h32l6 50H43z" fill="#FFFDF8" />
 
-          {/* legs -- short and plain */}
-          <path d="M57 146v32" />
-          <path d="M75 146v32" />
-          <path d="M57 178q-7 3-11 2" />
-          <path d="M75 178q7 3 11 2" />
+          {/* legs -- short and plain. Push braces: back leg trails. */}
+          {pose === 'push' ? (
+            <>
+              <path d="M57 146 44 176" />
+              <path d="M75 146v32" />
+              <path d="M44 176q-7 1-10 -2" />
+              <path d="M75 178q7 3 11 2" />
+            </>
+          ) : (
+            <>
+              <path d="M57 146v32" />
+              <path d="M75 146v32" />
+              <path d="M57 178q-7 3-11 2" />
+              <path d="M75 178q7 3 11 2" />
+            </>
+          )}
 
           <Arms pose={pose} />
         </g>
@@ -136,13 +147,23 @@ function Arms({ pose }: { pose: NarratorPose }) {
         </>
       )
     case 'push':
+      /*
+       * Both arms reach the same way, and the hands are round.
+       *
+       * The first version drew two long vertical ticks for palms, which at any
+       * real playback size read as a ladder or a flag rather than as hands. A
+       * filled circle survives being small; a 16-unit line does not.
+       *
+       * Both arms leave from the same side of the tunic. Routing the far arm
+       * across the body drew a line over the filled tunic, which read as a
+       * strap across the chest rather than as an arm.
+       */
       return (
         <>
-          <path d="M81 100 114 96" />
-          <path d="M114 88v16" />
-          <path d="M81 114 112 110" />
-          <path d="M112 102v16" />
-          <path d="M49 106 30 122" />
+          <path d="M82 101 101 97" />
+          <circle cx="107" cy="96" r="5.5" fill="#FFFDF8" />
+          <path d="M84 113 101 113" />
+          <circle cx="107" cy="114" r="5.5" fill="#FFFDF8" />
         </>
       )
     case 'nod':

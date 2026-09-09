@@ -128,7 +128,7 @@ export default function PaperCatalogue() {
       <h2>Props</h2>
       <div className="pc-grid">
         <Item name="WordCard" note="a word, never a token">
-          <WordCard label="scared" />
+          <WordCard label="dog" />
         </Item>
         <Item name="SmallMachine" note="generic; never named hardware">
           <div className="pc-row">

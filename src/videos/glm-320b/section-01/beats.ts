@@ -233,7 +233,7 @@ export const BEATS: Beat[] = [
     vo: 'A word comes in.',
     // The desk arrives here, unlabelled and unremarked. Beat 23 depends
     // entirely on it having been on screen for ten beats already.
-    commands: [word.arrive({ x: 10, y: 58 }, 0.5, 'scared'), desk.arrive({ x: 24, y: 82 }, 0.6)],
+    commands: [word.arrive({ x: 10, y: 58 }, 0.5, 'dog'), desk.arrive({ x: 24, y: 82 }, 0.6)],
   },
   {
     n: 14,
@@ -481,7 +481,7 @@ export const BEATS: Beat[] = [
       hospital.unbunk(),
       hospital.openDoors(),
       machine.off(),
-      word.arrive({ x: 26, y: 60 }, 0.5, 'scared'),
+      word.arrive({ x: 26, y: 60 }, 0.5, 'dog'),
       narrator.at({ x: 9, y: 85 }, 'push', 0.5),
     ],
     lateOverlays: {
