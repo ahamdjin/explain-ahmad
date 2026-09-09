@@ -113,21 +113,44 @@ from the residual. Also benchmark Ahmad's actual SSD.
 - It gives a real answer to *"why can't my 32 GB run it?"* — **not because the
   numbers don't add up, but because being there is the thing you're paying for.**
 
-### Recommended departure from the locked storyboard
+### CORRECTED: Section 01 does not answer this
 
-The locked contract says Section 01 must *create* the headache, not answer it.
-**I think that rule is what killed the story, and I'd drop it.**
+**I got this wrong in v5 and Ahmad corrected it.** I had moved the full answer
+into Section 01. That is too much, and it is not what the locked contract meant.
 
-ncase never withholds. He gives you the intuition immediately, then spends the
-rest of the piece making it precise. Section 01 should deliver a **complete small
-hope→wall→therefore cycle** and end on a *new, bigger* question — not on a
-deferral. Sections 02+ then earn the detail.
+The real distinction is not *answer vs defer*. It is:
 
-The new question Section 01 hands forward is a genuinely good one:
-**"42 departments? A different team at every one? What is actually happening in
-there?"**
+| | |
+| --- | --- |
+| **Fake wall** | Assert an obstacle, refuse to describe it. A red X, a hazard sign, `But something blocks this...`. Reads as **withholding**. This is what broke v1-v4. |
+| **Headache** | Show the plan working. Let it look obviously correct. Leave the question on screen and *nothing* blocking it. Reads as **curiosity**. |
 
----
+So Section 01 keeps the deferral and loses the X. It ends with the plan intact
+and correct-looking, and one question written over it:
+
+> **If we only load the experts we need, why can't we run this on far less memory?**
+
+Nothing on screen is crossed out, barred, or marked as failing. The viewer
+leaves thinking *that should work* - which is the small headache that makes them
+stay for Section 02.
+
+**Therefore Acts 3 and 4 below are NOT Section 01.** They are the payoff, and
+they belong to Section 02+. The derivation in section 3 above stays here because
+it is what makes Section 01 honest: we now know what the wall is, so the
+question we end on is a real one with a real answer, not a tease.
+
+The Section 01 shooting board is `storyboard/section-01/STORYBOARD_V5.md`
+(31 beats, 2:12, timed against the narration).
+
+### Generic framing - no personal hardware
+
+Dropped: "my Mac has 32 GB", and the SSD-benchmark task. The comparison on
+screen is **`hundreds of gigabytes` vs `a much smaller machine`** and nothing
+more specific. The script already words it that way. Keeping it generic means
+the video does not date and does not depend on one person's setup.
+
+Where a concrete figure is genuinely needed (Section 02+), use typical consumer
+hardware as a class, not a named machine.
 
 ## 4. Why the hospital
 
@@ -172,7 +195,12 @@ unit — specialists are an *organisation* unit (288 per layer) and gigabytes ar
 
 ---
 
-## 5. The beat sheet — 40 beats, 4 acts
+## 5. The four-act spine for the WHOLE video
+
+Acts 1-2 are Section 01 (see the shooting board for its real beats).
+Acts 3-4 are Sections 02+.
+
+### Original 40-beat draft, kept for the arc
 
 `rel` = story relation (drives spring feel + hold). `←` = the prerequisite beat.
 At ~3s while Ahmad speaks, this is **~2 minutes**.
@@ -186,7 +214,7 @@ At ~3s while Ahmad speaks, this is **~2 minutes**.
 | 2 | 320 billion parameters. | `320B` emphasised on the sheet. | so | 1 |
 | 3 | A parameter is just knowledge. Everything it learned. | `all of its knowledge` note. | so | 2 |
 | 4 | On disk that's 306 gigabytes. | `306 GB` stamped. | so | 3 |
-| 5 | My Mac has 32. *(light aside, not the spine)* | Small Mac, `32 GB`, dwarfed. | wall | 4 |
+| 5 | A normal machine has nowhere near that. *(generic - no named hardware)* | Small ordinary machine, dwarfed. | wall | 4 |
 | 6 | But here's the strange part. Only 18 billion are active. | `18B active` brace. | and-yet | 2 |
 | 7 | Active means: that's the only knowledge actually used. For one word. | One word card; small lit region. | so | 6 |
 | 8 | About 5% works. 95% sits there. | The contrast, held. | so | 7 |
@@ -212,7 +240,7 @@ biggest fix versus every previous version.
 | 19 | Same hospital. Different team, every time. | Both teams side by side. | so | 18 |
 | 20 | **So why are 280 specialists in the building doing nothing?** | The idle 280, `?`. | and-yet | 19 |
 
-### ACT 3 — THE TEST (beats 21–30)
+### ACT 3 — THE TEST (SECTION 02+, not Section 01)
 *Goal: spring the trap. Let it succeed first, then break it.*
 
 | # | Beat | On screen | rel | ← |
@@ -231,7 +259,7 @@ biggest fix versus every previous version.
 Beat 23 is essential. **The hope must actually succeed once**, or breaking it is
 a cheat rather than a discovery.
 
-### ACT 4 — THE PRICE (beats 31–40)
+### ACT 4 — THE PRICE (SECTION 02+, not Section 01)
 *Goal: pay it off in real numbers, then hand forward a better question.*
 
 | # | Beat | On screen | rel | ← |
@@ -305,18 +333,19 @@ they were the wrong call and you were right that they read as funny, not simple.
 
 ## 7. What I need from you
 
-You asked what to provide. **Honestly: nothing.** The documents and the ncase
-research were never the bottleneck — I had them and still produced a fake wall,
+You asked what to provide. **Honestly: nothing.** The ncase research and the
+documents were never the bottleneck - I had them and still produced a fake wall,
 because the wall had never been derived. It has now.
 
-Two decisions only, and I've assumed an answer to each so nothing is blocked:
+No open questions remain. Both earlier ones are resolved:
 
-1. **May Section 01 answer the question** (my recommendation, §3) or must it end
-   on the red X per the locked contract? *Assuming: it answers.*
-2. **~2 minutes for Section 01** at ~3s/beat — acceptable? *Assuming: yes.*
+1. Does Section 01 answer the question? **No** - it ends on it, with nothing
+   shown blocking it. Corrected above.
+2. Runtime? **Fixed by the script**: 225 words, ~1:33 spoken, 2:12 on screen.
 
-One task for you if you want the numbers bulletproof: run a disk read benchmark
-on your Mac so beat 33 uses your real SSD speed rather than a typical figure.
+The one thing worth your eye is the **frozen-frame test** at the end of the
+shooting board - beats 6, 20 and 29. If those three don't read as stills, the
+section doesn't work and no motion pass will rescue it.
 
 ## 8. What this replaces
 
@@ -324,6 +353,5 @@ on your Mac so beat 33 uses your real SSD speed rather than a typical figure.
 - `01-headache-chain.md` — superseded.
 - Library metaphor in `storyboard/section-01/FRAMES.md` (locked v2) — superseded,
   along with the "create the headache, not answer it" rule.
-- `08-why-it-cannot-fit.md` — **now largely absorbed into Act 4.** Section 08 can
-  become the precise version (bandwidth, batching, why not even a 4-bit quant
-  saves you) rather than the first time the viewer hears the answer.
+- `08-why-it-cannot-fit.md` — still the precise version (bandwidth, batching,
+  why not even a 4-bit quant saves you). Acts 3-4 give it a story shape to sit in.
