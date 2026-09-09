@@ -1,235 +1,233 @@
-# GLM-5.3-Flash — Visual Section Map
+# GLM-5.3-Flash — section map
 
-Status: **pre-production structure**. This sits between the script and individual storyboard frames.
+Status: **question-chain format, 8 sections.** Supersedes the 11-section
+syllabus, kept at `archive/SECTION_MAP-syllabus-v1.md`.
 
-The job of this file is to define the large visual pages/worlds of the video **before** we draw every frame or write more production code.
+Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
+Numbers: `research/glm/GROUND_TRUTH.md` · Words: `storyboard/VOCABULARY_LEDGER.md`
 
-## Rule
+## Why the format changed
 
-A **section/page** is one stable mental world with one conceptual job. It may contain several storyboard frames and several narration sentences.
+The old map specified sections as **Purpose / Visual world / Key mechanism /
+Viewer leaves knowing**. That is a syllabus, and syllabi compose into lists —
+"and then, and then." It had no field that could hold tension, so a section
+that went nowhere was indistinguishable from one that went somewhere. Section
+01's own steps 8, 9 and 10 were already the same beat three times, and five
+rebuilds faithfully reproduced it.
 
-Do not create a new page just because the narration moves to a new sentence.
+Every section now declares four things, and two of them are checkable by machine:
 
-The approved art direction is `art-direction/GLM_PAPER_WORLD.md`.
+- **Enters on** — must equal the previous section's *Exits on*
+- **Answers** — what it resolves, and the answer in one line
+- **Event** — the thing that *happens*; not an assertion
+- **Exits on** — must **differ** from *Enters on*
 
----
+## The want
 
-## Section 01 — The 320B → 18B Mystery
+> They shipped a 320-billion-parameter model and called it efficient.
+> I want to know whether that is true.
 
-**Purpose:** Create the central question before teaching the machinery.
+The video is a claim on trial. Every section is evidence. A section that is
+neither evidence for nor against the claim is off-mission and does not belong.
 
-**Narration source:** `video-script/01-opening-narration.md`
+## The verdict the video reaches
 
-**Visual world:** Paper model profile → parameter field → playful MoE expert world → router → RAM/storage hypothesis.
+> Sparse routing buys **compute**, not **memory**.
 
-**Story progression:**
+## The chain at a glance
 
-1. Meet GLM-5.3-Flash as a clean model information sheet.
-2. Highlight `320B total parameters` and `18B active parameters`.
-3. Use one simple word to show that only a small part is active.
-4. Let the apparently unused majority react: why are we here?
-5. Reveal that the capacity is organized as many experts.
-6. Introduce the router/dispatcher.
-7. Show that one word gets a small expert team and different words can get different teams.
-8. Introduce RAM / running memory and the tempting idea: keep only the selected experts there.
-9. Show the stronger hypothesis: experts live separately in storage, router chooses what is needed, selected experts load into a smaller machine.
-10. End on the unresolved question: **what stops this from being easy?**
+| # | Section | Event | Exits on |
+| --- | --- | --- | --- |
+| 1 | The claim on trial | word two picks a **different** eight | if the choice keeps changing, how could you hold only what you need? |
+| 2 | Follow one word in | we stop looking from outside | what does the chooser actually read? |
+| 3 | The word becomes numbers | the numbers turn out not to be fixed | if they change, does the choice change? |
+| 4 | Where the numbers change | the representation visibly changes | would the same word pick a different team? |
+| 5 | New numbers, new team | **same word, different eight, one floor up** | how many times does this happen? |
+| 6 | Forty-two floors | 8 × 42 counted on screen | could you fetch 336 sets per word, fast enough? |
+| 7 | The answer | **the plan from §1 jams** | then what did "18B active" ever buy? |
+| 8 | The verdict | the journey folds into the opening frame | — |
 
-**Storyboard status:** Frames 1–8 approved in concept/style. RAM/storage portion still to storyboard.
-
-**Do not answer the bottleneck yet.** This section creates the headache.
-
----
-
-## Section 02 — Follow One Prompt Inside
-
-**Purpose:** Stop looking at architecture from the outside and follow one concrete example.
-
-**Visual world:** Minimal paper prompt/chat surface that becomes the entrance to the model.
-
-**Concrete example:** `The dog dropped the ball, and it`
-
-**Key transition:** The sentence itself becomes the persistent actor; no architecture dump.
-
-**Viewer leaves knowing:** We are going to answer the mystery by following what actually happens to the input.
+**§1's event is §7's weapon.** Different words picking different experts is
+planted in the opening and is the exact thing that breaks the tempting plan six
+sections later. Nothing else in the video carries that load.
 
 ---
 
-## Section 03 — Text → Tokens
+## Section 1 — The claim on trial
 
-**Purpose:** Show that the model does not directly process ordinary written words as one indivisible object.
+- **Enters on** — *(cold open)*
+- **Answers** — Why does a 320B model only use 18B per word? → Its knowledge is
+  split into experts, and only a few get picked for each word.
+- **Event** — A second word arrives and lights a **completely different eight**.
+- **Exits on** — If the choice keeps changing, how could you ever hold just the
+  ones you need?
 
-**Visual world:** The same sentence on paper physically separates into tokenizer pieces.
+**Visual world** — model sheet → share bar → the expert building, router desk,
+the chosen team, the plan, a small machine.
 
-**Key beats:**
+**Must do**
+- Reach the first question inside ~30 seconds. No spec-table read.
+- Answer its own first question. *Why carry 320 if you use 18?* → **options.**
+  The viewer should feel the 300 billion is not waste.
+- Show the plan **working**, then leave the question over it.
 
-- sentence remains recognizable
-- tokenizer boundaries appear
-- pieces separate
-- briefly establish that tokens can be words, pieces, or punctuation
-- choose one persistent token to follow
+**Must not do**
+- Show anything blocked. No cross, no hazard mark, no "something stops this".
+- Say `token`. It says **word**.
+- Explain why the plan fails. That is §7.
 
-**Viewer leaves knowing:** The model works with a sequence of tokens.
-
----
-
-## Section 04 — Token → Token ID
-
-**Purpose:** Explain the integer ID without implying that the number contains meaning.
-
-**Visual world:** A huge paper index/catalog.
-
-**Key mechanism:** Token → lookup number → one exact row/address.
-
-**Viewer leaves knowing:** The token ID is an address/key, not a definition.
+**Owns after** — parameter, expert, router, active.
 
 ---
 
-## Section 05 — Token ID → Embedding
+## Section 2 — Follow one word in
 
-**Purpose:** Turn an abstract embedding lookup into a concrete physical operation.
+- **Enters on** — If the choice keeps changing, how could you hold just what you need?
+- **Answers** — nothing. Pure setup, earned by its event.
+- **Event** — We stop looking at the building from outside and go in with one word.
+- **Exits on** — What does the chooser actually read?
 
-**Visual world:** Giant numerical reference book.
+**Visual world** — a minimal paper prompt surface that becomes the doorway.
+The word is the persistent actor from here to §8; no architecture dump.
 
-**Key mechanism:**
+**Concrete example** — `The dog dropped the ball, and it`
 
-- token ID behaves like a page/index address
-- book flips to one row/page
-- that page contains a learned numerical vector
-- expand sideways to make `4096 values` feel physically large
-
-**Viewer leaves knowing:** The token now has a learned numerical representation that can travel through the model.
-
----
-
-## Section 06 — One Transformer Layer: Attention
-
-**Purpose:** Show how the token representation gathers useful context from the other available tokens.
-
-**Visual world:** One paper Transformer floor / workshop, with Attention and MoE as neighboring mechanisms.
-
-**Key mechanism:**
-
-- persistent token representation enters Attention
-- Query / Key / Value are introduced only as needed
-- compare against allowed context
-- create attention weights
-- read/mix Values
-- return changed contextual representation to the same token position
-
-**Truth note:** Use a familiar Q/K/V teaching lens while quietly acknowledging GLM-5.3-Flash uses a hybrid attention architecture.
-
-**Viewer leaves knowing:** The representation for the token has changed because it gathered context.
+**Must not do** — introduce layers, attention or numbers. It only turns inward.
 
 ---
 
-## Section 07 — One Transformer Layer: Router + Experts
+## Section 3 — The word becomes numbers
 
-**Purpose:** Explain the actual MoE selection mechanism with the same persistent representation.
+- **Enters on** — What does the chooser read?
+- **Answers** — A list of numbers standing for the word.
+- **Event** — The word becomes numbers, and the numbers turn out not to be fixed.
+- **Exits on** — If the numbers can change, does the choice change with them?
 
-**Visual world:** Paper expert workshop connected to the Attention room — not a disconnected new slide.
+**Visual world** — the word on paper separates and becomes a row of values.
 
-**Key mechanism:**
+**Mechanism, only as far as the question needs**
+- a word is handled as a piece of a sequence — `token` is earned here
+- that piece is carried as a row of learned numbers
+- widen the row so `4096 values` feels physically large
 
-- many learned expert networks exist
-- router reads the current hidden representation
-- router scores candidate experts
-- top 8 routed experts are selected
-- one shared expert also participates
-- selected experts transform the representation in parallel
-- outputs combine into one changed representation
-- another token can select another expert team
-- the same token may select a different team in a later sparse layer
+**Must not do** — a vocabulary catalog, token IDs, or an embedding-lookup
+section. Those served the old primer and are cut. The question needs only *the
+word becomes numbers, and numbers can change.*
 
-**Important:** Experts are playful characters visually, but the explanation must state that an expert is a learned feed-forward neural-network block, not a human-labelled specialty such as “math expert.”
-
-**Viewer leaves knowing:** `18B active` is selective computation, not a permanently fixed 18B sub-model.
+**Owns after** — token, "its numbers".
 
 ---
 
-## Section 08 — The Missing Answer: Why Not Load Only Those Experts?
+## Section 4 — Where the numbers change
 
-**Purpose:** Directly answer the question the opening promised.
+- **Enters on** — If the numbers can change, does the choice change with them?
+- **Answers** — The numbers change because the word gathers context from its neighbours.
+- **Event** — The representation visibly changes in front of the viewer.
+- **Exits on** — So with different numbers, would the same word pick a different team?
 
-**Status:** **This section is missing from the current 100-beat production story and must be designed before final production.**
+**Visual world** — one paper floor. Attention and the expert room are neighbours
+on the same floor, never disconnected slides.
 
-**Visual world:** Reuse the exact router + expert + RAM/storage world from the opening, now with enough knowledge to see the problem.
+**Mechanism** — the word's numbers compare against the words it is allowed to
+see, mix in what matters, and come back **changed**.
 
-**Key causal answer:**
+**Truth note** — Q/K/V is a familiar teaching lens; GLM-5.3-Flash uses hybrid
+KDA + sparse MLA attention. Do not present the lens as the architecture.
 
-1. The router cannot know the expert choice for all future work once at startup; routing depends on the current hidden representation.
-2. That representation changes token-by-token and layer-by-layer.
-3. Therefore the selected expert set can change at every sparse MoE layer and for different tokens.
-4. Keeping experts outside fast memory means selected expert weights may need to be transferred into the compute device repeatedly.
-5. Expert weights are large; moving them can turn weight-transfer bandwidth and latency into the bottleneck.
-6. Real inference systems can shard, cache, quantize and offload. The truthful claim is **not** that all 320B parameters must always live in GPU VRAM.
-7. The model still has a huge total checkpoint/capacity and efficient serving needs fast access to whichever experts routing chooses.
-
-**Visual payoff:** The opening's elegant `storage → router → load 8 experts → small RAM` machine starts to jam when the required team keeps changing across layers/tokens.
-
-**Viewer leaves knowing:** Sparse compute saves computation; it does not automatically turn the entire model into a tiny storage/memory footprint.
+**Owns after** — attention, context.
 
 ---
 
-## Section 09 — Repeat Through the Layers
+## Section 5 — New numbers, new team
 
-**Purpose:** Show that Attention + feed-forward/MoE is repeated, refining the representation rather than happening once.
+- **Enters on** — Would the same word pick a different team?
+- **Answers** — Yes. Same word, new numbers, new team.
+- **Event** — **The same word picks a different eight one floor up.**
+- **Exits on** — How many times does this happen?
 
-**Visual world:** The one Transformer workshop becomes one floor in a 45-floor paper building/machine.
+**Visual world** — the expert room from §1, now seen from inside, on one floor.
 
-**GLM structure:**
+**Mechanism** — the router reads the *current* numbers → scores the 288 →
+top-8 selected → one shared expert always joins → they transform the numbers
+in parallel → outputs combine into one changed representation.
 
-- 45 language layers
-- first 3 use dense feed-forward blocks
-- later sparse layers use MoE feed-forward blocks
+**Truth notes**
+- An expert is a **learned feed-forward block**, not a human specialty. Identity
+  is a number. Never "the maths expert".
+- Routing weights shown are illustrative unless measured from activations.
 
-**Key action:** The same token representation travels upward; its representation changes and later routing decisions can change with it.
-
-**Viewer leaves knowing:** The model repeatedly refines representations through many layers.
-
----
-
-## Section 10 — Next-Token Prediction
-
-**Purpose:** Finish the forward pass without turning the ending into another architecture lesson.
-
-**Visual world:** Vocabulary/index returns as a callback.
-
-**Key mechanism:**
-
-- final representation scores possible next tokens
-- a few candidates rise above the rest
-- one token is selected/appended
-- the updated sequence goes through the model again for the next generated token
-
-**Viewer leaves knowing:** Generation is repeated next-token prediction.
+**Owns after** — top-8, shared expert.
 
 ---
 
-## Section 11 — Return to the Opening Question
+## Section 6 — Forty-two floors
 
-**Purpose:** Close the exact loop opened in Section 01.
+- **Enters on** — How many times does this happen?
+- **Answers** — 42 sparse layers, eight experts each. **336 expert visits per word.**
+- **Event** — The count is done on screen: 8 × 42.
+- **Exits on** — Could you fetch 336 sets from storage, per word, fast enough?
 
-**Visual world:** Fold the whole journey back into the original GLM model profile / RAM-storage setup.
+**Visual world** — the one floor becomes one floor of a 45-floor building.
 
-**Final conceptual separation:**
+**Mechanism** — 45 layers; the first 3 are dense; the other **42 are sparse**.
+The same word climbs, its numbers change on every floor, and the routing choice
+can change with them.
 
-- `320B` = total learned model capacity / stored parameters
-- `~18B active` = approximate parameters participating in one token's forward path
-- sparse MoE = compute selectivity
-- large checkpoint / expert pool = still exists and must remain accessible
-- memory/runtime behavior depends on precision, quantization, sharding, caching and offload strategy
-
-**Viewer leaves knowing:** Why a huge MoE model can perform much less computation per token without becoming a genuinely tiny model.
+**Owns after** — layer, sparse vs dense.
 
 ---
 
-# Production Order From Here
+## Section 7 — The answer
 
-1. **Lock this section map.**
-2. Finish Section 01 storyboard only.
-3. Create reusable paper asset sheet from the approved storyboard language.
-4. Build one coded proof frame and compare it visually against the storyboard.
-5. Only after the proof succeeds, storyboard/build Section 02 onward one section at a time.
+- **Enters on** — Could you fetch 336 sets per word, fast enough?
+- **Answers** — No. The fetch costs more than the work it does.
+- **Event** — **The elegant plan from §1 jams.**
+- **Exits on** — Then what did "18B active" ever buy?
 
-Do **not** return to broad art-direction exploration unless a genuine visual problem is discovered.
+**Visual world** — reuse §1's exact plan — storage → router → load eight → small
+machine — now with enough knowledge to watch it fail.
+
+**Causal answer**
+1. The choice cannot be made once at startup; it depends on the current numbers.
+2. Those numbers change every word and every floor.
+3. So the needed set changes at each of the 42 sparse layers, per word.
+4. Keeping experts outside fast memory means fetching weights repeatedly.
+5. Expert weights are large; the transfer becomes the bottleneck. **~8 GB per
+   word** at ~2.8% of routed weight — see `GROUND_TRUTH.md`.
+6. Quantization reinforces the wall rather than escaping it: even at 4-bit the
+   full checkpoint is ~153 GiB.
+
+**Mandatory caveat** — real systems shard, cache, quantize and offload. The
+truthful claim is **not** that all 320B must live in GPU VRAM. It is that
+efficient serving needs *fast access* to whichever experts routing picks.
+
+**Owns after** — memory vs storage, bandwidth, quantization.
+
+---
+
+## Section 8 — The verdict
+
+- **Enters on** — What did "18B active" ever buy?
+- **Answers** — Compute, not memory.
+- **Event** — The whole journey folds back into the opening frame.
+- **Exits on** — none. The thesis lands.
+
+**Final separation, on one frame**
+- `320B` — total learned capacity, stored, and it must stay reachable
+- `~18B active` — the parameters on one word's path through the model
+- sparse MoE — selectivity of **computation**
+- memory behaviour — depends on precision, sharding, caching and offload
+
+**The ruling** — the efficiency claim is **true about compute and false about
+memory**, and that split is the whole video.
+
+---
+
+# Production order
+
+1. Spine, chain and gates. **Done.**
+2. Section 1 beats against the chain, then frames.
+3. Only after Section 1 is accepted, storyboard §2 onward, one at a time.
+
+Do not return to broad art-direction exploration; the visual language is
+settled and liked. Story problems are never fixed by changing the metaphor.

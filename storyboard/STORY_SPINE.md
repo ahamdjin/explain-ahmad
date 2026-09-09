@@ -1,6 +1,7 @@
 # Story spine — the missing file
 
-Status: **PROPOSAL. Two decisions are Ahmad's and are marked `NEEDS AHMAD`.**
+Status: **AGREED 2026-09-09.** Both open decisions settled by Ahmad: one
+mystery in eight sections, and the want is the efficiency claim on trial.
 
 This is the file the repo never had. `SECTION_MAP.md` specifies sections as
 **Purpose / Visual world / Key mechanism / Viewer leaves knowing** — a syllabus.
@@ -13,7 +14,7 @@ goes nowhere. See `skills/STORY_STRUCTURE.md` for the gates.
 
 | | |
 | --- | --- |
-| **The want** | `NEEDS AHMAD` — see §4. Must be a blocked goal, not a curiosity. |
+| **The want** | *They shipped a 320-billion-parameter model and called it efficient. I want to know whether that is true.* A claim on trial, not a curiosity. |
 | **The wall** | Which experts are needed is decided from the word's current numbers, and those numbers change at every one of the 42 sparse layers. So the set you need is unknowable in advance and changes 42 times per word — and fetching a set costs more than the work it does. |
 | **The thesis** | Sparse routing buys you **compute**, not **memory**. A 320B model doing 18B of work per word is still a 320B model that has to be reachable. |
 
@@ -85,9 +86,9 @@ not need a vocabulary catalog or token IDs.
 
 ---
 
-## 4. `NEEDS AHMAD` — the two things only you can answer
+## 4. Decisions — settled
 
-### Decision 1 — is this one video or two?
+### Decision 1 — one video. Eight sections. `AGREED`
 
 - **One mystery** (8 sections, the chain above). Tight, every section earns its
   place, tokenization appears only as far as the question needs. Shorter.
@@ -95,11 +96,13 @@ not need a vocabulary catalog or token IDs.
   the memory question. Then sections 3–5 and 10 need their own reason to exist,
   and the mystery goes cold for several minutes in the middle.
 
-I recommend **one mystery**. A viewer who stays for "why can't this fit" will
-not sit through token IDs, and a viewer who wants a primer is not hooked by a
-memory question.
+**Chosen: one mystery.** A viewer who stays for "why can't this fit" will not
+sit through token IDs, and a viewer who wants a primer is not hooked by a memory
+question. Tokenization and embeddings appear only as far as §3 of the chain
+needs them: *the word becomes numbers, and the numbers are not fixed.* No
+vocabulary catalog, no token IDs, no next-token prediction section.
 
-### Decision 2 — the want
+### Decision 2 — the want. `AGREED`
 
 Every rejected version had a narrator who *noticed* things. A want is a blocked
 goal, and it is what the repo has never contained. Generic, no personal machine.
@@ -115,19 +118,32 @@ Candidates:
    itself."** Closest to the current draft — and the weakest, because it is a
    curiosity dressed as a want. Included so the difference is visible.
 
-I recommend **2**. It gives the video a verdict to reach rather than a fact to
-deliver, it stays generic, and it makes the viewer a juror instead of a student.
+**Chosen: 2.** It gives the video a verdict to reach rather than a fact to
+deliver, it stays generic and does not date, and it makes the viewer a juror
+instead of a student.
+
+Consequences that now bind every section:
+
+- The video is **testing a claim**, so each section is evidence for or against
+  it. A section that is neither is off-mission.
+- The thesis is the **verdict**: *sparse routing buys compute, not memory.*
+  Section 8 delivers it as a ruling, not as a summary.
+- The tone is **curious and adversarial**, never debunking. The claim turns out
+  to be true about compute and false about memory, and that split is the point.
+- The protagonist is a **juror**, so the questions on screen are his, and he is
+  allowed to be convinced at beat 27 and unconvinced at beat 29.
 
 ---
 
-## 5. What I will write once those two are settled
+## 5. Foundation files
 
-- rewrite `SECTION_MAP.md` in the four-field question-chain format
-- `storyboard/VOCABULARY_LEDGER.md` — what the viewer owns per section, and
-  which words are banned until which section (`token` is Section 3's, so
-  Section 1 says `word`)
-- `research/glm/GROUND_TRUTH.md` — every verified number in one place. They are
-  currently spread across three files, which is how the checkpoint size got
-  written down wrong once
-- Section 01 rebuilt against the chain: ~21 beats, the different-eight event,
-  and an exit question that differs from its entry
+| File | Holds |
+| --- | --- |
+| `skills/STORY_STRUCTURE.md` | the four gates, run before any art |
+| `storyboard/STORY_SPINE.md` | this file — want, wall, thesis, question chain |
+| `storyboard/VOCABULARY_LEDGER.md` | what the viewer owns per section; banned terms |
+| `research/glm/GROUND_TRUTH.md` | every on-screen number, single source |
+| `storyboard/SECTION_MAP.md` | per-section detail, in question-chain format |
+
+Remaining: rebuild Section 01 against the chain — the different-eight event, and
+an exit question that differs from its entry.
