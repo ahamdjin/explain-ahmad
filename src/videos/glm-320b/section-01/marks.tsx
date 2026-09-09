@@ -15,15 +15,18 @@ export function Note({
   tone = 'ink',
   size = 'md',
   backed = false,
+  width,
 }: {
   children: ReactNode
   at: { x: string; y: string }
   rotate?: number
   align?: 'left' | 'center' | 'right'
-  tone?: 'ink' | 'orange' | 'red'
-  size?: 'sm' | 'md' | 'lg'
-  /** Adds a paper halo so the note stays readable over the parameter grid. */
+  tone?: 'ink' | 'orange' | 'red' | 'blue'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  /** Adds a paper halo so the note stays readable over a busy scene. */
   backed?: boolean
+  /** Set for the closing question, which is centred and spans the frame. */
+  width?: string
 }) {
   return (
     <motion.p
@@ -31,9 +34,18 @@ export function Note({
       data-tone={tone}
       data-size={size}
       data-backed={backed ? 'true' : undefined}
-      style={{ left: at.x, top: at.y, '--rotate': `${rotate}deg`, textAlign: align } as CSSProperties}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
+      data-wide={width ? 'true' : undefined}
+      style={{ left: at.x, top: at.y, textAlign: width ? 'center' : align, ...(width ? { width } : null) } as CSSProperties}
+      /*
+       * Rotation and centring are animated, not set in CSS.
+       *
+       * Motion writes an inline transform and silently discards any CSS
+       * transform on the same element -- which is why the closing question
+       * anchored by its top-left corner and ran off the right of the frame
+       * despite a `translate(-50%, -50%)` rule that looked correct.
+       */
+      initial={{ opacity: 0, x: width ? '-50%' : 0, y: width ? '-44%' : 6, rotate }}
+      animate={{ opacity: 1, x: width ? '-50%' : 0, y: width ? '-50%' : 0, rotate }}
       transition={{ duration: 0.32 }}
     >
       {children}
@@ -185,44 +197,11 @@ export function Sparks({ at, tone = 'orange' }: { at: { x: string; y: string }; 
   )
 }
 
-/** The red cross that marks the blocked path in frame 13. */
-export function Cross({ at }: { at: { x: string; y: string } }) {
-  return (
-    <motion.svg
-      className="s1-cross"
-      style={{ left: at.x, top: at.y } as CSSProperties}
-      viewBox="0 0 60 60"
-      aria-hidden="true"
-      initial={{ opacity: 0, scale: 1.5, rotate: -12 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{ type: 'spring', stiffness: 190, damping: 13 }}
-    >
-      <g stroke="#C86658" strokeWidth="6.5" strokeLinecap="round" filter="url(#s1-ink-soft)">
-        <path d="M13 13l34 34" />
-        <path d="M47 13L13 47" />
-      </g>
-    </motion.svg>
-  )
-}
-
-/** A titled panel that groups objects, e.g. "Stored experts (on disk / CPU)". */
-export function Panel({
-  title,
-  children,
-  dashed = false,
-  tone = 'ink',
-  className = '',
-}: {
-  title?: string
-  children: ReactNode
-  dashed?: boolean
-  tone?: 'ink' | 'orange'
-  className?: string
-}) {
-  return (
-    <div className={`s1-panel ${className}`.trim()} data-dashed={dashed ? 'true' : undefined} data-tone={tone}>
-      {title ? <span className="s1-panel-title">{title}</span> : null}
-      <div className="s1-panel-body">{children}</div>
-    </div>
-  )
-}
+/*
+ * There is deliberately no Cross export.
+ *
+ * Section 01 shows nothing being blocked. The plan at beat 26 has to look
+ * correct, and the section ends on a question with nothing crossed out beneath
+ * it -- a hazard mark there reads as withholding rather than as a mystery.
+ * If a later section needs one, it belongs to that section.
+ */

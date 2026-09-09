@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { BEATS, holdFor } from './beats'
+import { BEATS, RUNTIME_SECONDS, holdFor } from './beats'
 import { FEEL } from './motion'
 import { Overlays } from './Overlays'
 import { PaperDefs } from './paper'
-import { ROUTES, applyPatches, INITIAL } from './scene'
+import { INITIAL, applyPatches } from './scene'
 import { Stage } from './Stage'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
@@ -11,26 +11,28 @@ import './section-01.css'
 
 function initialIndex() {
   if (typeof window === 'undefined') return 0
-  const requested = Number(new URLSearchParams(window.location.search).get('frame'))
+  const requested = Number(new URLSearchParams(window.location.search).get('beat'))
   if (!Number.isFinite(requested) || requested < 1) return 0
   return Math.min(BEATS.length, Math.trunc(requested)) - 1
 }
 
+/**
+ * Click-to-advance scrollytelling. The frames the viewer stops on are the
+ * product; the transitions between them are secondary.
+ *
+ * Scene state is every completed beat merged together, plus the stages of the
+ * current beat that have come due. Actors therefore persist by default and
+ * reveals arrive in sequence rather than all at once. Nothing is ever removed
+ * to make room -- the frame accumulates.
+ */
 export default function Section01() {
   const [index, setIndex] = useState(initialIndex)
-  const [route, setRoute] = useState<'scared' | 'calculate'>('scared')
-  const [hasRouted, setHasRouted] = useState(false)
   const lockUntil = useRef(0)
-
   const beat = BEATS[index]
-  /** How far into the current beat we are, so staged reveals can fire in order. */
+
+  /** How far into the current beat we are, so staged reveals fire in order. */
   const [elapsed, setElapsed] = useState(Number.POSITIVE_INFINITY)
 
-  /**
-   * Scene state is every completed beat, plus the stages of the current beat
-   * that have come due. Actors therefore persist and reveals arrive in sequence
-   * rather than all at once.
-   */
   const scene = useMemo(() => {
     const previous = BEATS.slice(0, index).flatMap((item) => [
       ...item.commands,
@@ -42,8 +44,12 @@ export default function Section01() {
 
   /** Restart the beat clock on every move; stepping back skips the staging. */
   useEffect(() => {
-    // Must include lateOverlays: the clock previously stopped after the last
-    // stage, so any annotation scheduled past that point never appeared.
+    /*
+     * lateOverlays must be included. The clock previously stopped after the
+     * last *stage*, so any annotation scheduled past that point silently never
+     * appeared -- which suppressed the question on several beats, including
+     * the one the whole section builds to.
+     */
     const spans = [
       ...(beat.stages?.map((stage) => stage.at) ?? []),
       ...(beat.lateOverlays ? [beat.lateOverlays.at] : []),
@@ -54,13 +60,11 @@ export default function Section01() {
     }
     setElapsed(0)
     const started = performance.now()
-    let frame = 0
-    const tick = () => {
+    let frame = requestAnimationFrame(function tick() {
       setElapsed(performance.now() - started)
       frame = requestAnimationFrame(tick)
-    }
-    frame = requestAnimationFrame(tick)
-    const stop = setTimeout(() => cancelAnimationFrame(frame), Math.max(...spans) + 120)
+    })
+    const stop = setTimeout(() => cancelAnimationFrame(frame), Math.max(...spans) + 140)
     return () => {
       cancelAnimationFrame(frame)
       clearTimeout(stop)
@@ -93,15 +97,27 @@ export default function Section01() {
   }, [move])
 
   /**
-   * Which experts are lit. Only the routing experiment and the beats after it
-   * show a selection, so earlier beats read as "all capacity, nothing chosen".
+   * Overlays carried in from earlier beats.
+   *
+   * Handwriting normally belongs to one moment, so a beat replaces the whole
+   * set. But a few labels are measurements the next beat still argues from --
+   * the weight on the building, for one -- and dropping those one beat after
+   * they appear takes the following frame's point with it. Anything marked
+   * sticky survives until a beat clears the carry.
    */
-  const selected = useMemo(() => {
-    if (beat.n < 7) return []
-    return ROUTES[route]
-  }, [beat.n, route])
+  const sticky = useMemo(() => {
+    const since = BEATS.slice(0, index + 1).reduce(
+      (from, item, at) => (item.clearSticky ? at : from),
+      0,
+    )
+    return BEATS.slice(since, index).flatMap((item) => [
+      ...(item.overlays ?? []).filter((overlay) => overlay.sticky),
+      ...(item.lateOverlays?.overlays ?? []).filter((overlay) => overlay.sticky),
+    ])
+  }, [index])
 
-  const debug = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1'
+  const params = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search)
+  const debug = params?.get('debug') === '1'
 
   return (
     <div className="s1-page" role="application" aria-label="Why a 320B model uses about 18B active parameters">
@@ -115,72 +131,30 @@ export default function Section01() {
             move(1)
           }}
         >
-          <Stage scene={scene} selected={selected} feel={FEEL[beat.relation]} />
+          <Stage scene={scene} feel={FEEL[beat.relation]} />
           <Overlays
             overlays={[
+              ...sticky,
               ...(beat.overlays ?? []),
               ...(beat.lateOverlays && beat.lateOverlays.at <= elapsed ? beat.lateOverlays.overlays : []),
             ]}
-            scene={scene}
           />
-
-          {beat.interactive ? (
-            <RouteControls
-              route={route}
-              onPick={(next) => {
-                setRoute(next)
-                setHasRouted(true)
-              }}
-              hasRouted={hasRouted}
-            />
-          ) : null}
 
           {debug ? (
             <div className="s1-debug">
               <b>
-                {beat.n}/{BEATS.length} · {beat.id} · {beat.relation}
+                {beat.n}/{BEATS.length} · {beat.id} · {beat.relation} · {beat.secs}s
               </b>
               <span>{beat.title}</span>
               <span>VO: {beat.vo}</span>
+              <span>
+                board runtime {Math.floor(RUNTIME_SECONDS / 60)}:
+                {String(Math.round(RUNTIME_SECONDS % 60)).padStart(2, '0')}
+              </span>
             </div>
           ) : null}
         </div>
       </div>
-    </div>
-  )
-}
-
-/**
- * The one place the viewer does something rather than advancing.
- *
- * The expert field does not change; only the routing does. Picking a word
- * re-lights a different top-8 in the same population, which is the lesson.
- */
-function RouteControls({
-  route,
-  onPick,
-  hasRouted,
-}: {
-  route: 'scared' | 'calculate'
-  onPick: (route: 'scared' | 'calculate') => void
-  hasRouted: boolean
-}) {
-  return (
-    <div className="s1-route-controls" data-no-advance>
-      {(['scared', 'calculate'] as const).map((word) => (
-        <button
-          key={word}
-          type="button"
-          className="s1-route-card"
-          data-picked={route === word ? 'true' : undefined}
-          onClick={() => onPick(word)}
-        >
-          &ldquo;{word}&rdquo;
-        </button>
-      ))}
-      <span className="s1-route-hint">
-        {hasRouted ? 'Same 288 experts. Different eight.' : 'Pick a word'}
-      </span>
     </div>
   )
 }

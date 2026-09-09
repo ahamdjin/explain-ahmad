@@ -1,12 +1,9 @@
 import { motion } from 'motion/react'
 import { type CSSProperties, type ReactNode } from 'react'
-import { Expert, SharedExpert } from './cast/Expert'
+import { ModelSheet, Plan, ShareBar } from './cast/Boards'
+import { ChosenTeam, Hospital } from './cast/Hospital'
 import { Narrator } from './cast/Narrator'
-import { Router } from './cast/Router'
-import { Archway, Blocker, ModelInfoCard, RamTray, WeightShelf, WordCard } from './cast/Objects'
-import { Parcel } from './cast/MacBox'
-import { GhostOffices, Home, Office } from './cast/Office'
-import { ExpertField } from './ExpertField'
+import { ArchSheet, FrontDesk, SmallMachine, WordCard } from './cast/Props'
 import { type Feel } from './motion'
 import { type SceneState } from './scene'
 
@@ -16,6 +13,8 @@ import { type SceneState } from './scene'
  * move and reconfigure instead of being destroyed and rebuilt.
  *
  * Nothing in this file may be wrapped in AnimatePresence keyed on the beat.
+ * That was the original mistake: it made every beat a slide replacement, and no
+ * amount of easing work can make a slideshow feel like one continuous world.
  */
 
 function Slot({
@@ -39,12 +38,20 @@ function Slot({
     <motion.div
       className={`s1-slot ${className}`.trim()}
       style={{ zIndex: z } as CSSProperties}
-      // See ExpertField: centring must be animated, not set in CSS, because
-      // Motion's inline transform replaces any CSS transform.
+      /*
+       * Centring is animated, not set in CSS. Motion writes an inline transform
+       * and would silently discard a CSS `translate(-50%, -50%)`, which
+       * anchored every actor by its top-left corner and pushed the wide ones
+       * off frame.
+       */
       animate={{ left: `${at.x}%`, top: `${at.y}%`, x: '-50%', y: '-50%', scale, opacity: on ? 1 : 0 }}
-      transition={{ ...feel, opacity: { duration: on ? 0.32 : 0.18, ease: 'easeOut' } }}
+      /*
+       * Opacity gets its own fast transition. On the underdamped `and-yet`
+       * spring it never actually reached 0, so "hidden" actors stayed faintly
+       * on screen as ghosts.
+       */
+      transition={{ ...feel, opacity: { duration: on ? 0.34 : 0.2, ease: 'easeOut' } }}
       aria-hidden={!on}
-      // Keeps hidden actors from swallowing clicks meant for the stage.
       inert={!on || undefined}
     >
       {children}
@@ -52,164 +59,58 @@ function Slot({
   )
 }
 
-export function Stage({
-  scene,
-  selected,
-  feel,
-}: {
-  scene: SceneState
-  selected: readonly number[]
-  feel: Feel
-}) {
+export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   return (
     <>
-      <ExpertField
-        on={scene.grid.on}
-        at={scene.grid.at}
-        scale={scene.grid.scale}
-        slice={scene.grid.slice}
-        reacting={scene.grid.reacting}
-        asExperts={scene.grid.asExperts}
-        lead={scene.grid.lead}
-        scoring={scene.grid.scoring}
-        dim={scene.grid.dim}
-        size={scene.grid.size}
-        selected={selected}
-        feel={feel}
-      />
-
-      <Slot on={scene.card.on} at={scene.card.at} scale={scene.card.scale} z={3} feel={feel}>
-        <ModelInfoCard highlight={scene.card.highlight} />
-      </Slot>
-
-      <Slot on={scene.word.on} at={scene.word.at} scale={scene.word.scale} z={4} feel={feel}>
-        <WordCard />
-      </Slot>
-
-      <Slot on={scene.router.on} at={scene.router.at} scale={scene.router.scale} z={3} feel={feel}>
-        <Router gesturing={scene.router.gesturing} />
-      </Slot>
-
-      <Slot on={scene.team.on} at={scene.team.at} scale={scene.team.scale} z={3} feel={feel}>
-        <TeamGroup size={scene.team.size} label={scene.team.label} sub={scene.team.sub} />
-      </Slot>
-
-      <Slot on={scene.picked.on} at={scene.picked.at} scale={scene.picked.scale} z={3} feel={feel}>
-        <PickedGroup />
-      </Slot>
-
-      <Slot on={scene.ram.on} at={scene.ram.at} scale={scene.ram.scale} z={3} feel={feel}>
-        <RamTray count={scene.ram.count} note={scene.ram.note} />
-      </Slot>
-
-      <Slot on={scene.shelf.on} at={scene.shelf.at} scale={scene.shelf.scale} z={2} feel={feel}>
-        <WeightShelf
-          title={scene.shelf.title}
-          size={scene.shelf.size}
-          shelves={scene.shelf.shelves}
-          dimmed={scene.shelf.dim}
+      <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel}>
+        <Hospital
+          sign={scene.hospital.sign}
+          plaque={scene.hospital.plaque}
+          staffed={scene.hospital.staffed}
+          lit={scene.hospital.lit}
+          focus={scene.hospital.focus}
+          quiet={scene.hospital.quiet}
+          heavy={scene.hospital.heavy}
+          bunks={scene.hospital.bunks}
+          doorsOpen={scene.hospital.doorsOpen}
         />
       </Slot>
 
-      <Slot on={scene.blocker.on} at={scene.blocker.at} scale={scene.blocker.scale} z={4} feel={feel}>
-        <Blocker scale={0.86} />
-      </Slot>
-
-      <Slot on={scene.ghosts.on} at={scene.ghosts.at} scale={scene.ghosts.scale} z={1} feel={feel}>
-        <GhostOffices count={scene.ghosts.count} />
-      </Slot>
-
-      <Slot on={scene.home.on} at={scene.home.at} scale={scene.home.scale} z={2} feel={feel}>
-        <Home count={scene.home.count} />
-      </Slot>
-
-      <Slot on={scene.parcel.on} at={scene.parcel.at} scale={scene.parcel.scale} z={2} feel={feel}>
-        <Parcel />
-      </Slot>
-
-      <Slot on={scene.office.on} at={scene.office.at} scale={scene.office.scale} z={3} feel={feel}>
-        <Office
-          desks={scene.office.desks}
-          seated={scene.office.seated}
-          working={scene.office.working}
-          label={scene.office.label}
-          capacity={scene.office.capacity}
-          strained={scene.office.strained}
-        />
-      </Slot>
-
-      <Slot on={scene.arch.on} at={scene.arch.at} scale={scene.arch.scale} z={2} feel={feel}>
-        <Archway />
+      <Slot on={scene.bar.on} at={scene.bar.at} scale={scene.bar.scale} z={2} feel={feel}>
+        <ShareBar mode={scene.bar.mode} lit={scene.bar.lit} caption={scene.bar.caption} dark={scene.bar.dark} />
       </Slot>
 
       <Slot on={scene.sheet.on} at={scene.sheet.at} scale={scene.sheet.scale} z={3} feel={feel}>
-        <ArchitectureSheet pushed={scene.sheet.pushed} />
+        <ModelSheet lit={scene.sheet.lit} />
       </Slot>
 
-      <Slot on={scene.narrator.on} at={scene.narrator.at} z={5} feel={feel}>
+      <Slot on={scene.team.on} at={scene.team.at} scale={scene.team.scale} z={4} feel={feel}>
+        <ChosenTeam lit={scene.hospital.lit} boxed={scene.team.boxed} />
+      </Slot>
+
+      <Slot on={scene.desk.on} at={scene.desk.at} scale={scene.desk.scale} z={4} feel={feel}>
+        <FrontDesk named={scene.desk.named} ringed={scene.desk.ringed} />
+      </Slot>
+
+      <Slot on={scene.word.on} at={scene.word.at} scale={scene.word.scale} z={5} feel={feel}>
+        <WordCard label={scene.word.label} />
+      </Slot>
+
+      <Slot on={scene.plan.on} at={scene.plan.at} scale={scene.plan.scale} z={3} feel={feel}>
+        <Plan />
+      </Slot>
+
+      <Slot on={scene.machine.on} at={scene.machine.at} scale={scene.machine.scale} z={4} feel={feel}>
+        <SmallMachine filled={scene.machine.filled} />
+      </Slot>
+
+      <Slot on={scene.archSheet.on} at={scene.archSheet.at} scale={scene.archSheet.scale} z={6} feel={feel}>
+        <ArchSheet pushed={scene.archSheet.pushed} />
+      </Slot>
+
+      <Slot on={scene.narrator.on} at={scene.narrator.at} z={7} feel={feel}>
         <Narrator pose={scene.narrator.pose} flip={scene.narrator.flip} scale={scene.narrator.scale} />
       </Slot>
     </>
-  )
-}
-
-function TeamGroup({ size, label, sub }: { size: number; label: string; sub: string }) {
-  return (
-    <div className="s1-team-group">
-      <div className="s1-team-grid" style={{ '--team-cols': size > 40 ? 5 : 5 } as CSSProperties}>
-        {Array.from({ length: 8 }, (_, index) => (
-          <Expert key={index} index={index} size={size} mood="happy" />
-        ))}
-        <SharedExpert size={size} label="shared (always on)" />
-      </div>
-      {label ? (
-        <span className="s1-team-caption">
-          {label}
-          {sub ? <em>{sub}</em> : null}
-        </span>
-      ) : null}
-    </div>
-  )
-}
-
-function PickedGroup() {
-  return (
-    <div className="s1-picked">
-      <span className="s1-picked-title">Selected experts</span>
-      <div className="s1-picked-row">
-        {[0, 1, 2, 3].map((index) => (
-          <Expert key={index} index={index} size={42} mood="happy" />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function ArchitectureSheet({ pushed }: { pushed: boolean }) {
-  return (
-    <motion.div
-      className="s1-arch-sheet"
-      animate={{ rotate: pushed ? -4.5 : -1.5, x: pushed ? -60 : 0, opacity: pushed ? 0.85 : 1 }}
-      transition={{ type: 'spring', stiffness: 90, damping: 20 }}
-    >
-      <h3>Full model architecture</h3>
-      <div className="s1-arch-body">
-        <ul>
-          <li>Layers</li>
-          <li>Attention</li>
-          <li>MoE routing</li>
-          <li>Experts</li>
-          <li>KV cache</li>
-          <li>Training</li>
-          <li>&hellip;</li>
-        </ul>
-        <div className="s1-arch-diagram" aria-hidden="true">
-          {Array.from({ length: 24 }, (_, index) => (
-            <i key={index} />
-          ))}
-        </div>
-      </div>
-      <span className="s1-arch-more">(and much more&hellip;)</span>
-    </motion.div>
   )
 }

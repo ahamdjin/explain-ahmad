@@ -1,8 +1,8 @@
 /**
  * Captures Section 01 storyboard frames.
  *
- * Separate from capture-beats.mjs because Section 01 is authored as 14 frames
- * against storyboard/section-01/FRAMES.md, not as beats in story.ts.
+ * Separate from capture-beats.mjs because Section 01 is authored as beats
+ * against storyboard/section-01/STORYBOARD_V5.md, not as beats in story.ts.
  */
 import { spawn } from 'node:child_process'
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
@@ -36,15 +36,14 @@ async function loadFrameMeta() {
     if (!n) continue
     const id = block.match(/\n {4}id: '([^']*)',/)
     const title = block.match(/\n {4}title: (['"])(.*?)\1,/)
-    const vo = block.match(/\n {4}vo: (['"])(.*?)\1,/)
-    const weight = block.match(/\n {4}weight: '([^']*)',/)
+    const vo = block.match(/\n {4}vo: (['"])(.*?)\1,\n/)
+    const secs = block.match(/\n {4}secs: ([0-9.]+),/)
     frames.push({
       n: Number(n[1]),
       id: id?.[1] ?? `beat-${n[1]}`,
       title: title?.[2] ?? '',
       vo: vo?.[2] ?? '',
-      weight: weight?.[1] ?? 'normal',
-      interactive: /\n {4}interactive: true,/.test(block),
+      secs: secs ? Number(secs[1]) : 0,
     })
   }
 
@@ -107,7 +106,7 @@ const captured = []
 try {
   for (const n of targets) {
     const frame = frames.find((item) => item.n === n)
-    await page.goto(`${server.url}/section-01?frame=${n}${DEBUG ? '&debug=1' : ''}`, { waitUntil: 'networkidle' })
+    await page.goto(`${server.url}/section-01?beat=${n}${DEBUG ? '&debug=1' : ''}`, { waitUntil: 'networkidle' })
     await page.waitForTimeout(SETTLE)
     const file = `frame-${String(n).padStart(2, '0')}-${frame.id}.png`
     await page.screenshot({ path: path.join(OUT, file) })
@@ -146,13 +145,13 @@ function sheet(list) {
   span { font-size:12px; color:#5F5A53; }
 </style>
 <h1>Section 01 — ${list.length} frames at ${WIDTH}x${HEIGHT}</h1>
-<p class="sub">Compare against storyboard/section-01/*.png</p>
+<p class="sub">Compare against storyboard/section-01/STORYBOARD_V5.md</p>
 <div class="grid">
 ${list
   .map(
     (frame) => `  <figure>
     <img src="${frame.file}" alt="Frame ${frame.n}" loading="lazy" />
-    <figcaption><b>${frame.n} · ${escapeHtml(frame.title)}</b><span>${escapeHtml(frame.vo)}</span></figcaption>
+    <figcaption><b>${frame.n} · ${escapeHtml(frame.title)} · ${frame.secs}s</b><span>${escapeHtml(frame.vo)}</span></figcaption>
   </figure>`,
   )
   .join('\n')}

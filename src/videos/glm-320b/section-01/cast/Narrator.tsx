@@ -1,53 +1,71 @@
 import { motion } from 'motion/react'
 import { INK } from '../paper'
 
-export type NarratorPose = 'point' | 'wonder' | 'think' | 'hopeful' | 'cheer' | 'push'
+export type NarratorPose = 'wonder' | 'point' | 'think' | 'hopeful' | 'cheer' | 'push' | 'nod'
 
 /**
- * The viewer's proxy. Asks every question in Section 01, never explains.
- * Deliberately the only colourless character in the world.
+ * The viewer's proxy. Asks every question in Section 01 and explains nothing.
+ *
+ * Redrawn to the storyboard's proportions: a large round head on a small body,
+ * a simple tunic, and short plain legs. The previous version had long jointed
+ * legs that read as comic rather than simple, which is the opposite of what a
+ * figure standing next to a 320-billion-parameter building should do.
+ *
+ * Pose is the emotional track. A viewer with the sound off should be able to
+ * read hope and deflation off this figure alone -- so poses are large and few.
  */
 export function Narrator({
   pose = 'wonder',
   flip = false,
   scale = 1,
-  className = '',
 }: {
   pose?: NarratorPose
   flip?: boolean
   scale?: number
-  className?: string
 }) {
   return (
     <motion.div
-      className={`s1-narrator ${className}`.trim()}
+      className="s1-narrator"
       data-pose={pose}
       style={{ '--flip': flip ? -1 : 1, '--scale': scale } as React.CSSProperties}
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+      animate={{ y: pose === 'cheer' ? -6 : 0 }}
+      transition={{ type: 'spring', stiffness: 150, damping: 14 }}
     >
-      <svg viewBox="0 0 120 190" filter="url(#s1-ink-soft)" aria-hidden="true">
-        <g fill="none" stroke={INK} strokeWidth="3.1" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 130 200" aria-hidden="true">
+        <g fill="none" stroke={INK} strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
           {/* head */}
-          <path d="M60 8c25.5 0 42 16.5 42 37.5S85 84 60 84 18 66.5 18 45.5 34.5 8 60 8Z" fill="#FFFDF8" />
+          <circle cx="65" cy="46" r="40" fill="#FFFDF8" />
 
-          {/* eyes — direction varies by pose */}
-          <Eyes pose={pose} />
+          {/* neck */}
+          <path d="M65 86v10" />
 
-          {/* body */}
-          <path d="M60 84v58" />
-          <path d="M42 142h36" />
-          <path d="M46 142l-5 40" />
-          <path d="M74 142l5 40" />
+          {/* tunic */}
+          <path d="M49 96h32l6 50H43z" fill="#FFFDF8" />
+
+          {/* legs -- short and plain */}
+          <path d="M57 146v32" />
+          <path d="M75 146v32" />
+          <path d="M57 178q-7 3-11 2" />
+          <path d="M75 178q7 3 11 2" />
 
           <Arms pose={pose} />
         </g>
+
+        <Face pose={pose} />
+
+        {/* the "!" ticks the storyboard figures use when something lands */}
+        {(pose === 'point' || pose === 'cheer' || pose === 'hopeful') ? (
+          <g stroke={INK} strokeWidth="3" strokeLinecap="round" opacity="0.8">
+            <path d="M22 16l-6-9" />
+            <path d="M40 8l-2-10" />
+            <path d="M108 16l6-9" />
+          </g>
+        ) : null}
+
         {pose === 'think' ? (
-          <g fill={INK} opacity="0.55">
-            <circle cx="96" cy="60" r="3" />
-            <circle cx="106" cy="49" r="4.2" />
-            <circle cx="114" cy="35" r="5.4" />
+          <g fill={INK} opacity="0.5">
+            <circle cx="106" cy="22" r="3" />
+            <circle cx="116" cy="12" r="4.2" />
           </g>
         ) : null}
       </svg>
@@ -55,76 +73,90 @@ export function Narrator({
   )
 }
 
-function Eyes({ pose }: { pose: NarratorPose }) {
+function Face({ pose }: { pose: NarratorPose }) {
   if (pose === 'cheer') {
     return (
-      <g stroke={INK} strokeWidth="3.4">
-        <path d="M42 40c3-4 7-4 10 0" />
-        <path d="M68 40c3-4 7-4 10 0" />
-        <path d="M52 58c4 4 12 4 16 0" />
+      <g fill="none" stroke={INK} strokeWidth="3.2" strokeLinecap="round">
+        <path d="M45 40c3-5 8-5 11 0" />
+        <path d="M74 40c3-5 8-5 11 0" />
+        <path d="M55 58c5 5 15 5 20 0" />
       </g>
     )
   }
 
-  const look = pose === 'point' || pose === 'hopeful' ? 4 : pose === 'push' ? 5 : -3
+  /* Eyeline carries most of the acting: forward when engaged, off to the side
+   * when questioning, down when deflated. */
+  const shift = pose === 'point' || pose === 'push' ? 5 : pose === 'hopeful' ? 3 : pose === 'think' ? -4 : 0
+  const drop = pose === 'think' ? 3 : 0
+
   return (
-    <g fill={INK} stroke="none">
-      <ellipse cx={46 + look} cy="44" rx="4.6" ry="5.4" />
-      <ellipse cx={74 + look} cy="44" rx="4.6" ry="5.4" />
+    <g>
+      <g fill={INK}>
+        <ellipse cx={51 + shift} cy={44 + drop} rx="4.4" ry="5.2" />
+        <ellipse cx={79 + shift} cy={44 + drop} rx="4.4" ry="5.2" />
+      </g>
+      {pose === 'think' ? (
+        <path d="M56 63h18" fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      ) : pose === 'hopeful' || pose === 'nod' ? (
+        <path d="M56 60c4 4 12 4 16 0" fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      ) : null}
     </g>
   )
 }
 
-/**
- * Arm tips stay clear of the head silhouette (a circle spanning x 18-102,
- * y 3-87), otherwise the stroke reads as a line drawn through the face.
- */
+/** Arm tips stay clear of the head circle (cx 65, cy 46, r 40). */
 function Arms({ pose }: { pose: NarratorPose }) {
   switch (pose) {
     case 'point':
       return (
         <>
-          <path d="M60 102 26 118" />
-          <path d="M60 102l52 -14" />
+          <path d="M49 104 26 122" />
+          <path d="M81 102l30 -16" />
         </>
       )
     case 'think':
       return (
         <>
-          <path d="M60 104 30 118" />
-          <path d="M60 106l16 -8 -2 -8" />
+          <path d="M49 106 28 124" />
+          <path d="M81 104l14 -10 -3 -9" />
         </>
       )
     case 'hopeful':
       return (
         <>
-          <path d="M60 104 42 100 50 92" />
-          <path d="M60 104 78 100 70 92" />
+          <path d="M49 104 34 96 42 90" />
+          <path d="M81 104 96 96 88 90" />
         </>
       )
     case 'cheer':
       return (
         <>
-          <path d="M60 100 22 78" />
-          <path d="M60 100 98 78" />
+          <path d="M49 100 20 76" />
+          <path d="M81 100 110 76" />
         </>
       )
     case 'push':
-      // Both arms forward with flat palms, so the pose reads as pushing
-      // something rather than as two loose lines.
       return (
         <>
-          <path d="M60 100 100 96" />
-          <path d="M100 88v16" />
-          <path d="M60 112 98 108" />
-          <path d="M98 100v16" />
+          <path d="M81 100 114 96" />
+          <path d="M114 88v16" />
+          <path d="M81 114 112 110" />
+          <path d="M112 102v16" />
+          <path d="M49 106 30 122" />
+        </>
+      )
+    case 'nod':
+      return (
+        <>
+          <path d="M49 102 34 124" />
+          <path d="M81 102 96 124" />
         </>
       )
     default:
       return (
         <>
-          <path d="M60 100 28 116" />
-          <path d="M60 100 92 116" />
+          <path d="M49 102 28 122" />
+          <path d="M81 102 102 122" />
         </>
       )
   }

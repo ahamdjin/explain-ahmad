@@ -1,286 +1,225 @@
-import { type NarratorPose } from './cast/Narrator'
-
 /**
- * The persistent scene for Section 01.
+ * Section 01 scene state.
  *
- * Per NICKY_CASE_PRODUCTION_ARCHAEOLOGY.md, a beat is "an explicit list of
- * commands to existing scene objects", not a page replacement. So:
- *
- *   - every actor is declared here once and stays mounted for the whole section
- *   - a beat contributes a PARTIAL patch
- *   - state at beat N is the merge of beats 1..N
- *
- * Persistence is therefore the default: an actor keeps whatever it was given
- * until some later beat explicitly changes it. Nothing is ever rebuilt.
+ * One scene, mounted once. A beat issues *partial patches* which are merged
+ * cumulatively, so persistence is the default and nothing is ever rebuilt.
+ * Verbs describe story actions ("hospital.staff", "desk.name") rather than CSS,
+ * so beats.ts reads as direction and not as styling.
  */
 
-export type Spot = { x: number; y: number }
+export type At = { x: number; y: number }
 
 export type SceneState = {
-  card: { on: boolean; highlight: boolean; at: Spot; scale: number }
-  grid: {
+  /** Beats 1-5. The model info sheet. */
+  sheet: { on: boolean; at: At; scale: number; lit: 'none' | 'total' | 'both' }
+  /** Beats 5-9. The two numbers, alone, then as one share bar. */
+  bar: {
     on: boolean
-    at: Spot
+    at: At
     scale: number
-    slice: boolean
-    reacting: boolean
-    /** Cells lift out of the grid and become expert characters in place. */
-    asExperts: boolean
-    /** One expert first, as a worked example, before the whole population. */
-    lead: boolean
-    /** Router sweeps a score across the population before anything is chosen. */
-    scoring: boolean
-    dim: boolean
-    /** Byte size stamped on the mass, so the wall is a number not a vibe. */
-    size: string
+    mode: 'pair' | 'bar'
+    /** Fraction of the bar that is lit. 0.056 = 18B of 320B. */
+    lit: number
+    caption: string
+    /** Darkens the unlit remainder, so the question has something to sit on. */
+    dark: boolean
   }
-  word: { on: boolean; at: Spot; scale: number }
-  router: { on: boolean; at: Spot; scale: number; gesturing: boolean; fan: boolean }
-  team: { on: boolean; at: Spot; scale: number; count: number; size: number; label: string; sub: string }
-  shelf: { on: boolean; at: Spot; scale: number; dim: boolean; title: string; size: string; shelves: number }
-  ram: { on: boolean; at: Spot; scale: number; count: number; note: string }
-  picked: { on: boolean; at: Spot; scale: number }
-  blocker: { on: boolean; at: Spot; scale: number }
-  /** Memory as a room with desks. One desk = one gigabyte. */
-  office: {
+  /** Beats 10-31. The world. */
+  hospital: {
     on: boolean
-    at: Spot
+    at: At
     scale: number
-    desks: number
-    seated: number
-    working: number
-    label: string
-    capacity: string
-    strained: boolean
+    sign: string
+    plaque: string
+    staffed: boolean
+    /** Indices of the lit specialists. Empty = nobody chosen yet. */
+    lit: readonly number[]
+    /** Greys everything unlit, so 8-vs-280 reads instantly. */
+    focus: boolean
+    /** Whole building recedes to a prop while something else holds the frame. */
+    quiet: boolean
+    /** The `hundreds of gigabytes` weight, plus a visible sag. */
+    heavy: boolean
+    /** On-call bunks with zZ, for the plan at beat 26. */
+    bunks: boolean
+    doorsOpen: boolean
   }
-  /** Where idle workers could wait instead of occupying a desk. */
-  home: { on: boolean; at: Spot; scale: number; count: number }
-  /** The thing, before it is opened. Unnamed on purpose. */
-  parcel: { on: boolean; at: Spot; scale: number }
-  /** Faint copies of the Mac, so "306 GiB" is expressed in boxes the viewer owns. */
-  ghosts: { on: boolean; at: Spot; scale: number; count: number }
-  arch: { on: boolean; at: Spot; scale: number }
-  sheet: { on: boolean; at: Spot; scale: number; pushed: boolean }
-  narrator: { on: boolean; at: Spot; pose: NarratorPose; flip: boolean; scale: number }
-  /** Set by the viewer, not by a beat. See the routing experiment at beat 8. */
-  route: 'scared' | 'calculate'
+  /** The word being processed. Never called a token in this section. */
+  word: { on: boolean; at: At; scale: number; label: string }
+  /** The front desk. Present from beat 13, named ROUTER only at beat 23. */
+  desk: { on: boolean; at: At; scale: number; named: boolean; ringed: boolean }
+  /** The eight, lifted out of the building. */
+  team: { on: boolean; at: At; scale: number; boxed: boolean }
+  /** Beat 26. The plan, drawn as a plan. */
+  plan: { on: boolean; at: At; scale: number }
+  /** Beat 27. A generic small machine. Never a named or personal device. */
+  machine: { on: boolean; at: At; scale: number; filled: boolean }
+  /** Beat 30. The unreadable architecture sheet. */
+  archSheet: { on: boolean; at: At; scale: number; pushed: boolean }
+  narrator: {
+    on: boolean
+    at: At
+    scale: number
+    pose: 'wonder' | 'point' | 'think' | 'hopeful' | 'cheer' | 'push' | 'nod'
+    flip: boolean
+  }
 }
-
-const OFF: Spot = { x: 50, y: 50 }
 
 export const INITIAL: SceneState = {
-  card: { on: false, highlight: false, at: { x: 52, y: 50 }, scale: 1 },
-  grid: {
+  sheet: { on: false, at: { x: 50, y: 46 }, scale: 1, lit: 'none' },
+  bar: { on: false, at: { x: 50, y: 44 }, scale: 1, mode: 'pair', lit: 0.056, caption: '', dark: false },
+  hospital: {
     on: false,
-    at: { x: 56, y: 50 },
+    at: { x: 55, y: 47 },
     scale: 1,
-    slice: false,
-    reacting: false,
-    asExperts: false,
-    lead: false,
-    scoring: false,
-    dim: false,
-    size: '',
+    sign: '',
+    plaque: '',
+    staffed: false,
+    lit: [],
+    focus: false,
+    quiet: false,
+    heavy: false,
+    bunks: false,
+    doorsOpen: false,
   },
-  word: { on: false, at: { x: 10, y: 32 }, scale: 1 },
-  router: { on: false, at: { x: 43, y: 54 }, scale: 0.92, gesturing: false, fan: false },
-  team: { on: false, at: { x: 66, y: 50 }, scale: 1, count: 9, size: 54, label: '', sub: '' },
-  shelf: { on: false, at: { x: 76, y: 50 }, scale: 1, dim: false, title: '', size: '', shelves: 6 },
-  ram: { on: false, at: { x: 42, y: 50 }, scale: 1, count: 9, note: '' },
-  picked: { on: false, at: { x: 66, y: 30 }, scale: 1 },
-  blocker: { on: false, at: { x: 67, y: 48 }, scale: 1 },
-  office: {
-    on: false,
-    at: { x: 22, y: 56 },
-    scale: 1,
-    desks: 32,
-    seated: 0,
-    working: 0,
-    label: 'my office',
-    capacity: '32 desks · 1 desk = 1 GB',
-    strained: false,
-  },
-  home: { on: false, at: { x: 84, y: 74 }, scale: 1, count: 0 },
-  parcel: { on: false, at: { x: 60, y: 46 }, scale: 1 },
-  ghosts: { on: false, at: { x: 60, y: 50 }, scale: 1, count: 0 },
-  arch: { on: false, at: { x: 84, y: 52 }, scale: 1 },
-  sheet: { on: false, at: { x: 26, y: 48 }, scale: 1, pushed: false },
-  narrator: { on: false, at: OFF, pose: 'wonder', flip: false, scale: 0.9 },
-  route: 'scared',
+  word: { on: false, at: { x: 12, y: 50 }, scale: 1, label: 'scared' },
+  desk: { on: false, at: { x: 20, y: 78 }, scale: 1, named: false, ringed: false },
+  team: { on: false, at: { x: 15, y: 58 }, scale: 1, boxed: false },
+  plan: { on: false, at: { x: 50, y: 52 }, scale: 1 },
+  machine: { on: false, at: { x: 76, y: 68 }, scale: 1, filled: false },
+  archSheet: { on: false, at: { x: 48, y: 50 }, scale: 1, pushed: false },
+  narrator: { on: false, at: { x: 13, y: 68 }, scale: 1, pose: 'wonder', flip: false },
 }
 
-/** What a single story verb returns: a partial update to one or more actors. */
-export type Patch = {
-  [K in keyof SceneState]?: SceneState[K] extends object ? Partial<SceneState[K]> : SceneState[K]
-}
+type Actor = keyof SceneState
+export type Patch = { [K in Actor]?: Partial<SceneState[K]> }
 
-/** Shallow-merges one level deep, which is all the actor shape needs. */
+/** Cumulative merge. Absence of a key means "leave it exactly as it was". */
 export function applyPatches(base: SceneState, patches: Patch[]): SceneState {
-  const next = { ...base } as Record<string, unknown>
+  const next: SceneState = {
+    sheet: { ...base.sheet },
+    bar: { ...base.bar },
+    hospital: { ...base.hospital },
+    word: { ...base.word },
+    desk: { ...base.desk },
+    team: { ...base.team },
+    plan: { ...base.plan },
+    machine: { ...base.machine },
+    archSheet: { ...base.archSheet },
+    narrator: { ...base.narrator },
+  }
+
   for (const patch of patches) {
-    for (const [actor, value] of Object.entries(patch)) {
-      next[actor] =
-        value !== null && typeof value === 'object' && !Array.isArray(value)
-          ? { ...(next[actor] as object), ...value }
-          : value
+    for (const key of Object.keys(patch) as Actor[]) {
+      Object.assign(next[key], patch[key])
     }
   }
-  return next as SceneState
+
+  return next
 }
 
 /**
- * Where a finished piece goes to stay legible.
+ * The eight chosen specialists, scattered across floors rather than adjacent.
  *
- * This is scrollytelling: each click ADDS information to the frame. So an actor
- * that has done its job does not disappear -- it shrinks and steps aside into a
- * reserved spot, keeping what it taught available. The last frame of the section
- * should read as the whole argument.
+ * Deliberately not a contiguous block: routing picks by score, not by locality,
+ * and a tidy rectangle would teach the wrong thing. See art-direction §7 —
+ * experts are not labelled specialists and are not neighbours.
  */
-export const PARK = {
-  /* Top-left: what the model IS. */
-  modelId: { at: { x: 9, y: 11 }, scale: 0.3 },
-  word: { at: { x: 8, y: 25 }, scale: 0.62 },
+export const CHOSEN = [41, 76, 103, 147, 168, 211, 245, 278] as const
 
-  /* Right column, stacked vertically so parked pieces never overlap. */
-  population: { at: { x: 88, y: 13 }, scale: 0.22 },
-  store: { at: { x: 88, y: 31 }, scale: 0.3 },
+/* -- Story verbs ------------------------------------------------------------
+ * Each returns a patch. beats.ts should never touch scene shape directly. */
 
-  /* Bottom band, five fixed slots left to right in story order. */
-  router: { at: { x: 15, y: 89 }, scale: 0.36 },
-  team: { at: { x: 33, y: 89 }, scale: 0.38 },
-  picked: { at: { x: 50, y: 89 }, scale: 0.38 },
-  memory: { at: { x: 68, y: 88 }, scale: 0.5 },
-  blocked: { at: { x: 85, y: 88 }, scale: 0.42 },
-  machine: { at: { x: 93, y: 89 }, scale: 0.42 },
-} as const
-
-/*
- * Story verbs. These name what happens in the story, never CSS properties.
- */
-
-export const card = {
-  show: (at: Spot = { x: 52, y: 50 }) => ({ card: { on: true, highlight: true, at } }),
-  /** Shrinks to a corner tag; the model's identity stays on screen. */
-  park: () => ({ card: { on: true, highlight: false, ...PARK.modelId } }),
+export const sheet = {
+  arrive: (at: At, scale = 1): Patch => ({ sheet: { on: true, at, scale, lit: 'none' } }),
+  lightTotal: (): Patch => ({ sheet: { lit: 'total' } }),
+  lightBoth: (): Patch => ({ sheet: { lit: 'both' } }),
+  foldAway: (): Patch => ({ sheet: { on: false, scale: 0.72 } }),
 }
 
-export const grid = {
-  show: (at: Spot = { x: 56, y: 50 }, scale = 1, size = '') => ({ grid: { on: true, at, scale, size } }),
-  /** Quantization: the same mass, physically smaller, still far too big. */
-  squeeze: (scale: number, size: string) => ({ grid: { scale, size } }),
-  lightActiveSlice: () => ({ grid: { slice: true } }),
-  letInactiveAsk: () => ({ grid: { reacting: true } }),
-  stopAsking: () => ({ grid: { reacting: false } }),
-  /** Worked example: one cell becomes an expert before the rest follow. */
-  showOneExpert: (at: Spot, scale: number) => ({ grid: { lead: true, at, scale } }),
-  /** Beat 5: the same cells lift out and become the expert population. */
-  becomeExperts: (at: Spot, scale: number) => ({ grid: { asExperts: true, lead: false, at, scale } }),
-  /** The router scores every expert before any is selected. */
-  score: () => ({ grid: { scoring: true } }),
-  stopScoring: () => ({ grid: { scoring: false } }),
-  moveTo: (at: Spot, scale: number) => ({ grid: { at, scale } }),
-  recede: () => ({ grid: { dim: true } }),
-  park: () => ({ grid: { on: true, dim: true, ...PARK.population } }),
+export const bar = {
+  /** The two numbers survive the sheet, alone on the paper. */
+  asPair: (at: At, scale = 1): Patch => ({ bar: { on: true, at, scale, mode: 'pair' } }),
+  /** The pair becomes one measured bar: the whole premise in a single image. */
+  asBar: (at: At, scale = 1, caption = ''): Patch => ({ bar: { on: true, at, scale, mode: 'bar', caption } }),
+  darken: (): Patch => ({ bar: { dark: true } }),
+  moveTo: (at: At, scale: number): Patch => ({ bar: { at, scale } }),
+  off: (): Patch => ({ bar: { on: false } }),
+}
+
+export const hospital = {
+  /** Rises out of the bar. Same subject, new form -- never a slide change. */
+  rise: (at: At, scale = 1): Patch => ({ hospital: { on: true, at, scale } }),
+  label: (sign: string, plaque: string): Patch => ({ hospital: { sign, plaque } }),
+  staff: (): Patch => ({ hospital: { staffed: true } }),
+  choose: (lit: readonly number[]): Patch => ({ hospital: { lit, focus: true } }),
+  heavy: (): Patch => ({ hospital: { heavy: true } }),
+  /** Clears the weight. The plan is the answer to it, so it stops pressing. */
+  unheavy: (): Patch => ({ hospital: { heavy: false } }),
+  quiet: (): Patch => ({ hospital: { quiet: true } }),
+  wake: (): Patch => ({ hospital: { quiet: false } }),
+  bunks: (): Patch => ({ hospital: { bunks: true } }),
+  unbunk: (): Patch => ({ hospital: { bunks: false } }),
+  openDoors: (): Patch => ({ hospital: { doorsOpen: true } }),
+  moveTo: (at: At, scale: number): Patch => ({ hospital: { at, scale } }),
 }
 
 export const word = {
-  arrive: (at: Spot, scale = 1) => ({ word: { on: true, at, scale } }),
-  moveTo: (at: Spot, scale?: number) => ({ word: { at, ...(scale ? { scale } : {}) } }),
-  park: () => ({ word: { on: true, ...PARK.word } }),
+  /** Superseded by a later object that restates it. See `plan`. */
+  off: (): Patch => ({ word: { on: false } }),
+  arrive: (at: At, scale = 1, label = 'scared'): Patch => ({ word: { on: true, at, scale, label } }),
+  moveTo: (at: At, scale?: number): Patch => ({ word: { at, ...(scale === undefined ? {} : { scale }) } }),
 }
 
-export const router = {
-  appear: (at: Spot, scale = 0.9) => ({ router: { on: true, at, scale } }),
-  moveTo: (at: Spot, scale: number) => ({ router: { at, scale } }),
-  fanOut: () => ({ router: { fan: true } }),
-  foldFan: () => ({ router: { fan: false } }),
-  speakUp: () => ({ router: { gesturing: true } }),
-  settle: () => ({ router: { gesturing: false } }),
-  park: () => ({ router: { on: true, gesturing: false, ...PARK.router } }),
+export const desk = {
+  /** Superseded by a later object that restates it. See `plan`. */
+  off: (): Patch => ({ desk: { on: false } }),
+  /** Present, unlabelled, unremarked. The whole reveal at beat 23 depends on
+   *  this landing ten beats early. */
+  arrive: (at: At, scale = 1): Patch => ({ desk: { on: true, at, scale } }),
+  name: (): Patch => ({ desk: { named: true, ringed: true } }),
+  moveTo: (at: At, scale?: number): Patch => ({ desk: { at, ...(scale === undefined ? {} : { scale }) } }),
 }
 
 export const team = {
-  form: (at: Spot, size: number, label = '', sub = '') => ({
-    team: { on: true, at, size, label, sub },
-  }),
-  moveTo: (at: Spot, size?: number) => ({ team: { at, ...(size ? { size } : {}) } }),
-  relabel: (label: string, sub = '') => ({ team: { label, sub } }),
-  park: () => ({ team: { on: true, ...PARK.team } }),
+  /** Superseded by a later object that restates it. See `plan`. */
+  off: (): Patch => ({ team: { on: false } }),
+  lift: (at: At, scale = 1): Patch => ({ team: { on: true, at, scale } }),
+  box: (): Patch => ({ team: { boxed: true } }),
+  moveTo: (at: At, scale?: number): Patch => ({ team: { at, ...(scale === undefined ? {} : { scale }) } }),
 }
 
-export const shelf = {
-  reveal: (title: string, size: string, at: Spot = { x: 76, y: 50 }) => ({
-    shelf: { on: true, title, size, at },
-  }),
-  relabel: (title: string, size: string) => ({ shelf: { title, size } }),
-  recede: () => ({ shelf: { dim: true } }),
-  restore: () => ({ shelf: { dim: false } }),
-  moveTo: (at: Spot, scale = 1) => ({ shelf: { at, scale } }),
-  park: () => ({ shelf: { on: true, dim: true, ...PARK.store } }),
+/*
+ * Panels are the exception to persistence.
+ *
+ * The rule is that the *world* accumulates -- the hospital, the word and the
+ * narrator are never destroyed and never rebuilt. But an explanatory panel is
+ * not part of the world, and a panel that outlives its beat collides with
+ * whatever comes next. The plan is also a restatement: it already contains the
+ * router, the eight and the sleepers, so leaving the originals on screen
+ * underneath it is duplication, not continuity.
+ */
+export const plan = {
+  draw: (at: At, scale = 1): Patch => ({ plan: { on: true, at, scale } }),
+  moveTo: (at: At, scale?: number): Patch => ({ plan: { at, ...(scale === undefined ? {} : { scale }) } }),
+  off: (): Patch => ({ plan: { on: false } }),
 }
 
-export const memory = {
-  open: (at: Spot, count = 9, note = '') => ({ ram: { on: true, at, count, note } }),
-  load: (count: number, note = '') => ({ ram: { count, note } }),
-  moveTo: (at: Spot) => ({ ram: { at } }),
-  park: () => ({ ram: { on: true, ...PARK.memory } }),
+export const machine = {
+  off: (): Patch => ({ machine: { on: false } }),
+  arrive: (at: At, scale = 1): Patch => ({ machine: { on: true, at, scale } }),
+  fill: (): Patch => ({ machine: { filled: true } }),
 }
 
-export const picked = {
-  show: (at: Spot) => ({ picked: { on: true, at, scale: 1 } }),
-  park: () => ({ picked: { on: true, ...PARK.picked } }),
-}
-
-export const blocker = {
-  drop: (at: Spot = { x: 67, y: 48 }) => ({ blocker: { on: true, at, scale: 1 } }),
-  park: () => ({ blocker: { on: true, ...PARK.blocked } }),
-}
-
-export const parcel = {
-  arrive: (at: Spot, scale = 1) => ({ parcel: { on: true, at, scale } }),
-  /** Opens into the parameter mass. The grid takes its place, same spot. */
-  open: () => ({ parcel: { on: false } }),
-}
-
-export const ghosts = {
-  /** How many of the viewer's own box the mass would need. */
-  show: (count: number, at: Spot, scale = 1) => ({ ghosts: { on: true, count, at, scale } }),
-  hide: () => ({ ghosts: { on: false } }),
-}
-
-export const office = {
-  show: (at: Spot, scale = 1) => ({ office: { on: true, at, scale } }),
-  moveTo: (at: Spot, scale: number) => ({ office: { at, scale } }),
-  /** Workers present at desks, and how many of them are actually working. */
-  staff: (seated: number, working = 0) => ({ office: { seated, working } }),
-  strain: () => ({ office: { strained: true } }),
-  park: () => ({ office: { on: true, ...PARK.machine } }),
-}
-
-export const home = {
-  open: (at: Spot, scale = 1) => ({ home: { on: true, at, scale } }),
-  waiting: (count: number) => ({ home: { count } }),
-}
-
-export const arch = {
-  open: (at: Spot = { x: 84, y: 52 }) => ({ arch: { on: true, at } }),
-}
-
-export const sheet = {
-  present: (at: Spot = { x: 26, y: 48 }) => ({ sheet: { on: true, at } }),
-  pushAside: () => ({ sheet: { pushed: true } }),
+export const archSheet = {
+  slam: (at: At, scale = 1): Patch => ({ archSheet: { on: true, at, scale, pushed: false } }),
+  shove: (at: At, scale: number): Patch => ({ archSheet: { at, scale, pushed: true } }),
+  off: (): Patch => ({ archSheet: { on: false } }),
 }
 
 export const narrator = {
-  at: (at: Spot, pose: NarratorPose, scale = 0.9, flip = false) => ({
-    narrator: { on: true, at, pose, scale, flip },
+  at: (at: At, pose: SceneState['narrator']['pose'], scale = 1, flip = false): Patch => ({
+    narrator: { on: true, at, scale, pose, flip },
   }),
-  pose: (pose: NarratorPose) => ({ narrator: { pose } }),
-  hide: () => ({ narrator: { on: false } }),
+  pose: (pose: SceneState['narrator']['pose']): Patch => ({ narrator: { pose } }),
 }
-
-/** Expert ids for the two routable words. Different sets, same field. */
-export const ROUTES = {
-  scared: [4, 17, 22, 29, 33, 41, 48, 52],
-  calculate: [2, 9, 14, 26, 31, 37, 44, 50],
-} as const

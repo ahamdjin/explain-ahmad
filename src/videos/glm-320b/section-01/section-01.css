@@ -78,9 +78,10 @@
 }
 
 /* Characters ------------------------------------------------------------ */
+/* Characters ------------------------------------------------------------ */
 
 .s1-narrator {
-  width: calc(9cqw * var(--scale, 1));
+  width: calc(11cqw * var(--scale, 1));
   transform: scaleX(var(--flip, 1));
 }
 
@@ -91,330 +92,305 @@
   overflow: visible;
 }
 
-.s1-expert {
-  width: var(--size, 46px);
+/* One routed expert, drawn as a person. Identity is a number, never a job. */
+.s1-spec {
+  width: var(--size, 64px);
   flex: 0 0 auto;
 }
 
-.s1-expert svg {
+.s1-spec svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.s1-expert-id {
-  font: 400 15px/1 var(--mono);
-  letter-spacing: -0.02em;
+.s1-spec-id {
+  font: 400 11px/1 var(--mono);
 }
 
-.s1-expert-mark {
-  font: 400 22px/1 var(--hand);
+/* M1 — the model sheet -------------------------------------------------- */
+
+.s1-sheet {
+  position: relative;
+  width: 39cqw;
 }
 
-.s1-shared-expert {
-  display: grid;
-  justify-items: center;
-  gap: 2px;
-}
-
-.s1-shared-tag {
-  font: 400 clamp(9px, 0.85cqw, 15px) / 1.2 var(--hand);
-  color: var(--graphite);
-  text-align: center;
-}
-
-.s1-router {
-  width: calc(15cqw * var(--scale, 1));
-}
-
-.s1-router svg {
+.s1-sheet > svg {
   display: block;
   width: 100%;
   height: auto;
-  overflow: visible;
 }
 
-.s1-router-label {
-  font: 400 26px/1 var(--hand);
-}
-
-/* The word ------------------------------------------------------------- */
-
-.s1-word-card {
-  padding: calc(0.9cqh * var(--scale, 1)) calc(1.5cqw * var(--scale, 1));
-  background: linear-gradient(#f6e6c8, #f0dcb8);
-  border: 2px solid rgba(43, 41, 38, 0.55);
-  border-radius: 3px;
-  box-shadow: 2px 3px 0 rgba(43, 41, 38, 0.14);
-  transform: rotate(-2.5deg);
-}
-
-.s1-word-card span {
-  font: 400 calc(2.6cqw * var(--scale, 1)) / 1 var(--hand);
-  white-space: nowrap;
-}
-
-/* Parameter grid ------------------------------------------------------- */
-
-/* The one persistent field. 66cqw keeps it inside the 90% safe width. */
-.s1-field {
+.s1-sheet-body {
   position: absolute;
-  transform-origin: center;
+  inset: 0;
+  padding: 3.1cqh 3.4cqw 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.s1-sheet-body h2 {
+  margin: 0 0 1.7cqh;
+  text-align: center;
+  font: 400 clamp(18px, 2.5cqw, 48px) / 1.1 var(--hand);
+  letter-spacing: -0.01em;
+}
+
+.s1-sheet-body dl {
+  margin: 0;
   display: grid;
-  grid-template-columns: repeat(var(--cols), 1fr);
-  gap: 0.42cqw;
+  gap: 1.15cqh;
+}
+
+.s1-sheet-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1cqw;
+}
+
+.s1-sheet-row dt {
+  font: 400 clamp(11px, 1.32cqw, 25px) / 1.2 var(--hand);
+  color: var(--graphite);
+}
+
+.s1-sheet-row dd {
+  margin: 0;
+  font: 400 clamp(11px, 1.36cqw, 26px) / 1.2 var(--hand);
+  text-align: right;
+}
+
+/* Only the two numbers that matter ever get emphasis. */
+.s1-sheet-pill {
+  display: inline-block;
+  padding: 0.35cqh 0.85cqw;
+  border-radius: 999px;
+  font: 400 clamp(12px, 1.6cqw, 31px) / 1.15 var(--hand);
+}
+
+.s1-sheet-pill[data-tone='total'] {
+  background: #f6d9c0;
+  box-shadow: inset 0 0 0 2px rgba(200, 123, 69, 0.5);
+}
+
+.s1-sheet-pill[data-tone='active'] {
+  background: #cfdcee;
+  box-shadow: inset 0 0 0 2px rgba(78, 116, 168, 0.5);
+}
+
+/* M1/M2 — the share bar ------------------------------------------------- */
+
+.s1-bar {
   width: 66cqw;
 }
 
-.s1-cell {
-  position: relative;
-  aspect-ratio: 1;
-  background: #d9d4ca;
-  border: 1.4px solid rgba(43, 41, 38, 0.34);
-  border-radius: 3px;
-}
-
-.s1-cell[data-active='true'] {
-  background: var(--orange);
-  border-color: rgba(43, 41, 38, 0.6);
-}
-
-/* A cell that has become an expert keeps its own grid slot and scales up into
-   the space its faded neighbours left behind. */
-.s1-cell[data-expert='true'] {
-  background: none;
-  border: 0;
-  border-radius: 0;
-  z-index: 2;
-}
-
-.s1-cell[data-expert='true'] svg {
-  position: absolute;
-  inset: -14%;
-  width: 128%;
-  height: 128%;
-  overflow: visible;
-}
-
-.s1-cell[data-chosen='true'] {
-  z-index: 4;
-}
-
-/* The router's scoring pulse, one per expert, sweeping left to right. */
-.s1-score {
-  position: absolute;
-  inset: -18%;
-  border: 2.4px solid var(--blue);
-  border-radius: 30%;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.s1-field-title {
-  position: absolute;
-  top: 9%;
-  font: 400 clamp(11px, 1.05cqw, 20px) / 1 var(--mono);
-  letter-spacing: 0.1em;
-  color: var(--graphite);
-}
-
-/* A reacting parameter has to read as a face, not a smudge, so it lifts well
-   clear of its neighbours. */
-.s1-cell[data-asks='true'] {
-  background: var(--paper-light);
-  border-color: rgba(43, 41, 38, 0.62);
-  border-width: 1.8px;
-  z-index: 3;
-  transform: scale(2.15);
-  box-shadow: 0 1px 4px rgba(43, 41, 38, 0.16);
-}
-
-.s1-cell[data-asks='true'] svg {
-  position: absolute;
-  inset: 6%;
-  width: 88%;
-  height: 88%;
-  overflow: visible;
-}
-
-/* The machine: the stake, with a visible interior and spare room. */
-.s1-mac {
-  position: relative;
-  width: calc(26cqw * var(--scale, 1));
-}
-
-.s1-mac svg {
+.s1-bar svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.s1-mac-label {
+.s1-bar-big {
+  font: 400 66px/1 var(--hand);
+}
+
+.s1-bar-sub {
+  font: 400 27px/1 var(--hand);
+}
+
+.s1-bar-label {
   font: 400 30px/1 var(--hand);
 }
 
-.s1-mac-bay {
-  position: absolute;
-  left: 10.5%;
-  top: 26%;
-  width: 79%;
-  height: 44%;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 6%;
-  padding: 3% 3.4%;
-  align-content: center;
+.s1-bar-cap {
+  font: 400 26px/1 var(--scrawl);
 }
 
-.s1-mac-slot {
-  aspect-ratio: 1;
-  border: 1.4px dashed rgba(43, 41, 38, 0.22);
-  border-radius: 22%;
+/* M3 — the hospital ----------------------------------------------------- */
+
+.s1-hospital {
+  width: 62cqw;
+  transition: opacity 0.45s ease, filter 0.45s ease;
 }
 
-.s1-mac-slot[data-filled='true'] {
-  border-style: solid;
-  border-color: rgba(43, 41, 38, 0.5);
-}
-
-.s1-mac-slot i {
+.s1-hospital svg {
   display: block;
   width: 100%;
-  height: 100%;
-  border-radius: 20%;
+  height: auto;
+  overflow: visible;
 }
 
-.s1-mac[data-strained='true'] .s1-mac-slot[data-filled='true'] {
-  border-color: var(--red);
+/* Recedes to a prop while something else holds the frame. Never removed. */
+/* Recedes, but must stay legible: at 0.62 the dimmed staff went to a 0.25
+ * effective opacity and the building read as empty seats rather than people. */
+.s1-hospital[data-quiet='true'] {
+  opacity: 0.82;
+  filter: saturate(0.72);
 }
 
-/* The office: memory as a room with desks. One desk = one gigabyte. */
-.s1-office {
-  width: calc(30cqw * var(--scale, 1));
+.s1-hosp-sign {
+  font: 400 40px/1 var(--hand);
+}
+
+.s1-hosp-plaque {
+  font: 400 27px/1 var(--hand);
+}
+
+.s1-hosp-z {
+  font: 400 30px/1 var(--scrawl);
+}
+
+/* The eight, lifted out of the building ---------------------------------- */
+
+.s1-team {
+  position: relative;
   display: grid;
-  gap: 0.9cqh;
   justify-items: center;
+  gap: 1.1cqh;
+  padding: 1.5cqh 1.4cqw;
+  border-radius: 10px;
 }
 
-.s1-office-head {
+/* Beat 21 draws the box: "why not keep just this?" */
+.s1-team[data-boxed='true'] {
+  box-shadow: inset 0 0 0 3px rgba(78, 116, 168, 0.75);
+  background: rgba(207, 220, 238, 0.22);
+}
+
+.s1-team[data-boxed='true']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 3px dashed rgba(78, 116, 168, 0.55);
+  margin: -0.7cqh -0.6cqw;
+}
+
+.s1-team-row {
   display: grid;
-  justify-items: center;
+  grid-template-columns: repeat(4, auto);
+  gap: 0.9cqh 0.7cqw;
 }
 
-.s1-office-head strong {
-  font: 400 clamp(14px, 1.75cqw, 34px) / 1.1 var(--hand);
+.s1-team-one {
+  width: 4.4cqw;
 }
 
-.s1-office-head small {
-  font: 400 clamp(10px, 1.1cqw, 21px) / 1.2 var(--mono);
-  letter-spacing: 0.04em;
+.s1-team-one svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-team-cap {
+  font: 400 clamp(10px, 1.15cqw, 22px) / 1.2 var(--scrawl);
   color: var(--graphite);
 }
 
-.s1-office-room {
+/* The word, and the desk that chooses for it ----------------------------- */
+
+.s1-word {
+  position: relative;
+  width: 25cqw;
+}
+
+.s1-word svg {
+  display: block;
   width: 100%;
+  height: auto;
+}
+
+.s1-word-text {
+  position: absolute;
+  inset: 0;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 5%;
-  padding: 4% 4.5%;
-  background: #f4f0e6;
-  border: 3px solid var(--ink);
-  border-radius: 10px;
-  box-shadow: 3px 4px 0 rgba(43, 41, 38, 0.12);
+  place-items: center;
+  font: 400 clamp(13px, 2.1cqw, 40px) / 1 var(--hand);
 }
 
 .s1-desk {
   position: relative;
-  aspect-ratio: 1;
-  border-bottom: 2.4px solid rgba(43, 41, 38, 0.34);
-  border-radius: 2px;
-  background: rgba(43, 41, 38, 0.04);
-}
-
-.s1-desk[data-occupied='true'] {
-  background: none;
+  width: 22cqw;
 }
 
 .s1-desk svg {
-  position: absolute;
-  inset: -12% 0 12%;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.s1-office[data-strained='true'] .s1-office-room {
-  border-color: var(--red);
-}
-
-/* Where idle workers could wait instead of occupying a desk. */
-.s1-home {
-  width: calc(11cqw * var(--scale, 1));
-  display: grid;
-  justify-items: center;
-}
-
-.s1-home svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.s1-home-label {
-  font: 400 clamp(12px, 1.5cqw, 29px) / 1.1 var(--hand);
+.s1-desk-tag {
+  position: absolute;
+  left: 50%;
+  bottom: -1.2cqh;
+  transform: translateX(-50%);
+  padding: 0.3cqh 0.8cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.4px var(--ink);
+  border-radius: 4px;
+  white-space: nowrap;
+  font: 400 clamp(11px, 1.5cqw, 29px) / 1.1 var(--hand);
+  letter-spacing: 0.04em;
 }
 
-.s1-home-count {
-  font: 400 clamp(10px, 1.15cqw, 22px) / 1.2 var(--hand);
-  color: var(--graphite);
+/* M6 — the plan, and the small machine ----------------------------------- */
+
+.s1-plan {
+  width: 76cqw;
 }
 
-/* Ghost offices: a size expressed as "this many offices". */
-.s1-ghosts {
-  display: flex;
-  gap: 0.8cqw;
-  align-items: flex-end;
-}
-
-.s1-ghost {
-  width: calc(9cqw * var(--scale, 1));
-  aspect-ratio: 5 / 4;
-  border: 2.4px dashed rgba(43, 41, 38, 0.32);
-  border-radius: 8px;
-  background: rgba(231, 234, 234, 0.4);
-}
-
-/* The thing, unopened. */
-.s1-parcel {
-  width: calc(22cqw * var(--scale, 1));
-}
-
-.s1-parcel svg {
+.s1-plan svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-/* Byte size stamped on the parameter mass. */
-.s1-field-size {
-  position: absolute;
-  left: 0;
-  top: -7%;
-  font: 400 clamp(14px, 1.7cqw, 34px) / 1 var(--hand);
-  color: var(--ink);
+.s1-plan-step {
+  font: 400 30px/1 var(--hand);
 }
 
-/* Handwritten marks ---------------------------------------------------- */
+.s1-plan-z {
+  font: 400 34px/1 var(--scrawl);
+}
+
+.s1-machine {
+  width: 16cqw;
+}
+
+.s1-machine svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* M7 — the architecture sheet -------------------------------------------- */
+
+.s1-arch {
+  width: 27cqw;
+  filter: drop-shadow(0 8px 18px rgba(43, 41, 38, 0.16));
+}
+
+.s1-arch svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.s1-arch-title {
+  font: 400 34px/1 var(--hand);
+}
 
 .s1-note {
   position: absolute;
   margin: 0;
   max-width: 22cqw;
-  transform: rotate(var(--rotate, 0deg));
+  /* No transform here: Motion owns it. See marks.tsx. */
   font-family: var(--hand);
   line-height: 1.24;
   color: var(--ink);
@@ -431,6 +407,16 @@
 
 .s1-note[data-size='lg'] {
   font-size: clamp(18px, 2.15cqw, 42px);
+}
+
+/*
+ * A wide note is the closing question. It is centred on its anchor in BOTH
+ * axes and must escape the 22cqw cap, or it wraps to three lines and the last
+ * one falls off the bottom of the frame -- on the single most important beat
+ * in the section.
+ */
+.s1-note[data-wide='true'] {
+  max-width: none;
 }
 
 .s1-note[data-backed='true'] {
@@ -608,347 +594,16 @@
 
 /* Team, selection, routing controls ------------------------------------ */
 
-.s1-team-group {
-  display: grid;
-  justify-items: center;
-  gap: 1.2cqh;
+
+/* The closing question needs a paper halo to sit over the plan. */
+.s1-note[data-size='xl'] {
+  font-size: clamp(22px, 3.3cqw, 63px);
+  line-height: 1.3;
 }
 
-.s1-team-grid {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  gap: 1.6cqh 1.1cqw;
-  justify-items: center;
-  align-items: end;
+.s1-note[data-tone='blue'] {
+  color: #4e74a8;
 }
-
-.s1-team-caption {
-  display: grid;
-  justify-items: center;
-  font: 400 clamp(11px, 1.15cqw, 22px) / 1.25 var(--mono);
-  letter-spacing: 0.06em;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.s1-team-caption em {
-  font-style: normal;
-  font-family: var(--hand);
-  letter-spacing: 0;
-  color: var(--graphite);
-}
-
-.s1-picked {
-  display: grid;
-  justify-items: center;
-  gap: 0.8cqh;
-  padding: 1.4cqh 1.2cqw;
-  border: 2.2px dashed rgba(200, 123, 69, 0.8);
-  border-radius: 12px;
-  background: rgba(251, 243, 232, 0.72);
-}
-
-.s1-picked-title {
-  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
-  letter-spacing: 0.06em;
-  color: var(--orange-ink);
-  white-space: nowrap;
-}
-
-.s1-picked-row {
-  display: flex;
-  gap: 0.7cqw;
-}
-
-.s1-shelf-more {
-  font: 400 clamp(13px, 1.4cqw, 26px) / 0.6 var(--mono);
-  color: var(--graphite);
-  letter-spacing: 0.14em;
-}
-
-/* The routing experiment: the only controls in the section. */
-.s1-route-controls {
-  position: absolute;
-  left: 6%;
-  top: 50%;
-  translate: 0 -50%;
-  display: grid;
-  gap: 1.6cqh;
-  justify-items: start;
-  z-index: 6;
-}
-
-.s1-route-card {
-  padding: 1cqh 1.6cqw;
-  background: linear-gradient(#f6e6c8, #f0dcb8);
-  border: 2px solid rgba(43, 41, 38, 0.45);
-  border-radius: 3px;
-  box-shadow: 2px 3px 0 rgba(43, 41, 38, 0.12);
-  font: 400 clamp(15px, 2cqw, 38px) / 1 var(--hand);
-  color: var(--ink);
-  cursor: pointer;
-  rotate: -2deg;
-  transition:
-    transform 0.16s ease,
-    box-shadow 0.16s ease,
-    border-color 0.16s ease;
-}
-
-.s1-route-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 3px 5px 0 rgba(43, 41, 38, 0.16);
-}
-
-.s1-route-card[data-picked='true'] {
-  border-color: var(--orange-ink);
-  box-shadow:
-    0 0 0 3px rgba(231, 154, 99, 0.4),
-    2px 3px 0 rgba(43, 41, 38, 0.14);
-}
-
-.s1-route-card:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-
-.s1-route-hint {
-  font: 400 clamp(12px, 1.4cqw, 26px) / 1.3 var(--hand);
-  color: var(--graphite);
-}
-
-/* Shelf, RAM, machine --------------------------------------------------- */
-
-.s1-shelf {
-  width: calc(32cqw * var(--scale, 1));
-  display: grid;
-  justify-items: center;
-  gap: 0.7cqh;
-}
-
-.s1-shelf-title {
-  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
-  letter-spacing: 0.06em;
-  text-align: center;
-}
-
-.s1-shelf-body {
-  width: 100%;
-  display: grid;
-  gap: 0;
-  padding: 0.8cqh 0.8cqw;
-  background: #ded7c9;
-  border: 2.6px solid var(--ink);
-  border-radius: 4px;
-  box-shadow: 3px 4px 0 rgba(43, 41, 38, 0.12);
-}
-
-.s1-shelf-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.5cqw;
-  padding: 0.5cqh 0.3cqw;
-  border-bottom: 2.4px solid var(--ink);
-}
-
-.s1-shelf-row:last-child {
-  border-bottom: 0;
-}
-
-.s1-shelf-size {
-  font: 400 clamp(13px, 1.45cqw, 28px) / 1.2 var(--hand);
-}
-
-/* Narrow on purpose: the RAM tray must read as much smaller than the weight
-   shelf without either label being read. */
-.s1-ram {
-  width: 17cqw;
-  display: grid;
-  justify-items: center;
-  gap: 0.5cqh;
-  padding: 1.4cqh 1.2cqw;
-  background: var(--paper-light);
-  border: 2.6px solid var(--ink);
-  border-radius: 10px;
-  box-shadow: 3px 4px 0 rgba(43, 41, 38, 0.12);
-}
-
-.s1-ram-head {
-  display: grid;
-  justify-items: center;
-}
-
-.s1-ram-head strong {
-  font: 400 clamp(13px, 1.5cqw, 29px) / 1.1 var(--hand);
-}
-
-.s1-ram-head small {
-  font: 400 clamp(10px, 1.05cqw, 20px) / 1.2 var(--hand);
-  color: var(--graphite);
-}
-
-.s1-ram-slots {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5cqh 0.4cqw;
-  padding: 0.7cqh 0.6cqw;
-  background: rgba(43, 41, 38, 0.05);
-  border-radius: 6px;
-}
-
-.s1-ram-size {
-  font: 400 clamp(12px, 1.35cqw, 26px) / 1.2 var(--hand);
-}
-
-.s1-ram-note {
-  font: 400 clamp(10px, 1.1cqw, 21px) / 1.2 var(--hand);
-  color: var(--graphite);
-}
-
-.s1-blocker {
-  width: calc(7cqw * var(--scale, 1));
-}
-
-.s1-machine {
-  width: calc(9cqw * var(--scale, 1));
-}
-
-.s1-blocker svg,
-.s1-machine svg,
-.s1-arch svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-.s1-arch {
-  width: 17cqw;
-}
-
-/* Info card ------------------------------------------------------------- */
-
-.s1-info-card {
-  position: relative;
-  width: 44cqw;
-  padding: 3cqh 3cqw 2.6cqh;
-  background: var(--paper-light);
-  border: 3px solid var(--ink);
-  border-radius: 4px;
-  box-shadow: 4px 6px 0 rgba(43, 41, 38, 0.13);
-}
-
-.s1-info-tape {
-  position: absolute;
-  top: -1.6cqh;
-  left: 50%;
-  translate: -50% 0;
-  width: 8cqw;
-  height: 3.2cqh;
-  background: rgba(233, 214, 172, 0.85);
-  border: 1.5px solid rgba(43, 41, 38, 0.28);
-  rotate: -2.5deg;
-}
-
-.s1-info-card h2 {
-  margin: 0 0 1.4cqh;
-  padding-bottom: 1.2cqh;
-  border-bottom: 2px solid var(--line);
-  font: 400 clamp(22px, 3.1cqw, 60px) / 1 var(--hand);
-  text-align: center;
-}
-
-.s1-info-card dl {
-  display: grid;
-  gap: 1.15cqh;
-  margin: 0;
-}
-
-.s1-info-card dl > div {
-  display: grid;
-  grid-template-columns: 12cqw 1fr;
-  align-items: center;
-  gap: 1cqw;
-}
-
-.s1-info-card dt {
-  font: 400 clamp(12px, 1.35cqw, 26px) / 1.2 var(--hand);
-  color: var(--graphite);
-}
-
-.s1-info-card dd {
-  margin: 0;
-  font: 400 clamp(12px, 1.4cqw, 27px) / 1.2 var(--hand);
-}
-
-.s1-info-card mark {
-  padding: 0.2cqh 0.7cqw;
-  border-radius: 20px;
-  background: var(--orange);
-  color: var(--ink);
-  font-size: 1.12em;
-}
-
-.s1-info-card mark[data-kind='active'] {
-  background: #a8c4e2;
-}
-
-/* Architecture sheet ---------------------------------------------------- */
-
-.s1-arch-sheet {
-  width: 34cqw;
-  padding: 2.4cqh 2cqw;
-  background: var(--paper-light);
-  border: 2.6px solid var(--ink);
-  border-radius: 3px;
-  box-shadow: 5px 6px 0 rgba(43, 41, 38, 0.1), 10px 12px 0 rgba(43, 41, 38, 0.05);
-}
-
-.s1-arch-sheet h3 {
-  margin: 0 0 1.6cqh;
-  font: 400 clamp(15px, 1.9cqw, 36px) / 1 var(--hand);
-  text-align: center;
-}
-
-.s1-arch-body {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1.4cqw;
-  align-items: start;
-}
-
-.s1-arch-body ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.7cqh;
-  font: 400 clamp(10px, 1.15cqw, 22px) / 1.2 var(--hand);
-  color: var(--graphite);
-}
-
-.s1-arch-diagram {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.55cqh 0.5cqw;
-}
-
-.s1-arch-diagram i {
-  aspect-ratio: 1;
-  background: #cfcac1;
-  border: 1.4px solid rgba(43, 41, 38, 0.3);
-  border-radius: 3px;
-}
-
-.s1-arch-more {
-  display: block;
-  margin-top: 1.4cqh;
-  text-align: center;
-  font: 400 clamp(10px, 1.15cqw, 22px) / 1.2 var(--hand);
-  color: var(--graphite);
-}
-
-/* Debug ---------------------------------------------------------------- */
 
 .s1-debug {
   position: absolute;

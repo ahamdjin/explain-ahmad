@@ -1,28 +1,22 @@
 import { type Overlay } from './beats'
-import { braceBox } from './ExpertField'
-import { Arrow, Brace, Bubble, Cross, Note, Sparks } from './marks'
-import { type SceneState } from './scene'
+import { Arrow, Brace, Bubble, Note, Sparks } from './marks'
 
 /**
- * Overlays are the only things a beat replaces outright: handwriting, braces and
- * leader lines belong to one moment. Scene actors never come through here.
+ * Overlays are the only things a beat replaces outright: handwriting, braces
+ * and leader lines belong to one moment. Scene actors never come through here.
+ *
+ * A note has to carry something the voiceover does not -- a number, a label
+ * naming an object, a `?` attached to the confusing thing, a brace measuring
+ * something. The one banned pattern is a note transcribing the line being
+ * spoken over it.
  */
-export function Overlays({ overlays, scene }: { overlays: Overlay[]; scene: SceneState }) {
-  const anchors = braceBox(scene.grid.at.x, scene.grid.scale)
-
+export function Overlays({ overlays }: { overlays: Overlay[] }) {
   return (
     <>
       {overlays.map((overlay, index) => {
         const key = `${overlay.kind}-${index}`
 
         switch (overlay.kind) {
-          case 'title':
-            return (
-              <span className="s1-field-title" key={key} style={{ left: anchors.total.left }}>
-                {overlay.text}
-              </span>
-            )
-
           case 'note':
             return (
               <Note
@@ -32,6 +26,7 @@ export function Overlays({ overlays, scene }: { overlays: Overlay[]; scene: Scen
                 tone={overlay.tone}
                 size={overlay.size}
                 backed={overlay.backed}
+                width={overlay.width as string | undefined}
               >
                 {renderLines(overlay.text!)}
                 {overlay.sub ? <em>{overlay.sub}</em> : null}
@@ -45,26 +40,18 @@ export function Overlays({ overlays, scene }: { overlays: Overlay[]; scene: Scen
               </Bubble>
             )
 
-          case 'brace': {
-            const anchored =
-              overlay.anchor === 'grid-active'
-                ? anchors.active
-                : overlay.anchor === 'grid-total'
-                  ? anchors.total
-                  : null
-
+          case 'brace':
             return (
               <Brace
                 key={key}
                 label={overlay.text!}
                 sub={overlay.sub}
-                at={{ x: anchored ? anchored.left : overlay.at!.x, y: overlay.at!.y }}
-                width={anchored ? anchored.width : (overlay.width as string)}
+                at={overlay.at!}
+                width={overlay.width as string}
                 side={overlay.side}
                 tone={overlay.tone === 'orange' ? 'orange' : 'ink'}
               />
             )
-          }
 
           case 'arrow':
             return (
@@ -81,9 +68,6 @@ export function Overlays({ overlays, scene }: { overlays: Overlay[]; scene: Scen
 
           case 'sparks':
             return <Sparks key={key} at={overlay.at!} />
-
-          case 'cross':
-            return <Cross key={key} at={overlay.at!} />
 
           default:
             return null

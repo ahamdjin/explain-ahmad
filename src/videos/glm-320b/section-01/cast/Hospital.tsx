@@ -1,0 +1,248 @@
+import { motion } from 'motion/react'
+import { INK, expertColor } from '../paper'
+
+/**
+ * The world of Section 01.
+ *
+ * A hospital rather than a library, because a book on a shelf is *already
+ * available* -- shelving is free and retrieval is free -- so a library has no
+ * way to express a cost of absence, and the wall has to be faked with a hazard
+ * sign. A hospital that keeps specialists on site is not absurd, it is correct,
+ * and for the model's own reason. See video-script/01-the-night-shift.md §4.
+ *
+ * Section 01 never states that reason. It only has to make the plan look
+ * obviously right, so the closing question stings.
+ */
+
+const COLS = 36
+const ROWS = 8
+/** 36 x 8 = 288 routed experts per sparse layer. Verified figure. */
+const TOTAL = COLS * ROWS
+
+const X0 = 93
+const STEP_X = 26
+const Y0 = 184
+const STEP_Y = 43
+
+/** Scattered on purpose: routing picks by score, never by locality. */
+function seat(index: number) {
+  return { x: X0 + (index % COLS) * STEP_X, y: Y0 + Math.floor(index / COLS) * STEP_Y }
+}
+
+export function Hospital({
+  sign,
+  plaque,
+  staffed,
+  lit,
+  focus,
+  quiet,
+  heavy,
+  bunks,
+  doorsOpen,
+}: {
+  sign: string
+  plaque: string
+  staffed: boolean
+  lit: readonly number[]
+  focus: boolean
+  quiet: boolean
+  heavy: boolean
+  bunks: boolean
+  doorsOpen: boolean
+}) {
+  const chosen = new Set(lit)
+
+  return (
+    <motion.div
+      className="s1-hospital"
+      data-quiet={quiet ? 'true' : undefined}
+      animate={{ scaleY: heavy ? 0.988 : 1 }}
+      transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+      style={{ transformOrigin: 'bottom center' }}
+    >
+      <svg viewBox="0 0 1120 660" aria-hidden="true">
+        {/* warm spill from the doorway, behind everything */}
+        {doorsOpen ? (
+          <motion.ellipse
+            cx="560"
+            cy="566"
+            rx="210"
+            ry="86"
+            fill="#F0C98A"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.55 }}
+            transition={{ duration: 0.5 }}
+          />
+        ) : null}
+
+        <g fill="none" stroke={INK} strokeLinecap="round" strokeLinejoin="round">
+          {/* body */}
+          <path d="M60 162h1000v422H60z" fill="#F7F2E7" strokeWidth="3.2" />
+
+          {/* roof */}
+          <path d="M44 166 560 56l516 110" fill="#EDE5D8" strokeWidth="3.2" />
+
+          {/* sign band across the front */}
+          <path d="M344 100h432a5 5 0 0 1 5 5v50a5 5 0 0 1-5 5H344a5 5 0 0 1-5-5v-50a5 5 0 0 1 5-5Z" fill="#FBF8F1" strokeWidth="3" />
+
+          {/* floor lines */}
+          {Array.from({ length: ROWS }, (_, r) => (
+            <path key={r} d={`M76 ${Y0 + r * STEP_Y + 31}h968`} strokeWidth="1.9" opacity="0.42" />
+          ))}
+
+          {/* lobby */}
+          <path d={`M60 ${528}h1000`} strokeWidth="2.4" opacity="0.6" />
+        </g>
+
+        {sign ? (
+          <text x="560" y="141" textAnchor="middle" className="s1-hosp-sign" fill={INK}>
+            {sign}
+          </text>
+        ) : null}
+
+        {/* the staff */}
+        {staffed ? (
+          <g>
+            {Array.from({ length: TOTAL }, (_, i) => {
+              const isLit = chosen.has(i)
+              const { x, y } = seat(i)
+              const dim = focus && !isLit
+              const asleep = bunks && !isLit
+              return (
+                <motion.g
+                  key={i}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: dim ? 0.68 : 1, y: 0 }}
+                  transition={{
+                    duration: 0.34,
+                    // Staggered by column so the wall populates as a sweep
+                    // rather than snapping on all at once.
+                    delay: staffed ? 0.2 + (i % COLS) * 0.008 : 0,
+                  }}
+                >
+                  {isLit ? (
+                    <rect x={x - 4} y={y - 4} width="27" height="27" rx="9" fill="#E79A63" opacity="0.28" />
+                  ) : null}
+                  <g stroke={INK} strokeWidth="1.7" strokeLinecap="round">
+                    <path d={`M${x + 5} ${y + 18}v7`} />
+                    <path d={`M${x + 14} ${y + 18}v7`} />
+                  </g>
+                  <rect
+                    x={x}
+                    y={y}
+                    width="19"
+                    height="18"
+                    rx="5.5"
+                    fill={dim ? '#CDC1A9' : expertColor(i)}
+                    stroke={INK}
+                    strokeWidth="1.8"
+                  />
+                  {asleep ? (
+                    <g stroke={INK} strokeWidth="1.5" strokeLinecap="round" opacity="0.6">
+                      <path d={`M${x + 3.5} ${y + 8}h4`} />
+                      <path d={`M${x + 11.5} ${y + 8}h4`} />
+                    </g>
+                  ) : (
+                    <g fill={INK} opacity={dim ? 0.5 : 1}>
+                      <circle cx={x + 5.6} cy={y + 7.6} r="1.7" />
+                      <circle cx={x + 13.4} cy={y + 7.6} r="1.7" />
+                    </g>
+                  )}
+                </motion.g>
+              )
+            })}
+          </g>
+        ) : null}
+
+        {/* a few zZ, rather than 280 of them */}
+        {bunks ? (
+          <g className="s1-hosp-zz" fill={INK} opacity="0.55">
+            {[
+              [200, 216],
+              [430, 302],
+              [700, 260],
+              [880, 388],
+              [300, 474],
+              [640, 430],
+            ].map(([x, y]) => (
+              <text key={`${x}-${y}`} x={x} y={y} className="s1-hosp-z">
+                z
+              </text>
+            ))}
+          </g>
+        ) : null}
+
+        {/* entrance */}
+        <g fill="none" stroke={INK} strokeWidth="2.8" strokeLinejoin="round">
+          <path d="M486 534h148v50H486z" fill={doorsOpen ? '#FDF0D8' : '#EDE5D8'} />
+          <motion.path
+            d="M560 534v50"
+            animate={{ opacity: doorsOpen ? 0 : 1 }}
+            transition={{ duration: 0.3 }}
+          />
+        </g>
+
+        {/*
+          The building presses down. The weight is one heavy line plus its
+          label -- small arrow glyphs under the building read as stray marks
+          rather than as load.
+        */}
+        {heavy ? (
+          <motion.g
+            stroke="#8A7F6E"
+            strokeLinecap="round"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <path d="M60 597h1000" strokeWidth="11" opacity="0.42" />
+            <path d="M60 592h1000" strokeWidth="4" opacity="0.7" />
+          </motion.g>
+        ) : (
+          <path d="M16 590h1088" stroke={INK} strokeWidth="2.4" opacity="0.35" />
+        )}
+
+        {plaque ? (
+          <g>
+            <path d="M74 604h236a4 4 0 0 1 4 4v38a4 4 0 0 1-4 4H74a4 4 0 0 1-4-4v-38a4 4 0 0 1 4-4Z" fill="#FBF8F1" stroke={INK} strokeWidth="2.4" />
+            <text x="192" y="632" textAnchor="middle" className="s1-hosp-plaque" fill={INK}>
+              {plaque}
+            </text>
+          </g>
+        ) : null}
+      </svg>
+    </motion.div>
+  )
+}
+
+/**
+ * The eight, lifted out of the building and stood together.
+ *
+ * Beat 18 exists so the viewer can hold "the team is tiny" and "the building is
+ * enormous" in one frame at beat 20. Two separate objects, one comparison.
+ */
+export function ChosenTeam({ lit, boxed }: { lit: readonly number[]; boxed: boolean }) {
+  return (
+    <div className="s1-team" data-boxed={boxed ? 'true' : undefined}>
+      <div className="s1-team-row">
+        {lit.map((index) => (
+          <div className="s1-team-one" key={index}>
+            <svg viewBox="0 0 40 52" aria-hidden="true">
+              <rect x="1" y="1" width="38" height="34" rx="11" fill="#E79A63" opacity="0.22" />
+              <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
+                <path d="M14 33v10" />
+                <path d="M26 33v10" />
+              </g>
+              <rect x="5" y="3" width="30" height="30" rx="9" fill={expertColor(index)} stroke={INK} strokeWidth="2.2" />
+              <g fill={INK}>
+                <circle cx="15" cy="16" r="2.3" />
+                <circle cx="25" cy="16" r="2.3" />
+              </g>
+            </svg>
+          </div>
+        ))}
+      </div>
+      <span className="s1-team-cap">the eight that worked</span>
+    </div>
+  )
+}
