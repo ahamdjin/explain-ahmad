@@ -1,4 +1,5 @@
 import { Arrow, Brace, Bubble, Note, Sparks } from './marks'
+import { type Role } from './palette'
 
 /**
  * Handwriting, braces and leader lines. Shared by every section.
@@ -17,7 +18,7 @@ export type Overlay = {
   sub?: string
   width?: string | number
   rotate?: number
-  tone?: 'ink' | 'orange' | 'red' | 'blue'
+  tone?: Role
   size?: 'sm' | 'md' | 'lg' | 'xl'
   side?: 'top' | 'bottom'
   bow?: number
@@ -77,7 +78,7 @@ export function Overlays({ overlays }: { overlays: Overlay[] }) {
                 at={overlay.at!}
                 width={overlay.width as string}
                 side={overlay.side}
-                tone={overlay.tone === 'orange' ? 'orange' : 'ink'}
+                tone={overlay.tone}
               />
             )
 
@@ -88,7 +89,7 @@ export function Overlays({ overlays }: { overlays: Overlay[] }) {
                 from={overlay.from!}
                 to={overlay.to!}
                 bow={overlay.bow}
-                tone={overlay.tone === 'orange' ? 'orange' : 'ink'}
+                tone={overlay.tone}
                 dashed={overlay.dashed}
                 label={overlay.label}
               />

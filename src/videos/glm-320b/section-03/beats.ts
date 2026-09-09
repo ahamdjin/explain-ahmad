@@ -34,8 +34,8 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Not letters. Numbers.',
     commands: [],
     overlays: [
-      { kind: 'arrow', from: { x: 400, y: 400 }, to: { x: 640, y: 452 }, bow: -40, tone: 'orange' },
-      H('not letters — numbers', { x: '20%', y: '54%' }, { size: 'md', rotate: -2, tone: 'orange' }),
+      { kind: 'arrow', from: { x: 400, y: 400 }, to: { x: 640, y: 452 }, bow: -40, tone: 'measure' },
+      H('not letters — numbers', { x: '20%', y: '54%' }, { size: 'md', rotate: -2, tone: 'measure' }),
     ],
   },
   {
@@ -58,7 +58,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [narrator.pose('wonder')],
     lateOverlays: {
       at: 200,
-      overlays: [{ kind: 'note', text: '?', at: { x: '50%', y: '64%' }, size: 'xl', tone: 'red', rotate: 0 }],
+      overlays: [{ kind: 'note', text: '?', at: { x: '50%', y: '64%' }, size: 'xl', tone: 'cost', rotate: 0 }],
     },
   },
   {
@@ -74,7 +74,7 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 900,
       overlays: [
-        { kind: 'note', text: '4,096 numbers', at: { x: '38%', y: '66%' }, size: 'xl', tone: 'blue', rotate: -1, width: '40%' },
+        { kind: 'note', text: '4,096 numbers', at: { x: '38%', y: '66%' }, size: 'xl', tone: 'measure', rotate: -1, width: '40%' },
         H('for one small word', { x: '38%', y: '78%' }, { size: 'md', rotate: -1, width: '30%' }),
       ],
     },
@@ -125,7 +125,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 320, commands: [rowB.show({ x: 52, y: 56 }, 0.86, '“dog”, the next time')] }],
     lateOverlays: {
       at: 900,
-      overlays: [H('identical', { x: '86%', y: '44%' }, { size: 'lg', rotate: -4, tone: 'red' })],
+      overlays: [H('identical', { x: '86%', y: '44%' }, { size: 'lg', rotate: -4, tone: 'cost' })],
     },
   },
   {

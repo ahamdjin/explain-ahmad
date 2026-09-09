@@ -25,7 +25,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       </Slot>
 
       <Slot on={scene.row.on} at={scene.row.at} scale={scene.row.scale} z={3} feel={feel}>
-        <NumberRow seed={scene.row.seed} shown={7} label={scene.row.label} tone="blue" />
+        <NumberRow seed={scene.row.seed} shown={7} label={scene.row.label} tone="measure" />
       </Slot>
 
       <Slot on={scene.counter.on} at={scene.counter.at} scale={scene.counter.scale} z={4} feel={feel}>

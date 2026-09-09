@@ -119,8 +119,8 @@
 }
 
 .pc-pose[data-on='true'] {
-  border-color: rgba(200, 123, 69, 0.7);
-  background: rgba(231, 154, 99, 0.14);
+  border-color: rgba(111, 163, 148, 0.8);
+  background: rgba(111, 163, 148, 0.16);
 }
 
 .pc-pose em {

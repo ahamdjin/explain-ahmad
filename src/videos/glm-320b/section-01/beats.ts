@@ -62,8 +62,8 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 900,
       overlays: [
-        H('\u201cefficient\u201d', { x: '76%', y: '68%' }, { size: 'lg', rotate: -6, tone: 'orange' }),
-        { kind: 'arrow', from: { x: 1520, y: 700 }, to: { x: 1330, y: 560 }, bow: -30, tone: 'orange' },
+        H('\u201cefficient\u201d', { x: '76%', y: '68%' }, { size: 'lg', rotate: -6, tone: 'claim' }),
+        { kind: 'arrow', from: { x: 1520, y: 700 }, to: { x: 1330, y: 560 }, bow: -30, tone: 'claim' },
       ],
     },
   },
@@ -106,7 +106,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [bar.darken(), narrator.pose('think')],
     lateOverlays: {
       at: 260,
-      overlays: [{ kind: 'note', text: '?', at: { x: '52%', y: '42%' }, size: 'xl', tone: 'red', rotate: 0 }],
+      overlays: [{ kind: 'note', text: '?', at: { x: '52%', y: '42%' }, size: 'xl', tone: 'cost', rotate: 0 }],
     },
   },
   {
@@ -167,8 +167,8 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Eight. Out of 288. The other 280 do nothing at all.',
     commands: [],
     overlays: [
-      H('these eight are working', { x: '35%', y: '9%' }, { size: 'md', rotate: -2, tone: 'orange' }),
-      { kind: 'brace', text: '280 doing nothing', at: { x: HOSP_LEFT, y: '69%' }, width: HOSP_W, tone: 'orange' },
+      H('these eight are working', { x: '35%', y: '9%' }, { size: 'md', rotate: -2, tone: 'pick' }),
+      { kind: 'brace', text: '280 doing nothing', at: { x: HOSP_LEFT, y: '69%' }, width: HOSP_W },
     ],
   },
   {
@@ -194,11 +194,11 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 800,
       overlays: [
-        H('different word,\ndifferent experts', { x: '4%', y: '16%' }, { size: 'md', rotate: -2, tone: 'red' }),
+        H('different word,\ndifferent experts', { x: '4%', y: '16%' }, { size: 'md', rotate: -2, tone: 'cost' }),
         // A leader line, because a label floating at the frame edge does not
         // tell you which marks it is naming.
-        H('these are empty now', { x: '20%', y: '25%' }, { size: 'sm', rotate: -2, tone: 'red' }),
-        { kind: 'arrow', from: { x: 560, y: 300 }, to: { x: 792, y: 348 }, bow: -18, tone: 'orange' },
+        H('these are empty now', { x: '20%', y: '25%' }, { size: 'sm', rotate: -2, tone: 'cost' }),
+        { kind: 'arrow', from: { x: 560, y: 300 }, to: { x: 792, y: 348 }, bow: -18, tone: 'cost' },
       ],
     },
   },
@@ -255,8 +255,8 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 320,
       overlays: [
-        H('hundreds of gigabytes', { x: '57%', y: '74%' }, { size: 'lg', rotate: -1, tone: 'red', sticky: true, width: '34%' }),
-        { kind: 'note', text: '?', at: { x: '29%', y: '32%' }, size: 'xl', tone: 'red', rotate: 0 },
+        H('hundreds of gigabytes', { x: '57%', y: '74%' }, { size: 'lg', rotate: -1, tone: 'cost', sticky: true, width: '34%' }),
+        { kind: 'note', text: '?', at: { x: '29%', y: '32%' }, size: 'xl', tone: 'cost', rotate: 0 },
       ],
     },
   },
@@ -271,7 +271,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [desk.name(), narrator.pose('point')],
     lateOverlays: {
       at: 700,
-      overlays: [{ kind: 'arrow', from: { x: 300, y: 700 }, to: { x: 380, y: 800 }, bow: -20, tone: 'orange' }],
+      overlays: [{ kind: 'arrow', from: { x: 300, y: 700 }, to: { x: 380, y: 800 }, bow: -20, tone: 'pick' }],
     },
   },
   {
@@ -309,7 +309,7 @@ export const BEATS: Beat<Patch>[] = [
       at: 600,
       overlays: [
         { kind: 'sparks', at: { x: '87%', y: '30%' } },
-        H('it fits', { x: '87%', y: '58%' }, { size: 'lg', rotate: -3, tone: 'orange', sticky: true, width: '20%' }),
+        H('it fits', { x: '87%', y: '58%' }, { size: 'lg', rotate: -3, tone: 'pick', sticky: true, width: '20%' }),
       ],
     },
   },
@@ -330,7 +330,7 @@ export const BEATS: Beat<Patch>[] = [
       at: 700,
       // Sticky: at beat 20 the two cards are the evidence the question rests
       // on, and unlabelled they read as leftover clutter.
-      overlays: [H('two words.\ntwo different eights.', { x: '17%', y: '20%' }, { size: 'md', rotate: -2, tone: 'red', sticky: true })],
+      overlays: [H('two words.\ntwo different eights.', { x: '17%', y: '20%' }, { size: 'md', rotate: -2, tone: 'cost', sticky: true })],
     },
   },
   {

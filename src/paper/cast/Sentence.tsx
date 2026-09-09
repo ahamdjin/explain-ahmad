@@ -52,7 +52,7 @@ export function Sentence({
                   key={`w-${i}`}
                   d={`M${from} ${CARD_Y}Q${(from + to) / 2} ${CARD_Y - lift} ${to} ${CARD_Y}`}
                   fill="none"
-                  stroke={PALETTE.orangeInk}
+                  stroke={PALETTE.relateInk}
                   strokeWidth={2 + weight * 14}
                   strokeLinecap="round"
                   opacity={0.28 + weight * 0.6}
@@ -73,7 +73,7 @@ export function Sentence({
               height={H}
               rx={5}
               fill={PALETTE.paperLight}
-              stroke={i === focus ? PALETTE.orangeInk : INK}
+              stroke={i === focus ? PALETTE.relateInk : INK}
               strokeWidth={i === focus ? 4.4 : 2.6}
             />
             <text
@@ -81,7 +81,7 @@ export function Sentence({
               y={CARD_Y + 57}
               textAnchor="middle"
               className="s1-sentence-w"
-              fill={i === focus ? PALETTE.orangeInk : INK}
+              fill={i === focus ? PALETTE.relateInk : INK}
             >
               {word}
             </text>

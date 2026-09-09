@@ -57,7 +57,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'How well does this expert fit these numbers.',
     commands: [],
     overlays: [
-      H('how well do you fit\nthese numbers?', { x: '5%', y: '40%' }, { size: 'md', rotate: -2, tone: 'blue' }),
+      H('how well do you fit\nthese numbers?', { x: '5%', y: '40%' }, { size: 'md', rotate: -2, tone: 'measure' }),
     ],
   },
   {
@@ -78,7 +78,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: "Eight, out of 288.",
     commands: [],
     overlays: [
-      { kind: 'brace', text: '280 not chosen', at: { x: '33%', y: '67%' }, width: '48%', tone: 'orange' },
+      { kind: 'brace', text: '280 not chosen', at: { x: '33%', y: '67%' }, width: '48%' },
     ],
   },
   {
@@ -112,7 +112,7 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 300,
       overlays: [
-        H('guess first, then pick', { x: '50%', y: '80%' }, { size: 'md', rotate: -1, tone: 'blue', width: '30%' }),
+        H('guess first, then pick', { x: '50%', y: '80%' }, { size: 'md', rotate: -1, tone: 'measure', width: '30%' }),
       ],
     },
   },
@@ -124,7 +124,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 5.5,
     vo: 'Different numbers, different scores, different team.',
     commands: [row.change(41, 'this sentence’s row')],
-    overlays: [H('nothing about the model changed', { x: '5%', y: '76%' }, { size: 'md', rotate: -2, tone: 'red' })],
+    overlays: [H('nothing about the model changed', { x: '5%', y: '76%' }, { size: 'md', rotate: -2, tone: 'cost' })],
   },
   {
     n: 11,

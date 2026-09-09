@@ -40,7 +40,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 4.5,
     vo: 'And before anything picks experts, the word gets to look around.',
     commands: [narrator.pose('wonder')],
-    overlays: [H('before anyone picks anything', { x: '6%', y: '22%' }, { size: 'md', rotate: -2, tone: 'blue' })],
+    overlays: [H('before anyone picks anything', { x: '6%', y: '22%' }, { size: 'md', rotate: -2, tone: 'measure' })],
   },
   {
     n: 4,
@@ -61,7 +61,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Some matter a lot. Most barely matter at all.',
     commands: [],
     overlays: [
-      H('thick line = matters more', { x: '62%', y: '20%' }, { size: 'md', rotate: -2, tone: 'orange' }),
+      H('thick line = matters more', { x: '62%', y: '20%' }, { size: 'md', rotate: -2, tone: 'relate' }),
     ],
   },
   {
@@ -85,7 +85,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [rowA.change(73, 'after')],
     lateOverlays: {
       at: 500,
-      overlays: [H('the row is not fixed after all', { x: '50%', y: '80%' }, { size: 'md', rotate: -1, tone: 'red', width: '40%' })],
+      overlays: [H('the row is not fixed after all', { x: '50%', y: '80%' }, { size: 'md', rotate: -1, tone: 'cost', width: '40%' })],
     },
   },
   {
@@ -124,7 +124,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 260, commands: [rowB.show({ x: 50, y: 82 }, 0.7, '“dog” in “a hot dog”')] }],
     lateOverlays: {
       at: 800,
-      overlays: [H('same word.\ndifferent numbers.', { x: '84%', y: '58%' }, { size: 'md', rotate: -3, tone: 'red' })],
+      overlays: [H('same word.\ndifferent numbers.', { x: '84%', y: '58%' }, { size: 'md', rotate: -3, tone: 'cost' })],
     },
   },
   {

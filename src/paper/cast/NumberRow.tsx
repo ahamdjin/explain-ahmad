@@ -34,13 +34,13 @@ export function NumberRow({
   /** Runs the row off the right of the frame, so 4096 has a physical size. */
   extend?: boolean
   label?: string
-  tone?: 'ink' | 'blue' | 'orange'
+  tone?: 'ink' | 'measure' | 'relate'
 }) {
   const cells = values(seed, shown)
   const W = 96
   const GAP = 6
   const width = shown * (W + GAP)
-  const stroke = tone === 'blue' ? PALETTE.blueInk : tone === 'orange' ? PALETTE.orangeInk : INK
+  const stroke = tone === 'measure' ? PALETTE.blueInk : tone === 'relate' ? PALETTE.relateInk : INK
 
   return (
     <div className="s1-numrow" data-extend={extend ? 'true' : undefined}>

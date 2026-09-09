@@ -12,6 +12,30 @@
 4. Accents come in three weights — `orangeWash` (fill), `orange` (object),
    `orangeInk` (line). Use the right weight for the job; do not tint by hand.
 
+## Colour by job — `ROLE` in `palette.ts`
+
+Orange used to be doing eight different jobs at once: selection, attention,
+counting, current position, rings, pills, sparks and general emphasis. That is
+why the whole app read orange — **a hue that means everything means nothing.**
+
+Each role now owns a hue, and a component asks for the role, never the colour.
+
+| Role | Hue | Job | Example |
+| --- | --- | --- | --- |
+| `ink` | near-black | the default. Most handwriting. | `280 doing nothing` |
+| `measure` | blue | numbers, counts, the machine's own state | the 336 counter, every number row |
+| `pick` | teal | chosen, active, running | the eight lit experts, `it fits`, the current floor |
+| `relate` | purple | connections — attention, "because of that" | the attention arcs, the focus word |
+| `cost` | red | a contradiction, or a cost | `≈ 8 GB`, the carrying bar, the vacated chairs |
+| `claim` | orange | **only** where the efficiency claim is pointed at | `"efficient"` in §1 and §8 |
+
+**Orange appears three times in the finished video.** That restraint is what
+makes it land when it does. If you find yourself reaching for it for anything
+else, the answer is a different role — or `ink`.
+
+Notes default to `ink`. Reach for a role only when the note is doing that role's
+job; a coloured note that means nothing in particular just adds noise.
+
 ## What each group is for
 
 | Group | Job |
@@ -38,7 +62,6 @@ expert is a learned feed-forward block, not a specialty, and colour-coding
 Edit `palette.ts`, run `npm run palette`, run `npm run frames:all`, and compare.
 Because components hold names rather than values, that is the whole job.
 
-**Known note:** the current cream-and-orange set reads close to Anthropic's own
-brand palette. It was arrived at from the paper-world art direction rather than
-copied, but if the video should look distinctly its own, this is the one file
-to change — `paper`, `orange` and `orangeInk` carry most of that association.
+**On the cream ground:** `paper` is still warm, which is what makes it read as
+paper rather than as a screen. If the whole thing should feel less warm, that
+one token is the lever — everything else is now cool or neutral.

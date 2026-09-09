@@ -43,6 +43,16 @@ export const PALETTE = {
 
   red: '#C86658',
 
+  /* chosen, active, on */
+  pickWash: '#D8E8E2',
+  pick: '#6FA394',
+  pickInk: '#4C7F71',
+
+  /* connections: attention, "because of that" */
+  relateWash: '#E6DCF2',
+  relate: '#A98BC9',
+  relateInk: '#7C5DA6',
+
   /* the expert family -- one hue each, all the same weight */
   green: '#8FBF9F',
   teal: '#74A297',
@@ -61,6 +71,34 @@ export const PALETTE = {
 } as const
 
 export type PaletteKey = keyof typeof PALETTE
+
+/**
+ * Colour by *job*, not by taste.
+ *
+ * Orange was doing eight different jobs -- selection, attention, counting,
+ * current position, rings, pills, sparks and general emphasis -- which is why
+ * the whole app read orange. One hue cannot carry eight meanings, and a hue
+ * that means everything means nothing.
+ *
+ * Now each role owns a hue, and orange owns exactly one: the claim under test.
+ * It appears three times in the finished video, which is what makes it land.
+ */
+export const ROLE = {
+  /** Default. Most handwriting should be this. */
+  ink: PALETTE.ink,
+  /** Numbers, counts, the machine's own state. */
+  measure: PALETTE.blueInk,
+  /** Chosen, active, running. */
+  pick: PALETTE.pickInk,
+  /** Connections -- attention, "because of that". */
+  relate: PALETTE.relateInk,
+  /** A contradiction, or a cost. Never a blocked path. */
+  cost: PALETTE.red,
+  /** ONLY where the efficiency claim itself is being pointed at. */
+  claim: PALETTE.orangeInk,
+} as const
+
+export type Role = keyof typeof ROLE
 
 /**
  * The expert population reads as one family, so every member is the same
@@ -97,4 +135,8 @@ export const CSS_VARS: [string, string][] = [
   ['teal', PALETTE.teal],
   ['yellow', PALETTE.yellow],
   ['red', PALETTE.red],
+  ['pick', PALETTE.pick],
+  ['pick-ink', PALETTE.pickInk],
+  ['relate', PALETTE.relate],
+  ['relate-ink', PALETTE.relateInk],
 ]

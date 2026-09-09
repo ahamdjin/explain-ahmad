@@ -36,15 +36,15 @@ export function Tower({ floor, label }: { floor: number; label?: string }) {
                 y={y(n) + 1}
                 width={326}
                 height={H - 2}
-                fill={dense ? PALETTE.idleDeep : n === floor ? PALETTE.orangeWash : PALETTE.paperLight}
+                fill={dense ? PALETTE.idleDeep : n === floor ? PALETTE.pickWash : PALETTE.paperLight}
                 stroke={INK}
                 strokeWidth="1.1"
                 opacity={dense ? 0.9 : 1}
               />
               {n === floor ? (
                 <motion.g initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-                  <rect x={104} y={y(n) + 3} width={26} height={H - 6} rx="3" fill={PALETTE.orange} stroke={INK} strokeWidth="1.6" />
-                  <text x={444} y={y(n) + 12} className="s1-tower-here" fill={PALETTE.orangeInk}>
+                  <rect x={104} y={y(n) + 3} width={26} height={H - 6} rx="3" fill={PALETTE.pick} stroke={INK} strokeWidth="1.6" />
+                  <text x={444} y={y(n) + 12} className="s1-tower-here" fill={PALETTE.pickInk}>
                     floor {n}
                   </text>
                 </motion.g>

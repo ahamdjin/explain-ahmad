@@ -41,7 +41,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 260, commands: [path.carry(8), word.arrive({ x: 8, y: 16 }, 0.44, 'dog')] }],
     lateOverlays: {
       at: 700,
-      overlays: [H('only the eight we need', { x: '40%', y: '30%' }, { size: 'md', rotate: -2, tone: 'blue' })],
+      overlays: [H('only the eight we need', { x: '40%', y: '30%' }, { size: 'md', rotate: -2, tone: 'measure' })],
     },
   },
   {
@@ -77,7 +77,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 240, commands: [memory.hold(0), path.carry(8)] }],
     lateOverlays: {
       at: 640,
-      overlays: [H('a different eight', { x: '40%', y: '30%' }, { size: 'md', rotate: -2, tone: 'red' })],
+      overlays: [H('a different eight', { x: '40%', y: '30%' }, { size: 'md', rotate: -2, tone: 'cost' })],
     },
   },
   {
@@ -112,7 +112,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'So how much are we actually carrying in?',
     commands: [],
     overlays: [
-      { kind: 'note', text: '336', at: { x: '51%', y: '68%' }, size: 'xl', tone: 'orange', rotate: 0, width: '22%' },
+      { kind: 'note', text: '336', at: { x: '51%', y: '68%' }, size: 'xl', tone: 'measure', rotate: 0, width: '22%' },
       H('expert visits, for one word', { x: '51%', y: '82%' }, { size: 'md', rotate: -1, width: '30%' }),
     ],
   },
@@ -134,7 +134,7 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 1000,
       overlays: [
-        { kind: 'note', text: '≈ 8 GB', at: { x: '50%', y: '62%' }, size: 'xl', tone: 'orange', rotate: -1, width: '30%' },
+        { kind: 'note', text: '≈ 8 GB', at: { x: '50%', y: '62%' }, size: 'xl', tone: 'cost', rotate: -1, width: '30%' },
         H('per word', { x: '50%', y: '74%' }, { size: 'md', rotate: -1, width: '20%' }),
       ],
     },
@@ -159,7 +159,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [],
     lateOverlays: {
       at: 200,
-      overlays: [{ kind: 'note', text: '?', at: { x: '50%', y: '68%' }, size: 'xl', tone: 'red', rotate: 0 }],
+      overlays: [{ kind: 'note', text: '?', at: { x: '50%', y: '68%' }, size: 'xl', tone: 'cost', rotate: 0 }],
     },
   },
   {
@@ -200,7 +200,7 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 700,
       overlays: [
-        { kind: 'note', text: 'still ~153 GiB', at: { x: '66%', y: '44%' }, size: 'xl', tone: 'red', rotate: -2, width: '30%' },
+        { kind: 'note', text: 'still ~153 GiB', at: { x: '66%', y: '44%' }, size: 'xl', tone: 'cost', rotate: -2, width: '30%' },
         H('not a rounding error away from fitting', { x: '66%', y: '60%' }, { size: 'md', rotate: -1, width: '32%' }),
       ],
     },

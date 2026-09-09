@@ -134,8 +134,22 @@ export function Hospital({
                     delay: staffed ? 0.2 + (i % COLS) * 0.008 : 0,
                   }}
                 >
+                  {/*
+                    A wash alone was too quiet against the paper. The ring is
+                    what makes eight of 288 findable at a glance, without
+                    reaching for a loud colour to do it.
+                  */}
                   {isLit ? (
-                    <rect x={x - 6} y={y - 6} width="31" height="31" rx="11" fill={PALETTE.orange} opacity="0.42" />
+                    <rect
+                      x={x - 6}
+                      y={y - 6}
+                      width="31"
+                      height="31"
+                      rx="11"
+                      fill={PALETTE.pickWash}
+                      stroke={PALETTE.pickInk}
+                      strokeWidth="1.8"
+                    />
                   ) : null}
                   <g stroke={INK} strokeWidth="1.7" strokeLinecap="round">
                     <path d={`M${x + 5} ${y + 18}v7`} />
@@ -294,7 +308,7 @@ export function ChosenTeam({ lit, boxed }: { lit: readonly number[]; boxed: bool
         {lit.map((index) => (
           <div className="s1-team-one" key={index}>
             <svg viewBox="0 0 40 52" aria-hidden="true">
-              <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.orange} opacity="0.22" />
+              <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.pick} opacity="0.24" />
               <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
                 <path d="M14 33v10" />
                 <path d="M26 33v10" />

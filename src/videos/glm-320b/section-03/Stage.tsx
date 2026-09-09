@@ -14,11 +14,11 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       </Slot>
 
       <Slot on={scene.row.on} at={scene.row.at} scale={scene.row.scale} z={3} feel={feel}>
-        <NumberRow seed={11} shown={scene.row.shown} extend={scene.row.extend} label={scene.row.label} tone="blue" />
+        <NumberRow seed={11} shown={scene.row.shown} extend={scene.row.extend} label={scene.row.label} tone="measure" />
       </Slot>
 
       <Slot on={scene.rowB.on} at={scene.rowB.at} scale={scene.rowB.scale} z={3} feel={feel}>
-        <NumberRow seed={11} shown={scene.rowB.shown} label={scene.rowB.label} tone="blue" />
+        <NumberRow seed={11} shown={scene.rowB.shown} label={scene.rowB.label} tone="measure" />
       </Slot>
 
       <Slot on={scene.aside.on} at={scene.aside.at} z={6} feel={feel}>

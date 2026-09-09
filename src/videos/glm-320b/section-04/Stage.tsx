@@ -21,11 +21,11 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       })}
 
       <Slot on={scene.rowA.on} at={scene.rowA.at} scale={scene.rowA.scale} z={3} feel={feel}>
-        <NumberRow seed={scene.rowA.seed} shown={9} label={scene.rowA.label} tone="blue" />
+        <NumberRow seed={scene.rowA.seed} shown={9} label={scene.rowA.label} tone="measure" />
       </Slot>
 
       <Slot on={scene.rowB.on} at={scene.rowB.at} scale={scene.rowB.scale} z={3} feel={feel}>
-        <NumberRow seed={scene.rowB.seed} shown={9} label={scene.rowB.label} tone="orange" />
+        <NumberRow seed={scene.rowB.seed} shown={9} label={scene.rowB.label} tone="measure" />
       </Slot>
 
       <Slot on={scene.narrator.on} at={scene.narrator.at} z={5} feel={feel}>

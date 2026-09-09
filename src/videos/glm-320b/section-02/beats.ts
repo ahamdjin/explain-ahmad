@@ -26,7 +26,7 @@ export const BEATS: Beat<Patch>[] = [
       hospital.show({ x: 55, y: 42 }, 0.78),
       narrator.at({ x: 8, y: 84 }, 'think', 0.5),
     ],
-    overlays: [H('know it in advance… somehow', { x: '5%', y: '20%' }, { size: 'md', rotate: -2, tone: 'blue' })],
+    overlays: [H('know it in advance… somehow', { x: '5%', y: '20%' }, { size: 'md', rotate: -2, tone: 'measure' })],
   },
   {
     n: 2,
@@ -100,7 +100,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [word.refuse({ x: 8, y: 70 })],
     lateOverlays: {
       at: 400,
-      overlays: [H('set aside', { x: '17%', y: '70%' }, { size: 'md', rotate: -6, tone: 'red' })],
+      overlays: [H('set aside', { x: '17%', y: '70%' }, { size: 'md', rotate: -6, tone: 'cost' })],
     },
   },
   {
@@ -120,7 +120,7 @@ export const BEATS: Beat<Patch>[] = [
         rotate: -1,
         backed: true,
         width: '50%',
-        tone: 'red',
+        tone: 'cost',
       },
     ],
   },
@@ -135,7 +135,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 300, commands: [row.slideIn({ x: 70, y: 52 }, 0.85, '')] }],
     lateOverlays: {
       at: 800,
-      overlays: [H('this is what it reads', { x: '70%', y: '68%' }, { size: 'md', rotate: -2, tone: 'blue', width: '34%' })],
+      overlays: [H('this is what it reads', { x: '70%', y: '68%' }, { size: 'md', rotate: -2, tone: 'measure', width: '34%' })],
     },
   },
   {

@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { type CSSProperties, type ReactNode } from 'react'
 import { INK } from './ink'
-import { PALETTE } from './palette'
+import { PALETTE, ROLE, type Role } from './palette'
 
 /**
  * Handwritten annotation. Carries the questions in Section 01, so it must be
@@ -22,7 +22,7 @@ export function Note({
   at: { x: string; y: string }
   rotate?: number
   align?: 'left' | 'center' | 'right'
-  tone?: 'ink' | 'orange' | 'red' | 'blue'
+  tone?: Role
   size?: 'sm' | 'md' | 'lg' | 'xl'
   /** Adds a paper halo so the note stays readable over a busy scene. */
   backed?: boolean
@@ -94,7 +94,7 @@ export function Brace({
   at: { x: string; y: string }
   width: string
   side?: 'top' | 'bottom'
-  tone?: 'ink' | 'orange'
+  tone?: Role
 }) {
   return (
     <motion.div
@@ -110,7 +110,7 @@ export function Brace({
         <path
           d={side === 'bottom' ? 'M2 2v9h396V2M200 11v4' : 'M2 14V5h396v9M200 5V1'}
           fill="none"
-          stroke={tone === 'orange' ? PALETTE.orangeInk : INK}
+          stroke={ROLE[tone]}
           strokeWidth="2.4"
           strokeLinecap="round"
         />
@@ -140,13 +140,13 @@ export function Arrow({
   from: { x: number; y: number }
   to: { x: number; y: number }
   bow?: number
-  tone?: 'ink' | 'orange'
+  tone?: Role
   dashed?: boolean
   label?: string
 }) {
   const midX = (from.x + to.x) / 2
   const midY = (from.y + to.y) / 2 - bow
-  const stroke = tone === 'orange' ? PALETTE.orangeInk : INK
+  const stroke = ROLE[tone]
   const id = `s1-head-${tone}`
 
   return (
@@ -178,7 +178,8 @@ export function Arrow({
 }
 
 /** Emphasis ticks. Used sparingly — excitement, or a thing that just landed. */
-export function Sparks({ at, tone = 'orange' }: { at: { x: string; y: string }; tone?: 'orange' | 'ink' }) {
+/** Something landed. Reads as success, so it takes the "chosen" hue. */
+export function Sparks({ at, tone = 'pick' }: { at: { x: string; y: string }; tone?: Role }) {
   return (
     <motion.svg
       className="s1-sparks"
@@ -189,7 +190,7 @@ export function Sparks({ at, tone = 'orange' }: { at: { x: string; y: string }; 
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
     >
-      <g stroke={tone === 'orange' ? PALETTE.orange : INK} strokeWidth="3.2" strokeLinecap="round">
+      <g stroke={ROLE[tone]} strokeWidth="3.2" strokeLinecap="round">
         <path d="M30 4v12" />
         <path d="M8 14l8 9" />
         <path d="M52 14l-8 9" />

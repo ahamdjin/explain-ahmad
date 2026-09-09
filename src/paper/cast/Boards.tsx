@@ -237,7 +237,7 @@ export function Plan() {
           </g>
           {eight.map((n, k) => (
             <g key={n} transform={`translate(${612 + (k % 4) * 68} ${168 + Math.floor(k / 4) * 68})`}>
-              <rect x="-4" y="-4" width="34" height="33" rx="10" fill={PALETTE.orange} opacity="0.26" />
+              <rect x="-4" y="-4" width="34" height="33" rx="10" fill={PALETTE.pick} opacity="0.28" />
               <rect width="26" height="25" rx="8" fill={expertColor(n)} stroke={INK} strokeWidth="2" />
               <circle cx="8.5" cy="10" r="2.1" fill={INK} />
               <circle cx="18" cy="10" r="2.1" fill={INK} />

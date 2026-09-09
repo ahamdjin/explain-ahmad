@@ -32,11 +32,14 @@ export function Specialist({
       style={{ '--size': `${size}px` } as React.CSSProperties}
     >
       <svg viewBox="0 0 40 52" aria-hidden="true">
-        {lit ? <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.orange} opacity="0.22" /> : null}
+        {lit ? <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.pick} opacity="0.24" /> : null}
         <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
           <path d="M14 33v10" />
           <path d="M26 33v10" />
         </g>
+        {/* `dimmed` also serves the always-on shared expert: neutral fill and a
+            dashed edge, because it is not one of the eight and must not read
+            as a member of the family. */}
         <rect
           x="5"
           y="3"
@@ -46,6 +49,7 @@ export function Specialist({
           fill={dimmed ? PALETTE.idle : expertColor(index)}
           stroke={INK}
           strokeWidth="2.2"
+          strokeDasharray={dimmed ? '5 4' : undefined}
         />
         {asleep ? (
           <g stroke={INK} strokeWidth="2" strokeLinecap="round" opacity="0.7">

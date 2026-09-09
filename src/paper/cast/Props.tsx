@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { INK } from '../ink'
+import { expertColor } from '../palette'
 import { PALETTE } from '../palette'
 
 /** The word entering the model. Called a word, never a token, in Section 01. */
@@ -31,7 +32,7 @@ export function FrontDesk({ named, ringed }: { named: boolean; ringed: boolean }
             rx="118"
             ry="96"
             fill="none"
-            stroke={PALETTE.orangeInk}
+            stroke={INK}
             strokeWidth="3"
             strokeDasharray="10 8"
             initial={{ opacity: 0, scale: 1.15 }}
@@ -87,7 +88,7 @@ export function SmallMachine({ filled }: { filled: boolean }) {
           <g>
             {[0, 1, 2, 3].map((i) => (
               <g key={i} transform={`translate(${74 + i * 42} 66)`}>
-                <rect width="26" height="26" rx="8" fill={PALETTE.orange} stroke={INK} strokeWidth="2" />
+                <rect width="26" height="26" rx="8" fill={expertColor(i * 2)} stroke={INK} strokeWidth="2" />
                 <circle cx="9" cy="13" r="1.9" fill={INK} />
                 <circle cx="18" cy="13" r="1.9" fill={INK} />
               </g>

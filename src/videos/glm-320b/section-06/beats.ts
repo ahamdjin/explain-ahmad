@@ -23,7 +23,7 @@ export const BEATS: Beat<Patch>[] = [
       wall.show({ x: 50, y: 42 }, 0.82, CHOSEN),
       narrator.at({ x: 7, y: 86 }, 'think', 0.44),
     ],
-    overlays: [H('no', { x: '50%', y: '80%' }, { size: 'xl', rotate: -3, tone: 'red', width: '20%' })],
+    overlays: [H('no', { x: '50%', y: '80%' }, { size: 'xl', rotate: -3, tone: 'cost', width: '20%' })],
   },
   {
     n: 2,
@@ -75,7 +75,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 4.5,
     vo: '…and its numbers are different from the floor below.',
     commands: [tower.climbTo(21), row.change(97, 'floor 21')],
-    overlays: [H('new numbers on every floor', { x: '5%', y: '80%' }, { size: 'md', rotate: -2, tone: 'blue' })],
+    overlays: [H('new numbers on every floor', { x: '5%', y: '80%' }, { size: 'md', rotate: -2, tone: 'measure' })],
   },
   {
     n: 7,
@@ -96,7 +96,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [tower.climbTo(28), row.change(151, 'floor 28')],
     lateOverlays: {
       at: 300,
-      overlays: [H('a new team, every floor', { x: '5%', y: '20%' }, { size: 'md', rotate: -2, tone: 'red' })],
+      overlays: [H('a new team, every floor', { x: '5%', y: '20%' }, { size: 'md', rotate: -2, tone: 'cost' })],
     },
   },
   {
@@ -124,7 +124,7 @@ export const BEATS: Beat<Patch>[] = [
     ],
     lateOverlays: {
       at: 800,
-      overlays: [H('not eight. this.', { x: '26%', y: '84%' }, { size: 'lg', rotate: -2, tone: 'red', width: '24%' })],
+      overlays: [H('not eight. this.', { x: '26%', y: '84%' }, { size: 'lg', rotate: -2, tone: 'cost', width: '24%' })],
     },
   },
   {

@@ -30,8 +30,8 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Three hundred and twenty billion parameters. Eighteen billion active. And the word "efficient".',
     commands: [],
     overlays: [
-      H('“efficient”', { x: '78%', y: '66%' }, { size: 'lg', rotate: -6, tone: 'orange' }),
-      { kind: 'arrow', from: { x: 1560, y: 690 }, to: { x: 1370, y: 556 }, bow: -30, tone: 'orange' },
+      H('“efficient”', { x: '78%', y: '66%' }, { size: 'lg', rotate: -6, tone: 'claim' }),
+      { kind: 'arrow', from: { x: 1560, y: 690 }, to: { x: 1370, y: 556 }, bow: -30, tone: 'claim' },
     ],
   },
   {
@@ -69,7 +69,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 260, commands: [building.show({ x: 76, y: 44 }, 0.62), building.heavy()] }],
     lateOverlays: {
       at: 900,
-      overlays: [H('and this part is not', { x: '76%', y: '76%' }, { size: 'lg', rotate: -2, tone: 'red', width: '30%' })],
+      overlays: [H('and this part is not', { x: '76%', y: '76%' }, { size: 'lg', rotate: -2, tone: 'cost', width: '30%' })],
     },
   },
   {

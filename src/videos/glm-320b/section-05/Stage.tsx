@@ -42,12 +42,12 @@ export function Stage({
       </Slot>
 
       <Slot on={scene.row.on} at={scene.row.at} scale={scene.row.scale} z={3} feel={feel}>
-        <NumberRow seed={scene.row.seed} shown={7} label={scene.row.label} tone="blue" />
+        <NumberRow seed={scene.row.seed} shown={7} label={scene.row.label} tone="measure" />
       </Slot>
 
       <Slot on={scene.shared.on} at={scene.shared.at} scale={scene.shared.scale} z={3} feel={feel}>
         <div className="s5-shared">
-          <Specialist index={0} size={62} lit />
+          <Specialist index={0} size={62} dimmed />
           <span>always on</span>
         </div>
       </Slot>

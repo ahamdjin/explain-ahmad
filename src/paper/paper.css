@@ -17,6 +17,10 @@
   --teal: #74A297;
   --yellow: #E3C45B;
   --red: #C86658;
+  --pick: #6FA394;
+  --pick-ink: #4C7F71;
+  --relate: #A98BC9;
+  --relate-ink: #7C5DA6;
   --line: rgba(43, 41, 38, 0.2);
 
   --hand: 'Patrick Hand', 'Bradley Hand', 'Noteworthy', cursive;
@@ -427,11 +431,23 @@
   border-radius: 8px;
 }
 
-.s1-note[data-tone='orange'] {
+.s1-note[data-tone='claim'] {
   color: var(--orange-ink);
 }
 
-.s1-note[data-tone='red'] {
+.s1-note[data-tone='measure'] {
+  color: var(--blue-ink);
+}
+
+.s1-note[data-tone='pick'] {
+  color: var(--pick-ink);
+}
+
+.s1-note[data-tone='relate'] {
+  color: var(--relate-ink);
+}
+
+.s1-note[data-tone='cost'] {
   color: var(--red);
 }
 
@@ -506,7 +522,7 @@
   white-space: nowrap;
 }
 
-.s1-brace[data-tone='orange'] .s1-brace-label {
+.s1-brace[data-tone='claim'] .s1-brace-label {
   color: var(--orange-ink);
 }
 
@@ -603,9 +619,7 @@
   line-height: 1.3;
 }
 
-.s1-note[data-tone='blue'] {
-  color: #4e74a8;
-}
+
 
 .s1-debug {
   position: absolute;
@@ -694,7 +708,8 @@
 .s1-counter strong {
   font: 400 clamp(28px, 5.6cqw, 108px) / 1 var(--hand);
   font-variant-numeric: tabular-nums;
-  color: var(--orange-ink);
+  /* A count is a measurement, not an alarm. */
+  color: var(--blue-ink);
 }
 
 .s1-counter span {
@@ -831,8 +846,8 @@
 }
 
 .s1-choice button[data-picked='true'] {
-  background: #f6d9c0;
-  box-shadow: inset 0 0 0 3.2px var(--orange-ink);
+  background: var(--pick);
+  box-shadow: inset 0 0 0 3.2px var(--pick-ink);
 }
 
 .s1-choice span {
@@ -862,4 +877,4 @@
   color: #4a463f;
 }
 
-.s1-verdict b { font-weight: 400; color: var(--orange-ink); }
+.s1-verdict b { font-weight: 400; color: var(--pick-ink); }
