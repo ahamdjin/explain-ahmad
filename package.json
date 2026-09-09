@@ -11,6 +11,7 @@
     "check:chain": "node scripts/check-chain.mjs",
     "smoke": "node scripts/smoke.mjs",
     "board": "node scripts/board.mjs",
+    "timing": "node scripts/timing.mjs",
     "palette": "node scripts/palette.mjs",
     "frames:all": "for s in 01 02 03 04 05 06 07 08; do node scripts/capture-frames.mjs --section=section-$s; done",
     "frames:s1": "node scripts/capture-frames.mjs --section=section-01",
