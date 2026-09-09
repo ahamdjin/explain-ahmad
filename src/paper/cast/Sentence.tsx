@@ -73,7 +73,7 @@ export function Sentence({
               height={H}
               rx={5}
               fill={PALETTE.paperLight}
-              stroke={i === focus ? PALETTE.relateInk : INK}
+              stroke={i === focus ? PALETTE.tealInk : INK}
               strokeWidth={i === focus ? 4.4 : 2.6}
             />
             <text
@@ -81,7 +81,7 @@ export function Sentence({
               y={CARD_Y + 57}
               textAnchor="middle"
               className="s1-sentence-w"
-              fill={i === focus ? PALETTE.relateInk : INK}
+              fill={i === focus ? PALETTE.tealInk : INK}
             >
               {word}
             </text>

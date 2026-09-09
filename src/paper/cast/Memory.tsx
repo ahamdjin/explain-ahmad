@@ -216,7 +216,7 @@ export function CostBars({ show, ratio }: { show: 'fetch' | 'both'; ratio: strin
             the actual work
           </text>
           <rect x="8" y="186" width={FULL} height="58" rx="4" fill="none" stroke={INK} strokeWidth="2" strokeDasharray="6 7" opacity="0.35" />
-          <rect x="8" y="186" width="20" height="58" rx="3" fill={PALETTE.pick} stroke={INK} strokeWidth="3" />
+          <rect x="8" y="186" width="20" height="58" rx="3" fill={PALETTE.blue} stroke={INK} strokeWidth="3" />
           <text x="54" y="226" className="s1-bar-fig" fill={INK}>
             milliseconds
           </text>

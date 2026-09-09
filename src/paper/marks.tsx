@@ -178,8 +178,8 @@ export function Arrow({
 }
 
 /** Emphasis ticks. Used sparingly — excitement, or a thing that just landed. */
-/** Something landed. Reads as success, so it takes the "chosen" hue. */
-export function Sparks({ at, tone = 'pick' }: { at: { x: string; y: string }; tone?: Role }) {
+/** Something landed. Emphasis, not a coded thing, so it stays ink. */
+export function Sparks({ at, tone = 'ink' }: { at: { x: string; y: string }; tone?: Role }) {
   return (
     <motion.svg
       className="s1-sparks"

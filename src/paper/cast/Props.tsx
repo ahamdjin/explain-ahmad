@@ -7,8 +7,19 @@ import { PALETTE } from '../palette'
 export function WordCard({ label }: { label: string }) {
   return (
     <div className="s1-word">
+      {/* Teal is the word's colour and nothing else's, so a viewer can track
+          it from section 1 to section 7 without being told to. */}
       <svg viewBox="0 0 240 96" filter="url(#s1-ink-soft)" aria-hidden="true">
-        <rect x="4" y="6" width="232" height="82" rx="5" fill={PALETTE.paperLight} stroke={INK} strokeWidth="2.8" />
+        <rect
+          x="4"
+          y="6"
+          width="232"
+          height="82"
+          rx="5"
+          fill={PALETTE.paperLight}
+          stroke={PALETTE.tealInk}
+          strokeWidth="3.2"
+        />
       </svg>
       <span className="s1-word-text">&ldquo;{label}&rdquo;</span>
     </div>

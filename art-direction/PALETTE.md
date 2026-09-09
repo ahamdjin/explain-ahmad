@@ -12,31 +12,53 @@
 4. Accents come in three weights — `orangeWash` (fill), `orange` (object),
    `orangeInk` (line). Use the right weight for the job; do not tint by hand.
 
-## Colour by job — `ROLE` in `palette.ts`
+## One thing, one colour
 
-Orange used to be doing eight different jobs at once: selection, attention,
-counting, current position, rings, pills, sparks and general emphasis. That is
-why the whole app read orange — **a hue that means everything means nothing.**
+The colour of a thing is part of what identifies it, so a viewer can track it
+across eight sections without being told. **That only works if each hue means
+exactly one thing.** The moment a hue picks up a second job it stops
+identifying anything, and the whole piece reads as tinted.
 
-Each role now owns a hue, and a component asks for the role, never the colour.
+This has been got wrong twice. First orange was doing eight jobs — selection,
+attention, counting, position, rings, pills, sparks, emphasis. Then teal
+inherited five of them. Both times the symptom was identical: the app looked
+like one colour.
 
-| Role | Hue | Job | Example |
-| --- | --- | --- | --- |
-| `ink` | near-black | the default. Most handwriting. | `280 doing nothing` |
-| `measure` | blue | numbers, counts, the machine's own state | the 336 counter, every number row |
-| `pick` | teal | chosen, active, running | the eight lit experts, `it fits`, the current floor |
-| `relate` | purple | connections — attention, "because of that" | the attention arcs, the focus word |
-| `cost` | red | a contradiction, or a cost | `≈ 8 GB`, the carrying bar, the vacated chairs |
-| `claim` | orange | **only** where the efficiency claim is pointed at | `"efficient"` in §1 and §8 |
+| Hue | Means | Where |
+| --- | --- | --- |
+| **ink** | structure, and every note not naming a coded thing | buildings, braces, most handwriting |
+| **teal** | **the word we follow** | its card, the focus word in a sentence, where it is on the tower |
+| **blue** | **anything measured** — numbers, counts, durations | number rows, the 336 counter, the work bar, the scoring sweep |
+| **purple** | **connections** — attention, "because of that" | the attention arcs, leader lines between things |
+| **red** | **a cost, or a contradiction** | the carrying bar, `≈ 8 GB`, vacated chairs, `same word / different numbers` |
+| **orange** | **the efficiency claim, only** | `"efficient"` in §1 and §8. Three uses in 8:04. |
+| beige family | present but not participating | the 280, storage |
+| the 8 expert hues | identity, and nothing else | one hue per expert, all one weight |
 
-**Orange appears three times in the finished video.** That restraint is what
-makes it land when it does. If you find yourself reaching for it for anything
-else, the answer is a different role — or `ink`.
+### Two deliberate absences
 
-Notes default to `ink`. Reach for a role only when the note is doing that role's
-job; a coloured note that means nothing in particular just adds noise.
+**Chosen has no hue.** Selection is carried by *having colour at all* — a
+chosen expert keeps its family colour and gains an ink ring, against neighbours
+that are flat beige. Contrast does it better than a sixth accent would, and it
+leaves teal free for the word, which needs it far more.
 
-## What each group is for
+**Handwriting is ink by default.** A note takes a role's colour only when it
+names that role's thing. Colour in a frame should come from the objects, not
+from the labels — coloured labels everywhere is what made it noisy.
+
+## The paper
+
+A flat fill reads as a beige screen. What makes paper read as paper is three
+things, all in `.s1-frame::after`, none of them animated:
+
+1. **fibre** — fine directionless grain
+2. **tooth** — a coarser soft mottle underneath it
+3. **uneven light** — warm from the top left, cooling into the far corner
+
+Plus an inset shadow on `::before`, because a sheet has edges. If the world
+ever starts to feel digital, these are the knobs — not the hues.
+
+## What each group is for## What each group is for
 
 | Group | Job |
 | --- | --- |

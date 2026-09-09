@@ -43,10 +43,10 @@ export const PALETTE = {
 
   red: '#C86658',
 
-  /* chosen, active, on */
-  pickWash: '#D8E8E2',
-  pick: '#6FA394',
-  pickInk: '#4C7F71',
+  /* the word we follow */
+  tealWash: '#D6E7E1',
+  teal2: '#6FA394',
+  tealInk: '#43786A',
 
   /* connections: attention, "because of that" */
   relateWash: '#E6DCF2',
@@ -73,28 +73,39 @@ export const PALETTE = {
 export type PaletteKey = keyof typeof PALETTE
 
 /**
- * Colour by *job*, not by taste.
+ * One thing, one colour.
  *
- * Orange was doing eight different jobs -- selection, attention, counting,
- * current position, rings, pills, sparks and general emphasis -- which is why
- * the whole app read orange. One hue cannot carry eight meanings, and a hue
- * that means everything means nothing.
+ * The colour of a thing is part of what identifies it, so a viewer can track
+ * it across eight sections without being told. That only works if each hue
+ * means exactly one thing -- the moment a hue picks up a second job it stops
+ * identifying anything, and the whole piece reads as tinted.
  *
- * Now each role owns a hue, and orange owns exactly one: the claim under test.
- * It appears three times in the finished video, which is what makes it land.
+ * This has been got wrong twice. First orange was doing eight jobs. Then teal
+ * inherited five of them. Both times the symptom was the same: the app looked
+ * like one colour.
+ *
+ * Two deliberate absences:
+ *
+ * - **Chosen has no hue.** Selection is already carried by *having colour at
+ *   all* -- a chosen expert keeps its family colour and gains an ink ring,
+ *   against neighbours that are flat beige. Contrast does it better than a
+ *   sixth accent would, and it leaves teal free for the word.
+ * - **Handwriting is ink by default.** A note takes a role's colour only when
+ *   it names that role's thing. Colour in a frame should come from the objects,
+ *   not from the labels; coloured labels everywhere is what made it noisy.
  */
 export const ROLE = {
-  /** Default. Most handwriting should be this. */
+  /** Structure, buildings, and every note that is not naming a coded thing. */
   ink: PALETTE.ink,
-  /** Numbers, counts, the machine's own state. */
+  /** The word we follow, from §1 to §7. Its card, its label, where it is. */
+  word: PALETTE.tealInk,
+  /** Its numbers, and anything counted: rows, counters, totals, durations. */
   measure: PALETTE.blueInk,
-  /** Chosen, active, running. */
-  pick: PALETTE.pickInk,
-  /** Connections -- attention, "because of that". */
+  /** Connections between things -- attention, "because of that". */
   relate: PALETTE.relateInk,
-  /** A contradiction, or a cost. Never a blocked path. */
+  /** A cost, or a contradiction. Never a blocked path. */
   cost: PALETTE.red,
-  /** ONLY where the efficiency claim itself is being pointed at. */
+  /** ONLY where the efficiency claim itself is pointed at. Three uses. */
   claim: PALETTE.orangeInk,
 } as const
 
@@ -135,8 +146,8 @@ export const CSS_VARS: [string, string][] = [
   ['teal', PALETTE.teal],
   ['yellow', PALETTE.yellow],
   ['red', PALETTE.red],
-  ['pick', PALETTE.pick],
-  ['pick-ink', PALETTE.pickInk],
+  ['teal-2', PALETTE.teal2],
+  ['teal-ink', PALETTE.tealInk],
   ['relate', PALETTE.relate],
   ['relate-ink', PALETTE.relateInk],
 ]

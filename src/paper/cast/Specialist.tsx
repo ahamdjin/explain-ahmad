@@ -32,7 +32,7 @@ export function Specialist({
       style={{ '--size': `${size}px` } as React.CSSProperties}
     >
       <svg viewBox="0 0 40 52" aria-hidden="true">
-        {lit ? <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.pick} opacity="0.24" /> : null}
+        {lit ? <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.paperWhite} stroke={INK} strokeWidth="1.6" /> : null}
         <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
           <path d="M14 33v10" />
           <path d="M26 33v10" />

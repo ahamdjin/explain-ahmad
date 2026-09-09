@@ -167,7 +167,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Eight. Out of 288. The other 280 do nothing at all.',
     commands: [],
     overlays: [
-      H('these eight are working', { x: '35%', y: '9%' }, { size: 'md', rotate: -2, tone: 'pick' }),
+      H('these eight are working', { x: '35%', y: '9%' }, { size: 'md', rotate: -2 }),
       { kind: 'brace', text: '280 doing nothing', at: { x: HOSP_LEFT, y: '69%' }, width: HOSP_W },
     ],
   },
@@ -271,7 +271,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [desk.name(), narrator.pose('point')],
     lateOverlays: {
       at: 700,
-      overlays: [{ kind: 'arrow', from: { x: 300, y: 700 }, to: { x: 380, y: 800 }, bow: -20, tone: 'pick' }],
+      overlays: [{ kind: 'arrow', from: { x: 300, y: 700 }, to: { x: 380, y: 800 }, bow: -20, tone: 'relate' }],
     },
   },
   {
@@ -309,7 +309,7 @@ export const BEATS: Beat<Patch>[] = [
       at: 600,
       overlays: [
         { kind: 'sparks', at: { x: '87%', y: '30%' } },
-        H('it fits', { x: '87%', y: '58%' }, { size: 'lg', rotate: -3, tone: 'pick', sticky: true, width: '20%' }),
+        H('it fits', { x: '87%', y: '58%' }, { size: 'lg', rotate: -3, sticky: true, width: '20%' }),
       ],
     },
   },

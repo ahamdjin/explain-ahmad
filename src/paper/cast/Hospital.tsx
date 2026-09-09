@@ -146,8 +146,8 @@ export function Hospital({
                       width="31"
                       height="31"
                       rx="11"
-                      fill={PALETTE.pickWash}
-                      stroke={PALETTE.pickInk}
+                      fill={PALETTE.paperWhite}
+                      stroke={INK}
                       strokeWidth="1.8"
                     />
                   ) : null}
@@ -308,7 +308,7 @@ export function ChosenTeam({ lit, boxed }: { lit: readonly number[]; boxed: bool
         {lit.map((index) => (
           <div className="s1-team-one" key={index}>
             <svg viewBox="0 0 40 52" aria-hidden="true">
-              <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.pick} opacity="0.24" />
+              <rect x="1" y="1" width="38" height="34" rx="11" fill={PALETTE.paperWhite} stroke={INK} strokeWidth="1.6" />
               <g stroke={INK} strokeWidth="2.1" strokeLinecap="round">
                 <path d="M14 33v10" />
                 <path d="M26 33v10" />
