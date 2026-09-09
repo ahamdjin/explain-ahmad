@@ -1,156 +1,533 @@
-# Section 01 — Storyboard Frames 1–14
+# Section 01 — Locked Storyboard v2
 
-Status: **APPROVED visual storyboard for Section 01.** This is the frame-level source of truth.
+Status: **LOCKED STORYBOARD STRUCTURE.** This replaces the old 14-frame storyboard for Section 01.
 
-Reference sheets (authoritative for style, character design and layout):
+This file is the visual contract for the intro. Implementation is not allowed to improvise away from it.
 
-- `frames-01-04.png` — Why 320B but only 18B active?
-- `frames-05-08.png` — From 18B active to a team of experts
-- `frames-09-12.png` — From experts to the memory question
-- `frames-13-14.png` — The unresolved mystery and the move inside
+## Teaching goal
 
-Narration source: `../../video-script/01-opening-narration.md`
-Art direction: `../../art-direction/GLM_PAPER_WORLD.md`
-Implementation: `src/videos/glm-320b/section-01/` — route `/section-01`, `?frame=N` to jump
-Review: `npm run frames:s1` writes `frames/section-01/index.html`
+By the end of Section 01, the viewer should understand four things:
 
----
+1. GLM-5.3-Flash is huge: `320B total parameters`.
+2. For one token, only about `18B parameters are active`.
+3. MoE routing means only a small expert path works at a time.
+4. That creates the obvious question: **why not keep the unused experts in storage and load only the selected ones?**
 
-## Cast
+The section must **create that headache, not answer it**.
 
-Established by these sheets and reused for the rest of the video.
+## Audience rule
 
-| Actor | Design | Role |
-| --- | --- | --- |
-| **Narrator** | Simple white round head, two dot eyes, thin stick body/arms, no color | The viewer's proxy. Asks every question. Never explains. |
-| **Experts** | Rounded paper square, two dot eyes, small smile, pastel fill (orange/blue/green/purple/yellow/pink/teal), tiny feet | Learned feed-forward blocks. Identical construction, color varies. |
-| **Router** | Boxy robot, antenna with a bead, screen face, two side arms, body labelled `Router` | Reads the current representation, selects experts. Dispatcher, not a boss. |
-| **Shared expert** | Same as expert but grey/neutral with a dashed outline | Always participates. |
-| **The word** | Kraft-paper card, slight rotation, reading `"scared"` | The persistent actor for all of Section 01. |
-| **Weight shelf** | Drawn shelving unit, experts sitting on shelves, `···` to imply more | Stored checkpoint. Labelled in GB. |
-| **RAM tray** | Small drawn box/tray labelled `RAM / VRAM (Working Memory)` | Active working space. Physically much smaller than the shelf. |
-| **Blocker** | Yellow/black hazard pole + red warning triangle | The unexplained bottleneck. Appears once, frame 13. |
+Target viewer: roughly 15+.
 
-## Persistent objects
+Visual standard: a five-year-old should be able to follow the physical story with the sound off.
 
-`"scared"` card, the parameter grid, the expert population, the Router, the weight shelf, and the RAM tray are the same objects throughout. They reconfigure; they do not get replaced.
+At any moment, the viewer should be holding at most **3–4 ideas**. If a beat introduces more, split it.
 
----
+## Visual-language rule
 
-## Frame 1 — Meet the model
+The narration uses the correct technical nouns. The visuals use familiar physical metaphors to explain what those nouns do.
 
-- **VO:** "So, GLM-5.3-Flash has 320 billion parameters and only 18 billion are active."
-- **On screen:** Model info card, taped at the corner, slightly rotated. Rows: Architecture / Total Parameters / Active Parameters / Experts / Layers / Purpose. `320 Billion` highlighted orange, `18 Billion` highlighted blue. Two callout notes point at them: `320B total parameters`, `18B active parameters`. Narrator stands left with a raised hand: "This is the model we'll look at!"
-- **Goal:** Introduce the real model and the two numbers.
-- **Note:** This is the §14 information-screen exception — no grid, no router, no experts yet.
+- parameters / learned capacity → giant library / books
+- token → task card
+- router → dispatcher / manager-like character, still labelled `ROUTER`
+- experts → workers / teachers with neutral identities
+- storage → home / warehouse
+- RAM / VRAM / fast-access memory → office / working space
 
-## Frame 2 — A word comes in
+The metaphor is visual grammar, not literal technical equivalence.
 
-- **VO:** "For any one word, only about 18 billion parameters are active."
-- **On screen:** Header `MODEL PARAMETERS (320,000,000,000)`. Large grid of grey rounded squares fills the frame. The `"scared"` card enters from the left with an arrow. A **contiguous** orange block lights up inside the grid, braced below: `~18B ACTIVE`. Narrator, lower left: "A word goes in…"
-- **Goal:** Show scale — most of the model is not active for one word.
+## Production rule
 
-## Frame 3 — A tiny part is used
+Before animation, every beat must work as a frozen frame.
 
-- **VO:** "Which basically means the model owns 320 billion parameters… but only uses a small fraction of them to process that word."
-- **On screen:** Same grid, now braced across the top: `320B TOTAL PARAMETERS`. The orange block keeps its lower brace, now reading `~18B ACTIVE (about 5.6%)`. Narrator: "Just a small part?"
-- **Goal:** Make the contrast obvious. Both braces visible in one frame.
+The coded frame should read like the approved storyboard even with motion disabled.
 
-## Frame 4 — The obvious question
-
-- **VO:** "Okay. So why have the other 300 billion?"
-- **On screen:** Same grid and same orange block. Roughly seven of the **grey** squares grow narrator-style faces and speak: "What about us?", "Why are we here?", "Do we ever get to work?", "Are we just extra?" Small motion ticks beside them.
-- **Goal:** Create the question that leads into Mixture of Experts.
-- **Note:** The reaction comes from the inactive parameters themselves — not from added text.
-
-## Frame 5 — The inactive part isn't useless
-
-- **VO:** "The rest of the parameters aren't wasted. They are organized into 288 experts. They stay inactive until they are needed."
-- **On screen:** Left: the braced grid, `320B TOTAL PARAMETERS` above, orange block braced `~18B ACTIVE`. Right: the grey majority has become a loose crowd of pastel expert characters on a soft panel, braced `288 EXPERTS (inactive until needed)`. Annotation: "They are Experts!" Narrator, far left: "So where do the other 300B go?"
-- **Goal:** Establish Mixture of Experts by transforming the existing mass — the boxes become the experts, they are not spawned from nowhere.
-
-## Frame 6 — Meet the router
-
-- **VO:** "A router analyzes the word and quickly selects the most relevant experts."
-- **On screen:** `"scared"` card → arrow → the Router robot, centered. Speech bubble: "The router is a smart dispatcher. It looks at the word and picks the best experts." Five dashed arrows fan right to five labelled experts. Annotation top-right: "Experts with relevant skills get selected." Narrator, left: "How does it choose the right experts?"
-- **Goal:** Introduce the router as the decision maker.
-- **⚠ Accuracy conflict — see Accuracy Notes below.**
-
-## Frame 7 — One word, a small team
-
-- **VO:** "For the word 'scared', the router selects 8 specialized experts plus 1 shared expert that's always active."
-- **On screen:** `"scared"` → Router (left). Right: a rounded orange-outlined panel headed `8 EXPERTS + 1 SHARED`, holding 9 expert characters in two rows — 8 pastel + 1 grey dashed `Shared Expert (always on)`. Annotation: "The router picks a small team for this word."
-- **Goal:** Only a small team is active, not the whole model.
-- **⚠ Accuracy conflict — see Accuracy Notes below.**
-
-## Frame 8 — Different words, different experts
-
-- **VO:** "Different words need different knowledge, so the router selects different experts every time."
-- **On screen:** Split frame, thin divider. Left: `"scared"` card, down arrow, a row of 5 experts, caption `Team for "scared"`. Right: `"calculate"` card, down arrow, a **different** row of experts, caption `Team for "calculate"`. Annotation between: "A different word activates a different team." Narrator, right, arms up: "Same model. Different experts. That's the power of MoE!"
-- **Goal:** Routing is per token.
-- **Note:** The expert *field* must stay in the same place across both halves — only the selection changes.
-
-## Frame 9 — A new question
-
-- **VO:** "But then I had another question."
-- **On screen:** Left: `"scared"` → Router, with 9 selected experts in a row beneath, braced `8 EXPERTS + 1 SHARED (active now)`. A vertical divider. Right: the weight shelf, four shelves of experts, `···` continuing, labelled `MODEL WEIGHTS (STORED)` and `Hundreds of GB`. Narrator, center, hand to chin, thought dots: "If only a few are working…"
-- **Goal:** The viewer begins wondering about memory.
-
-## Frame 10 — The memory problem
-
-- **VO:** "If only a few experts are being used, why deal with hundreds of gigabytes of weights?"
-- **On screen:** Same left group. Center: a new small box, `RAM / VRAM (Working Memory)`, holding the 9 active experts, labelled `~ a few GB`. Right: the shelf, now `MODEL WEIGHTS (ON DISK / STORAGE)`, `Hundreds of GB (e.g. 200–400GB)`. Annotation with a leader line: "…but a huge amount of weights!"
-- **Goal:** Make the contradiction visual — tiny active compute beside massive stored weights.
-- **Note:** The size difference between RAM tray and shelf must read without labels.
-
-## Frame 11 — Keep only the small part?
-
-- **VO:** "Why can't I keep just the small part I need?"
-- **On screen:** Router with its 9-expert row, braced `8 EXPERTS + 1 SHARED (the ones we need)`. A curved arrow labelled "Load into memory?" sweeps right into the RAM box, now holding 4 experts, `~ a few GB (only what we need)`. Far right: the shelf, `REST OF MODEL (STILL STORED)`, `Hundreds of GB (still there)`. Narrator, hands clasped hopefully, sparkle marks: "That would be so much simpler!"
-- **Goal:** Make the obvious hypothesis visible — as a hypothesis, not an answer.
-
-## Frame 12 — The router already knows
-
-- **VO:** "The router already knows which experts this word should go to."
-- **On screen:** `"scared"` → Router (left), gesturing, with emphasis ticks and a speech bubble: "I already know which experts to use!" A curved arrow runs right to a dashed orange selection box around 4 experts pulled from the shelf, annotated "Pick these experts from the full model…". Four orange dashed arrows drop from those experts into the RAM box below, labelled "Load into memory". Narrator, far right, sparkles: "Makes sense!"
-- **Goal:** Set up the idea of loading only the selected experts.
-
-## Frame 13 — Something is stopping this
-
-- **VO:** "Could this make the model fit on a smaller machine? And if not, what is stopping us?"
-- **On screen:** Left-to-right mechanism in one line: `Stored experts (on disk / CPU)` panel of 9 experts → arrow → Router ("Pick the right experts for this word") → arrow → dashed orange `Selected experts (load to VRAM)` column → **red ✗** → hazard pole with red warning triangle → a small sad grey machine, "A smaller machine?". Annotation top-left with a curved arrow: "We only load the experts we need!" Annotation top-right: "But something is blocking it…" Narrator, lower left, hand to chin: "So… why doesn't this just work?"
-- **Goal:** Crystallize the mystery **without** answering it.
-- **Note:** This is the hook the whole video hangs on. The question must be legible on screen, and the blockage must be the highest-contrast object in the frame.
-
-## Frame 14 — Follow one word inside
-
-- **VO:** "To answer that, staring at the final architecture isn't enough. Let's see what happens inside the model."
-- **On screen:** Left: a stack of paper sheets, top one headed `Full model architecture` — a dense grey block diagram with a side list (Layers, Attention, MoE routing, Experts, KV cache, Training, …) and "(and much more…)". The narrator physically pushes the sheet aside: "That's a lot for now…" / "Let's look inside instead." Right: a lit stone archway with steps, `Inside the model` above it, and the `"scared"` card moving into it with an arrow.
-- **Goal:** Transition cleanly into Section 02.
+No generic slide replacement. Objects persist and transform when the story says they are the same thing.
 
 ---
 
-## Accuracy Notes — must be resolved before frames 6–8 are built
+# Scene A — Make 320B → 18B physically understandable
 
-Frames 6, 7 and 8 label experts with human-readable specialties: *Emotions & Human Behavior, Common Sense, World Knowledge, Language & Writing, Safety & Alignment, Reasoning, Social Context, Commonsense, Instructions, Creativity.*
+## Beat 1 — Meet the model
 
-This contradicts two existing sources of truth:
+### On screen
 
-- `art-direction/GLM_PAPER_WORLD.md` §7: "the explanation must state that an expert is a learned feed-forward neural-network block, not a human-labelled specialty such as 'math expert'."
-- `storyboard/SECTION_MAP.md` Section 07: same requirement.
+A clean paper model-information sheet, closely matching the original approved first-frame composition.
 
-Real MoE experts are not interpretable specialists. Nothing in GLM-5.3-Flash assigns "Safety & Alignment" to expert 47. Shipping these labels as fact is the single most likely thing in this video to be picked apart in the comments.
+Main title: `GLM-5.3-Flash`
 
-Two further wording issues in frame 6:
+Rows can include:
 
-- "It looks at the **word**" — the router reads the current hidden representation, which has already been changed by attention. Not the word.
-- "picks the **best** experts" — implies a quality judgement. The router scores and takes top-k.
+- Architecture — Mixture of Experts
+- Total parameters — **320B**
+- Active parameters — **18B**
+- Experts — 288 routed per sparse layer + 1 shared
+- Layers — 45
 
-**Recommended fix**, keeping the visual composition exactly as drawn:
+Only `320B` and `18B` get strong visual emphasis. The other rows are supporting texture, not new teaching obligations.
 
-- Give experts neutral identities — `Expert 12`, `Expert 47`, a badge or symbol — instead of skill names.
-- If a "different experts for different words" idea is still needed in frame 8, show *different sets of numbered experts*, which is both true and just as readable.
-- Reword frame 6's bubble to: "I read what this word has become, score every expert, and take the top 8."
-- Optionally add one quiet margin note when experts first appear: "An expert is a learned network block — not a labelled specialist."
+Narrator stands beside the sheet.
 
-The composition, characters, staging and beat structure of frames 6–8 are approved as drawn. Only the labels and that one bubble need changing.
+### Change
+
+Nothing moves yet except a tiny entrance/settle. Give the viewer time to register the two numbers.
+
+### Narration anchor
+
+> “GLM-5.3-Flash has 320 billion parameters, but only about 18 billion are active for one token.”
+
+### Viewer owns
+
+`320B total` vs `18B active`.
+
+---
+
+## Beat 2 — Turn the number into a physical world
+
+### On screen
+
+The `320B` row expands out of the information sheet into a huge library/building of shelves.
+
+A small plaque remains: `320B TOTAL PARAMETERS`.
+
+Books represent learned capacity. Do **not** imply one book equals one parameter.
+
+### Change
+
+Model sheet recedes or folds into the library title plaque. The library becomes the dominant world.
+
+### Narration anchor
+
+> “To make that scale easier to see, imagine the model’s learned capacity as a giant library.”
+
+### Viewer owns
+
+The total model is enormous.
+
+---
+
+## Beat 3 — Make 320B feel enormous
+
+### On screen
+
+Camera pulls back.
+
+Shelves continue far beyond the first visible wall. Repetition, depth and scale do the teaching. Narrator becomes physically tiny beside it.
+
+No new labels except `320B TOTAL`.
+
+### Change
+
+Only scale changes. No new concept.
+
+### Narration anchor
+
+> “And 320 billion is a very, very large library.”
+
+### Viewer owns
+
+The size emotionally, not just numerically.
+
+---
+
+## Beat 4 — One token arrives
+
+### On screen
+
+A paper task card enters carrying the token `"scared"`.
+
+As it arrives, only a small region of the library wakes up:
+
+- books open
+- tabs pop out
+- small movement begins
+- orange/blue emphasis appears
+
+Everything else remains visually quiet.
+
+Label the lit region: `~18B ACTIVE`.
+
+### Change
+
+One task enters → only a small subset wakes.
+
+### Narration anchor
+
+> “For this token, only about 18 billion parameters actually participate.”
+
+### Viewer owns
+
+One token uses only a small part of the whole model.
+
+---
+
+## Beat 5 — Define “active” visually
+
+### On screen
+
+Hold the exact same library composition.
+
+The active books are visibly doing something: open pages, movement, small working marks.
+
+The rest are closed, still and dimmed.
+
+Small handwritten labels are enough:
+
+- `working now`
+- `not used for this token`
+
+No new architecture.
+
+### Change
+
+The distinction becomes behavioral rather than merely color-coded.
+
+### Narration anchor
+
+> “Active just means these are the parameters participating in this forward pass. The rest still exist; they just aren’t being used for this token.”
+
+### Viewer owns
+
+`active` means participating now, not permanently belonging to a smaller model.
+
+---
+
+# Scene B — Show the expert mechanism without rushing it
+
+## Beat 6 — Bridge from library to experts
+
+### On screen
+
+The library does **not** instantly disappear into characters.
+
+First, shelf sections visibly group into repeated compartments / departments.
+
+A magnified paper window or callout says:
+
+`ZOOM INTO ONE SPARSE MoE LAYER`
+
+Inside that representative layer, the grouped capacity begins turning into expert stations.
+
+### Change
+
+Books → grouped capacity → expert stations.
+
+This beat exists specifically to avoid the old confusing jump from “inactive parameters” directly to “288 experts.”
+
+### Narration anchor
+
+> “GLM is a Mixture-of-Experts model. In its sparse MoE layers, much of the feed-forward capacity is organized into many expert networks.”
+
+### Viewer owns
+
+The expert system is how the model organizes selectable compute.
+
+---
+
+## Beat 7 — Meet the experts
+
+### On screen
+
+The representative MoE layer is now an expert workplace.
+
+Show a dense crowd of workers/teachers with neutral identities.
+
+Visible label:
+
+`288 ROUTED EXPERTS + 1 SHARED EXPERT`
+
+The shared expert is visually distinct and always at a desk.
+
+Do not give experts semantic job titles such as Math, Coding, Emotions, Safety, etc.
+
+### Change
+
+The grouped stations finish becoming the expert population.
+
+### Narration anchor
+
+> “In one sparse layer, there are 288 routed experts, plus a shared expert.”
+
+### Viewer owns
+
+There are many expert choices available.
+
+---
+
+## Beat 8 — The router receives the task
+
+### On screen
+
+The `"scared"` task card moves to a dispatcher-like character at a desk.
+
+The desk / badge clearly says `ROUTER`.
+
+The character can look like a manager/principal/dispatcher visually, but we never rename the technical mechanism.
+
+The router scans/scores the expert field.
+
+### Change
+
+Task → router → score sweep across experts.
+
+Do not insert a separate “who decides?” beat. The goal here is explanation, not another mystery.
+
+### Narration anchor
+
+> “The router scores the experts for the token’s current representation.”
+
+### Viewer owns
+
+The router chooses which expert paths to use.
+
+---
+
+## Beat 9 — Only a small team works
+
+### On screen
+
+Exactly 8 routed experts light up and move to working desks.
+
+The shared expert is already present and joins the work.
+
+The rest of the expert population stays visible but quiet.
+
+Selected workers should visibly work:
+
+- papers moving
+- pencils / tools
+- small head/hand motion
+- task card being passed through
+
+Label:
+
+`TOP 8 ROUTED + 1 SHARED`
+
+Quiet margin note:
+
+`expert selection is one part of the model's active path`
+
+### Change
+
+Many available → small selected working team.
+
+### Narration anchor
+
+> “The router activates the top eight routed experts, while the shared expert also participates.”
+
+### Viewer owns
+
+Most expert capacity exists, but only a few experts work on this token in this sparse layer.
+
+---
+
+## Beat 10 — Make the 18B idea click
+
+### On screen
+
+Pull back slightly so the relationship is obvious:
+
+- huge available expert population
+- tiny working team
+- task moving through the selected team
+
+Bring back the earlier visual callback:
+
+`~18B ACTIVE ACROSS THE MODEL`
+
+Do **not** visually write `8 experts = 18B`.
+
+### Change
+
+The local expert selection connects back to the global `320B vs 18B` fact from Beat 1.
+
+### Narration anchor
+
+> “This sparse routing is a big reason the model can have enormous total capacity while the active path for a token is much smaller.”
+
+### Viewer owns
+
+They now understand what “only 18B active” means at a conceptual level.
+
+---
+
+# Scene C — Create the memory headache
+
+## Beat 11 — The strange running-memory picture
+
+### On screen
+
+Transition from expert workplace into the memory metaphor.
+
+The expert population is represented as being **available to the running model** in a large working-memory world.
+
+Use the office metaphor:
+
+- office = `RUNNING MEMORY / FAST-ACCESS WEIGHTS`
+- many experts are present / available
+- only the selected team is actually working
+
+A nearby `HOME / STORAGE` world also exists, but it is not yet the proposed solution.
+
+### Change
+
+Expert-selection explanation becomes a memory question without introducing Transformer floors yet.
+
+### Narration anchor
+
+> “But here’s the strange part. Even though only a small path is computing, the full model still has a huge pool of weights that has to remain accessible to the runtime.”
+
+### Viewer owns
+
+Sparse compute does not make the rest of the model disappear.
+
+---
+
+## Beat 12 — The obvious idea
+
+### On screen
+
+Narrator looks at all the idle experts occupying the working-memory world.
+
+Then the visual proposes the simple solution:
+
+Inactive experts leave the office and go `HOME / STORAGE`.
+
+The office becomes dramatically smaller and calmer.
+
+Only the currently selected working team remains.
+
+The narrator looks pleased because the idea feels obvious.
+
+### Change
+
+Full available pool in working-memory world → most experts moved home.
+
+### Narration anchor
+
+> “So why not leave the experts we aren’t using in storage and keep only the small team we need in working memory?”
+
+### Viewer owns
+
+The tempting hypothesis.
+
+---
+
+## Beat 13 — Test the hypothesis cleanly
+
+### On screen
+
+A fresh token/task arrives.
+
+The router receives it.
+
+The router selects 8 routed experts.
+
+Those selected experts are visually called from `HOME / STORAGE` into the `OFFICE / WORKING MEMORY`.
+
+They arrive, sit down and work.
+
+Everyone else stays home.
+
+Keep this machine beautiful and simple. Do **not** show the failure yet.
+
+### Change
+
+Router choice → selected experts travel in → work begins.
+
+### Narration anchor
+
+> “The router picks the experts. We load those experts. They do the work. Everyone else stays in storage.”
+
+### Viewer owns
+
+The proposed system feels like it should work.
+
+---
+
+## Beat 14 — The headache / cliffhanger
+
+### On screen
+
+Freeze on the elegant simplified system from Beat 13.
+
+Do not jam it yet. Do not show layer-by-layer routing. Do not reveal bandwidth or latency.
+
+A large handwritten question lands over the scene:
+
+**`So why doesn't this make the model easy to run on a much smaller machine?`**
+
+Then a simple doorway / arch appears at the edge of frame:
+
+`INSIDE THE MODEL`
+
+The task card starts moving toward it.
+
+### Change
+
+The proposed solution remains visually convincing, but the unanswered question now hangs over it.
+
+### Narration anchor
+
+> “It sounds obvious. So if that doesn’t make a 320-billion-parameter model easy to run on a much smaller machine… what exactly is stopping us? To answer that, we have to go inside.”
+
+### Viewer owns
+
+The exact headache that earns the rest of the video.
+
+---
+
+# Cognitive-load checkpoints
+
+At the end of Beat 5, the viewer should only be holding:
+
+- 320B total
+- ~18B active
+- active means participating now
+
+At the end of Beat 10:
+
+- MoE has many experts
+- router selects a small expert team
+- only a small path works at once
+
+At the end of Beat 14:
+
+- full expert pool still exists
+- storage is cheap; working memory / fast access is precious
+- obvious idea: load only selected experts
+- unresolved question: why is that not easy?
+
+Nothing about tokenization, embeddings, attention, repeated routing across layers, bandwidth, cache behavior or next-token prediction belongs in Section 01.
+
+---
+
+# Accuracy guardrails
+
+These are non-negotiable even if the visuals are metaphorical.
+
+1. **Do not imply one book = one parameter or one fact.** Knowledge is distributed across learned weights.
+2. **Do not imply all 320B parameters are literally contained in 288 experts.** `288 routed experts` is a per-sparse-layer configuration. The model also has shared and always-used components.
+3. **Do not imply `8 experts = 18B parameters`.** The 18B active figure is the approximate active parameter path across the model, not a direct multiplication of top-8 experts.
+4. **Experts do not get human-readable subjects.** Neutral IDs/badges only.
+5. **The router technically reads the current hidden representation.** The task card is a visual stand-in, not a claim that it reads raw English text.
+6. **Do not claim all model weights must always live in GPU VRAM.** Real runtimes can shard, offload, cache and use RAM/VRAM differently. The truthful intro claim is that the full weight pool still exists and efficient inference needs fast access to whichever weights are selected.
+7. **Do not reveal the answer in this section.** No layer-by-layer commute jam, bandwidth bottleneck or routing-repeat explanation before Section 08.
+
+---
+
+# Visual quality bar
+
+The current `/section-01` implementation proved the scene architecture can be clean, but its motion and narrator artwork are not the visual target.
+
+For the rebuild:
+
+- keep the clean spacing and authored composition
+- keep persistent scene objects
+- keep staged reveals
+- improve the narrator artwork
+- use sourced assets only where they are genuinely better than custom SVG/code
+- allow code/SVG for libraries, desks, paths, offices, shelves, fields, annotations and mechanism pieces
+- animation comes **after** frozen-frame approval
+
+The storyboard is not “inspiration.” It is the specification.
