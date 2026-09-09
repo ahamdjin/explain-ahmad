@@ -1,6 +1,25 @@
-# Story spine — v2
+# Story spine — v3
 
-Status: **the promise is chosen; the chain is rewritten to pay it off.**
+Status: **v3 — plain, and answered as it goes.**
+
+v2 was a mystery: it opened a question and held it for eight minutes. Ahmad
+read it and said it was not simple, was not making sense, and *"eventually
+answers the same thing it did above"* — which is exactly right. §1 asked why
+the machine needs all of it, answered a smaller different question (why the
+rest is not waste), and exited by re-asking the first one. That is the
+circularity bug from v1 in a new costume.
+
+v3 fixes it by **telling the viewer the answer in the first ninety seconds**
+and spending the rest of the video showing that it is true. Nothing is
+withheld. Every section answers the question it raises, and the answer is what
+raises the next one — therefore, but, therefore. No unsolved puzzle at any
+point.
+
+It also **teaches the mechanism** rather than theorising about it:
+tokenization, numbers, attention, the router, the layers. Ahmad asked for that
+twice and was right both times — the journey is what makes the answer
+believable, and a viewer who has seen the machinery does not have to take the
+verdict on trust.
 
 Supersedes `archive/STORY_SPINE-claim-on-trial-v1.md` (the claim-on-trial
 version, 8 sections, built and shipped as 96 beats / 8:04). What forced the
@@ -68,54 +87,80 @@ not be moved by being told. They have to watch the reasonable version of their
 own idea get built, work, and then fail for a reason they can see. That is what
 Sections 6 and 7 are for, and it is why they get 27% of the runtime.
 
-## 4. The chain — 8 sections
+## 4. The chain — 8 sections, plain
 
-Each section: `Enters on` = previous `Exits on`, and `Exits on` ≠ `Enters on`.
-Checked by `npm run check:chain`.
+Every section: **answers its own question**, and the answer creates the next
+one. Read the *Therefore / But* column downward — it should read as one
+sentence with no "and then" in it.
 
-| # | Section | Answers | Event — what *happens* | Exits on |
+| # | Section | Teaches | Answers, in plain words | Therefore / But |
 | --- | --- | --- | --- | --- |
-| 1 | **The number that lies** | what "active" is, and why the other 300B isn't waste → **options** | a second word picks a different eight — **and some of the first eight stayed** | if some keep coming back, why not keep the popular ones close and fetch the rest? |
-| 2 | **What the chooser reads** | a long row of numbers standing for the word | **the router never looks at the word** — and the row is identical every time | the row never changes. So how did the team change? |
-| 3 | **Where the numbers change** | the word gathers context from its neighbours | "the dog barked" vs "a hot dog" → two different rows | would different numbers pick a different eight? |
-| 4 | **New numbers, new team** | yes — scored against the row, top eight | **the viewer picks, and watches the team change** | how many times does this happen? |
-| 5 | **Forty-two floors** | 42 sparse layers × 8 = **336 visits per word** | the room is one floor of 45; the counter runs to 336 | then how does anyone run one of these at home? |
-| 6 | **The plan, and the jam** | the naive fetch: ~8 GB per word, ~1.6 s, against milliseconds of work | **the plan from §1 is run, works once, then jams** | but people *do* run these. So what are they doing that we aren't? |
-| 7 | **The trick, and the exchange rate** | caching. Experts repeat, so keep the hot ones nearby — it genuinely works, and it is what people actually do | **the viewer drags a slider — how much do you keep close — and cannot find a setting that is both small and fast** | so what did "18 billion active" ever buy? |
-| 8 | **The verdict** | compute, not memory — and more so every generation | the two models from §1 return, side by side | *(none — the thesis lands)* |
+| 1 | **What "18 billion active" means** | parameter, expert, active | it uses a **different** 18 billion for every word, and it does not choose until the last moment | **Therefore** we need to watch it choose |
+| 2 | **Your words become numbers** | token, embedding | your text is cut into pieces, and each piece becomes a long row of numbers | **Therefore** the machine never sees your words, only numbers |
+| 3 | **The numbers change on the way** | attention, context | each piece looks at the pieces around it and its numbers change — "dog" in *the dog barked* is not "dog" in *hot dog* | **Therefore** the numbers are never the same twice |
+| 4 | **Who picks the experts** | router, top-8, 288 | a router scores all 288 experts against the numbers *as they are right now* and keeps the best 8 | **But** those numbers just changed — so the choice changes with them |
+| 5 | **It happens 42 times per word** | layer, sparse vs dense | 42 sparse layers × 8 experts = **336 expert visits for one word** | **Therefore** there are 336 choices per word and none can be known ahead |
+| 6 | **What if you only stored the 18 billion?** | memory vs storage | you would fetch about 8 GB per word — around a second and a half, against milliseconds of actual work | **Therefore** the fetching costs more than the thinking |
+| 7 | **How people actually run these** | caching, the trade | experts do repeat, so you keep the frequent ones close — and it genuinely works, up to a point | **But** with 12,096 expert slots the exchange rate is brutal: no setting is both small and fast |
+| 8 | **What the number actually bought** | — | **compute, not memory** — and the finer the experts, the wider the gap | *(the end)* |
 
-### The load-bearing structure
+### Read as one sentence
 
-- **§1's promise is §8's payoff.** The two models open the video and close it.
-- **§1's event is §7's seed.** "Some of them stayed" is what makes caching the
-  obvious idea, and caching is what §7 has to defeat honestly.
-- **§7 is a trade, not a wall.** You *can* trade memory for speed — that is
-  exactly what offloading is. The video's job is to show the **exchange rate**,
-  and that on a model this fine-grained there is no setting that is both small
-  and fast. A slider the viewer cannot win is a stronger proof than any bar
-  chart, and it is the honest shape of the problem.
-- **§5 exits into §1's promise.** *How does anyone run these at home?* is the
-  question the opening planted, arriving on schedule.
-- **The payoff gets two sections, not one.** v1 spent 16% of runtime on the
-  answer. This spends 27%, because the answer is the only part that changes
-  someone's mind.
+> A model uses a different 18 billion for every word, **therefore** we watch it
+> choose. Your words become numbers, **therefore** the machine works on numbers.
+> The numbers change as they travel, **therefore** they are never the same twice.
+> The router reads those numbers, **but** they just changed — so the choice
+> changes too. That happens 42 times per word, **therefore** there are 336
+> choices nobody can predict. **Therefore** storing only the active part means
+> fetching 8 GB per word. People do it anyway with caching, **but** the exchange
+> rate is brutal. **Therefore** "active parameters" saved you compute, not
+> memory.
 
-## 5. What changed from v1, and why
+No "and then" anywhere. That is the test.
+
+### What each section may NOT do
+
+- **No cliffhanger.** A section that ends on a question it does not answer is
+  the v2 bug. A section ends on an answer that has a consequence.
+- **No withholding for a reveal.** The answer is given in §1. Everything after
+  is evidence, and evidence is more convincing when the claim is already known.
+- **No theory without the thing.** Show the numbers, the row, the desk, the
+  floors. "Representation" is a word; a row of 4096 values is a picture.
+
+## 5. Style — plain, and out loud
+
+The reference is Nate Herk: plain conversational delivery, no drama, say what
+you are about to do and then do it, explain each step as it happens, never hold
+back an answer to build suspense.
+
+| Do | Don't |
+| --- | --- |
+| "Here's the answer, straight up." | "But there's a problem…" (mystery) |
+| "A parameter is just a number the model learned." | "parameters encode learned representations" |
+| short sentences, one idea each | one sentence carrying two ideas |
+| "Let's follow one word through it." | "Let us now consider the forward pass." |
+| name the thing, then use the name plainly | avoid the name to seem clever |
+| numbers said out loud: "three hundred and twenty billion" | "320B" as spoken text |
+
+If a line would not survive being said to a friend at a table, it is rewritten.
+
+## 6. What changed from v1, and why
 
 | | v1 | v2 |
 | --- | --- | --- |
-| Open | *"This is GLM-5.3-Flash."* Hook at 0:19 | the two-model contradiction. Promise by 0:12 |
+| Open | *"This is GLM-5.3-Flash."* Hook at 0:19 | the number, the surprise, **and the answer** — all inside 90 seconds |
 | Want | the word "efficient" on trial | the number everyone quotes, and what it buys |
 | §1 event | "a **completely** different eight" | a different eight, **with the overlap shown** — true, and it seeds §7 |
 | Old §2 | 46 s, answered nothing, sat at the most fragile point in the video | **folded into §2** — its event survives, the corridor does not |
-| The answer | one section, 1:16 | **two sections** — the naive jam, then the clever fix and its limit |
+| The answer | withheld until §7 | **given in §1**, then proved for seven sections |
+| Tokenization | cut as "a different video" | **taught in §2** — Ahmad asked twice; the journey is what makes the answer believable |
 | Thesis | compute not memory | compute not memory, **and it worsens with granularity** |
 | Honesty | implied you cannot offload | concedes offloading works, then shows where it runs out |
 
 The old §2's reveal — *the router never looks at the word* — was too good to
 lose and too thin to carry 46 seconds. It now opens §2 and buys its keep in ten.
 
-## 6. Two things we may not claim
+## 7. Two things we may not claim
 
 **We may not put a number on expert overlap for this model.** The 44.2%
 consecutive-token figure and the LRU hit rates are measured on Mixtral 8×7B —
@@ -130,7 +175,7 @@ rate, and §7 must be built as a trade. Anything stronger is contradicted by a
 Both restrictions make the video better. A trade the viewer can operate is more
 convincing than a wall they have to accept.
 
-## 7. Foundation files
+## 8. Foundation files
 
 | File | Holds |
 | --- | --- |
