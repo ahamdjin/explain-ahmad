@@ -942,3 +942,69 @@
   font-size: 21px;
   letter-spacing: 0.04em;
 }
+
+/* Scale — the number, the field, the block ------------------------------- */
+
+.s1-bignum {
+  display: grid;
+  justify-items: center;
+  gap: 1.4cqh;
+}
+
+.s1-bignum-value {
+  font: 400 clamp(40px, 9cqw, 190px) / 0.92 var(--hand);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.s1-bignum-cap {
+  font: 400 clamp(12px, 1.6cqw, 30px) / 1.2 var(--hand);
+  color: var(--graphite);
+}
+
+.s1-field {
+  width: 76cqw;
+}
+
+.s1-field svg,
+.s1-block svg,
+.s1-vocab svg,
+.s1-etable svg,
+.s1-space svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-block {
+  width: 52cqw;
+}
+
+/* Lookup — the vocabulary list and the embedding table -------------------- */
+
+.s1-vocab {
+  width: 21cqw;
+}
+
+.s1-etable {
+  width: 27cqw;
+}
+
+.s1-space {
+  width: 34cqw;
+}
+
+.s1-vocab-n,
+.s1-etable-n {
+  font: 400 13px/1 var(--mono);
+}
+
+.s1-vocab-t {
+  font: 400 15px/1 var(--hand);
+}
+
+.s1-vocab-cap,
+.s1-space-t {
+  font: 400 17px/1 var(--hand);
+}

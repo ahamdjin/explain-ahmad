@@ -34,6 +34,8 @@ export { Camera, CAMERA_HOME, type CameraState } from './camera'
 export { Sentence } from './cast/Sentence'
 export { Tower } from './cast/Tower'
 export { Aside, Choice, VerdictCard } from './cast/Aside'
+export { BigNumber, Block, type PatchName } from './cast/Scale'
+export { Vocabulary, EmbeddingTable, Space } from './cast/Lookup'
 
 /**
  * The object library. Things rather than people: `size` sets the width, and

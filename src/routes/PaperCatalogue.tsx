@@ -2,7 +2,9 @@ import { useState } from 'react'
 import {
   PALETTE,
   ArchSheet,
+  BigNumber,
   Bird,
+  Block,
   Book,
   BookStack,
   Car,
@@ -11,6 +13,7 @@ import {
   Dog,
   Drive,
   DriveRack,
+  EmbeddingTable,
   Keyboard,
   Laptop,
   Library,
@@ -20,6 +23,8 @@ import {
   RamStick,
   Screen,
   Shelf,
+  Space,
+  Vocabulary,
   Van,
   ChosenTeam,
   FrontDesk,
@@ -189,6 +194,51 @@ export default function PaperCatalogue() {
         </Item>
         <Item name="ArchSheet" note="unreadable on purpose">
           <ArchSheet pushed={false} />
+        </Item>
+      </div>
+
+      <h2>Scale and lookup</h2>
+      <p className="pc-note">
+        The pieces that turn a number into a quantity you can see, and the two tables the video
+        looks things up in. Built for the 13-section rebuild — see{' '}
+        <code>video-script/READ_ALOUD.md</code>.
+      </p>
+      <div className="pc-grid">
+        <Item name="BigNumber" note="the only thing in the frame" wide>
+          <BigNumber value="320,000,000,000" caption="parameters" />
+        </Item>
+        <Item name="Block — scattered" note="the same marks, loose. Not a separate component" wide>
+          <Block scatter />
+        </Item>
+        <Item name="Block — patch A" note="~5% lit, scattered not contiguous" wide>
+          <Block lit="a" />
+        </Item>
+        <Item name="Block — lifted" note="the patch floats clear, leaving a hole" wide>
+          <Block lit="a" lifted />
+        </Item>
+        <Item name="Block — the misfit" note="patch C lit, patch A ghosted. A mismatch, never a cross" wide>
+          <Block lit="c" ghost="a" />
+        </Item>
+        <Item name="Block — coarse vs fine" note="§13: the same model, divided differently" wide>
+          <div className="pc-row">
+            <Block grain="coarse" lit="b" />
+            <Block grain="fine" lit="b" />
+          </div>
+        </Item>
+        <Item name="Vocabulary" note="hit, scrolling, scores — §2 and §9 share it" tall>
+          <div className="pc-row">
+            <Vocabulary hit={4021} label="154,880 entries" />
+            <Vocabulary scores label="every token, scored" />
+          </div>
+        </Item>
+        <Item name="EmbeddingTable" note="one row per token; it continues past the top" tall>
+          <div className="pc-row">
+            <EmbeddingTable seeking label="row 4021" />
+            <EmbeddingTable pulled label="pulled out" />
+          </div>
+        </Item>
+        <Item name="Space" note="relative distance only — no axes, no coordinates" wide>
+          <Space show />
         </Item>
       </div>
 
