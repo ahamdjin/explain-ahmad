@@ -39,8 +39,8 @@ neither evidence for nor against the claim is off-mission and does not belong.
 | # | Section | Event | Exits on |
 | --- | --- | --- | --- |
 | 1 | The claim on trial | word two picks a **different** eight | if the choice keeps changing, how could you hold only what you need? |
-| 2 | Follow one word in | we stop looking from outside | what does the chooser actually read? |
-| 3 | The word becomes numbers | the numbers turn out not to be fixed | if they change, does the choice change? |
+| 2 | Follow one word in | **the router never looks at the word** | what is the router actually reading? |
+| 3 | The word becomes numbers | the word tears into 4096 numbers | those numbers are the same every time \u2014 so how did the team ever change? |
 | 4 | Where the numbers change | the representation visibly changes | would the same word pick a different team? |
 | 5 | New numbers, new team | **same word, different eight, one floor up** | how many times does this happen? |
 | 6 | Forty-two floors | 8 × 42 counted on screen | could you fetch 336 sets per word, fast enough? |
@@ -82,10 +82,14 @@ the chosen team, the plan, a small machine.
 
 ## Section 2 — Follow one word in
 
-- **Enters on** — If the choice keeps changing, how could you hold just what you need?
-- **Answers** — nothing. Pure setup, earned by its event.
-- **Event** — We stop looking at the building from outside and go in with one word.
-- **Exits on** — What does the chooser actually read?
+- **Enters on** — If the choice keeps changing, how could you ever hold only the ones you need?
+- **Answers** — nothing yet — but it finds where the question has to be settled.
+- **Event** — **The router never looks at the word.** It reads a sheet of numbers instead.
+- **Exits on** — What is the router actually reading?
+
+A transition section is the easiest place to lose a viewer, so this one carries
+its own surprise rather than being a corridor. It is also true: routing reads
+the current representation, never the raw text.
 
 **Visual world** — a minimal paper prompt surface that becomes the doorway.
 The word is the persistent actor from here to §8; no architecture dump.
@@ -98,10 +102,14 @@ The word is the persistent actor from here to §8; no architecture dump.
 
 ## Section 3 — The word becomes numbers
 
-- **Enters on** — What does the chooser read?
-- **Answers** — A list of numbers standing for the word.
-- **Event** — The word becomes numbers, and the numbers turn out not to be fixed.
-- **Exits on** — If the numbers can change, does the choice change with them?
+- **Enters on** — What is the router actually reading?
+- **Answers** — A long list of numbers that stands for the word.
+- **Event** — **The word tears up into 4096 numbers that run off the frame.**
+- **Exits on** — Those numbers are the same every time. So how did the team ever change?
+
+Exits on a **contradiction**, not a question: §1 proved the team changes and this
+section proves the numbers don't. Both cannot be true, which is what makes §4
+necessary rather than merely next.
 
 **Visual world** — the word on paper separates and becomes a row of values.
 
@@ -226,8 +234,11 @@ memory**, and that split is the whole video.
 # Production order
 
 1. Spine, chain and gates. **Done.**
-2. Section 1 beats against the chain, then frames.
-3. Only after Section 1 is accepted, storyboard §2 onward, one at a time.
+2. Section 1 beats against the chain, then frames. **Done.**
+3. Scripts for every section. **Done** — `video-script/0N-*.md`, verified by
+   `npm run check:chain`.
+4. Storyboards and implementation, one section at a time, §7 first because it is
+   the payoff that validates §1.
 
 Do not return to broad art-direction exploration; the visual language is
 settled and liked. Story problems are never fixed by changing the metaphor.

@@ -1,8 +1,8 @@
 # GLM-5.3-Flash — ground truth
 
 **Single source for every number that appears on screen.** They were previously
-spread across `01-opening-hope-wall.md`, `GLM_V7_ATTENTION_MOE_RESEARCH.md` and
-`08-why-it-cannot-fit.md`, which is how the checkpoint size got written down
+spread across `archive/video-script-drafts/01-opening-hope-wall.md`, `GLM_V7_ATTENTION_MOE_RESEARCH.md`
+and the old section-08 draft, which is how the checkpoint size got written down
 wrong once. Cite this file; do not re-derive.
 
 Verified 2026-09-09 against the model card, `config.json`, and the vLLM recipe.

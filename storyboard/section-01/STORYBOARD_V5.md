@@ -1,6 +1,6 @@
 # Section 01 - Storyboard v5 (SHOOTING BOARD)
 
-Status: **BEAT-BY-BEAT BOARD.** Timed against `video-script/01-opening-narration.md`.
+Status: **BEAT-BY-BEAT BOARD.** Timed against `video-script/01-the-claim.md`.
 
 This is the board implementation must match. Story rationale: `video-script/01-the-night-shift.md`.
 
