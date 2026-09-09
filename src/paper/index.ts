@@ -24,7 +24,7 @@ export {
 } from './director'
 export { ModelSheet, ShareBar, Plan } from './cast/Boards'
 export { Hospital, ChosenTeam } from './cast/Hospital'
-export { Narrator, NARRATOR_STYLES, type NarratorPose, type NarratorStyle } from './cast/Narrator'
+export { Narrator, NARRATOR_POSES, NARRATOR_STYLES, type NarratorPose, type NarratorStyle } from './cast/Narrator'
 export { WordCard, FrontDesk, SmallMachine, ArchSheet } from './cast/Props'
 export { Specialist } from './cast/Specialist'
 export { WordLoop, Ground } from './cast/WordLoop'

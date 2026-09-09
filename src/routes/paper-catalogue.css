@@ -69,6 +69,11 @@
   aspect-ratio: 30 / 9;
 }
 
+/* The pose grid wraps to two rows, so it needs the height to show them. */
+.pc-item[data-tall='true'] .pc-stage {
+  aspect-ratio: 30 / 15;
+}
+
 .pc-inner {
   position: absolute !important;
   inset: 0;

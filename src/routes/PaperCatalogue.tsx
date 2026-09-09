@@ -7,6 +7,7 @@ import {
   Hospital,
   ModelSheet,
   Narrator,
+  NARRATOR_POSES,
   NARRATOR_STYLES,
   PaperDefs,
   Plan,
@@ -30,13 +31,13 @@ import './paper-catalogue.css'
  * See skills/ASSET_LIBRARY.md.
  */
 
-const POSES: NarratorPose[] = ['wonder', 'point', 'think', 'hopeful', 'cheer', 'push', 'nod']
+const POSES = NARRATOR_POSES
 const STYLES = Object.keys(NARRATOR_STYLES) as NarratorStyle[]
 const CHOSEN = [41, 76, 103, 147, 168, 211, 245, 278]
 
-function Item({ name, note, wide, children }: { name: string; note?: string; wide?: boolean; children: React.ReactNode }) {
+function Item({ name, note, wide, tall, children }: { name: string; note?: string; wide?: boolean; tall?: boolean; children: React.ReactNode }) {
   return (
-    <figure className="pc-item" data-wide={wide ? 'true' : undefined}>
+    <figure className="pc-item" data-wide={wide ? 'true' : undefined} data-tall={tall ? 'true' : undefined}>
       <div className="pc-stage">
         <div className="s1-page pc-inner">{children}</div>
       </div>
@@ -85,21 +86,21 @@ export default function PaperCatalogue() {
         <Item name="Narrator" note={`style="${style}" pose="${pose}" · ${NARRATOR_STYLES[style].job}`}>
           <Narrator pose={pose} style={style} scale={1.6} />
         </Item>
-        <Item name="Narrator — all poses" note="pose is the emotional track; readable with sound off" wide>
+        <Item name="Narrator — all poses" note="pose is the emotional track; readable with sound off. Click one." wide tall>
           <div className="pc-row">
             {POSES.map((p) => (
               <button key={p} type="button" className="pc-pose" data-on={p === pose ? 'true' : undefined} onClick={() => setPose(p)}>
-                <Narrator pose={p} style={style} scale={0.8} />
+                <Narrator pose={p} style={style} scale={0.62} />
                 <em>{p}</em>
               </button>
             ))}
           </div>
         </Item>
-        <Item name="Narrator — the cast" note="style is who they are; any style holds any pose. Nobody carries a hue." wide>
+        <Item name="Narrator — the cast" note="style is who they are; any style holds any pose. Nobody carries a hue. Click one." wide>
           <div className="pc-row">
             {STYLES.map((name) => (
               <button key={name} type="button" className="pc-pose" data-on={name === style ? 'true' : undefined} onClick={() => setStyle(name)}>
-                <Narrator pose={pose} style={name} scale={0.8} />
+                <Narrator pose={pose} style={name} scale={0.72} />
                 <em>{name}</em>
               </button>
             ))}
