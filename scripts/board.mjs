@@ -11,15 +11,26 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const ROOT = 'src/videos/glm-320b'
-const SCRIPTS = {
-  '01': ['01-the-claim.md', 'The claim on trial'],
-  '02': ['02-follow-one-word.md', 'Follow one word in'],
-  '03': ['03-the-word-becomes-numbers.md', 'The word becomes numbers'],
-  '04': ['04-where-the-numbers-change.md', 'Where the numbers change'],
-  '05': ['05-new-numbers-new-team.md', 'New numbers, new team'],
-  '06': ['06-forty-two-floors.md', 'Forty-two floors'],
-  '07': ['07-the-answer.md', 'The answer'],
-  '08': ['08-the-verdict.md', 'The verdict'],
+const SCRIPTS = await scriptIndex()
+/**
+ * Which script belongs to which built section, derived rather than listed.
+ *
+ * This was a hard-coded map and it broke the moment the scripts were renamed,
+ * which is the whole argument against hard-coded maps in a generated tool.
+ * The section number is the join key; the title comes out of the script's H1.
+ */
+async function scriptIndex() {
+  const files = await readdir('video-script')
+  const index = {}
+  for (const file of files.sort()) {
+    const m = /^(\d\d)-.+\.md$/.exec(file)
+    if (!m) continue
+    if (index[m[1]]) continue
+    const md = await readFile(path.join('video-script', file), 'utf8')
+    const title = /^# Section \d+ — (.+)$/m.exec(md)?.[1]?.trim() ?? file
+    index[m[1]] = [file, title]
+  }
+  return index
 }
 
 /** beats.ts imports story verbs, so it cannot be evaluated standalone. */

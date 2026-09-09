@@ -29,8 +29,20 @@ const WPM = Number(args.get('wpm') ?? 145)
 const WPS = WPM / 60
 /** Below this, the line is being raced. */
 const MIN_SLACK = Number(args.get('slack') ?? 0.35)
-const SECTIONS = ['01', '02', '03', '04', '05', '06', '07', '08']
 const FROM_SCRIPTS = args.has('scripts')
+
+/**
+ * Whichever sections are actually built, rather than a hard-coded list.
+ *
+ * This read the superseded eight for one commit after the rebuild started,
+ * and reported the old video's timings as if they were the new one's. A tool
+ * that silently describes the wrong thing is worse than one that is missing.
+ */
+const { readdir: readDir } = await import('node:fs/promises')
+const SECTIONS = (await readDir('src/videos/glm-320b', { withFileTypes: true }))
+  .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name))
+  .map((e) => e.name.slice(-2))
+  .sort()
 
 /**
  * A script beat looks like:  > **12.** Some line. *(a stage direction)*
@@ -97,7 +109,7 @@ if (FROM_SCRIPTS) {
   }
 } else {
   for (const n of SECTIONS) {
-    const source = await readFile(`src/videos/glm-320b/superseded/section-${n}/beats.ts`, 'utf8')
+    const source = await readFile(`src/videos/glm-320b/section-${n}/beats.ts`, 'utf8')
     for (const block of source.split(/\n {2}\{\n/).slice(1)) {
       const num = block.match(/^ {4}n: (\d+),/)
       if (!num) continue
