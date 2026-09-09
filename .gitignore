@@ -11,3 +11,9 @@ frames/
 # Local browser review artifacts
 .playwright-cli/
 output/playwright/
+
+# voice-over tracks are large and not source
+public/vo/*.mp3
+public/vo/*.wav
+public/vo/*.m4a
+output/recordings/

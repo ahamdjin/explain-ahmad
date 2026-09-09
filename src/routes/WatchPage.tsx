@@ -18,7 +18,7 @@ type Chapter = {
   title: string
   /** The question the viewer arrives holding. Must match the previous exit. */
   enters: string
-  component?: ComponentType<{ onFinish?: () => void }>
+  component?: ComponentType<{ onFinish?: () => void; autoplay?: boolean }>
 }
 
 const Section01 = lazy(() => import('../videos/glm-320b/section-01/Section01'))
@@ -86,13 +86,28 @@ function startAt() {
 export default function WatchPage() {
   const [index, setIndex] = useState(startAt)
   const chapter = CHAPTERS[index]
-  const chrome = typeof window === 'undefined' || new URLSearchParams(window.location.search).get('chrome') !== '0'
+  const params = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search)
+  const chrome = params?.get('chrome') !== '0'
+  const autoplay = params?.get('play') === '1'
+  /** A breath between chapters, so §7 does not cut straight into §8. */
+  const [turning, setTurning] = useState(false)
 
-  const next = useCallback(() => setIndex((i) => Math.min(CHAPTERS.length - 1, i + 1)), [])
+  const next = useCallback(() => {
+    setTurning(true)
+    window.setTimeout(() => {
+      setIndex((i) => Math.min(CHAPTERS.length - 1, i + 1))
+      setTurning(false)
+    }, 420)
+  }, [])
 
-  /* On a placeholder there is no section to take the keypress, so the page does. */
+  /* A placeholder has no section to take the keypress, and none to run a
+   * timeline either, so the page does both. */
   useEffect(() => {
     if (chapter.component) return
+    if (autoplay) {
+      const hold = setTimeout(next, 2600)
+      return () => clearTimeout(hold)
+    }
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowRight' || event.key === ' ') {
         event.preventDefault()
@@ -105,15 +120,15 @@ export default function WatchPage() {
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [chapter.component, next])
+  }, [chapter.component, next, autoplay])
 
   const Current = chapter.component
 
   return (
-    <div className="w-page">
+    <div className="w-page" data-turning={turning ? 'true' : undefined}>
       {Current ? (
         <Suspense fallback={<div className="w-blank" />}>
-          <Current key={chapter.n} onFinish={next} />
+          <Current key={chapter.n} onFinish={next} autoplay={autoplay} />
         </Suspense>
       ) : (
         <div className="w-todo" onClick={next} role="presentation">

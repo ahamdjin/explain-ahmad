@@ -2,6 +2,13 @@
   position: fixed;
   inset: 0;
   background: #f2ecdf;
+  transition: opacity 380ms ease;
+}
+
+/* A breath between chapters. Without it §7 cuts straight into §8 and the two
+ * worlds collide on one frame. */
+.w-page[data-turning='true'] {
+  opacity: 0;
 }
 
 .w-blank {

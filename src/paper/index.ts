@@ -13,7 +13,15 @@ export { Note, Bubble, Brace, Arrow, Sparks } from './marks'
 export { FEEL, HOLD, type Relation, type Feel } from './motion'
 export { Overlays, type Overlay } from './overlays'
 export { Slot } from './slot'
-export { SectionRunner, holdFor, stageSpan, runtimeSeconds, type Beat } from './director'
+export {
+  SectionRunner,
+  holdFor,
+  stageSpan,
+  runtimeSeconds,
+  beatStarts,
+  beatAt,
+  type Beat,
+} from './director'
 export { ModelSheet, ShareBar, Plan } from './cast/Boards'
 export { Hospital, ChosenTeam } from './cast/Hospital'
 export { Narrator, type NarratorPose } from './cast/Narrator'

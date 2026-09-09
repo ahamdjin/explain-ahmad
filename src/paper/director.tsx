@@ -54,6 +54,24 @@ export function runtimeSeconds<P>(beats: Beat<P>[]) {
   return beats.reduce((total, beat) => total + beat.secs, 0)
 }
 
+/** Cumulative start time of each beat, in seconds. The autoplay timeline. */
+export function beatStarts<P>(beats: Beat<P>[]) {
+  const starts: number[] = []
+  let at = 0
+  for (const beat of beats) {
+    starts.push(at)
+    at += beat.secs
+  }
+  return starts
+}
+
+/** Which beat owns a given moment. Used when audio is the master clock. */
+export function beatAt<P>(beats: Beat<P>[], seconds: number) {
+  const starts = beatStarts(beats)
+  for (let i = starts.length - 1; i >= 0; i -= 1) if (seconds >= starts[i]) return i
+  return 0
+}
+
 function initialIndex(count: number) {
   if (typeof window === 'undefined') return 0
   const requested = Number(new URLSearchParams(window.location.search).get('beat'))
@@ -67,6 +85,8 @@ export function SectionRunner<S, P>({
   apply,
   label,
   onFinish,
+  autoplay = false,
+  audioSrc,
   children,
 }: {
   beats: Beat<P>[]
@@ -75,6 +95,14 @@ export function SectionRunner<S, P>({
   label: string
   /** Advancing past the last beat. Used by the continuous player. */
   onFinish?: () => void
+  /** Run on the timeline instead of on clicks. Space becomes pause. */
+  autoplay?: boolean
+  /**
+   * A voice-over track. When present it becomes the **master clock** -- beats
+   * follow the audio rather than a timer, so a beat can never drift out of
+   * sync with the sentence it belongs to. Without it, `secs` drives.
+   */
+  audioSrc?: string
   children: (scene: S, feel: Feel) => ReactNode
 }) {
   const [index, setIndex] = useState(() => initialIndex(beats.length))
@@ -155,6 +183,11 @@ export function SectionRunner<S, P>({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === ' ' && autoplay) {
+        event.preventDefault()
+        setPaused((value) => !value)
+        return
+      }
       if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'PageDown') {
         event.preventDefault()
         move(1)
@@ -166,7 +199,7 @@ export function SectionRunner<S, P>({
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [move])
+  }, [move, autoplay])
 
   /** Overlays carried in from earlier beats, until a beat clears the carry. */
   const sticky = useMemo(() => {
@@ -176,6 +209,63 @@ export function SectionRunner<S, P>({
       ...(item.lateOverlays?.overlays ?? []).filter((overlay) => overlay.sticky),
     ])
   }, [beats, index])
+
+  /* ---- autoplay ---------------------------------------------------------
+   * Clicking is the authored experience; autoplay exists so the piece can be
+   * watched hands-free and recorded, and so a voice-over has something to
+   * drive. Space pauses instead of advancing while it runs. */
+  const [paused, setPaused] = useState(false)
+  const audio = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    if (!autoplay || audioSrc) return
+    if (paused) return
+    if (index === beats.length - 1) {
+      const end = setTimeout(() => onFinish?.(), beats[index].secs * 1000)
+      return () => clearTimeout(end)
+    }
+    const next = setTimeout(() => {
+      indexRef.current = index + 1
+      lockUntil.current = 0
+      setIndex(index + 1)
+    }, beats[index].secs * 1000)
+    return () => clearTimeout(next)
+  }, [autoplay, audioSrc, paused, index, beats, onFinish])
+
+  /* Audio, when there is any, owns the clock. */
+  useEffect(() => {
+    if (!autoplay || !audioSrc) return
+    const el = new Audio(audioSrc)
+    audio.current = el
+    const onTime = () => {
+      const wanted = beatAt(beats, el.currentTime)
+      if (wanted !== indexRef.current) {
+        indexRef.current = wanted
+        lockUntil.current = 0
+        setIndex(wanted)
+      }
+    }
+    const onEnd = () => onFinish?.()
+    el.addEventListener('timeupdate', onTime)
+    el.addEventListener('ended', onEnd)
+    void el.play().catch(() => {
+      /* Autoplay policies block sound until a gesture. The timeline still
+       * runs, so a silent preview behaves; the user clicks once for audio. */
+    })
+    return () => {
+      el.removeEventListener('timeupdate', onTime)
+      el.removeEventListener('ended', onEnd)
+      el.pause()
+      audio.current = null
+    }
+  }, [autoplay, audioSrc, beats, onFinish])
+
+  useEffect(() => {
+    const el = audio.current
+    if (!el) return
+    if (paused) el.pause()
+    else void el.play().catch(() => {})
+  }, [paused])
 
   const debug =
     typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1'
@@ -189,6 +279,10 @@ export function SectionRunner<S, P>({
           onPointerUp={(event) => {
             const target = event.target as HTMLElement
             if (event.button !== 0 || target.closest('[data-no-advance]')) return
+            if (autoplay) {
+              setPaused((value) => !value)
+              return
+            }
             move(1)
           }}
         >
@@ -200,6 +294,12 @@ export function SectionRunner<S, P>({
               ...(beat.lateOverlays && beat.lateOverlays.at <= elapsed ? beat.lateOverlays.overlays : []),
             ]}
           />
+
+          {autoplay && paused ? (
+            <div className="s1-paused" data-no-advance>
+              paused
+            </div>
+          ) : null}
 
           {debug ? (
             <div className="s1-debug">

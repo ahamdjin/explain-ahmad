@@ -878,3 +878,18 @@
 }
 
 .s1-verdict b { font-weight: 400; color: var(--pick-ink); }
+
+/* Autoplay ---------------------------------------------------------------- */
+
+.s1-paused {
+  position: absolute;
+  left: 50%;
+  bottom: 4cqh;
+  transform: translateX(-50%);
+  padding: 0.6cqh 1.4cqw;
+  border-radius: 999px;
+  background: rgba(251, 248, 241, 0.9);
+  box-shadow: inset 0 0 0 2px var(--ink);
+  pointer-events: none;
+  font: 400 clamp(11px, 1.4cqw, 27px) / 1 var(--hand);
+}
