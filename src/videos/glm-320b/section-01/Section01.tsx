@@ -52,6 +52,7 @@ export default function Section01() {
         <div
           role="application"
           aria-label={`Storyboard frame ${frame} of ${LAST_FRAME}`}
+          style={{ width: '100%', height: '100%' }}
           onPointerUp={(event) => {
             if (event.button !== 0) return
             move(1)
