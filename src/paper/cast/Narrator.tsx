@@ -65,10 +65,10 @@ export type NarratorStyle = 'plain' | 'me' | 'vendor' | 'engineer' | 'analyst' |
 
 type Look = {
   /** Filled with a *paper* tone, never a hue -- see the note on the cast. */
-  hair: 'none' | 'crop' | 'buzz' | 'wave' | 'curls' | 'bun' | 'long'
+  hair: 'none' | 'crop' | 'buzz' | 'wave' | 'curls' | 'spikes' | 'royal' | 'bun' | 'long'
   /** Ink hatch, never a filled mass -- see the note on Beard. */
   beard: 'none' | 'stubble' | 'moustache' | 'goatee' | 'full'
-  glasses: 'none' | 'round' | 'square'
+  glasses: 'none' | 'round' | 'square' | 'big'
   headwear: 'none' | 'cap' | 'beanie'
   garment: 'tunic' | 'tee' | 'hoodie' | 'collar' | 'coat'
   /** A lanyard. Whoever wears one is speaking for an organisation. */
@@ -106,17 +106,17 @@ export const NARRATOR_STYLES: Record<NarratorStyle, Look> = {
    * opinion -- so it should open a claim and deliver a verdict.
    *
    * CUSTOM: this is the one to edit. Five fields decide the whole likeness:
-   *   hair      'curls' | 'wave' | 'crop' | 'buzz' | 'bun' | 'long' | 'none'
+   *   hair      'spikes' | 'royal' | 'curls' | 'wave' | 'crop' | 'buzz' | 'bun' | 'long' | 'none'
    *   beard     'full' | 'goatee' | 'moustache' | 'stubble' | 'none'
-   *   glasses   'square' | 'round' | 'none'
+   *   glasses   'big' | 'square' | 'round' | 'none'
    *   headwear  'none' | 'cap' | 'beanie'
    *   garment   'hoodie' | 'tee' | 'collar' | 'coat' | 'tunic'
    * Change those and look at /paper. Anything else means redrawing.
    */
   me: {
-    hair: 'curls',
+    hair: 'spikes',
     beard: 'full',
-    glasses: 'square',
+    glasses: 'big',
     headwear: 'none',
     garment: 'hoodie',
     badge: false,
@@ -426,6 +426,25 @@ const CURLS: [number, number][] = [
   [96, 36],
 ]
 
+/**
+ * Spikes: bases on the head circle at r 40, peaks out at r 52, alternating.
+ *
+ * Generated rather than drawn, because a hand-written zigzag on a circle never
+ * quite sits on it -- the valleys either float off the skull or bite into it.
+ */
+function spikes() {
+  const at = (deg: number, r: number) => {
+    const a = (deg * Math.PI) / 180
+    return `${(65 + r * Math.cos(a)).toFixed(1)} ${(46 - r * Math.sin(a)).toFixed(1)}`
+  }
+  const points: string[] = []
+  for (let i = 0; i <= 12; i += 1) {
+    const deg = 168 - i * 13
+    points.push(at(deg, i % 2 === 0 ? 40 : 52))
+  }
+  return `M${points.join('L')}Q86 32 65 34Q44 37 25.9 37.7Z`
+}
+
 /** The hairline. Kept high enough to leave a forehead for the brows. */
 const CROP = 'M25.5 40A40 40 0 0 1 104.5 40Q86 32 65 34Q44 37 25.5 40Z'
 
@@ -439,6 +458,7 @@ function Hair({ kind, away }: { kind: Look['hair']; away: boolean }) {
         <circle cx="65" cy="46" r="40" />
         {kind === 'bun' ? <circle cx="65" cy="4" r="11" /> : null}
         {kind === 'long' ? <path d="M27 44Q22 96 32 116Q42 102 40 62Z M103 44Q108 96 98 116Q88 102 90 62Z" /> : null}
+        {kind === 'spikes' ? <path d={spikes()} /> : null}
         {/* ears. A nape curve read as a mouth on a blank head; these do not. */}
         <g fill="none" strokeWidth="2.6">
           <path d="M26 42q-6 4-1 10" />
@@ -457,6 +477,28 @@ function Hair({ kind, away }: { kind: Look['hair']; away: boolean }) {
         ))}
         {/* redrawn over the circle outlines so the mass has no seams inside it */}
         <path d="M31 38Q48 30 65 32Q82 30 99 38Q82 33 65 35Q48 33 31 38Z" stroke="none" />
+      </g>
+    )
+  }
+
+  if (kind === 'spikes') {
+    return (
+      <g fill={HAIR} stroke={INK} strokeWidth="2.8" strokeLinejoin="round">
+        <path d={spikes()} />
+      </g>
+    )
+  }
+
+  if (kind === 'royal') {
+    /*
+     * Volume over the ears, swept back, thinner on the crown. The wings are
+     * the whole thing -- without them it is just a hairline.
+     */
+    return (
+      <g fill={HAIR} stroke={INK} strokeWidth="3" strokeLinejoin="round">
+        <path d="M22 48Q16 24 33 18Q49 11 65 15Q82 19 97 17Q113 22 108 48Q102 33 88 31Q70 27 52 30Q34 33 22 48Z" />
+        <path d="M34 26Q52 20 68 23" fill="none" strokeWidth="2.1" opacity="0.5" />
+        <path d="M74 24Q88 24 98 29" fill="none" strokeWidth="2.1" opacity="0.5" />
       </g>
     )
   }
@@ -557,7 +599,14 @@ function Glasses({ kind }: { kind: Look['glasses'] }) {
    */
   return (
     <g fill="none" stroke={INK} strokeWidth="2.6" strokeLinejoin="round">
-      {kind === 'round' ? (
+      {kind === 'big' ? (
+        <>
+          {/* oversized, and thicker than the face lines. Deliberately silly. */}
+          {/* centred on the eyes and just touching, or they read wall-eyed */}
+          <circle cx="50" cy="44" r="15" strokeWidth="3.6" />
+          <circle cx="80" cy="44" r="15" strokeWidth="3.6" />
+        </>
+      ) : kind === 'round' ? (
         <>
           <circle cx="51" cy="44" r="11" />
           <circle cx="79" cy="44" r="11" />
@@ -568,9 +617,18 @@ function Glasses({ kind }: { kind: Look['glasses'] }) {
           <rect x="67" y="35" width="24" height="18" rx="7" />
         </>
       )}
-      <path d="M62 43h6" />
-      <path d="M40 41 27 39" strokeLinecap="round" />
-      <path d="M90 41 103 39" strokeLinecap="round" />
+      {kind === 'big' ? (
+        <>
+          <path d="M35 40 24 36" strokeLinecap="round" strokeWidth="3" />
+          <path d="M95 40 106 36" strokeLinecap="round" strokeWidth="3" />
+        </>
+      ) : (
+        <>
+          <path d="M62 43h6" />
+          <path d="M40 41 27 39" strokeLinecap="round" />
+          <path d="M90 41 103 39" strokeLinecap="round" />
+        </>
+      )}
     </g>
   )
 }

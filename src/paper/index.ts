@@ -34,3 +34,23 @@ export { Camera, CAMERA_HOME, type CameraState } from './camera'
 export { Sentence } from './cast/Sentence'
 export { Tower } from './cast/Tower'
 export { Aside, Choice, VerdictCard } from './cast/Aside'
+
+/**
+ * The object library. Things rather than people: `size` sets the width, and
+ * on the fixed stage that can be a container unit, e.g. size="18cqw".
+ */
+export { Prop, seeded, shade, SHADES } from './props/frame'
+export { Book, BookStack, Shelf, Library } from './props/Books'
+export {
+  Laptop,
+  Screen,
+  MachineBox,
+  Keyboard,
+  Mouse,
+  RamStick,
+  RamBank,
+  Drive,
+  DriveRack,
+} from './props/Machines'
+export { Dog, Cat, Bird } from './props/Creatures'
+export { Car, Van, Crate } from './props/Vehicles'

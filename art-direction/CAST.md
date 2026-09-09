@@ -75,15 +75,22 @@ speaking for an organisation rather than for themselves.
 A style is **data**, not a component. Five fields:
 
 ```
-hair      'crop' | 'buzz' | 'wave' | 'curls' | 'bun' | 'long' | 'none'
+hair      'spikes' | 'royal' | 'curls' | 'crop' | 'buzz' | 'wave' | 'bun' | 'long' | 'none'
 beard     'stubble' | 'moustache' | 'goatee' | 'full' | 'none'
-glasses   'round' | 'square' | 'none'
+glasses   'big' | 'round' | 'square' | 'none'
 headwear  'cap' | 'beanie' | 'none'
 garment   'tunic' | 'tee' | 'hoodie' | 'collar' | 'coat'
 ```
 
 `me` is the custom likeness — change those five, look at `/paper`. Anything
 beyond them means redrawing.
+
+`spikes` is generated: bases on the head circle at r 40, peaks out at r 52,
+alternating. A hand-written zigzag never quite sits on a circle — the valleys
+either float off the skull or bite into it. `royal` is the other big one:
+volume over the ears, swept back, thin on the crown. `big` glasses are
+oversized and thicker than the face lines, centred on the eyes and just
+touching in the middle — off-centre they read wall-eyed.
 
 ## What the frames taught
 

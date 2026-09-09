@@ -920,3 +920,25 @@
   pointer-events: none;
   font: 400 clamp(11px, 1.4cqw, 27px) / 1 var(--hand);
 }
+
+/* The object library ----------------------------------------------------- */
+/* Everything in src/paper/props. `size` sets the width; height follows the
+   viewBox, so an object never needs a hard-coded height. */
+
+.s1-prop {
+  width: var(--size, 120px);
+  flex: 0 0 auto;
+}
+
+.s1-prop svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-prop-label {
+  font-family: 'Patrick Hand', ui-sans-serif, system-ui, sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.04em;
+}

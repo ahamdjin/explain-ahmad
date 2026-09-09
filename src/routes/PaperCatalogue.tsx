@@ -2,6 +2,25 @@ import { useState } from 'react'
 import {
   PALETTE,
   ArchSheet,
+  Bird,
+  Book,
+  BookStack,
+  Car,
+  Cat,
+  Crate,
+  Dog,
+  Drive,
+  DriveRack,
+  Keyboard,
+  Laptop,
+  Library,
+  MachineBox,
+  Mouse,
+  RamBank,
+  RamStick,
+  Screen,
+  Shelf,
+  Van,
   ChosenTeam,
   FrontDesk,
   Hospital,
@@ -170,6 +189,106 @@ export default function PaperCatalogue() {
         </Item>
         <Item name="ArchSheet" note="unreadable on purpose">
           <ArchSheet pushed={false} />
+        </Item>
+      </div>
+
+      <h2>Objects</h2>
+      <p className="pc-note">
+        Things rather than people. <code>size</code> sets the width and the height follows the
+        viewBox, so on the stage you can pass a container unit — <code>size="18cqw"</code> — and it
+        scales with the frame. Variety comes from <em>value</em>, never hue: every hue already means
+        something, so a coloured book would read as being one of those things.
+      </p>
+      <div className="pc-grid">
+        <Item name="Book" note='state="shut" | "open"'>
+          <div className="pc-row">
+            <Book size={70} />
+            <Book size={110} state="open" />
+          </div>
+        </Item>
+        <Item name="BookStack" note="count — a pile that looks like a pile">
+          <BookStack size={180} count={5} />
+        </Item>
+        <Item name="Shelf" note="seed changes the widths, gaps and lean" wide>
+          <div className="pc-row">
+            <Shelf size={320} seed={1} />
+            <Shelf size={320} seed={7} />
+          </div>
+        </Item>
+        <Item name="Library" note="shelves, seed, lit — the case, with the cornice" tall>
+          <div className="pc-row">
+            <Library size={190} />
+            <Library size={190} seed={4} lit />
+          </div>
+        </Item>
+
+        <Item name="Laptop" note="lit, shut — the wedge and the notch are the cue">
+          <div className="pc-row">
+            <Laptop size={190} />
+            <Laptop size={190} lit />
+          </div>
+        </Item>
+        <Item name="Screen" note="the chin and the blade foot are the cue">
+          <div className="pc-row">
+            <Screen size={150} />
+            <Screen size={150} lit />
+          </div>
+        </Item>
+        <Item name="MachineBox" note='shape="mini" | "studio" | "tower"' wide>
+          <div className="pc-row">
+            <MachineBox size={150} shape="mini" lit />
+            <MachineBox size={120} shape="studio" />
+            <MachineBox size={100} shape="tower" />
+          </div>
+        </Item>
+        <Item name="Keyboard + Mouse" note="key grid is generated, not drawn" wide>
+          <div className="pc-row">
+            <Keyboard size={280} />
+            <Mouse size={54} />
+          </div>
+        </Item>
+        <Item name="RamStick" note="chips over gold fingers; the notch stops it being a chocolate bar" wide>
+          <div className="pc-row">
+            <RamStick size={280} />
+            <RamStick size={280} lit />
+          </div>
+        </Item>
+        <Item name="RamBank" note="filled vs empty slots — the headroom is the point" wide>
+          <RamBank size={300} count={4} filled={2} />
+        </Item>
+        <Item name="Drive" note='kind="ssd" | "disk" — the platter makes "slow" self-evident' wide>
+          <div className="pc-row">
+            <Drive size={190} kind="ssd" label="320B" />
+            <Drive size={190} kind="disk" />
+          </div>
+        </Item>
+        <Item name="DriveRack" note="what &ldquo;more than fits&rdquo; looks like">
+          <DriveRack size={190} rows={5} />
+        </Item>
+
+        <Item name="Dog" note="sits — and the tail up is what stops it being a fox">
+          <div className="pc-row">
+            <Dog size={150} />
+            <Dog size={130} sits />
+          </div>
+        </Item>
+        <Item name="Cat + Bird" note="the curled tail is the whole cat" wide>
+          <div className="pc-row">
+            <Cat size={200} />
+            <Bird size={130} />
+          </div>
+        </Item>
+        <Item name="Car" note="moving adds speed lines — two or three, never more">
+          <div className="pc-row">
+            <Car size={260} moving />
+          </div>
+        </Item>
+        <Item name="Van + Crate" note="load 0-3 — empty on the way out, full on the way back" wide>
+          <div className="pc-row">
+            <Van size={270} load={3} moving />
+            <Crate size={95} />
+            <Crate size={95} open />
+          </div>
         </Item>
       </div>
     </div>
