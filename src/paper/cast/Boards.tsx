@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { INK, expertColor } from '../paper'
+import { INK, expertColor } from '../ink'
 
 /**
  * Beats 1-5.

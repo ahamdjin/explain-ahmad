@@ -1,0 +1,124 @@
+.pc-page {
+  min-height: 100vh;
+  padding: 40px clamp(16px, 4vw, 64px) 96px;
+  background: #e8e2d6;
+  color: #2b2926;
+  font: 14px/1.55 ui-sans-serif, system-ui, sans-serif;
+}
+
+.pc-page header {
+  max-width: 62ch;
+  margin-bottom: 40px;
+}
+
+.pc-page h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+.pc-page header p {
+  margin: 0;
+  color: #5f5a53;
+}
+
+.pc-page code {
+  padding: 1px 5px;
+  background: rgba(43, 41, 38, 0.09);
+  border-radius: 3px;
+  font: 12px/1.4 ui-monospace, monospace;
+}
+
+.pc-page h2 {
+  margin: 44px 0 16px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.2);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5f5a53;
+}
+
+.pc-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.pc-item {
+  margin: 0;
+  overflow: hidden;
+  background: #fbf8f1;
+  border: 1px solid rgba(43, 41, 38, 0.18);
+  border-radius: 5px;
+}
+
+.pc-item[data-wide='true'] {
+  grid-column: 1 / -1;
+}
+
+/* Pieces are authored against the 16:9 stage, so preview them on one. */
+.pc-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.12);
+}
+
+.pc-inner {
+  position: absolute !important;
+  inset: 0;
+  container-type: size;
+  display: grid;
+  place-items: center;
+  padding: 4%;
+  cursor: default;
+}
+
+.pc-item figcaption {
+  display: grid;
+  gap: 3px;
+  padding: 10px 13px;
+}
+
+.pc-item b {
+  font: 600 12px/1.4 ui-monospace, monospace;
+  letter-spacing: 0.03em;
+}
+
+.pc-item span {
+  font-size: 12px;
+  color: #5f5a53;
+}
+
+.pc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 3cqw, 44px);
+}
+
+.pc-desks {
+  width: 70%;
+}
+
+.pc-pose {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pc-pose[data-on='true'] {
+  border-color: rgba(200, 123, 69, 0.7);
+  background: rgba(231, 154, 99, 0.14);
+}
+
+.pc-pose em {
+  font: 11px/1 ui-monospace, monospace;
+  font-style: normal;
+  color: #5f5a53;
+}

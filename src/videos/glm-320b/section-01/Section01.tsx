@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { BEATS, RUNTIME_SECONDS, holdFor } from './beats'
-import { FEEL } from './motion'
+import { FEEL } from '../../../paper/motion'
 import { Overlays } from './Overlays'
-import { PaperDefs } from './paper'
+import { PaperDefs } from '../../../paper'
 import { INITIAL, applyPatches } from './scene'
 import { Stage } from './Stage'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
-import './section-01.css'
+import '../../../paper/paper.css'
 
 function initialIndex() {
   if (typeof window === 'undefined') return 0

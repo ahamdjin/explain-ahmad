@@ -1,4 +1,4 @@
-import { INK, expertColor } from '../paper'
+import { INK, expertColor } from '../ink'
 
 /**
  * One routed expert, drawn as a person.

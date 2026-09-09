@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { INK, expertColor } from '../paper'
+import { INK, expertColor } from '../ink'
 
 /**
  * The world of Section 01.

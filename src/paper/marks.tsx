@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { type CSSProperties, type ReactNode } from 'react'
-import { INK } from './paper'
+import { INK } from './ink'
 
 /**
  * Handwritten annotation. Carries the questions in Section 01, so it must be

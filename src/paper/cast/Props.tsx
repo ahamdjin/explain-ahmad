@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { INK } from '../paper'
+import { INK } from '../ink'
 
 /** The word entering the model. Called a word, never a token, in Section 01. */
 export function WordCard({ label }: { label: string }) {

@@ -1,5 +1,5 @@
 import { type Overlay } from './beats'
-import { Arrow, Brace, Bubble, Note, Sparks } from './marks'
+import { Arrow, Brace, Bubble, Note, Sparks } from '../../../paper/marks'
 
 /**
  * Overlays are the only things a beat replaces outright: handwriting, braces

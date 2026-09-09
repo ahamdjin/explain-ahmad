@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { INK } from '../paper'
+import { INK } from '../ink'
 
 export type NarratorPose = 'wonder' | 'point' | 'think' | 'hopeful' | 'cheer' | 'push' | 'nod'
 

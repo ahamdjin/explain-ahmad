@@ -1,10 +1,10 @@
 import { motion } from 'motion/react'
 import { type CSSProperties, type ReactNode } from 'react'
-import { ModelSheet, Plan, ShareBar } from './cast/Boards'
-import { ChosenTeam, Hospital } from './cast/Hospital'
-import { Narrator } from './cast/Narrator'
-import { ArchSheet, FrontDesk, SmallMachine, WordCard } from './cast/Props'
-import { type Feel } from './motion'
+import { ModelSheet, Plan, ShareBar } from '../../../paper/cast/Boards'
+import { ChosenTeam, Hospital } from '../../../paper/cast/Hospital'
+import { Narrator } from '../../../paper/cast/Narrator'
+import { ArchSheet, FrontDesk, SmallMachine, WordCard } from '../../../paper/cast/Props'
+import { type Feel } from '../../../paper/motion'
 import { type SceneState } from './scene'
 
 /**

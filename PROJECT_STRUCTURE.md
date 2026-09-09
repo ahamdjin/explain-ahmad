@@ -12,7 +12,7 @@ These are **not video-specific**.
 ## `research/`
 Source notes and factual research used to understand a topic or study other explainers.
 
-- `research/ncase/` — Nicky Case / explorable-explanation study notes
+- `skills/ncase/` — Nicky Case / explorable-explanation study notes
 - `research/glm/` — GLM architecture and technical research
 - `research/RESEARCH_NOTES.md` — general research notes
 

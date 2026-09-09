@@ -1,4 +1,4 @@
-import { HOLD, type Relation } from './motion'
+import { HOLD, type Relation } from '../../../paper/motion'
 import {
   CHOSEN,
   archSheet,
