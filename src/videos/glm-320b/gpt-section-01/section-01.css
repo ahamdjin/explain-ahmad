@@ -1,0 +1,30 @@
+/* Isolated comparison route. Nothing in this stylesheet targets the original. */
+.g1-page { position:fixed; inset:0; overflow:hidden; display:grid; place-items:center; color:#2b2926; background:#e5dfd2; --hand:'Patrick Hand',cursive; --scrawl:'Caveat',cursive; }
+.g1-viewport { width:min(100vw,calc((100dvh - 76px) * 16 / 9)); aspect-ratio:16/9; }
+.g1-page[data-presenting='true'] .g1-viewport { width:min(100vw,calc(100dvh * 16 / 9)); }
+.g1-frame { position:relative; width:100%; height:100%; container-type:size; cursor:pointer; overflow:hidden; box-shadow:0 5px 32px #51483212; }
+.g1-stage { display:block; width:100%; height:100%; font-family:var(--hand); }
+.g1-stage .g1-mono { font-family:ui-monospace,SFMono-Regular,monospace; letter-spacing:1.4px; }
+.g1-narrator-slot { position:absolute; width:10cqw; transform-origin:bottom center; pointer-events:none; }
+.g1-narrator { width:100%; transform:scaleX(var(--flip,1)); }
+.g1-narrator svg { display:block; width:100%; overflow:visible; }
+.g1-review { position:absolute; bottom:10px; left:50%; translate:-50% 0; display:flex; align-items:center; gap:10px; width:max-content; max-width:calc(100% - 24px); font:12px/1.4 ui-sans-serif,system-ui,sans-serif; padding:7px 11px; background:#f9f6ef; border:1px solid #cfc6b5; border-radius:6px; }
+.g1-review a { color:#5b645d; white-space:nowrap; text-decoration:none; }
+.g1-review-name { font-size:10px; letter-spacing:1px; color:#746d61; padding:0 10px; border-right:1px solid #d6cdbd; }
+.g1-review button,.g1-review select { color:#37352d; background:transparent; border:1px solid #d6cdbd; border-radius:4px; min-height:30px; padding:4px 9px; font:inherit; cursor:pointer; }
+.g1-review button:hover,.g1-review button[aria-pressed='true'] { background:#e9e2d5; }
+.g1-review button:disabled { opacity:.3; cursor:default; }
+.g1-review :focus-visible { outline:2px solid #527797; outline-offset:3px; }
+.g1-review small { white-space:nowrap; color:#81796b; }
+.g1-review select { max-width:260px; }
+.g1-script { position:absolute; right:24px; top:20px; width:min(350px,80vw); padding:18px 22px; background:#fbf8ef; border:1px solid #bdb29e; box-shadow:0 8px 24px #453b2920; font:14px/1.5 ui-sans-serif,system-ui,sans-serif; }
+.g1-script b { font-size:11px; color:#807563; }
+.g1-script p { font-family:var(--hand); font-size:24px; margin:12px 0; }
+.g1-script small,.g1-script em { display:block; color:#807563; }
+.g1-script em { font-size:10px; margin-top:14px; font-style:normal; }
+.g1-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+@media(max-width:760px) { .g1-review { gap:5px; bottom:8px; padding:5px; } .g1-review-name,.g1-review small { display:none; } .g1-review select { width:130px; } .g1-review button { padding:4px 7px; } }
+@media(prefers-reduced-motion:reduce) { .g1-page * { scroll-behavior:auto!important; } }
+/* Motion's SVG builder supplies fill-box/50% origins. Stage positions are
+   authored against the SVG viewport, so scaling must use its (0,0) origin. */
+.g1-stage g { transform-origin:0px 0px!important; transform-box:view-box!important; }

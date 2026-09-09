@@ -7,6 +7,7 @@ export type VideoRouteDefinition = {
 }
 
 const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
+const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
 const Section01 = lazy(() => import('./glm-320b/section-01/Section01'))
 
 /**
@@ -14,6 +15,7 @@ const Section01 = lazy(() => import('./glm-320b/section-01/Section01'))
  * Each route owns its full-screen production experience and stays lazy-loaded.
  */
 export const videoRoutes: VideoRouteDefinition[] = [
+  { slug: 'gpt-section-01', title: 'GPT Section 1 — A continuous experiment', component: GptSection01 },
   {
     slug: 'why-320b-uses-18b',
     title: 'Why Does a 320B AI Only Use 18B Parameters?',

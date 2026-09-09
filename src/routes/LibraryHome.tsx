@@ -3,6 +3,8 @@ import { SceneFrame } from '../engine/SceneFrame'
 import { SketchAnnotation } from '../visuals/SketchAnnotation'
 
 const destinations = [
+  { to: '/gpt-section-01', title: 'GPT Section 1', meta: 'Compare the new opening storyboard with the original' },
+  { to: '/section-01', title: 'Original Section 1', meta: 'The original hospital opening' },
   { to: '/styles', title: 'Art directions', meta: 'Paper, clean, editorial, technical' },
   { to: '/lab/trust', title: 'Click stories', meta: 'Ncase-style reveal and choice patterns' },
   { to: '/lab/navigation', title: 'Navigation', meta: 'Snap, exact gesture paging, scene replacement' },
@@ -21,7 +23,7 @@ export default function LibraryHome() {
             Build the <SketchAnnotation type="underline" color="#55a99e">explanation</SketchAnnotation>, not the website.
           </h1>
           <p className="library-subtitle">
-            This route is only a module library. Real video pages stay out of the router until the actual script and story are known.
+            The storytelling library and current explainer studies. Open either Section 1 to compare the two openings.
           </p>
           <p className="library-lab-hint">Inside any lab: <kbd>L</kbd> or <kbd>⌘K</kbd> opens controls.</p>
         </div>

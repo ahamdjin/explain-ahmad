@@ -10,7 +10,9 @@
     "frames": "node scripts/capture-beats.mjs",
     "frames:opening": "node scripts/capture-beats.mjs --beats=1-14",
     "frames:s1": "node scripts/capture-frames.mjs",
-    "record:s1": "node scripts/record-section.mjs"
+    "record:s1": "node scripts/record-section.mjs",
+    "frames:gpt": "node scripts/review-gpt-section.mjs",
+    "record:gpt": "node scripts/review-gpt-section.mjs --record"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

@@ -7,3 +7,7 @@ frames/
 
 .DS_Store
 *.local
+
+# Local browser review artifacts
+.playwright-cli/
+output/playwright/
