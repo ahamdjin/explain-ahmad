@@ -31,61 +31,113 @@ you are waiting on, and nobody leaves feeling strung along.
 
 ## The script
 
+Every line lands on something happening. See `skills/SPATIAL_CONTINUITY.md`.
+
 ### Act 1 — the number, plainly (beats 1–6)
 
-> **1.** Let's talk about this number.
+> **1.** *(a plain sheet, one number on it)* Let's start with this number.
 >
-> **2.** *(320,000,000,000 fills the frame)* Three hundred and twenty billion.
+> **2.** *(the number fills the frame)* Three hundred and twenty billion.
 >
-> **3.** That's how many parameters this model has. And a parameter is just a
-> number it learned while it was being trained.
+> **3.** *(it breaks apart into a field of tiny separate numbers)* That's how
+> many parameters it has. And a parameter is just a number it learned while it
+> was being trained.
 >
-> **4.** So the whole model is three hundred and twenty billion numbers, sitting
-> in a very big file.
+> **4.** *(the field packs itself into one solid block)* So the whole model is
+> three hundred and twenty billion numbers, sitting in one very big file.
 >
-> **5.** Now here's the bit everyone quotes. To answer you, it only uses about
-> eighteen billion of them.
+> **5.** *(a small patch of the block lights up)* And to answer you, it only
+> uses this much of it. About eighteen billion.
 >
-> **6.** *(18 lit, next to 320)* Eighteen out of three hundred and twenty.
-> Roughly five percent.
+> **6.** *(a brace measures the lit patch against the block)* Eighteen, out of
+> three hundred and twenty. Roughly five percent.
 
 ### Act 2 — the reasonable idea, and why it fails (beats 7–12)
 
-> **7.** So the obvious thought is: fine. Store the eighteen billion. Throw the
-> rest away.
+> **7.** *(the lit patch lifts out of the block and sits on its own)* So the
+> obvious thought is — take that bit. Keep it. Throw the rest away.
 >
-> **8.** And that doesn't work. You need all three hundred and twenty billion,
-> sitting there, ready.
+> **8.** *(the patch drops back in; the block goes whole again)* And that
+> doesn't work. You need all three hundred and twenty billion, sitting there,
+> ready.
 >
-> **9.** Here's why, straight up.
+> **9.** *(the word `dog` arrives at the block; a patch lights)* Here's why.
+> Watch what happens when a word comes in.
 >
-> **10.** It uses a **different** eighteen billion for every single word.
+> **10.** *(the word `cat` arrives; a completely different patch lights)* Now
+> another word. **Different part of the file.**
 >
-> **11.** Not a different amount — the same amount, but a different eighteen
-> billion. Different parts of the file, every word.
+> **11.** *(both patches shown together on the same block)* Same amount — about
+> eighteen billion, both times. Different eighteen billion.
 >
-> **12.** And it doesn't decide which parts until the moment it needs them.
+> **12.** *(a third word arrives; a third patch)* And it doesn't work out which
+> part until the word actually turns up.
 
 ### Act 3 — what that means, and where we're going (beats 13–18)
 
-> **13.** *(the plan crossed through — plainly, no drama)* Which means you can't
-> pack a smaller version in advance. There's nothing to pack.
+> **13.** *(the lifted patch from beat 7 returns, and visibly does not fit the
+> new pattern)* Which is why you can't pack a smaller version in advance.
+> There's nothing to pack.
 >
-> **14.** That's the answer. That's the whole thing.
+> **14.** *(everything settles; the block, whole)* That's the answer. That's the
+> whole thing.
 >
-> **15.** But it's hard to believe, so let me show you.
+> **15.** *(the camera pushes toward the block's surface)* But it's hard to
+> believe, so let me show you.
 >
-> **16.** *(inside — 288 blocks)* The model's knowledge is split into experts.
-> Two hundred and eighty-eight of them, in each part of the model.
+> **16.** *(inside — the surface resolves into 288 separate blocks)* Up close,
+> the model's knowledge is in separate pieces. Two hundred and eighty-eight of
+> them, in each part of the model. They're called **experts**.
 >
-> **17.** A word comes in, eight of them get used, and the other two hundred
-> and eighty do nothing.
+> **17.** *(`dog` arrives; eight light, 280 go flat)* A word comes in, eight of
+> them get used, and the other two hundred and eighty do nothing at all.
 >
-> **18.** So the question I actually have to answer is: **who picks the eight,
-> and why can't they tell us in advance?** Let's follow one word through and
-> watch.
+> **18.** *(the eight hold; a plain desk sits unlabelled beside them)* So the
+> question I actually have to answer is: **who picks the eight, and why can't
+> they tell us in advance?**
 
 ---
+
+## Storyboard
+
+`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+
+| beat | where | camera | what happens | on screen | example |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the sheet | — | a sheet comes to rest | `ModelSheet`, one figure on it | `320,000,000,000` |
+| 2 | the sheet | — | the number scales up until it fills the frame | `BigNumber` | `320,000,000,000` |
+| 3 | the sheet | — | the number shatters into a field of small separate numbers | `BigNumber` → `ParamField` | a field of ~2,000 dots standing for 320B |
+| 4 | the sheet | — | the field compacts into one solid block | `ParamField` → `Block` | the block, one object |
+| 5 | the sheet | — | a patch inside the block lights | `Block` with `lit` patch A | patch ≈ 5% of the area |
+| 6 | the sheet | — | a brace draws itself from patch to whole | `Block`, `Brace` | `18B` / `320B` |
+| 7 | the sheet | — | the lit patch lifts free and hovers | `Block` (hole), patch floating | the patch, alone |
+| 8 | the sheet | — | the patch drops back; the block seals | `Block`, whole | — |
+| 9 | the sheet | — | `dog` travels in from the left; patch A lights | `Block`, `WordCard` dog, patch A | **`dog`** |
+| 10 | the sheet | — | `cat` arrives; patch A goes dark, patch B lights | `WordCard` cat, patch B | **`cat`** |
+| 11 | the sheet | — | both patches drawn on one block, side by side | `Block`, patch A + B outlined | two patches, equal area |
+| 12 | the sheet | — | `it` arrives; patch C lights, different again | `WordCard` it, patch C | **`it`** |
+| 13 | the sheet | — | the beat-7 patch returns and overlays; it misses | patch outline vs patch C | the mismatch |
+| 14 | the sheet | — | everything clears; the block sits alone | `Block`, whole | — |
+| 15 | inside, one part | **push in** | the camera travels into the block face | `Block` growing past frame | — |
+| 16 | inside, one part | — | the surface resolves into 288 discrete blocks | `Hospital` (288) | 36 × 8 = 288 |
+| 17 | inside, one part | — | `dog` enters; 8 light, 280 flatten | `Hospital` `lit`, `WordCard` dog | **`dog`**, 8 of 288 |
+| 18 | inside, one part | — | a plain desk slides in beside the eight, unlabelled | `Hospital`, `FrontDesk` (unnamed) | — |
+
+### Board notes
+
+- **One place for twelve beats.** Acts 1 and 2 all happen at the sheet, so the
+  camera does not move once until beat 15. That stillness is what makes the
+  push-in mean something.
+- **Beat 15 is the only camera move in the section**, and it is the move that
+  answers *where are we going*. The viewer can point at beat 14 and say "we
+  went into that."
+- **Patch A, B and C must be visibly, obviously different regions** — not
+  shuffled dots. The whole answer of the section is that picture.
+- **Beat 13 is the one place anything is shown failing**, and it is allowed
+  because beats 9–12 already gave the reason. Nothing is crossed out; the patch
+  simply does not line up. Misfit, not prohibition.
+- The desk arrives at beat 18 and is **not named**. It stands there through §2
+  until §5 names it. Function before name.
 
 ## Line jobs
 
@@ -128,15 +180,20 @@ question, arising from the answer.
 - **Beat 2 is the thumbnail.** Three hundred and twenty billion, filling the
   frame, readable at any size.
 - Beat 6 is the frame the whole video hangs on: 320 and 18, together, to scale.
-- Beat 10 gets a hold, and the frame must show **two different eights** on the
-  same 288 — that is the answer, so it gets a picture, not a caption.
-- No hardware in this section. No chips, no cards. That is §6.
+- Beat 11 is the **carrying frame**: two different patches on one block. That
+  is the answer of the section, so it is a picture and never a caption.
+- Beats 9–12 use the running example: **`dog`**, then **`cat`**, then **`it`**
+  — the same words the whole video uses. `skills/SPATIAL_CONTINUITY.md` §5.
+- No hardware in this section. No chips, no cards. That is §13.
 
 ## Assets
 
 | Need | Status |
 | --- | --- |
-| a big number that fills the frame | **build** — `BigNumber`, reusable in §5 and §8 |
-| `ModelSheet` (320 / 18) | have |
-| `Hospital` — the 288, with two different eights | have |
-| `Plan`, and a plain "no" over it | have `Plan`; the "no" is a **new** state |
+| a big number that fills the frame | **build** — `BigNumber`, reusable in §9 and §13 |
+| the number shattering into a field | **build** — `ParamField`, and it is only used here |
+| a solid block with lightable patches | **build** — `Block`, with named patch regions |
+| `Brace` measuring patch against whole | have |
+| push-in camera | have |
+| `Hospital` — the 288, 8 lit | have |
+| `FrontDesk`, unlabelled | have |

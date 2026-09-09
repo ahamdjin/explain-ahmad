@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "check": "tsc -b && node scripts/check-chain.mjs",
     "check:chain": "node scripts/check-chain.mjs",
+    "check:board": "node scripts/check-board.mjs",
     "smoke": "node scripts/smoke.mjs",
     "board": "node scripts/board.mjs",
     "timing": "node scripts/timing.mjs",
