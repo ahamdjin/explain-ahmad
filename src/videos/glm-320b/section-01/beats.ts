@@ -1,16 +1,20 @@
 import { HOLD, type Relation } from '../../../paper/motion'
 import {
   CHOSEN,
+  CHOSEN_B,
   archSheet,
   bar,
   desk,
+  ground,
   hospital,
+  loop,
   machine,
   narrator,
   plan,
   sheet,
   team,
   word,
+  word2,
   type Patch,
 } from './scene'
 
@@ -72,324 +76,262 @@ const H = (text: string, at: { x: string; y: string }, extra: Partial<Overlay> =
 })
 
 /* Layout anchors. Kept here so the whole section can be reflowed in one place. */
-const HOSP = { x: 58, y: 40 }
+const HOSP = { x: 57, y: 41 }
 const HOSP_S = 0.78
 /** Building's left edge and width as stage percentages, for braces beneath it. */
-const HOSP_LEFT = '34%'
+const HOSP_LEFT = '33%'
 const HOSP_W = '48%'
 
 export const BEATS: Beat[] = [
-  /* ═══ M1 · THE TWO NUMBERS ═══════════════════════════════════════════════
-   * Fast. The viewer roughly knows these words, so the job is only to put the
-   * two numbers next to each other and let the gap do the work. */
+  /* ═══ ACT 1 · THE CLAIM ══════════════════════════════════════════════════
+   * The want is a claim on trial, so the section opens on the claim and on
+   * the machine *working* -- never on a specification table. */
   {
     n: 1,
     id: 'the-model',
-    title: 'Meet the model',
+    title: 'This is the model',
     relation: 'want',
-    secs: 3,
-    vo: "So, GLM-5.3-Flash. This is the model we're going to pull apart.",
-    commands: [sheet.arrive({ x: 50, y: 45 }), narrator.at({ x: 14, y: 71 }, 'point', 1)],
+    secs: 3.5,
+    vo: 'This is GLM-5.3-Flash.',
+    commands: [
+      ground.at(84),
+      sheet.arrive({ x: 56, y: 44 }),
+      narrator.at({ x: 21, y: 66 }, 'point', 1),
+    ],
   },
   {
     n: 2,
-    id: 'total',
-    title: '320 billion',
+    id: 'the-claim',
+    title: 'And they call it efficient',
     relation: 'so',
-    secs: 4,
-    vo: 'It has 320 billion parameters.',
+    secs: 5,
+    vo: 'Three hundred and twenty billion parameters \u2014 everything it has ever learned. And they call it efficient.',
     commands: [],
     stages: [{ at: 260, commands: [sheet.lightTotal()] }],
+    lateOverlays: {
+      at: 900,
+      overlays: [
+        H('\u201cefficient\u201d', { x: '76%', y: '68%' }, { size: 'lg', rotate: -6, tone: 'orange' }),
+        { kind: 'arrow', from: { x: 1520, y: 700 }, to: { x: 1330, y: 560 }, bow: -30, tone: 'orange' },
+      ],
+    },
   },
   {
     n: 3,
-    id: 'knowledge',
-    title: 'Parameters are knowledge',
+    id: 'what-it-does',
+    title: 'Word in, next word out',
     relation: 'so',
-    secs: 3.5,
-    vo: 'Which in simple words is everything it has ever learned.',
-    commands: [narrator.pose('wonder')],
-    overlays: [
-      H('everything it has\never learned', { x: '75%', y: '38%' }, { size: 'md', rotate: -3, tone: 'orange' }),
-      { kind: 'arrow', from: { x: 1420, y: 430 }, to: { x: 1180, y: 452 }, bow: 30, tone: 'orange' },
+    secs: 5,
+    // Start on the machine doing its job. The body stays closed -- it is the
+    // same object that opens into the expert world at beat 6.
+    vo: 'Its whole job is this. You give it a word, it gives you the next one.',
+    commands: [sheet.foldAway(), narrator.at({ x: 9, y: 78 }, 'wonder', 0.62)],
+    stages: [
+      { at: 200, commands: [loop.show({ x: 53, y: 42 }, 1, 'dog', 'ran')] },
+      { at: 1300, commands: [loop.answer()] },
     ],
   },
   {
     n: 4,
-    id: 'active',
-    title: 'Only 18 billion active',
+    id: 'only-18',
+    title: 'Only 18 billion move',
     relation: 'and-yet',
-    secs: 4.5,
-    vo: 'But for any one word, only about 18 billion of them are active.',
-    commands: [],
-    stages: [{ at: 300, commands: [sheet.lightBoth()] }],
-  },
-  {
-    n: 5,
-    id: 'the-pair',
-    title: 'The two numbers, alone',
-    relation: 'so',
-    secs: 3.5,
-    vo: 'So the model owns 320 billion...  but only uses this much of them.',
-    // The sheet has done its job. What matters from here is the *relationship*
-    // between two numbers, not a spec list, so everything else leaves.
-    commands: [sheet.foldAway(), bar.asPair({ x: 50, y: 42 })],
-  },
-  {
-    n: 6,
-    id: 'the-sliver',
-    title: 'The share bar',
-    relation: 'so',
-    secs: 5,
-    // FROZEN-FRAME TEST 1 of 3. The whole premise of the section, in one image.
-    vo: 'Which, drawn to scale, looks like this.',
-    commands: [],
-    stages: [{ at: 240, commands: [bar.asBar({ x: 50, y: 50 }, 1, 'for one word \u2014 about 5% of it')] }],
-  },
-  {
-    n: 7,
-    id: 'okay',
-    title: 'Okay',
-    relation: 'so',
-    secs: 2.5,
-    vo: 'Okay.',
-    commands: [narrator.pose('nod')],
+    secs: 5.5,
+    // FROZEN FRAME 1 of 3. The claim and the number, in one image.
+    vo: 'And doing that only uses eighteen billion of them. About five percent.',
+    commands: [loop.off()],
+    stages: [{ at: 240, commands: [bar.asBar({ x: 50, y: 44 }, 1, 'the part that actually works')] }],
   },
 
-  /* ═══ M2 · SO WHY HAVE THE REST? ═════════════════════════════════════════
-   * The question lands at beat 8 of 31. Every earlier version buried it past
-   * the halfway mark, which is why they read as exposition. */
+  /* ═══ ACT 2 · SO WHY CARRY THE REST? ═════════════════════════════════════
+   * Q1 is asked at beat 5 of 21 and is genuinely answered at beat 13. */
   {
-    n: 8,
-    id: 'the-dark-rest',
-    title: 'So why have the other 300 billion?',
+    n: 5,
+    id: 'q1',
+    title: 'So why carry the rest?',
     relation: 'and-yet',
-    secs: 4,
-    vo: 'So why have the other 300 billion at all?',
-    commands: [bar.darken()],
+    secs: 4.5,
+    vo: 'So why carry the other three hundred billion at all?',
+    commands: [bar.darken(), narrator.pose('think')],
     lateOverlays: {
-      at: 240,
-      overlays: [
-        { kind: 'note', text: '?', at: { x: '52%', y: '44%' }, size: 'xl', tone: 'red', rotate: 0 },
-        H('what is all of this for?', { x: '62%', y: '64%' }, { size: 'md', rotate: -2, tone: 'red' }),
-      ],
+      at: 260,
+      overlays: [{ kind: 'note', text: '?', at: { x: '52%', y: '42%' }, size: 'xl', tone: 'red', rotate: 0 }],
     },
   },
   {
-    n: 9,
-    id: 'ask-it',
-    title: 'Ahmad asks it',
-    relation: 'hope',
-    secs: 4,
-    vo: "That's the question. And the answer turns into a much better one.",
-    commands: [narrator.at({ x: 14, y: 71 }, 'hopeful', 1)],
-  },
-
-  /* ═══ M3 · THE HOSPITAL ══════════════════════════════════════════════════
-   * The world arrives by transformation, not replacement: the bar rises into
-   * the building. Same subject, new form. */
-  {
-    n: 10,
-    id: 'build',
-    title: 'The hospital',
+    n: 6,
+    id: 'look-inside',
+    title: 'Not one big block',
     relation: 'therefore',
     secs: 5,
-    vo: "Because this is a Mixture-of-Experts model. And the easiest way to see one is as a hospital.",
-    commands: [narrator.at({ x: 7, y: 84 }, 'wonder', 0.5)],
+    vo: "Let's look inside. It isn't one big block of knowledge.",
+    commands: [ground.off()],
     stages: [
-      { at: 120, commands: [bar.moveTo({ x: 58, y: 40 }, 0.5)] },
-      { at: 520, commands: [bar.off(), hospital.rise(HOSP, HOSP_S)] },
+      { at: 120, commands: [bar.moveTo(HOSP, 0.5)] },
+      { at: 540, commands: [bar.off(), hospital.rise(HOSP, HOSP_S), narrator.at({ x: 7, y: 84 }, 'wonder', 0.5)] },
+    ],
+  },
+  {
+    n: 7,
+    id: 'experts',
+    title: '288 experts',
+    relation: 'so',
+    secs: 5,
+    vo: "It's split into experts. Two hundred and eighty-eight of them.",
+    commands: [hospital.label('Mixture of Experts', '320B total')],
+    stages: [{ at: 200, commands: [hospital.staff()] }],
+    lateOverlays: {
+      at: 1050,
+      overlays: [{ kind: 'brace', text: '288 experts', at: { x: HOSP_LEFT, y: '69%' }, width: HOSP_W }],
+    },
+  },
+  {
+    n: 8,
+    id: 'a-word-arrives',
+    title: 'A word comes in',
+    relation: 'so',
+    secs: 3.5,
+    // The desk lands here, unlabelled. Beat 16 depends on it having been on
+    // screen, unremarked, for eight beats.
+    vo: 'A word comes in.',
+    commands: [word.arrive({ x: 10, y: 56 }, 0.5, 'dog'), desk.arrive({ x: 23, y: 82 }, 0.58)],
+  },
+  {
+    n: 9,
+    id: 'a-few-picked',
+    title: 'Only a few get picked',
+    relation: 'so',
+    secs: 4.5,
+    // Passive, matching the script. No chooser is shown yet.
+    vo: 'And only a few of them get picked.',
+    commands: [],
+    stages: [{ at: 240, commands: [hospital.choose(CHOSEN)] }],
+  },
+  {
+    n: 10,
+    id: 'eight-of-288',
+    title: 'Eight of 288',
+    relation: 'so',
+    secs: 4.5,
+    vo: 'Eight. Out of 288. The other 280 do nothing at all.',
+    commands: [],
+    overlays: [
+      H('these eight are working', { x: '35%', y: '9%' }, { size: 'md', rotate: -2, tone: 'orange' }),
+      { kind: 'brace', text: '280 doing nothing', at: { x: HOSP_LEFT, y: '69%' }, width: HOSP_W, tone: 'orange' },
     ],
   },
   {
     n: 11,
-    id: 'the-sign',
-    title: 'Named on the world',
-    relation: 'so',
-    secs: 3,
-    vo: 'A big one.',
-    commands: [hospital.label('Mixture of Experts', '320B total')],
+    id: 'another-word',
+    title: 'Now watch',
+    relation: 'and-yet',
+    secs: 4,
+    vo: 'Now watch. Another word.',
+    commands: [word.moveTo({ x: 10, y: 40 }, 0.44), narrator.pose('point')],
+    stages: [{ at: 300, commands: [word2.arrive({ x: 10, y: 62 }, 0.5, 'cat')] }],
   },
   {
     n: 12,
-    id: 'staff',
-    title: '288 specialists',
-    relation: 'so',
-    secs: 5,
-    vo: 'Inside it there are lots of different expert networks. Two hundred and eighty-eight of them.',
-    commands: [],
-    stages: [{ at: 200, commands: [hospital.staff()] }],
-    lateOverlays: {
-      at: 1050,
-      overlays: [{ kind: 'brace', text: '288 experts', at: { x: HOSP_LEFT, y: '68%' }, width: HOSP_W }],
-    },
-  },
-  {
-    n: 13,
-    id: 'a-word-arrives',
-    title: 'One word arrives',
-    relation: 'so',
-    secs: 3.5,
-    vo: 'A word comes in.',
-    // The desk arrives here, unlabelled and unremarked. Beat 23 depends
-    // entirely on it having been on screen for ten beats already.
-    commands: [word.arrive({ x: 10, y: 58 }, 0.5, 'dog'), desk.arrive({ x: 24, y: 82 }, 0.6)],
-  },
-  {
-    n: 14,
-    id: 'eight-light',
-    title: 'Only a few are selected',
-    relation: 'so',
-    secs: 5,
-    vo: 'And for that word, only a few of them are selected.',
-    // Passive on purpose, matching the script. No chooser is shown yet.
-    commands: [],
-    stages: [{ at: 260, commands: [hospital.choose(CHOSEN)] }],
-  },
-  {
-    n: 15,
-    id: 'count-them',
-    title: '8 working, 280 not',
-    relation: 'so',
-    secs: 3.5,
-    vo: 'Eight of them. Out of 288.',
-    commands: [],
-    overlays: [
-      H('these eight are working', { x: '36%', y: '9%' }, { size: 'md', rotate: -2, tone: 'orange' }),
-      { kind: 'brace', text: '280 doing nothing', at: { x: HOSP_LEFT, y: '68%' }, width: HOSP_W, tone: 'orange' },
-    ],
-  },
-  {
-    n: 16,
-    id: 'makes-sense',
-    title: 'That makes sense',
-    relation: 'so',
-    secs: 3,
-    vo: 'That makes sense.',
-    commands: [narrator.pose('nod')],
-  },
-
-  /* ═══ M4 · THE SECOND QUESTION ═══════════════════════════════════════════
-   * The eight leave the building so that "the team is tiny" and "the building
-   * is enormous" can be held in one frame. */
-  {
-    n: 17,
-    id: 'turn',
-    title: 'But then',
-    relation: 'and-yet',
-    secs: 3,
-    vo: 'But then I had another question.',
-    commands: [narrator.pose('wonder')],
-  },
-  {
-    n: 18,
-    id: 'isolate-eight',
-    title: 'The eight, lifted out',
-    relation: 'so',
-    secs: 4.5,
-    vo: 'If only a few experts are actually being used...',
-    commands: [team.lift({ x: 16, y: 38 }, 0.85), hospital.quiet()],
-  },
-  {
-    n: 19,
-    id: 'the-weight',
-    title: 'Hundreds of gigabytes',
+    id: 'different-eight',
+    title: 'A completely different eight',
     relation: 'wall',
-    secs: 5.5,
-    vo: 'why does running the model still mean dealing with hundreds of gigabytes of weights?',
-    commands: [hospital.heavy()],
+    // THE EVENT. Everything in this section and in section 7 depends on it,
+    // so it gets the longest hold in the section and no competing overlay.
+    secs: 6,
+    vo: 'A completely different eight.',
+    commands: [hospital.reroute(CHOSEN_B, CHOSEN)],
     lateOverlays: {
-      at: 340,
+      at: 800,
       overlays: [
-        // Centred under the building it measures. Floating out to the left, it
-        // read as an unrelated caption rather than the building's weight.
-        H('hundreds of gigabytes', { x: '58%', y: '73%' }, { size: 'lg', rotate: -1, tone: 'red', sticky: true, width: '34%' }),
+        H('different word,\ndifferent experts', { x: '4%', y: '16%' }, { size: 'md', rotate: -2, tone: 'red' }),
+        // A leader line, because a label floating at the frame edge does not
+        // tell you which marks it is naming.
+        H('these are empty now', { x: '20%', y: '25%' }, { size: 'sm', rotate: -2, tone: 'red' }),
+        { kind: 'arrow', from: { x: 560, y: 300 }, to: { x: 792, y: 348 }, bow: -18, tone: 'orange' },
       ],
     },
   },
   {
-    n: 20,
-    id: 'the-mismatch',
-    title: 'The mismatch',
-    relation: 'and-yet',
-    secs: 4.5,
-    // FROZEN-FRAME TEST 2 of 3. Tiny team, enormous building, one frame.
-    vo: 'All of that... for these eight.',
-    commands: [],
-    overlays: [{ kind: 'note', text: '?', at: { x: '30%', y: '36%' }, size: 'xl', tone: 'red', rotate: 0 }],
-  },
-  {
-    n: 21,
-    id: 'just-the-part',
-    title: 'Keep just the small part',
-    relation: 'hope',
-    secs: 4.5,
-    vo: "Why can't I keep just the small part I need?",
-    commands: [team.box()],
-    lateOverlays: {
-      at: 280,
-      overlays: [H('why not keep just this?', { x: '5%', y: '58%' }, { size: 'md', rotate: -2, tone: 'blue' })],
-    },
+    n: 13,
+    id: 'options',
+    title: "They're options",
+    relation: 'therefore',
+    secs: 6,
+    // Q1 answered. The viewer should feel the 300 billion is not waste.
+    vo: "Same model. New word, new team. So those three hundred billion aren't waste \u2014 they're options. You just never need all of them at once.",
+    commands: [narrator.pose('nod')],
+    overlays: [
+      {
+        kind: 'note',
+        text: 'not waste \u2014 options',
+        at: { x: '52%', y: '80%' },
+        size: 'lg',
+        rotate: -1,
+        backed: true,
+        width: '40%',
+      },
+    ],
   },
 
-  /* ═══ M5 · THE ROUTER, NAMED ═════════════════════════════════════════════
-   * Function before name. The chooser has been visible since beat 13; this is
-   * where it turns out to have a name. */
+  /* ═══ ACT 3 · THEN WHY IS IT SO HEAVY? ═══════════════════════════════════
+   * A new question, which needs beat 13's answer to even be askable. */
   {
-    n: 22,
-    id: 'stranger',
-    title: 'It gets stranger',
+    n: 14,
+    id: 'but-hold-on',
+    title: 'But hold on',
     relation: 'and-yet',
-    secs: 3,
-    vo: 'And it gets even stranger.',
-    commands: [narrator.pose('think')],
-  },
-  {
-    n: 23,
-    id: 'reveal-router',
-    title: 'That thing has a name',
-    relation: 'so',
-    secs: 5.5,
-    vo: 'Because the model already has something called a router.',
-    commands: [desk.name()],
-  },
-  {
-    n: 24,
-    id: 'its-job',
-    title: 'What it does',
-    relation: 'so',
-    secs: 5,
-    vo: 'Its whole job is to decide which experts a word should go to.',
-    commands: [],
-    overlays: [
-      { kind: 'arrow', from: { x: 250, y: 700 }, to: { x: 400, y: 800 }, bow: -24 },
-      { kind: 'arrow', from: { x: 520, y: 780 }, to: { x: 400, y: 500 }, bow: 70, tone: 'orange' },
-      H('picks the eight', { x: '29%', y: '62%' }, { size: 'sm', rotate: -2, tone: 'orange' }),
+    secs: 3.5,
+    vo: "But hold on. If it's only ever eight at a time\u2026",
+    // The two words stand down here and come back at beat 19 to accuse. They
+    // also collided with the team, and act 3 is about the plan, not the words.
+    commands: [
+      team.lift({ x: 15, y: 34 }, 0.8),
+      word.off(),
+      word2.off(),
+      hospital.quiet(),
+      narrator.pose('wonder'),
     ],
   },
   {
-    n: 25,
-    id: 'so-pause',
-    title: 'So...',
-    relation: 'so',
-    secs: 3,
-    vo: 'So...',
-    commands: [narrator.pose('hopeful')],
+    n: 15,
+    id: 'the-weight',
+    title: 'Hundreds of gigabytes',
+    relation: 'wall',
+    secs: 5.5,
+    // FROZEN FRAME 2 of 3. Tiny team, enormous heavy building, one image.
+    vo: 'why does running this thing still mean hundreds of gigabytes?',
+    commands: [hospital.heavy()],
+    lateOverlays: {
+      at: 320,
+      overlays: [
+        H('hundreds of gigabytes', { x: '57%', y: '74%' }, { size: 'lg', rotate: -1, tone: 'red', sticky: true, width: '34%' }),
+        { kind: 'note', text: '?', at: { x: '29%', y: '32%' }, size: 'xl', tone: 'red', rotate: 0 },
+      ],
+    },
   },
-
-  /* ═══ M6 · THE HOPE, AT ITS PEAK ═════════════════════════════════════════
-   * Nothing here is crossed out, greyed as broken, or marked with a warning.
-   * The plan has to look CORRECT. The viewer must finish this section
-   * thinking "that should work" -- that is the headache. A hazard sign here
-   * would turn curiosity into the feeling of being withheld from, which is
-   * exactly what made every earlier version read as a bad story. */
   {
-    n: 26,
+    n: 16,
+    id: 'the-router',
+    title: 'It was there all along',
+    relation: 'so',
+    secs: 6,
+    // Function before name: this desk has been on screen since beat 8.
+    vo: "Especially when something already knows which eight you need. It's called the router \u2014 and it's been sitting right there the whole time.",
+    commands: [desk.name(), narrator.pose('point')],
+    lateOverlays: {
+      at: 700,
+      overlays: [{ kind: 'arrow', from: { x: 300, y: 700 }, to: { x: 380, y: 800 }, bow: -20, tone: 'orange' }],
+    },
+  },
+  {
+    n: 17,
     id: 'the-plan',
-    title: 'The plan',
+    title: 'So load those eight',
     relation: 'hope',
     secs: 6,
-    vo: "If the router already knows which experts it needs... why can't we just load those, use them, and leave everything else asleep?",
+    // Nothing here is crossed out or marked as failing. The plan must look
+    // correct, because the viewer has to leave thinking it should work.
+    vo: 'So load those eight. Leave everybody else asleep.',
     clearSticky: true,
     commands: [
       hospital.moveTo({ x: 85, y: 17 }, 0.36),
@@ -397,53 +339,63 @@ export const BEATS: Beat[] = [
       hospital.unheavy(),
       team.off(),
       word.off(),
+      word2.off(),
       desk.off(),
       narrator.at({ x: 8, y: 82 }, 'hopeful', 0.5),
     ],
     stages: [{ at: 300, commands: [plan.draw({ x: 45, y: 42 }, 0.86)] }],
   },
   {
-    n: 27,
+    n: 18,
     id: 'it-fits',
-    title: 'And it fits',
+    title: 'That fits on almost anything',
     relation: 'hope',
-    secs: 5.5,
-    vo: 'Could we turn a 320-billion-parameter model into something that fits comfortably on a much smaller machine?',
+    secs: 5,
+    vo: 'Eight experts. That fits on almost anything.',
     commands: [machine.arrive({ x: 87, y: 44 }, 0.62)],
-    stages: [{ at: 420, commands: [machine.fill(), narrator.pose('cheer')] }],
+    stages: [{ at: 400, commands: [machine.fill(), narrator.pose('cheer')] }],
     lateOverlays: {
-      at: 620,
+      at: 600,
       overlays: [
         { kind: 'sparks', at: { x: '87%', y: '30%' } },
-        H('it fits!', { x: '87%', y: '58%' }, { size: 'lg', rotate: -3, tone: 'orange', sticky: true, width: '20%' }),
+        H('it fits', { x: '87%', y: '58%' }, { size: 'lg', rotate: -3, tone: 'orange', sticky: true, width: '20%' }),
       ],
     },
   },
+
+  /* ═══ ACT 4 · THE TURN ═══════════════════════════════════════════════════
+   * The payoff of beat 12. Nothing is shown blocked -- the plan stays intact
+   * and correct-looking underneath the question. */
   {
-    n: 28,
-    id: 'and-if-not',
-    title: 'And if not',
+    n: 19,
+    id: 'which-eight',
+    title: 'Except \u2014 which eight?',
     relation: 'and-yet',
-    secs: 4,
-    vo: 'And if not...',
-    // Nothing breaks. The sparks simply stop and the pose drops. The restraint
-    // here is the entire difference between a headache and a red cross.
+    secs: 5,
+    vo: 'Except \u2014 which eight? That changed the moment the word changed.',
     commands: [narrator.pose('think')],
+    stages: [{ at: 300, commands: [word.arrive({ x: 8, y: 20 }, 0.4, 'dog'), word2.arrive({ x: 8, y: 34 }, 0.4, 'cat')] }],
+    lateOverlays: {
+      at: 700,
+      // Sticky: at beat 20 the two cards are the evidence the question rests
+      // on, and unlabelled they read as leftover clutter.
+      overlays: [H('two words.\ntwo different eights.', { x: '17%', y: '20%' }, { size: 'md', rotate: -2, tone: 'red', sticky: true })],
+    },
   },
   {
-    n: 29,
+    n: 20,
     id: 'the-question',
-    title: 'The headache',
+    title: 'The exit question',
     relation: 'wall',
-    secs: 6,
-    // FROZEN-FRAME TEST 3 of 3. The working plan, with the question over it.
-    vo: 'what exactly is stopping us?',
+    secs: 7,
+    // FROZEN FRAME 3 of 3. The working plan, with the question over it.
+    vo: "So you'd need a new set. Every single word. If we only load the experts we need, why can't we run this on far less memory?",
     commands: [],
     overlays: [
       {
         kind: 'note',
-        text: 'If we only load the experts we need,\nwhy can’t we run this on far less memory?',
-        at: { x: '50%', y: '78%' },
+        text: 'If we only load the experts we need,\nwhy can\u2019t we run this on far less memory?',
+        at: { x: '50%', y: '79%' },
         size: 'xl',
         rotate: -1,
         backed: true,
@@ -451,36 +403,22 @@ export const BEATS: Beat[] = [
       },
     ],
   },
-
-  /* ═══ M7 · GO INSIDE ═════════════════════════════════════════════════════ */
   {
-    n: 30,
-    id: 'the-sheet',
-    title: 'Staring at it will not help',
-    relation: 'therefore',
-    secs: 4.5,
-    vo: "To answer that, staring at the final architecture isn't going to help.",
-    commands: [archSheet.slam({ x: 48, y: 50 })],
-    stages: [{ at: 600, commands: [narrator.at({ x: 7, y: 84 }, 'push', 0.5)] }],
-  },
-  {
-    n: 31,
-    id: 'inside',
-    title: 'Inside the model',
+    n: 21,
+    id: 'go-inside',
+    title: 'Follow one word inside',
     relation: 'therefore',
     secs: 5.5,
-    vo: "So let's see what's actually happening in there.",
+    vo: "To answer that, staring at the finished model won't help. Let's follow one word inside.",
     clearSticky: true,
     commands: [
-      archSheet.off(),
       plan.off(),
+      machine.off(),
+      word2.off(),
       hospital.moveTo({ x: 58, y: 44 }, 0.8),
       hospital.wake(),
-      // Nobody is asleep in this frame and nothing is pressing down: leaving
-      // the zZ and the weight arrows on read as leftover state, not story.
       hospital.unbunk(),
       hospital.openDoors(),
-      machine.off(),
       word.arrive({ x: 26, y: 60 }, 0.5, 'dog'),
       narrator.at({ x: 9, y: 85 }, 'push', 0.5),
     ],
@@ -507,5 +445,5 @@ export function stageSpan(beat: Beat) {
   return all.length ? Math.max(...all) : 0
 }
 
-/** Board runtime, so drift between the doc and the code is visible. */
+/** Board runtime, so drift between the script and the code is visible. */
 export const RUNTIME_SECONDS = BEATS.reduce((total, beat) => total + beat.secs, 0)

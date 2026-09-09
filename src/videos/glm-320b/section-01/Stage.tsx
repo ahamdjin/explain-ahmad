@@ -4,6 +4,7 @@ import { ModelSheet, Plan, ShareBar } from '../../../paper/cast/Boards'
 import { ChosenTeam, Hospital } from '../../../paper/cast/Hospital'
 import { Narrator } from '../../../paper/cast/Narrator'
 import { ArchSheet, FrontDesk, SmallMachine, WordCard } from '../../../paper/cast/Props'
+import { WordLoop } from '../../../paper/cast/WordLoop'
 import { type Feel } from '../../../paper/motion'
 import { type SceneState } from './scene'
 
@@ -62,12 +63,21 @@ function Slot({
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   return (
     <>
+      {scene.ground.on ? (
+        <div className="s1-ground" style={{ top: `${scene.ground.y}%` }} aria-hidden="true" />
+      ) : null}
+
+      <Slot on={scene.loop.on} at={scene.loop.at} scale={scene.loop.scale} z={2} feel={feel}>
+        <WordLoop showOut={scene.loop.showOut} inWord={scene.loop.inWord} outWord={scene.loop.outWord} />
+      </Slot>
+
       <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel}>
         <Hospital
           sign={scene.hospital.sign}
           plaque={scene.hospital.plaque}
           staffed={scene.hospital.staffed}
           lit={scene.hospital.lit}
+          was={scene.hospital.was}
           focus={scene.hospital.focus}
           quiet={scene.hospital.quiet}
           heavy={scene.hospital.heavy}
@@ -94,6 +104,10 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Slot on={scene.word.on} at={scene.word.at} scale={scene.word.scale} z={5} feel={feel}>
         <WordCard label={scene.word.label} />
+      </Slot>
+
+      <Slot on={scene.word2.on} at={scene.word2.at} scale={scene.word2.scale} z={5} feel={feel}>
+        <WordCard label={scene.word2.label} />
       </Slot>
 
       <Slot on={scene.plan.on} at={scene.plan.at} scale={scene.plan.scale} z={3} feel={feel}>

@@ -21,11 +21,20 @@ export function ModelSheet({ lit }: { lit: 'none' | 'total' | 'both' }) {
 
   return (
     <div className="s1-sheet">
-      {/* Sized to the rows it holds. A taller sheet left an empty lower half
-          that read as a missing section rather than as breathing room. */}
+      {/*
+        Sized to the rows it holds -- a taller sheet left an empty lower half
+        that read as a missing section rather than as breathing room.
+
+        The tape, the tilt and the shadow are not decoration: a perfectly
+        upright rectangle floating on an empty field reads as a slide, and the
+        whole point of this world is that things are physically somewhere.
+      */}
       <svg viewBox="0 0 700 330" aria-hidden="true">
         <path d="M14 14h672v302H14z" fill="#FBF8F1" stroke={INK} strokeWidth="3.4" />
         <path d="M52 92h596" stroke={INK} strokeWidth="2.2" opacity="0.55" />
+        <g transform="rotate(-7 350 14)">
+          <path d="M296 -2h108v30H296z" fill="#EFE3C8" stroke={INK} strokeWidth="2.2" opacity="0.92" />
+        </g>
       </svg>
 
       <div className="s1-sheet-body">

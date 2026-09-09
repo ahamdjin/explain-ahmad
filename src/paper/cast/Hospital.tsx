@@ -34,6 +34,7 @@ export function Hospital({
   plaque,
   staffed,
   lit,
+  was,
   focus,
   quiet,
   heavy,
@@ -44,6 +45,8 @@ export function Hospital({
   plaque: string
   staffed: boolean
   lit: readonly number[]
+  /** Where the *previous* word's team sat. */
+  was: readonly number[]
   focus: boolean
   quiet: boolean
   heavy: boolean
@@ -51,6 +54,13 @@ export function Hospital({
   doorsOpen: boolean
 }) {
   const chosen = new Set(lit)
+  /*
+   * The event of this section is that a second word picks a different eight.
+   * Lighting the new team alone cannot show that -- the viewer has no memory
+   * of where the last one sat, so the frame reads as "eight are lit" rather
+   * than "eight *different* ones are lit". These are the empty chairs.
+   */
+  const vacated = was.filter((i) => !chosen.has(i))
 
   return (
     <motion.div
@@ -121,7 +131,7 @@ export function Hospital({
                   }}
                 >
                   {isLit ? (
-                    <rect x={x - 4} y={y - 4} width="27" height="27" rx="9" fill="#E79A63" opacity="0.28" />
+                    <rect x={x - 6} y={y - 6} width="31" height="31" rx="11" fill="#E79A63" opacity="0.42" />
                   ) : null}
                   <g stroke={INK} strokeWidth="1.7" strokeLinecap="round">
                     <path d={`M${x + 5} ${y + 18}v7`} />
@@ -148,6 +158,30 @@ export function Hospital({
                       <circle cx={x + 13.4} cy={y + 7.6} r="1.7" />
                     </g>
                   )}
+                </motion.g>
+              )
+            })}
+          </g>
+        ) : null}
+
+        {/* the seats the previous word's team has just left */}
+        {staffed && vacated.length ? (
+          <g>
+            {vacated.map((i) => {
+              const { x, y } = seat(i)
+              return (
+                <motion.g key={`was-${i}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+                  <rect
+                    x={x - 5}
+                    y={y - 5}
+                    width="29"
+                    height="29"
+                    rx="10"
+                    fill="none"
+                    stroke="#C86658"
+                    strokeWidth="2.4"
+                    strokeDasharray="4 4"
+                  />
                 </motion.g>
               )
             })}

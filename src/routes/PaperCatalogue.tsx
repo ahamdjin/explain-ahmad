@@ -112,13 +112,13 @@ export default function PaperCatalogue() {
       <h2>World</h2>
       <div className="pc-grid">
         <Item name="Hospital — staffed" note="288 experts, code-generated 36×8" wide>
-          <Hospital sign="Mixture of Experts" plaque="320B total" staffed lit={[]} focus={false} quiet={false} heavy={false} bunks={false} doorsOpen={false} />
+          <Hospital sign="Mixture of Experts" plaque="320B total" staffed lit={[]} was={[]} focus={false} quiet={false} heavy={false} bunks={false} doorsOpen={false} />
         </Item>
         <Item name="Hospital — chosen + heavy" note="focus dims the 280; heavy adds the load line" wide>
-          <Hospital sign="Mixture of Experts" plaque="320B total" staffed lit={CHOSEN} focus quiet={false} heavy bunks={false} doorsOpen={false} />
+          <Hospital sign="Mixture of Experts" plaque="320B total" staffed lit={CHOSEN} was={[]} focus quiet={false} heavy bunks={false} doorsOpen={false} />
         </Item>
         <Item name="Hospital — bunks + doors" note="asleep, and the entrance open" wide>
-          <Hospital sign="Mixture of Experts" plaque="320B total" staffed lit={CHOSEN} focus quiet={false} heavy={false} bunks doorsOpen />
+          <Hospital sign="Mixture of Experts" plaque="320B total" staffed lit={CHOSEN} was={[]} focus quiet={false} heavy={false} bunks doorsOpen />
         </Item>
         <Item name="ChosenTeam" note="the eight, lifted out">
           <ChosenTeam lit={CHOSEN} boxed />

@@ -625,3 +625,35 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* The opening image: the machine doing its job ------------------------- */
+
+.s1-loop {
+  width: 62cqw;
+}
+
+.s1-loop svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-loop-word {
+  font: 400 58px/1 var(--hand);
+}
+
+/* A horizon, so objects stand somewhere instead of floating on a slide. */
+.s1-ground {
+  position: absolute;
+  left: 4cqw;
+  width: 92cqw;
+  border-top: 2px solid rgba(43, 41, 38, 0.22);
+}
+
+/* Tilt and shadow live here rather than in the SVG, so the tape rotates
+ * with the sheet as one physical object. */
+.s1-sheet {
+  filter: drop-shadow(0 10px 16px rgba(43, 41, 38, 0.13));
+  transform: rotate(-1.1deg);
+}

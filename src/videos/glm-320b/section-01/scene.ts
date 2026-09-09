@@ -10,6 +10,10 @@
 export type At = { x: number; y: number }
 
 export type SceneState = {
+  /** Beat 3. The machine doing its job, before anything is opened up. */
+  loop: { on: boolean; at: At; scale: number; showOut: boolean; inWord: string; outWord: string }
+  /** A horizon, so the frame is a place rather than a slide. */
+  ground: { on: boolean; y: number }
   /** Beats 1-5. The model info sheet. */
   sheet: { on: boolean; at: At; scale: number; lit: 'none' | 'total' | 'both' }
   /** Beats 5-9. The two numbers, alone, then as one share bar. */
@@ -34,6 +38,8 @@ export type SceneState = {
     staffed: boolean
     /** Indices of the lit specialists. Empty = nobody chosen yet. */
     lit: readonly number[]
+    /** The team the previous word had, drawn as vacated chairs. */
+    was: readonly number[]
     /** Greys everything unlit, so 8-vs-280 reads instantly. */
     focus: boolean
     /** Whole building recedes to a prop while something else holds the frame. */
@@ -46,6 +52,12 @@ export type SceneState = {
   }
   /** The word being processed. Never called a token in this section. */
   word: { on: boolean; at: At; scale: number; label: string }
+  /**
+   * The second word. A separate actor on purpose: the event of this section is
+   * two words on screen at once picking different teams, which is impossible
+   * if one card is relabelled.
+   */
+  word2: { on: boolean; at: At; scale: number; label: string }
   /** The front desk. Present from beat 13, named ROUTER only at beat 23. */
   desk: { on: boolean; at: At; scale: number; named: boolean; ringed: boolean }
   /** The eight, lifted out of the building. */
@@ -66,6 +78,8 @@ export type SceneState = {
 }
 
 export const INITIAL: SceneState = {
+  loop: { on: false, at: { x: 50, y: 44 }, scale: 1, showOut: false, inWord: 'dog', outWord: 'ran' },
+  ground: { on: false, y: 82 },
   sheet: { on: false, at: { x: 50, y: 46 }, scale: 1, lit: 'none' },
   bar: { on: false, at: { x: 50, y: 44 }, scale: 1, mode: 'pair', lit: 0.056, caption: '', dark: false },
   hospital: {
@@ -76,13 +90,15 @@ export const INITIAL: SceneState = {
     plaque: '',
     staffed: false,
     lit: [],
+    was: [],
     focus: false,
     quiet: false,
     heavy: false,
     bunks: false,
     doorsOpen: false,
   },
-  word: { on: false, at: { x: 12, y: 50 }, scale: 1, label: 'scared' },
+  word: { on: false, at: { x: 12, y: 50 }, scale: 1, label: 'dog' },
+  word2: { on: false, at: { x: 12, y: 72 }, scale: 1, label: 'cat' },
   desk: { on: false, at: { x: 20, y: 78 }, scale: 1, named: false, ringed: false },
   team: { on: false, at: { x: 15, y: 58 }, scale: 1, boxed: false },
   plan: { on: false, at: { x: 50, y: 52 }, scale: 1 },
@@ -97,10 +113,13 @@ export type Patch = { [K in Actor]?: Partial<SceneState[K]> }
 /** Cumulative merge. Absence of a key means "leave it exactly as it was". */
 export function applyPatches(base: SceneState, patches: Patch[]): SceneState {
   const next: SceneState = {
+    loop: { ...base.loop },
+    ground: { ...base.ground },
     sheet: { ...base.sheet },
     bar: { ...base.bar },
     hospital: { ...base.hospital },
     word: { ...base.word },
+    word2: { ...base.word2 },
     desk: { ...base.desk },
     team: { ...base.team },
     plan: { ...base.plan },
@@ -127,8 +146,30 @@ export function applyPatches(base: SceneState, patches: Patch[]): SceneState {
  */
 export const CHOSEN = [41, 76, 103, 147, 168, 211, 245, 278] as const
 
+/**
+ * The team a *different* word gets. This is the section's event.
+ *
+ * It shares nothing with CHOSEN -- overlap would soften the one moment the
+ * whole video is built on, and it is also true: routing scores independently
+ * per input, so two unrelated words have no reason to agree.
+ */
+export const CHOSEN_B = [17, 58, 121, 155, 190, 233, 259, 284] as const
+
 /* -- Story verbs ------------------------------------------------------------
  * Each returns a patch. beats.ts should never touch scene shape directly. */
+
+export const loop = {
+  show: (at: At, scale = 1, inWord = 'dog', outWord = 'ran'): Patch => ({
+    loop: { on: true, at, scale, inWord, outWord, showOut: false },
+  }),
+  answer: (): Patch => ({ loop: { showOut: true } }),
+  off: (): Patch => ({ loop: { on: false } }),
+}
+
+export const ground = {
+  at: (y: number): Patch => ({ ground: { on: true, y } }),
+  off: (): Patch => ({ ground: { on: false } }),
+}
 
 export const sheet = {
   arrive: (at: At, scale = 1): Patch => ({ sheet: { on: true, at, scale, lit: 'none' } }),
@@ -153,6 +194,8 @@ export const hospital = {
   label: (sign: string, plaque: string): Patch => ({ hospital: { sign, plaque } }),
   staff: (): Patch => ({ hospital: { staffed: true } }),
   choose: (lit: readonly number[]): Patch => ({ hospital: { lit, focus: true } }),
+  /** Re-route to a different team, leaving the old seats visibly empty. */
+  reroute: (lit: readonly number[], was: readonly number[]): Patch => ({ hospital: { lit, was, focus: true } }),
   heavy: (): Patch => ({ hospital: { heavy: true } }),
   /** Clears the weight. The plan is the answer to it, so it stops pressing. */
   unheavy: (): Patch => ({ hospital: { heavy: false } }),
@@ -167,8 +210,14 @@ export const hospital = {
 export const word = {
   /** Superseded by a later object that restates it. See `plan`. */
   off: (): Patch => ({ word: { on: false } }),
-  arrive: (at: At, scale = 1, label = 'scared'): Patch => ({ word: { on: true, at, scale, label } }),
+  arrive: (at: At, scale = 1, label = 'dog'): Patch => ({ word: { on: true, at, scale, label } }),
   moveTo: (at: At, scale?: number): Patch => ({ word: { at, ...(scale === undefined ? {} : { scale }) } }),
+}
+
+export const word2 = {
+  arrive: (at: At, scale = 1, label = 'cat'): Patch => ({ word2: { on: true, at, scale, label } }),
+  moveTo: (at: At, scale?: number): Patch => ({ word2: { at, ...(scale === undefined ? {} : { scale }) } }),
+  off: (): Patch => ({ word2: { on: false } }),
 }
 
 export const desk = {
