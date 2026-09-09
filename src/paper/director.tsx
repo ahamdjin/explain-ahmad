@@ -79,7 +79,19 @@ export function SectionRunner<S, P>({
 }) {
   const [index, setIndex] = useState(() => initialIndex(beats.length))
   const lockUntil = useRef(0)
+  /*
+   * A mirror of `index`, so `move` can read the current beat without putting
+   * the end-of-section check inside the state updater. React may run an
+   * updater during the render phase, and calling the parent's onFinish from
+   * in there is a setState-while-rendering -- it warns, and the update can be
+   * dropped.
+   */
+  const indexRef = useRef(index)
   const beat = beats[index]
+
+  useEffect(() => {
+    indexRef.current = index
+  }, [index])
 
   /** How far into the current beat we are, so staged reveals fire in order. */
   const [elapsed, setElapsed] = useState(Number.POSITIVE_INFINITY)
@@ -126,15 +138,17 @@ export function SectionRunner<S, P>({
     (delta: number) => {
       const now = performance.now()
       if (now < lockUntil.current) return
-      setIndex((current) => {
-        if (delta > 0 && current === beats.length - 1) {
-          onFinish?.()
-          return current
-        }
-        const next = Math.max(0, Math.min(beats.length - 1, current + delta))
-        lockUntil.current = now + holdFor(beats[next])
-        return next
-      })
+
+      if (delta > 0 && indexRef.current === beats.length - 1) {
+        onFinish?.()
+        return
+      }
+
+      const next = Math.max(0, Math.min(beats.length - 1, indexRef.current + delta))
+      if (next === indexRef.current) return
+      lockUntil.current = now + holdFor(beats[next])
+      indexRef.current = next
+      setIndex(next)
     },
     [beats, onFinish],
   )
