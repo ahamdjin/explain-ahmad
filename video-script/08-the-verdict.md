@@ -1,5 +1,8 @@
 # Section 08 — The verdict
 
+> **Built.** 8 beats, 0:47. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-08` · in sequence: `/watch?section=8`
+
 ## Contract
 
 | | |
@@ -8,7 +11,7 @@
 | Answers | Compute, not memory. |
 | **Event** | **The claim from beat 2 of §1 is ruled on.** |
 | Exits on | none — the thesis lands |
-| Beats | ~8 · ~45s |
+| Beats | **8 · 0:47** — built |
 
 ## The job
 

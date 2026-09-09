@@ -1,0 +1,10 @@
+.s5-shared {
+  display: grid;
+  justify-items: center;
+  gap: 0.5cqh;
+}
+
+.s5-shared span {
+  font: 400 clamp(10px, 1.2cqw, 23px) / 1.2 var(--scrawl);
+  color: var(--graphite);
+}

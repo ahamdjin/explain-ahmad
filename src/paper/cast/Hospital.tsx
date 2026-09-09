@@ -40,6 +40,7 @@ export function Hospital({
   heavy,
   bunks,
   doorsOpen,
+  scoring = false,
 }: {
   sign: string
   plaque: string
@@ -52,6 +53,8 @@ export function Hospital({
   heavy: boolean
   bunks: boolean
   doorsOpen: boolean
+  /** The router is grading all 288 against the current numbers. */
+  scoring?: boolean
 }) {
   const chosen = new Set(lit)
   /*
@@ -162,6 +165,34 @@ export function Hospital({
               )
             })}
           </g>
+        ) : null}
+
+        {/* every expert being graded, all 288 of them */}
+        {staffed && scoring ? (
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
+            {Array.from({ length: ROWS }, (_, r) => (
+              <rect
+                key={r}
+                x={X0 - 8}
+                y={Y0 + r * STEP_Y - 6}
+                width={COLS * STEP_X}
+                height="32"
+                rx="8"
+                fill="#5E83B8"
+                opacity="0.1"
+              />
+            ))}
+            <motion.rect
+              x={X0 - 10}
+              y={Y0 - 10}
+              width="34"
+              height={ROWS * STEP_Y}
+              fill="#5E83B8"
+              opacity="0.28"
+              animate={{ x: [X0 - 10, X0 + COLS * STEP_X - 24] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+            />
+          </motion.g>
         ) : null}
 
         {/* the seats the previous word's team has just left */}

@@ -237,8 +237,13 @@ memory**, and that split is the whole video.
 2. Section 1 beats against the chain, then frames. **Done.**
 3. Scripts for every section. **Done** — `video-script/0N-*.md`, verified by
    `npm run check:chain`.
-4. Storyboards and implementation, one section at a time, §7 first because it is
-   the payoff that validates §1.
+4. Storyboards and implementation. **Done — all 8 sections built.**
+   96 beats, 8:04. `storyboard/BOARD.md` is generated from the beats
+   themselves by `npm run board`, so the board and the build cannot disagree.
+5. Watch the whole thing in order at `/watch`. Individual routes
+   (`/section-04`) exist for review only — no section makes sense alone.
+
+Remaining: voice-over, and a pass on pacing once there is audio to cut against.
 
 Do not return to broad art-direction exploration; the visual language is
 settled and liked. Story problems are never fixed by changing the metaphor.

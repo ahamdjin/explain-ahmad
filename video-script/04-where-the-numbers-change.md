@@ -1,5 +1,8 @@
 # Section 04 — Where the numbers change
 
+> **Built.** 11 beats, 0:54. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-04` · in sequence: `/watch?section=4`
+
 ## Contract
 
 | | |
@@ -8,7 +11,7 @@
 | Answers | Because the word never stays alone. It reads its neighbours, and its numbers change. |
 | **Event** | **The same word, in two sentences, ends up with two different rows.** |
 | Exits on | With different numbers, would the router pick a different eight? |
-| Beats | ~11 · ~60s |
+| Beats | **11 · 0:54** — built |
 | Owns after | `attention`, `context` |
 | Still forbidden | `layer` as a count, `bandwidth` |
 

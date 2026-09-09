@@ -6,6 +6,9 @@ and this is the only section that has to change someone's mind.
 Supersedes `08-why-it-cannot-fit.md`, which was written as an explanation rather
 than as a scene.
 
+> **Built.** 14 beats, 1:16. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-07` · in sequence: `/watch?section=7`
+
 ## Contract
 
 | | |
@@ -14,7 +17,7 @@ than as a scene.
 | Answers | No. The fetching costs more than the work it does. |
 | **Event** | **The plan from §1 is run, and it jams.** |
 | Exits on | What did "18 billion active" ever buy? |
-| Beats | ~13 · ~75s |
+| Beats | **14 · 1:16** — built |
 | Owns after | memory vs storage, `bandwidth`, `quantization` |
 
 ## How this section wins or loses

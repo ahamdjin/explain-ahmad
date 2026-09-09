@@ -1,5 +1,8 @@
 # Section 06 — Forty-two floors
 
+> **Built.** 11 beats, 0:55. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-06` · in sequence: `/watch?section=6`
+
 ## Contract
 
 | | |
@@ -8,7 +11,7 @@
 | Answers | No. It happens 42 times per word — 336 expert visits. |
 | **Event** | **The room turns out to be one floor of a tower, and the counter runs to 336.** |
 | Exits on | Could you fetch 336 different sets, per word, fast enough? |
-| Beats | ~11 · ~55s |
+| Beats | **11 · 0:55** — built |
 | Owns after | `layer`, `sparse` vs `dense` |
 | Still forbidden | `bandwidth` (it arrives in §7) |
 

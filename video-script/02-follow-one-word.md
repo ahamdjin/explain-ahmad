@@ -2,6 +2,9 @@
 
 Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
 
+> **Built.** 10 beats, 0:46. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-02` · in sequence: `/watch?section=2`
+
 ## Contract
 
 | | |
@@ -10,7 +13,7 @@ Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
 | Answers | nothing yet — but it finds where the question has to be settled |
 | **Event** | **The router never looks at the word.** |
 | Exits on | What is the router actually reading? |
-| Beats | ~9 · ~45s |
+| Beats | **10 · 0:46** — built |
 | Owns after | "one trip through" |
 | Still forbidden | `embedding`, `attention`, `layer`, `bandwidth` |
 

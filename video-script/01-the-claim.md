@@ -6,6 +6,9 @@ question was its opening question.
 Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
 Numbers: `research/glm/GROUND_TRUTH.md` · Words: `storyboard/VOCABULARY_LEDGER.md`
 
+> **Built.** 21 beats, 1:46. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-01` · in sequence: `/watch?section=1`
+
 ## Contract
 
 | | |
@@ -15,7 +18,7 @@ Numbers: `research/glm/GROUND_TRUTH.md` · Words: `storyboard/VOCABULARY_LEDGER.
 | Answers | Why carry 320 billion if a word only uses 18? → **because which experts you need depends on the word.** The rest isn't waste, it's options. |
 | Event | **A second word arrives and picks a completely different eight.** |
 | Exits on | If the choice keeps changing, how could you ever hold only the ones you need? |
-| Beats | 21 · ~1:50 |
+| Beats | **21 · 1:46** — built |
 | Never says | `token`, `layer`, `attention`, `VRAM`, `quantization`, `bandwidth` |
 
 ## Why the old script was replaced

@@ -1,5 +1,8 @@
 # Section 05 — New numbers, new team
 
+> **Built.** 11 beats, 0:54. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-05` · in sequence: `/watch?section=5`
+
 ## Contract
 
 | | |
@@ -8,7 +11,7 @@
 | Answers | Yes. It scores all 288 against the row and takes the top eight. |
 | **Event** | **The viewer picks the sentence, and watches the team change.** |
 | Exits on | So this happens once per word — right? |
-| Beats | ~11 · ~60s |
+| Beats | **11 · 0:54** — built |
 | Owns after | `top-8`, `shared expert` |
 | Still forbidden | `bandwidth`, `VRAM` |
 

@@ -23,7 +23,12 @@ type Chapter = {
 
 const Section01 = lazy(() => import('../videos/glm-320b/section-01/Section01'))
 const Section02 = lazy(() => import('../videos/glm-320b/section-02/Section02'))
+const Section03 = lazy(() => import('../videos/glm-320b/section-03/Section03'))
+const Section04 = lazy(() => import('../videos/glm-320b/section-04/Section04'))
+const Section05 = lazy(() => import('../videos/glm-320b/section-05/Section05'))
+const Section06 = lazy(() => import('../videos/glm-320b/section-06/Section06'))
 const Section07 = lazy(() => import('../videos/glm-320b/section-07/Section07'))
+const Section08 = lazy(() => import('../videos/glm-320b/section-08/Section08'))
 
 const CHAPTERS: Chapter[] = [
   { n: 1, title: 'The claim on trial', enters: '', component: Section01 },
@@ -33,25 +38,42 @@ const CHAPTERS: Chapter[] = [
     enters: 'If the choice keeps changing, how could you ever hold only the ones you need?',
     component: Section02,
   },
-  { n: 3, title: 'The word becomes numbers', enters: 'What is the router actually reading?' },
+  {
+    n: 3,
+    title: 'The word becomes numbers',
+    enters: 'What is the router actually reading?',
+    component: Section03,
+  },
   {
     n: 4,
     title: 'Where the numbers change',
     enters: 'Those numbers are the same every time. So how did the team ever change?',
+    component: Section04,
   },
   {
     n: 5,
     title: 'New numbers, new team',
     enters: 'With different numbers, would the router pick a different eight?',
+    component: Section05,
   },
-  { n: 6, title: 'Forty-two floors', enters: 'So this happens once per word — right?' },
+  {
+    n: 6,
+    title: 'Forty-two floors',
+    enters: 'So this happens once per word — right?',
+    component: Section06,
+  },
   {
     n: 7,
     title: 'The answer',
     enters: 'Could you fetch 336 different sets, per word, fast enough?',
     component: Section07,
   },
-  { n: 8, title: 'The verdict', enters: 'What did "18 billion active" ever buy?' },
+  {
+    n: 8,
+    title: 'The verdict',
+    enters: 'What did "18 billion active" ever buy?',
+    component: Section08,
+  },
 ]
 
 function startAt() {

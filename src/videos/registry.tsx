@@ -10,7 +10,12 @@ const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
 const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
 const Section01 = lazy(() => import('./glm-320b/section-01/Section01'))
 const Section02 = lazy(() => import('./glm-320b/section-02/Section02'))
+const Section03 = lazy(() => import('./glm-320b/section-03/Section03'))
+const Section04 = lazy(() => import('./glm-320b/section-04/Section04'))
+const Section05 = lazy(() => import('./glm-320b/section-05/Section05'))
+const Section06 = lazy(() => import('./glm-320b/section-06/Section06'))
 const Section07 = lazy(() => import('./glm-320b/section-07/Section07'))
+const Section08 = lazy(() => import('./glm-320b/section-08/Section08'))
 
 /**
  * Real video pages are registered only after their story is known.
@@ -33,9 +38,10 @@ export const videoRoutes: VideoRouteDefinition[] = [
     title: 'Section 02 — Follow one word in',
     component: Section02,
   },
-  {
-    slug: 'section-07',
-    title: 'Section 07 — The answer',
-    component: Section07,
-  },
+  { slug: 'section-03', title: 'Section 03 — The word becomes numbers', component: Section03 },
+  { slug: 'section-04', title: 'Section 04 — Where the numbers change', component: Section04 },
+  { slug: 'section-05', title: 'Section 05 — New numbers, new team', component: Section05 },
+  { slug: 'section-06', title: 'Section 06 — Forty-two floors', component: Section06 },
+  { slug: 'section-07', title: 'Section 07 — The answer', component: Section07 },
+  { slug: 'section-08', title: 'Section 08 — The verdict', component: Section08 },
 ]

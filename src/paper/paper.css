@@ -728,3 +728,130 @@
 .s1-numrow-label {
   font: 400 30px/1 var(--scrawl);
 }
+
+/* A sentence, and what the focus word pays attention to ------------------ */
+
+.s1-sentence { width: 74cqw; }
+.s1-sentence[data-dim='true'] { opacity: 0.5; filter: saturate(0.4); }
+
+.s1-sentence svg,
+.s1-tower svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-sentence-w { font: 400 46px/1 var(--hand); }
+.s1-sentence-cap { font: 400 30px/1 var(--scrawl); }
+
+/* The model as 45 floors -------------------------------------------------- */
+
+.s1-tower { width: 26cqw; }
+.s1-tower-tag { font: 400 15px/1 var(--hand); }
+.s1-tower-here { font: 400 13px/1 var(--hand); }
+.s1-tower-label { font: 400 16px/1 var(--scrawl); }
+
+/* An expandable aside, and the one interactive choice --------------------- */
+
+.s1-aside { position: relative; }
+
+.s1-aside > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5cqw;
+  padding: 0.55cqh 1cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.2px rgba(94, 131, 184, 0.75);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font: 400 clamp(11px, 1.35cqw, 26px) / 1 var(--hand);
+  color: #4e74a8;
+}
+
+.s1-aside > button i {
+  display: grid;
+  place-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: rgba(94, 131, 184, 0.16);
+  font-style: normal;
+}
+
+.s1-aside-panel {
+  position: absolute;
+  top: calc(100% + 1cqh);
+  left: 0;
+  z-index: 30;
+  width: 30cqw;
+  padding: 1.6cqh 1.5cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.4px var(--ink), 0 10px 26px rgba(43, 41, 38, 0.14);
+  border-radius: 8px;
+}
+
+.s1-aside-panel h4 {
+  margin: 0 0 0.7cqh;
+  font: 400 clamp(13px, 1.6cqw, 31px) / 1.2 var(--hand);
+}
+
+.s1-aside-panel p {
+  margin: 0 0 0.6cqh;
+  font: 400 clamp(11px, 1.3cqw, 25px) / 1.45 var(--hand);
+  color: #4a463f;
+}
+
+.s1-aside-panel p:last-child { margin-bottom: 0; }
+
+.s1-choice {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+}
+
+.s1-choice button {
+  padding: 0.9cqh 1.4cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.6px var(--ink);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font: 400 clamp(12px, 1.7cqw, 33px) / 1 var(--hand);
+  color: var(--ink);
+}
+
+.s1-choice button[data-picked='true'] {
+  background: #f6d9c0;
+  box-shadow: inset 0 0 0 3.2px var(--orange-ink);
+}
+
+.s1-choice span {
+  font: 400 clamp(11px, 1.35cqw, 26px) / 1.2 var(--scrawl);
+  color: var(--graphite);
+}
+
+/* The verdict ------------------------------------------------------------- */
+
+.s1-verdict {
+  width: 56cqw;
+  padding: 2.4cqh 2.4cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 3.4px var(--ink);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.s1-verdict p {
+  margin: 0;
+  font: 400 clamp(15px, 2.5cqw, 48px) / 1.3 var(--hand);
+}
+
+.s1-verdict p + p {
+  margin-top: 1.1cqh;
+  font-size: clamp(12px, 1.7cqw, 33px);
+  color: #4a463f;
+}
+
+.s1-verdict b { font-weight: 400; color: var(--orange-ink); }

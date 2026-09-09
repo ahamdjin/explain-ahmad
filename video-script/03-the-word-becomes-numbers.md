@@ -1,5 +1,8 @@
 # Section 03 — The word becomes numbers
 
+> **Built.** 10 beats, 0:49. Board: `storyboard/BOARD.md` (generated).
+> Route: `/section-03` · in sequence: `/watch?section=3`
+
 ## Contract
 
 | | |
@@ -8,7 +11,7 @@
 | Answers | A long list of numbers that stands for the word. |
 | **Event** | **The word tears up into 4096 numbers that run off the frame.** |
 | Exits on | Those numbers are the same every time. So how did the team ever change? |
-| Beats | ~11 · ~55s |
+| Beats | **10 · 0:49** — built |
 | Owns after | `token`, "its numbers" |
 | Still forbidden | `attention`, `layer`, `bandwidth` |
 
