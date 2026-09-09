@@ -1,78 +1,28 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { BEATS, holdFor } from './beats'
-import { FEEL } from './motion'
-import { Overlays } from './Overlays'
-import { PaperDefs } from './paper'
-import { ROUTES, applyPatches, INITIAL } from './scene'
-import { Stage } from './Stage'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { StoryboardStageV2, type Section01Frame } from './StoryboardStageV2'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
-import './section-01.css'
+import './storyboard-v2.css'
 
-function initialIndex() {
-  if (typeof window === 'undefined') return 0
+const LAST_FRAME = 14
+
+function initialFrame(): Section01Frame {
+  if (typeof window === 'undefined') return 1
   const requested = Number(new URLSearchParams(window.location.search).get('frame'))
-  if (!Number.isFinite(requested) || requested < 1) return 0
-  return Math.min(BEATS.length, Math.trunc(requested)) - 1
+  if (!Number.isFinite(requested)) return 1
+  return Math.max(1, Math.min(LAST_FRAME, Math.trunc(requested))) as Section01Frame
 }
 
 export default function Section01() {
-  const [index, setIndex] = useState(initialIndex)
-  const [route, setRoute] = useState<'scared' | 'calculate'>('scared')
-  const [hasRouted, setHasRouted] = useState(false)
+  const [frame, setFrame] = useState<Section01Frame>(initialFrame)
   const lockUntil = useRef(0)
-
-  const beat = BEATS[index]
-  /** How far into the current beat we are, so staged reveals can fire in order. */
-  const [elapsed, setElapsed] = useState(Number.POSITIVE_INFINITY)
-
-  /**
-   * Scene state is every completed beat, plus the stages of the current beat
-   * that have come due. Actors therefore persist and reveals arrive in sequence
-   * rather than all at once.
-   */
-  const scene = useMemo(() => {
-    const previous = BEATS.slice(0, index).flatMap((item) => [
-      ...item.commands,
-      ...(item.stages ?? []).flatMap((stage) => stage.commands),
-    ])
-    const due = (beat.stages ?? []).filter((stage) => stage.at <= elapsed).flatMap((stage) => stage.commands)
-    return applyPatches(INITIAL, [...previous, ...beat.commands, ...due])
-  }, [beat, index, elapsed])
-
-  /** Restart the beat clock on every move; stepping back skips the staging. */
-  useEffect(() => {
-    // Must include lateOverlays: the clock previously stopped after the last
-    // stage, so any annotation scheduled past that point never appeared.
-    const spans = [
-      ...(beat.stages?.map((stage) => stage.at) ?? []),
-      ...(beat.lateOverlays ? [beat.lateOverlays.at] : []),
-    ]
-    if (!spans.length) {
-      setElapsed(Number.POSITIVE_INFINITY)
-      return
-    }
-    setElapsed(0)
-    const started = performance.now()
-    let frame = 0
-    const tick = () => {
-      setElapsed(performance.now() - started)
-      frame = requestAnimationFrame(tick)
-    }
-    frame = requestAnimationFrame(tick)
-    const stop = setTimeout(() => cancelAnimationFrame(frame), Math.max(...spans) + 120)
-    return () => {
-      cancelAnimationFrame(frame)
-      clearTimeout(stop)
-    }
-  }, [beat])
 
   const move = useCallback((delta: number) => {
     const now = performance.now()
     if (now < lockUntil.current) return
-    setIndex((current) => {
-      const next = Math.max(0, Math.min(BEATS.length - 1, current + delta))
-      lockUntil.current = now + holdFor(BEATS[next])
+    setFrame((current) => {
+      const next = Math.max(1, Math.min(LAST_FRAME, current + delta)) as Section01Frame
+      if (next !== current) lockUntil.current = now + 260
       return next
     })
   }, [])
@@ -87,100 +37,29 @@ export default function Section01() {
         event.preventDefault()
         move(-1)
       }
+      if (/^[1-9]$/.test(event.key) && event.altKey) {
+        const requested = Number(event.key)
+        setFrame(Math.min(requested, LAST_FRAME) as Section01Frame)
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [move])
 
-  /**
-   * Which experts are lit. Only the routing experiment and the beats after it
-   * show a selection, so earlier beats read as "all capacity, nothing chosen".
-   */
-  const selected = useMemo(() => {
-    if (beat.n < 7) return []
-    return ROUTES[route]
-  }, [beat.n, route])
-
-  const debug = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1'
-
   return (
-    <div className="s1-page" role="application" aria-label="Why a 320B model uses about 18B active parameters">
-      <PaperDefs />
-      <div className="s1-viewport">
+    <main className="s1v2-page" aria-label="Section 1: why a 320B MoE model uses a much smaller active path">
+      <div className="s1v2-viewport">
         <div
-          className="s1-frame"
+          role="application"
+          aria-label={`Storyboard frame ${frame} of ${LAST_FRAME}`}
           onPointerUp={(event) => {
-            const target = event.target as HTMLElement
-            if (event.button !== 0 || target.closest('[data-no-advance]')) return
+            if (event.button !== 0) return
             move(1)
           }}
         >
-          <Stage scene={scene} selected={selected} feel={FEEL[beat.relation]} />
-          <Overlays
-            overlays={[
-              ...(beat.overlays ?? []),
-              ...(beat.lateOverlays && beat.lateOverlays.at <= elapsed ? beat.lateOverlays.overlays : []),
-            ]}
-            scene={scene}
-          />
-
-          {beat.interactive ? (
-            <RouteControls
-              route={route}
-              onPick={(next) => {
-                setRoute(next)
-                setHasRouted(true)
-              }}
-              hasRouted={hasRouted}
-            />
-          ) : null}
-
-          {debug ? (
-            <div className="s1-debug">
-              <b>
-                {beat.n}/{BEATS.length} · {beat.id} · {beat.relation}
-              </b>
-              <span>{beat.title}</span>
-              <span>VO: {beat.vo}</span>
-            </div>
-          ) : null}
+          <StoryboardStageV2 frame={frame} />
         </div>
       </div>
-    </div>
-  )
-}
-
-/**
- * The one place the viewer does something rather than advancing.
- *
- * The expert field does not change; only the routing does. Picking a word
- * re-lights a different top-8 in the same population, which is the lesson.
- */
-function RouteControls({
-  route,
-  onPick,
-  hasRouted,
-}: {
-  route: 'scared' | 'calculate'
-  onPick: (route: 'scared' | 'calculate') => void
-  hasRouted: boolean
-}) {
-  return (
-    <div className="s1-route-controls" data-no-advance>
-      {(['scared', 'calculate'] as const).map((word) => (
-        <button
-          key={word}
-          type="button"
-          className="s1-route-card"
-          data-picked={route === word ? 'true' : undefined}
-          onClick={() => onPick(word)}
-        >
-          &ldquo;{word}&rdquo;
-        </button>
-      ))}
-      <span className="s1-route-hint">
-        {hasRouted ? 'Same 288 experts. Different eight.' : 'Pick a word'}
-      </span>
-    </div>
+    </main>
   )
 }
