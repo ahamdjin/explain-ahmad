@@ -15,7 +15,8 @@
     "record:gpt": "node scripts/review-gpt-section.mjs --record",
     "check:chain": "node scripts/check-chain.mjs",
     "check": "tsc -b && node scripts/check-chain.mjs",
-    "frames:s7": "node scripts/capture-frames.mjs --section=section-07"
+    "frames:s7": "node scripts/capture-frames.mjs --section=section-07",
+    "frames:s2": "node scripts/capture-frames.mjs --section=section-02"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

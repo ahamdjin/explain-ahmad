@@ -7,12 +7,13 @@ import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
 /** Section 07 -- the answer. Script: video-script/07-the-answer.md */
-export default function Section07() {
+export default function Section07({ onFinish }: { onFinish?: () => void } = {}) {
   return (
     <SectionRunner
       beats={BEATS}
       initial={INITIAL}
       apply={applyPatches}
+      onFinish={onFinish}
       label="Why the experts cannot just be loaded on demand"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

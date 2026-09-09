@@ -66,12 +66,15 @@ export function SectionRunner<S, P>({
   initial,
   apply,
   label,
+  onFinish,
   children,
 }: {
   beats: Beat<P>[]
   initial: S
   apply: (base: S, patches: P[]) => S
   label: string
+  /** Advancing past the last beat. Used by the continuous player. */
+  onFinish?: () => void
   children: (scene: S, feel: Feel) => ReactNode
 }) {
   const [index, setIndex] = useState(() => initialIndex(beats.length))
@@ -124,12 +127,16 @@ export function SectionRunner<S, P>({
       const now = performance.now()
       if (now < lockUntil.current) return
       setIndex((current) => {
+        if (delta > 0 && current === beats.length - 1) {
+          onFinish?.()
+          return current
+        }
         const next = Math.max(0, Math.min(beats.length - 1, current + delta))
         lockUntil.current = now + holdFor(beats[next])
         return next
       })
     },
-    [beats],
+    [beats, onFinish],
   )
 
   useEffect(() => {

@@ -699,3 +699,32 @@
   font: 400 clamp(11px, 1.5cqw, 29px) / 1.2 var(--scrawl);
   color: var(--graphite);
 }
+
+/* Camera ----------------------------------------------------------------- */
+
+.s1-camera {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+}
+
+/* A word, as the model actually holds it ---------------------------------- */
+
+.s1-numrow { width: 56cqw; }
+.s1-numrow[data-extend='true'] { width: 118cqw; }
+
+.s1-numrow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-numrow-v {
+  font: 400 30px/1 var(--mono);
+  letter-spacing: -0.02em;
+}
+
+.s1-numrow-label {
+  font: 400 30px/1 var(--scrawl);
+}

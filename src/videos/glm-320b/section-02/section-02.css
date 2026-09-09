@@ -1,0 +1,11 @@
+/* A refused word is set down and greyed -- not faded out. The viewer has to
+ * see it being declined, not see it disappear. */
+.s2-word {
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.s2-word[data-refused='true'] {
+  opacity: 0.5;
+  filter: saturate(0.2);
+  transform: rotate(-7deg);
+}
