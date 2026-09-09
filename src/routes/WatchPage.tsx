@@ -22,58 +22,28 @@ type Chapter = {
 }
 
 const Section01 = lazy(() => import('../videos/glm-320b/section-01/Section01'))
-const Section02 = lazy(() => import('../videos/glm-320b/section-02/Section02'))
-const Section03 = lazy(() => import('../videos/glm-320b/section-03/Section03'))
-const Section04 = lazy(() => import('../videos/glm-320b/section-04/Section04'))
-const Section05 = lazy(() => import('../videos/glm-320b/section-05/Section05'))
-const Section06 = lazy(() => import('../videos/glm-320b/section-06/Section06'))
-const Section07 = lazy(() => import('../videos/glm-320b/section-07/Section07'))
-const Section08 = lazy(() => import('../videos/glm-320b/section-08/Section08'))
 
+/**
+ * The thirteen-section chain from `storyboard/STORY_SPINE.md` v4.
+ *
+ * `enters` is the question the viewer arrives holding, and it must match what
+ * the previous section left them with. Sections not built yet appear as a
+ * plate rather than being skipped, so the gap is visible while it is a gap.
+ */
 const CHAPTERS: Chapter[] = [
-  { n: 1, title: 'The claim on trial', enters: '', component: Section01 },
-  {
-    n: 2,
-    title: 'Follow one word in',
-    enters: 'If the choice keeps changing, how could you ever hold only the ones you need?',
-    component: Section02,
-  },
-  {
-    n: 3,
-    title: 'The word becomes numbers',
-    enters: 'What is the router actually reading?',
-    component: Section03,
-  },
-  {
-    n: 4,
-    title: 'Where the numbers change',
-    enters: 'Those numbers are the same every time. So how did the team ever change?',
-    component: Section04,
-  },
-  {
-    n: 5,
-    title: 'New numbers, new team',
-    enters: 'With different numbers, would the router pick a different eight?',
-    component: Section05,
-  },
-  {
-    n: 6,
-    title: 'Forty-two floors',
-    enters: 'So this happens once per word — right?',
-    component: Section06,
-  },
-  {
-    n: 7,
-    title: 'The answer',
-    enters: 'Could you fetch 336 different sets, per word, fast enough?',
-    component: Section07,
-  },
-  {
-    n: 8,
-    title: 'The verdict',
-    enters: 'What did "18 billion active" ever buy?',
-    component: Section08,
-  },
+  { n: 1, title: 'What "18 billion active" means', enters: '', component: Section01 },
+  { n: 2, title: 'Your words become tokens', enters: 'Who picks the eight, and why can’t they tell us in advance?' },
+  { n: 3, title: 'From an ID to a meaning', enters: 'A row number has no meaning in it. So how does it know what anything means?' },
+  { n: 4, title: 'The word looks around', enters: 'That row is the same every time. So how does the word ever mean two things?' },
+  { n: 5, title: 'The router picks the eight', enters: 'The numbers depend on the sentence. Who reads them?' },
+  { n: 6, title: 'The experts do the work', enters: 'Eight experts are picked. What do they actually do?' },
+  { n: 7, title: 'That was one layer. There are 45.', enters: 'How many steps are there?' },
+  { n: 8, title: 'That was one token. Here’s the sentence.', enters: '336 choices for one token. But a sentence isn’t one token.' },
+  { n: 9, title: 'Where the answer comes out', enters: 'All of that happens. What comes out?' },
+  { n: 10, title: 'And then it does the whole thing again', enters: 'All that machinery, and one word comes out?' },
+  { n: 11, title: 'So could you store only the 18 billion?', enters: 'It never stops choosing. So could you store only the part it uses?' },
+  { n: 12, title: 'How people actually run these', enters: 'But people run big models on small machines.' },
+  { n: 13, title: 'What that number actually bought', enters: 'It’s a price, not a wall. So what did it buy?' },
 ]
 
 function startAt() {

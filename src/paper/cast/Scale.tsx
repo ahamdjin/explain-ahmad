@@ -99,7 +99,13 @@ export function Block({
 }: {
   lit?: PatchName
   ghost?: PatchName
-  /** The lit patch floats clear of the block, leaving a hole. */
+  /**
+   * The lit patch floats clear of the block, leaving a hole.
+   *
+   * It has to travel far enough to break the block's own outline. At -46 it
+   * still sat inside the edge and read as a nudge rather than as something
+   * taken out.
+   */
   lifted?: boolean
   heavy?: boolean
   /** §13: the same block, divided coarsely or finely. */
@@ -135,11 +141,11 @@ export function Block({
              * first version kept the paper tone while scattered and the field
              * was invisible against the page.
              */
-            fill: scatter ? INK : isLit ? PALETTE.tealWash : PALETTE.idle,
+            fill: scatter ? INK : isLit ? PALETTE.teal2 : PALETTE.idleDeep,
             opacity: scatter ? 0.7 : isLit ? 1 : lit ? 0.5 : 0.78,
             /* Loose: jittered outward off the lattice, and smaller. */
             x: scatter ? (seeded(cx * 97 + cy) - 0.5) * 260 : 0,
-            y: (scatter ? (seeded(cx * 31 + cy + 500) - 0.5) * 190 : 0) + (isLit && lifted && !scatter ? -46 : 0),
+            y: (scatter ? (seeded(cx * 31 + cy + 500) - 0.5) * 190 : 0) + (isLit && lifted && !scatter ? -132 : 0),
             scale: scatter ? 0.28 : 1,
           }}
           transition={{
@@ -161,7 +167,28 @@ export function Block({
       transition={{ type: 'spring', stiffness: 120, damping: 18 }}
       style={{ transformOrigin: 'bottom center' }}
     >
-      <svg viewBox={`-8 -56 ${COLS * CELL + 16} ${ROWS * CELL + 72}`} aria-hidden="true">
+      <svg viewBox={`-8 -168 ${COLS * CELL + 16} ${ROWS * CELL + 184}`} aria-hidden="true">
+        {/*
+          Where the lifted patch came from. Paper against the block's own fill
+          is almost no contrast, so the hole is drawn rather than left.
+        */}
+        {lifted && lit && !scatter
+          ? PATCHES[lit].map((r, i) => (
+              <rect
+                key={`hole-${i}`}
+                x={r.x * CELL}
+                y={r.y * CELL}
+                width={r.w * CELL - 2}
+                height={r.h * CELL - 2}
+                rx="2"
+                fill={PALETTE.paper}
+                stroke={INK}
+                strokeWidth="1.6"
+                strokeDasharray="4 4"
+                opacity="0.5"
+              />
+            ))
+          : null}
         {/* The edge only exists once the marks are one object. */}
         <motion.rect
           x="-4"

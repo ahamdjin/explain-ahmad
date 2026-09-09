@@ -1,4 +1,4 @@
-import { SectionRunner, runtimeSeconds } from '../../../paper'
+import { SectionRunner, runtimeSeconds } from '../../../../paper'
 import { BEATS } from './beats'
 import { INITIAL, applyPatches } from './scene'
 import { Stage } from './Stage'

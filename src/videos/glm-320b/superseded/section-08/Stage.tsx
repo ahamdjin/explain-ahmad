@@ -1,6 +1,6 @@
-import { CostBars, Hospital, ModelSheet, Narrator, Slot, VerdictCard } from '../../../paper'
+import { CostBars, Hospital, ModelSheet, Narrator, Slot, VerdictCard } from '../../../../paper'
 import { CHOSEN } from '../section-01/scene'
-import { type Feel } from '../../../paper/motion'
+import { type Feel } from '../../../../paper/motion'
 import { type SceneState } from './scene'
 
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {

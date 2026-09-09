@@ -1,4 +1,4 @@
-import { type Beat, type Overlay } from '../../../paper'
+import { type Beat, type Overlay } from '../../../../paper'
 import { bars, building, narrator, sheet, verdict, type Patch } from './scene'
 
 const H = (text: string, at: { x: string; y: string }, extra: Partial<Overlay> = {}): Overlay => ({

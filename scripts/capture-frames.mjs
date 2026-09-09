@@ -18,7 +18,8 @@ for (const raw of process.argv.slice(2)) {
 
 const WIDTH = Number(args.get('width') ?? 1920)
 const HEIGHT = Number(args.get('height') ?? 1080)
-const SETTLE = Number(args.get('settle') ?? 1500)
+/* Long enough that `lateOverlays` and `stages` have all fired. */
+const SETTLE = Number(args.get('settle') ?? 3400)
 const DEBUG = args.get('debug') === 'true'
 const SECTION = args.get('section') ?? 'section-01'
 const OUT = path.resolve(args.get('out') ?? `frames/${SECTION}`)

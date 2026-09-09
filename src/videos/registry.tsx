@@ -9,13 +9,14 @@ export type VideoRouteDefinition = {
 const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
 const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
 const Section01 = lazy(() => import('./glm-320b/section-01/Section01'))
-const Section02 = lazy(() => import('./glm-320b/section-02/Section02'))
-const Section03 = lazy(() => import('./glm-320b/section-03/Section03'))
-const Section04 = lazy(() => import('./glm-320b/section-04/Section04'))
-const Section05 = lazy(() => import('./glm-320b/section-05/Section05'))
-const Section06 = lazy(() => import('./glm-320b/section-06/Section06'))
-const Section07 = lazy(() => import('./glm-320b/section-07/Section07'))
-const Section08 = lazy(() => import('./glm-320b/section-08/Section08'))
+const Old01 = lazy(() => import('./glm-320b/superseded/section-01/Section01'))
+const Section02 = lazy(() => import('./glm-320b/superseded/section-02/Section02'))
+const Section03 = lazy(() => import('./glm-320b/superseded/section-03/Section03'))
+const Section04 = lazy(() => import('./glm-320b/superseded/section-04/Section04'))
+const Section05 = lazy(() => import('./glm-320b/superseded/section-05/Section05'))
+const Section06 = lazy(() => import('./glm-320b/superseded/section-06/Section06'))
+const Section07 = lazy(() => import('./glm-320b/superseded/section-07/Section07'))
+const Section08 = lazy(() => import('./glm-320b/superseded/section-08/Section08'))
 
 /**
  * Real video pages are registered only after their story is known.
@@ -30,9 +31,10 @@ export const videoRoutes: VideoRouteDefinition[] = [
   },
   {
     slug: 'section-01',
-    title: 'Section 01 — The claim on trial',
+    title: 'Section 01 — What "18 billion active" means',
     component: Section01,
   },
+  { slug: 'old/section-01', title: 'Superseded — the claim on trial', component: Old01 },
   {
     slug: 'section-02',
     title: 'Section 02 — Follow one word in',

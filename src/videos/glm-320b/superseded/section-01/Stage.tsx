@@ -1,10 +1,10 @@
-import { ModelSheet, Plan, ShareBar } from '../../../paper/cast/Boards'
-import { ChosenTeam, Hospital } from '../../../paper/cast/Hospital'
-import { Narrator } from '../../../paper/cast/Narrator'
-import { ArchSheet, FrontDesk, SmallMachine, WordCard } from '../../../paper/cast/Props'
-import { WordLoop } from '../../../paper/cast/WordLoop'
-import { Slot } from '../../../paper'
-import { type Feel } from '../../../paper/motion'
+import { ModelSheet, Plan, ShareBar } from '../../../../paper/cast/Boards'
+import { ChosenTeam, Hospital } from '../../../../paper/cast/Hospital'
+import { Narrator } from '../../../../paper/cast/Narrator'
+import { ArchSheet, FrontDesk, SmallMachine, WordCard } from '../../../../paper/cast/Props'
+import { WordLoop } from '../../../../paper/cast/WordLoop'
+import { Slot } from '../../../../paper'
+import { type Feel } from '../../../../paper/motion'
 import { type SceneState } from './scene'
 
 /**

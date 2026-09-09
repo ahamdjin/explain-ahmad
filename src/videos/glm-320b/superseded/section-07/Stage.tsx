@@ -1,5 +1,5 @@
-import { CostBars, Counter, FastMemory, FetchPath, Narrator, Slot, Store, WordCard } from '../../../paper'
-import { type Feel } from '../../../paper/motion'
+import { CostBars, Counter, FastMemory, FetchPath, Narrator, Slot, Store, WordCard } from '../../../../paper'
+import { type Feel } from '../../../../paper/motion'
 import { type SceneState } from './scene'
 
 /**

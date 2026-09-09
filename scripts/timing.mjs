@@ -97,7 +97,7 @@ if (FROM_SCRIPTS) {
   }
 } else {
   for (const n of SECTIONS) {
-    const source = await readFile(`src/videos/glm-320b/section-${n}/beats.ts`, 'utf8')
+    const source = await readFile(`src/videos/glm-320b/superseded/section-${n}/beats.ts`, 'utf8')
     for (const block of source.split(/\n {2}\{\n/).slice(1)) {
       const num = block.match(/^ {4}n: (\d+),/)
       if (!num) continue

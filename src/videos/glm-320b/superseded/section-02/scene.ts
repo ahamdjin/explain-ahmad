@@ -1,4 +1,4 @@
-import { CAMERA_HOME, type CameraState } from '../../../paper'
+import { CAMERA_HOME, type CameraState } from '../../../../paper'
 
 /**
  * Section 02 scene -- follow one word in.

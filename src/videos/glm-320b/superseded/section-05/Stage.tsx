@@ -1,5 +1,5 @@
-import { Choice, FrontDesk, Hospital, Narrator, NumberRow, Slot, Specialist } from '../../../paper'
-import { type Feel } from '../../../paper/motion'
+import { Choice, FrontDesk, Hospital, Narrator, NumberRow, Slot, Specialist } from '../../../../paper'
+import { type Feel } from '../../../../paper/motion'
 import { TEAMS, type Route, type SceneState } from './scene'
 
 export function Stage({

@@ -7,7 +7,7 @@
  * assumed that room *is* the model. The pull-back is the biggest single "oh"
  * available in the whole video, and it costs one camera move.
  */
-import { CAMERA_HOME, type CameraState } from '../../../paper'
+import { CAMERA_HOME, type CameraState } from '../../../../paper'
 
 export type At = { x: number; y: number }
 

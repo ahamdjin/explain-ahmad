@@ -1,4 +1,4 @@
-import { type Beat, type Overlay } from '../../../paper'
+import { type Beat, type Overlay } from '../../../../paper'
 import { CHOSEN } from '../section-01/scene'
 import { choice, desk, narrator, row, shared, wall, type Patch } from './scene'
 

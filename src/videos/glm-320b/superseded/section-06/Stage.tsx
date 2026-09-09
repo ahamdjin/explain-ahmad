@@ -1,5 +1,5 @@
-import { Aside, Camera, Counter, Hospital, Narrator, NumberRow, Slot, Tower } from '../../../paper'
-import { type Feel } from '../../../paper/motion'
+import { Aside, Camera, Counter, Hospital, Narrator, NumberRow, Slot, Tower } from '../../../../paper'
+import { type Feel } from '../../../../paper/motion'
 import { type SceneState } from './scene'
 
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
