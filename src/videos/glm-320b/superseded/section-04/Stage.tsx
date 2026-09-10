@@ -12,7 +12,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             <Sentence
               words={line.words}
               focus={line.focus}
-              weights={line.weights}
+              attention={line.weights ? { weights: line.weights } : undefined}
               dim={line.dim}
               caption={line.caption}
             />

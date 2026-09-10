@@ -1,4 +1,4 @@
-import { type Beat, type Overlay } from '../../../paper'
+import { brace, centred, note, type Beat } from '../../../paper'
 import {
   CHOSEN,
   big,
@@ -24,28 +24,12 @@ import {
  * that move mean anything.
  */
 
-/**
- * A handwritten note, placed in stage percentages as plain numbers.
- *
- * The overlay type wants `'50%'` strings, which is very easy to get wrong and
- * fails as a type error rather than a visible one. This takes numbers.
- *
- * A note must carry something the voice does not. Never transcribe the line.
- */
-const H = (text: string, x: number, y: number, extra: Partial<Overlay> = {}): Overlay => ({
-  kind: 'note',
-  text,
-  at: { x: `${x}%`, y: `${y}%` },
-  size: 'sm',
-  ...extra,
-})
-
 /* Layout anchors. Reflow the whole section from here. */
 const BLOCK = { x: 52, y: 46 }
 const BLOCK_S = 1
 /** The block's left edge and width as stage percentages, for braces under it. */
-const BLOCK_LEFT = '26%'
-const BLOCK_W = '52%'
+const BLOCK_LEFT = 26
+const BLOCK_W = 52
 
 export const BEATS: Beat<Patch>[] = [
   /* ═══ ACT 1 · THE NUMBER, PLAINLY ═══════════════════════════════════════
@@ -79,18 +63,18 @@ export const BEATS: Beat<Patch>[] = [
     id: 'what-a-parameter-is',
     title: 'It shatters into separate numbers',
     relation: 'so',
-    secs: 8,
+    secs: 10,
     vo: 'That’s how many parameters it has. And a parameter is just a number it learned while it was being trained.',
     commands: [big.off(), block.scatter(BLOCK, BLOCK_S)],
     /* The label arrives after the marks, so the viewer sees the thing first. */
-    lateOverlays: { at: 2600, overlays: [H('every one of these\nis a parameter', 26, 88, { rotate: -3 })] },
+    lateOverlays: { at: 2600, overlays: [note('every one of these\nis a parameter', 26, 88, { rotate: -3 })] },
   },
   {
     n: 4,
     id: 'one-big-file',
     title: 'The marks pack into one object',
     relation: 'so',
-    secs: 7,
+    secs: 8,
     vo: 'So the whole model is three hundred and twenty billion numbers, sitting in one very big file.',
     commands: [block.pack()],
   },
@@ -99,7 +83,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'only-this-much',
     title: 'A patch of it lights',
     relation: 'and-yet',
-    secs: 6,
+    secs: 7,
     vo: 'And to answer you, it only uses this much of it. About eighteen billion.',
     commands: [block.light('a')],
   },
@@ -112,14 +96,8 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Eighteen, out of three hundred and twenty. Roughly five percent.',
     commands: [],
     overlays: [
-      {
-        kind: 'brace',
-        at: { x: BLOCK_LEFT, y: '80%' },
-        width: BLOCK_W,
-        label: '320 billion — all of it',
-        sticky: true,
-      },
-      H('≈ 18 billion\nof it', 12, 34, { tone: 'measure', rotate: 3, sticky: true }),
+      brace('320 billion — all of it', BLOCK_LEFT, 80, BLOCK_W, { sticky: true }),
+      note('≈ 18 billion\nof it', 12, 34, { tone: 'measure', rotate: 3, sticky: true }),
     ],
   },
 
@@ -134,7 +112,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'So the obvious thought is — take that bit. Keep it. Throw the rest away.',
     commands: [block.lift(), narrator.pose('hopeful')],
     clearSticky: true,
-    overlays: [H('keep this…', 12, 26, { rotate: -5 })],
+    overlays: [note('keep this…', 12, 26, { rotate: -5 })],
   },
   {
     n: 8,
@@ -164,7 +142,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Now another word. Different part of the file.',
     commands: [word2.arrive({ x: 10, y: 50 }, 0.8)],
     stages: [{ at: 1200, commands: [block.light('b')] }],
-    overlays: [H('a different part', 84, 20, { tone: 'cost', rotate: 4, sticky: true })],
+    overlays: [note('a different part', 84, 20, { tone: 'cost', rotate: 4, sticky: true })],
   },
   {
     n: 11,
@@ -175,9 +153,9 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Same amount — about eighteen billion, both times. Different eighteen billion.',
     commands: [block.ghost('a')],
     overlays: [
-      H('a different part', 84, 20, { tone: 'cost', rotate: 4, sticky: true }),
-      H('where “cat” went', 50, 88, { tone: 'measure', rotate: -1 }),
-      H('where “dog” went — dashed', 50, 94, { tone: 'cost', rotate: 1 }),
+      note('a different part', 84, 20, { tone: 'cost', rotate: 4, sticky: true }),
+      centred('where “cat” went', 50, 88, { tone: 'measure', rotate: -1 }),
+      centred('where “dog” went — dashed', 50, 94, { tone: 'cost', rotate: 1 }),
     ],
   },
   {
@@ -202,8 +180,8 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Which is why you can’t pack a smaller version in advance. There’s nothing to pack.',
     commands: [block.ghost('a'), narrator.pose('slump')],
     overlays: [
-      H('what we packed', 50, 88, { tone: 'cost', rotate: -1 }),
-      H('what it needs now', 50, 94, { tone: 'word', rotate: 1 }),
+      centred('what we packed', 50, 88, { tone: 'cost', rotate: -1 }),
+      centred('what it needs now', 50, 94, { tone: 'word', rotate: 1 }),
     ],
   },
   {
@@ -239,7 +217,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'two-eighty-eight-experts',
     title: 'The surface resolves into 288',
     relation: 'so',
-    secs: 9,
+    secs: 11,
     vo: 'Up close, the model’s knowledge is in separate pieces. Two hundred and eighty-eight of them, in each part of the model. They’re called experts.',
     commands: [
       block.off(),
@@ -249,7 +227,7 @@ export const BEATS: Beat<Patch>[] = [
     ],
     lateOverlays: {
       at: 4200,
-      overlays: [H('288 experts', 50, 12, { size: 'md', rotate: -2, sticky: true })],
+      overlays: [centred('288 experts', 50, 12, { size: 'md', rotate: -2, sticky: true })],
     },
   },
   {
@@ -262,8 +240,8 @@ export const BEATS: Beat<Patch>[] = [
     commands: [word.arrive({ x: 10, y: 30 }, 0.78)],
     stages: [{ at: 1600, commands: [hospital.choose(CHOSEN)] }],
     overlays: [
-      H('288 experts', 50, 12, { size: 'md', rotate: -2, sticky: true }),
-      H('8', 12, 46, { size: 'lg', tone: 'measure' }),
+      centred('288 experts', 50, 12, { size: 'md', rotate: -2, sticky: true }),
+      note('8', 12, 46, { size: 'lg', tone: 'measure' }),
     ],
   },
   {
@@ -271,12 +249,12 @@ export const BEATS: Beat<Patch>[] = [
     id: 'who-picks-the-eight',
     title: 'A plain desk slides in',
     relation: 'and-yet',
-    secs: 9,
+    secs: 10,
     vo: 'So the question I actually have to answer is: who picks the eight, and why can’t they tell us in advance?',
     commands: [desk.arrive({ x: 14, y: 78 }, 0.66), narrator.at({ x: 91, y: 70 }, 'think', 1, true)],
     clearSticky: true,
     overlays: [
-      H('who picks\nthe eight?', 50, 86, { size: 'md', rotate: -2 }),
+      centred('who picks\nthe eight?', 50, 86, { size: 'md', rotate: -2 }),
     ],
   },
 ]
