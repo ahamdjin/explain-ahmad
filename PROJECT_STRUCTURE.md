@@ -53,7 +53,7 @@ React/Vite implementation.
 
 For the GLM video, check `src/videos/registry.tsx` to identify the active implementation. Currently it points to `src/videos/glm-320b/v9/Glm320bProductionV9.tsx`.
 
-Old versioned video implementations may remain for reference, but they are **legacy**, not current story sources.
+Earlier loose V1–V8 GLM implementations have been removed from the working tree; Git history preserves them.
 
 ## `archive/`
 
