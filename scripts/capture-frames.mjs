@@ -18,7 +18,19 @@ for (const raw of process.argv.slice(2)) {
 
 const WIDTH = Number(args.get('width') ?? 1920)
 const HEIGHT = Number(args.get('height') ?? 1080)
-/* Long enough that `lateOverlays` and `stages` have all fired. */
+/*
+ * How long to wait before shooting, as a floor.
+ *
+ * The real wait is **per beat**: a beat's own latest staged reveal plus a
+ * second of settle. A single constant is not enough and has been wrong twice
+ * -- first at 1500ms, which silently dropped every `lateOverlays` label from
+ * every contact sheet ever taken in this repo, and then at 3400ms, which
+ * missed the last stage of §12 beat 13 and photographed the slider mid-sweep
+ * at the wrong end of its range.
+ *
+ * A frame that is not the frame the beat ends on is worse than no frame,
+ * because it is reviewed and believed.
+ */
 const SETTLE = Number(args.get('settle') ?? 3400)
 const DEBUG = args.get('debug') === 'true'
 const SECTION = args.get('section') ?? 'section-01'
@@ -40,12 +52,16 @@ async function loadFrameMeta() {
     const title = block.match(/\n {4}title: (['"])(.*?)\1,/)
     const vo = block.match(/\n {4}vo: (['"])(.*?)\1,\n/)
     const secs = block.match(/\n {4}secs: ([0-9.]+),/)
+    /* Every staged and late-overlay offset in this beat, so the wait can be
+     * long enough for the last of them to have fired. */
+    const offsets = [...block.matchAll(/\bat: (\d+)\b/g)].map((m) => Number(m[1]))
     frames.push({
       n: Number(n[1]),
       id: id?.[1] ?? `beat-${n[1]}`,
       title: title?.[2] ?? '',
       vo: vo?.[2] ?? '',
       secs: secs ? Number(secs[1]) : 0,
+      settle: Math.max(SETTLE, (offsets.length ? Math.max(...offsets) : 0) + 1200),
     })
   }
 
@@ -109,11 +125,13 @@ try {
   for (const n of targets) {
     const frame = frames.find((item) => item.n === n)
     await page.goto(`${server.url}/${SECTION}?beat=${n}${DEBUG ? '&debug=1' : ''}`, { waitUntil: 'networkidle' })
-    await page.waitForTimeout(SETTLE)
+    await page.waitForTimeout(frame.settle)
     const file = `frame-${String(n).padStart(2, '0')}-${frame.id}.png`
     await page.screenshot({ path: path.join(OUT, file) })
     captured.push({ ...frame, file })
-    console.log(`  ${String(n).padStart(2)}  ${frame.title}`)
+    console.log(
+      `  ${String(n).padStart(2)}  ${frame.title}${frame.settle > SETTLE ? `  (waited ${frame.settle}ms)` : ''}`,
+    )
   }
 
   await writeFile(path.join(OUT, 'index.html'), sheet(captured), 'utf8')

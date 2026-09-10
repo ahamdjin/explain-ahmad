@@ -15,7 +15,7 @@
     "timing": "node scripts/timing.mjs",
     "readthrough": "node scripts/readthrough.mjs",
     "palette": "node scripts/palette.mjs",
-    "frames:all": "for s in 01 02 03 04 05 06 07 08; do node scripts/capture-frames.mjs --section=section-$s; done",
+    "frames:all": "for s in 01 02 03 04 05 06 07 08 09 10 11 12 13; do node scripts/capture-frames.mjs --section=section-$s || exit 1; done",
     "frames:s1": "node scripts/capture-frames.mjs --section=section-01",
     "frames:s2": "node scripts/capture-frames.mjs --section=section-02",
     "frames:s3": "node scripts/capture-frames.mjs --section=section-03",
@@ -27,7 +27,12 @@
     "frames:gpt": "node scripts/review-gpt-section.mjs",
     "record": "node scripts/record.mjs",
     "record:fast": "node scripts/record.mjs --width=1280",
-    "record:gpt": "node scripts/review-gpt-section.mjs --record"
+    "record:gpt": "node scripts/review-gpt-section.mjs --record",
+    "frames:s9": "node scripts/capture-frames.mjs --section=section-09",
+    "frames:s10": "node scripts/capture-frames.mjs --section=section-10",
+    "frames:s11": "node scripts/capture-frames.mjs --section=section-11",
+    "frames:s12": "node scripts/capture-frames.mjs --section=section-12",
+    "frames:s13": "node scripts/capture-frames.mjs --section=section-13"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",
