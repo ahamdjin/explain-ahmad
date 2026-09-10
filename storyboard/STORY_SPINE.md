@@ -1,4 +1,32 @@
-# Story spine — v4
+# Story spine — v5
+
+Status: **v5 — the intro asks, §11 answers, and every section is a chapter with
+a wall at each end.** All thirteen sections built; §01 rewritten to v9 script,
+§§02–13 need their open/close lines set (§5 below).
+
+v4's note is kept below because the decision it records was reversed by the
+person watching it. v4 chose to **tell the viewer the answer in the first
+ninety seconds** and spend the rest proving it. Ahmad watched the built thing
+and reported: *"The whole story feels disconnected on what, when, how it is
+happening. I dont know when was the intro. When we jumped to Token and Token ID
+and Embedding and then attention."* Two separate faults, and v4 caused one of
+them and failed to prevent the other:
+
+1. **The answer arrived before the machine did.** §01 beat 13 said *"That's the
+   answer. That's the whole thing."* at 1:20, and §11 re-asked the same question
+   fifteen minutes later. Nothing was at stake in between. **v5: the intro
+   asks, §11 answers.**
+2. **No section ever names itself.** "Attention" is spoken ten times, always in
+   passing, never as *"this part is called attention, and it starts now."*
+   Sections chain their *questions* but never bank their *answers*, so nothing
+   accumulates and 21 minutes reads as one run-on. **v5: §5 below.**
+
+v4's other decision — teach the whole machine rather than theorise about it —
+was right and stands.
+
+---
+
+**(v4's note, superseded on the two points above)**
 
 Status: **v4 — the whole machine, taught, then the payoff. All thirteen
 sections built.** 164 beats, 21:36, 76% talking. `npm run board` for every
@@ -168,7 +196,69 @@ that banks it, e.g.:
 Six deposits, then §11 spends them. A viewer at minute nine should feel the
 answer arriving, not waiting.
 
-## 5. Style — plain, and out loud
+## 5. The chapter wall — how a section announces and closes itself
+
+This is v5's whole addition, and it exists because Ahmad could not tell where
+one part ended and the next began.
+
+Ahmad's call was **handoff only, no title cards** — the narration carries the
+structure, nothing is added to the frame. That is also what *The Evolution of
+Trust* does: it has no chapter titles either, but **every time its mechanic
+changes, the narration says so in a sentence**
+(`skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §6). We removed the corner chrome
+and never wrote the sentences. These are the sentences.
+
+Every section gets exactly two load-bearing beats:
+
+| | |
+| --- | --- |
+| **The opening beat** | **Banks** the previous section's answer as *settled and owned* — "so we now know X" — then adds the **but** that makes this section necessary. Never opens on fresh material. |
+| **The closing beat** | **Declares this mechanism finished by name** — "that's attention, done" — states what the viewer now has, and names the one thing still missing. |
+
+The failure v4 had is that openings carried the *question* forward
+(*"So — who picks the eight"*) without ever banking the *answer*. A viewer who
+never gets to keep anything never accumulates anything, and 21 minutes of open
+questions feels like drift. **Bank first, then complicate.**
+
+Two rules that keep this from becoming recap:
+
+- **Bank in one clause, not a summary.** "So the row is now specific to this
+  sentence —" is banking. "Let's review what we've learned about attention" is
+  a recap, and recaps are where retention dies.
+- **Name the mechanism at the close, not the open.** Saying "this next part is
+  called attention" before it happens spends the word on nothing. Saying
+  "that's attention — that's all attention is" after the viewer has watched it
+  work attaches the word to a memory. This is the Trust rule about withholding
+  the naming word, at section scale.
+
+### The thirteen walls
+
+`Opens` must bank the previous row's `Closes`. `npm run check:chain` verifies
+the pairing; it cannot verify that the sentences are any good.
+
+| # | Chapter | Opens by banking… | …then the **but** | Closes on |
+| --- | --- | --- | --- | --- |
+| 1 | the question | *(nothing — this is the top)* | you type, and 5% runs | **who picks the eight, and why is that the expensive question?** |
+| 2 | tokens | something picks the eight; to see how, follow a word in | it doesn't get words | your text is numbers now — but a row number is a **name**, not a meaning |
+| 3 | meaning | each piece has a row number, which is only a name | a name has to become a meaning | that's the lookup done — the word is 4,096 numbers, but **the same 4,096 every time** |
+| 4 | attention | the row is fixed per word | so every "dog" starts identical, which can't be right | **that's attention, done** — the row has changed, and it changed because of *this sentence* |
+| 5 | the router | the row is now specific to this sentence | something has to read it and choose | **that's the router, done** — eight picked, and they could not have been picked any earlier |
+| 6 | the experts | eight are chosen | what do they actually *do*? | **that's one full step, done** — attention, choose, work. So how many steps are there? |
+| 7 | the stack | one step changes the word | there are forty-five of them | **336 choices for one word** — every one needing the floor below it first |
+| 8 | the sentence | 336 for one word | I've been following one word, and I owe you a correction | **every word pays its own 336** — so what comes out? |
+| 9 | the output | all of it happens, for every word | and it produces… one word | **one word, out of all that** |
+| 10 | the loop | one word comes out | so how do you get a paragraph? | **it never stops re-choosing** — now we can finally ask the opening question properly |
+| 11 | **the answer** | it re-chooses, every word, every floor | so could you store just the 5%? | **no — ~8 GB fetched per word against milliseconds of work** |
+| 12 | the honest limit | you can't store only the active part | except people run these on small machines every day | it works — but with 12,096 slots there's **no setting that is both small and fast** |
+| 13 | the verdict | small *or* fast, not both | so what did "five percent active" actually buy? | **compute, not memory** — and the finer the experts, the wider the gap |
+
+Row 11 is where v4's answer moved to, and it is now the first time the video
+says it.
+
+Row 4 and row 5 are the two Ahmad named as the place he got lost. Both now
+open by banking and close by naming.
+
+## 6. Style — plain, and out loud
 
 The reference is Nate Herk: plain conversational delivery, no drama, say what
 you are about to do and then do it, explain each step as it happens, never hold
@@ -185,7 +275,7 @@ back an answer to build suspense.
 
 If a line would not survive being said to a friend at a table, it is rewritten.
 
-## 6. What changed from v1, and why
+## 7. What changed from v1, and why
 
 | | v1 | v2 |
 | --- | --- | --- |
@@ -201,7 +291,7 @@ If a line would not survive being said to a friend at a table, it is rewritten.
 The old §2's reveal — *the router never looks at the word* — was too good to
 lose and too thin to carry 46 seconds. It now opens §2 and buys its keep in ten.
 
-## 7. Two things we may not claim
+## 8. Two things we may not claim
 
 **We may not put a number on expert overlap for this model.** The 44.2%
 consecutive-token figure and the LRU hit rates are measured on Mixtral 8×7B —
@@ -216,7 +306,7 @@ rate, and §7 must be built as a trade. Anything stronger is contradicted by a
 Both restrictions make the video better. A trade the viewer can operate is more
 convincing than a wall they have to accept.
 
-## 8. Foundation files
+## 9. Foundation files
 
 | File | Holds |
 | --- | --- |
@@ -230,7 +320,7 @@ convincing than a wall they have to accept.
 | `storyboard/BOARD.md` | **generated** — every beat of every section, from the code |
 | `skills/SPATIAL_CONTINUITY.md` | where the viewer is, and what may move them |
 
-## 9. Two corrections made during the build
+## 10. Two corrections made during the build
 
 **§13 does not return to a spec sheet.** The board asked beat 2 to pan "back to
 the opening sheet, exactly as it was — `ModelSheet`, 320 / 18". §1 as built has

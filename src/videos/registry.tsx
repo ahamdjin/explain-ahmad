@@ -39,7 +39,7 @@ const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
  */
 const GptWatch = lazy(() => import('./glm-320b/gpt-watch/GptWatch'))
 
-/** The superseded eight-section build. `storyboard/STORY_SPINE.md` §6. */
+/** The superseded eight-section build. `storyboard/STORY_SPINE.md` §7. */
 const Old01 = lazy(() => import('./glm-320b/superseded/section-01/Section01'))
 const Old02 = lazy(() => import('./glm-320b/superseded/section-02/Section02'))
 const Old03 = lazy(() => import('./glm-320b/superseded/section-03/Section03'))

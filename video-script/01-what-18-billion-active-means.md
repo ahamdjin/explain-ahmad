@@ -1,199 +1,178 @@
-# Section 01 — What "18 billion active" means
+# Section 01 — What "five percent active" actually costs
 
-Status: **SCRIPT v8.** Written to spine v3 — plain, and answered as it goes.
-Replaces `archive/01-the-number-that-lies-v7.md`, which opened a question and
-held it for eight minutes.
+Status: **SCRIPT v9.** Written to spine v5 — *the intro asks, §11 answers.*
+Replaces v8, which opened on a bare number and gave the whole answer away at
+1:20. v8's own note argued for that; Ahmad watched it and reported the video
+"feels disconnected", with no sense of where the intro ended. He is right, and
+the cause is below.
 
 Spine: `storyboard/STORY_SPINE.md` · Numbers: `research/glm/GROUND_TRUTH.md`
-Words: `storyboard/VOCABULARY_LEDGER.md` · Timing: `npm run timing -- --scripts`
+Hook research: `research/RETENTION_AND_ANGLE.md` ·
+Method: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md`
 
 ## Contract
 
 | | |
 | --- | --- |
-| Teaches | parameter, expert, active |
-| Answers | **it uses a different 18 billion for every word, and it does not choose until the last moment** |
-| Therefore | so we need to watch it choose — which is the rest of the video |
-| Target | ~18 beats · ~1:35 |
-| Never says | `token`, `layer`, `attention`, `bandwidth`, `VRAM` |
+| Teaches | parameter, expert, active, Mixture of Experts |
+| Answers | **about five percent of it runs — and that number does not predict the hardware** |
+| Exits on | who picks the eight, and why is *that* the expensive question? |
+| Therefore | so we go and watch it choose — which is the rest of the video |
+| Target | ~19 beats · ~1:22 |
+| Never says | `token`, `layer`, `attention`, `bandwidth`, `VRAM`, `router` |
+| **Must not say** | why you cannot store only the active part. **That is §11.** |
+
+## What changed, and why
+
+Three faults, all of them mine.
+
+**1. It opened on the subject.** `research/RETENTION_AND_ANGLE.md` scores the
+opening in three phases — pattern interrupt (0–5s), specific payoff promise
+(5–15s), stakes (15–30s) — and v8 missed all three: a number at 0:00, a
+definition at 0:07, and no stake at all. `NCASE_EVOLUTION_OF_TRUST.md` §1 is
+the same finding from the other direction: a piece about game theory opens on
+the Christmas truce, not on game theory. **Open on a concrete situation with a
+contradiction in it.** Ours is the thing every viewer has done — typing into a
+box and hitting enter.
+
+**2. The spine's own promise was never built.** `STORY_SPINE.md` §1 states the
+promise as *"Two models. Both use about five percent of themselves to answer
+you. One runs on a single graphics card. The other needs four."* That is a
+verifiable contradiction, it is what §4 of the retention research says to buy,
+and no competing video makes it. It is not in v8 anywhere. It is now beats 6–9.
+
+**3. It answered its own question at 1:20** — *"That's the answer. That's the
+whole thing."* — and then §11 re-asked it fifteen minutes later. Ahmad's call:
+the intro asks, §11 answers. Those five beats are gone.
 
 ## The one rule this section exists to obey
 
-**The answer is given here, in plain words, before anything is explained.**
+**Ask the question. Prove it is a real question. Do not answer it.**
 
-v7 asked *why does it need all of it* and then spent eight minutes not saying.
-That reads as a puzzle nobody solves. Telling the viewer the answer at 1:10 and
-then proving it for seven sections is not weaker — it is how a tutorial works.
-A claim you already know is easier to watch being demonstrated than a mystery
-you are waiting on, and nobody leaves feeling strung along.
+The distinction that keeps this from being v2's mystery bug: v2 asserted an
+obstacle and refused to describe it. This section asserts *nothing* it does not
+show. Five percent is shown. The two machines are shown. The 288 and the eight
+are shown. What is withheld is only the **consequence**, and a withheld
+consequence with all its evidence on screen is a hook, not a cheat.
+`skills/STORY_STRUCTURE.md` §2.
 
 ---
 
 ## The script
 
-Every line lands on something happening. See `skills/SPATIAL_CONTINUITY.md`.
+### Act 1 — the bet (beats 1–5, 0:00–0:20)
 
-### Act 1 — the number, plainly (beats 1–6)
+> **1.** *(a prompt box, a cursor blinking in it; a message types itself)*
+> You type something. You hit enter.
+>
+> **2.** *(the model arrives whole — one solid block, no label, no spec table)*
+> How much of this thing do you reckon just ran, to answer you?
+>
+> **3.** *(nothing moves. the block sits there. the question stays up)*
+> Go on, guess. All of it? Half?
+>
+> **4.** *(95% of the block goes grey. a thin live sliver stays)*
+> About five percent.
+>
+> **5.** *(hold)*
+> Which sounds like very good news.
 
-> **1.** *(a plain sheet, one number on it)* Let's start with this number.
->
-> **2.** *(the number fills the frame)* Three hundred and twenty billion.
->
-> **3.** *(it breaks apart into a field of tiny separate numbers)* That's how
-> many parameters it has. And a parameter is just a number it learned while it
-> was being trained.
->
-> **4.** *(the field packs itself into one solid block)* So the whole model is
-> three hundred and twenty billion numbers, sitting in one very big file.
->
-> **5.** *(a small patch of the block lights up)* And to answer you, it only
-> uses this much of it. About eighteen billion.
->
-> **6.** *(a brace measures the lit patch against the block)* Eighteen, out of
-> three hundred and twenty. Roughly five percent.
+`Place Your Bets` — `skills/ncase/NCASE_4_MORE_DESIGN_PATTERNS.md` §2. The
+guess and the answer occupy the **same block in the same position**, because
+the pattern's whole power is spatial comparison. Beat 3 is a held beat with
+nothing happening on purpose: it is the only moment in the video that asks the
+viewer to commit to a belief, and it needs the air.
 
-### Act 2 — the reasonable idea, and why it fails (beats 7–12)
+### Act 2 — the contradiction (beats 6–10, 0:20–0:45)
 
-> **7.** *(the lit patch lifts out of the block and sits on its own)* So the
-> obvious thought is — take that bit. Keep it. Throw the rest away.
+> **6.** *(a second block slides in beside the first. both get the same grey
+> treatment, the same live sliver)* Here are two models. Both of them use about
+> five percent of themselves to answer you.
 >
-> **8.** *(the patch drops back in; the block goes whole again)* And that
-> doesn't work. You need all three hundred and twenty billion, sitting there,
-> ready.
+> **7.** *(one graphics card appears under the left block)* This one runs on a
+> single graphics card.
 >
-> **9.** *(the word `dog` arrives at the block; a patch lights)* Here's why.
-> Watch what happens when a word comes in.
+> **8.** *(three more cards appear under the right block)* This one needs four.
 >
-> **10.** *(the word `cat` arrives; a completely different patch lights)* Now
-> another word. **Different part of the file.**
+> **9.** *(the two sliver-percentages sit level with each other; the cards do
+> not)* Same five percent. Four times the machine.
 >
-> **11.** *(both patches shown together on the same block)* Same amount — about
-> eighteen billion, both times. Different eighteen billion.
->
-> **12.** *(a third word arrives; a third patch)* And it doesn't work out which
-> part until the word actually turns up.
+> **10.** *(the grey drains back in; one block remains)* So "five percent
+> active" is not telling you what you think it's telling you. And I want to
+> know what it *is* telling you — that's the video.
 
-### Act 3 — what that means, and where we're going (beats 13–18)
+Beats 7–8 are the promise, and they are checkable: gpt-oss-120b is ~58 GiB at
+MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not
+fit four. `STORY_SPINE.md` §1 carries the table and the sources. Say **"about
+five percent"** — 4.4% and 5.6% are the same claim, and the contradiction is
+honest at either precision.
 
-> **13.** *(the lifted patch from beat 7 returns, and visibly does not fit the
-> new pattern)* Which is why you can't pack a smaller version in advance.
-> There's nothing to pack.
->
-> **14.** *(everything settles; the block, whole)* That's the answer. That's the
-> whole thing.
->
-> **15.** *(the camera pushes toward the block's surface)* But it's hard to
-> believe, so let me show you.
->
-> **16.** *(inside — the surface resolves into 288 separate blocks)* Up close,
-> the model's knowledge is in separate pieces. Two hundred and eighty-eight of
-> them, in each part of the model. They're called **experts**.
->
-> **17.** *(`dog` arrives; eight light, 280 go flat)* A word comes in, eight of
-> them get used, and the other two hundred and eighty do nothing at all.
->
-> **18.** *(the eight hold; a plain desk sits unlabelled beside them)* So the
-> question I actually have to answer is: **who picks the eight, and why can't
-> they tell us in advance?**
+### Act 3 — now the words, because now they are needed (beats 11–14, 0:45–1:05)
 
----
+> **11.** *(the block breaks into a field of tiny separate marks)* Quick, so
+> the rest of this makes sense. A parameter is one number the model learned
+> while it was being trained.
+>
+> **12.** *(the marks resolve back; the count sits under them)* Three hundred
+> and twenty billion of them. One very big file.
+>
+> **13.** *(camera pushes in — the only move in the section)* And they're not
+> one lump. Up close, they're in separate pieces.
+>
+> **14.** *(288 of them, in rows)* Two hundred and eighty-eight, in each part
+> of the model. They're called experts.
+
+Vocabulary arrives at 0:45, not 0:07. `NCASE_EVOLUTION_OF_TRUST.md` §2: the
+abstraction is built out of a concrete thing the learner has already operated.
+By beat 11 the viewer has watched five percent of a block light up twice, so
+"parameter" is a name for something they have already seen behave.
+
+### Act 4 — the handoff (beats 15–19, 1:05–1:22)
+
+> **15.** *(a word arrives; eight of the 288 light)* A word comes in. Eight of
+> them get used.
+>
+> **16.** *(the other 280 stay flat and grey)* The other two hundred and eighty
+> do nothing at all.
+>
+> **17.** *(the eight lit ones and the grey sliver from beat 4 line up)*
+> There's your five percent. That's where it comes from.
+>
+> **18.** *(the whole arrangement sits still and gets its name)* This has a
+> name, by the way. It's called a Mixture of Experts.
+>
+> **19.** *(the eight stay lit. everything else recedes)* So — who picks the
+> eight? And why does that turn out to be the expensive question?
+
+**Beat 19 is the chapter wall.** It states what the section settled (five
+percent is eight of 288) and names the one thing that is now missing (who
+chooses). §02 opens by banking exactly that and adding its own *but*. This is
+the handoff pattern in `STORY_SPINE.md` §5, and it is the fix for "the whole
+story feels disconnected" — no title cards, no chrome, the narration carries
+the wall.
 
 ## Storyboard
 
-`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+| # | Place | Event | Relation | Secs |
+| --- | --- | --- | --- | --- |
+| 1 | the prompt | a message is typed and sent | want | 4 |
+| 2 | the sheet | the model arrives whole | want | 4 |
+| 3 | the sheet | nothing moves — the viewer guesses | want | 3 |
+| 4 | the sheet | 95% goes grey | and-yet | 4 |
+| 5 | the sheet | hold | so | 3 |
+| 6 | the sheet | a second model arrives beside it | and-yet | 5 |
+| 7 | the sheet | one card under the left | so | 4 |
+| 8 | the sheet | four cards under the right | wall | 5 |
+| 9 | the sheet | the percentages level, the cards do not | wall | 4 |
+| 10 | the sheet | the second model leaves; the question stays | therefore | 6 |
+| 11 | the sheet | the block breaks into marks | so | 6 |
+| 12 | the sheet | the marks resolve; the count lands | so | 4 |
+| 13 | inside | push in | so | 3 |
+| 14 | inside | the 288 appear | so | 6 |
+| 15 | inside | a word arrives; eight light | so | 4 |
+| 16 | inside | the other 280 stay flat | and-yet | 4 |
+| 17 | inside | the eight line up with the sliver | therefore | 4 |
+| 18 | inside | the arrangement is named | so | 4 |
+| 19 | inside | everything recedes but the eight | and-yet | 5 |
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the sheet | — | a sheet comes to rest | `ModelSheet`, one figure on it | `320,000,000,000` |
-| 2 | the sheet | — | the number scales up until it fills the frame | `BigNumber` | `320,000,000,000` |
-| 3 | the sheet | — | the number shatters into a field of small separate numbers | `BigNumber` → `ParamField` | a field of ~2,000 dots standing for 320B |
-| 4 | the sheet | — | the field compacts into one solid block | `ParamField` → `Block` | the block, one object |
-| 5 | the sheet | — | a patch inside the block lights | `Block` with `lit` patch A | patch ≈ 5% of the area |
-| 6 | the sheet | — | a brace draws itself from patch to whole | `Block`, `Brace` | `18B` / `320B` |
-| 7 | the sheet | — | the lit patch lifts free and hovers | `Block` (hole), patch floating | the patch, alone |
-| 8 | the sheet | — | the patch drops back; the block seals | `Block`, whole | — |
-| 9 | the sheet | — | `dog` travels in from the left; patch A lights | `Block`, `WordCard` dog, patch A | **`dog`** |
-| 10 | the sheet | — | `cat` arrives; patch A goes dark, patch B lights | `WordCard` cat, patch B | **`cat`** |
-| 11 | the sheet | — | both patches drawn on one block, side by side | `Block`, patch A + B outlined | two patches, equal area |
-| 12 | the sheet | — | `it` arrives; patch C lights, different again | `WordCard` it, patch C | **`it`** |
-| 13 | the sheet | — | the beat-7 patch returns and overlays; it misses | patch outline vs patch C | the mismatch |
-| 14 | the sheet | — | everything clears; the block sits alone | `Block`, whole | — |
-| 15 | inside, one part | **push in** | the camera travels into the block face | `Block` growing past frame | — |
-| 16 | inside, one part | — | the surface resolves into 288 discrete blocks | `Hospital` (288) | 36 × 8 = 288 |
-| 17 | inside, one part | — | `dog` enters; 8 light, 280 flatten | `Hospital` `lit`, `WordCard` dog | **`dog`**, 8 of 288 |
-| 18 | inside, one part | — | a plain desk slides in beside the eight, unlabelled | `Hospital`, `FrontDesk` (unnamed) | — |
-
-### Board notes
-
-- **One place for twelve beats.** Acts 1 and 2 all happen at the sheet, so the
-  camera does not move once until beat 15. That stillness is what makes the
-  push-in mean something.
-- **Beat 15 is the only camera move in the section**, and it is the move that
-  answers *where are we going*. The viewer can point at beat 14 and say "we
-  went into that."
-- **Patch A, B and C must be visibly, obviously different regions** — not
-  shuffled dots. The whole answer of the section is that picture.
-- **Beat 13 is the one place anything is shown failing**, and it is allowed
-  because beats 9–12 already gave the reason. Nothing is crossed out; the patch
-  simply does not line up. Misfit, not prohibition.
-- The desk arrives at beat 18 and is **not named**. It stands there through §2
-  until §5 names it. Function before name.
-
-## Line jobs
-
-| Beat | Job | |
-| --- | --- | --- |
-| 1–4 | **teach** | what a parameter is. Plainly, once |
-| 5–6 | **turn** | the number that doesn't fit |
-| 7 | **hook** | the viewer's own reasonable idea, said out loud for them |
-| 8 | **answer** | no. Flatly |
-| 9–12 | **answer** | *the whole answer*, in plain words |
-| 13–14 | **answer** | the consequence, named |
-| 15 | **therefore** | the promise of proof, not of mystery |
-| 16–17 | **teach** | experts, so the next section has a floor to stand on |
-| 18 | **therefore** | the question the rest of the video answers — and it is a *new* question, not beat 7 again |
-
-## Why beat 18 is not circular
-
-Beat 7 asks: *can I store only the part it uses?* — **answered at beat 8–12.**
-Beat 18 asks: *who picks, and why can't they say in advance?* — a mechanism
-question that could not have been asked at beat 7, because at beat 7 the viewer
-did not know a chooser existed.
-
-That is the test the previous two drafts failed. One question, answered. A new
-question, arising from the answer.
-
-## Truth notes
-
-- "About five percent" — 18B of 321B is 5.6%. Say "roughly five percent".
-- **Say `word`, never `token`.** Token is taught in §2, and only there.
-- A parameter is defined **once**, in beat 3, in eight words. It is never
-  re-explained.
-- Beat 13 is the one place in the video where something is shown not working,
-  and it is allowed here because the section **has already given the reason**.
-  Nothing is crossed through before beat 12.
-- Beat 16: "in each part of the model" is deliberately vague. `layer` is §5's
-  word, and the count matters there, not here.
-
-## Rules for the frames
-
-- **Beat 2 is the thumbnail.** Three hundred and twenty billion, filling the
-  frame, readable at any size.
-- Beat 6 is the frame the whole video hangs on: 320 and 18, together, to scale.
-- Beat 11 is the **carrying frame**: two different patches on one block. That
-  is the answer of the section, so it is a picture and never a caption.
-- Beats 9–12 use the running example: **`dog`**, then **`cat`**, then **`it`**
-  — the same words the whole video uses. `skills/SPATIAL_CONTINUITY.md` §5.
-- No hardware in this section. No chips, no cards. That is §13.
-
-## Assets
-
-| Need | Status |
-| --- | --- |
-| a big number that fills the frame | **build** — `BigNumber`, reusable in §9 and §13 |
-| the number shattering into a field | **build** — `ParamField`, and it is only used here |
-| a solid block with lightable patches | **build** — `Block`, with named patch regions |
-| `Brace` measuring patch against whole | have |
-| push-in camera | have |
-| `Hospital` — the 288, 8 lit | have |
-| `FrontDesk`, unlabelled | have |
+Total ≈ 1:22. `npm run timing -- --scripts` after recording.
