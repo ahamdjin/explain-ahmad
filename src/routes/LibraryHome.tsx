@@ -12,19 +12,31 @@ import '../explanation-system.css'
  * and /watch is the product.
  */
 const current = [
-  { to: '/watch', title: 'Watch the whole thing', meta: '8 sections, 96 beats, 8:04 — in order, the way it is meant to be seen' },
+  { to: '/watch', title: 'Watch the whole thing', meta: '13 sections, in order, the way it is meant to be seen' },
   { to: '/paper', title: 'Paper library', meta: 'Every reusable piece and object in every state' },
 ]
 
+/**
+ * The thirteen-section chain. `storyboard/STORY_SPINE.md` v4.
+ *
+ * The `meta` line is what the section *adds*, not what it is about — that is
+ * the load-bearing column of the spine's chain table, and having it here means
+ * the index can be read as an argument rather than as a table of contents.
+ */
 const sections = [
-  { to: '/section-01', title: '01 — The claim on trial', meta: 'word two picks a different eight' },
-  { to: '/section-02', title: '02 — Follow one word in', meta: 'the router never looks at the word' },
-  { to: '/section-03', title: '03 — The word becomes numbers', meta: 'and the numbers never change' },
-  { to: '/section-04', title: '04 — Where the numbers change', meta: 'context arrives' },
-  { to: '/section-05', title: '05 — New numbers, new team', meta: 'same word, different eight' },
-  { to: '/section-06', title: '06 — Forty-two floors', meta: '336 expert visits, counted on screen' },
-  { to: '/section-07', title: '07 — The answer', meta: 'the plan from §1 jams' },
-  { to: '/section-08', title: '08 — The verdict', meta: 'compute, not memory' },
+  { to: '/section-01', title: '01 — What "18 billion active" means', meta: 'a different 18 billion every word' },
+  { to: '/section-02', title: '02 — Your words become tokens', meta: 'a row number is a name, not a meaning' },
+  { to: '/section-03', title: '03 — From an ID to a meaning', meta: 'the row is fixed per token' },
+  { to: '/section-04', title: '04 — The word looks around', meta: 'the numbers depend on the whole sentence' },
+  { to: '/section-05', title: '05 — The router picks the eight', meta: 'the choice depends on those numbers' },
+  { to: '/section-06', title: '06 — The experts do the work', meta: 'the token leaves changed' },
+  { to: '/section-07', title: '07 — That was one layer. There are 45.', meta: '336 choices, not one' },
+  { to: '/section-08', title: '08 — That was one token', meta: 'every token pays its own 336' },
+  { to: '/section-09', title: '09 — Where the answer comes out', meta: 'all that, and one word' },
+  { to: '/section-10', title: '10 — And then it does it again', meta: 'it never stops re-choosing' },
+  { to: '/section-11', title: '11 — Could you store only the 18?', meta: 'the fetching costs more than the work' },
+  { to: '/section-12', title: '12 — How people actually run these', meta: 'the honest limit — and the slider' },
+  { to: '/section-13', title: '13 — What that number bought', meta: 'compute, not memory' },
 ]
 
 const studies = [
@@ -35,7 +47,8 @@ const studies = [
   { to: '/lab/drag', title: 'Interaction', meta: 'Drag, manipulate, compare, simulate' },
   { to: '/lab/reveal', title: 'Reveals', meta: 'Masks, focus, progressive disclosure' },
   { to: '/gpt-section-01', title: 'GPT Section 1', meta: 'An alternative opening, kept for comparison' },
-  { to: '/why-320b-uses-18b', title: 'Production v9', meta: 'Superseded by the eight sections' },
+  { to: '/why-320b-uses-18b', title: 'Production v9', meta: 'Superseded' },
+  { to: '/old/section-01', title: 'The superseded eight', meta: 'The claim-on-trial cut, kept to compare against' },
 ]
 
 export default function LibraryHome() {
@@ -48,8 +61,8 @@ export default function LibraryHome() {
             Build the <SketchAnnotation type="underline" color="#55a99e">explanation</SketchAnnotation>, not the website.
           </h1>
           <p className="library-subtitle">
-            Sparse routing buys compute, not memory — in eight sections. Individual sections open for
-            review only; no section makes sense on its own.
+            Sparse routing buys compute, not memory — taught in thirteen sections. Individual
+            sections open for review only; no section makes sense on its own.
           </p>
           <p className="library-lab-hint">
             In a section: click or <kbd>&rarr;</kbd> to advance, <kbd>&larr;</kbd> back. Inside any

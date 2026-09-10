@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useState, type ComponentType } from 'react'
+import { ChapterDots } from '../paper/rail'
 import './watch.css'
 
 /**
@@ -9,8 +10,9 @@ import './watch.css'
  * spends its whole runtime paying off, and a viewer who never sees both has not
  * seen the video.
  *
- * Sections that are not built yet appear as a plate rather than being skipped
- * silently, so the gap in the chain is visible while it is still a gap.
+ * All thirteen are built. The `component` field is kept optional anyway, so
+ * that a section taken out for rework shows as a plate rather than silently
+ * vanishing from the chain.
  */
 
 type Chapter = {
@@ -22,28 +24,40 @@ type Chapter = {
 }
 
 const Section01 = lazy(() => import('../videos/glm-320b/section-01/Section01'))
+const Section02 = lazy(() => import('../videos/glm-320b/section-02/Section02'))
+const Section03 = lazy(() => import('../videos/glm-320b/section-03/Section03'))
+const Section04 = lazy(() => import('../videos/glm-320b/section-04/Section04'))
+const Section05 = lazy(() => import('../videos/glm-320b/section-05/Section05'))
+const Section06 = lazy(() => import('../videos/glm-320b/section-06/Section06'))
+const Section07 = lazy(() => import('../videos/glm-320b/section-07/Section07'))
+const Section08 = lazy(() => import('../videos/glm-320b/section-08/Section08'))
+const Section09 = lazy(() => import('../videos/glm-320b/section-09/Section09'))
+const Section10 = lazy(() => import('../videos/glm-320b/section-10/Section10'))
+const Section11 = lazy(() => import('../videos/glm-320b/section-11/Section11'))
+const Section12 = lazy(() => import('../videos/glm-320b/section-12/Section12'))
+const Section13 = lazy(() => import('../videos/glm-320b/section-13/Section13'))
 
 /**
  * The thirteen-section chain from `storyboard/STORY_SPINE.md` v4.
  *
  * `enters` is the question the viewer arrives holding, and it must match what
- * the previous section left them with. Sections not built yet appear as a
- * plate rather than being skipped, so the gap is visible while it is a gap.
+ * the previous section left them with — `npm run check:chain` asserts exactly
+ * that against the scripts' contract tables.
  */
 const CHAPTERS: Chapter[] = [
   { n: 1, title: 'What "18 billion active" means', enters: '', component: Section01 },
-  { n: 2, title: 'Your words become tokens', enters: 'Who picks the eight, and why can’t they tell us in advance?' },
-  { n: 3, title: 'From an ID to a meaning', enters: 'A row number has no meaning in it. So how does it know what anything means?' },
-  { n: 4, title: 'The word looks around', enters: 'That row is the same every time. So how does the word ever mean two things?' },
-  { n: 5, title: 'The router picks the eight', enters: 'The numbers depend on the sentence. Who reads them?' },
-  { n: 6, title: 'The experts do the work', enters: 'Eight experts are picked. What do they actually do?' },
-  { n: 7, title: 'That was one layer. There are 45.', enters: 'How many steps are there?' },
-  { n: 8, title: 'That was one token. Here’s the sentence.', enters: '336 choices for one token. But a sentence isn’t one token.' },
-  { n: 9, title: 'Where the answer comes out', enters: 'All of that happens. What comes out?' },
-  { n: 10, title: 'And then it does the whole thing again', enters: 'All that machinery, and one word comes out?' },
-  { n: 11, title: 'So could you store only the 18 billion?', enters: 'It never stops choosing. So could you store only the part it uses?' },
-  { n: 12, title: 'How people actually run these', enters: 'But people run big models on small machines.' },
-  { n: 13, title: 'What that number actually bought', enters: 'It’s a price, not a wall. So what did it buy?' },
+  { n: 2, title: 'Your words become tokens', enters: 'Who picks the eight, and why can’t they tell us in advance?', component: Section02 },
+  { n: 3, title: 'From an ID to a meaning', enters: 'A row number has no meaning in it. So how does it know what anything means?', component: Section03 },
+  { n: 4, title: 'The word looks around', enters: 'That row is the same every single time. So how does the word ever mean two things?', component: Section04 },
+  { n: 5, title: 'The router picks the eight', enters: 'So the numbers depend on the sentence. Who reads them, and what do they decide?', component: Section05 },
+  { n: 6, title: 'The experts do the work', enters: 'Eight experts are picked. What do they actually do?', component: Section06 },
+  { n: 7, title: 'That was one layer. There are 45.', enters: 'How many steps are there?', component: Section07 },
+  { n: 8, title: 'That was one token. Here’s the sentence.', enters: '336 choices for one token. But a sentence isn’t one token.', component: Section08 },
+  { n: 9, title: 'Where the answer comes out', enters: 'All of that happens. What comes out?', component: Section09 },
+  { n: 10, title: 'And then it does the whole thing again', enters: 'All that machinery, and one word comes out?', component: Section10 },
+  { n: 11, title: 'So could you store only the 18 billion?', enters: 'It never stops choosing. So could you store only the part it uses?', component: Section11 },
+  { n: 12, title: 'How people actually run these', enters: 'So you can’t store only the active part. But people run big models on small machines.', component: Section12 },
+  { n: 13, title: 'What that number actually bought', enters: 'It’s a price, not a wall. So what did “18 billion active” actually get us?', component: Section13 },
 ]
 
 function startAt() {
@@ -69,6 +83,25 @@ export default function WatchPage() {
       setTurning(false)
     }, 420)
   }, [])
+
+  /**
+   * Straight to a chapter, through the same page turn.
+   *
+   * The turn is kept rather than skipped: without it the swap is a hard cut
+   * and the new section's first beat has already started animating before the
+   * old one has gone.
+   */
+  const goTo = useCallback(
+    (wanted: number) => {
+      if (wanted === index) return
+      setTurning(true)
+      window.setTimeout(() => {
+        setIndex(Math.max(0, Math.min(CHAPTERS.length - 1, wanted)))
+        setTurning(false)
+      }, 420)
+    },
+    [index],
+  )
 
   /* A placeholder has no section to take the keypress, and none to run a
    * timeline either, so the page does both. */
@@ -110,12 +143,21 @@ export default function WatchPage() {
       )}
 
       {chrome ? (
-        <div className="w-chapter" data-no-advance>
-          <b>
-            {chapter.n} / {CHAPTERS.length}
-          </b>
-          <span>{chapter.title}</span>
-        </div>
+        <>
+          <div className="w-chapter" data-no-advance>
+            <b>
+              {chapter.n} / {CHAPTERS.length}
+            </b>
+            <span>{chapter.title}</span>
+          </div>
+
+          <ChapterDots
+            count={CHAPTERS.length}
+            index={index}
+            labels={CHAPTERS.map((item) => item.title)}
+            onPick={goTo}
+          />
+        </>
       ) : null}
     </div>
   )

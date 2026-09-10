@@ -25,6 +25,20 @@ import {
   Shelf,
   Space,
   Vocabulary,
+  Clock,
+  CostBars,
+  ExpertBlend,
+  ExpertCache,
+  ExpertOpen,
+  GenerateLoop,
+  ModelCard,
+  Room,
+  RunningMachine,
+  Sentence,
+  Tower,
+  TradeSlider,
+  WEIGHTS,
+  PROMPT,
   Van,
   ChosenTeam,
   FrontDesk,
@@ -239,6 +253,88 @@ export default function PaperCatalogue() {
         </Item>
         <Item name="Space" note="relative distance only — no axes, no coordinates" wide>
           <Space show />
+        </Item>
+      </div>
+
+      <h2>The machine, in motion</h2>
+      <p className="pc-note">
+        The mechanism pieces, §4 to §13. Two of these are worth knowing about before reaching for
+        anything else. <code>AttentionArcs</code> renders as a bare <code>&lt;g&gt;</code> so the
+        component that owns the token positions can draw the lines <em>inside its own svg</em> —
+        two components agreeing on a coordinate system by hand is two components whose lines miss.
+        And <code>TradeSlider</code> is the one real control in the video: §12's cache box, machine
+        pace and machine bulk are all derived from its single value, held by that section&rsquo;s{' '}
+        <code>Stage</code>.
+      </p>
+      <div className="pc-grid">
+        <Item name="Sentence — one card" note="your prompt, before anything happens to it" wide>
+          <Sentence words={PROMPT} />
+        </Item>
+        <Item name="Sentence — fractured" note="the same card, mid-break. Uneven on purpose" wide>
+          <Sentence words={PROMPT} split jumble focus={1} />
+        </Item>
+        <Item name="Sentence — tokens, with rows" note="what each piece actually is inside" wide>
+          <Sentence words={PROMPT} split rows focus={1} changed={1} />
+        </Item>
+        <Item name="Sentence — attention" note="thickness is weight. No numbers, ever" wide>
+          <Sentence
+            words={PROMPT}
+            split
+            rows
+            focus={4}
+            attention={{ weights: WEIGHTS, masked: true }}
+          />
+        </Item>
+        <Item name="ExpertOpen" note="§5: the name oversells it. A row in, a different row out" wide>
+          <ExpertOpen />
+        </Item>
+        <Item name="ExpertBlend — eight out" note="one row in, eight different rows out" wide>
+          <ExpertBlend stage="out" />
+        </Item>
+        <Item name="ExpertBlend — weighted" note="size is the router's score. This is why §5 mattered" wide>
+          <ExpertBlend stage="weighted" shared />
+        </Item>
+        <Item name="ExpertBlend — merged" note="one row out, beside the one that arrived" wide>
+          <ExpertBlend stage="merged" ghost label="thought about, once" />
+        </Item>
+        <Item name="Room" note="§6 gives it edges so §7 can make it one floor" wide>
+          <Room bounded />
+        </Item>
+        <Item name="Tower — one climber" note="45 floors, 3 dense. look · pick · work" tall>
+          <Tower floor={12} markers={1} flash="pick" teams />
+        </Item>
+        <Item name="Tower — the whole prompt" note="§8: nine at once, wired, and named" tall>
+          <Tower floor={20} markers={9} wiring counters="336" plaque="transformer" />
+        </Item>
+        <Item name="GenerateLoop" note="§10: the reply builds at the pace of the loop" tall>
+          <GenerateLoop words={['bounced', 'off', 'the']} pace={0.6} total={5040} cycling />
+        </Item>
+        <Item name="ExpertCache" note="§12: the empty slots stay drawn — that is the trade" wide>
+          <div className="pc-row">
+            <ExpertCache kept={0.15} filled={2} label="kept close" />
+            <ExpertCache kept={0.9} filled={20} hits={16} label="kept close" />
+          </div>
+        </Item>
+        <Item name="TradeSlider" note="drag it. Both ends are bad, and that is the point" wide>
+          <TradeSlider ask="where would you put it?" />
+        </Item>
+        <Item name="RunningMachine" note="pace and bulk. Small and slow, or fast and enormous" wide>
+          <div className="pc-row">
+            <RunningMachine pace={0.1} bulk={0.05} words={['bounced']} />
+            <RunningMachine pace={0.95} bulk={0.9} words={['bounced', 'off']} />
+          </div>
+        </Item>
+        <Item name="Clock" note="§11: a duration is only felt if it takes that long" wide>
+          <Clock seconds={1.5} running label="~1.5 s" />
+        </Item>
+        <Item name="CostBars" note="§11: to scale, and the enlargement is labelled" wide>
+          <CostBars show="both" ratio="about 50× more" inset />
+        </Item>
+        <Item name="ModelCard" note="§13: four chips, not a rack. Coarse against fine" wide>
+          <div className="pc-row">
+            <ModelCard name="gpt-oss-120b" total="117B" active="5.1B" experts="128" chips={1} grain="coarse" litShare note="one chip" />
+            <ModelCard name="this model" total="321B" active="18B" experts="288" chips={4} grain="fine" litShare note="four" />
+          </div>
         </Item>
       </div>
 
