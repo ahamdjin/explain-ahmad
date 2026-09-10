@@ -3,6 +3,8 @@ import { SceneFrame } from '../engine/SceneFrame'
 import { SketchAnnotation } from '../visuals/SketchAnnotation'
 
 const destinations = [
+  { to: '/why-320b-uses-18b', title: 'Current GLM watch', meta: 'Current V9 production route' },
+  { to: '/gpt-watch', title: 'GPT Watch', meta: 'Alternate 120-beat cut with the memory/loading payoff' },
   { to: '/styles', title: 'Art directions', meta: 'Paper, clean, editorial, technical' },
   { to: '/lab/trust', title: 'Click stories', meta: 'Ncase-style reveal and choice patterns' },
   { to: '/lab/navigation', title: 'Navigation', meta: 'Snap, exact gesture paging, scene replacement' },
@@ -21,7 +23,7 @@ export default function LibraryHome() {
             Build the <SketchAnnotation type="underline" color="#55a99e">explanation</SketchAnnotation>, not the website.
           </h1>
           <p className="library-subtitle">
-            This route is only a module library. Real video pages stay out of the router until the actual script and story are known.
+            The library now links to both the current GLM production cut and the isolated GPT alternate cut for direct comparison.
           </p>
           <p className="library-lab-hint">Inside any lab: <kbd>L</kbd> or <kbd>⌘K</kbd> opens controls.</p>
         </div>
