@@ -57,7 +57,8 @@ export const BEATS: Beat<Patch>[] = [
        * the camera loses ground rather than the object shrinking on the spot. */
       camera.to({ x: 46, y: 46 }, 0.92),
       chip.moveTo({ x: 62, y: 30 }, 0.8),
-      narrator.set({ pose: 'wonder' }),
+      /* The table runs off the top of frame. Reaching says how tall. */
+      narrator.set({ pose: 'reach' }),
     ],
     lateOverlays: {
       at: 3400,

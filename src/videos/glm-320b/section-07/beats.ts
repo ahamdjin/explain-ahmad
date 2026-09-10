@@ -159,7 +159,8 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 5,
     vo: 'Forty-two floors. Eight experts each.',
-    commands: [tower.climbTo(6)],
+    /* Counting it out, because the next beat multiplies it. */
+    commands: [tower.climbTo(6), narrator.set({ pose: 'count' })],
     overlays: [note('42 × 8', 84, 34, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
   },
   {

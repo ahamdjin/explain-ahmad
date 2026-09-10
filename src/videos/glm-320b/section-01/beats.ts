@@ -178,7 +178,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 8,
     vo: 'Which is why you can’t pack a smaller version in advance. There’s nothing to pack.',
-    commands: [block.ghost('a'), narrator.pose('slump')],
+    commands: [block.ghost('a'), narrator.pose('resign')],
     overlays: [
       centred('what we packed', 50, 88, { tone: 'cost', rotate: -1 }),
       centred('what it needs now', 50, 94, { tone: 'word', rotate: 1 }),

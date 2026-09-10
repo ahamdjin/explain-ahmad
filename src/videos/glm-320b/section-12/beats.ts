@@ -42,7 +42,8 @@ export const BEATS: Beat<Patch>[] = [
       ground.at(GROUND_Y),
       machine.show({ x: 72, y: 54 }, 1),
       machine.say(['bounced', 'off', 'the']),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
+      /* The concession, admitted rather than announced. */
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'confide', flip: true }),
     ],
   },
   {

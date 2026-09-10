@@ -23,7 +23,8 @@ export const BEATS: Beat<Patch>[] = [
     commands: [
       ground.at(GROUND_Y),
       tower.show({ x: 50, y: 48 }, 1, { markers: 1, floor: 22 }),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
+      /* Leaning in to admit something, which is what beat 1 is. */
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'confide', flip: true }),
     ],
   },
   {

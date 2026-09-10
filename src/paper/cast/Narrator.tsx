@@ -22,6 +22,21 @@ import { PALETTE } from '../palette'
  *   lean     inspecting something closely
  *   aha      the moment it lands
  *   back     turned away, looking at something enormous
+ *
+ * The second set, added once `plain` became the host. With no beard, glasses or
+ * hat left to characterise the figure, **the pose is the entire performance** --
+ * so the register has to be wider than "happy, sad, pointing".
+ *
+ *   count    enumerating on fingers -- 336, 3,024, 12,096
+ *   weigh    two things held against each other. The trade-off pose, and the
+ *            thesis of this whole video is a trade-off
+ *   halt     a flat palm. "So, no. Not like that."
+ *   offer    presenting a thing to the viewer. "This is the router."
+ *   confide  leaning in to admit something. "I owe you a correction."
+ *   flat     arms folded, deadpan. "There is no maths expert."
+ *   reach    up toward something that runs off the top of the frame
+ *   resign   hands falling open. Not slump -- slump is the whole body giving
+ *            up, this is one gesture ending in nothing
  */
 export type NarratorPose =
   | 'wonder'
@@ -38,6 +53,14 @@ export type NarratorPose =
   | 'lean'
   | 'aha'
   | 'back'
+  | 'count'
+  | 'weigh'
+  | 'halt'
+  | 'offer'
+  | 'confide'
+  | 'flat'
+  | 'reach'
+  | 'resign'
 
 export const NARRATOR_POSES: NarratorPose[] = [
   'wonder',
@@ -54,6 +77,14 @@ export const NARRATOR_POSES: NarratorPose[] = [
   'lean',
   'aha',
   'back',
+  'count',
+  'weigh',
+  'halt',
+  'offer',
+  'confide',
+  'flat',
+  'reach',
+  'resign',
 ]
 
 /**
@@ -230,6 +261,12 @@ const HEAD_SET: Partial<Record<NarratorPose, { tilt?: number; dx?: number; dy?: 
   wait: { tilt: 5 },
   aha: { dy: -3 },
   shrug: { tilt: -4 },
+  count: { tilt: -4 },
+  weigh: { tilt: -5 },
+  offer: { tilt: -3, dx: 2 },
+  confide: { tilt: -7, dx: 3, dy: 1 },
+  reach: { tilt: -9, dy: -3 },
+  resign: { dy: 4 },
 }
 
 export function Narrator({
@@ -254,10 +291,28 @@ export function Narrator({
       data-pose={pose}
       data-style={style}
       style={{ '--flip': flip ? -1 : 1, '--scale': scale } as React.CSSProperties}
+      /*
+       * Whole-body motion. Kept here rather than in the pose tables because it
+       * is the wrapper that moves, not the drawing -- a pose that only changes
+       * the arms reads as a puppet with a still torso.
+       */
       animate={{
-        y: pose === 'cheer' ? -6 : pose === 'aha' ? -3 : pose === 'carry' ? 3 : 0,
-        rotate: pose === 'push' ? 5 : pose === 'lean' ? 7 : 0,
-        scaleY: pose === 'slump' ? 0.965 : pose === 'carry' ? 0.975 : 1,
+        y:
+          pose === 'cheer'
+            ? -6
+            : pose === 'aha'
+              ? -3
+              : pose === 'reach'
+                ? -5
+                : pose === 'carry'
+                  ? 3
+                  : pose === 'resign'
+                    ? 3
+                    : 0,
+        rotate:
+          pose === 'push' ? 5 : pose === 'lean' ? 7 : pose === 'confide' ? 6 : pose === 'weigh' ? -3 : 0,
+        scaleY:
+          pose === 'slump' ? 0.965 : pose === 'carry' ? 0.975 : pose === 'resign' ? 0.985 : 1,
       }}
       transition={{ type: 'spring', stiffness: 150, damping: 14 }}
     >
@@ -323,6 +378,16 @@ const FACE: Record<NarratorPose, FaceSet> = {
   lean: { shift: 6, eyes: 'squint', brows: 'down' },
   aha: { eyes: 'wide', mouth: 'open', brows: 'up' },
   back: {},
+
+  count: { shift: 5, drop: -1, mouth: 'flat' },
+  weigh: { mouth: 'flat', brows: 'up' },
+  halt: { mouth: 'flat', brows: 'down' },
+  offer: { shift: 5, mouth: 'smile' },
+  confide: { shift: 6, eyes: 'squint', mouth: 'smile' },
+  flat: { mouth: 'flat' },
+  /* Looking up. A negative `drop` lifts the pupils. */
+  reach: { shift: 3, drop: -3, eyes: 'wide', brows: 'up' },
+  resign: { drop: 2, mouth: 'flat', brows: 'sad' },
 }
 
 function Face({ pose }: { pose: NarratorPose }) {
@@ -778,8 +843,14 @@ function Badge() {
 }
 
 /** Round hands. A filled circle survives being small; a short line does not. */
-function Hand({ x, y }: { x: number; y: number }) {
-  return <circle cx={x} cy={y} r="5.5" fill={PALETTE.paperWhite} />
+/**
+ * A hand. A filled circle, and the radius is the only variable.
+ *
+ * Two vertical ticks were tried for an open palm and read as a ladder at any
+ * real playback size. In this idiom an open palm is just a bigger circle.
+ */
+function Hand({ x, y, r = 5.5 }: { x: number; y: number; r?: number }) {
+  return <circle cx={x} cy={y} r={r} fill={PALETTE.paperWhite} stroke={INK} strokeWidth="3.2" />
 }
 
 function Legs({ pose }: { pose: NarratorPose }) {
@@ -826,6 +897,42 @@ function Legs({ pose }: { pose: NarratorPose }) {
         <path d="M74 146v32" />
         <path d="M58 178q-5 3-9 1" />
         <path d="M74 178q5 3 9 1" />
+      </>
+    )
+  }
+
+  if (pose === 'reach') {
+    /* Up on the toes. Reaching is a whole-body thing or it is just an arm. */
+    return (
+      <>
+        <path d="M57 146v30" />
+        <path d="M75 146v30" />
+        <path d="M57 176q-6 5-9 4" />
+        <path d="M75 176q6 5 9 4" />
+      </>
+    )
+  }
+
+  if (pose === 'confide') {
+    /* Weight on the near foot, because the body is tipping toward camera. */
+    return (
+      <>
+        <path d="M57 146 52 178" />
+        <path d="M75 146 79 176" />
+        <path d="M52 178q-7 3-11 2" />
+        <path d="M79 176q7 4 11 3" />
+      </>
+    )
+  }
+
+  if (pose === 'flat') {
+    /* Feet apart and planted. Deadpan is a stance, not only a face. */
+    return (
+      <>
+        <path d="M55 146 51 178" />
+        <path d="M77 146 81 178" />
+        <path d="M51 178q-8 3-12 2" />
+        <path d="M81 178q8 3 12 2" />
       </>
     )
   }
@@ -976,6 +1083,125 @@ function Arms({ pose }: { pose: NarratorPose }) {
           <path d="M80 104 85 130" />
         </>
       )
+    case 'count':
+      /*
+       * One hand up with the fingers showing, and that is the whole read.
+       * Fingers are short strokes off a round hand -- drawn as bare ticks with
+       * no hand behind them they read as a fork.
+       *
+       * The hand has to clear the head circle (cx 65, cy 46, r 40). At y 76 the
+       * circle reaches x 94, so the hand sits at 104.
+       */
+      return (
+        <>
+          <path d="M82 102 98 84" />
+          <Hand x={104} y={77} />
+          <g strokeWidth="2.6">
+            <path d="M99 71 96 62" />
+            <path d="M104 70v-10" />
+            <path d="M109 71 112 62" />
+          </g>
+          <path d="M49 104 36 124" />
+        </>
+      )
+
+    case 'weigh':
+      /*
+       * Two open palms at different heights -- a balance, tipped.
+       *
+       * This is the pose the video was missing. Its thesis is a trade: compute
+       * against memory, small against fast. A figure that can only point at one
+       * thing at a time cannot hold two.
+       */
+      return (
+        <>
+          <path d="M48 106 28 99" />
+          <Hand x={22} y={96} />
+          <path d="M82 106 102 115" />
+          <Hand x={108} y={118} />
+        </>
+      )
+
+    case 'halt':
+      /*
+       * The arm goes out and slightly up, and the palm is one large circle.
+       *
+       * The first version had a normal-sized hand with three finger ticks
+       * above it, which read as a sprout growing out of a fist. A stop is a
+       * flat palm facing the viewer, and in this idiom that is simply a bigger
+       * round hand held further from the body -- the size *is* the palm.
+       */
+      return (
+        <>
+          <path d="M82 103 100 92" />
+          <Hand x={108} y={87} r={8.5} />
+          <path d="M49 104 44 130" />
+        </>
+      )
+
+    case 'offer':
+      /* One hand low and open, presenting. The other stays out of the way. */
+      return (
+        <>
+          <path d="M82 107 103 118" />
+          <Hand x={109} y={121} />
+          <path d="M49 104 34 122" />
+        </>
+      )
+
+    case 'confide':
+      /* A hand up beside the face. The body tips in too, via the wrapper. */
+      return (
+        <>
+          <path d="M82 104 97 82" />
+          <Hand x={103} y={75} />
+          <path d="M49 106 37 126" />
+        </>
+      )
+
+    case 'flat':
+      /*
+       * Folded arms: two crossing forearms, each ending at the other elbow.
+       * Two *crossing* lines read as folded arms; one line across the tunic
+       * reads as a strap, which is why this is drawn as a cross and not a bar.
+       */
+      return (
+        <>
+          <path d="M49 106 77 117" />
+          <Hand x={83} y={119} />
+          <path d="M81 106 53 119" />
+          <Hand x={47} y={121} />
+        </>
+      )
+
+    case 'reach':
+      /*
+       * The hand ends **above the crown** (the head's top is y 6). Anything
+       * lower is an arm held out sideways, not a reach -- the first version
+       * stopped level with the ear and read as waving.
+       *
+       * Straight up would put the arm through the head, so it swings out and
+       * back in: at y 16 the head circle reaches x 91, so x 101 clears it.
+       */
+      return (
+        <>
+          <path d="M81 100Q108 78 101 26" />
+          <Hand x={100} y={17} />
+          <path d="M49 104 36 124" />
+        </>
+      )
+
+    case 'resign':
+      /* Both hands falling open, low. A gesture ending in nothing. */
+      return (
+        <>
+          <path d="M48 107 29 121" />
+          <Hand x={23} y={125} />
+          <path d="M82 107 101 121" />
+          <Hand x={107} y={125} />
+        </>
+      )
+
     default:
       return (
         <>
@@ -1001,6 +1227,28 @@ function Marks({ pose }: { pose: NarratorPose }) {
       </g>
     )
   }
+
+  if (pose === 'count') {
+    /* Tally marks. Three, not five -- the count is the beat's job, not this
+     * mark's, and five reads as an amount rather than as counting. */
+    return (
+      <g stroke={INK} strokeWidth="2.6" strokeLinecap="round" opacity="0.5">
+        <path d="M100 34v-12" />
+        <path d="M108 34v-12" />
+        <path d="M116 34v-12" />
+      </g>
+    )
+  }
+
+  /*
+   * `weigh` deliberately has no mark.
+   *
+   * The first version drew a faint dashed line between the two hands to say
+   * "these are being held against each other" -- and it ran straight across
+   * the filled tunic, which reads as a sash. Anything drawn between the hands
+   * has to cross the body, so nothing is drawn: the hands at different heights
+   * and the tilt of the torso carry it.
+   */
 
   if (pose === 'think') {
     return (

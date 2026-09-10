@@ -170,7 +170,8 @@ export const BEATS: Beat<Patch>[] = [
       clock.off(),
       bars.fetch(),
       bars.both('about 50× more'),
-      narrator.set({ pose: 'point' }),
+      /* Two things held against each other -- the frame is a comparison. */
+      narrator.set({ pose: 'weigh' }),
     ],
   },
   {
@@ -196,7 +197,8 @@ export const BEATS: Beat<Patch>[] = [
     secs: 8,
     /* "Not like that" is the hinge into §12 and is not optional. */
     vo: 'So, no. You can’t just store the eighteen billion. Not like that.',
-    commands: [narrator.set({ pose: 'nod' })],
+    /* "So, no." A refusal, not agreement. */
+    commands: [narrator.set({ pose: 'halt' })],
     overlays: [centred(`~${GB_PER_WORD} GB a word — not like that`, 50, 88, { size: 'md', rotate: 1 })],
   },
 ]

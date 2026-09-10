@@ -22,7 +22,7 @@ The palette's hues are all spoken for — teal is the word, blue is a
 measurement, red is a cost — so a character tinted with one of them would read
 as *being* that thing. **People are drawn; only mechanisms are coloured.**
 
-## The fourteen poses
+## The twenty-two poses
 
 The emotional track. A viewer with the sound off should be able to read the
 story off this figure alone.
@@ -49,6 +49,40 @@ them: every section ends on a question, one plan has to visibly fail, the cost
 is a *carry* rather than a push, the fetch takes real time, and scale only
 reads if someone small is looking up at it.
 
+### The second eight
+
+Added once `plain` became the host. With no beard, glasses or hat left to
+characterise the figure, **the pose is the entire performance** — so the
+register had to be wider than pointing, agreeing and giving up.
+
+| pose | what it says | reach for it when |
+| --- | --- | --- |
+| `count` | enumerating | a number is being built on screen — 336, 3,024, 12,096 |
+| `weigh` | two things held against each other | **the trade-off pose.** The thesis of this video is a trade |
+| `halt` | a flat palm — "no, not like that" | a refusal, not a failure |
+| `offer` | presenting a thing to the viewer | something is named for the first time |
+| `confide` | leaning in to admit something | a concession, before the comments make it |
+| `flat` | arms folded, deadpan | a flat statement of fact that must not read as uncertainty |
+| `reach` | up toward something off the top of frame | height, when height is the point |
+| `resign` | one gesture ending in nothing | a *therefore* that costs something — not `slump`, which is the whole body |
+
+Three of these needed a second pass, and the faults are worth keeping written
+down because they are the same faults every time:
+
+- `weigh` had a faint dashed line between the two hands to say "these are
+  being held against each other". It crossed the filled tunic and read as a
+  **sash**. Anything drawn between the hands must cross the body, so nothing is
+  drawn — the hands at different heights and the tilt of the torso carry it.
+- `halt` had a normal hand with three finger ticks above it, which read as a
+  **sprout growing out of a fist**. In this idiom an open palm is simply a
+  bigger circle held further from the body: the size *is* the palm.
+- `reach` stopped level with the ear and read as **waving**. The hand has to
+  end above the crown, and since straight up goes through the head, the arm
+  swings out and back in.
+
+The rule underneath all three: **a stick figure has no detail budget.** If a
+gesture needs a small mark to be legible, it is not legible.
+
 ## The seven figures
 
 Between them they are a whole court: someone makes a claim, someone built the
@@ -57,7 +91,7 @@ someone rules on it, and someone is watching.
 
 | style | who | when |
 | --- | --- | --- |
-| `plain` | the viewer's proxy — asks, never explains | the default, and most of the run |
+| `plain` | **the host** — Ahmad on screen | the default, and effectively the whole run |
 | `me` | the host — the only figure allowed an opinion | opening a claim, delivering a verdict |
 | `vendor` | the claim — says "efficient" and moves on | where the claim is *made*, not tested |
 | `engineer` | the one who tries to actually run it | where a plan is attempted |

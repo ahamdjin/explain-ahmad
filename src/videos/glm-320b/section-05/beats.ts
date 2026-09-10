@@ -53,7 +53,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 8,
     vo: 'This is the router. It’s tiny compared to everything around it, and it has exactly one job.',
-    commands: [desk.name(), desk.ring(), narrator.set({ pose: 'point' })],
+    commands: [desk.name(), desk.ring(), narrator.set({ pose: 'offer' })],
   },
   {
     n: 3,
@@ -101,7 +101,9 @@ export const BEATS: Beat<Patch>[] = [
      * The most important frame in this section for not teaching a lie. The wall
      * carries no labels at all, and the note says why rather than naming one.
      */
-    commands: [open.off(), hospital.plain(), narrator.set({ pose: 'shrug' })],
+    /* Deadpan, not a shrug. A shrug says "I don't know"; here we do know --
+     * nobody assigned them subjects, and that is a flat statement of fact. */
+    commands: [open.off(), hospital.plain(), narrator.set({ pose: 'flat' })],
     lateOverlays: {
       at: 4800,
       overlays: [centred('no names on any of them —\nnot one', 50, 86, { size: 'md', rotate: -1 })],

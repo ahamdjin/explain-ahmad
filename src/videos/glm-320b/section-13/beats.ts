@@ -86,7 +86,7 @@ export const BEATS: Beat<Patch>[] = [
       share.moveTo({ x: 50, y: 82 }, 0.6),
       block.show({ x: 50, y: 42 }, 0.7, { grain: 'fine' }),
       block.whole(),
-      narrator.set({ pose: 'push' }),
+      narrator.set({ pose: 'carry' }),
     ],
   },
   {
@@ -107,7 +107,12 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 8,
     vo: 'Sparse routing buys you compute. It doesn’t buy you memory.',
-    commands: [share.moveTo({ x: 26, y: 66 }, 0.52), block.moveTo({ x: 74, y: 46 }, 0.5)],
+    /* The thesis is a trade, so the figure holds two things at once. */
+    commands: [
+      share.moveTo({ x: 26, y: 66 }, 0.52),
+      block.moveTo({ x: 74, y: 46 }, 0.5),
+      narrator.set({ pose: 'weigh' }),
+    ],
     overlays: [
       note('compute — bought', 26, 84, { size: 'md', tone: 'measure', rotate: -2 }),
       note('memory — not bought', 74, 84, { size: 'md', tone: 'cost', rotate: 2 }),
