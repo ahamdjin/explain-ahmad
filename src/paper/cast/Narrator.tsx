@@ -115,16 +115,21 @@ export const NARRATOR_STYLES: Record<NarratorStyle, Look> = {
    */
   me: {
     /*
-     * The cap, at Ahmad's ask. Hair is `crop` rather than `spikes` because the
-     * cap is drawn after the hair and sits on the hairline -- spikes came
-     * through the crown and read as hair growing out of the hat. Crop shows at
-     * the sides and under the back, which is what a cap actually looks like.
+     * The cap, and nothing else on the face. Ahmad's ask, twice: first the cap,
+     * then "just the simple cap guy".
      *
-     * The glasses stay. That was an explicit ask and it is the likeness.
+     * Hair is `crop` rather than `spikes` because the cap draws over the
+     * hairline -- spikes came through the crown and read as hair growing out of
+     * the hat. Crop shows at the sides, which is what a cap actually looks like.
+     *
+     * So the identity is the cap and the hoodie, and the face is left plain.
+     * That still reads distinctly against `plain`, which has no hair, no hat
+     * and a tunic -- the two are not confusable at a glance, which is the rule
+     * that matters when two figures share a frame.
      */
     hair: 'crop',
-    beard: 'full',
-    glasses: 'big',
+    beard: 'none',
+    glasses: 'none',
     headwear: 'cap',
     garment: 'hoodie',
     badge: false,

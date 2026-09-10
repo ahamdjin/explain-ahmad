@@ -142,22 +142,19 @@ export default function WatchPage() {
         </div>
       )}
 
+      {/*
+        No chapter plate. It sat in the top corner naming the section and
+        counting it out of thirteen, which is production scaffolding printed
+        over the film -- the dots already say where you are, and a viewer does
+        not need to be told they are five thirteenths of the way through.
+      */}
       {chrome ? (
-        <>
-          <div className="w-chapter" data-no-advance>
-            <b>
-              {chapter.n} / {CHAPTERS.length}
-            </b>
-            <span>{chapter.title}</span>
-          </div>
-
-          <ChapterDots
-            count={CHAPTERS.length}
-            index={index}
-            labels={CHAPTERS.map((item) => item.title)}
-            onPick={goTo}
-          />
-        </>
+        <ChapterDots
+          count={CHAPTERS.length}
+          index={index}
+          labels={CHAPTERS.map((item) => item.title)}
+          onPick={goTo}
+        />
       ) : null}
     </div>
   )

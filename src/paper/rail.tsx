@@ -71,12 +71,14 @@ export function ChapterDots({
           data-now={i === index ? 'true' : undefined}
           data-seen={i < index ? 'true' : undefined}
           onClick={() => onPick(i)}
+          /* The section's name, on hover. No number on screen -- the ring
+           * says where you are and the count is not information anyone
+           * watching needs. */
           title={`${i + 1}. ${labels[i] ?? ''}`}
           aria-label={`Section ${i + 1}: ${labels[i] ?? ''}`}
           aria-current={i === index ? 'true' : undefined}
         >
           <i aria-hidden="true" />
-          <em>{i + 1}</em>
         </button>
       ))}
     </div>

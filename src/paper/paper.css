@@ -699,11 +699,26 @@
 }
 
 /* A horizon, so objects stand somewhere instead of floating on a slide. */
+/*
+ * A horizon, so the frame is a place rather than a slide.
+ *
+ * It has to run **off both edges**. As a 2px rule inset 4% from each side it
+ * read as an underline with nothing above it -- a stray mark somebody would
+ * reasonably ask about -- rather than as ground. Full-bleed, thinner, and faded
+ * at the ends, it reads as a surface receding, which is the only job it has.
+ */
 .s1-ground {
   position: absolute;
-  left: 4cqw;
-  width: 92cqw;
-  border-top: 2px solid rgba(43, 41, 38, 0.22);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(43, 41, 38, 0.18) 12%,
+    rgba(43, 41, 38, 0.18) 88%,
+    transparent
+  );
 }
 
 /* Tilt and shadow live here rather than in the SVG, so the tape rotates
@@ -1267,7 +1282,7 @@
   position: absolute;
   left: 4cqw;
   right: 4cqw;
-  bottom: 5.4cqh;
+  bottom: 1.2cqh;
   z-index: 20;
   display: flex;
   gap: 3px;
@@ -1327,11 +1342,14 @@
   opacity: 1;
 }
 
+/* Sections at the top, beats at the bottom: the two rails are different
+ * scales of the same journey, and separating them means neither is mistaken
+ * for the other. */
 .s1-dots {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 1.6cqh;
+  top: 1.8cqh;
   z-index: 21;
   display: flex;
   gap: 0.7cqw;
@@ -1395,18 +1413,3 @@
   opacity: 0.5;
 }
 
-.s1-dot em {
-  position: absolute;
-  bottom: 2.3cqh;
-  font: 400 clamp(9px, 1cqw, 18px) / 1 var(--mono);
-  font-style: normal;
-  color: var(--graphite);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.16s ease;
-}
-
-.s1-dot:hover em,
-.s1-dot[data-now='true'] em {
-  opacity: 1;
-}
