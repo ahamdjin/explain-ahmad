@@ -21,7 +21,7 @@ The active route is:
 
 `src/videos/glm-320b/v9/Glm320bProductionV9.tsx`
 
-Older `Glm320bVideo*` files and old versioned CSS in `src/videos/glm-320b/` are legacy experiments. Do not treat them as current just because they remain in the repository.
+Earlier loose V1–V8 GLM implementations and stylesheets have been removed from the working tree. Git history preserves them if needed.
 
 ## Repository map
 
