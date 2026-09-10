@@ -1,4 +1,4 @@
-import { note, type Beat } from '../../../paper'
+import { GROUND_Y, note, type Beat } from '../../../paper'
 import { VISITS, camera, count, ground, narrator, room, rowA, rowB, tower, type Patch } from './scene'
 
 /**
@@ -22,7 +22,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 3,
     vo: 'Forty-five.',
     commands: [
-      ground.at(96),
+      ground.at(GROUND_Y),
       room.show({ x: 50, y: 50 }, 1, { bounded: true }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
     ],

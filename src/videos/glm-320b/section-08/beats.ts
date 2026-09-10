@@ -1,9 +1,4 @@
-import {
-  centred,
-  note,
-  TOKENS,
-  type Beat,
-} from '../../../paper'
+import { centred, GROUND_Y, note, TOKENS, type Beat } from '../../../paper'
 import {TOTAL, count, ground, line, narrator, tower, type Patch} from './scene'
 
 /**
@@ -26,7 +21,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 7,
     vo: 'Now. I’ve been following one token this whole time, and I owe you a correction.',
     commands: [
-      ground.at(96),
+      ground.at(GROUND_Y),
       tower.show({ x: 50, y: 48 }, 1, { markers: 1, floor: 22 }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
     ],

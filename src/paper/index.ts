@@ -53,6 +53,7 @@ export {
   NARRATOR_HOME,
   INITIAL_NARRATOR,
   INITIAL_GROUND,
+  GROUND_Y,
   INITIAL_CAMERA,
   type At,
   type Placed,

@@ -1,4 +1,4 @@
-import { note, type Beat } from '../../../paper'
+import { GROUND_Y, note, type Beat } from '../../../paper'
 import { LAST, camera, ground, last, narrator, out, rows, tower, vocab, type Patch } from './scene'
 
 /**
@@ -19,7 +19,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 8,
     vo: 'At the top of the stack we’ve got a row for every token in your prompt.',
     commands: [
-      ground.at(96),
+      ground.at(GROUND_Y),
       tower.show({ x: 50, y: 48 }, 1, { floor: 45, markers: 9 }),
       /* Push in on the top floor. We go to them; they have stopped. */
       camera.to({ x: 50, y: 22 }, 1.5),

@@ -1,10 +1,4 @@
-import {
-  centred,
-  FOLLOWED,
-  note,
-  PROMPT,
-  type Beat,
-} from '../../../paper'
+import { centred, FOLLOWED, GROUND_Y, note, PROMPT, type Beat } from '../../../paper'
 import {
   camera,
   chip,
@@ -43,7 +37,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 10,
     vo: 'So — who picks the eight. That thing does. And to find out how, we have to follow something in.',
     commands: [
-      ground.at(86),
+      ground.at(GROUND_Y),
       hospital.show({ x: 52, y: 46 }, 0.86, { staffed: true, dim: true }),
       desk.show({ x: 14, y: 78 }, 0.66),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
@@ -99,7 +93,7 @@ export const BEATS: Beat<Patch>[] = [
           hospital.off(),
           desk.off(),
           camera.home(),
-          ground.at(72),
+          ground.at(GROUND_Y),
           sentence.moveTo({ x: 62, y: 40 }, 0.58),
         ],
       },

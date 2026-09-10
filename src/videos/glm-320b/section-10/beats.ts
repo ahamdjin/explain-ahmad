@@ -1,10 +1,4 @@
-import {
-  centred,
-  note,
-  PROMPT,
-  REPLY,
-  type Beat,
-} from '../../../paper'
+import { centred, GROUND_Y, note, PROMPT, REPLY, type Beat } from '../../../paper'
 import {aside, ground, line, loop, narrator, out, tower, visitsAfter, type Patch} from './scene'
 
 /**
@@ -26,7 +20,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 8,
     vo: 'So how do you get a paragraph out of a machine that produces one word?',
     commands: [
-      ground.at(96),
+      ground.at(GROUND_Y),
       tower.show({ x: 28, y: 48 }, 0.82),
       out.show({ x: 62, y: 22 }, 0.62, { label: REPLY[0] }),
       line.show({ x: 28, y: 93 }, 0.3),

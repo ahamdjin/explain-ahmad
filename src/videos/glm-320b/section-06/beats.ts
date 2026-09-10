@@ -1,4 +1,4 @@
-import { centred, note, type Beat } from '../../../paper'
+import { centred, GROUND_Y, note, type Beat } from '../../../paper'
 import { CHOSEN, blend, ground, hospital, narrator, room, row, type Patch } from './scene'
 
 /**
@@ -23,7 +23,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 5,
     vo: 'Right. Eight experts picked. What do they actually do with it?',
     commands: [
-      ground.at(88),
+      ground.at(GROUND_Y),
       /*
        * The wall we came from, held well clear of the mechanism. At 0.62 behind
        * the blend its 288 figures collided with the eight blocks and the output
@@ -139,7 +139,7 @@ export const BEATS: Beat<Patch>[] = [
      * a bounded thing, so that §7 can take it away and make it one floor.
      */
     vo: 'Which raises the obvious question — how many steps are there?',
-    commands: [room.draw(), ground.at(96)],
+    commands: [room.draw(), ground.at(GROUND_Y)],
     lateOverlays: {
       at: 3000,
       overlays: [centred('how many steps\nare there?', 50, 86, { size: 'md', rotate: -2 })],

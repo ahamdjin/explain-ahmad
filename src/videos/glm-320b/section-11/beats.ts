@@ -1,4 +1,4 @@
-import { centred, note, tick, type Beat } from '../../../paper'
+import { centred, GROUND_Y, note, tick, type Beat } from '../../../paper'
 import {
   GB_PER_WORD,
   MB_PER_EXPERT,
@@ -42,7 +42,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 6,
     vo: 'Back to where we started. Eighteen billion out of three hundred and twenty.',
     commands: [
-      ground.at(96),
+      ground.at(GROUND_Y),
       tower.show({ x: 26, y: 48 }, 0.82),
       numbers.show({ x: 68, y: 36 }, 1),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
@@ -61,7 +61,7 @@ export const BEATS: Beat<Patch>[] = [
       numbers.off(),
       camera.to({ x: 50, y: 50 }, 1),
       store.show({ x: 15, y: 42 }, 0.7),
-      ground.at(84),
+      ground.at(GROUND_Y),
     ],
     stages: [
       { at: 1400, commands: [desk.show({ x: 45, y: 70 }, 0.46)] },

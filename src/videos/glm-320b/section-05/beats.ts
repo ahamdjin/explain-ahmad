@@ -1,4 +1,4 @@
-import { centred, arrow, brace, note, type Beat } from '../../../paper'
+import { arrow, brace, centred, GROUND_Y, note, type Beat } from '../../../paper'
 import {
   CHOSEN,
   OTHER,
@@ -36,7 +36,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 9,
     vo: 'So: we’ve now got a row of numbers that’s specific to this sentence. This is what arrives here.',
     commands: [
-      ground.at(84),
+      ground.at(GROUND_Y),
       row.show({ x: 20, y: 40 }, 0.5),
       desk.show({ x: 62, y: 62 }, 0.8),
       /* Pan. The row travels and the frame goes with it, which is what makes

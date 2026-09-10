@@ -1,4 +1,4 @@
-import { centred, note, type Beat } from '../../../paper'
+import { centred, GROUND_Y, note, type Beat } from '../../../paper'
 import {
   OTHER_MODEL,
   THIS_MODEL,
@@ -38,7 +38,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 4,
     vo: 'So. Eighteen billion active.',
     commands: [
-      ground.at(88),
+      ground.at(GROUND_Y),
       big.show({ x: 50, y: 42 }, 1, { value: '18 billion', caption: 'active' }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
     ],

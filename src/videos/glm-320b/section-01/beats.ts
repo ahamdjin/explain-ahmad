@@ -1,4 +1,4 @@
-import { brace, centred, note, type Beat } from '../../../paper'
+import { brace, centred, GROUND_Y, note, type Beat } from '../../../paper'
 import {
   CHOSEN,
   big,
@@ -42,7 +42,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 3,
     vo: "Let's start with this number.",
     commands: [
-      ground.at(86),
+      ground.at(GROUND_Y),
       big.show('320,000,000,000', { x: 52, y: 44 }, 0.42),
       /* The narrator lives on the right for the whole section. The words come
        * in from the left, and at 408px wide they own that side of the frame. */
@@ -223,7 +223,7 @@ export const BEATS: Beat<Patch>[] = [
       block.off(),
       hospital.rise({ x: 52, y: 46 }, 0.86),
       hospital.staff(),
-      ground.at(88),
+      ground.at(GROUND_Y),
     ],
     lateOverlays: {
       at: 4200,

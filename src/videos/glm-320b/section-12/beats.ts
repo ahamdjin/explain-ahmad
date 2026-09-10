@@ -1,4 +1,4 @@
-import { centred, note, type Beat } from '../../../paper'
+import { centred, GROUND_Y, note, type Beat } from '../../../paper'
 import {
   SLOTS,
   cache,
@@ -39,7 +39,7 @@ export const BEATS: Beat<Patch>[] = [
     /* The concession, and it must be generous. It works before we qualify it. */
     vo: 'Except — people do run models like this on small machines. Right now. And they’re not lying about it.',
     commands: [
-      ground.at(88),
+      ground.at(GROUND_Y),
       machine.show({ x: 72, y: 54 }, 1),
       machine.say(['bounced', 'off', 'the']),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),

@@ -1,4 +1,4 @@
-import { brace, note, type Beat } from '../../../paper'
+import { brace, GROUND_Y, note, type Beat } from '../../../paper'
 import {
   again1,
   again2,
@@ -36,7 +36,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 6,
     vo: 'Here’s how it gets meaning out of a row number.',
     commands: [
-      ground.at(72),
+      ground.at(GROUND_Y),
       chip.show({ x: 46, y: 46 }, 1, { becomes: true }),
       /* Only the bottom edge, and only from below frame. The pull-back is the
        * beat that reveals what it is the edge of. */

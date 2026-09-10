@@ -1,9 +1,4 @@
-import {
-  centred,
-  FOLLOWED,
-  note,
-  type Beat,
-} from '../../../paper'
+import { centred, FOLLOWED, GROUND_Y, note, type Beat } from '../../../paper'
 import {
   barked,
   camera,
@@ -39,7 +34,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 8,
     vo: 'So every "dog" starts out identical. Which can’t be right — and it isn’t, for long.',
     commands: [
-      ground.at(74),
+      ground.at(GROUND_Y),
       row.show({ x: 50, y: 44 }, 0.7),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'think', flip: true }),
     ],

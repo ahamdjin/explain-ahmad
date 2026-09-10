@@ -97,7 +97,25 @@ export const INITIAL_NARRATOR: NarratorActor = {
   flip: true,
 }
 
-export const INITIAL_GROUND: GroundActor = { on: false, y: 86 }
+/**
+ * The horizon, and there is only one.
+ *
+ * **82% is the narrator's foot line**, measured rather than guessed: the figure
+ * is 11cqw wide on a 130x200 viewBox, so it spans 55%-85% of the frame, and
+ * its feet sit at 178/200 of that box.
+ *
+ * It is a constant because the sections had drifted to six different values --
+ * 72, 74, 84, 86, 88 and 96 -- and at 72 the line ran straight through the
+ * narrator's waist and across the middle of the frame, which is the one thing a
+ * horizon must never look like. At 96 the figure floated above it instead.
+ *
+ * A single height is also the correct answer on its own terms: the video is one
+ * continuous space, so it is one ground. A horizon that changes height between
+ * sections is a continuity bug wearing an art direction costume.
+ */
+export const GROUND_Y = 82
+
+export const INITIAL_GROUND: GroundActor = { on: false, y: GROUND_Y }
 
 /** The camera, when a section needs the frame itself to move. */
 export type CameraActor = { x: number; y: number; zoom: number }
