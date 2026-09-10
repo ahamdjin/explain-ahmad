@@ -1,48 +1,62 @@
 # Project Structure
 
-Keep the repository easy to read. Each top-level folder has one job.
+Each top-level folder has one job. The goal is to make it obvious what is **current**, what is **reference**, and what is **historical**.
 
-## `skills/`
-Reusable rules for how explainers are designed and built.
+## Authority order
 
-Examples: explanation design, continuity, diagram grammar, interaction patterns, visual system, refinement standards.
+When files disagree, use this order:
 
-These are **not video-specific**.
+1. `video-script/` — current spoken script
+2. `storyboard/` — current story / visual structure
+3. `research/` — factual and teaching reference
+4. `art-direction/` — visual language
+5. `src/` — implementation
+6. `archive/` — historical only
 
-## `research/`
-Source notes and factual research used to understand a topic or study other explainers.
-
-- `research/ncase/` — Nicky Case / explorable-explanation study notes
-- `research/glm/` — GLM architecture and technical research
-- `research/RESEARCH_NOTES.md` — general research notes
-
-Research informs the work; it is not the current script.
-
-## `art-direction/`
-The authoritative visual language for a video/project before storyboard and implementation.
-
-This is where we lock things such as palette, paper/material treatment, character personality, line style, motion language, visual semantics, composition rules, and what must be avoided.
-
-For the current GLM explainer, `art-direction/GLM_PAPER_WORLD.md` is the source of truth. Once locked, do not repeatedly reinvent the style while storyboarding or coding.
+Implementation must follow the story and research; it does not redefine them.
 
 ## `video-script/`
-The current spoken YouTube script.
 
-This folder should contain what Ahmad plans to **say**. Visuals should only be added here after they are deliberately locked sentence-by-sentence.
+What Ahmad currently plans to say.
+
+Current state: only `01-opening-narration.md` is a current spoken-script draft. Do not assume implementation copy is the final script.
 
 ## `storyboard/`
-The pre-production bridge between script and implementation.
 
-Start with large visual sections/pages before creating individual storyboard frames. One section is one stable mental world and can contain several narration sentences and several frames.
+Pre-production story structure.
 
-For the current GLM explainer, `storyboard/SECTION_MAP.md` is the authoritative high-level visual/story structure. Detailed frames are created only inside a section after that section is understood.
+`storyboard/SECTION_MAP.md` is the **authoritative current high-level story** for the GLM explainer.
 
-## `archive/`
-Old experiments, previous-version plans, audits, rollback notes, and superseded visual attempts.
+## `research/`
 
-Useful for history, but **not authoritative for the current video**.
+Reference material, not narration.
+
+- `research/glm/GLM_V7_ATTENTION_MOE_RESEARCH.md` — current GLM technical reference
+- `research/ncase/NCASE_STUDY_INDEX.md` — entry point for teaching / Nicky Case studies
+- `research/RESEARCH_NOTES.md` — general notes
+
+Older version-specific research belongs in `archive/`.
+
+## `art-direction/`
+
+Visual rules only.
+
+`art-direction/GLM_PAPER_WORLD.md` is the current GLM visual-language reference.
+
+## `skills/`
+
+Reusable explanation, continuity, interaction and visual rules. These are not GLM-specific facts or current narration.
 
 ## `src/`
-The actual React/Vite implementation and reusable visual components.
 
-Changing `skills/`, `research/`, `art-direction/`, `video-script/`, `storyboard/`, or `archive/` does not mean the production UI should automatically be redesigned.
+React/Vite implementation.
+
+For the GLM video, check `src/videos/registry.tsx` to identify the active implementation. Currently it points to `src/videos/glm-320b/v9/Glm320bProductionV9.tsx`.
+
+Old versioned video implementations may remain for reference, but they are **legacy**, not current story sources.
+
+## `archive/`
+
+Superseded scripts, audits, experiments, old research and rollback material.
+
+Nothing here is authoritative. Useful ideas can be recovered from archive, but only become current after being deliberately moved into the current script/storyboard/research.
