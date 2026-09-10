@@ -62,3 +62,46 @@ one of them a distinguishing mark, colour or silhouette.
 The library must be *visible*, or it will not be used. Keep a route that renders
 every piece in every state on one page. If a prop cannot be seen without
 running a section, it will be rebuilt by whoever needs it next.
+
+## The scene kit is part of the library too
+
+`src/paper/scene.ts` holds the cumulative merge and the four generic actor
+verbs; `src/paper/notes.ts` holds the overlay builders. Section 01 hand-wrote
+its own `applyPatches` — a nine-line object spread naming every actor — which
+is correct once and a liability thirteen times, because the merge is identical
+in all of them and the copies drift the moment an actor is added.
+
+So a section's `scene.ts` should contain only the two things that are genuinely
+its own:
+
+1. **which actors are on stage** — the state type and its initial value
+2. **what the story does to them** — named story verbs, written on top of the
+   generic four
+
+Story verbs still matter. `block.scatter()` and `hospital.choose()` are why
+`beats.ts` reads as direction rather than as state assignment, and
+`actorVerbs` supplies the plumbing underneath them, not the vocabulary.
+
+## Alignment is not a thing two components can agree on by hand
+
+`AttentionLines` was built as its own actor, positioned in stage percentages
+next to a `Sentence` that computes its token layout internally. Those two would
+have had to agree about where the ninth token's centre is, by hand, at every
+scale — and lines that miss the cards they connect teach nothing.
+
+The fix is the shape to reuse: the geometry is a bare `<g>` (`AttentionArcs`)
+that the owner of the coordinate system drops **inside its own `svg`**, plus a
+thin wrapper (`AttentionLines`) for the rare standalone case.
+
+> **If two components need to agree on a position, one of them should be
+> rendering inside the other.**
+
+## One number, many pictures
+
+§12 has a cache box, a machine, and two read-outs, all of which are the same
+fact: how much of the model you keep close. A demonstration like that dies of
+exactly one failure — the control saying one thing while the picture says
+another — so the value lives in the section's `Stage`, and the box's size, the
+machine's pace and its bulk are all derived from it.
+
+A beat can drive the control, and the viewer can always take it back.

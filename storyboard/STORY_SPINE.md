@@ -1,6 +1,13 @@
 # Story spine — v4
 
-Status: **v4 — the whole machine, taught, then the payoff.**
+Status: **v4 — the whole machine, taught, then the payoff. All thirteen
+sections built.** 164 beats, 21:36, 76% talking. `npm run board` for every
+beat, `/watch` to see it in order, `npm run timing` for the pacing.
+
+The `secs` in the build come from a 145-words-per-minute estimate and are
+placeholders. **Record against `video-script/READ_ALOUD.md` and set them from
+the real audio** — `docs/VOICE_OVER.md`. Until then the runtime is an estimate
+and the autoplay preview only approximates the cut.
 
 v3 got the voice right and was still missing most of the machine. Ahmad's
 brief: token → token ID → embedding *with an example* → attention, so the model
@@ -14,7 +21,7 @@ is only worth anything to someone who has seen the machine. So v4 teaches the
 full pipeline and uses the memory question as the **payoff**, not as a mystery
 running underneath.
 
-Runtime lands around **16–17 minutes**. The risk of that shape is a payoff at
+Runtime lands around **21 minutes** as built (16.6 of it speaking). The risk of that shape is a payoff at
 minute twelve, and the answer to it is in §4 below: every mechanism section
 must add one *reason you could not have known in advance*. The teaching is the
 answer being assembled, not a detour before it.
@@ -220,3 +227,18 @@ convincing than a wall they have to accept.
 | `research/glm/GROUND_TRUTH.md` | every on-screen number about this model |
 | `storyboard/VOCABULARY_LEDGER.md` | what the viewer owns per section |
 | `storyboard/SECTION_MAP.md` | per-section detail |
+| `storyboard/BOARD.md` | **generated** — every beat of every section, from the code |
+| `skills/SPATIAL_CONTINUITY.md` | where the viewer is, and what may move them |
+
+## 9. Two corrections made during the build
+
+**§13 does not return to a spec sheet.** The board asked beat 2 to pan "back to
+the opening sheet, exactly as it was — `ModelSheet`, 320 / 18". §1 as built has
+no `ModelSheet`, deliberately: *no spec read* is the first rule of that opening.
+So §13 beat 2 returns to what §1 actually opened with — the number, and the
+block behind it. A callback to a frame that does not exist is worse than none.
+
+**§8 is nine tokens, not ten.** The running prompt tokenises to nine pieces and
+they are on screen while the arithmetic happens, so it is 9 × 336 = **3,024**.
+The tidier 3,360 was not available to us. §2's token ID is hedged as *"let's
+say"* for the same reason — 4021 has not been measured from the tokenizer.

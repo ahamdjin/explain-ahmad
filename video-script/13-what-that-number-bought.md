@@ -66,7 +66,7 @@ The answer is split, and the split is the whole video:
 | beat | where | camera | what happens | on screen | example |
 | --- | --- | --- | --- | --- | --- |
 | 1 | the plan | — | the plan dissolves; `18` rises and holds alone | `BigNumber` | `18B` |
-| 2 | the sheet | **pan** | we slide back to the opening sheet, exactly as it was | `ModelSheet` | 320 / 18 |
+| 2 | the sheet | **pan** | we slide back to what §1 opened on: the number, and the block behind it | `BigNumber`, `Block` | `18 billion` over the block |
 | 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking |
 | 4 | the sheet | — | the block from §1 returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable |
 | 5 | the sheet | — | a label lands between the bar and the block | `Note` in `claim` orange | "efficient" |
@@ -80,8 +80,11 @@ The answer is split, and the split is the whole video:
 
 ### Board notes
 
-- **One camera move**, beat 2, back to where we opened. The sheet must be the
-  **same object** as §1 beat 1 — same tilt, same paper, same figures.
+- **One camera move**, beat 2, back to where we opened — and the callback must
+  be to the frame §1 **actually has**. This row originally asked for the opening
+  `ModelSheet`; §1 has no spec sheet, on purpose (*no spec read* is the first
+  rule of that opening), so beat 2 returns to the number and the block instead.
+  A callback to a frame that does not exist is worse than no callback.
 - **Beat 3 concedes first.** The true half gets a frame of its own before any
   qualification. A verdict that only convicts reads as a debunk.
 - Beat 5 is one of `claim` orange's three budgeted uses in the whole video.
@@ -145,5 +148,5 @@ The answer is split, and the split is the whole video:
 | --- | --- |
 | `CostBars` | have |
 | the model, whole and heavy | have |
-| two `ModelSheet`s with chip counts | **extend** — a compare state |
+| two model cards with chip counts and grain | **built** — `ModelCard`, two of them |
 | `VerdictCard` | have |

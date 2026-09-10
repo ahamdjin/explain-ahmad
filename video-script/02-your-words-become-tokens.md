@@ -49,7 +49,7 @@ it, and the splitting happens in front of us. See `skills/SPATIAL_CONTINUITY.md`
 >
 > **10.** *(our piece flies to the list, lands on a row, and comes back carrying
 > the row's number)* So each piece gets swapped for where it sits in that list.
-> A row number. This one's number four thousand and twenty-one.
+> A row number. Let's say this one's number four thousand and twenty-one.
 >
 > **11.** *(the word fades off the card, leaving only `4021`)* That number is
 > called a **token ID**. And it's the only thing that carries on.
@@ -111,9 +111,11 @@ it, and the splitting happens in front of us. See `skills/SPATIAL_CONTINUITY.md`
 ## Truth notes
 
 - 154,880 is this model's vocabulary size, from `config.json`. `GROUND_TRUTH.md`.
-- **Token ID 4021 for "dog" is invented.** Either measure it from the real
-  tokenizer before recording, or say *"let's say it's number four thousand and
-  twenty-one"*. Do not present an unmeasured ID as fact.
+- **Token ID 4021 for "dog" is invented**, so beat 10 is hedged — it says
+  *"let's say"*. That is the fix as built. If the real ID is ever measured from
+  the tokenizer, drop the hedge and use the measured number; until then the
+  hedge is not optional, because an unmeasured ID presented as fact is the one
+  kind of error an expert viewer will find instantly.
 - Byte-pair encoding, how the vocabulary was built, and why " dog" and "dog"
   are different tokens go in an **expandable aside**, not in beats.
 - Beat 11 must land as a genuine problem, not a technicality. The viewer should

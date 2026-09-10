@@ -37,8 +37,8 @@
 > **8.** Which means each token in your prompt is doing its own three hundred
 > and thirty-six.
 >
-> **9.** *(counters multiplying)* Ten tokens in your sentence? That's three
-> thousand, three hundred and sixty expert visits.
+> **9.** *(counters multiplying)* Nine tokens in your sentence? That's three
+> thousand and twenty-four expert visits.
 >
 > **10.** And every one of them decided on the spot, from numbers that didn't
 > exist until a moment before.
@@ -94,9 +94,9 @@
 ## Truth notes
 
 - **The example is 9 tokens, not 10.** The running prompt tokenises to nine
-  pieces in §2, and it is on screen, so 9 × 336 = **3,024**. The script says
-  "ten tokens" and must be corrected to nine before recording, or the frame
-  contradicts the voice.
+  pieces in §2, and it is on screen here, so 9 × 336 = **3,024**. Beat 9 said
+  "ten tokens" in the first draft; corrected, because the pieces are countable
+  on the frame and a viewer who counts them would catch us.
 
 - This is where v1's "following one word" simplification gets **paid for out
   loud** instead of hidden in a footnote. Beat 1 admits it. That is cheaper
@@ -107,8 +107,6 @@
 - Each token picks its **own** top-8 independently at every sparse layer.
 - "Transformer" is defined as the arrangement. Positional information, layer
   norm and the residual stream are asides, not beats.
-- 10 × 336 = 3,360. Keep the example at ten tokens so the arithmetic is
-  something the viewer can do in their head.
 
 ## Frames
 

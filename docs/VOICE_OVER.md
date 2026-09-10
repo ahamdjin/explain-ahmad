@@ -5,7 +5,12 @@ There is no audio yet. This is the plumbing and how to use it.
 ## How the timing works
 
 Every beat declares `secs`. Those add up to the section runtime and to the
-`8:04` in `storyboard/BOARD.md`, and they are what autoplay runs on.
+**21:39** in `storyboard/BOARD.md`, and they are what autoplay runs on.
+
+The current numbers were set from a word count at 145 words per minute plus
+about a second of air, which is why `npm run timing` reports 76% talking and no
+beat that cannot be said. That is a *floor*, not a performance: it guarantees
+the line fits, and nothing more.
 
 **When a voice track exists it becomes the master clock.** Beats then follow
 `audio.currentTime` rather than a timer, so a beat cannot drift out of sync
@@ -14,8 +19,14 @@ their own clocks and one of them stuttered.
 
 ## Adding a track
 
-1. Record the section's script from `video-script/0N-*.md`. The lines are
-   already split per beat, in order.
+1. Record from **`video-script/READ_ALOUD.md`** — the whole video in one
+   document, every line with the timecode it starts at, the place the beat
+   leaves you in, and the event the line is describing. That last column is the
+   one to watch while reading: you are describing what is on the screen, never
+   the other way round.
+
+   The per-section scripts (`video-script/0N-*.md`) hold the contract, the
+   board and the truth notes. They are for building, not for reading aloud.
 2. Save it as `public/vo/0N.mp3`.
 3. In `src/videos/glm-320b/section-0N/Section0N.tsx`, set:
 
@@ -35,7 +46,14 @@ the real thing.
 1. `npm run record` — the whole piece at authored timing, no audio.
 2. Watch it and note every beat that feels short or long.
 3. Adjust `secs` in that section's `beats.ts`.
-4. `npm run board` so the storyboard reflects it.
+4. `npm run board && npm run readthrough` so both generated documents reflect
+   it. They read `secs` out of the beats, so they cannot disagree with the
+   build — but they will not update themselves.
+
+**Record §1 and §2 before building anything further onto the timing.** There
+are 164 beats; setting `secs` from a word count and then again from the real
+voice is doing it twice. Two sections is enough to learn your actual pace, and
+the rest can be authored to it.
 
 A beat that is *slightly* long is almost always better than one that is short.
 A viewer can wait; they cannot rewind a live watch.
@@ -45,8 +63,11 @@ A viewer can wait; they cannot rewind a live watch.
 | | |
 | --- | --- |
 | `/watch` | click through, in order |
+| the dots at the bottom | one per section — click to jump. A ring marks where you are |
+| the rail above them | one tick per beat, width proportional to its length. Click to land on it |
+| <kbd>Home</kbd> / <kbd>End</kbd> | first and last beat of the section you are in |
 | `/watch?play=1` | hands-free at authored timing. Space or click pauses. |
-| `/watch?play=1&chrome=0` | the same with the chapter label hidden |
+| `/watch?play=1&chrome=0` | **for recording** — hides the chapter label, the dots and the rail |
 | `/watch?section=5` | start at a chapter |
 | `npm run record` | the whole piece to `output/recordings/whole-piece.webm` |
 | `npm run record -- --section=7` | one chapter |
