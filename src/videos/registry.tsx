@@ -7,6 +7,7 @@ export type VideoRouteDefinition = {
 }
 
 const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
+const Glm320bGptWatch = lazy(() => import('./glm-320b/gpt-watch/GptWatch'))
 
 /**
  * Real video pages are registered only after their story is known.
@@ -17,5 +18,10 @@ export const videoRoutes: VideoRouteDefinition[] = [
     slug: 'why-320b-uses-18b',
     title: 'Why Does a 320B AI Only Use 18B Parameters?',
     component: Glm320bVideo,
+  },
+  {
+    slug: 'gpt-watch',
+    title: 'GPT Watch — GLM 320B → 18B alternate cut',
+    component: Glm320bGptWatch,
   },
 ]
