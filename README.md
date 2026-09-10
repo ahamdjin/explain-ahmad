@@ -1,24 +1,55 @@
-# Explain Ahmad — Storytelling Engine
+# Explain Ahmad
 
-A reusable React/Vite system for building deeply authored interactive YouTube explainers.
+Interactive explainer project. The current video is about **why GLM-5.3-Flash can have 320B total parameters while using about 18B active parameters per token**.
+
+## Start here — current sources
+
+Use these files in this order:
+
+1. `video-script/01-opening-narration.md` — **current spoken script**. Only the opening is written here so far.
+2. `storyboard/SECTION_MAP.md` — **authoritative current story / section structure**.
+3. `research/glm/GLM_V7_ATTENTION_MOE_RESEARCH.md` — **current GLM technical reference**.
+4. `research/ncase/NCASE_STUDY_INDEX.md` — entry point for teaching / Nicky Case research.
+5. `art-direction/GLM_PAPER_WORLD.md` — current visual language.
+6. `src/videos/registry.tsx` — tells you which production implementation is actually active.
+
+**Important:** implementation is not the source of truth for story or technical claims. Script, storyboard and research come first.
+
+## Current production
+
+The active route is:
+
+`src/videos/glm-320b/v9/Glm320bProductionV9.tsx`
+
+Earlier loose V1–V8 GLM implementations and stylesheets have been removed from the working tree. Git history preserves them if needed.
 
 ## Repository map
 
-See `PROJECT_STRUCTURE.md` first.
+- `video-script/` — words Ahmad currently plans to say.
+- `storyboard/` — current story structure and visual beats.
+- `research/glm/` — factual / architecture research.
+- `research/ncase/` — teaching and explainer research.
+- `art-direction/` — current visual rules.
+- `skills/` — reusable explainer rules, not video-specific facts.
+- `src/` — implementation and reusable visual code.
+- `archive/` — superseded material kept only for history/reference.
 
-- `skills/` — reusable explanation/design rules
-- `research/` — source and technical research
-- `video-script/` — the current spoken YouTube script
-- `archive/` — old/superseded planning material
-- `src/` — implementation code
+See `PROJECT_STRUCTURE.md` for the authority rules.
 
-## Current phase
+## Core rule
 
-**The video is built.** Eight sections, 96 beats, 8:04, click-to-advance.
-Remaining: voice-over, and a pacing pass once there is audio to cut against.
+**The video is built.** Thirteen sections, 164 beats, 21:39, click-to-advance.
+Remaining: voice-over, and a pacing pass once there is audio to cut against
+(every `secs` is currently a 145-wpm word-count floor, not a measured take).
 
-Start at **`/watch`** — it runs all eight in order, which is the only way any
-of it makes sense. Individual `/section-0N` routes exist for review.
+Start at **`/watch`** (also **`/video-1`**) — it runs all thirteen in order,
+which is the only way any of it makes sense. Individual `/section-NN` routes
+exist for review. **`/video-2`** is a separate, unfinished proposal cut; see
+`PROJECT_STRUCTURE.md` for which is which.
+
+Every beat is also exported as a still: `npm run frames:export` writes
+`~/Desktop/explain-ahmad-frames/`, one PNG per beat plus an `index.html`
+contact sheet.
 
 The reusable library is `src/paper` (browse it at **`/paper`**). Everything
 else under `src/` is earlier exploration, kept for reference and reachable
@@ -34,16 +65,18 @@ This library intentionally over-builds interaction quality and robustness. More 
 
 ## Library routes
 
-- `/watch` — **the video**, all eight sections in order (`?play=1`, `?chrome=0`, `?section=N`)
+- `/watch`, `/video-1` — **the video**, all thirteen sections in order (`?play=1`, `?chrome=0`, `?section=N`)
 - `/paper` — every reusable piece and object in every state
-- `/section-01` … `/section-08` — one section, for review only
+- `/section-01` … `/section-13` — one section, for review only
 - `/` — index of all of the above, plus the older studies
 - `/styles` — art-direction reference
 - `/lab/:demo` — capability demos
-- `/why-320b-uses-18b` — production v9, superseded by the eight sections
+- `/video-2` — the GPT alternate cut, 120 beats, a proposal in the v9 engine
+- `/why-320b-uses-18b` — production v9, superseded
+- `/old/section-01` … `/old/section-08` — the superseded eight-section cut
 
 Every route is lazy-loaded and owns its own CSS, so opening one does not pay
-for any of the others. `npm run smoke` opens all 19 and fails on any console
+for any of the others. `npm run smoke` opens every one and fails on any console
 error, page error or failed request.
 
 ## Core story hierarchy
@@ -194,8 +227,4 @@ npm run dev
 
 ## Upstream / inspiration
 
-- Nicky Case — *The Evolution of Trust* (CC0-1.0)
-- Nicky Case — *Parable of the Polygons* (CC0-1.0)
-- Nicky Case — *LOOPY* (CC0-1.0)
-
-See `NCASE_CREDITS.md` and `THIRD_PARTY.md` for provenance.
+See `NCASE_CREDITS.md` and `THIRD_PARTY.md`.

@@ -1,16 +1,21 @@
-# Real video routes
+# Video implementations
 
-This folder intentionally contains no real video pages yet.
+This folder contains real explainer implementations.
 
-A video route is created only when the actual script/story is supplied.
+## Current GLM video
 
-Workflow:
-1. Receive the script or section.
-2. Break it into conceptual beats.
-3. Choose interaction/navigation per beat.
-4. Choose art direction per scene.
-5. Reuse library primitives where they genuinely help.
-6. Add a new route entry in `registry.tsx`.
-7. Tune the finished scenes visually by eye.
+`registry.tsx` is the authority for which implementation is live.
 
-Do not create speculative `/attention`, `/moe`, `/hermes-agent`, etc. pages just to demonstrate the framework. Use `/lab/:demo` for capability demos instead.
+Current route:
+
+`why-320b-uses-18b` → `glm-320b/v9/Glm320bProductionV9.tsx`
+
+Do not infer the current story from old implementation files. The story authority lives in `video-script/` and `storyboard/`.
+
+## Rule for versions
+
+- Active version: whatever `registry.tsx` imports.
+- Older versioned implementations: legacy experiments/reference.
+- New production work should live inside the active version folder rather than creating another loose root-level `V*` file.
+
+Capability demos belong in `/lab`, not here.

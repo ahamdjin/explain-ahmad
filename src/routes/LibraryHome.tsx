@@ -46,6 +46,7 @@ const studies = [
   { to: '/lab/flow', title: 'Diagrams', meta: 'Signal flow, nodes, edges, visual systems' },
   { to: '/lab/drag', title: 'Interaction', meta: 'Drag, manipulate, compare, simulate' },
   { to: '/lab/reveal', title: 'Reveals', meta: 'Masks, focus, progressive disclosure' },
+  { to: '/video-2', title: 'Video 2 — the GPT cut', meta: '120 beats, drawn in the superseded v9 engine' },
   { to: '/gpt-section-01', title: 'GPT Section 1', meta: 'An alternative opening, kept for comparison' },
   { to: '/why-320b-uses-18b', title: 'Production v9', meta: 'Superseded' },
   { to: '/old/section-01', title: 'The superseded eight', meta: 'The claim-on-trial cut, kept to compare against' },

@@ -32,6 +32,13 @@ const Section13 = lazy(() => import('./glm-320b/section-13/Section13'))
 const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
 const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
 
+/**
+ * Video 2: the GPT alternate cut. 120 beats over v9's worlds, so it is a
+ * *proposal* rendered in the superseded engine, not a second finished video.
+ * `storyboard/GPT.md` and `video-script/GPT.md` are its script.
+ */
+const GptWatch = lazy(() => import('./glm-320b/gpt-watch/GptWatch'))
+
 /** The superseded eight-section build. `storyboard/STORY_SPINE.md` §6. */
 const Old01 = lazy(() => import('./glm-320b/superseded/section-01/Section01'))
 const Old02 = lazy(() => import('./glm-320b/superseded/section-02/Section02'))
@@ -57,6 +64,7 @@ export const videoRoutes: VideoRouteDefinition[] = [
   { slug: 'section-12', title: 'Section 12 — How people actually run these', component: Section12 },
   { slug: 'section-13', title: 'Section 13 — What that number actually bought', component: Section13 },
 
+  { slug: 'video-2', title: 'Video 2 — the GPT alternate cut, 120 beats', component: GptWatch },
   { slug: 'gpt-section-01', title: 'GPT Section 1 — an alternative opening', component: GptSection01 },
   { slug: 'why-320b-uses-18b', title: 'Production v9 — superseded', component: Glm320bVideo },
 
