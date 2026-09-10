@@ -269,3 +269,133 @@ export function Plan() {
     </div>
   )
 }
+
+/**
+ * §13 beats 7-11. The second model, as evidence.
+ *
+ * Two of these side by side rather than one component with a `compare` state:
+ * they are two objects on the stage, they arrive at different beats, and the
+ * whole read of the frame is *two of the same kind of thing, different*. A
+ * single component holding both would have to be told which half to animate,
+ * which is a second, worse copy of the patch system.
+ *
+ * `chips` draws a countable stack, never a rack. A rack is an unquantified
+ * "lots"; four is the promise the video opened on.
+ *
+ * `grain` is the argument: the same total, divided coarsely or finely. Beats
+ * 9-10 are the carrying frames of the section and they are this prop changing.
+ */
+export function ModelCard({
+  name,
+  total,
+  active,
+  experts,
+  chips = 0,
+  grain,
+  /** Light the active share inside the block. Beat 8: both, and they match. */
+  litShare = false,
+  note,
+}: {
+  name: string
+  total: string
+  active: string
+  experts: string
+  chips?: number
+  grain?: 'coarse' | 'fine'
+  litShare?: boolean
+  note?: string
+}) {
+  /* Coarse: 8 x 5. Fine: 20 x 12. Same area, so the frame compares grain and
+   * not size -- and the two models really do hold comparable amounts. */
+  const cols = grain === 'fine' ? 20 : 8
+  const rows = grain === 'fine' ? 12 : 5
+  const CW = 240 / cols
+  const CH = 132 / rows
+  /* ~5% of the block, scattered. Both models, the same share -- that is beat 8,
+   * and it only reads if neither one is a tidy contiguous corner. */
+  const litSet = new Set(
+    Array.from({ length: Math.max(1, Math.round(cols * rows * 0.055)) }, (_, i) =>
+      Math.floor(((i + 1) * 9973) % (cols * rows)),
+    ),
+  )
+
+  return (
+    <div className="s1-mcard">
+      <svg viewBox="0 0 300 400" aria-hidden="true">
+        <path d="M8 8h284v250H8z" fill={PALETTE.paperLight} stroke={INK} strokeWidth="3.2" />
+        <text x="150" y="40" textAnchor="middle" className="s1-mcard-name" fill={INK}>
+          {name}
+        </text>
+        <path d="M28 54h244" stroke={INK} strokeWidth="2" opacity="0.5" />
+
+        {/* the model as a divided block */}
+        {grain ? (
+          <g>
+            {Array.from({ length: cols * rows }, (_, i) => {
+              const cx = i % cols
+              const cy = Math.floor(i / cols)
+              const lit = litShare && litSet.has(i)
+              return (
+                <motion.rect
+                  key={i}
+                  x={30 + cx * CW}
+                  y={68 + cy * CH}
+                  width={CW - 1.6}
+                  height={CH - 1.6}
+                  rx={grain === 'fine' ? 0.8 : 2}
+                  initial={false}
+                  animate={{ fill: lit ? PALETTE.teal2 : PALETTE.idleDeep }}
+                  transition={{ duration: 0.4, delay: (i % cols) * 0.006 }}
+                />
+              )
+            })}
+            <rect x="29" y="67" width="242" height="134" rx="3" fill="none" stroke={INK} strokeWidth="2.4" />
+          </g>
+        ) : null}
+
+        <g className="s1-mcard-figs">
+          <text x="30" y="228" className="s1-mcard-k" fill={INK}>
+            {total} total · {active} active
+          </text>
+          <text x="30" y="250" className="s1-mcard-k" fill={PALETTE.graphite}>
+            {experts} experts per sparse layer
+          </text>
+        </g>
+
+        {/* four chips, not a rack */}
+        <g>
+          {Array.from({ length: chips }, (_, i) => (
+            <motion.g
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 140, damping: 16, delay: i * 0.1 }}
+            >
+              <rect
+                x={20 + i * 68}
+                y="286"
+                width="58"
+                height="58"
+                rx="6"
+                fill={PALETTE.paperShade}
+                stroke={INK}
+                strokeWidth="2.8"
+              />
+              <rect x={32 + i * 68} y="298" width="34" height="34" rx="3" fill={PALETTE.idleDim} stroke={INK} strokeWidth="2" />
+              {/* legs, so it reads as a chip and not as a tile */}
+              <g stroke={INK} strokeWidth="2" strokeLinecap="round">
+                <path d={`M${30 + i * 68} 344v8M${44 + i * 68} 344v8M${58 + i * 68} 344v8M${72 + i * 68} 344v8`} />
+              </g>
+            </motion.g>
+          ))}
+        </g>
+
+        {note ? (
+          <text x="150" y="382" textAnchor="middle" className="s1-mcard-note" fill={INK}>
+            {note}
+          </text>
+        ) : null}
+      </svg>
+    </div>
+  )
+}

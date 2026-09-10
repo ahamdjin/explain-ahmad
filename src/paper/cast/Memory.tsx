@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { useEffect, useState } from 'react'
 import { INK, expertColor } from '../ink'
 import { PALETTE } from '../palette'
 
@@ -184,12 +185,31 @@ export function FetchPath({ items, jammed }: { items: number; jammed: boolean })
  * invisible -- that is the finding, so it is drawn to scale and labelled rather
  * than inflated to be legible.
  */
-export function CostBars({ show, ratio }: { show: 'fetch' | 'both'; ratio: string }) {
+export function CostBars({
+  show,
+  ratio,
+  /**
+   * A magnified view of the small bar, with **the magnification labelled**.
+   *
+   * The two bars really are to scale: 1000 units against 20 is 1:50, which is
+   * the measured penalty. But a 20-unit bar is barely a mark, so §11 beat 12
+   * needs it enlarged to be readable -- and an enlargement that does not say
+   * how much it enlarged by is a dishonest chart. A dishonest bar chart on
+   * this frame would undo the whole video, so the multiplier is on screen.
+   */
+  inset,
+}: {
+  show: 'fetch' | 'both'
+  ratio: string
+  inset?: boolean
+}) {
   const FULL = 1000
+  /** The work bar, drawn to scale against the fetch bar. */
+  const WORK = 20
 
   return (
     <div className="s1-bars">
-      <svg viewBox="0 0 1180 290" aria-hidden="true">
+      <svg viewBox="0 0 1180 310" aria-hidden="true">
         <text x="8" y="34" className="s1-bar-name" fill={INK}>
           carrying them in
         </text>
@@ -216,25 +236,120 @@ export function CostBars({ show, ratio }: { show: 'fetch' | 'both'; ratio: strin
             the actual work
           </text>
           <rect x="8" y="186" width={FULL} height="58" rx="4" fill="none" stroke={INK} strokeWidth="2" strokeDasharray="6 7" opacity="0.35" />
-          <rect x="8" y="186" width="20" height="58" rx="3" fill={PALETTE.blue} stroke={INK} strokeWidth="3" />
+          <rect x="8" y="186" width={WORK} height="58" rx="3" fill={PALETTE.blue} stroke={INK} strokeWidth="3" />
           <text x="54" y="226" className="s1-bar-fig" fill={INK}>
             milliseconds
           </text>
           <text x={FULL + 26} y="226" className="s1-bar-ratio" fill={PALETTE.red}>
             {ratio}
           </text>
+
+          {/* the same bar, enlarged, with the enlargement stated */}
+          {inset ? (
+            <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.5 }}>
+              <path
+                d={`M8 250 L300 268 M${8 + WORK} 250 L${300 + WORK * 12} 268`}
+                stroke={INK}
+                strokeWidth="1.6"
+                strokeDasharray="4 4"
+                opacity="0.5"
+                fill="none"
+              />
+              <rect x="300" y="268" width={WORK * 12} height="18" rx="2" fill={PALETTE.blue} stroke={INK} strokeWidth="2" />
+              <text x={300 + WORK * 12 + 16} y="284" className="s1-bar-inset" fill={INK}>
+                the same bar, 12× bigger — so you can see it at all
+              </text>
+            </motion.g>
+          ) : null}
         </motion.g>
       </svg>
     </div>
   )
 }
 
-/** A number the viewer watches being built is a number they trust. */
-export function Counter({ value, label }: { value: number; label: string }) {
+/**
+ * A number the viewer watches being built is a number they trust.
+ *
+ * `run` is why this counts rather than appears. 336 is asserted by every other
+ * video about this subject; here it is assembled on screen, floor by floor,
+ * next to the marker doing the climbing. The same is true of 12,096 in §12.
+ */
+export function Counter({
+  value,
+  label,
+  run = false,
+  seconds = 1.4,
+}: {
+  value: number
+  label: string
+  /** Count up to `value` instead of arriving at it. */
+  run?: boolean
+  seconds?: number
+}) {
+  const [shown, setShown] = useState(run ? 0 : value)
+
+  useEffect(() => {
+    if (!run) {
+      setShown(value)
+      return
+    }
+    const started = performance.now()
+    let frame = requestAnimationFrame(function tick(now) {
+      const t = Math.min(1, (now - started) / (seconds * 1000))
+      /* Ease out, so it decelerates onto the figure and holds there. */
+      setShown(Math.round(value * (1 - (1 - t) ** 3)))
+      if (t < 1) frame = requestAnimationFrame(tick)
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [run, value, seconds])
+
   return (
     <div className="s1-counter">
-      <strong>{value.toLocaleString('en-US')}</strong>
+      <strong>{shown.toLocaleString('en-US')}</strong>
       <span>{label}</span>
+    </div>
+  )
+}
+
+/**
+ * A clock, running.
+ *
+ * §11 beat 10 has to make "roughly a second and a half" felt rather than
+ * stated, and the only way a duration is felt is if it takes that long. The
+ * hand really does sweep for `seconds`.
+ */
+export function Clock({ seconds, running, label }: { seconds: number; running: boolean; label: string }) {
+  return (
+    <div className="s1-clock">
+      <svg viewBox="0 0 260 300" aria-hidden="true">
+        <circle cx="130" cy="130" r="106" fill={PALETTE.paperLight} stroke={INK} strokeWidth="4" />
+        {Array.from({ length: 12 }, (_, i) => {
+          const angle = (i / 12) * Math.PI * 2
+          return (
+            <path
+              key={i}
+              d={`M${130 + Math.sin(angle) * 88} ${130 - Math.cos(angle) * 88}L${130 + Math.sin(angle) * 96} ${130 - Math.cos(angle) * 96}`}
+              stroke={INK}
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          )
+        })}
+        <motion.path
+          d="M130 130V44"
+          stroke={PALETTE.red}
+          strokeWidth="5"
+          strokeLinecap="round"
+          style={{ transformOrigin: '130px 130px' }}
+          initial={false}
+          animate={{ rotate: running ? 360 : 0 }}
+          transition={running ? { duration: seconds, repeat: Infinity, ease: 'linear' } : { duration: 0.3 }}
+        />
+        <circle cx="130" cy="130" r="7" fill={INK} />
+        <text x="130" y="268" textAnchor="middle" className="s1-clock-fig" fill={PALETTE.red}>
+          {label}
+        </text>
+      </svg>
     </div>
   )
 }

@@ -114,10 +114,18 @@ export const NARRATOR_STYLES: Record<NarratorStyle, Look> = {
    * Change those and look at /paper. Anything else means redrawing.
    */
   me: {
-    hair: 'spikes',
+    /*
+     * The cap, at Ahmad's ask. Hair is `crop` rather than `spikes` because the
+     * cap is drawn after the hair and sits on the hairline -- spikes came
+     * through the crown and read as hair growing out of the hat. Crop shows at
+     * the sides and under the back, which is what a cap actually looks like.
+     *
+     * The glasses stay. That was an explicit ask and it is the likeness.
+     */
+    hair: 'crop',
     beard: 'full',
     glasses: 'big',
-    headwear: 'none',
+    headwear: 'cap',
     garment: 'hoodie',
     badge: false,
     job: 'the host -- the only figure with an opinion',

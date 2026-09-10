@@ -1,4 +1,4 @@
-import { Arrow, Brace, Bubble, Note, Sparks } from './marks'
+import { Arrow, Brace, Bubble, Note, Sparks, Tick } from './marks'
 import { type Role } from './palette'
 
 /**
@@ -9,7 +9,7 @@ import { type Role } from './palette'
  * banned pattern is a note transcribing the line being spoken over it.
  */
 export type Overlay = {
-  kind: 'note' | 'bubble' | 'brace' | 'arrow' | 'sparks'
+  kind: 'note' | 'bubble' | 'brace' | 'arrow' | 'sparks' | 'tick'
   /** Percentages of the stage, except `arrow`, which uses 1920x1080 units. */
   at?: { x: string; y: string }
   from?: { x: number; y: number }
@@ -97,6 +97,10 @@ export function Overlays({ overlays }: { overlays: Overlay[] }) {
 
           case 'sparks':
             return <Sparks key={key} at={overlay.at!} />
+
+          /* It worked. See the note on `Tick` -- this is not a cross. */
+          case 'tick':
+            return <Tick key={key} at={overlay.at!} tone={overlay.tone} />
 
           default:
             return null

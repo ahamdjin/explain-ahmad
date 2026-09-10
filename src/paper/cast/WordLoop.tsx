@@ -58,6 +58,12 @@ export function WordLoop({ showOut, inWord, outWord }: { showOut: boolean; inWor
  * than as a thing standing somewhere, and the narrator appears to float beside
  * it. One faint line is enough to turn the frame into a place.
  */
-export function Ground() {
-  return <div className="s1-ground" aria-hidden="true" />
+export function Ground({ y }: { y?: number }) {
+  return (
+    <div
+      className="s1-ground"
+      style={y === undefined ? undefined : { top: `${y}%` }}
+      aria-hidden="true"
+    />
+  )
 }

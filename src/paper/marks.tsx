@@ -199,6 +199,41 @@ export function Sparks({ at, tone = 'ink' }: { at: { x: string; y: string }; ton
   )
 }
 
+/**
+ * A tick. Something worked.
+ *
+ * This is not a cross wearing a different hat, and the distinction is worth
+ * stating because the repo bans the cross. A cross says *forbidden*, which is
+ * a thing this video never says about anything. A tick says *this worked* —
+ * and §11 beat 3 needs exactly that, because **a plan that never worked cannot
+ * break**. The failure has to be a discovery, so the success has to be real.
+ */
+export function Tick({ at, tone = 'ink' }: { at: { x: string; y: string }; tone?: Role }) {
+  return (
+    <motion.svg
+      className="s1-tick"
+      style={{ left: at.x, top: at.y } as CSSProperties}
+      viewBox="0 0 60 60"
+      aria-hidden="true"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: 'spring', stiffness: 220, damping: 15 }}
+    >
+      <motion.path
+        d="M10 32l14 14 26-32"
+        fill="none"
+        stroke={ROLE[tone]}
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+      />
+    </motion.svg>
+  )
+}
+
 /*
  * There is deliberately no Cross export.
  *

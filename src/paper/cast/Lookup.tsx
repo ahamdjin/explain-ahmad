@@ -26,11 +26,22 @@ export function Vocabulary({
   scrolling = false,
   /** §9: a score against every entry, with a few standing out. */
   scores,
+  /**
+   * §9 beat 7. The list reorders and a handful of plausible continuations rise
+   * to the top. They must be plausible continuations of the **real** prompt --
+   * an attentive viewer checks, and `The dog dropped the ball, and it` really
+   * does want `bounced`.
+   */
+  candidates,
+  /** §9 beat 8. One entry lifted out of the list. */
+  picked = false,
   label,
 }: {
   hit?: number
   scrolling?: boolean
   scores?: boolean
+  candidates?: readonly string[]
+  picked?: boolean
   label?: string
 }) {
   const rows = 20
@@ -48,7 +59,11 @@ export function Vocabulary({
             const y = 26 + i * 24
             const isHit = hit !== undefined && i === 10
             /* Scores fall off fast: a few plausible, most hopeless. */
-            const score = scores ? Math.max(0.04, seeded(i * 3 + 1) ** 3) : 0
+            const score = scores
+              ? candidates
+                ? Math.max(0.03, 1 - i * 0.17) ** 1.6
+                : Math.max(0.04, seeded(i * 3 + 1) ** 3)
+              : 0
             return (
               <g key={i}>
                 {isHit ? (
@@ -57,8 +72,14 @@ export function Vocabulary({
                 <text x="26" y={y} className="s1-vocab-n" fill={PALETTE.blueInk} opacity={isHit ? 1 : 0.55}>
                   {hit !== undefined ? String(hit - 10 + i) : String(4011 + i)}
                 </text>
-                <text x="96" y={y} className="s1-vocab-t" fill={INK} opacity={isHit ? 1 : 0.72}>
-                  {ENTRIES[i % ENTRIES.length]}
+                <text
+                  x="96"
+                  y={y}
+                  className="s1-vocab-t"
+                  fill={candidates && i < candidates.length ? PALETTE.tealInk : INK}
+                  opacity={isHit ? 1 : candidates ? (i < candidates.length ? 1 : 0.4) : 0.72}
+                >
+                  {candidates?.[i] ?? ENTRIES[i % ENTRIES.length]}
                 </text>
                 {scores ? (
                   <motion.rect
@@ -86,6 +107,24 @@ export function Vocabulary({
           <path d="M20 20h348M20 500h348" strokeDasharray="3 5" />
         </g>
 
+        {/*
+          The pick, lifted clear of the list. Drawn over the masking bands, so
+          it is genuinely out of the box rather than highlighted inside it.
+        */}
+        {picked && candidates?.length ? (
+          <motion.g
+            initial={{ opacity: 0, x: 0, y: 0 }}
+            animate={{ opacity: 1, x: 58, y: -46 }}
+            transition={{ type: 'spring', stiffness: 110, damping: 15 }}
+          >
+            <rect x="70" y="8" width="250" height="40" rx="4" fill={PALETTE.paperWhite} stroke={PALETTE.tealInk} strokeWidth="3" />
+            <text x="195" y="36" textAnchor="middle" className="s1-vocab-pick" fill={PALETTE.tealInk}>
+              {candidates[0]}
+            </text>
+          </motion.g>
+        ) : null}
+
+
         {label ? (
           <text x="190" y="546" textAnchor="middle" className="s1-vocab-cap" fill={INK}>
             {label}
@@ -112,12 +151,12 @@ export function EmbeddingTable({
   seeking?: boolean
   label?: string
 }) {
-  const rows = 26
-  const hitRow = 15
+  const rows = 46
+  const hitRow = 22
   return (
     <div className="s1-etable">
-      <svg viewBox="0 0 460 620" aria-hidden="true">
-        <rect x="20" y="0" width="380" height="600" fill={PALETTE.paperSheet} stroke={INK} strokeWidth="3" />
+      <svg viewBox="0 0 460 1080" aria-hidden="true">
+        <rect x="20" y="0" width="380" height="1060" fill={PALETTE.paperSheet} stroke={INK} strokeWidth="3" />
 
         {Array.from({ length: rows }, (_, i) => {
           const y = 18 + i * 22
@@ -126,7 +165,7 @@ export function EmbeddingTable({
             <g key={i}>
               <path d={`M20 ${y + 8}h380`} stroke={INK} strokeWidth="1.2" opacity="0.22" />
               <text x="34" y={y + 4} className="s1-etable-n" fill={PALETTE.blueInk} opacity={isHit ? 1 : 0.4}>
-                {String(4006 + i)}
+                {String(3999 + i)}
               </text>
               {/* the row's values, as marks rather than digits */}
               <motion.g
@@ -163,12 +202,14 @@ export function EmbeddingTable({
           />
         ) : null}
 
-        {/* it continues past the top */}
+        {/* it continues past both ends */}
         <rect x="20" y="0" width="380" height="26" fill={PALETTE.paperSheet} opacity="0.92" />
         <path d="M20 12h380" stroke={INK} strokeWidth="1.4" strokeDasharray="3 5" opacity="0.4" />
+        <rect x="20" y="1034" width="380" height="26" fill={PALETTE.paperSheet} opacity="0.92" />
+        <path d="M20 1048h380" stroke={INK} strokeWidth="1.4" strokeDasharray="3 5" opacity="0.4" />
 
         {label ? (
-          <text x="210" y="616" textAnchor="middle" className="s1-vocab-cap" fill={INK}>
+          <text x="210" y="1076" textAnchor="middle" className="s1-vocab-cap" fill={INK}>
             {label}
           </text>
         ) : null}

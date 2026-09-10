@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { PaperDefs } from './ink'
 import { FEEL, HOLD, type Feel, type Relation } from './motion'
 import { Overlays, type Overlay } from './overlays'
+import { BeatRail } from './rail'
 import './paper.css'
 
 /**
@@ -162,6 +163,22 @@ export function SectionRunner<S, P>({
     }
   }, [beat])
 
+  /**
+   * Go straight to a beat.
+   *
+   * Bypasses `lockUntil` on purpose: that lock exists to stop a fast click
+   * skipping past a reveal, and it has nothing to say about someone
+   * deliberately aiming at beat 9. It also skips the staged reveals of every
+   * beat in between, which is correct -- the scene is the merge of all
+   * previous commands, so landing on a beat is landing on its end state.
+   */
+  const jump = useCallback((next: number) => {
+    const clamped = Math.max(0, Math.min(beats.length - 1, next))
+    lockUntil.current = 0
+    indexRef.current = clamped
+    setIndex(clamped)
+  }, [beats.length])
+
   const move = useCallback(
     (delta: number) => {
       const now = performance.now()
@@ -196,10 +213,19 @@ export function SectionRunner<S, P>({
         event.preventDefault()
         move(-1)
       }
+      /* Back to the top of the section, and to its last beat. */
+      if (event.key === 'Home') {
+        event.preventDefault()
+        jump(0)
+      }
+      if (event.key === 'End') {
+        event.preventDefault()
+        jump(beats.length - 1)
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [move, autoplay])
+  }, [move, jump, beats.length, autoplay])
 
   /** Overlays carried in from earlier beats, until a beat clears the carry. */
   const sticky = useMemo(() => {
@@ -267,8 +293,14 @@ export function SectionRunner<S, P>({
     else void el.play().catch(() => {})
   }, [paused])
 
-  const debug =
-    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1'
+  const params = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search)
+  const debug = params?.get('debug') === '1'
+  /**
+   * The rails are scaffolding for whoever is making the video, not part of it.
+   * `chrome=0` takes them off for a recording, the same flag `/watch` uses for
+   * its chapter label.
+   */
+  const chrome = params?.get('chrome') !== '0'
 
   return (
     <div className="s1-page" role="application" aria-label={label}>
@@ -300,6 +332,8 @@ export function SectionRunner<S, P>({
               paused
             </div>
           ) : null}
+
+          {chrome ? <BeatRail beats={beats} index={index} onPick={jump} /> : null}
 
           {debug ? (
             <div className="s1-debug">

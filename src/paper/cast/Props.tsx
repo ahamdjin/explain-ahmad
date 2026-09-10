@@ -3,8 +3,28 @@ import { INK } from '../ink'
 import { expertColor } from '../palette'
 import { PALETTE } from '../palette'
 
-/** The word entering the model. Called a word, never a token, in Section 01. */
-export function WordCard({ label }: { label: string }) {
+/**
+ * The word entering the model.
+ *
+ * `id` is §2 beats 10-11: the letters fade off the card and the row number
+ * stays. **The same card**, because the ID replacing the word is the point --
+ * a second card arriving would say the number is a new thing, when the whole
+ * beat is that the number is all that carries on.
+ */
+export function WordCard({
+  label,
+  /** The token ID this piece is swapped for, once it has been looked up. */
+  id,
+  /** The letters have gone; only the digits remain. */
+  becomes = false,
+  tone = 'word',
+}: {
+  label: string
+  id?: string
+  becomes?: boolean
+  tone?: 'word' | 'measure'
+}) {
+  const stroke = tone === 'measure' ? PALETTE.blueInk : PALETTE.tealInk
   return (
     <div className="s1-word">
       {/* Teal is the word's colour and nothing else's, so a viewer can track
@@ -17,11 +37,30 @@ export function WordCard({ label }: { label: string }) {
           height="82"
           rx="5"
           fill={PALETTE.paperLight}
-          stroke={PALETTE.tealInk}
+          stroke={becomes ? PALETTE.blueInk : stroke}
           strokeWidth="3.2"
         />
       </svg>
-      <span className="s1-word-text">&ldquo;{label}&rdquo;</span>
+      {/* Both are mounted and cross-faded in place, so the swap happens on one
+          object rather than between two. */}
+      <motion.span
+        className="s1-word-text"
+        initial={false}
+        animate={{ opacity: becomes ? 0 : 1 }}
+        transition={{ duration: 0.4 }}
+      >
+        &ldquo;{label}&rdquo;
+      </motion.span>
+      {id ? (
+        <motion.span
+          className="s1-word-id"
+          initial={false}
+          animate={{ opacity: becomes ? 1 : 0 }}
+          transition={{ duration: 0.4, delay: becomes ? 0.2 : 0 }}
+        >
+          {id}
+        </motion.span>
+      ) : null}
     </div>
   )
 }

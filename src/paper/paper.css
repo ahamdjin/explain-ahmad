@@ -421,6 +421,7 @@
 
 .s1-note {
   position: absolute;
+  z-index: 9;
   margin: 0;
   max-width: 22cqw;
   /* No transform here: Motion owns it. See marks.tsx. */
@@ -572,11 +573,20 @@
   color: var(--graphite);
 }
 
+/*
+ * Handwriting sits above the world it annotates.
+ *
+ * Without a z-index the arrow's own label rendered *behind* an actor -- §5's
+ * "the scores came from here" was sliced off where the building started, on
+ * the one frame that carries the section's whole argument. Actors are z 0-7,
+ * so the marks live above that.
+ */
 .s1-arrow {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 9;
   pointer-events: none;
   overflow: visible;
 }
@@ -586,8 +596,10 @@
 }
 
 .s1-sparks,
+.s1-tick,
 .s1-cross {
   position: absolute;
+  z-index: 9;
   width: 4cqw;
   height: auto;
   transform: translate(-50%, -50%);
@@ -769,8 +781,10 @@
   letter-spacing: -0.02em;
 }
 
+/* Rows are drawn small and their labels are what identify them, so the label
+ * is sized to survive the scale the beat places the row at. */
 .s1-numrow-label {
-  font: 400 30px/1 var(--scrawl);
+  font: 400 46px/1 var(--scrawl);
 }
 
 /* A sentence, and what the focus word pays attention to ------------------ */
@@ -791,10 +805,15 @@
 
 /* The model as 45 floors -------------------------------------------------- */
 
-.s1-tower { width: 26cqw; }
-.s1-tower-tag { font: 400 15px/1 var(--hand); }
-.s1-tower-here { font: 400 13px/1 var(--hand); }
-.s1-tower-label { font: 400 16px/1 var(--scrawl); }
+/*
+ * The tower is tall and thin, so a width-based size makes it small: at 26cqw
+ * its own labels rendered at about 13 real pixels and could not be read on the
+ * frame at all. Sized by what the *labels* need to be legible.
+ */
+.s1-tower { width: 30cqw; }
+.s1-tower-tag { font: 400 26px/1 var(--hand); }
+.s1-tower-here { font: 400 22px/1 var(--hand); }
+.s1-tower-label { font: 400 24px/1 var(--scrawl); }
 
 /* An expandable aside, and the one interactive choice --------------------- */
 
@@ -987,8 +1006,13 @@
   width: 21cqw;
 }
 
+/*
+ * The height is the whole point of this object -- "the table must feel absurdly
+ * tall" -- so it is sized to run past the top and bottom of the frame rather
+ * than to fit inside it. At 27cqw it read as a modest box on a shelf.
+ */
 .s1-etable {
-  width: 27cqw;
+  width: 26cqw;
 }
 
 .s1-space {
@@ -1007,4 +1031,382 @@
 .s1-vocab-cap,
 .s1-space-t {
   font: 400 17px/1 var(--hand);
+}
+
+/* Attention — the wiring between tokens ---------------------------------- */
+
+.s1-attn { width: 76cqw; }
+
+.s1-attn svg,
+.s1-blend svg,
+.s1-room svg,
+.s1-cache svg,
+.s1-run svg,
+.s1-loop2 svg,
+.s1-mcard svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-attn-ask {
+  display: grid;
+  place-items: center;
+  padding: 0.9cqh 1.6cqw;
+  background: var(--paper-light);
+  box-shadow: inset 0 0 0 2.6px var(--relate-ink);
+  border-radius: 4px;
+}
+
+.s1-attn-ask span {
+  font: 400 clamp(14px, 2.1cqw, 40px) / 1.2 var(--hand);
+  color: var(--relate-ink);
+}
+
+/* The eight doing the work ------------------------------------------------ */
+
+.s1-blend { width: 72cqw; }
+.s1-blend-tag { font: 400 22px/1 var(--scrawl); }
+
+/* The room, once it has edges -------------------------------------------- */
+
+.s1-room { width: 64cqw; }
+
+/* The tower, and everything that climbs it ------------------------------- */
+
+.s1-tower[data-ghost='true'] { opacity: 0.22; filter: saturate(0.3); }
+.s1-tower-count { font: 400 15px/1 var(--mono); }
+.s1-tower-plaque { font: 400 34px/1 var(--hand); letter-spacing: 0.02em; }
+
+/* The generation loop ---------------------------------------------------- */
+
+.s1-loop2 { width: 30cqw; }
+.s1-loop2-tag { font: 400 15px/1 var(--scrawl); }
+.s1-loop2-word { font: 400 36px/1 var(--hand); }
+.s1-loop2-cost { font: 400 26px/1 var(--mono); }
+.s1-loop2-total { font: 400 52px/1 var(--hand); font-variant-numeric: tabular-nums; }
+.s1-loop2-label { font: 400 24px/1 var(--scrawl); }
+
+/* The cache, the slider, the machine ------------------------------------- */
+
+.s1-cache { width: 20cqw; }
+.s1-cache-tag { font: 400 15px/1 var(--scrawl); }
+.s1-run { width: 34cqw; }
+.s1-run-word { font: 400 26px/1 var(--hand); }
+
+/*
+ * The slider is the one thing in this video the viewer operates, so it is real
+ * DOM rather than SVG: a pointer target with a hit area, a handle that can be
+ * grabbed anywhere along the track, and read-outs that update as it moves.
+ */
+.s1-trade {
+  display: grid;
+  gap: 1cqh;
+  padding: 1.4cqh 1.6cqw;
+  background: var(--paper-light);
+  box-shadow: inset 0 0 0 2.8px rgba(43, 41, 38, 0.55);
+  border-radius: 5px;
+  width: 26cqw;
+  touch-action: none;
+}
+
+.s1-trade-head {
+  font: 400 clamp(13px, 1.9cqw, 36px) / 1.15 var(--hand);
+  color: var(--ink);
+}
+
+.s1-trade-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.6cqw;
+  align-items: stretch;
+}
+
+.s1-trade-track {
+  position: relative;
+  width: 3.4cqw;
+  height: 17cqh;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 2.4px rgba(43, 41, 38, 0.5);
+  border-radius: 999px;
+  cursor: grab;
+}
+
+.s1-trade-fill {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: var(--blue);
+  border-radius: 999px;
+  opacity: 0.5;
+}
+
+.s1-trade-handle {
+  position: absolute;
+  left: 50%;
+  width: 4.6cqw;
+  height: 26px;
+  translate: -50% 0;
+  background: var(--paper-white, #fffdf8);
+  box-shadow: inset 0 0 0 3px var(--ink);
+  border-radius: 4px;
+}
+
+.s1-trade-end {
+  position: absolute;
+  left: calc(100% + 0.6cqw);
+  font: 400 clamp(9px, 1.2cqw, 22px) / 1 var(--scrawl);
+  color: var(--graphite);
+  white-space: nowrap;
+}
+
+.s1-trade-end[data-end='top'] { top: -2px; }
+.s1-trade-end[data-end='bottom'] { bottom: -2px; }
+
+.s1-trade-read {
+  display: grid;
+  align-content: center;
+  gap: 1.2cqh;
+  margin: 0;
+  padding-left: 5.5cqw;
+}
+
+.s1-trade-read dt {
+  font: 400 clamp(10px, 1.3cqw, 24px) / 1 var(--scrawl);
+  color: var(--graphite);
+}
+
+.s1-trade-read dd {
+  margin: 0;
+  font: 400 clamp(16px, 2.5cqw, 48px) / 1 var(--hand);
+  font-variant-numeric: tabular-nums;
+  color: var(--blue-ink);
+}
+
+/* Both ends have to be visibly bad with the sound off. */
+.s1-trade-read dd[data-bad='true'] { color: var(--red); }
+
+.s1-trade-ask {
+  margin: 0;
+  font: 400 clamp(12px, 1.7cqw, 32px) / 1.25 var(--scrawl);
+  color: var(--relate-ink);
+}
+
+/* The two models, side by side ------------------------------------------- */
+
+.s1-mcard { width: 19cqw; }
+.s1-mcard-name { font: 400 26px/1 var(--hand); }
+.s1-mcard-k { font: 400 15px/1 var(--scrawl); }
+.s1-mcard-note { font: 400 20px/1 var(--hand); }
+
+/* A word that turns into its row number ---------------------------------- */
+
+.s1-word-id {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 400 clamp(20px, 3.4cqw, 66px) / 1 var(--mono);
+  color: var(--blue-ink);
+}
+
+.s1-vocab-pick { font: 400 26px/1 var(--hand); }
+
+.s1-numrow[data-dim='true'] { opacity: 0.42; }
+
+.s1-eopen { width: 50cqw; }
+
+.s1-eopen svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-bar-inset { font: 400 24px/1 var(--scrawl); }
+
+.s1-clock { width: 12cqw; }
+
+.s1-clock svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-clock-fig { font: 400 40px/1 var(--hand); }
+
+/* §11's verdict, still hanging over §12's working machine. Both true at once. */
+.s12-hangover {
+  padding: 0.8cqh 1.4cqw;
+  background: var(--paper-light);
+  box-shadow: inset 0 0 0 2.6px var(--red);
+  border-radius: 4px;
+  font: 400 clamp(13px, 2cqw, 38px) / 1.15 var(--hand);
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.s1-run-tag { font: 400 24px/1 var(--scrawl); }
+
+/* Getting to a beat, and getting to a section ---------------------------
+ *
+ * Scaffolding for whoever is making the video, not part of it. Both rails sit
+ * quiet until the pointer is near them, and `?chrome=0` removes them entirely.
+ *
+ * **No role colours here.** Teal means "the word we follow", blue means "a
+ * measurement" -- and chrome tinted with either would read as *being* one of
+ * those things. The first version used teal for "already watched", which is a
+ * second job for a hue that is supposed to identify exactly one thing, and on
+ * paper at low opacity it also vanished: five of the thirteen dots could not
+ * be seen at all. So these are ink at three weights, and weight alone carries
+ * where you are and where you have been.
+ */
+
+.s1-rail {
+  position: absolute;
+  left: 4cqw;
+  right: 4cqw;
+  bottom: 5.4cqh;
+  z-index: 20;
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 2.4cqh;
+  opacity: 0.3;
+  transition: opacity 0.22s ease;
+}
+
+.s1-rail:hover,
+.s1-rail:focus-within {
+  opacity: 1;
+}
+
+.s1-rail-tick {
+  /* The beat's own length, so the rail is a timeline and not a row of boxes. */
+  flex: var(--w, 5) 1 0;
+  position: relative;
+  height: 4px;
+  min-width: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: rgba(43, 41, 38, 0.3);
+  cursor: pointer;
+  transition:
+    height 0.16s ease,
+    background 0.16s ease;
+}
+
+.s1-rail:hover .s1-rail-tick {
+  height: 9px;
+}
+
+.s1-rail-tick:hover,
+.s1-rail-tick[data-now='true'] {
+  height: 15px;
+  background: var(--ink);
+}
+
+/* The beat number, only on the one under the pointer and the one you are on --
+ * eighteen numbers at once is a ruler, not a hint. */
+.s1-rail-tick span {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  translate: -50% 0;
+  font: 400 clamp(9px, 1cqw, 18px) / 1 var(--mono);
+  color: var(--graphite);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+
+.s1-rail-tick:hover span,
+.s1-rail-tick[data-now='true'] span {
+  opacity: 1;
+}
+
+.s1-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.6cqh;
+  z-index: 21;
+  display: flex;
+  gap: 0.7cqw;
+  justify-content: center;
+  align-items: center;
+  height: 2.6cqh;
+  /* Higher than the beat rail's: these are the only way to reach a section,
+   * so they have to be findable without hunting for them. */
+  opacity: 0.55;
+  transition: opacity 0.22s ease;
+}
+
+.s1-dots:hover,
+.s1-dots:focus-within {
+  opacity: 1;
+}
+
+.s1-dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.8cqh;
+  height: 1.8cqh;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.s1-dot i {
+  width: 0.95cqh;
+  height: 0.95cqh;
+  border-radius: 50%;
+  background: rgba(43, 41, 38, 0.28);
+  transition:
+    width 0.18s ease,
+    height 0.18s ease,
+    background 0.18s ease;
+}
+
+/* Where you have been, by weight. The dots read as progress, not as a menu. */
+.s1-dot[data-seen='true'] i {
+  background: rgba(43, 41, 38, 0.6);
+}
+
+.s1-dot[data-now='true'] i,
+.s1-dot:hover i {
+  width: 1.4cqh;
+  height: 1.4cqh;
+  background: var(--ink);
+}
+
+/* A ring on the one you are in. Size alone does not read at 55% opacity. */
+.s1-dot[data-now='true']::after {
+  content: '';
+  position: absolute;
+  width: 2.5cqh;
+  height: 2.5cqh;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.6px var(--ink);
+  opacity: 0.5;
+}
+
+.s1-dot em {
+  position: absolute;
+  bottom: 2.3cqh;
+  font: 400 clamp(9px, 1cqw, 18px) / 1 var(--mono);
+  font-style: normal;
+  color: var(--graphite);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+
+.s1-dot:hover em,
+.s1-dot[data-now='true'] em {
+  opacity: 1;
 }

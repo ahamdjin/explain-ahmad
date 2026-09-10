@@ -42,6 +42,7 @@ export function Hospital({
   bunks,
   doorsOpen,
   scoring = false,
+  badges = 'none',
 }: {
   sign: string
   plaque: string
@@ -56,6 +57,17 @@ export function Hospital({
   doorsOpen: boolean
   /** The router is grading all 288 against the current numbers. */
   scoring?: boolean
+  /**
+   * Score marks over every expert.
+   *
+   * `empty` is beat 6: the question is asked of all 288 at once, before any
+   * answer exists. `scored` is beat 7: every one of them has a value.
+   *
+   * The count is not negotiable. If the marks only appear over the winners the
+   * frame says the router looked at eight, which is the exact opposite of what
+   * the section is for.
+   */
+  badges?: 'none' | 'empty' | 'scored'
 }) {
   const chosen = new Set(lit)
   /*
@@ -182,6 +194,47 @@ export function Hospital({
           </g>
         ) : null}
 
+        {/*
+          A score mark over every single expert. All 288, not the eight -- the
+          router grades the whole wall, and a frame that shows otherwise
+          teaches the wrong thing about what routing costs.
+        */}
+        {staffed && badges !== 'none' ? (
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+            {Array.from({ length: TOTAL }, (_, i) => {
+              const { x, y } = seat(i)
+              const score = 0.14 + ((i * 2654435761) % 1000) / 1000 * 0.86
+              return (
+                <g key={`badge-${i}`}>
+                  <rect
+                    x={x + 1}
+                    y={y - 15}
+                    width="17"
+                    height="10"
+                    rx="2"
+                    fill={PALETTE.paperWhite}
+                    stroke={PALETTE.blueInk}
+                    strokeWidth="1.1"
+                    opacity="0.85"
+                  />
+                  {badges === 'scored' ? (
+                    <motion.rect
+                      x={x + 2.4}
+                      y={y - 13.6}
+                      height="7.2"
+                      rx="1"
+                      fill={PALETTE.blue}
+                      initial={{ width: 0 }}
+                      animate={{ width: 14.2 * score }}
+                      transition={{ duration: 0.3, delay: (i % COLS) * 0.014 }}
+                    />
+                  ) : null}
+                </g>
+              )
+            })}
+          </motion.g>
+        ) : null}
+
         {/* every expert being graded, all 288 of them */}
         {staffed && scoring ? (
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
@@ -217,6 +270,13 @@ export function Hospital({
               const { x, y } = seat(i)
               return (
                 <motion.g key={`was-${i}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+                  {/*
+                    A solid red ring, not a dashed one.
+                    Dashed already means "not one of the eight" -- it is how the
+                    always-on shared expert is drawn -- and §5 beat 13 had both
+                    on screen at once, so "dashed" meant two different things in
+                    one frame and neither could be read.
+                  */}
                   <rect
                     x={x - 5}
                     y={y - 5}
@@ -226,7 +286,6 @@ export function Hospital({
                     fill="none"
                     stroke={PALETTE.red}
                     strokeWidth="2.4"
-                    strokeDasharray="4 4"
                   />
                 </motion.g>
               )
