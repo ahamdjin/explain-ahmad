@@ -9,7 +9,7 @@
  * Verbs describe story actions — `block.scatter()`, `word.arrive()` — never
  * CSS, so beats.ts reads as direction.
  */
-import type { PatchName } from '../../../paper'
+import type { NarratorPose, NarratorStyle, PatchName } from '../../../paper'
 
 export type At = { x: number; y: number }
 
@@ -66,8 +66,9 @@ export type SceneState = {
     on: boolean
     at: At
     scale: number
-    pose: 'wonder' | 'point' | 'think' | 'hopeful' | 'cheer' | 'push' | 'nod' | 'shrug' | 'slump' | 'carry' | 'wait' | 'lean' | 'aha' | 'back'
-    style: 'plain' | 'me'
+    /* From the cast, not retyped -- see the note in paper/scene.ts. */
+    pose: NarratorPose
+    style: NarratorStyle
     flip: boolean
   }
   /** A horizon, so the frame is a place rather than a slide. */
@@ -96,7 +97,8 @@ export const INITIAL: SceneState = {
     doorsOpen: false,
   },
   desk: { on: false, at: { x: 15, y: 76 }, scale: 0.8, named: false, ringed: false },
-  narrator: { on: false, at: { x: 10, y: 70 }, scale: 1, pose: 'wonder', style: 'me', flip: false },
+  /* `plain` is the host. `paper/scene.ts` explains why. */
+  narrator: { on: false, at: { x: 10, y: 70 }, scale: 1, pose: 'wonder', style: 'plain', flip: false },
   ground: { on: false, y: 84 },
 }
 

@@ -105,3 +105,19 @@ another — so the value lives in the section's `Stage`, and the box's size, the
 machine's pace and its bulk are all derived from it.
 
 A beat can drive the control, and the viewer can always take it back.
+
+## One host, and a cast you almost never need
+
+`plain` is the host — Ahmad on screen, and the default for every section. It is
+deliberately the plainest figure in the set: no hair, no beard, no glasses, no
+hat. Nothing about the drawing competes with what is being explained beside it,
+and there is nothing in it to date.
+
+The other six styles are a supporting cast, and they are for **beats that
+genuinely need a second person in the frame** — which is rare. One figure
+carrying the whole video is not a limitation. It is why the piece reads as one
+person explaining something rather than as a cast performing a script.
+
+Two figures that do share a frame must be distinguishable at a glance. Two
+built from the same primitives, twenty percent apart, read as a continuity
+error rather than as a cast.

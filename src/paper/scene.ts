@@ -11,6 +11,8 @@
  * See skills/ASSET_LIBRARY.md. A copied director is thirteen directors.
  */
 
+import { type NarratorPose, type NarratorStyle } from './cast/Narrator'
+
 /** A position on the stage, in percentages. */
 export type At = { x: number; y: number }
 
@@ -67,11 +69,19 @@ export function actorVerbs<S extends Record<string, object>, K extends keyof S>(
 
 /* -- The two actors that are in every section ----------------------------- */
 
+
 export type NarratorActor = Placed & {
-  pose:
-    | 'wonder' | 'point' | 'think' | 'hopeful' | 'cheer' | 'push' | 'nod'
-    | 'shrug' | 'slump' | 'carry' | 'wait' | 'lean' | 'aha' | 'back'
-  style: 'plain' | 'me'
+  /* The pose and style unions come from the cast rather than being retyped
+   * here: a copy would silently stop matching the moment a pose is added. */
+  pose: NarratorPose
+  /**
+   * Which figure this is.
+   *
+   * `plain` is **the host** -- Ahmad's on-screen self, and the default. The
+   * other six are the supporting cast, brought in only when a beat genuinely
+   * needs a second person in the frame. See NARRATOR_STYLES.
+   */
+  style: NarratorStyle
   flip: boolean
 }
 
@@ -93,7 +103,8 @@ export const INITIAL_NARRATOR: NarratorActor = {
   at: NARRATOR_HOME,
   scale: 1,
   pose: 'wonder',
-  style: 'me',
+  /* The host. See the note on `style` above. */
+  style: 'plain',
   flip: true,
 }
 
@@ -120,3 +131,6 @@ export const INITIAL_GROUND: GroundActor = { on: false, y: GROUND_Y }
 /** The camera, when a section needs the frame itself to move. */
 export type CameraActor = { x: number; y: number; zoom: number }
 export const INITIAL_CAMERA: CameraActor = { x: 50, y: 50, zoom: 1 }
+
+/** So a section's scene can type its narrator without repeating the unions. */
+export type { NarratorPose, NarratorStyle }

@@ -85,12 +85,27 @@ type Look = {
  * measurement, red is a cost -- and a character tinted with one of those would
  * read as *being* that thing. People are drawn; only mechanisms are coloured.
  *
- * Seven figures, which between them are a whole court: someone makes a claim,
- * someone built the thing, someone has to run it, someone checks the numbers,
- * someone doubts it, someone rules on it, and someone is watching.
+ * Seven figures. **`plain` is the host** -- Ahmad's on-screen self, and the
+ * default for every section. The other six are a supporting cast: someone
+ * makes a claim, someone built the thing, someone has to run it, someone
+ * checks the numbers, someone doubts it.
+ *
+ * They are brought in **only when a beat genuinely needs a second person in
+ * the frame**, which is rare. One figure carrying the whole video is not a
+ * limitation -- it is why the piece reads as one person explaining something
+ * rather than as a cast performing a script.
  */
 export const NARRATOR_STYLES: Record<NarratorStyle, Look> = {
-  /** The viewer's proxy. Asks every question, explains nothing. The default. */
+  /**
+   * **The host.** Ahmad, on screen, and the default for every section.
+   *
+   * Deliberately the plainest figure in the set: no hair, no beard, no
+   * glasses, no hat, a tunic. Nothing about the drawing competes with what is
+   * being explained beside it, and there is nothing to date.
+   *
+   * This used to be the viewer's proxy and `me` was the host. Swapped at
+   * Ahmad's ask after seeing both on frames -- see the note on `me`.
+   */
   plain: {
     hair: 'none',
     beard: 'none',
@@ -102,10 +117,14 @@ export const NARRATOR_STYLES: Record<NarratorStyle, Look> = {
   },
 
   /**
-   * The host. Speaks in the first person, and is the only figure allowed an
-   * opinion -- so it should open a claim and deliver a verdict.
+   * **Not the host any more.** `plain` is.
    *
-   * CUSTOM: this is the one to edit. Five fields decide the whole likeness:
+   * Kept because it is a good alternate and because the catalogue renders it,
+   * but nothing uses it by default. If you set a section's narrator to `me`,
+   * that is a deliberate choice to put a different-looking figure on screen --
+   * do not assume it is the host just because of the name.
+   *
+   * Five fields decide the whole likeness:
    *   hair      'spikes' | 'royal' | 'curls' | 'wave' | 'crop' | 'buzz' | 'bun' | 'long' | 'none'
    *   beard     'full' | 'goatee' | 'moustache' | 'stubble' | 'none'
    *   glasses   'big' | 'square' | 'round' | 'none'

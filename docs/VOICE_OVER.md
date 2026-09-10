@@ -58,6 +58,26 @@ the rest can be authored to it.
 A beat that is *slightly* long is almost always better than one that is short.
 A viewer can wait; they cannot rewind a live watch.
 
+## Looking at every frame at once
+
+`npm run frames:export` captures all 164 beats and writes them to
+**`~/Desktop/explain-ahmad-frames/`**, with one `index.html` covering the whole
+thing — every frame in order, each with its beat number, its title, the line
+said over it, and the timecode it starts at. One page, scrolled top to bottom,
+is the closest a folder of stills gets to watching the video.
+
+It lives outside the repo on purpose. The in-repo `frames/` directory is
+working output: `npm run frames:all` deletes and rewrites it every time a
+section is recaptured, so anything you annotate or send from there is one
+command away from being wiped.
+
+    npm run frames:export                       # capture fresh, then export
+    npm run frames:export -- --reuse            # export what is already in frames/
+    npm run frames:export -- --out=~/Pictures/x # somewhere else
+
+Re-run it after any visual change. Every frame in that folder is only as
+current as the last capture, and a stale frame gets reviewed and believed.
+
 ## Watching and recording
 
 | | |
