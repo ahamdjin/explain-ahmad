@@ -154,8 +154,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'one-big-list',
     title: 'A tall list rises beside the row',
     relation: 'so',
-    secs: 7,
-    vo: 'And every token the model knows about lives in one big list.',
+    secs: 10,
+    vo: 'And every token it knows about lives in one big list. How long do you reckon that list is?',
     commands: [vocab.show({ x: 84, y: 46 }, 1.5), narrator.set({ pose: 'point' })],
   },
   {
@@ -164,7 +164,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The list scrolls fast, decelerates, stops',
     relation: 'so',
     secs: 8,
-    vo: 'This one has a hundred and fifty-four thousand, eight hundred and eighty entries in it.',
+    vo: 'A hundred and fifty-four thousand, eight hundred and eighty.',
     commands: [vocab.scroll()],
     lateOverlays: {
       at: 2600,
@@ -209,8 +209,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'no-meaning-in-it',
     title: 'The list withdraws; the number is alone in frame',
     relation: 'and-yet',
-    secs: 22,
-    vo: 'And that’s your sentence turned into numbers — that part’s done. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all.',
+    secs: 25,
+    vo: 'And that’s the cutting up done — your sentence is numbers now, and that’s all a tokeniser is. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all.',
     /*
      * Nothing else may be on screen. The absence is the argument, and it is
      * the setup for §3 — so the sentence, the list and the narrator all go.

@@ -87,8 +87,8 @@ fit four. Table and sources: `STORY_SPINE.md` §1. Say **"about five percent"** 
 > quotes to explain why these models are cheap to run now. Both of these have
 > it. Only one of them is cheap.
 >
-> **5.** *(the two blocks hold, unequal)* So what is that number actually
-> telling you?
+> **5.** *(the two blocks hold, unequal)* Same five percent. Four times the machine.
+> So what is that number actually telling you?
 >
 > **6.** *(the right-hand block and its four cards slide away; one block left)*
 > I'm going to follow one word all the way through this thing. By the end
@@ -199,3 +199,83 @@ one thing now missing; §02 opens by banking exactly that. **S-14**.
 | 17 | inside, one part | **push in** | everything recedes but the eight | `Hospital` focus | — | S-14 |
 
 Total ≈ 1:24. Beat seconds are a 145-wpm floor; set them from the recording.
+
+### Board notes
+
+- **Nine beats in one place, then one camera move.** Beats 1–9 never change
+  where you are. The push-in at 10 is the only move in the section, and the
+  stillness before it is what makes it mean *we are going inside this thing*
+  rather than *here is a new slide*.
+- **The two blocks are one comparison, not two subjects.** They arrive
+  together, they get the same treatment, and the only thing that differs is
+  what is underneath them. If the right-hand block ever gets its own moment,
+  the section has become about two models instead of about one number.
+- **Beat 4's phrase is sticky and beats 2–3's counts are sticky.** Found by
+  rendering: without it, "one" left the screen as "four" arrived and the
+  contradiction never existed in a single frame. A comparison needs both halves
+  visible at once or it is two facts in sequence.
+- **Beat 6 clears everything.** The second model and both rigs leave together,
+  so Act 3 starts on one object with nothing borrowed from the comparison.
+- **Beat 12 is a held beat with nothing happening.** The only one in the
+  section. It is the bet, and a bet needs air — if something moves, the viewer
+  watches instead of guessing.
+- **The 288 do not move between 12 and 13.** The guess and the answer occupy
+  the same space, which is the whole mechanism of Place Your Bets. Eight light
+  up *in place*.
+- **All 288 are drawn.** Not a representative sample. §12's whole argument
+  depends on 288 being felt as a large number, and a grid of 72 standing in for
+  288 makes the model four times less selective than it is — which is the
+  single worst fault in the GPT cut (`storyboard/video-2-gpt/GPT_REVIEW.md`).
+
+## Line jobs
+
+| Beat | Job |
+| --- | --- |
+| 1–3 | **the contradiction** — two objects and a visible difference. No topic named |
+| 4 | **the inversion** — the viewer's own belief, named back to them |
+| 5 | hold — the unequal thing sits there |
+| 6 | **the promise** — what they get for staying, by 0:26 |
+| 7–9 | **teach** — parameter, and the five percent, on events |
+| 10 | the only camera move |
+| 11 | **teach** — 288 separate pieces |
+| 12 | **the bet** — the one commit in this section |
+| 13–15 | **the reveal** — eight, the idle 280, and where 5% came from |
+| 16 | **the name** — after it has been watched working |
+| 17 | **the wall** — what is settled, and what is now missing |
+
+## Truth notes
+
+- **321B, said as "three hundred and twenty billion."** The round number is
+  what the field quotes and what the viewer will have seen. `GROUND_TRUTH.md`
+  carries the exact figure; §13 is where precision matters.
+- **"About five percent" is doing real work.** gpt-oss-120b is 4.4% active and
+  GLM-5.3-Flash is 5.6%. Saying *about five percent* makes one true sentence
+  cover both, and the contradiction is honest at either precision.
+  `storyboard/video-1/STORY_SPINE.md` §1.
+- **One card versus four is checkable**: ~58 GiB at MXFP4 fits one 80 GB
+  accelerator; ~306 GiB at FP8 does not fit four. Sources in the spine.
+- **The two models are not named on screen.** Naming them invites "which is
+  better", which is not the question. They are *two models*, and the difference
+  between them is the only thing being claimed.
+- **Nothing here says why you cannot store the active part.** That is §11, and
+  saying it here is what v8 did wrong.
+
+## Frames
+
+- Beat 1: the two blocks must be the **same size** and read as the same kind of
+  object. Their lit regions are deliberately **different patches** — the active
+  part is not in the same place in both, and that is quietly true.
+- Beats 2–3: one card, then four. The four must not be a stack or a bigger box
+  — four separate objects, so the count is countable at a glance.
+- Beat 5: the brace spans **both** blocks. `brace`'s x is its left edge.
+- Beat 12: nothing on screen but the 288 and the question.
+- Beat 15: the eight lit pieces and beat 9's live sliver are the same claim
+  arriving twice; they need to be visibly the same proportion.
+
+## Assets
+
+| Need | Status |
+| --- | --- |
+| a second `Block`, comparable, independently lit | **built** — `block2` |
+| a row of machines under a block | **built** — `Rig`, local to this section |
+| `Hospital` at 288 with eight lit | **have** |

@@ -11,7 +11,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 01 — What "five percent active" actually costs
 
-`17` beats · `2:16` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
+`17` beats · `2:19` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
 
 - **Exits on** — who picks the eight, and why is that the expensive question?
 
@@ -21,7 +21,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 2 | `one-card` | 5 | so | One graphics card | This one runs on a single graphics card. |
 | 3 | `four-cards` | 4 | wall | Four of them | This one needs four. |
 | 4 | `the-number-everybody-quotes` | 14 | and-yet | The number everybody quotes | "Only five percent active" is the number everybody quotes to explain why these models are cheap to run now. Both of these have it. Only one of them is cheap. |
-| 5 | `unequal` | 5 | and-yet | Level above, unequal below | Same five percent. Four times the machine. |
+| 5 | `unequal` | 8 | and-yet | Level above, unequal below | Same five percent. Four times the machine. So what is that number actually telling you? |
 | 6 | `the-promise` | 14 | therefore | The promise | I’m going to follow one word all the way through this thing. By the end you’ll know exactly what "five percent active" buys you — and what it doesn’t. |
 | 7 | `this-is-the-model` | 5 | so | The model, whole | This is the model. All of it. |
 | 8 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers in one very big file. Each one is something it learned while it was being trained. That’s what a parameter is. |
@@ -37,9 +37,10 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 02 — Your words become tokens
 
-`12` beats · `1:55` · script: `video-script/02-your-words-become-tokens.md` · route: `/section-02`
+`12` beats · `2:01` · script: `video-script/02-your-words-become-tokens.md` · route: `/section-02`
 
-- **Enters on** — who picks the eight, and why can't they tell us in advance?
+- **Enters on** — who picks the eight, and why is that the expensive question?
+- **Exits on** — a row number is a name. So how does a name become a meaning?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -50,11 +51,11 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 5 | `it-gets-cut-up` | 11 | wall | The sentence fractures into uneven pieces, in place | It gets cut up. Into pieces about the size of a word — sometimes a whole word, sometimes half of one. |
 | 6 | `these-are-tokens` | 7 | so | The pieces settle into a row | These are called tokens. That’s all a token is. A chunk of text. |
 | 7 | `understanding-is-three` | 7 | and-yet | `understanding` drops in, breaks into three, and leaves | Longer words come apart into more of them. "Understanding" is three. |
-| 8 | `one-big-list` | 7 | so | A tall list rises beside the row | And every token the model knows about lives in one big list. |
-| 9 | `a-hundred-fifty-four-thousand` | 8 | so | The list scrolls fast, decelerates, stops | This one has a hundred and fifty-four thousand, eight hundred and eighty entries in it. |
+| 8 | `one-big-list` | 10 | so | A tall list rises beside the row | And every token it knows about lives in one big list. How long do you reckon that list is? |
+| 9 | `a-hundred-fifty-four-thousand` | 8 | so | The list scrolls fast, decelerates, stops | A hundred and fifty-four thousand, eight hundred and eighty. |
 | 10 | `a-row-number` | 12 | so | The `dog` piece flies to the list and returns with a number | So each piece gets swapped for where it sits in that list. A row number. Let’s say this one’s number four thousand and twenty-one. |
 | 11 | `thats-a-token-id` | 8 | so | The letters fade off the card; the digits stay | That number is called a token ID. And it’s the only thing that carries on. |
-| 12 | `no-meaning-in-it` | 22 | and-yet | The list withdraws; the number is alone in frame | And that’s your sentence turned into numbers — that part’s done. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all. |
+| 12 | `no-meaning-in-it` | 25 | and-yet | The list withdraws; the number is alone in frame | And that’s the cutting up done — your sentence is numbers now, and that’s all a tokeniser is. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all. |
 
 ## Section 03 — From an ID to a meaning
 
@@ -296,8 +297,8 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 | § | Section | Beats | Runtime | Hands forward |
 | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | 17 | 2:16 | who picks the eight, and why is that the expensive question? |
-| 02 | Your words become tokens | 12 | 1:55 | — |
+| 01 | What "five percent active" actually costs | 17 | 2:19 | who picks the eight, and why is that the expensive question? |
+| 02 | Your words become tokens | 12 | 2:01 | a row number is a name. So how does a name become a meaning? |
 | 03 | From an ID to a meaning | 13 | 2:07 | — |
 | 04 | The word looks around | 13 | 1:52 | — |
 | 05 | The router picks the eight | 13 | 2:21 | — |
@@ -309,7 +310,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 11 | So could you store only the 18 billion? | 13 | 1:54 | — |
 | 12 | How people actually run these | 14 | 2:16 | — |
 | 13 | What that number actually bought | 12 | 2:06 | (none — the thesis lands) |
-| | **whole piece** | **163** | **24:29** | |
+| | **whole piece** | **163** | **24:38** | |
 
 ⚑ the section's event · ❄ a frame that must read as a still
 

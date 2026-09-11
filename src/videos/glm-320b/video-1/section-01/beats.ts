@@ -113,8 +113,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'unequal',
     title: 'Level above, unequal below',
     relation: 'and-yet',
-    secs: 5,
-    vo: 'Same five percent. Four times the machine.',
+    secs: 8,
+    vo: 'Same five percent. Four times the machine. So what is that number actually telling you?',
     commands: [narrator.pose('weigh')],
     /* The brace spans both blocks: left block starts at ~17%, right ends at
      * ~85%. `brace`'s x is the LEFT EDGE, not the centre. */

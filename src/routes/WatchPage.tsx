@@ -46,7 +46,7 @@ const Section13 = lazy(() => import('../videos/glm-320b/video-1/section-13/Secti
  */
 const CHAPTERS: Chapter[] = [
   { n: 1, title: 'What "18 billion active" means', enters: '', component: Section01 },
-  { n: 2, title: 'Your words become tokens', enters: 'Who picks the eight, and why can’t they tell us in advance?', component: Section02 },
+  { n: 2, title: 'Your words become tokens', enters: 'Who picks the eight, and why is that the expensive question?', component: Section02 },
   { n: 3, title: 'From an ID to a meaning', enters: 'A row number has no meaning in it. So how does it know what anything means?', component: Section03 },
   { n: 4, title: 'The word looks around', enters: 'That row is the same every single time. So how does the word ever mean two things?', component: Section04 },
   { n: 5, title: 'The router picks the eight', enters: 'So the numbers depend on the sentence. Who reads them, and what do they decide?', component: Section05 },
