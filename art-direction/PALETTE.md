@@ -31,9 +31,27 @@ like one colour.
 | **blue** | **anything measured** — numbers, counts, durations | number rows, the 336 counter, the work bar, the scoring sweep |
 | **purple** | **connections** — attention, "because of that" | the attention arcs, leader lines between things |
 | **red** | **a cost, or a contradiction** | the carrying bar, `≈ 8 GB`, vacated chairs, `same word / different numbers` |
-| **orange** | **the efficiency claim, only** | `"efficient"` in §1 and §8. Three uses in 8:04. |
+| **orange** | **the efficiency claim, only** | `"efficient"` — **once**, at §13 beat 5. See below. |
 | beige family | present but not participating | the 280, storage |
 | the 8 expert hues | identity, and nothing else | one hue per expert, all one weight |
+
+### Orange is down to one use, and that is worth a decision
+
+This row said *"`"efficient"` in §1 and §8. Three uses in 8:04"*, which
+describes the **superseded** 8-minute build. The video is 29:45 across 13
+sections, and `grep -rn "tone: 'claim'" src/videos/glm-320b/video-1` returns
+**one** hit: §13 beat 5.
+
+It got there honestly — a review found orange misused as emphasis in §3, §4 and
+§5 and those were reverted, leaving the one legitimate use standing. But one use
+of a reserved accent in half an hour is not a motif, it is an accident the
+viewer has no way to read.
+
+**The open question:** the claim is *made* at §1 beat 4 — *"Everyone quotes that
+number to say these models are cheap now"* — and *tried* at §13. A colour
+reserved for a claim on trial has two obvious jobs and is currently doing one.
+Either §1 beat 4 should carry it, or the reservation should be dropped and §13
+should use ink. **Do not resolve this by adding orange somewhere convenient.**
 
 ### Two deliberate absences
 

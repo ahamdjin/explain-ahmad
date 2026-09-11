@@ -35,13 +35,17 @@ Verified 2026-09-09 against the model card, `config.json`, and the vLLM recipe.
 
 | Quantity | Value | Working |
 | --- | --- | --- |
-| Expert visits per word | **336** | 8 routed × 42 sparse layers |
+| Expert visits per token | **336** | 8 routed × 42 sparse layers |
 | Total expert slots | 12,096 | 288 × 42 |
-| Share of routed weight touched per word | ~2.8% | 8 ÷ 288, **one sparse layer** |
-| One expert | **~25 MB** | 4096 × 2048 × 3 at FP8. `TOKENIZER.md` |
-| **Routed weight to fetch per word, if not resident** | **~8.5 GB** | 336 × 25 MB |
+| Share of routed weight touched per token | ~2.8% | 8 ÷ 288, **one sparse layer** |
+| One expert | **~25 MB** | 4096 × 2048 × 3 at FP8 = 25.17 MB. `TOKENIZER.md` |
+| **Routed weight to fetch per token, if not resident** | **~8.5 GB** | 336 × 25 MB |
 | Active 18B at shipped FP8 | ~18 GB | 1 byte per parameter |
 | Full checkpoint squeezed to 4-bit | ~153 GiB | still very large |
+
+**Token, not word, throughout this table.** §2 beat 6 spends a clause on it --
+*"from here on, whenever I count something, I'm counting tokens"* -- and this
+table said "per word" for all three of the figures the video puts on screen.
 
 ### Cross-checks on the ~8 GB
 
@@ -67,7 +71,7 @@ attention (45 layers)  3.0 GB      shared expert × 42     1.1 GB
 3 dense FFN layers     0.5 GB      embeddings             0.6 GB
                                    ─────────────────────────────
                                    ~5.2 GB resident
-                                   +8.5 GB routed, per word
+                                   +8.5 GB routed, per token
 ```
 
 Against a card figure of 18B ≈ 18 GB, that leaves ~4 GB unaccounted for —
