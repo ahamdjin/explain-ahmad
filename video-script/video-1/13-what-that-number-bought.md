@@ -40,54 +40,87 @@ The answer is split, and the split is the whole video:
 
 > **True about compute. Never true about memory.**
 
+## What changed from v8
+
+**1. It broke the one strategy it cites.** S-11 is *thesis once, one sentence,
+at the end* — and v8 stated the thesis at **beat 5**: *"'active parameters' is
+a compute number. It was never a memory number."* Then beat 11, the beat
+actually carrying the S-11 citation, said something else. So the thesis went
+early, in the middle, and the strategy label sat on a different line. It now
+lands **once**, at beat 12, and beats 5–6 *show* work against space without
+naming the conclusion.
+
+**2. The board still opened on `18B`.** Beat 1's own line asks what *"five
+percent active"* bought. The frames have to open on the thing §1 opened on —
+which is now two models and their chips, not a number.
+
+**3. The close did not close the ring.** S-10 is *reuse the opening's nouns*,
+and the narration did — *two models, one card, four* — while the board showed a
+verdict card with a slogan on it. The last frames are now literally §1's beats
+1–3, redrawn, which is the whole point: the same picture, and this time the
+viewer can read it.
+
 ## The script
 
 ### Act 1 — banking the price (beat 1) · **S-14**
 
-> **1.** Small, or fast. Not both. So — what did "five percent active" actually buy?
->
-### Act 2 — what the number actually bought (beats 2–9) · **S-04**
+> **1.** *(the plan dissolves; the two sheets from §1 ghost back in)* Small, or
+> fast. Not both. So — what did "five percent active" actually buy?
 
-> **2.** Here's what that number is actually telling you.
->
-> **3.** *(the work bar, small)* Per word, this thing does the thinking of a
-> model about a twentieth of its size. That's real. That's why it's quick, and
-> why it's cheap to run per word. **That part is completely true.**
->
-> **4.** *(the whole model, heavy)* But all of it still has to be within reach.
-> Because it never knows which part it wants until the moment it wants it.
->
-> **5.** So: **"active parameters" is a compute number.** It was never a memory
-> number.
->
-> **6.** *(both, side by side)* Sparse routing buys you compute. It doesn't buy
-> you memory.
->
-> **7.** And here’s the part I didn’t expect. This model has a hundred and twenty
-> billion parameters, and it fits on one chip. This one has three hundred and
-> twenty, and needs four.
->
-> **8.** Both of them use about five percent of themselves to answer you.
->
-> **9.** The difference is that this one is chopped finer. More experts, smaller
-> each.
->
-### Act 3 — the finer the slice, the wider the gap (beat 10) · **S-15**
+### Act 2 — what it bought, and what it didn't (beats 2–6) · **S-04**
 
-> **10.** Which is exactly **why it's better** — and exactly why it's harder to
-> hold.
+> **2.** *(we slide back to what §1 opened on)* Here's what that number is
+> actually telling you.
 >
-### Act 4 — the thesis, once (beat 11) · **S-11**
-
-> **11.** So the better these models get at using less of themselves, the more
-> of them you have to keep lying around.
+> **3.** *(a small work bar draws itself)* Per word, this thing does the
+> thinking of a model about a twentieth of its size. That's real. That's why
+> it's quick, and why it's cheap to run per word. **That part is true.**
 >
-### Act 5 — back to the two models (beat 12) · **S-10**
+> **4.** *(the whole model returns behind it, whole, and settles heavily)* But
+> all of it still has to be within reach. Because it never knows which part it
+> wants until the moment it wants it.
+>
+> **5.** *(the bar and the block separate into two labelled columns)* One of
+> those is a number about **work**. The other is a number about **space**.
+>
+> **6.** *(the work column tiny, the space column full height)* Sparse routing
+> shrinks the first one. It does nothing at all to the second.
 
-> **12.** Two models. Both about five percent active. One of them runs on a single
-> card; the other one needs four. Now you know why. "Active parameters" is a
-> compute number, not a memory number — and the finer you slice the experts,
-> the wider that gap gets.
+### Act 3 — the part I didn't expect (beats 7–10) · **S-04**
+
+> **7.** *(a second sheet slides in; chips stack under each)* And here's the part
+> I didn't expect. This model has about a hundred and twenty billion parameters,
+> and it fits on one chip. This one has three hundred and twenty, and needs
+> four.
+>
+> **8.** *(both sheets light their active share; the two shares match)* Both of
+> them use about five percent of themselves to answer you.
+>
+> **9.** *(each sheet's block divides — one coarse, one into many fine pieces)*
+> The difference is that this one is chopped finer. More experts, smaller each.
+>
+> **10.** *(the fine-grained one's chip stack grows while its pieces shrink)*
+> Which is exactly **why it's better** — better at specialising, better at
+> spreading the load. And exactly why it's harder to hold.
+
+### Act 4 — the corollary nobody makes (beat 11) · **S-15**
+
+> **11.** *(the second sheet withdraws; a trend continues past the frame)* So the
+> better these models get at using less of themselves, the more of themselves
+> you have to keep within reach.
+
+### Act 5 — the thesis, once (beat 12) · **S-11**
+
+> **12.** *(everything clears to one line of handwriting)* "Active parameters" is
+> a compute number. It was never a memory number.
+
+### Act 6 — back to the two models (beats 13–14) · **S-10**
+
+> **13.** *(§1's opening frame, redrawn exactly — two sheets, one chip and four)*
+> Two models. Both about five percent active. One of them runs on a single card;
+> the other one needs four.
+>
+> **14.** *(nothing moves)* Now you know why.
 
 ## Storyboard
 
@@ -95,37 +128,41 @@ The answer is split, and the split is the whole video:
 
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | the plan | — | the plan dissolves; `18` rises and holds alone | `BigNumber` | `18B` | S-14 |
-| 2 | the sheet | **pan** | we slide back to what §1 opened on: the number, and the block behind it | `BigNumber`, `Block` | `18 billion` over the block | S-04 |
+| 1 | the plan | — | the plan dissolves; the two sheets from §1 ghost back in behind it | two `Block`s, faint | the pair returning | S-14 |
+| 2 | the sheet | **pan** | we slide back to what §1 opened on | `Block`, lit share | ~5% of it live | S-04 |
 | 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking | S-04 |
-| 4 | the sheet | — | the block from §1 returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable | S-04 |
-| 5 | the sheet | — | a label lands between the bar and the block | `Note` in `claim` orange | "efficient" | S-04 |
-| 6 | the sheet | — | the bar and the block separate into two labelled halves | two columns | compute / memory | S-04 |
-| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `ModelSheet`s, 1 chip vs 4 | 117B → 1 · 321B → 4 | S-04 |
-| 8 | the sheet | — | both sheets light their active share; the two shares match | two lit patches | ~5% both | S-04 |
+| 4 | the sheet | — | the block returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable | S-04 |
+| 5 | the sheet | — | the bar and the block separate into two labelled columns | two columns | **work / space** | S-04 |
+| 6 | the sheet | — | the work column shrinks to almost nothing; the space column stays full height | two columns, unequal | one shrinks, one doesn't | S-04 |
+| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `Block`s, 1 chip vs 4 | ~117B → 1 · 321B → 4 | S-04 |
+| 8 | the sheet | — | both sheets light their active share; the two shares visibly match | two lit patches | ~5% both | S-04 |
 | 9 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones | two `Block`s, different grain | 128 vs 288 | S-04 |
-| 10 | the sheet | — | the fine-grained one's chip stack grows while its pieces get smaller | grain vs chips | better · harder | S-15 |
-| 11 | the sheet | — | the second sheet withdraws; ours holds with its four chips | one sheet, 4 chips | the trend | S-11 |
-| 12 | the sheet | — | everything clears to one card | `VerdictCard` | **cheap to run ≠ small** | S-10 |
+| 10 | the sheet | — | the fine-grained one's chip stack grows while its pieces get smaller | grain vs chips | better · harder | S-04 |
+| 11 | the sheet | — | the second sheet withdraws; a trend line continues past the edge of frame | one sheet, trend | the direction of travel | S-15 |
+| 12 | the sheet | — | everything clears to a single line of handwriting | one line, alone | **compute, not memory** | S-11 |
+| 13 | the sheet | — | §1's opening frame redraws itself exactly: two sheets, one chip and four | two `Block`s + `MachineBox` ×1, ×4 | the ring closes | S-10 |
+| 14 | the sheet | — | nothing moves | the same frame, held | now you know why | S-10 |
 
 ### Board notes
 
-- **One camera move**, beat 2, back to where we opened — and the callback must
-  be to the frame §1 **actually has**. This row originally asked for the opening
-  `ModelSheet`; §1 has no spec sheet, on purpose (*no spec read* is the first
-  rule of that opening), so beat 2 returns to the number and the block instead.
-  A callback to a frame that does not exist is worse than no callback.
-- **Beat 3 concedes first.** The true half gets a frame of its own before any
-  qualification. A verdict that only convicts reads as a debunk.
-- Beat 5 is one of `claim` orange's three budgeted uses in the whole video.
-  `art-direction/PALETTE.md`.
-- **Beats 9–10 are the carrying frames** and the *oh-now-I-see*: two blocks,
-  one coarse and one fine, with the fine one carrying four chips. The trend, as
-  a picture, with no line of voice-over needed to explain it.
-- Beat 7 draws **four chips, not a rack.** A rack is an unquantified "lots";
-  four is the promise.
-- No new mechanism appears anywhere in this section. Anything needing
-  explanation belonged earlier.
+- **One camera move**, at beat 2, back to the sheet §1 opened on. Beats 3–14
+  are still, and the stillness matters: the last third of this section is the
+  same frame twice, and the second time is the payoff.
+- **Beats 13–14 are §1 beats 1–3, redrawn.** Same two blocks, same chip counts,
+  same positions. Not a callback *about* the opening — the opening itself,
+  returned to. `NCASE_EVOLUTION_OF_TRUST.md` §6: Trust's outro reuses its own
+  first nouns, *trenches* and *No Man's Land*, and that is what makes the ring
+  close rather than merely rhyme.
+- **Beat 12 is the only frame in the video with nothing on it but one line.**
+  The thesis is said once, and nothing competes with it. v8 said it at beat 5
+  as well, which is why it needed protecting here.
+- **Beat 6's two columns must be wildly unequal.** If they are comparable
+  heights the viewer reads a trade-off; the claim is that one of them does not
+  move at all.
+- **Beat 9's two grains must be visibly different sizes**, not different
+  colours. The argument is about how finely the same mass is divided, and a
+  colour difference says "different kind" instead of "same thing, cut smaller".
+- No question anywhere in this section, deliberately. It is the verdict.
 
 ---
 
@@ -133,26 +170,15 @@ The answer is split, and the split is the whole video:
 
 | Beat | Job |
 | --- | --- |
-| 1–2 | setup |
-| 3 | **answer** — the true half, conceded generously and without hedging |
-| 4 | **answer** — the false half |
-| 5–6 | **answer** — the thesis, stated once, plainly |
-| 7–10 | **answer** — the trend, with evidence. This is the *oh, now I see* |
-| 11 | **answer** — the sentence the viewer repeats to someone else |
-| 12 | **answer** — the landing |
-
-## Rules
-
-- **Be fair to the claim.** Beat 3 concedes what is genuinely true with no
-  hedge. A verdict that only convicts reads as a debunk, and a debunk is a
-  worse video than an explanation.
-- **No new mechanism.** Anything needing explanation here belonged earlier.
-- Beats 7–10 are the only place the second model appears. It is **evidence**,
-  not a hook — and it earns its place because the viewer now knows what
-  "chopped finer" costs.
-- Beat 11 is the thesis line. It should be sayable from memory a week later.
-- The word **"efficient"** may appear on screen at beat 5 in `claim` orange.
-  That is one of its three budgeted uses. `art-direction/PALETTE.md`.
+| 1 | **bank** — small or fast, not both. So what did it buy? |
+| 2–3 | **concede** — the compute saving is real, and say so plainly |
+| 4 | **but** — all of it still has to be reachable |
+| 5–6 | **teach** — work and space are two different numbers |
+| 7–8 | **the surprise** — two models, same share, different machines |
+| 9–10 | **teach** — fine-graining is why it is better *and* harder |
+| 11 | **the corollary** — nobody else in the field says this |
+| 12 | **the thesis** — once, alone, at the end |
+| 13–14 | **the ring** — §1's frame, now readable |
 
 ## Truth notes
 
