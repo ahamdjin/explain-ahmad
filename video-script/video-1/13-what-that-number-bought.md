@@ -27,7 +27,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 13`
 | | |
 | --- | --- |
 | Enters on | it's a price, not a wall. So what did "five percent active" actually get us? |
-| Answers | **compute, not memory** — and the finer the experts, the wider the gap |
+| Answers | **compute, not memory** — and the number on the box cannot tell you which machine you need |
 | Exits on | *(none — the thesis lands)* |
 | Target | ~15 beats · ~1:30 |
 

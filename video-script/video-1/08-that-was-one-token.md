@@ -26,7 +26,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 08`
 
 | | |
 | --- | --- |
-| Enters on | 336 choices for one token. But a sentence isn't one token. |
+| Enters on | 336 expert visits for one token. But a sentence isn't one token. |
 | Teaches | **transformer**, parallel processing |
 | Answers | the whole prompt goes through together, and attention is the wiring between them |
 | Exits on | all of that happens. What comes out? |

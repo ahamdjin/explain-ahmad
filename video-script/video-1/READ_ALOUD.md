@@ -14,7 +14,7 @@ edit the seconds. See `docs/VOICE_OVER.md`.
 
 Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered scripts
 
-**Total: 13 sections · 189 beats · 3708 words · 29:38**
+**Total: 13 sections · 189 beats · 3708 words · 29:45**
 
 | § | section | from | length | beats | words |
 | --- | --- | --- | --- | --- | --- |
@@ -27,10 +27,10 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | 07 | That was one layer. There are 45. | `13:59` | 127s | 13 | 237 |
 | 08 | That was one token. Here's the sentence. | `16:06` | 128s | 14 | 218 |
 | 09 | Where the answer comes out | `18:14` | 99s | 12 | 155 |
-| 10 | And then it does the whole thing again | `19:53` | 120s | 14 | 209 |
-| 11 | So could you store only the 18 billion? | `21:53` | 131s | 15 | 261 |
-| 12 | How people actually run these | `24:04` | 167s | 16 | 292 |
-| 13 | What that number actually bought | `26:51` | 167s | 15 | 323 |
+| 10 | And then it does the whole thing again | `19:53` | 123s | 14 | 209 |
+| 11 | So could you store only the 18 billion? | `21:56` | 131s | 15 | 261 |
+| 12 | How people actually run these | `24:07` | 167s | 16 | 292 |
+| 13 | What that number actually bought | `26:54` | 171s | 15 | 323 |
 
 ## §01 — What "five percent active" actually costs
 
@@ -226,7 +226,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 
 ## §10 — And then it does the whole thing again
 
-`19:53` → `21:53` · 14 beats · 209 words · 120s · `10-and-then-it-does-it-again.md`
+`19:53` → `21:56` · 14 beats · 209 words · 123s · `10-and-then-it-does-it-again.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
@@ -235,79 +235,79 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `20:12` | No. It starts at the bottom. Floor one, same as the first word did. | outside the tower | the card drops to the base and sits on floor one |
 | `20:19` | The word it just made joins the end of your sentence. | outside the tower | the sentence is now one token longer; a ninth marker appears |
 | `20:26` | But the eight before it don't climb again. The state it needs from those earlier tokens is kept. That's the bit it doesn't have to redo. | outside the tower | the eight earlier markers dim and hold in place up the tower; none of them move |
-| `20:35` | Just the new word goes up. All forty-five floors, reading the kept work as it passes. | outside the tower | only the ninth marker enters the base and climbs alone |
-| `20:44` | Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one token. | outside the tower | 42 of the 45 floors light as it passes; a counter runs with it |
-| `20:56` | And another word comes out. | outside the tower | another card drops out at the top |
-| `21:00` | Then again. And again. One word at a time. | outside the tower | the cycle repeats, accelerating each time |
-| `21:09` | That's it. That's what's actually happening while you sit there watching it type. | outside the tower | the produced words accumulate as a line of text beside the tower |
-| `21:17` | Your eight tokens cost two thousand, six hundred and eighty-eight visits, once. Every token it writes back costs another three hundred and thirty-six. | outside the tower | the prompt's total sets once and stops; a second counter starts, adding 336 per produced word |
-| `21:28` | And it doesn't know which experts the next word needs until the next word is halfway up. | outside the tower | the running total climbs and does not stop |
-| `21:39` | It never stops re-choosing. | outside the tower | everything halts at once |
-| `21:45` | Which means we can finally ask the question we started with, properly. | outside the tower | the tower and the finished reply hold together |
+| `20:38` | Just the new word goes up. All forty-five floors, reading the kept work as it passes. | outside the tower | only the ninth marker enters the base and climbs alone |
+| `20:47` | Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one token. | outside the tower | 42 of the 45 floors light as it passes; a counter runs with it |
+| `20:59` | And another word comes out. | outside the tower | another card drops out at the top |
+| `21:03` | Then again. And again. One word at a time. | outside the tower | the cycle repeats, accelerating each time |
+| `21:12` | That's it. That's what's actually happening while you sit there watching it type. | outside the tower | the produced words accumulate as a line of text beside the tower |
+| `21:20` | Your eight tokens cost two thousand, six hundred and eighty-eight visits, once. Every token it writes back costs another three hundred and thirty-six. | outside the tower | the prompt's total sets once and stops; a second counter starts, adding 336 per produced word |
+| `21:31` | And it doesn't know which experts the next word needs until the next word is halfway up. | outside the tower | the running total climbs and does not stop |
+| `21:42` | It never stops re-choosing. | outside the tower | everything halts at once |
+| `21:48` | Which means we can finally ask the question we started with, properly. | outside the tower | the tower and the finished reply hold together |
 
 ## §11 — So could you store only the 18 billion?
 
-`21:53` → `24:04` · 15 beats · 261 words · 131s · `11-could-you-store-only-the-18.md`
+`21:56` → `24:07` · 15 beats · 261 words · 131s · `11-could-you-store-only-the-18.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `21:53` | It re-chooses — every floor, every word, and it never stops. So: back to where we started. Could you just store the part it actually uses? | **pull back** → the plan | the tower and reply recede; a drive and a router sketch themselves as a plan |
-| `22:06` | And here's the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on. | the plan | the whole model settles onto the drive; a path draws from drive to floor |
-| `22:20` | First token, first floor. Eight experts fetched. It works. | the plan | eight experts travel the path and land on floor one; it runs |
-| `22:28` | Second floor. New row, new eight. Fetch those as well. | the plan | floor two asks for a different eight; they travel too |
-| `22:34` | Third floor. Again. | the plan | floor three, again, slightly faster |
-| `22:38` | And again, and again — forty-two times, for one token. | the plan | the remaining floors blur past, the counter climbing |
-| `22:46` | So how much did we actually carry in? | the plan | the counter stops dead |
-| `22:51` | One expert is about twenty-five megabytes, at the precision this thing ships in. Three hundred and thirty-six of them is about eight and a half gigabytes. | the plan | 336 and 25 MB slide together and a total assembles |
-| `23:03` | For one token. | the plan | everything else clears; the total sits alone |
-| `23:08` | Off a fast drive — call it five gigabytes a second — that's the better part of two seconds. For one token. | the plan | a clock runs beside the total and stops |
-| `23:18` | And the expert computation itself? Milliseconds. | the plan | two bars appear, one for fetching, one for the work |
-| `23:26` | There it is. The fetching costs more than the thinking. Not a bit more — about fifty times more. | the plan | the bars redraw to true scale; the work bar nearly vanishes |
-| `23:37` | So, no. You can't just store the part it uses. Not like that. | the plan | the bars hold; nothing else on screen |
-| `23:47` | Although — if you're sitting there thinking "just keep the popular ones nearby" — | the plan | a small cache shelf sketches itself in beside the bars |
-| `23:56` | Hold that thought. You're right. That's next. Beats 14–15 are not a tease for its own sake. §12's reversal only works if the viewer arrives there believing caching solves this — S-09 requires a belief this video taught them, not one they brought. So the belief has to be planted deliberately, in its own frame, and it has to be endorsed: you're right. | the plan | the shelf finishes drawing and stays, empty |
+| `21:56` | It re-chooses — every floor, every word, and it never stops. So: back to where we started. Could you just store the part it actually uses? | **pull back** → the plan | the tower and reply recede; a drive and a router sketch themselves as a plan |
+| `22:09` | And here's the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on. | the plan | the whole model settles onto the drive; a path draws from drive to floor |
+| `22:23` | First token, first floor. Eight experts fetched. It works. | the plan | eight experts travel the path and land on floor one; it runs |
+| `22:31` | Second floor. New row, new eight. Fetch those as well. | the plan | floor two asks for a different eight; they travel too |
+| `22:37` | Third floor. Again. | the plan | floor three, again, slightly faster |
+| `22:41` | And again, and again — forty-two times, for one token. | the plan | the remaining floors blur past, the counter climbing |
+| `22:49` | So how much did we actually carry in? | the plan | the counter stops dead |
+| `22:54` | One expert is about twenty-five megabytes, at the precision this thing ships in. Three hundred and thirty-six of them is about eight and a half gigabytes. | the plan | 336 and 25 MB slide together and a total assembles |
+| `23:06` | For one token. | the plan | everything else clears; the total sits alone |
+| `23:11` | Off a fast drive — call it five gigabytes a second — that's the better part of two seconds. For one token. | the plan | a clock runs beside the total and stops |
+| `23:21` | And the expert computation itself? Milliseconds. | the plan | two bars appear, one for fetching, one for the work |
+| `23:29` | There it is. The fetching costs more than the thinking. Not a bit more — about fifty times more. | the plan | the bars redraw to true scale; the work bar nearly vanishes |
+| `23:40` | So, no. You can't just store the part it uses. Not like that. | the plan | the bars hold; nothing else on screen |
+| `23:50` | Although — if you're sitting there thinking "just keep the popular ones nearby" — | the plan | a small cache shelf sketches itself in beside the bars |
+| `23:59` | Hold that thought. You're right. That's next. Beats 14–15 are not a tease for its own sake. §12's reversal only works if the viewer arrives there believing caching solves this — S-09 requires a belief this video taught them, not one they brought. So the belief has to be planted deliberately, in its own frame, and it has to be endorsed: you're right. | the plan | the shelf finishes drawing and stays, empty |
 
 ## §12 — How people actually run these
 
-`24:04` → `26:51` · 16 beats · 292 words · 167s · `12-how-people-actually-run-these.md`
+`24:07` → `26:54` · 16 beats · 292 words · 167s · `12-how-people-actually-run-these.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `24:04` | So you can't store only the active part. Except — people do run models like this on small machines. Right now. And they're not lying about it. | the plan | §11's empty shelf stays; a small machine slides in beside it and runs, steadily, producing words |
-| `24:17` | So what are they doing that we just failed to do? | the plan | the machine keeps running while the numbers from §11 hang over it, unchanged |
-| `24:24` | Caching. That thing you thought of. | the plan | the shelf fills in solid and takes a label |
-| `24:31` | Here's the thing we noticed all the way back at the start. Experts repeat. Not always — but often enough to matter. | the plan | two words run through; a couple of the same blocks are used both times |
-| `24:42` | The next token quite often wants some of the same experts the last one did. So you don't fetch every time. | the plan | those repeating blocks stay in the box instead of returning to the drive |
-| `24:52` | You keep the ones that keep coming back close, and you only go to the drive for the ones you're missing. | the plan | the next word's fetches split: most come from the box, a few from the drive |
-| `25:06` | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. | the plan | the machine speeds up; a small model tag appears on the box |
-| `25:17` | Which turns the whole thing into one question. How much do you keep close? | the plan | a slider rises out of the floor under the box |
-| `25:26` | Before I move it — where do you reckon the good setting is? | the plan | the slider holds untouched at neither end; nothing moves |
-| `25:36` | Keep more, and it's fast — but now you need a big machine again, which is the thing we were trying to avoid. | the plan | the slider is dragged up: the box swells, the machine races, its frame grows huge |
-| `25:48` | Keep less, the machine gets small — and the misses pile up, and it crawls. | the plan | dragged down: the box shrinks, long hops multiply, the machine crawls |
-| `25:57` | And remember what we're choosing from. Two hundred and eighty-eight experts, on each of forty-two floors. | the plan | the 288 wall and the 42 floors ghost in behind the box, dwarfing it |
-| `26:06` | Twelve thousand and ninety-six slots. | the plan | a count assembles from them and lands on the box |
-| `26:13` | So it's a trade — and where the good setting sits depends on how often the experts repeat. On eight-expert models, people have measured that. Nobody has measured it for twelve thousand slots. | the plan | the slider is dragged across its whole range; neither end ever shows both |
-| `26:29` | So the honest answer is that nobody knows where the good setting is. And "five percent active" was never going to tell you. | the plan | a question mark settles over the middle of the range, where a position would go |
-| `26:41` | So you can run it on less. It'll just be slow. That was never a wall — it's a price. | the plan | the slider settles mid-range; the machine runs, slowly, and keeps running |
+| `24:07` | So you can't store only the active part. Except — people do run models like this on small machines. Right now. And they're not lying about it. | the plan | §11's empty shelf stays; a small machine slides in beside it and runs, steadily, producing words |
+| `24:20` | So what are they doing that we just failed to do? | the plan | the machine keeps running while the numbers from §11 hang over it, unchanged |
+| `24:27` | Caching. That thing you thought of. | the plan | the shelf fills in solid and takes a label |
+| `24:34` | Here's the thing we noticed all the way back at the start. Experts repeat. Not always — but often enough to matter. | the plan | two words run through; a couple of the same blocks are used both times |
+| `24:45` | The next token quite often wants some of the same experts the last one did. So you don't fetch every time. | the plan | those repeating blocks stay in the box instead of returning to the drive |
+| `24:55` | You keep the ones that keep coming back close, and you only go to the drive for the ones you're missing. | the plan | the next word's fetches split: most come from the box, a few from the drive |
+| `25:09` | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. | the plan | the machine speeds up; a small model tag appears on the box |
+| `25:20` | Which turns the whole thing into one question. How much do you keep close? | the plan | a slider rises out of the floor under the box |
+| `25:29` | Before I move it — where do you reckon the good setting is? | the plan | the slider holds untouched at neither end; nothing moves |
+| `25:39` | Keep more, and it's fast — but now you need a big machine again, which is the thing we were trying to avoid. | the plan | the slider is dragged up: the box swells, the machine races, its frame grows huge |
+| `25:51` | Keep less, the machine gets small — and the misses pile up, and it crawls. | the plan | dragged down: the box shrinks, long hops multiply, the machine crawls |
+| `26:00` | And remember what we're choosing from. Two hundred and eighty-eight experts, on each of forty-two floors. | the plan | the 288 wall and the 42 floors ghost in behind the box, dwarfing it |
+| `26:09` | Twelve thousand and ninety-six slots. | the plan | a count assembles from them and lands on the box |
+| `26:16` | So it's a trade — and where the good setting sits depends on how often the experts repeat. On eight-expert models, people have measured that. Nobody has measured it for twelve thousand slots. | the plan | the slider is dragged across its whole range; neither end ever shows both |
+| `26:32` | So the honest answer is that nobody knows where the good setting is. And "five percent active" was never going to tell you. | the plan | a question mark settles over the middle of the range, where a position would go |
+| `26:44` | So you can run it on less. It'll just be slow. That was never a wall — it's a price. | the plan | the slider settles mid-range; the machine runs, slowly, and keeps running |
 
 ## §13 — What that number actually bought
 
-`26:51` → `29:38` · 15 beats · 323 words · 167s · `13-what-that-number-bought.md`
+`26:54` → `29:45` · 15 beats · 323 words · 171s · `13-what-that-number-bought.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `26:51` | Small, or fast. Not both. So — what did "five percent active" actually buy? | the plan | the plan dissolves; the two sheets from §1 ghost back in behind it |
-| `26:59` | Here's what that number is actually telling you. | **pan** → the sheet | we slide back to what §1 opened on |
-| `27:04` | Per token, this thing does the thinking of a model about a twentieth of its size. That's real. That's why it's quick, and why it's cheap to run per token. That part is true. | the sheet | a small work bar draws itself beside the sheet |
-| `27:20` | But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it. | the sheet | the block returns behind it, whole, and settles heavily |
-| `27:32` | One of those is a number about work. The other is a number about space. | the sheet | the bar and the block separate into two labelled columns |
-| `27:40` | Sparse routing shrinks the first one. It does nothing at all to the second. | the sheet | the work column shrinks to almost nothing; the space column stays full height |
-| `27:48` | And here's the part I didn't expect. This model has about a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs eight. | the sheet | a second sheet slides in beside the first; chips stack under each |
-| `28:03` | Both of them use about five percent of themselves to answer you. | the sheet | both sheets light their active share; the two shares visibly match |
-| `28:10` | Three things differ, and only one of them is exciting. It's nearly three times the parameters. It ships at twice the precision per weight. And it's chopped finer — more experts, smaller each. | the sheet | three chips land beside the second sheet: parameter count, precision, granularity |
-| `28:26` | The first two are why the file is bigger. They're just size. This one is the interesting one — and it's not about the file at all. | the sheet | the first two chips grey out; the granularity chip stays lit |
-| `28:39` | Chopping finer is exactly why it's better — better at specialising, better at spreading the load. It's also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby. | the sheet | each sheet's block divides — one into coarse pieces, one into many fine ones; the fine one's lit share scatters across the whole sheet |
-| `28:57` | So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn't move. | the sheet | the second sheet withdraws; a trend line continues past the edge of frame |
-| `29:08` | "Active parameters" is a compute number. It was never a memory number. | the sheet | everything clears to a single line of handwriting |
-| `29:19` | Two models. Both about five percent active. One of them runs on a single card; the other one needs eight. | the sheet | §1's opening frame redraws itself exactly: two sheets, one chip and eight |
-| `29:31` | Now you know why. | the sheet | nothing moves |
+| `26:54` | Small, or fast. Not both. So — what did "five percent active" actually buy? | the plan | the plan dissolves; the two sheets from §1 ghost back in behind it |
+| `27:02` | Here's what that number is actually telling you. | **pan** → the sheet | we slide back to what §1 opened on |
+| `27:07` | Per token, this thing does the thinking of a model about a twentieth of its size. That's real. That's why it's quick, and why it's cheap to run per token. That part is true. | the sheet | a small work bar draws itself beside the sheet |
+| `27:23` | But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it. | the sheet | the block returns behind it, whole, and settles heavily |
+| `27:35` | One of those is a number about work. The other is a number about space. | the sheet | the bar and the block separate into two labelled columns |
+| `27:43` | Sparse routing shrinks the first one. It does nothing at all to the second. | the sheet | the work column shrinks to almost nothing; the space column stays full height |
+| `27:51` | And here's the part I didn't expect. This model has about a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs eight. | the sheet | a second sheet slides in beside the first; chips stack under each |
+| `28:06` | Both of them use about five percent of themselves to answer you. | the sheet | both sheets light their active share; the two shares visibly match |
+| `28:13` | Three things differ, and only one of them is exciting. It's nearly three times the parameters. It ships at twice the precision per weight. And it's chopped finer — more experts, smaller each. | the sheet | three chips land beside the second sheet: parameter count, precision, granularity |
+| `28:29` | The first two are why the file is bigger. They're just size. This one is the interesting one — and it's not about the file at all. | the sheet | the first two chips grey out; the granularity chip stays lit |
+| `28:42` | Chopping finer is exactly why it's better — better at specialising, better at spreading the load. It's also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby. | the sheet | each sheet's block divides — one into coarse pieces, one into many fine ones; the fine one's lit share scatters across the whole sheet |
+| `29:00` | So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn't move. | the sheet | the second sheet withdraws; a trend line continues past the edge of frame |
+| `29:15` | "Active parameters" is a compute number. It was never a memory number. | the sheet | everything clears to a single line of handwriting |
+| `29:26` | Two models. Both about five percent active. One of them runs on a single card; the other one needs eight. | the sheet | §1's opening frame redraws itself exactly: two sheets, one chip and eight |
+| `29:38` | Now you know why. | the sheet | nothing moves |

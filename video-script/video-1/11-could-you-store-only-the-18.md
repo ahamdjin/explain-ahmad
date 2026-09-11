@@ -30,7 +30,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | --- | --- |
 | Enters on | it never stops choosing. So could you store only the part it uses? |
 | Teaches | memory vs storage |
-| Answers | no — you would fetch about 8.5 GB per word, against milliseconds of actual work |
+| Answers | no — you would fetch about 8.5 GB per token, against milliseconds of actual work |
 | Exits on | so you can't store only the active part. But people run big models on small machines. |
 | → next | **but** people run models like this on small machines every day |
 | Target | ~13 beats · ~1:25 |

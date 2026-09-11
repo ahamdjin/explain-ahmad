@@ -26,11 +26,11 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 10`
 
 | | |
 | --- | --- |
-| Enters on | all that machinery, and one word comes out? |
+| Enters on | all that machinery, and one token comes out? |
 | Teaches | autoregression — how a paragraph appears |
-| Answers | the new word joins the end and climbs all forty-five floors itself — the earlier words' work is kept, the routing is not |
+| Answers | the new token joins the end and climbs all forty-five floors itself — the earlier tokens' state is kept, the routing is not |
 | Exits on | it never stops choosing. So could you store only the part it uses? |
-| → next | **therefore** every word of the reply pays 336 all over again |
+| → next | **therefore** every token of the reply pays 336 all over again |
 | Banks | **it never stops re-choosing** |
 | Target | ~14 beats · ~1:15 |
 

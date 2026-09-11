@@ -71,6 +71,7 @@ for (const file of CHAIN) {
   rows.push({
     file,
     enters: field(source, 'Enters on'),
+    exitsOn: field(source, 'Exits on'),
     answers: field(source, 'Answers'),
     exits: exitOf(source),
   })
@@ -93,6 +94,31 @@ rows.forEach((row, index) => {
   // The section must not end where it started.
   if (row.enters && row.exits && normalise(row.enters) === normalise(row.exits)) {
     problems.push(`${where}: exits on the same question it entered on. That is a circle, not a story`)
+  }
+
+  /*
+   * **The handoff itself**, which this script has claimed to check since it was
+   * written and did not.
+   *
+   * `Exits on` is the sentence the viewer is holding when a section ends;
+   * `Enters on` is the sentence the next section says they are holding. They
+   * are the same sentence or the seam is visible. Nothing enforced it, so §7
+   * exited on "336 expert **visits** for one token" while §8 entered on "336
+   * **choices** for one token" — a word this video had just spent a whole
+   * section correcting — and the gate printed "nothing circles back on itself"
+   * over the top of it.
+   *
+   * `row.exits` is whichever of `→ next` / `Therefore` / `Exits on` came first,
+   * so it is usually the *reason* rather than the sentence. The comparison has
+   * to read `Exits on` specifically.
+   */
+  const next = rows[index + 1]
+  if (next && row.exitsOn && !isTerminal(row.exitsOn) && next.enters) {
+    if (normalise(row.exitsOn) !== normalise(next.enters)) {
+      problems.push(
+        `${where} exits on "${row.exitsOn}"\n       but ${next.file} enters on "${next.enters}" — the seam shows`,
+      )
+    }
   }
 })
 
@@ -141,5 +167,6 @@ if (problems.length) {
   for (const problem of problems) console.error(`  ! ${problem}`)
   process.exit(1)
 }
-console.log('Every section answers something and hands something forward, nothing circles back on')
-console.log('itself, and /watch agrees with the scripts. Read the pairs above to judge the links.\n')
+console.log('Every section answers something and hands something forward, every section enters')
+console.log('on the sentence the one before it exits on, nothing circles back on itself, and')
+console.log('/watch agrees with the scripts. Read the pairs above to judge the links.\n')
