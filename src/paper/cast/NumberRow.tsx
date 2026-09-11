@@ -116,16 +116,22 @@ export function NumberRow({
         */}
         {showMatches && closeness > 0.02 ? (
           <motion.rect
-            x={-10}
-            y={22}
-            width={width + 12}
-            height={78}
-            rx={8}
+            /*
+             * A halo, not a backing. The cells are opaque, so a rect the size
+             * of the row is invisible behind them -- the first version showed
+             * an 8px sliver and read as nothing. It has to stand clear of the
+             * cells on all four sides to be a band at all.
+             */
+            x={-22}
+            y={8}
+            width={width + 32}
+            height={106}
+            rx={12}
             fill={PALETTE.tealWash}
             stroke={PALETTE.tealInk}
-            strokeWidth="3"
+            strokeWidth="3.4"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.35 + closeness * 0.55 }}
+            animate={{ opacity: 0.45 + closeness * 0.5 }}
             transition={{ duration: 0.5 }}
           />
         ) : null}

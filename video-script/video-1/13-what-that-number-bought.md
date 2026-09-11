@@ -237,6 +237,7 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 
 | Need | Status |
 | --- | --- |
+| the three differences, two dimmable | **have** — `Differences`, added 2026-09-11, verified by rendering |
 | `CostBars` | have |
 | the model, whole and heavy | have |
 | two model cards with chip counts and grain | **built** — `ModelCard`, two of them |

@@ -57,6 +57,11 @@ export type SceneState = {
   /** The second model, as evidence. Never as a hook. */
   cardA: Placed & { chips: number; grain?: 'coarse' | 'fine'; litShare: boolean; note: string }
   cardB: Placed & { chips: number; grain?: 'coarse' | 'fine'; litShare: boolean; note: string }
+  /**
+   * The three differences between the two models, two of which are only size.
+   * Beats 9-10. `paper/cast/Plates.tsx`.
+   */
+  diffs: Placed & { lit: readonly number[] }
   verdict: { on: boolean; at: At; scale: number; lines: [string, string] }
   narrator: NarratorActor
   ground: GroundActor
@@ -69,6 +74,7 @@ export const INITIAL: SceneState = {
   block: { on: false, at: { x: 50, y: 46 }, scale: 0.8, heavy: false, grain: 'fine', lit: undefined },
   cardA: { on: false, at: { x: 30, y: 50 }, scale: 1, chips: 0, grain: 'coarse', litShare: false, note: '' },
   cardB: { on: false, at: { x: 70, y: 50 }, scale: 1, chips: 0, grain: 'fine', litShare: false, note: '' },
+  diffs: { on: false, at: { x: 50, y: 18 }, scale: 0.52, lit: [0, 1, 2] },
   verdict: {
     on: false,
     at: { x: 50, y: 48 },
@@ -92,6 +98,13 @@ const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
 export const big = a('big')
 export const share = a('share')
+/** Beat 9 names all three; beat 10 dims the two that are merely size. */
+export const diffs = {
+  ...a('diffs'),
+  all: (): Patch => ({ diffs: { on: true, lit: [0, 1, 2] } }),
+  /* Granularity is index 2, and it is the only one that is not about size. */
+  onlyGranularity: (): Patch => ({ diffs: { lit: [2] } }),
+}
 export const verdict = a('verdict')
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }

@@ -84,7 +84,7 @@ export const INITIAL: SceneState = {
   total: { on: false, at: { x: 50, y: 40 }, scale: 1, value: '~8 GB', caption: 'for one word' },
   clock: { on: false, at: { x: 80, y: 44 }, scale: 1, seconds: 1.5, running: false, label: '~1.5 s' },
   bars: { on: false, at: { x: 50, y: 48 }, scale: 1, show: 'fetch', ratio: '', inset: false },
-  shelf: { on: false, at: { x: 74, y: 56 }, scale: 0.76, outline: true },
+  shelf: { on: false, at: { x: 24, y: 80 }, scale: 0.58, outline: true },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
   camera: { ...INITIAL_CAMERA },

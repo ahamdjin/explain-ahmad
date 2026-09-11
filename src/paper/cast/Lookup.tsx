@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { INK } from '../ink'
 import { PALETTE, ROLE } from '../palette'
 import { seeded } from '../props/frame'
+import { FOLLOWED, PROMPT_IDS } from '../prompt'
 
 /**
  * The two tables the video looks things up in.
@@ -70,6 +71,16 @@ export function Vocabulary({
                   <rect x="12" y={y - 15} width="356" height="22" rx="3" fill={PALETTE.tealWash} />
                 ) : null}
                 <text x="26" y={y} className="s1-vocab-n" fill={PALETTE.blueInk} opacity={isHit ? 1 : 0.55}>
+                  {/*
+                    With `hit`, the numbers are real: the list is scrolled to
+                    that token's ID and the rows around it follow. Without it
+                    (§9, where the list is being scored for the *next* word and
+                    no single row is claimed) they are arbitrary row numbers,
+                    and deliberately so -- the beat is about every entry
+                    getting a score, not about which IDs the candidates have.
+                    Do not "fix" these to the prompt's IDs: that would assert
+                    the candidates live next to ` dog`, which is not true.
+                  */}
                   {hit !== undefined ? String(hit - 10 + i) : String(4011 + i)}
                 </text>
                 <text
@@ -79,7 +90,28 @@ export function Vocabulary({
                   fill={candidates && i < candidates.length ? PALETTE.tealInk : INK}
                   opacity={isHit ? 1 : candidates ? (i < candidates.length ? 1 : 0.4) : 0.72}
                 >
-                  {candidates?.[i] ?? ENTRIES[i % ENTRIES.length]}
+                  {/*
+                    A leading space is a *different token* -- that is §2's
+                    whole point, and why ` dog` is 5562 while bare `dog` is
+                    18427. But a space renders as nothing, so the list showed
+                    what looked like `dog` twice and read as a bug. The space
+                    is drawn as a faint middot, the way a tokenizer viewer
+                    does it, so the distinction the video teaches is visible in
+                    the object that teaches it.
+                  */}
+                  {(() => {
+                    const entry = candidates?.[i] ?? ENTRIES[i % ENTRIES.length]
+                    return entry.startsWith(' ') ? (
+                      <>
+                        <tspan fill={PALETTE.stone} opacity="0.55">
+                          ·
+                        </tspan>
+                        {entry.slice(1)}
+                      </>
+                    ) : (
+                      entry
+                    )
+                  })()}
                 </text>
                 {scores ? (
                   <motion.rect
@@ -145,14 +177,31 @@ export function EmbeddingTable({
   /** The row that has been pulled out, if any. */
   pulled = false,
   seeking = false,
+  /**
+   * The token ID whose row is pulled -- the row numbers are centred on it.
+   *
+   * This used to be hardcoded: `String(3999 + i)` with the hit row at index
+   * 22, which put the highlighted row at **4021**. That was ` dog`'s ID before
+   * the tokenizer was actually run; the measured ID is **5562**. The whole
+   * frame therefore contradicted §2's own on-screen number, and no gate could
+   * see it because the wrong figure was computed inside a component rather
+   * than written in a script. It was found by looking at a rendered frame.
+   *
+   * Defaults to the measured ID so it cannot drift again.
+   * `research/glm/TOKENIZER.md`, `src/paper/prompt.ts`.
+   */
+  id = PROMPT_IDS[FOLLOWED],
   label,
 }: {
   pulled?: boolean
   seeking?: boolean
+  id?: number
   label?: string
 }) {
   const rows = 46
   const hitRow = 22
+  /* So the highlighted row reads `id`, whatever `id` is. */
+  const firstRow = id - hitRow
   return (
     <div className="s1-etable">
       <svg viewBox="0 0 460 1080" aria-hidden="true">
@@ -165,7 +214,7 @@ export function EmbeddingTable({
             <g key={i}>
               <path d={`M20 ${y + 8}h380`} stroke={INK} strokeWidth="1.2" opacity="0.22" />
               <text x="34" y={y + 4} className="s1-etable-n" fill={PALETTE.blueInk} opacity={isHit ? 1 : 0.4}>
-                {String(3999 + i)}
+                {String(firstRow + i)}
               </text>
               {/* the row's values, as marks rather than digits */}
               <motion.g

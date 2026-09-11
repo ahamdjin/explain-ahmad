@@ -81,7 +81,7 @@ export const BEATS: Beat<Patch>[] = [
     ],
     lateOverlays: {
       at: 3200,
-      overlays: [note('288 experts', 84, 70, { size: 'md', tone: 'measure', rotate: 2, sticky: true })],
+      overlays: [note('288 experts', 82, 22, { size: 'md', tone: 'measure', rotate: 2, sticky: true })],
     },
   },
   {
@@ -179,7 +179,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 6000, commands: [plates.slideOff(), narrator.set({ pose: 'flat' })] }],
     lateOverlays: {
       at: 7200,
-      overlays: [note('no plate sticks', 78, 20, { size: 'md', tone: 'cost', rotate: 3 })],
+      overlays: [note('no plate sticks', 80, 76, { size: 'md', tone: 'cost', rotate: 3 })],
     },
   },
   {

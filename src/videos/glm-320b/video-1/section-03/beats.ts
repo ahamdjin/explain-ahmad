@@ -114,7 +114,7 @@ export const BEATS: Beat<Patch>[] = [
     clearSticky: true,
     lateOverlays: {
       at: 2600,
-      overlays: [note('what for?', 58, 58, { size: 'lg', rotate: -2, sticky: true })],
+      overlays: [note('what for?', 56, 62, { size: 'lg', rotate: -2, sticky: true })],
     },
   },
   {
@@ -138,8 +138,19 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 8,
     vo: 'They’re not the same row. But taken whole, they’re close — the two rows sit near each other.',
-    commands: [cat.compare(), cat.moveTo({ x: 64, y: 46 }, 0.58), dog.moveTo({ x: 64, y: 32 }, 0.58)],
-    overlays: [note('close — as\nwhole rows', 62, 52, { tone: 'word', rotate: -4 })],
+    /*
+     * **Both** rows light, and they come close together. A band on one row
+     * says nothing about the other -- the claim is that this *pair* sits near
+     * each other, so the pair has to be the lit object. The first render lit
+     * only `cat` and read as "this row is special", which is not the point.
+     */
+    commands: [
+      dog.compare(),
+      cat.compare(),
+      dog.moveTo({ x: 62, y: 36 }, 0.58),
+      cat.moveTo({ x: 62, y: 50 }, 0.58),
+    ],
+    overlays: [note('close — as\nwhole rows', 82, 42, { size: 'md', tone: 'word', rotate: -4 })],
   },
   {
     n: 9,
@@ -148,8 +159,8 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'wall',
     secs: 6,
     vo: 'Now "Tuesday". Not close to either of them.',
-    commands: [tues.show({ x: 64, y: 60 }, 0.58, { label: 'Tuesday' }), tues.compare()],
-    overlays: [note('not close', 62, 70, { tone: 'cost', rotate: 3 })],
+    commands: [tues.show({ x: 62, y: 66 }, 0.58, { label: 'Tuesday' }), tues.compare()],
+    overlays: [note('not close', 82, 68, { size: 'md', tone: 'cost', rotate: 3 })],
   },
   {
     n: 10,
@@ -233,7 +244,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [again2.show({ x: 60, y: 70 }, 0.62)],
     lateOverlays: {
       at: 3200,
-      overlays: [note('identical.\nevery time.', 14, 50, { size: 'md', tone: 'cost', rotate: -3 })],
+      overlays: [note('identical.\nevery time.', 82, 34, { size: 'md', tone: 'cost', rotate: -3 })],
     },
   },
 ]

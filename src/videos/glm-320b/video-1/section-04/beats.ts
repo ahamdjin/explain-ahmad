@@ -149,8 +149,13 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Now watch why that matters. "The dog barked." And "a hot dog."',
     commands: [
       line.off(),
-      barked.show({ x: 27, y: 34 }, 0.62),
-      hot.show({ x: 73, y: 34 }, 0.62),
+      /*
+       * Far enough apart to read as **two** sentences. At 0.62 and x 27/73
+       * the two ran together into "the dog barked a hot dog" -- one line of
+       * seven cards, which is the opposite of the comparison the beat is for.
+       */
+      barked.show({ x: 26, y: 32 }, 0.5),
+      hot.show({ x: 74, y: 32 }, 0.5),
       narrator.set({ pose: 'point' }),
     ],
   },
@@ -168,8 +173,8 @@ export const BEATS: Beat<Patch>[] = [
      */
     vo: 'Same word both times. Both of them started from the exact same row — the one we pulled out of the table. How different do you reckon they end up?',
     commands: [
-      rowA.show({ x: 27, y: 58 }, 0.42, { covered: true }),
-      rowB.show({ x: 73, y: 58 }, 0.42, { covered: true }),
+      rowA.show({ x: 26, y: 58 }, 0.42, { covered: true }),
+      rowB.show({ x: 74, y: 58 }, 0.42, { covered: true }),
       narrator.set({ pose: 'wonder' }),
     ],
     lateOverlays: {

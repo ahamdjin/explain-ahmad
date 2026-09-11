@@ -6,6 +6,7 @@ import {
   block,
   cardA,
   cardB,
+  diffs,
   ground,
   narrator,
   share,
@@ -162,7 +163,7 @@ export const BEATS: Beat<Patch>[] = [
      * GiB against ~306 GiB almost entirely. See this section's truth notes.
      */
     vo: 'Three things differ, and only one of them is exciting. It’s nearly three times the parameters. It ships at twice the precision per weight. And it’s chopped finer — more experts, smaller each.',
-    commands: [],
+    commands: [diffs.all()],
     overlays: [
       note(`${OTHER_MODEL.experts} per floor`, 28, 82, { tone: 'measure', rotate: -2 }),
       note(`${THIS_MODEL.experts} per floor`, 72, 82, { tone: 'measure', rotate: 2 }),
@@ -175,8 +176,9 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'and-yet',
     secs: 13,
     vo: 'The first two are why the file is bigger. They’re just size. This one is the interesting one — and it’s not about the file at all.',
-    commands: [],
-    overlays: [note('size · size · the interesting one', 50, 14, { size: 'md', tone: 'measure', rotate: -1 })],
+    /* Dimming, not removing. The two size differences stay on screen and stay
+     * true -- they are just not the thing the rest of the section is about. */
+    commands: [diffs.onlyGranularity()],
   },
   {
     n: 11,
@@ -215,6 +217,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [
       cardA.off(),
       cardB.off(),
+      diffs.off(),
       share.off(),
       block.off(),
       big.off(),

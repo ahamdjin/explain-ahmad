@@ -1444,3 +1444,16 @@
   color: var(--stone);
   opacity: 0.7;
 }
+
+
+/* Three named differences, two of which are only size -------------------- */
+
+/* §13 beats 9-10. The label is set type and the detail is handwritten: the
+ * label is a category, the detail is the measurement behind it. */
+.s1-diff-label {
+  font: 400 42px/1 var(--hand);
+}
+
+.s1-diff-detail {
+  font: 400 32px/1 var(--scrawl);
+}

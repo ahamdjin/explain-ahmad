@@ -214,7 +214,7 @@ export const BEATS: Beat<Patch>[] = [
      * finished box would look like part of the plan we just refused.
      */
     vo: 'Although — if you’re sitting there thinking "just keep the popular ones nearby" —',
-    commands: [shelf.show({ x: 74, y: 56 }, 0.76, { outline: true }), narrator.set({ pose: 'confide' })],
+    commands: [shelf.show({ x: 24, y: 80 }, 0.58, { outline: true }), narrator.set({ pose: 'confide' })],
   },
   {
     n: 15,
@@ -233,7 +233,7 @@ export const BEATS: Beat<Patch>[] = [
     clearSticky: true,
     lateOverlays: {
       at: 2400,
-      overlays: [centred('you’re right — that’s next', 74, 84, { size: 'md', tone: 'word', rotate: -2 })],
+      overlays: [centred('you’re right — that’s next', 48, 88, { size: 'md', tone: 'word', rotate: -2 })],
     },
   },
 ]

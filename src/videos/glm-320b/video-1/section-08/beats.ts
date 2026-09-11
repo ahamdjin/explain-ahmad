@@ -127,7 +127,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [count.ask('expert visits — one pass'), narrator.set({ pose: 'wonder' })],
     lateOverlays: {
       at: 3000,
-      overlays: [note('8 × 336 = ?', 84, 30, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
+      overlays: [note('8 × 336 = ?', 74, 30, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
     },
   },
   {

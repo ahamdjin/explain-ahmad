@@ -114,7 +114,7 @@ export const BEATS: Beat<Patch>[] = [
     stages: [{ at: 2600, commands: [tower.climbTo(45)] }],
     lateOverlays: {
       at: 5200,
-      overlays: [note('336 — for one word', 20, 30, { size: 'md', tone: 'measure', rotate: -2 })],
+      overlays: [note('336 — for one word', 58, 18, { size: 'md', tone: 'measure', rotate: -2 })],
     },
   },
   {

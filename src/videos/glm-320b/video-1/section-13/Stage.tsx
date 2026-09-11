@@ -1,4 +1,4 @@
-import { BigNumber, Block, Camera, Ground, ModelCard, Slot } from '../../../../paper'
+import { BigNumber, Block, Camera, Differences, Ground, ModelCard, Slot } from '../../../../paper'
 import { ShareBar } from '../../../../paper/cast/Boards'
 import { VerdictCard } from '../../../../paper/cast/Aside'
 import { Narrator } from '../../../../paper/cast/Narrator'
@@ -48,6 +48,22 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
         <Slot on={scene.big.on} at={scene.big.at} scale={scene.big.scale} z={4} feel={feel}>
           <BigNumber value={scene.big.value} caption={scene.big.caption} />
+        </Slot>
+
+        {/*
+          Beats 9-10. All three named, then the two that are only size dimmed.
+          Granularity is last so the lit one is the one the video goes on to
+          talk about. See `Differences` for why this must be a picture.
+        */}
+        <Slot on={scene.diffs.on} at={scene.diffs.at} scale={scene.diffs.scale} z={6} feel={feel}>
+          <Differences
+            items={[
+              { label: 'parameters', detail: `${OTHER_MODEL.total} → ${THIS_MODEL.total}` },
+              { label: 'precision', detail: 'MXFP4 → FP8' },
+              { label: 'granularity', detail: `${OTHER_MODEL.experts} → ${THIS_MODEL.experts} experts` },
+            ]}
+            lit={scene.diffs.lit}
+          />
         </Slot>
 
         <Slot on={scene.verdict.on} at={scene.verdict.at} scale={scene.verdict.scale} z={5} feel={feel}>

@@ -89,7 +89,7 @@ export const INITIAL: SceneState = {
     scoring: false,
     badges: 'none',
   },
-  plates: { on: false, at: { x: 50, y: 30 }, scale: 0.7, landing: false, falling: false },
+  plates: { on: false, at: { x: 51, y: 44 }, scale: 1.5, landing: false, falling: false },
   arcs: { on: false, at: { x: 15, y: 54 }, scale: 0.6 },
   open: { on: false, at: { x: 50, y: 48 }, scale: 1 },
   shared: { on: false, at: { x: 84, y: 34 }, scale: 1 },

@@ -29,6 +29,9 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             shown={10}
             extend={scene.dog.extend}
             tone="measure"
+            basis={DOG_SEED}
+            drift={0}
+            showMatches={scene.dog.matches}
             label={scene.dog.label}
           />
         </Slot>

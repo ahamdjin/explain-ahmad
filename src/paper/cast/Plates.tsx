@@ -83,3 +83,83 @@ export function Plates({
     </svg>
   )
 }
+
+/**
+ * Three named differences, side by side, where two of them can be dimmed.
+ *
+ * §13 beats 9-10, and it exists to defuse the most dangerous claim in the
+ * video. `gpt-oss-120b` ships at ~58 GiB and this model at ~306 GiB, and three
+ * things differ: **total parameters** (116.8B vs 321B), **shipped precision**
+ * (MXFP4 vs FP8) and **expert granularity** (128 vs 288 per sparse layer). The
+ * first two account for the footprint almost entirely. Granularity accounts
+ * for essentially none of it.
+ *
+ * An earlier cut said *"the difference is that this one is chopped finer"* over
+ * a frame that divided the blocks, so the picture made smaller experts look
+ * like the cause of more GPUs -- a claim a knowledgeable viewer disproves with
+ * two numbers, on the thesis beat. Naming all three and then dimming the two
+ * that are merely size is the correction, and it has to be *visual*: the VO
+ * alone leaves the old implication on screen.
+ *
+ * `research/glm/OFFLOADING_AND_LOCALITY.md` §5.
+ */
+export function Differences({
+  items,
+  /** Indices still lit. Beat 9 lights all three; beat 10 lights only the last. */
+  lit,
+}: {
+  items: readonly { label: string; detail: string }[]
+  lit: readonly number[]
+}) {
+  const W = 300
+  const H = 108
+  const GAP = 26
+  return (
+    <svg
+      viewBox={`0 0 ${items.length * (W + GAP)} ${H + 40}`}
+      aria-hidden="true"
+      style={{ width: items.length * (W + GAP), overflow: 'visible' }}
+    >
+      {items.map((item, i) => {
+        const on = lit.includes(i)
+        return (
+          <motion.g
+            key={item.label}
+            initial={{ y: -60, opacity: 0 }}
+            animate={{ y: 0, opacity: on ? 1 : 0.3 }}
+            transition={{ type: 'spring', stiffness: 140, damping: 16, delay: i * 0.14 }}
+          >
+            <rect
+              x={i * (W + GAP)}
+              y={0}
+              width={W}
+              height={H}
+              rx={6}
+              fill={PALETTE.paperSheet}
+              stroke={INK}
+              strokeWidth={on ? 3.2 : 2}
+            />
+            <text
+              x={i * (W + GAP) + W / 2}
+              y={44}
+              textAnchor="middle"
+              className="s1-diff-label"
+              fill={INK}
+            >
+              {item.label}
+            </text>
+            <text
+              x={i * (W + GAP) + W / 2}
+              y={82}
+              textAnchor="middle"
+              className="s1-diff-detail"
+              fill={on ? PALETTE.blueInk : PALETTE.stone}
+            >
+              {item.detail}
+            </text>
+          </motion.g>
+        )
+      })}
+    </svg>
+  )
+}

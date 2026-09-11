@@ -46,7 +46,7 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   tower: { on: false, at: { x: 50, y: 48 }, scale: 1, floor: 0, markers: 0, wiring: false, plaque: '', counters: '' },
   line: { on: false, at: { x: 50, y: 92 }, scale: 0.4 },
-  count: { on: false, at: { x: 84, y: 56 }, scale: 1, value: TOTAL, label: '', run: false, blank: false },
+  count: { on: false, at: { x: 74, y: 54 }, scale: 1, value: TOTAL, label: '', run: false, blank: false },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
 }

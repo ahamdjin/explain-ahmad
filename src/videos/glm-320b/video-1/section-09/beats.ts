@@ -77,7 +77,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [vocab.show({ x: 76, y: 48 }, 1.5)],
     lateOverlays: {
       at: 2400,
-      overlays: [note('the same list from earlier —\n154,880 entries', 76, 86, { tone: 'measure', rotate: 2, sticky: true })],
+      overlays: [note('the same list from earlier —\n154,880 entries', 28, 18, { size: 'md', tone: 'measure', rotate: 2, sticky: true })],
     },
   },
   {

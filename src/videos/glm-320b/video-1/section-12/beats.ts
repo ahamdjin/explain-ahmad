@@ -148,11 +148,9 @@ export const BEATS: Beat<Patch>[] = [
      * `NCASE_4_MORE_DESIGN_PATTERNS.md` on asking before showing.
      */
     vo: 'Before I move it — where do you reckon the good setting is?',
+    /* The slider carries the question itself, on the control the viewer is
+     * about to drag. A second copy as an overlay only collided with it. */
     commands: [slider.ask('before I move it — where do you reckon the good setting is?'), narrator.set({ pose: 'wonder' })],
-    lateOverlays: {
-      at: 3000,
-      overlays: [centred('where’s the good setting?', 17, 94, { size: 'md', rotate: -2, sticky: true })],
-    },
   },
   {
     n: 10,
