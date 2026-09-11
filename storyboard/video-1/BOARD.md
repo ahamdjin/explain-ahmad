@@ -11,29 +11,35 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 01 — What "five percent active" actually costs
 
-`17` beats · `2:13` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
+`23` beats · `2:40` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
 
 - **Exits on** — who picks the eight, and why is that the expensive question?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `two-models` | 6 | want | Two models, both five percent active | Two AI models. Both use about five percent of themselves to answer you. |
-| 2 | `one-card` | 4 | so | One chip | This one runs on a single chip. |
-| 3 | `eight-cards` | 3 | wall | Eight of them | This one needs eight. |
-| 4 | `the-number-everybody-quotes` | 9 | and-yet | The number everybody quotes | Everyone quotes that number to say these models are cheap now. Both have it. Only one of them is. |
-| 5 | `unequal` | 4 | and-yet | Level above, unequal below | Same five percent. Eight times the machine. |
-| 6 | `the-promise` | 12 | therefore | The promise | By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through. |
-| 7 | `this-is-the-model` | 5 | so | The model, whole | This is the model. All of it. |
-| 8 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. |
-| 9 | `five-percent-lights` | 7 | so | Five percent goes live | And when a token comes in, about five percent of them do something. |
-| 10 | `push-in` | 3 | so | The camera pushes into the block | Let’s get closer. |
-| 11 | `two-eighty-eight` | 12 | so | The surface resolves into 288 | Up close, it’s not one lump. This is one small part of the model — and there are two hundred and eighty-eight separate pieces in it. |
-| 12 | `how-many-run` | 9 | want | Nothing happens. The viewer bets. | Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run? |
-| 13 | `eight` | 4 | and-yet | Eight | Eight. |
-| 14 | `the-other-280` | 9 | so | The other 280 do nothing | Eight get picked. The other two hundred and eighty do nothing at all. |
-| 15 | `not-the-whole-five-percent` | 15 | and-yet | Eight of 288 is not the five percent | You might think that’s the five percent. It isn’t — this is one small part of the model, and there’s more in here than these, and plenty that runs every time regardless. Hold onto that. |
-| 16 | `mixture-of-experts` | 9 | so | It takes its name | And this has a name. It’s called a Mixture of Experts. Those pieces are the experts. |
-| 17 | `who-picks-the-eight` | 9 | and-yet | The chapter wall | So — who picks the eight? And why does that turn out to be the expensive question? |
+| 1 | `you-ask-it-something` | 5 | want | A chat window. A question types itself in. | You type something into one of these. |
+| 2 | `one-word-comes-back` | 4 | so | It answers. One word, and it stops there. | And it starts answering. One word. |
+| 3 | `behind-the-screen` | 5 | and-yet | The window turns edge-on and we pass behind it | Here is what happened behind that one word. |
+| 4 | `forty-five-floors` | 4 | so | A tower rises behind the glass | It went up forty-five floors. |
+| 5 | `a-room-of-two-eighty-eight` | 7 | so | Behind the tower, a room with 288 in it | On most of those floors, a room with two hundred and eighty-eight specialists in it. |
+| 6 | `three-thirty-six-for-one-word` | 6 | wall | A counter runs up to 336 under the whole thing | Three hundred and thirty-six of them got pulled in. For that one word. |
+| 7 | `only-five-percent-runs` | 9 | and-yet | The machinery clears; two model sheets arrive, both five percent lit | And they tell you only about five percent of it ever runs. Here are two models. Both about five percent. |
+| 8 | `one-card` | 4 | so | One chip | This one runs on a single chip. |
+| 9 | `eight-cards` | 3 | wall | Eight of them | This one needs eight. |
+| 10 | `the-number-everybody-quotes` | 9 | and-yet | The number everybody quotes | Both of them have that number. Only one of them is actually cheap to own. |
+| 11 | `unequal` | 4 | and-yet | Level above, unequal below | Same five percent. Eight times the machine. |
+| 12 | `the-promise` | 12 | therefore | The promise | By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through. |
+| 13 | `this-is-the-model` | 5 | so | The model, whole | This is the model. All of it. |
+| 14 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. |
+| 15 | `five-percent-lights` | 7 | so | Five percent goes live | And when a token comes in, about five percent of them do something. |
+| 16 | `push-in` | 3 | so | The camera pushes into the block | Let’s get closer. |
+| 17 | `two-eighty-eight` | 9 | so | The surface resolves into the room from beat 5 | That room again. Two hundred and eighty-eight separate pieces — and this is one small part of the model. |
+| 18 | `how-many-run` | 9 | want | Nothing happens. The viewer bets. | Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run? |
+| 19 | `eight` | 4 | and-yet | Eight | Eight. |
+| 20 | `the-other-280` | 9 | so | The other 280 do nothing | Eight get picked. The other two hundred and eighty do nothing at all. |
+| 21 | `not-the-whole-five-percent` | 11 | and-yet | Eight of 288 is not the five percent | You might think that’s the five percent. It isn’t. This is one small part, and plenty more runs every time regardless. Hold onto that. |
+| 22 | `mixture-of-experts` | 9 | so | It takes its name | And this has a name. It’s called a Mixture of Experts. Those pieces are the experts. |
+| 23 | `who-picks-the-eight` | 9 | and-yet | The chapter wall | So — who picks the eight? And why does that turn out to be the expensive question? |
 
 ## Section 02 — Your words become tokens
 
@@ -333,7 +339,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 | § | Section | Beats | Runtime | Hands forward |
 | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | 17 | 2:13 | who picks the eight, and why is that the expensive question? |
+| 01 | What "five percent active" actually costs | 23 | 2:40 | who picks the eight, and why is that the expensive question? |
 | 02 | Your words become tokens | 13 | 2:01 | a row number has no meaning in it. So how does it know what anything means? |
 | 03 | From an ID to a meaning | 15 | 2:21 | that row is the same every single time. So how does the word ever mean two things? |
 | 04 | The word looks around | 16 | 2:29 | so the numbers depend on the sentence. Who reads them, and what do they decide? |
@@ -346,7 +352,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 11 | So could you store only the 18 billion? | 15 | 2:11 | so you can't store only the active part. But people run big models on small machines. |
 | 12 | How people actually run these | 16 | 2:47 | it's a price, not a wall. So what did "five percent active" actually get us? |
 | 13 | What that number actually bought | 15 | 2:51 | (none — the thesis lands) |
-| | **whole piece** | **189** | **29:45** | |
+| | **whole piece** | **195** | **30:12** | |
 
 ⚑ the section's event · ❄ a frame that must read as a still
 

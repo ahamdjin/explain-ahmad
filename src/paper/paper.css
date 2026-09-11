@@ -1487,3 +1487,12 @@
 .s1-diff-detail {
   font: 400 32px/1 var(--scrawl);
 }
+
+/* The chat window. `paper/cast/Chat.tsx` -- the one familiar object in the
+   cast, and the only thing on screen for the first five seconds. */
+.s1-chat { width: 40cqw; }
+.s1-chat svg { width: 100%; height: auto; overflow: visible; }
+.s1-chat-model { font: 400 19px/1 var(--scrawl); letter-spacing: 0.02em; }
+.s1-chat-ask { font: 400 30px/1 var(--hand); }
+.s1-chat-said { font: 400 34px/1 var(--hand); }
+.s1-chat-caret { font: 400 30px/1 var(--mono); }

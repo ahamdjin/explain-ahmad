@@ -1,4 +1,4 @@
-import { BigNumber, Block, Slot } from '../../../../paper'
+import { BigNumber, Block, Chat, Counter, Slot, Tower } from '../../../../paper'
 import { Hospital } from '../../../../paper/cast/Hospital'
 import { Narrator } from '../../../../paper/cast/Narrator'
 import { FrontDesk, Rig, WordCard } from '../../../../paper/cast/Props'
@@ -21,6 +21,28 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {scene.ground.on ? (
         <div className="s1-ground" style={{ top: `${scene.ground.y}%` }} aria-hidden="true" />
       ) : null}
+
+      {/*
+        Beats 1-6. The screen everybody recognises, and what is behind it.
+        `paper/cast/Chat.tsx` says why the section starts here.
+      */}
+      <Slot on={scene.chat.on} at={scene.chat.at} scale={scene.chat.scale} z={3} feel={feel}>
+        <Chat
+          ask={scene.chat.ask}
+          said={scene.chat.said}
+          typing={scene.chat.typing}
+          turned={scene.chat.turned}
+          model={scene.chat.model}
+        />
+      </Slot>
+
+      <Slot on={scene.tower.on} at={scene.tower.at} scale={scene.tower.scale} z={1} feel={feel}>
+        <Tower tags={false} floor={scene.tower.floor} markers={scene.tower.markers} />
+      </Slot>
+
+      <Slot on={scene.count.on} at={scene.count.at} scale={scene.count.scale} z={2} feel={feel}>
+        <Counter value={scene.count.value} label={scene.count.label} run={scene.count.run} />
+      </Slot>
 
       <Slot on={scene.block.on} at={scene.block.at} scale={scene.block.scale} z={1} feel={feel}>
         <Block

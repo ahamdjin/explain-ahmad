@@ -52,6 +52,8 @@ const slotX = (slot: number) => BODY_X + 16 + slot * ((BODY_W - 32) / 18)
 export type TowerFlash = 'look' | 'pick' | 'work'
 
 export function Tower({
+  /** The `42 sparse` / `3 dense` braces. Off before §7 has said "layer". */
+  tags = true,
   /** The floor the climbers are on. Also the highlighted floor. */
   floor = 0,
   /** How many token markers are on the building. §8 puts eight here. */
@@ -85,6 +87,7 @@ export function Tower({
   ghost = false,
   label,
 }: {
+  tags?: boolean
   floor?: number
   markers?: number
   kept?: number
@@ -185,7 +188,16 @@ export function Tower({
           )
         })}
 
-        {/* the two populations, braced, because beat 10 says 3 and 42 */}
+        {/*
+          The two populations, braced, because §7 beat 10 says 3 and 42.
+          **Suppressed by `tags={false}`** -- §1 beat 4 shows this tower fifteen
+          seconds into the video, before "layer" has been said once, and
+          "42 sparse / 3 dense" there is the exact jargon-before-landmark
+          problem the new opening exists to avoid. It is a height then, and a
+          population later.
+        */}
+        {tags ? (
+        <>
         <g fill="none" stroke={INK} strokeWidth="2.2" strokeLinecap="round">
           <path d={`M${BODY_X - 8} ${floorY(FLOORS)}h-14v${(FLOORS - DENSE) * FLOOR_H}h14`} />
           <path d={`M${BODY_X - 8} ${floorY(DENSE)}h-14v${DENSE * FLOOR_H}h14`} />
@@ -196,6 +208,8 @@ export function Tower({
         <text x={BODY_X - 30} y={floorY(DENSE) + (DENSE * FLOOR_H) / 2 + 5} textAnchor="end" className="s1-tower-tag" fill={INK}>
           3 dense
         </text>
+        </>
+        ) : null}
 
         {/* the climb, traced whole. Every floor needed the one below it. */}
         {trace ? (

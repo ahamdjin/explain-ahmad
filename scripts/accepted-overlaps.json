@@ -4,7 +4,7 @@
   "accepted": [
     {
       "section": "01",
-      "beat": 8,
+      "beat": 14,
       "pair": "s1-slot × s1-note “320,000,000,000”",
       "why": "Bounding-box artefact. The block at this beat is a scatter of separate marks and its box spans 26-78/8-84, but there is no ink under the label -- verified by eye. The label sits in clear paper above the cloud."
     },
