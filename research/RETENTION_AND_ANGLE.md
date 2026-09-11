@@ -43,6 +43,13 @@ fourth video to explain top-k routing well is not a plan. The differentiator
 has to be something the existing videos get *wrong* or do not reach — and
 there is one. See `research/glm/OFFLOADING_AND_LOCALITY.md`.
 
+> **Superseded by `research/COMPETITIVE_FIELD.md` (2026-09-11).** This section
+> asserted the overlap from titles alone. The field has now been checked —
+> descriptions, lengths, view counts and full chapter lists. Two findings this
+> section missed: **two of the three competitors open exactly the way our §01
+> used to**, and the memory thesis is *already taken* by the first video, not
+> merely adjacent to it. Read the new file instead of this section.
+
 ## 3. Titles — what the field actually uses
 
 Patterns visible in the competitors: a **mechanism name** plus a **consequence**

@@ -124,7 +124,21 @@ Fine-graining is not a mistake. More experts, smaller each, is *why* modern MoE
 models are good — better specialisation, better load balance. It is also
 precisely what defeats the caching trick that lets people run Mixtral on a
 laptop. **The better these models get at being sparse, the harder they get to
-hold.** Nobody has made that video.
+hold.**
+
+**Corrected 2026-09-11** — this used to end "Nobody has made that video."
+`research/COMPETITIVE_FIELD.md` checked the field properly, and that is only
+half true:
+
+- *"Sparse routing buys compute, not memory"* **has** been made. It is the
+  entire description of *The AI Trick Eating the World's Memory* (10:35,
+  2026-06-30), which also covers SSD offloading and expert paging with the same
+  citations we use. We are **second to that thesis**, and its frame is
+  macro-economic — why DRAM got expensive — where ours is personal.
+- **The fine-graining argument is still nobody's.** No video in the field
+  connects more-and-smaller-experts to *caching stops working*. That, and the
+  336 arithmetic, and following one word through the whole machine, are what
+  we actually own.
 
 ## 3. What the viewer thinks they already know
 
