@@ -48,7 +48,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Because a token never stays on its own. It’s sitting in a sentence.',
     commands: [
       row.off(),
-      /* Pull back. The reveal is that the row was one of nine all along, so the
+      /* Pull back. The reveal is that the row was one of eight all along, so the
        * camera loses ground rather than the line sliding in from off frame. */
       camera.to({ x: 50, y: 50 }, 0.86),
       /* Tokens are already tokens by now, so the line is always split. */

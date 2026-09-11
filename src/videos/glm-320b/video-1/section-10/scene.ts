@@ -31,7 +31,7 @@ import {
 
 /** A plausible continuation, and the words arrive in this order. */
 
-/** 9 tokens × 336 for the prompt, then 336 for every word it writes. */
+/** One 336 per prompt token, then another 336 for every word it writes. */
 export const PREFILL = PROMPT.length * 336
 export const visitsAfter = (words: number) => PREFILL + words * 336
 

@@ -19,6 +19,7 @@ import {
   INITIAL_NARRATOR,
   mergePatches,
   PROMPT,
+  TOKENS,
   type At,
   type CameraActor,
   type GroundActor,
@@ -50,7 +51,7 @@ export const CANDIDATES = [
 
 export type SceneState = {
   tower: Placed & { floor: number; markers: number }
-  /** The nine finished rows at the top of the stack. */
+  /** One finished row per token, at the top of the stack. */
   rows: Placed & { focus: number }
   /** The last row, lifted clear of the others. */
   last: Placed & { label: string }
@@ -64,7 +65,7 @@ export type SceneState = {
 }
 
 export const INITIAL: SceneState = {
-  tower: { on: false, at: { x: 50, y: 48 }, scale: 1, floor: 45, markers: 9 },
+  tower: { on: false, at: { x: 50, y: 48 }, scale: 1, floor: 45, markers: TOKENS },
   rows: { on: false, at: { x: 46, y: 52 }, scale: 0.5, focus: -1 },
   last: { on: false, at: { x: 26, y: 34 }, scale: 0.4, label: '“it” — the last position' },
   vocab: { on: false, at: { x: 76, y: 50 }, scale: 1.4, scores: false, candidates: false, picked: false },

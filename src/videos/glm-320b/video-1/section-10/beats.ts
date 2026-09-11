@@ -1,4 +1,4 @@
-import { centred, GROUND_Y, note, PROMPT, REPLY, type Beat } from '../../../../paper'
+import { centred, GROUND_Y, note, PROMPT, REPLY, TOKENS, type Beat } from '../../../../paper'
 import {aside, ground, line, loop, narrator, out, tower, visitsAfter, type Patch} from './scene'
 
 /**
@@ -43,7 +43,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 7,
     vo: 'The word it just made gets added onto the end of your sentence.',
-    commands: [out.off(), line.grow([...PROMPT, REPLY[0]]), tower.set({ markers: 10, floor: 1 })],
+    commands: [out.off(), line.grow([...PROMPT, REPLY[0]]), tower.set({ markers: TOKENS + 1, floor: 1 })],
     lateOverlays: {
       at: 2600,
       overlays: [note('10 tokens now', 28, 86, { tone: 'measure', rotate: -3 })],

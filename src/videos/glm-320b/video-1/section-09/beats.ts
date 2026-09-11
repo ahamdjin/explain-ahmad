@@ -1,4 +1,4 @@
-import { GROUND_Y, note, type Beat } from '../../../../paper'
+import { GROUND_Y, note, TOKENS, type Beat } from '../../../../paper'
 import { LAST, camera, ground, last, narrator, out, rows, tower, vocab, type Patch } from './scene'
 
 /**
@@ -20,7 +20,7 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'So every token in your prompt pays its own three hundred and thirty-six, all at once. At the top of the stack we’ve got a row for every one of them.',
     commands: [
       ground.at(GROUND_Y),
-      tower.show({ x: 50, y: 48 }, 1, { floor: 45, markers: 9 }),
+      tower.show({ x: 50, y: 48 }, 1, { floor: 45, markers: TOKENS }),
       /* Push in on the top floor. We go to them; they have stopped. */
       camera.to({ x: 50, y: 22 }, 1.5),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
@@ -28,8 +28,8 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 2,
-    id: 'nine-finished-rows',
-    title: 'Each marker unfolds into its finished row, nine in a line',
+    id: 'eight-finished-rows',
+    title: 'Each marker unfolds into its finished row, eight in a line',
     relation: 'so',
     secs: 7,
     vo: 'But only one of them matters right now. The last one.',

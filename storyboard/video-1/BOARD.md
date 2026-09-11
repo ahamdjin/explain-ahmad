@@ -202,7 +202,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `a-row-for-every-token` | 15 | want | We rise to the top and arrive alongside the waiting markers | So every token in your prompt pays its own three hundred and thirty-six, all at once. At the top of the stack we’ve got a row for every one of them. |
-| 2 | `nine-finished-rows` | 7 | so | Each marker unfolds into its finished row, nine in a line | But only one of them matters right now. The last one. |
+| 2 | `eight-finished-rows` | 7 | so | Each marker unfolds into its finished row, eight in a line | But only one of them matters right now. The last one. |
 | 3 | `next-attaches-to-the-end` | 9 | so | The first eight dim; only the last stays lit | Because the job is to work out what comes next — and next attaches to the end. |
 | 4 | `that-final-row` | 9 | so | The last row lifts clear of the others | So that final row gets compared against the whole list. All hundred and fifty-four thousand tokens. |
 | 5 | `the-list-returns` | 5 | so | §2’s list rises again beside it | Every one of them gets a score. |

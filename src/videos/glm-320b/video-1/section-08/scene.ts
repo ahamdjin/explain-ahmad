@@ -25,7 +25,7 @@ import {
   type Placed,
 } from '../../../../paper'
 
-/** 9 tokens × 336 expert visits each. */
+/** One 336 per prompt token. Derived, so the tokenizer stays the authority. */
 export const TOTAL = TOKENS * 336
 
 export type SceneState = {
@@ -36,7 +36,7 @@ export type SceneState = {
     plaque: string
     counters: string
   }
-  /** The prompt at the base, so the nine markers have nine visible causes. */
+  /** The prompt at the base, so every marker has a visible cause. */
   line: Placed
   count: { on: boolean; at: At; scale: number; value: number; label: string; run: boolean }
   narrator: NarratorActor
@@ -77,7 +77,7 @@ export const tower = {
   wire: (): Patch => ({ tower: { wiring: true } }),
   /** The shape, named. Not a mysterious thing — this arrangement. */
   name: (plaque: string): Patch => ({ tower: { plaque } }),
-  /** 336 above every marker, nine times over. */
+  /** 336 above every marker, once per prompt token. */
   each: (counters: string): Patch => ({ tower: { counters } }),
 }
 
