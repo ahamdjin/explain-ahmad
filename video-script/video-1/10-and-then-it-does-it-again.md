@@ -1,5 +1,26 @@
 # Section 10 — And then it does the whole thing again
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 10`
+
 ## Contract
 
 | | |
@@ -7,17 +28,24 @@
 | Enters on | all that machinery, and one word comes out? |
 | Teaches | autoregression — how a paragraph appears |
 | Answers | the word is added to the end and the entire stack runs again, from the top |
+| Exits on | it never stops choosing. So could you store only the part it uses? |
 | → next | **therefore** every word of the reply pays 336 all over again |
 | Banks | **it never stops re-choosing** |
 | Target | ~11 beats · ~1:05 |
 
 ## The script
 
+### Act 1 — banking the one word (beat 1) · **S-14**
+
 > **1.** One word. So how do you get a paragraph out of a machine that produces one
 > word?
 >
+### Act 2 — a question about the paragraph (beat 2) · **S-06**
+
 > **2.** You run it again.
 >
+### Act 3 — it runs again, from the top (beats 3–10) · **S-04**
+
 > **3.** *(the new word joins the end of the sentence)* The word it just made
 > gets added onto the end of your sentence.
 >
@@ -39,6 +67,8 @@
 > **10.** So it isn't three hundred and thirty-six choices. It's three hundred
 > and thirty-six **per token, per word it writes**. It never stops choosing.
 >
+### Act 4 — it never stops re-choosing (beat 11) · **S-14**
+
 > **11.** So it never stops re-choosing. Which means we can finally ask the question
 > we started with, properly.
 

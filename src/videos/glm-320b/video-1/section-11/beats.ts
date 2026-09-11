@@ -196,7 +196,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 15,
     /* "Not like that" is the hinge into §12 and is not optional. */
-    vo: 'So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next.',
+    vo: 'So, no. You can’t just store the part it uses. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next.',
     /* "So, no." A refusal, not agreement. */
     commands: [narrator.set({ pose: 'halt' })],
     overlays: [centred(`~${GB_PER_WORD} GB a word — not like that`, 50, 88, { size: 'md', rotate: 1 })],

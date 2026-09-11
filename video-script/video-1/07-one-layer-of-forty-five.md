@@ -1,5 +1,26 @@
 # Section 07 — That was one layer. There are 45.
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 07`
+
 ## Contract
 
 | | |
@@ -7,15 +28,20 @@
 | Enters on | how many steps are there? |
 | Teaches | **layer**, **sparse** vs **dense** |
 | Answers | forty-five, and forty-two of them choose experts — **336 expert visits per token** |
+| Exits on | 336 choices for one token. But a sentence isn't one token. |
 | → next | **therefore** 336 choices, every one needing the floor below to finish first |
 | Banks | **336 choices, not one** |
 | Target | ~13 beats · ~1:25 |
 
 ## The script
 
+### Act 1 — banking one step (beat 1) · **S-14**
+
 > **1.** That’s one step — look around, choose, work. Here’s how many steps there
 > are. Forty-five.
 >
+### Act 2 — forty-five floors (beats 2–5) · **S-04**
+
 > **2.** *(the camera pulls back — the room becomes one floor)* That room we've
 > been standing in this whole time is one floor.
 >
@@ -26,12 +52,16 @@
 > **5.** And every floor does the same two things. Look around. Pick experts.
 > Do the work.
 >
+### Act 3 — the second bet (beats 6–7) · **S-05**
+
 > **6.** *(the row changing on each floor)* So: same word, one floor up. Do you
 > reckon it picks the same eight?
 >
 > **7.** No. Because the row arriving at floor two is not the row that arrived at
 > floor one. Different row, different scores, different eight.
 >
+### Act 4 — it re-chooses on every floor (beats 8–12) · **S-04**
+
 > **8.** *(a new eight lights, one floor up)* Different eight.
 >
 > **9.** Every floor picks fresh. Same token, same model, new team.
@@ -45,6 +75,8 @@
 > **12.** *(the counter runs)* Which means this isn't eight expert visits for
 > this token. It's three hundred and thirty-six.
 >
+### Act 5 — 336 — the number nobody quotes (beat 13) · **S-15**
+
 > **13.** Three hundred and thirty-six choices, for one token — and every single one
 > of them needed the floor below to finish before it could be made. Nobody
 > quotes that number. It’s the one that matters.

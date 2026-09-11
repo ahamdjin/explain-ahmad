@@ -18,7 +18,7 @@ Strategies: `skills/STRATEGY_LEDGER.md`
 | Enters on | who picks the eight, and why is *that* the expensive question? |
 | Teaches | **token**, **token ID**, vocabulary |
 | Answers | your text is cut into pieces, and every possible piece has a number |
-| Exits on | a row number is a **name**. So how does a name become a meaning? |
+| Exits on | a row number has no meaning in it. So how does it know what anything means? |
 | → next | **but** a number like that is a name, not a meaning |
 | Target | 13 beats · see `npm run restamp 02` for the coded runtime |
 | Still forbidden | `embedding`, `attention`, `layer`, `router` |

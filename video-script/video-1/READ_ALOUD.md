@@ -14,7 +14,7 @@ edit the seconds. See `docs/VOICE_OVER.md`.
 
 Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered scripts
 
-**Total: 13 sections · 164 beats · 3182 words · 24:32**
+**Total: 13 sections · 164 beats · 3183 words · 24:32**
 
 | § | section | from | length | beats | words |
 | --- | --- | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | 08 | That was one token. Here's the sentence. | `13:47` | 101s | 11 | 193 |
 | 09 | Where the answer comes out | `15:28` | 81s | 10 | 153 |
 | 10 | And then it does the whole thing again | `16:49` | 82s | 11 | 142 |
-| 11 | So could you store only the 18 billion? | `18:11` | 119s | 13 | 219 |
+| 11 | So could you store only the 18 billion? | `18:11` | 119s | 13 | 220 |
 | 12 | How people actually run these | `20:10` | 136s | 14 | 244 |
 | 13 | What that number actually bought | `22:26` | 126s | 12 | 243 |
 
@@ -229,7 +229,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 
 ## §11 — So could you store only the 18 billion?
 
-`18:11` → `20:10` · 13 beats · 219 words · 119s · `11-could-you-store-only-the-18.md`
+`18:11` → `20:10` · 13 beats · 220 words · 119s · `11-could-you-store-only-the-18.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
@@ -245,7 +245,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `19:26` | Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one word. | the plan | a clock draws itself beside the 8.5 GB and runs |
 | `19:36` | And the work those eight experts actually did? Milliseconds. | the plan | a second bar appears beside the first, almost invisible |
 | `19:44` | There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more. | the plan | both bars redraw to true scale; the small one needs a magnified inset to be visible at all |
-| `19:55` | So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking 'just keep the popular ones nearby', hold that thought. You’re right. That’s next. | the plan | the bars hold, then a small cache shelf sketches itself in and stays |
+| `19:55` | So, no. You can’t just store the part it uses. Not like that. Although — if you’re sitting there thinking 'just keep the popular ones nearby', hold that thought. You’re right. That’s next. | the plan | the bars hold, then a small cache shelf sketches itself in and stays |
 
 ## §12 — How people actually run these
 

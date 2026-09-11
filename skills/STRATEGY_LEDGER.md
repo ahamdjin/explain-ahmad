@@ -218,7 +218,20 @@ and it is untested. Labelled C so it is not mistaken for S-01–S-11.
 Cashed in by sentences like *"Simpleton is actually capable of exploiting
 Always Cooperate"*, which is only readable because both nouns are characters.
 
-**Ours:** 288 anonymous boxes and a desk.
+**Ours:** the **router** takes a name, at §5 beat 2, and that is the one place
+this strategy applies.
+
+**And it is barred from the experts, by the facts.**
+`research/glm/GROUND_TRUTH.md`: *"Experts are not interpretable specialists. An
+expert is a learned feed-forward block. Never label one 'the maths expert';
+identity is a number."* §5 beat 5 says this out loud — *"there's no French
+expert, no maths expert"* — which is the opposite move to S-13 and is correct.
+
+This is the one row where a tier-A strategy must be **refused**, and it is
+worth stating plainly: a technique that would make something easier to hold in
+mind does not earn the right to make it false. I had cited S-13 on two beats
+that do not do it — §5 beat 3 and §6 beat 2 — and a review of the citations
+against the narration caught it.
 
 ### S-14 · Bank, then complicate (therefore / but) · **tier A** · *asserted*
 

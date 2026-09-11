@@ -1,5 +1,26 @@
 # Section 08 — That was one token. Here's the sentence.
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 08`
+
 ## Contract
 
 | | |
@@ -7,15 +28,20 @@
 | Enters on | 336 choices for one token. But a sentence isn't one token. |
 | Teaches | **transformer**, parallel processing |
 | Answers | the whole prompt goes through together, and attention is the wiring between them |
+| Exits on | all of that happens. What comes out? |
 | → next | **therefore** every token pays its own 336 |
 | Banks | **every token pays its own 336** |
 | Target | ~11 beats · ~1:10 |
 
 ## The script
 
+### Act 1 — banking 336, then the correction (beat 1) · **S-14**
+
 > **1.** Three hundred and thirty-six, for one token. Now — I’ve been following one
 > token this whole time, and I owe you a correction.
 >
+### Act 2 — the whole prompt at once (beats 2–10) · **S-04**
+
 > **2.** *(the whole sentence enters at once)* It doesn't go in on its own. Your
 > entire prompt goes in together.
 >
@@ -43,6 +69,8 @@
 > **10.** And every one of them decided on the spot, from numbers that didn't
 > exist until a moment before.
 >
+### Act 3 — every token pays its own (beat 11) · **S-14**
+
 > **11.** So every token pays its own three hundred and thirty-six. All of that
 > happens. And what comes out?
 

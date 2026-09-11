@@ -1,5 +1,26 @@
 # Section 12 — How people actually run these
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 12`
+
 **The honesty section.** Without it the video is contradicted by a
 `llama.cpp` flag, and the audience most likely to comment is the audience that
 already knows it.
@@ -11,14 +32,19 @@ already knows it.
 | Enters on | so you can't store only the active part. But people run big models on small machines. |
 | Teaches | caching, and the memory-for-speed trade |
 | Answers | experts repeat, so you keep the frequent ones close — and it genuinely works |
+| Exits on | it's a price, not a wall. So what did "five percent active" actually get us? |
 | → next | **but** with 12,096 expert slots there is no setting that is both small and fast |
 | Target | ~14 beats · ~1:35 |
 
 ## The script
 
+### Act 1 — banking the answer, then the exception (beat 1) · **S-14**
+
 > **1.** So you can’t store only the active part. Except — people do run models like
 > this on small machines. Right now. And they’re not lying about it.
 >
+### Act 2 — caching, and it works (beats 2–8) · **S-04**
+
 > **2.** So what are they doing that we just failed to do?
 >
 > **3.** *(one word on screen)* Caching.
@@ -38,20 +64,28 @@ already knows it.
 > **8.** *(a slider appears)* Which turns the whole thing into one question.
 > **How much do you keep close?**
 >
+### Act 3 — the trade, both ways (beats 9–10) · **S-15**
+
 > **9.** *(dragging up)* Keep more, and it's fast — but now you need a big
 > machine again, which is the thing we were trying to avoid.
 >
 > **10.** *(dragging down)* Keep less, the machine gets small — and the misses
 > pile up, and it crawls.
 >
+### Act 4 — twelve thousand slots (beats 11–12) · **S-09**
+
 > **11.** And remember what we're choosing from. Two hundred and eighty-eight
 > experts, on each of forty-two floors.
 >
 > **12.** *(the number builds)* Twelve thousand and ninety-six slots.
 >
+### Act 5 — no setting that is both (beat 13) · **S-15**
+
 > **13.** There's no setting on that slider where it's both. That's the trade,
 > and on a model chopped this fine the exchange rate is brutal.
 >
+### Act 6 — a price, not a wall (beat 14) · **S-14**
+
 > **14.** So you can run it on less. It’ll just be slow. That was never a wall — it’s
 > a price.
 

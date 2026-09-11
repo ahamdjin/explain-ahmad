@@ -1,5 +1,26 @@
 # Section 03 — From an ID to a meaning
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 03`
+
 ## Contract
 
 | | |
@@ -7,6 +28,7 @@
 | Enters on | a row number has no meaning in it. So how does it know what anything means? |
 | Teaches | **embedding** |
 | Answers | the ID is used to look up a long row of numbers, and *that* carries the meaning |
+| Exits on | that row is the same every single time. So how does the word ever mean two things? |
 | → next | **but** that row is identical every single time the word appears |
 | Banks | the row is **fixed per token** — half of the paradox §4 resolves |
 | Target | ~13 beats · ~1:25 |
@@ -14,9 +36,13 @@
 
 ## The script
 
+### Act 1 — banking the row number (beat 1) · **S-14**
+
 > **1.** So every piece has a row number now — and a row number is only a name. A
 > name has to turn into a meaning somewhere. Here’s where.
 >
+### Act 2 — the lookup, in front of you (beats 2–12) · **S-04**
+
 > **2.** *(a very tall table)* The model has a table. One row for every token
 > in that list — all hundred and fifty-four thousand of them.
 >
@@ -47,6 +73,8 @@
 >
 > **12.** And that's what goes into the model. Not "dog". This.
 >
+### Act 3 — the wall — the same row, every time (beat 13) · **S-14**
+
 > **13.** And that’s the lookup, done — the word is four thousand and ninety-six
 > numbers now. But here’s the thing to hold on to. This row is stored in a
 > table. Which means it is exactly the same every single time the word "dog"

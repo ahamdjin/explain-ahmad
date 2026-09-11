@@ -40,7 +40,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `13` beats · `1:56` · script: `video-script/02-your-words-become-tokens.md` · route: `/section-02`
 
 - **Enters on** — who picks the eight, and why is that the expensive question?
-- **Exits on** — a row number is a name. So how does a name become a meaning?
+- **Exits on** — a row number has no meaning in it. So how does it know what anything means?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -63,6 +63,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `13` beats · `2:07` · script: `video-script/03-from-an-id-to-a-meaning.md` · route: `/section-03`
 
 - **Enters on** — a row number has no meaning in it. So how does it know what anything means?
+- **Exits on** — that row is the same every single time. So how does the word ever mean two things?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -85,6 +86,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `13` beats · `1:52` · script: `video-script/04-the-word-looks-around.md` · route: `/section-04`
 
 - **Enters on** — that row is the same every single time. So how does the word ever mean two things?
+- **Exits on** — so the numbers depend on the sentence. Who reads them, and what do they decide?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -107,6 +109,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `13` beats · `2:21` · script: `video-script/05-the-router-picks-the-eight.md` · route: `/section-05`
 
 - **Enters on** — so the numbers depend on the sentence. Who reads them, and what do they decide?
+- **Exits on** — eight experts are picked. What do they actually do?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -129,6 +132,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `11` beats · `1:26` · script: `video-script/06-the-experts-do-the-work.md` · route: `/section-06`
 
 - **Enters on** — eight experts are picked. What do they actually do?
+- **Exits on** — how many steps are there?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -149,6 +153,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `13` beats · `1:52` · script: `video-script/07-one-layer-of-forty-five.md` · route: `/section-07`
 
 - **Enters on** — how many steps are there?
+- **Exits on** — 336 choices for one token. But a sentence isn't one token.
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -171,6 +176,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `11` beats · `1:41` · script: `video-script/08-that-was-one-token.md` · route: `/section-08`
 
 - **Enters on** — 336 choices for one token. But a sentence isn't one token.
+- **Exits on** — all of that happens. What comes out?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -191,6 +197,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `10` beats · `1:21` · script: `video-script/09-where-the-answer-comes-out.md` · route: `/section-09`
 
 - **Enters on** — all of that happens. What comes out?
+- **Exits on** — all that machinery, and one word comes out?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -210,6 +217,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `11` beats · `1:22` · script: `video-script/10-and-then-it-does-it-again.md` · route: `/section-10`
 
 - **Enters on** — all that machinery, and one word comes out?
+- **Exits on** — it never stops choosing. So could you store only the part it uses?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -230,6 +238,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 `13` beats · `1:59` · script: `video-script/11-could-you-store-only-the-18.md` · route: `/section-11`
 
 - **Enters on** — it never stops choosing. So could you store only the part it uses?
+- **Exits on** — so you can't store only the active part. But people run big models on small machines.
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -245,13 +254,14 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 10 | `a-second-and-a-half` | 10 | wall | A clock draws itself beside the 8 GB and runs | Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one word. |
 | 11 | `and-the-work` | 8 | and-yet | A second bar appears beside the first, almost invisible | And the work those eight experts actually did? Milliseconds. |
 | 12 | `fetching-costs-more` | 11 | therefore | Both bars redraw to true scale, with the small one magnified | There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more. |
-| 13 | `not-like-that` | 15 | therefore | The bars hold; nothing else on screen | So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next. |
+| 13 | `not-like-that` | 15 | therefore | The bars hold; nothing else on screen | So, no. You can’t just store the part it uses. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next. |
 
 ## Section 12 — How people actually run these
 
 `14` beats · `2:16` · script: `video-script/12-how-people-actually-run-these.md` · route: `/section-12`
 
 - **Enters on** — so you can't store only the active part. But people run big models on small machines.
+- **Exits on** — it's a price, not a wall. So what did "five percent active" actually get us?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
@@ -274,7 +284,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 `12` beats · `2:06` · script: `video-script/13-what-that-number-bought.md` · route: `/section-13`
 
-- **Enters on** — it's a price, not a wall. So what did "18 billion active" actually get us?
+- **Enters on** — it's a price, not a wall. So what did "five percent active" actually get us?
 - **Exits on** — (none — the thesis lands)
 
 | # | id | s | rel | Beat | Voice |
@@ -299,17 +309,17 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | § | Section | Beats | Runtime | Hands forward |
 | --- | --- | --- | --- | --- |
 | 01 | What "five percent active" actually costs | 17 | 2:13 | who picks the eight, and why is that the expensive question? |
-| 02 | Your words become tokens | 13 | 1:56 | a row number is a name. So how does a name become a meaning? |
-| 03 | From an ID to a meaning | 13 | 2:07 | — |
-| 04 | The word looks around | 13 | 1:52 | — |
-| 05 | The router picks the eight | 13 | 2:21 | — |
-| 06 | The experts do the work | 11 | 1:26 | — |
-| 07 | That was one layer. There are 45. | 13 | 1:52 | — |
-| 08 | That was one token. Here's the sentence. | 11 | 1:41 | — |
-| 09 | Where the answer comes out | 10 | 1:21 | — |
-| 10 | And then it does the whole thing again | 11 | 1:22 | — |
-| 11 | So could you store only the 18 billion? | 13 | 1:59 | — |
-| 12 | How people actually run these | 14 | 2:16 | — |
+| 02 | Your words become tokens | 13 | 1:56 | a row number has no meaning in it. So how does it know what anything means? |
+| 03 | From an ID to a meaning | 13 | 2:07 | that row is the same every single time. So how does the word ever mean two things? |
+| 04 | The word looks around | 13 | 1:52 | so the numbers depend on the sentence. Who reads them, and what do they decide? |
+| 05 | The router picks the eight | 13 | 2:21 | eight experts are picked. What do they actually do? |
+| 06 | The experts do the work | 11 | 1:26 | how many steps are there? |
+| 07 | That was one layer. There are 45. | 13 | 1:52 | 336 choices for one token. But a sentence isn't one token. |
+| 08 | That was one token. Here's the sentence. | 11 | 1:41 | all of that happens. What comes out? |
+| 09 | Where the answer comes out | 10 | 1:21 | all that machinery, and one word comes out? |
+| 10 | And then it does the whole thing again | 11 | 1:22 | it never stops choosing. So could you store only the part it uses? |
+| 11 | So could you store only the 18 billion? | 13 | 1:59 | so you can't store only the active part. But people run big models on small machines. |
+| 12 | How people actually run these | 14 | 2:16 | it's a price, not a wall. So what did "five percent active" actually get us? |
 | 13 | What that number actually bought | 12 | 2:06 | (none — the thesis lands) |
 | | **whole piece** | **164** | **24:32** | |
 

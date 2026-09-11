@@ -57,7 +57,7 @@ const CHAPTERS: Chapter[] = [
   { n: 10, title: 'And then it does the whole thing again', enters: 'All that machinery, and one word comes out?', component: Section10 },
   { n: 11, title: 'So could you store only the 18 billion?', enters: 'It never stops choosing. So could you store only the part it uses?', component: Section11 },
   { n: 12, title: 'How people actually run these', enters: 'So you can’t store only the active part. But people run big models on small machines.', component: Section12 },
-  { n: 13, title: 'What that number actually bought', enters: 'It’s a price, not a wall. So what did “18 billion active” actually get us?', component: Section13 },
+  { n: 13, title: 'What that number actually bought', enters: 'It’s a price, not a wall. So what did “five percent active” actually get us?', component: Section13 },
 ]
 
 function startAt() {

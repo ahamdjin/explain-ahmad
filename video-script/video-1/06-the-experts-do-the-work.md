@@ -1,5 +1,26 @@
 # Section 06 — The experts do the work
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 06`
+
 ## Contract
 
 | | |
@@ -7,10 +28,13 @@
 | Enters on | eight experts are picked. What do they actually do? |
 | Teaches | expert output, weighted blending |
 | Answers | each takes the row and returns a different one; the eight get blended into a single row |
+| Exits on | how many steps are there? |
 | → next | **therefore** the token leaves changed — and that was one step |
 | Target | ~11 beats · ~1:05 |
 
 ## The script
+
+### Act 1 — banking the eight (beat 1) · **S-14**
 
 > **1.** Right — eight picked, out of two hundred and eighty-eight. What do they
 > actually do with it?
@@ -18,6 +42,8 @@
 > **2.** *(the row copies into eight)* Each one takes the row, and puts out a
 > different row.
 >
+### Act 2 — what they do to the row (beats 2–10) · **S-04**
+
 > **3.** Same numbers going in. Eight different answers coming out.
 >
 > **4.** And they don't get an equal say. The router already scored them, so the
@@ -38,6 +64,8 @@
 >
 > **10.** And that is one step. Done. Finished.
 >
+### Act 3 — one full step, named and done (beat 11) · **S-12**
+
 > **11.** And that’s one full step, done. Look around, choose, work. Which raises the
 > obvious question — how many steps are there?
 
@@ -48,7 +76,7 @@
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the room | — | the eight lift forward out of the wall; the 280 recede into the background | 8 `Specialist`s forward | 8 | S-14 |
-| 2 | the room | — | the row copies eight times, one copy travelling into each | 8 identical rows | same input | S-13 |
+| 2 | the room | — | the row copies eight times, one copy travelling into each | 8 identical rows | same input | S-04 |
 | 3 | the room | — | eight visibly different rows emerge on the far side | 8 different `NumberRow`s | 8 different outputs | S-04 |
 | 4 | the room | — | each output takes on the size of its expert's score | 8 rows, weighted | bigger = higher score | S-04 |
 | 5 | the room | — | the eight converge and merge into a single row, larger ones dominating | 8 → 1 `NumberRow` | the blend | S-04 |

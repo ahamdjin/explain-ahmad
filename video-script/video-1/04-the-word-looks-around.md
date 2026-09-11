@@ -1,5 +1,26 @@
 # Section 04 — The word looks around
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 04`
+
 ## Contract
 
 | | |
@@ -7,6 +28,7 @@
 | Enters on | that row is the same every single time. So how does the word ever mean two things? |
 | Teaches | **attention**, **context** |
 | Answers | every token reads the others and pulls in what matters, and its row changes |
+| Exits on | so the numbers depend on the sentence. Who reads them, and what do they decide? |
 | → next | **therefore** the same word carries different numbers in different sentences |
 | Banks | **the numbers depend on the whole sentence** |
 | Target | ~13 beats · ~1:30 |
@@ -14,11 +36,17 @@
 
 ## The script
 
+### Act 1 — banking the fixed row (beat 1) · **S-14**
+
 > **1.** So the row is fixed — every "dog" starts out identical. Which can’t be
 > right, and it isn’t, for long.
 >
+### Act 2 — a question before the mechanism (beat 2) · **S-06**
+
 > **2.** Because a token never stays on its own. It's sitting in a sentence.
 >
+### Act 3 — the word reads the others (beats 3–12) · **S-04**
+
 > **3.** *(the full sentence, all rows visible)* And before anything else
 > happens, every token gets to look at the others.
 >
@@ -48,6 +76,8 @@
 > **12.** So the numbers don't belong to the word any more. They belong to
 > **the word in this sentence**.
 >
+### Act 4 — naming attention, after it has happened (beat 13) · **S-12**
+
 > **13.** And that’s attention. That’s all attention is. The row has changed — and it
 > changed because of this sentence. None of it could have been worked out
 > ahead of time.

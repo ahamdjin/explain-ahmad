@@ -1,5 +1,26 @@
 # Section 05 — The router picks the eight
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 05`
+
 ## Contract
 
 | | |
@@ -7,20 +28,27 @@
 | Enters on | so the numbers depend on the sentence. Who reads them, and what do they decide? |
 | Teaches | **router**, **top-8**, **shared expert**, what an expert actually is |
 | Answers | it scores all 288 experts against the row *as it is now*, and keeps the best eight |
+| Exits on | eight experts are picked. What do they actually do? |
 | → next | **therefore** the choice is made from numbers that only just existed |
 | Banks | **the choice depends on those numbers** |
 | Target | ~13 beats · ~1:25 |
 
 ## The script
 
+### Act 1 — banking the changed row (beat 1) · **S-14**
+
 > **1.** So the row is specific to this sentence now. Which means something can
 > finally read it — as it is — and choose. This is what arrives here.
 >
+### Act 2 — the thing that chooses gets a name (beat 2) · **S-13**
+
 > **2.** *(the desk, named at last)* This is the **router**. It's tiny compared
 > to everything around it, and it has exactly one job.
 >
 > **3.** *(the 288)* In front of it: two hundred and eighty-eight experts.
 >
+### Act 3 — scoring all 288 (beats 4–12) · **S-04**
+
 > **4.** And I should say what an expert actually is, because the name oversells
 > it. It's a block of numbers that takes a row in and puts a different row out.
 > That's all.
@@ -48,6 +76,8 @@
 > **12.** Change the sentence and the row changes. Change the row and the scores
 > change. Change the scores and you get a different eight.
 >
+### Act 4 — naming the router (beat 13) · **S-12**
+
 > **13.** And that’s the router, done. Eight picked out of two hundred and
 > eighty-eight — and that choice could not have been made any earlier than
 > this. It needed the row to exist first.
@@ -60,7 +90,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the desk | **pan** | the changed row travels right and comes to rest at the unlabelled desk | `NumberRow`, `FrontDesk` | the post-attention row | S-14 |
 | 2 | the desk | — | a small plaque lands on the desk | `FrontDesk` named | "router" | S-13 |
-| 3 | the room | **pull back** | we back off and the 288 fill the frame beyond the desk | `Hospital`, 288 | 36 × 8 | S-13 |
+| 3 | the room | **pull back** | we back off and the 288 fill the frame beyond the desk | `Hospital`, 288 | 36 × 8 | S-04 |
 | 4 | the room | — | one expert lifts out and opens: a row goes in, a different row comes out | one `Specialist`, enlarged | row in → row out | S-04 |
 | 5 | the room | — | it drops back into the wall; no labels appear on any of them | `Hospital`, all plain | no names, anywhere | S-04 |
 | 6 | the room | — | an empty score badge appears on all 288 at once | 288 badges | 288 | S-04 |

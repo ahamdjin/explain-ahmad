@@ -1,5 +1,26 @@
 # Section 11 — So could you store only the 18 billion?
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 11`
+
 **The payoff begins here.** Everything before this exists to make this section
 arithmetic the viewer can follow, rather than a claim from authority.
 
@@ -10,6 +31,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | Enters on | it never stops choosing. So could you store only the part it uses? |
 | Teaches | memory vs storage |
 | Answers | no — you would fetch about 8.5 GB per word, against milliseconds of actual work |
+| Exits on | so you can't store only the active part. But people run big models on small machines. |
 | → next | **but** people run models like this on small machines every day |
 | Target | ~13 beats · ~1:25 |
 
@@ -26,9 +48,13 @@ arithmetic the viewer can follow, rather than a claim from authority.
 
 ## The script
 
+### Act 1 — banking the loop, then stating the plan (beat 1) · **S-14**
+
 > **1.** It re-chooses — every floor, every word, and it never stops. So: back to
 > where we started. Could you just store the part it actually uses?
 >
+### Act 2 — fetching the eight, floor by floor (beats 2–8) · **S-04**
+
 > **2.** And here's the plan, stated honestly: keep the whole model on a drive.
 > When the router picks its eight, go and get those eight. Do the work. Move on.
 >
@@ -47,10 +73,14 @@ arithmetic the viewer can follow, rather than a claim from authority.
 > **8.** One expert is about twenty-six megabytes. Three hundred and thirty-six
 > of them is **about eight gigabytes**.
 >
+### Act 3 — the arithmetic nobody does (beat 9) · **S-15**
+
 > **9.** One expert is about twenty-five megabytes, at the precision this thing ships
 > in. Three hundred and thirty-six of them is about eight and a half
 > gigabytes.
 >
+### Act 4 — against milliseconds of work (beats 10–12) · **S-04**
+
 > **10.** Off a fast drive — call it five gigabytes a second — that’s the better part
 > of two seconds. For one word.
 >
@@ -60,9 +90,11 @@ arithmetic the viewer can follow, rather than a claim from authority.
 > **12.** *(the bars, to scale)* There it is. **The fetching costs more than the
 > thinking.** Not a bit more — hundreds of times more.
 >
-> **13.** So, no. You can’t just store the eighteen billion. Not like that. Although —
-> if you’re sitting there thinking 'just keep the popular ones nearby', hold
-> that thought. You’re right. That’s next.
+### Act 5 — the answer, and a thread left hanging (beat 13) · **S-08**
+
+> **13.** So, no. You can’t just store the part it uses. Not like that. Although — if
+> you’re sitting there thinking 'just keep the popular ones nearby', hold that
+> thought. You’re right. That’s next.
 
 ## Storyboard
 
@@ -79,8 +111,8 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | 7 | the plan | — | the flights stop; a counter lands | `Counter` | **336** | S-04 |
 | 8 | the plan | — | 336 and 25 MB slide together; a total assembles | `Counter`, arithmetic | 336 × 25 MB | S-04 |
 | 9 | the plan | — | the total lands and a label drops under it | `BigNumber`, `Note` | **~8.5 GB** — for one word | S-15 |
-| 10 | the plan | — | a clock draws itself beside the 8.5 GB and runs | clock, `Counter` | **~~1.7 s** | S-08 |
-| 11 | the plan | — | a second bar appears beside the first, almost invisible | `CostBars`, work bar | milliseconds | S-09 |
+| 10 | the plan | — | a clock draws itself beside the 8.5 GB and runs | clock, `Counter` | **~~1.7 s** | S-04 |
+| 11 | the plan | — | a second bar appears beside the first, almost invisible | `CostBars`, work bar | milliseconds | S-04 |
 | 12 | the plan | — | both bars redraw to true scale; the small one needs a magnified inset to be visible at all | `CostBars` to scale | fetch vs work | S-04 |
 | 13 | the plan | — | the bars hold, then a small cache shelf sketches itself in and stays | `CostBars` + `ExpertCache` ghost | — | S-08 |
 

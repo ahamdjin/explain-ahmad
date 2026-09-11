@@ -1,5 +1,26 @@
 # Section 09 — Where the answer comes out
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
+
 ## Contract
 
 | | |
@@ -7,14 +28,19 @@
 | Enters on | all of that happens. What comes out? |
 | Teaches | next-token prediction, scores over the vocabulary |
 | Answers | the last position gets turned into a score for every token in the list, and one is chosen |
+| Exits on | all that machinery, and one word comes out? |
 | → next | **therefore** one word comes out — out of all that |
 | Target | ~10 beats · ~1:00 |
 
 ## The script
 
+### Act 1 — banking the parallel pass (beat 1) · **S-14**
+
 > **1.** So every token in your prompt pays its own three hundred and thirty-six, all
 > at once. At the top of the stack we’ve got a row for every one of them.
 >
+### Act 2 — scoring the whole vocabulary (beats 2–9) · **S-04**
+
 > **2.** But only one of them matters right now. The last one.
 >
 > **3.** *(the final position lights)* Because the job is to work out what comes
@@ -35,6 +61,8 @@
 > **9.** All of that. Forty-five floors, three hundred and thirty-six experts
 > per token, every token in your prompt.
 >
+### Act 3 — one word, out of all that (beat 10) · **S-14**
+
 > **10.** All of that. Forty-five floors, three hundred and thirty-six experts per
 > token, every token in your prompt. And what comes out the other end is one
 > word.

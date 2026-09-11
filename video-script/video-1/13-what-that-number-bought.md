@@ -1,10 +1,31 @@
 # Section 13 — What that number actually bought
 
+Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+
+v8's interiors survive — they were built for spatial continuity and that work
+stands. What v8 did not have was a **chapter wall** at either end, a named
+teacher for anything it was doing, or an `Exits on` that had to equal the next
+section's `Enters on` word for word. All three are now in place:
+
+- **Beat 1 banks** the previous section's answer in one clause, then adds the
+  *but* that makes this section necessary. It does not carry the previous
+  question forward — that was the fault behind *"the whole story feels
+  disconnected"*. `STORY_SPINE.md` §5.
+- **The closing beat names the mechanism as finished** and says what is now
+  missing, so the viewer gets to put something down before picking the next
+  thing up.
+- **Act headings carry strategy IDs**, derived from the storyboard's own
+  strategy column rather than asserted separately.
+
+Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 13`
+
 ## Contract
 
 | | |
 | --- | --- |
-| Enters on | it's a price, not a wall. So what did "18 billion active" actually get us? |
+| Enters on | it's a price, not a wall. So what did "five percent active" actually get us? |
 | Answers | **compute, not memory** — and the finer the experts, the wider the gap |
 | Exits on | *(none — the thesis lands)* |
 | Target | ~12 beats · ~1:15 |
@@ -21,8 +42,12 @@ The answer is split, and the split is the whole video:
 
 ## The script
 
+### Act 1 — banking the price (beat 1) · **S-14**
+
 > **1.** Small, or fast. Not both. So — what did "five percent active" actually buy?
 >
+### Act 2 — what the number actually bought (beats 2–9) · **S-04**
+
 > **2.** Here's what that number is actually telling you.
 >
 > **3.** *(the work bar, small)* Per word, this thing does the thinking of a
@@ -47,12 +72,18 @@ The answer is split, and the split is the whole video:
 > **9.** The difference is that this one is chopped finer. More experts, smaller
 > each.
 >
+### Act 3 — the finer the slice, the wider the gap (beat 10) · **S-15**
+
 > **10.** Which is exactly **why it's better** — and exactly why it's harder to
 > hold.
 >
+### Act 4 — the thesis, once (beat 11) · **S-11**
+
 > **11.** So the better these models get at using less of themselves, the more
 > of them you have to keep lying around.
 >
+### Act 5 — back to the two models (beat 12) · **S-10**
+
 > **12.** Two models. Both about five percent active. One of them runs on a single
 > card; the other one needs four. Now you know why. "Active parameters" is a
 > compute number, not a memory number — and the finer you slice the experts,
