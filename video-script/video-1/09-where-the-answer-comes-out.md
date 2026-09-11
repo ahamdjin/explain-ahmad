@@ -32,40 +32,64 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
 | → next | **therefore** one word comes out — out of all that |
 | Target | ~10 beats · ~1:00 |
 
+## What changed from v8
+
+**1. Beats 9 and 10 were the same sentence twice.** Both opened *"All of that.
+Forty-five floors, three hundred and thirty-six experts…"*. The recap is worth
+having — it is the section's whole emotional point — but once, over three
+frames where the picture does the work, not twice in words.
+
+**2. The board said nine rows.** Stale from before the tokenizer was measured;
+it is eight, and beat 3 dims seven of them, not eight.
+`research/glm/TOKENIZER.md`.
+
 ## The script
 
 ### Act 1 — banking the parallel pass (beat 1) · **S-14**
 
-> **1.** So every token in your prompt pays its own three hundred and thirty-six, all
-> at once. At the top of the stack we’ve got a row for every one of them.
->
-### Act 2 — scoring the whole vocabulary (beats 2–9) · **S-04**
+> **1.** *(we rise to the top and arrive alongside the waiting markers)* So every
+> token in your prompt pays its own three hundred and thirty-six, all at once.
+> At the top of the stack there's a row for every one of them.
 
-> **2.** But only one of them matters right now. The last one.
->
-> **3.** *(the final position lights)* Because the job is to work out what comes
-> **next** — and next attaches to the end.
->
-> **4.** So that final row gets compared against the whole list. All hundred and
-> fifty-four thousand tokens.
->
-> **5.** *(scores spreading across the list)* Every one of them gets a score.
-> How likely are you to be the next thing.
->
-> **6.** *(the top few rise)* Most are hopeless. A few are plausible.
->
-> **7.** And one gets picked.
->
-> **8.** *(a single token drops out)* That's your next word. That's the output.
->
-> **9.** All of that. Forty-five floors, three hundred and thirty-six experts
-> per token, every token in your prompt.
->
-### Act 3 — one word, out of all that (beat 10) · **S-14**
+### Act 2 — only the last one matters (beats 2–4) · **S-04**
 
-> **10.** All of that. Forty-five floors, three hundred and thirty-six experts per
-> token, every token in your prompt. And what comes out the other end is one
-> word.
+> **2.** *(each marker unfolds into its finished row, eight in a line)* Eight
+> rows. One per token, all of them finished.
+>
+> **3.** *(the first seven dim; only the last stays lit)* But only one of them
+> matters right now. The last one.
+>
+> **4.** *(the last row lifts clear of the others)* Because the job is to work
+> out what comes **next** — and next attaches to the end.
+
+### Act 3 — scoring the whole vocabulary (beats 5–9) · **S-04**
+
+> **5.** *(the vocabulary list from §2 rises again beside it)* So that final row
+> gets compared against the whole list. All hundred and fifty-four thousand,
+> eight hundred and eighty of them.
+>
+> **6.** *(a value spreads down the entire list)* Every single one gets a score.
+> How well does this word fit — right here, right now?
+>
+> **7.** *(the list reorders; a handful rise)* Most are hopeless. A few are
+> plausible.
+>
+> **8.** *(one entry is lifted out of the list)* And one gets picked.
+>
+> **9.** *(it becomes a word card and drops clear of the tower)* That's your next
+> word. That's the output.
+
+### Act 4 — the wall (beats 10–12) · **S-14**
+
+> **10.** *(we fall away until the whole tower and the single small card share
+> the frame)* All of that.
+>
+> **11.** *(the tower fills the frame; the card stays tiny)* Forty-five floors.
+> Three hundred and thirty-six experts per token. Every token in your prompt,
+> all the way up.
+>
+> **12.** *(nothing moves; the card sits there)* And what comes out the other end
+> is **one word**.
 
 ## Storyboard
 
@@ -73,9 +97,9 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
 
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | the top floor | **push in** | we rise to the top and arrive alongside the waiting markers | top of `Tower` | nine rows | S-14 |
-| 2 | the top floor | — | each marker unfolds into its finished row, nine in a line | 9 `NumberRow`s | one per token | S-04 |
-| 3 | the top floor | — | the first eight dim; only the last stays lit | 8 dim, 1 lit | the last one | S-04 |
+| 1 | the top floor | **push in** | we rise to the top and arrive alongside the waiting markers | top of `Tower` | eight rows | S-14 |
+| 2 | the top floor | — | each marker unfolds into its finished row, eight in a line | 8 `NumberRow`s | one per token | S-04 |
+| 3 | the top floor | — | the first seven dim; only the last stays lit | 7 dim, 1 lit | the last one | S-04 |
 | 4 | the top floor | — | the last row lifts clear of the others | one `NumberRow` | `it` | S-04 |
 | 5 | the top floor | — | the vocabulary list from §2 rises again beside it | `Vocabulary` returning | 154,880 | S-04 |
 | 6 | the top floor | — | a value spreads down the entire list, every entry getting one | scores across list | every token scored | S-04 |
@@ -83,20 +107,28 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
 | 8 | the top floor | — | one entry is lifted out of the list | one entry | the pick | S-04 |
 | 9 | the top floor | — | it becomes a word card and drops clear of the tower | `WordCard` | **`bounced`** | S-04 |
 | 10 | outside the tower | **pull back** | we fall away until the whole tower and the single small card share the frame | `Tower` + one `WordCard` | all that → one word | S-14 |
+| 11 | outside the tower | — | the tower fills the frame; the card stays the size it was | `Tower` large, card tiny | the disproportion | S-14 |
+| 12 | outside the tower | — | nothing moves; the card sits there, alone against it | `Tower` + `WordCard` | one word | S-14 |
 
 ### Board notes
 
-- **Two camera moves, one at each end**: up to meet them, then all the way out.
-  Beat 10's pull-back is the emotional beat of the section and it is the frame,
-  not the line.
-- Beat 5 **must reuse the §2 list**, drawn identically. The callback only works
-  if it is recognisably the same object — same height, same scroll, same edge.
-- **Beat 10 is a carrying frame**: the entire machine on one side, one small
-  card on the other. Scale contrast teaching magnitude with no label, per
-  `skills/PRODUCTION_ORDER.md`.
-- Beat 7's candidates must be **plausible continuations of the real prompt**, or
-  an attentive viewer catches it. `The dog dropped the ball, and it` → `bounced`
-  is honest.
+- **Two camera moves, and they bracket the section**: a push in to the top
+  floor at beat 1, a pull back out at beat 10. Beats 2–9 are still, and beats
+  10–12 hold the same wide frame while the words do the last of the work.
+- **Eight rows, seven dimmed.** The board said nine. This is the frame that
+  makes §8's arithmetic countable, so the number of objects has to match the
+  number the voice just said.
+- **Beat 6's score must spread down the whole list**, past the top and bottom
+  of frame. If only the candidates get scored, the frame says the model shortlists
+  first, which is not what happens and quietly undoes §5's *"every single one
+  gets a score"*.
+- **Beats 10–12 are one image held for three beats.** The tower enormous, the
+  card tiny, nothing moving. That disproportion is the section's whole argument
+  and v8 spent it on two beats of identical narration instead of letting the
+  picture carry it.
+- Beat 9's card must be the **same object** that §10 beat 3 picks up. If it is
+  redrawn, the loop reads as a new thing rather than as the thing that just
+  came out.
 
 ---
 
@@ -104,10 +136,11 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
 
 | Beat | Job |
 | --- | --- |
-| 1–3 | **teach** — why the last position |
-| 4–6 | **teach** — scores across the vocabulary |
-| 7–8 | **answer** — one token out |
-| 9–10 | **turn** — the disproportion, stated so it stings. This is what makes §10 land |
+| 1 | **bank** — all of them paid 336, at once |
+| 2–4 | **teach** — only the last position is asked the question |
+| 5–6 | **teach** — the whole vocabulary is scored, not a shortlist |
+| 7–9 | **teach** — a few plausible, one picked, one card out |
+| 10–12 | **the wall** — all that machinery, one word |
 
 ## Truth notes
 

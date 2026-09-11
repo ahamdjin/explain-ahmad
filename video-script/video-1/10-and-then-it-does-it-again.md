@@ -33,44 +33,67 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 10`
 | Banks | **it never stops re-choosing** |
 | Target | ~11 beats · ~1:05 |
 
+## What changed from v8
+
+**1. S-06 was cited on "You run it again."** That is the answer, not a
+question — the same false citation §4 had. And there is a real question here,
+with a genuinely wrong intuition behind it: most people assume the model
+*continues* from where it stopped. It starts over. Beat 2 now asks, beat 3
+answers.
+
+**2. The board said a tenth marker.** Stale from the tokenizer measurement —
+eight tokens plus the new word is **nine**.
+
+**3. The closing recap ran into the handoff.** Splitting them gives *it never
+stops re-choosing* its own frame, which is the line §11 is about to spend.
+
 ## The script
 
 ### Act 1 — banking the one word (beat 1) · **S-14**
 
-> **1.** One word. So how do you get a paragraph out of a machine that produces one
-> word?
->
-### Act 2 — a question about the paragraph (beat 2) · **S-06**
+> **1.** *(the tower and the single word card hold, apart)* One word. So how do
+> you get a paragraph out of a machine that produces one word?
 
-> **2.** You run it again.
->
-### Act 3 — it runs again, from the top (beats 3–10) · **S-04**
+### Act 2 — the question (beats 2–3) · **S-06**
 
-> **3.** *(the new word joins the end of the sentence)* The word it just made
-> gets added onto the end of your sentence.
+> **2.** *(the card hovers near the base; nothing else moves)* To make the next
+> one — do you reckon it carries on from where it stopped? Or starts over?
 >
-> **4.** And the whole thing goes back in. From the beginning.
->
-> **5.** *(the stack runs again)* New sentence — one word longer. Forty-five
-> floors. Look around, pick experts, do the work.
->
-> **6.** And another word comes out.
->
-> **7.** *(the loop, accelerating)* Then again. And again. One word at a time,
-> until it decides to stop.
->
-> **8.** That's it. That's what's actually happening while you sit there
-> watching a reply appear.
->
-> **9.** Every single word of that reply. Full stack. Fresh choices.
->
-> **10.** So it isn't three hundred and thirty-six choices. It's three hundred
-> and thirty-six **per token, per word it writes**. It never stops choosing.
->
-### Act 4 — it never stops re-choosing (beat 11) · **S-14**
+> **3.** *(the card joins the end of the sentence and the whole thing turns back
+> towards the base)* It starts over. All of it.
 
-> **11.** So it never stops re-choosing. Which means we can finally ask the question
-> we started with, properly.
+### Act 3 — the loop (beats 4–11) · **S-04**
+
+> **4.** *(the sentence is now one token longer; a ninth marker appears)* The
+> word it just made joins the end of your sentence.
+>
+> **5.** *(all nine enter at the base together)* And the whole thing goes back
+> in. From the beginning. One token longer than last time.
+>
+> **6.** *(the whole climb replays, faster)* Forty-five floors again. Three
+> hundred and thirty-six choices again — for every single token.
+>
+> **7.** *(another card drops out at the top)* And another word comes out.
+>
+> **8.** *(the cycle repeats, accelerating)* Then again. And again. One word at
+> a time.
+>
+> **9.** *(the produced words accumulate beside the tower)* That's it. That's
+> what's actually happening while you sit there watching it type.
+>
+> **10.** *(a counter beside each produced word ticks)* Every single word of
+> that reply. Full stack. Fresh choices.
+>
+> **11.** *(the running total climbs and does not stop)* So it isn't three
+> hundred and thirty-six choices. It's three hundred and thirty-six, times
+> every token, times every word it writes back.
+
+### Act 4 — the wall (beats 12–13) · **S-14**
+
+> **12.** *(everything halts at once)* It never stops re-choosing.
+>
+> **13.** *(the tower and the finished reply hold together in frame)* Which
+> means we can finally ask the question we started with, properly.
 
 ## Storyboard
 
@@ -79,30 +102,38 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 10`
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | outside the tower | — | the tower and the single word card hold, apart | `Tower`, `WordCard` | one word | S-14 |
-| 2 | outside the tower | — | the card flies back down to the base and joins the end of the sentence | card → `Sentence` | `…and it bounced` | S-06 |
-| 3 | outside the tower | — | the sentence is now one token longer; a tenth marker appears | `Sentence` +1, 10 markers | 10 tokens | S-04 |
-| 4 | outside the tower | — | all ten markers enter at the base together | `Tower`, 10 climbing | again | S-04 |
-| 5 | outside the tower | — | the whole climb replays, faster | `Tower`, fast climb | 45 floors again | S-04 |
-| 6 | outside the tower | — | another card drops out at the top | `WordCard` | the next word | S-04 |
-| 7 | outside the tower | — | the cycle repeats, accelerating each time | `GenerateLoop` | again, and again | S-04 |
-| 8 | outside the tower | — | the produced words accumulate as a line of text beside the tower | growing sentence | the reply, appearing | S-04 |
-| 9 | outside the tower | — | a counter beside each produced word ticks 336 per token | `Counter`s | 336, per token, per word | S-04 |
-| 10 | outside the tower | — | the running total climbs and does not stop | `Counter`, unbounded | it never stops | S-04 |
-| 11 | outside the tower | — | everything halts at once; the tower and the finished reply hold | `Tower` + full reply | — | S-14 |
+| 2 | outside the tower | — | the card hovers near the base; nothing else moves | card, still | **`carry on, or start over?`** | S-06 |
+| 3 | outside the tower | — | the card joins the end of the sentence and the whole line turns back towards the base | card → `Sentence` | `…and it bounced` | S-06 |
+| 4 | outside the tower | — | the sentence is now one token longer; a ninth marker appears | `Sentence` +1, 9 markers | 9 tokens | S-04 |
+| 5 | outside the tower | — | all nine markers enter at the base together | `Tower`, 9 climbing | again | S-04 |
+| 6 | outside the tower | — | the whole climb replays, faster | `Tower`, fast climb | 45 floors again | S-04 |
+| 7 | outside the tower | — | another card drops out at the top | `WordCard` | the next word | S-04 |
+| 8 | outside the tower | — | the cycle repeats, accelerating each time | `GenerateLoop` | again, and again | S-04 |
+| 9 | outside the tower | — | the produced words accumulate as a line of text beside the tower | growing sentence | the reply, appearing | S-04 |
+| 10 | outside the tower | — | a counter beside each produced word ticks 336 per token | `Counter`s | 336, per token, per word | S-04 |
+| 11 | outside the tower | — | the running total climbs and does not stop | `Counter`, unbounded | it never stops | S-04 |
+| 12 | outside the tower | — | everything halts at once | `Tower` + reply, frozen | the stop | S-14 |
+| 13 | outside the tower | — | the tower and the finished reply hold together | `Tower` + full reply | — | S-14 |
 
 ### Board notes
 
-- **No camera moves.** We watch the loop from one fixed position for the whole
-  section, because the loop is the subject and a moving camera would make it
-  read as a montage rather than a cycle.
-- **Beat 7's acceleration is the one place speed itself is the message.** It
-  should become slightly uncomfortable. That discomfort is the argument.
-- Beat 8 connects it to something the viewer has literally watched happen — a
-  reply appearing a word at a time. The line of text must build **at the pace
-  of the loop**, not smoothly.
-- The KV-cache aside chips off **beat 5** and must open without stopping the
-  loop behind it.
-- Beat 11's total halt buys §11's opening. Stop everything, then ask.
+- **No camera moves.** §9 left us outside the tower and §11 stays there. The
+  whole loop is watched from one position, which is what lets beat 11's
+  unbounded counter read as *this does not stop* rather than as a new scene.
+- **Beat 2 is the still frame.** The card has to hover *near the base* — close
+  enough that "carry on from here" looks plausible — or the question has no
+  wrong answer to offer, and a question whose wrong answer is unavailable is
+  decoration.
+- **Nine markers, not ten.** Eight tokens plus the word it just made. The board
+  said ten, stale from before the tokenizer was measured.
+- **Beat 6 must replay the *whole* climb**, from the base, not resume partway.
+  That is the entire content of beat 3's answer, and if the animation cheats by
+  starting halfway the picture teaches the intuition the beat just corrected.
+- **Beat 11's counter must have no ceiling and no final value.** The moment it
+  lands on a number, the point inverts — it becomes a cost you could budget for,
+  which is exactly the belief §11 goes on to take apart.
+- Beat 12 halts **everything at once**, including the counter. §11 opens on the
+  stillness.
 
 ---
 
@@ -110,12 +141,13 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 10`
 
 | Beat | Job |
 | --- | --- |
-| 1 | **hook** — the question the viewer has after §9 beat 10 |
-| 2 | **answer** — three words |
-| 3–7 | **teach** — the loop |
-| 8 | **teach** — connects it to something they have literally watched happen |
-| 9–10 | **banked** — deposit five, and the one that makes §11 inevitable |
-| 11 | **therefore** — the turn back to the opening |
+| 1 | **bank** — one word, and the obvious problem with that |
+| 2 | **ask** — carry on, or start over? |
+| 3 | **correct** — it starts over, all of it |
+| 4–6 | **teach** — one token longer, forty-five floors again |
+| 7–9 | **teach** — the loop, accelerating, and what it looks like from outside |
+| 10–11 | **teach** — the cost multiplies by every word it writes |
+| 12–13 | **the wall** — it never stops re-choosing |
 
 ## Truth notes
 

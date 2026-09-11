@@ -37,13 +37,13 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 07`
 
 ### Act 1 — banking one step (beat 1) · **S-14**
 
-> **1.** That’s one step — look around, choose, work. Here’s how many steps there
-> are. Forty-five.
+> **1.** *(the room holds, bounded, with the row inside it)* That's one step —
+> look around, choose, work. And that room we've been standing in this whole
+> time is not the machine. It's one part of it.
 >
 ### Act 2 — forty-five floors (beats 2–5) · **S-04**
 
-> **2.** *(the camera pulls back — the room becomes one floor)* That room we've
-> been standing in this whole time is one floor.
+> **2.** *(the camera pulls back — the room becomes one floor)* It's one floor.
 >
 > **3.** *(the tower assembles)* There are forty-five of them.
 >

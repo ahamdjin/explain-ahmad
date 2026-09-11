@@ -33,46 +33,84 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 08`
 | Banks | **every token pays its own 336** |
 | Target | ~11 beats · ~1:10 |
 
+## What changed from v8
+
+**1. The board still said nine markers, in four rows.** Stale from before the
+tokenizer was measured, and an earlier sweep missed them because they are
+numerals — `9 markers`, `all nine climb`, `all nine counters`, `all nine,
+waiting` — while the narration had already been corrected to eight. The frames
+and the voice were contradicting each other in the one section whose whole job
+is an arithmetic the viewer can check.
+
+**2. The arithmetic was handed over instead of asked.** 8 × 336 is a sum a
+viewer can do in their head, and doing it is what makes the total land. Beat 9
+now holds the two numbers with the total blank. S-06, soft.
+
+**3. "Transformer" is named in its own act.** v8 buried the naming mid-run
+between the attention wiring and the counters. It is the one word most viewers
+came in carrying an idea about, so it gets beats 6–7 and nothing else happens
+on them.
+
 ## The script
 
 ### Act 1 — banking 336, then the correction (beat 1) · **S-14**
 
-> **1.** Three hundred and thirty-six, for one token. Now — I’ve been following one
-> token this whole time, and I owe you a correction.
->
-### Act 2 — the whole prompt at once (beats 2–10) · **S-04**
+> **1.** *(the single marker holds partway up)* Three hundred and thirty-six,
+> for one token. Now — I've been following one token this whole time, and I owe
+> you a correction.
 
-> **2.** *(the whole sentence enters at once)* It doesn't go in on its own. Your
-> entire prompt goes in together.
->
-> **3.** *(all tokens climbing side by side)* Every token climbs at the same
-> time. All of them, all forty-five floors, together.
->
-> **4.** And **attention** is the wiring between them. That's what connects
-> them — every token, on every floor, looking at all the others.
->
-> **5.** That's what makes it read your sentence as a sentence, instead of a
-> list of separate words.
->
-> **6.** And this whole arrangement — the stack of floors, attention wiring them
-> together, experts doing the work on each one — this is what the word
-> **transformer** actually means.
->
-> **7.** That's it. It's not a mysterious thing. It's this shape.
->
-> **8.** Which means each token in your prompt is doing its own three hundred
-> and thirty-six.
->
-> **9.** *(counters multiplying)* Eight tokens in your sentence? That’s two thousand,
-> six hundred and eighty-eight expert visits.
->
-> **10.** And every one of them decided on the spot, from numbers that didn't
-> exist until a moment before.
->
-### Act 3 — every token pays its own (beat 11) · **S-14**
+### Act 2 — the whole prompt at once (beats 2–5) · **S-04**
 
-> **11.** So every token pays its own three hundred and thirty-six. All of that
-> happens. And what comes out?
+> **2.** *(seven more markers appear at the base beside it)* It doesn't go in on
+> its own. Your entire prompt goes in together.
+>
+> **3.** *(all eight climb side by side)* Every token climbs at the same time.
+> All of them, all forty-five floors, together.
+>
+> **4.** *(lines appear between the markers on the floor they share)* And
+> attention is the wiring between them. Every token, on every floor, looking at
+> all the others.
+>
+> **5.** *(the lines redraw on each new floor as they climb)* That's what makes
+> it read your sentence as a sentence, instead of a list of separate words.
+
+### Act 3 — the shape has a name (beats 6–7) · **S-12**
+
+> **6.** *(a plate slides onto the front of the tower)* And this whole
+> arrangement — the stack of floors, attention wiring them together, experts
+> doing the work on each one — this is what the word **transformer** actually
+> means.
+>
+> **7.** *(the plate settles; the climb continues behind it)* That's it. It
+> isn't a mysterious thing. It's this shape.
+
+### Act 4 — the sum (beats 8–9) · **S-06**
+
+> **8.** *(a small counter appears above every marker)* Which means each token
+> in your prompt is doing its own three hundred and thirty-six.
+>
+> **9.** *(the counters hold; the total beneath them stays blank)* Eight tokens.
+> Three hundred and thirty-six each. How many is that?
+
+### Act 5 — the total (beats 10–12) · **S-04**
+
+> **10.** *(all eight counters run at once and the total assembles)* Two
+> thousand, six hundred and eighty-eight.
+>
+> **11.** *(the total lands and holds)* Expert visits. For one pass, over eight
+> words.
+>
+> **12.** *(the total holds while the climb finishes behind it)* And every one
+> of them decided on the spot, from numbers that didn't exist until a moment
+> before.
+
+### Act 6 — the wall (beats 13–14) · **S-14**
+
+> **13.** *(the markers arrive at the top floor)* So every token pays its own
+> three hundred and thirty-six.
+>
+> **14.** *(they stop dead, all eight together)* All of that happens. And what
+> comes out?
 
 ## Storyboard
 
@@ -81,31 +119,39 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 08`
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the tower | — | the single marker holds partway up | `Tower`, 1 marker | one token | S-14 |
-| 2 | the tower | — | eight more markers appear at the base beside it, one per token | `Tower`, 9 markers | 9 tokens | S-04 |
-| 3 | the tower | — | all nine climb together, side by side, floor by floor | `Tower`, 9 climbing | together | S-04 |
+| 2 | the tower | — | seven more markers appear at the base beside it, one per token | `Tower`, 8 markers | 8 tokens | S-04 |
+| 3 | the tower | — | all eight climb together, side by side, floor by floor | `Tower`, 8 climbing | together | S-04 |
 | 4 | the tower | — | lines appear between the markers on the floor they are all standing on | cross-marker lines | attention, between | S-04 |
 | 5 | the tower | — | the lines redraw on each new floor as they climb | lines per floor | on every floor | S-04 |
-| 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | "transformer" | S-04 |
-| 7 | the tower | — | the plate settles; the climb continues behind it | plaque + climb | the shape, named | S-04 |
-| 8 | the tower | — | a small counter appears above every marker | 9 `Counter`s | 336 each | S-04 |
-| 9 | the tower | — | all nine counters run at once and a total assembles beneath them | 9 counters + total | 8 × 336 | S-04 |
-| 10 | the tower | — | the total lands and holds | `Counter` | **2,688** | S-04 |
-| 11 | the tower | — | the markers arrive at the top floor and stop dead | `Tower`, markers at top | all nine, waiting | S-14 |
+| 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | **"transformer"** | S-12 |
+| 7 | the tower | — | the plate settles; the climb continues behind it | plaque + climb | the shape, named | S-12 |
+| 8 | the tower | — | a small counter appears above every marker, each reading 336 | 8 `Counter`s | 336 each | S-04 |
+| 9 | the tower | — | the counters hold; a blank total waits beneath them; nothing moves | 8 counters + blank | **`8 × 336 = ?`** | S-06 |
+| 10 | the tower | — | all eight counters run at once and the total assembles beneath them | 8 counters + total | 8 × 336 | S-04 |
+| 11 | the tower | — | the total lands and holds | `Counter` | **2,688** | S-04 |
+| 12 | the tower | — | the total holds while the climb finishes behind it | total + climb | decided on the spot | S-04 |
+| 13 | the tower | — | the markers arrive at the top floor | `Tower`, markers near top | all eight | S-14 |
+| 14 | the tower | — | they stop dead, together, and nothing happens next | `Tower`, markers stopped | waiting | S-14 |
 
 ### Board notes
 
-- **No camera moves.** We stay outside the tower for the whole section, because
-  the section is about *how many things are happening at once* — and that only
-  reads from a distance.
-- Beat 2 is the honest correction the voice-over admits at beat 1. The eight new
-  markers must appear **at the base**, not mid-climb, or it looks like they were
-  hidden rather than simplified away.
-- Beat 4 is the reframe of §4 at no cost: attention is the wiring *between*
-  tokens, which the viewer only now sees because there is more than one.
-- **8 tokens × 336 = 2,688**, using the real running prompt
-  (`The dog dropped the ball, and it` → 9 tokens). Do not round to ten for a
-  neater number — the prompt is on screen and a viewer can count it.
-- Beat 11's dead stop is the setup for §9. Silence, then the question.
+- **No camera moves.** §7 brought us to the tower and §9 pushes in on its top
+  floor. Fourteen beats in one place.
+- **Eight markers. Not nine.** Four rows of this board said nine, months after
+  the narration said eight, because the numerals survived a text sweep that
+  caught the spelled-out words. This is the one section whose argument is an
+  arithmetic the viewer can check against countable objects on screen, so a
+  miscount here is not cosmetic — it makes the total wrong in front of them.
+  `research/glm/TOKENIZER.md`.
+- **Beat 9's total must be genuinely blank**, not faint or pre-drawn. If the
+  number is visible the sum is not a question, and 8 × 336 is small enough that
+  a viewer will actually attempt it — which is the only reason to ask.
+- **Beat 4's lines are between markers, not from one marker.** §4 drew attention
+  from *our* token outwards; here it is the mesh. If this frame repeats §4's
+  one-to-many shape, the correction in beat 1 never lands visually.
+- **Beat 14 has to be a dead stop.** Nothing continues, nothing fades. §9 opens
+  by pushing in on exactly this frame, and the pause is what makes *"and what
+  comes out?"* a question rather than a link.
 
 ---
 
@@ -113,12 +159,15 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 08`
 
 | Beat | Job |
 | --- | --- |
-| 1 | **honest** — the simplification is named and paid for, not buried in an aside |
-| 2–3 | **answer** — parallel, together |
-| 4–5 | **teach** — attention as wiring. Reframes §4 at no cost |
-| 6–7 | **teach** — "transformer" defined as a shape, not a mystery |
-| 8–10 | **banked** — deposit four, and it multiplies |
-| 11 | **therefore** — the question §9 answers |
+| 1 | **bank**, then admit the simplification |
+| 2–3 | **correct** — the whole prompt, together |
+| 4–5 | **teach** — attention is the wiring between them |
+| 6–7 | **name** — this shape is what "transformer" means |
+| 8 | **teach** — every token pays its own 336 |
+| 9 | **ask** — eight of them. How many is that? |
+| 10–11 | **answer** — 2,688 |
+| 12 | **teach** — and none of it was knowable in advance |
+| 13–14 | **the wall** — all that, and what comes out? |
 
 ## Truth notes
 
