@@ -71,6 +71,41 @@ decomposition as complete.** What it does settle is that the routed experts are
 **under half** the active path, so *eight experts in one layer* and *five
 percent of the model* are different claims about different things.
 
+## How many GPUs — derived, because it was derived wrong once
+
+**This is the video's first thirteen seconds and its final callback, so the
+working is here rather than in a script.**
+
+| | GLM-5.3-Flash | gpt-oss-120b |
+| --- | --- | --- |
+| Shipped footprint | ~306 GiB (FP8) | ~58 GiB (MXFP4) |
+| In GB | **328.6 GB** | 62.3 GB |
+| ÷ 80 GB per accelerator | 4.11 → **5 is the floor** | 0.78 → **1** |
+| Smallest workable tensor-parallel size | **8** | **1** |
+| Squeezed to 4-bit | ~153 GiB = 164.3 GB → 2.05 → floor 3 | ~58 GiB → 1 |
+| Smallest workable TP at 4-bit | **4** | **1** |
+
+Two separate facts do the work:
+
+1. **Four 80 GB cards is 320 GB, and the weights are 328.6 GB.** They do not
+   fit, before a single byte of KV cache or runtime.
+2. **Tensor-parallel size must divide the 64 attention heads**, so TP ∈ {1, 2,
+   4, 8, …}. Five is arithmetically sufficient and practically impossible. The
+   next size up is **eight**.
+
+So the honest comparison is **one card against eight**, and at 4-bit **one
+against four**.
+
+`STORY_SPINE.md` said *"Fits on: four"* while §1's own board note said
+*"~306 GiB at FP8 **does not fit** four"* — the spine and the script
+contradicted each other on the video's opening claim, and both had been read
+many times without anyone doing the division. The spine's *"squeezed to 4-bit:
+~153 GiB — still two"* was wrong the same way: 153 GiB is 164.3 GB and two
+cards are 160 GB.
+
+**Do not restate a GPU count anywhere without dividing.** The figure is not
+published by anyone; it is ours, and it is only as good as this table.
+
 ## On-screen rules
 
 - **`18B active` is the path across the whole model**, not eight experts in one

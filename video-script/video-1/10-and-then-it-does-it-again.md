@@ -89,15 +89,15 @@ stops re-choosing* its own frame, which is the line §11 is about to spend.
 > word it just made joins the end of your sentence.
 >
 > **5.** *(the eight earlier markers dim and hold in place, up the tower)* But
-> the eight before it don't climb again. Everything the model worked out about
-> them is still sitting there, kept. That's the bit it doesn't have to redo.
+> the eight before it don't climb again. The state it needs from those earlier
+> tokens is kept. That's the bit it doesn't have to redo.
 >
 > **6.** *(only the ninth marker enters the base and begins to climb)* Just the
 > new word goes up. All forty-five floors, reading the kept work as it passes.
 >
 > **7.** *(forty-two of the floors light as it passes; a counter runs)*
 > Forty-two of those floors choose. Eight experts each time. Three hundred and
-> thirty-six expert visits — for this one word.
+> thirty-six expert visits — for this one token.
 
 ### Act 4 — the loop (beats 8–12) · **S-04**
 
@@ -110,8 +110,8 @@ stops re-choosing* its own frame, which is the line §11 is about to spend.
 > what's actually happening while you sit there watching it type.
 >
 > **11.** *(the prompt's total sets, then a second counter starts per word)*
-> Your eight words cost two thousand, six hundred and eighty-eight visits, once.
-> Every single word it writes back costs another three hundred and thirty-six.
+> Your eight tokens cost two thousand, six hundred and eighty-eight visits,
+> once. Every token it writes back costs another three hundred and thirty-six.
 >
 > **12.** *(the running total climbs and does not stop)* And it doesn't know
 > which experts the next word needs until the next word is halfway up.
@@ -207,9 +207,13 @@ stops re-choosing* its own frame, which is the line §11 is about to spend.
   336 × tokens × words. v9 multiplied them, which inflates the number by more
   than an order of magnitude and would have been the most quotable error in the
   video.
-- Beat 5 says the kept work is "everything the model worked out about them",
-  which is true and deliberately not called a cache on screen. The word "cache"
-  buys nothing here and costs a definition.
+- **Beat 5 says "the state it needs", not "everything it worked out".** The
+  stronger phrasing overshot the research: `GROUND_TRUTH.md` says the earlier
+  positions' **keys and values** are reused, and this model is hybrid KDA +
+  sparse MLA, so what is retained is attention state — not a complete record of
+  everything computed about those tokens. "The state it needs" is true of both
+  halves of the hybrid and still says the useful thing. The word "cache" stays
+  off screen: it buys nothing here and costs a definition.
 - "Until it decides to stop" — an end-of-sequence token. One clause, no more.
 
 ## Frames

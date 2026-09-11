@@ -119,7 +119,7 @@ locate it**. That is a claim we can defend, and it still lands §13.
 > **11.** *(dragging down)* Keep less, the machine gets small — and the misses
 > pile up, and it crawls.
 
-### Act 5 — why there is no good setting (beats 12–14) · **S-09**
+### Act 5 — why the box number can't find the setting (beats 12–15) · **S-09**
 
 > **12.** *(the 288 wall and the 42 floors ghost in behind the box, dwarfing
 > it)* And remember what we're choosing from. Two hundred and eighty-eight
@@ -175,18 +175,29 @@ locate it**. That is a claim we can defend, and it still lands §13.
   you thought of"* at beat 3 land as a payoff rather than a coincidence.
 - **Beat 9 is the most valuable still frame in the video.** The slider is
   untouched and at neither end, and the viewer is asked to put it somewhere.
-  The honest answer is that there is no good setting, so the guess cannot be
-  right — which is the point. They commit to a good setting existing, and then
-  watch both ends fail. `NCASE_4_MORE_DESIGN_PATTERNS.md` warns against
-  clicking mistaken for thinking; this is the opposite case, a question whose
-  value is entirely in what it costs the viewer to answer.
+
+  **The guess is not wrong — it is unanswerable, and that is the point.** This
+  note used to say "there is no good setting, so the guess cannot be right",
+  which is a *stronger* claim than the section is allowed to make and directly
+  contradicts the line beat 14 now speaks. Nobody has measured expert locality
+  for 288 experts at top-8, so the video may not assert that no good setting
+  exists; what it can show is that both ends fail and that *"five percent
+  active"* cannot locate the middle.
+
+  If a future pass finds this note and the spoken line disagreeing again,
+  **the spoken line is the one that matches the research** —
+  `research/glm/OFFLOADING_AND_LOCALITY.md` §5. Do not "fix" beat 14 back.
+
+  `NCASE_4_MORE_DESIGN_PATTERNS.md` warns against clicking mistaken for
+  thinking; this is the opposite case, a question whose value is entirely in
+  what it costs the viewer to answer.
 - **Beats 10–11 must both fail visibly**, and by different failures: the frame
   grows too big at one end, the machine crawls at the other. If either end
   merely looks *worse*, the trade reads as tuning rather than as a wall.
 - **Beat 12's ghosts have to dwarf the box.** 288 × 42 against a cache that
   holds a handful. The count at beat 13 is the reversal, and it only works if
   the scale was felt one beat earlier.
-- **Beat 15 keeps the machine running.** Slowly, and working. The section's
+- **Beat 16 keeps the machine running.** Slowly, and working. The section's
   last claim is *a price, not a wall*, and a stopped machine would say the
   opposite.
 
@@ -205,7 +216,6 @@ locate it**. That is a claim we can defend, and it still lands §13.
 | 10–11 | **teach** — both ends fail, differently |
 | 12–15 | **the reversal** — 12,096 slots, and the box number can't locate the setting |
 | 16 | **the wall** — a price, not a wall; the machine is still running |
-| 15 | **the wall** — a price, not a wall |
 
 ## Truth notes — mandatory
 

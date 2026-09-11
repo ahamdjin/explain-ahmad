@@ -77,7 +77,8 @@ in front of us. See `skills/SPATIAL_CONTINUITY.md`.
 > and this sentence happens to break mostly along the words.
 >
 > **6.** *(the pieces settle in a row)* These are called **tokens**. That’s all
-> a token is. A chunk of text.
+> a token is. A chunk of text. And from here on, whenever I count something, I'm
+> counting tokens.
 >
 > **7.** *(the word `unbelievable` drops in and shatters into three)* Don’t get
 > comfortable, though. Feed it "unbelievable" and you get this. Un. Belie.

@@ -56,13 +56,13 @@ percent active"* bought. The frames have to open on the thing §1 opened on —
 which is now two models and their chips, not a number.
 
 **3. The close did not close the ring.** S-10 is *reuse the opening's nouns*,
-and the narration did — *two models, one card, four* — while the board showed a
+and the narration did — *two models, one card, eight* — while the board showed a
 verdict card with a slogan on it. The last frames are now literally §1's beats
 1–3, redrawn, which is the whole point: the same picture, and this time the
 viewer can read it.
 
 **4. Beat 9 blamed the footprint on fine-graining.** It said *"the difference
-is that this one is chopped finer"* directly after the one-card/four-card
+is that this one is chopped finer"* directly after the one-card/eight-card
 frame, over an animation that divided the blocks — so the picture made smaller
 experts look like the cause of more GPUs. Three things differ between
 `gpt-oss-120b` and this model: **parameter count** (116.8B vs 321B), **shipped
@@ -88,9 +88,9 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 > **2.** *(we slide back to what §1 opened on)* Here's what that number is
 > actually telling you.
 >
-> **3.** *(a small work bar draws itself)* Per word, this thing does the
+> **3.** *(a small work bar draws itself)* Per token, this thing does the
 > thinking of a model about a twentieth of its size. That's real. That's why
-> it's quick, and why it's cheap to run per word. **That part is true.**
+> it's quick, and why it's cheap to run per token. **That part is true.**
 >
 > **4.** *(the whole model returns behind it, whole, and settles heavily)* But
 > all of it still has to be within reach. Because it never knows which part it
@@ -107,7 +107,7 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 > **7.** *(a second sheet slides in; chips stack under each)* And here's the part
 > I didn't expect. This model has about a hundred and twenty billion parameters,
 > and it fits on one chip. This one has three hundred and twenty, and needs
-> four.
+> eight.
 >
 > **8.** *(both sheets light their active share; the two shares match)* Both of
 > them use about five percent of themselves to answer you.
@@ -129,9 +129,10 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 
 ### Act 4 — the corollary nobody makes (beat 12) · **S-15**
 
-> **12.** *(the second sheet withdraws; a trend continues past the frame)* So the
-> better these models get at using less of themselves, the more of themselves
-> you have to keep within reach.
+> **12.** *(the second sheet withdraws; a trend continues past the frame)* So
+> the better these models get at using less of themselves at any one moment,
+> the more of themselves has to be sitting there anyway. And the number on the
+> box doesn't move.
 
 ### Act 5 — the thesis, once (beat 13) · **S-11**
 
@@ -140,9 +141,9 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 
 ### Act 6 — back to the two models (beats 14–15) · **S-10**
 
-> **14.** *(§1's opening frame, redrawn exactly — two sheets, one chip and four)*
+> **14.** *(§1's opening frame, redrawn exactly — two sheets, one chip and eight)*
 > Two models. Both about five percent active. One of them runs on a single card;
-> the other one needs four.
+> the other one needs eight.
 >
 > **15.** *(nothing moves)* Now you know why.
 
@@ -165,7 +166,7 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 | 11 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones; the fine one's lit share scatters across the whole sheet | two `Block`s, different grain; scattered lit cells | 128 vs 288 · smeared | S-04 |
 | 12 | the sheet | — | the second sheet withdraws; a trend line continues past the edge of frame | one sheet, trend | the direction of travel | S-15 |
 | 13 | the sheet | — | everything clears to a single line of handwriting | one line, alone | **compute, not memory** | S-11 |
-| 14 | the sheet | — | §1's opening frame redraws itself exactly: two sheets, one chip and four | two `Block`s + `MachineBox` ×1, ×4 | the ring closes | S-10 |
+| 14 | the sheet | — | §1's opening frame redraws itself exactly: two sheets, one chip and eight | two `Block`s + `Rig` ×1, ×8 | the ring closes | S-10 |
 | 15 | the sheet | — | nothing moves | the same frame, held | now you know why | S-10 |
 
 ### Board notes
@@ -221,6 +222,15 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 - **"One chip", not "one graphics card."** An 80 GB accelerator is not a gaming
   GPU, and the consumer figure exists only with offloading — which is §12's
   material.
+- **The scope of the granularity argument, stated once.** §12 concedes that no
+  expert-locality figure has been published at 288 experts and top-8 — every
+  one we cite is from eight-expert, top-2 models. So this section may say:
+  granularity spreads the active weight across the whole checkpoint rather than
+  leaving it in one place (geometry, not measurement), and the active-parameter
+  figure cannot tell you what machine you need (the thesis). It may **not** say
+  that fine-graining defeats caching, or present "harder to hold" as a measured
+  law. Beat 12 said the latter until 2026-09-11. If this note and the spoken
+  line ever disagree again, **the narrower one is right.**
 - **Never let fine-graining explain the footprint.** ~58 GiB against ~306 GiB
   is total parameters (116.8B vs 321B) and shipped precision (MXFP4 vs FP8).
   Granularity contributes essentially nothing to file size. v9's beat 9 said

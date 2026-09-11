@@ -156,7 +156,10 @@ export const BEATS: Beat<Patch>[] = [
     n: 10,
     id: 'keep-more-and-its-big',
     title: 'Dragged up: the box swells, the machine races, its frame grows huge',
-    relation: 'wall',
+    /* `and-yet`: the first end *fails*, but the failure only becomes a wall
+     * once the other end fails too, one beat later. Both marked `wall` read as
+     * two endings rather than one trap with two jaws. */
+    relation: 'and-yet',
     secs: 12,
     vo: 'Keep more, and it’s fast — but now you need a big machine again, which is the thing we were trying to avoid.',
     commands: [slider.drive(0.95), path.fetch(1), cache.fill(24), cache.hit(20)],

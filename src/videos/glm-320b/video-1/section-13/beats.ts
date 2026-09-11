@@ -27,7 +27,7 @@ import {
  * debunk is a worse video than an explanation.
  *
  * **Beats 9-10 are the carrying frames** and the *oh-now-I-see*: two blocks,
- * one coarse and one fine, with the fine one carrying four chips. The trend, as
+ * one coarse and one fine, with the fine one carrying eight chips. The trend, as
  * a picture, with no line of voice-over needed to explain it.
  *
  * No new mechanism appears anywhere in this section. Anything that needed
@@ -68,10 +68,10 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 16,
     /* The true half, conceded with no hedge. */
-    vo: 'Per word, this thing does the thinking of a model about a twentieth of its size. That’s real. That’s why it’s quick, and why it’s cheap to run per word. That part is true.',
+    vo: 'Per token, this thing does the thinking of a model about a twentieth of its size. That’s real. That’s why it’s quick, and why it’s cheap to run per token. That part is true.',
     commands: [
       block.off(),
-      share.show({ x: 50, y: 54 }, 0.86, { mode: 'bar', lit: 0.056, caption: 'the thinking it does per word' }),
+      share.show({ x: 50, y: 54 }, 0.86, { mode: 'bar', lit: 0.056, caption: 'the thinking it does per token' }),
       narrator.set({ pose: 'nod' }),
     ],
     lateOverlays: {
@@ -124,12 +124,12 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 7,
-    id: 'one-chip-or-four',
+    id: 'one-chip-or-eight',
     title: 'A second card slides in beside the first; chips stack under each',
     relation: 'and-yet',
     secs: 15,
-    vo: 'And here’s the part I didn’t expect. This model has about a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs four.',
-    /* Four chips, not a rack. A rack is an unquantified "lots"; four is the
+    vo: 'And here’s the part I didn’t expect. This model has about a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs eight.',
+    /* Eight chips, not a rack. A rack is an unquantified "lots"; eight is the
      * promise the video opened on. */
     commands: [
       share.off(),
@@ -138,7 +138,7 @@ export const BEATS: Beat<Patch>[] = [
        * the two cards it was supposed to have set up. */
       big.off(),
       cardA.show({ x: 28, y: 50 }, 1.1, { chips: OTHER_MODEL.chips, grain: 'coarse', note: 'fits on one chip' }),
-      cardB.show({ x: 72, y: 50 }, 1.1, { chips: THIS_MODEL.chips, grain: 'fine', note: 'needs four' }),
+      cardB.show({ x: 72, y: 50 }, 1.1, { chips: THIS_MODEL.chips, grain: 'fine', note: 'needs eight' }),
       narrator.set({ pose: 'wonder' }),
     ],
   },
@@ -197,11 +197,20 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 12,
     id: 'the-trend',
-    title: 'The second card withdraws; ours holds with its four chips',
+    title: 'The second card withdraws; ours holds with its eight chips',
     relation: 'therefore',
-    secs: 11,
+    secs: 15,
     /* The sentence the viewer repeats to someone else. */
-    vo: 'So the better these models get at using less of themselves, the more of themselves you have to keep within reach.',
+    /*
+     * **The corollary, and it must stay arithmetic.** A lower active share
+     * against a larger total means more inactive weight that still has to be
+     * reachable -- that is division, not a claim about caching. §12 has just
+     * conceded that nobody has measured expert locality at 288/top-8, so this
+     * beat may not turn round and present "harder to cache" as a proven law.
+     * It said "the more of themselves you have to keep within reach", which
+     * reads as exactly that law. `research/glm/OFFLOADING_AND_LOCALITY.md` §5.
+     */
+    vo: 'So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn’t move.',
     commands: [cardA.off(), cardB.moveTo({ x: 50, y: 48 }, 1.3), narrator.set({ pose: 'lean' })],
   },
   {
@@ -240,8 +249,8 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 14,
-    id: 'two-models-one-card-and-four',
-    title: '§1’s opening frame redraws itself exactly: two sheets, one chip and four',
+    id: 'two-models-one-card-and-eight',
+    title: '§1’s opening frame redraws itself exactly: two sheets, one chip and eight',
     relation: 'so',
     secs: 12,
     /*
@@ -250,7 +259,7 @@ export const BEATS: Beat<Patch>[] = [
      * similar picture; an exact match reads as a return, which is the only
      * version that pays off seventeen beats of setup.
      */
-    vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs four.',
+    vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs eight.',
     /*
      * §1's coordinates, exactly: blocks at 30/42 and 72/42 scale 0.5, rigs at
      * 30/73 and 72/73 with counts 1 and 4. If `section-01/scene.ts` moves,
@@ -268,7 +277,7 @@ export const BEATS: Beat<Patch>[] = [
       block.show({ x: 30, y: 42 }, 0.5, { grain: 'fine', lit: 'a', heavy: false }),
       block2.show({ x: 72, y: 42 }, 0.5, { lit: 'b' }),
       rigA.show({ x: 30, y: 73 }, 1, { count: 1 }),
-      rigB.show({ x: 72, y: 73 }, 1, { count: 4 }),
+      rigB.show({ x: 72, y: 73 }, 1, { count: 8 }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
     ],
     clearSticky: true,
@@ -276,7 +285,7 @@ export const BEATS: Beat<Patch>[] = [
       at: 3600,
       overlays: [
         note('one', 27, 82, { tone: 'measure', sticky: true }),
-        note('four', 69, 82, { tone: 'cost', sticky: true }),
+        note('eight', 69, 82, { tone: 'cost', sticky: true }),
       ],
     },
   },

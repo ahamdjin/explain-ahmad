@@ -52,7 +52,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 carried *both* "about twenty-six megabytes / about eight gigabytes" **and**
 "about twenty-five / eight and a half" — the measured line had been written one
 beat too low, leaving the superseded number in front of it and overwriting
-*"For one word."* entirely. Two different figures for the same quantity, four
+*"For one token."* entirely. Two different figures for the same quantity, four
 beats apart, in the section that is the video's answer.
 
 It survived because the agreement check only ran one way: it asked whether
@@ -98,18 +98,17 @@ belief.
 > twenty-five megabytes, at the precision this thing ships in. Three hundred and
 > thirty-six of them is about eight and a half gigabytes.
 >
-> **9.** *(the total holds, alone)* For one word.
+> **9.** *(the total holds, alone)* For one token.
 
 ### Act 4 — against milliseconds of work (beats 10–12) · **S-04**
 
 > **10.** *(a clock runs beside the total)* Off a fast drive — call it five
-> gigabytes a second — that's the better part of two seconds. For one word.
+> gigabytes a second — that's the better part of two seconds. For one token.
 >
-> **11.** *(two bars appear)* And the work those eight experts actually did?
-> Milliseconds.
+> **11.** *(two bars appear)* And the expert computation itself? Milliseconds.
 >
 > **12.** *(the bars, to scale)* There it is. **The fetching costs more than the
-> thinking.** Not a bit more — hundreds of times more.
+> thinking.** Not a bit more — about fifty times more.
 
 ### Act 5 — the answer (beat 13) · **S-14**
 
@@ -146,7 +145,7 @@ deliberately, in its own frame, and it has to be endorsed: *you're right*.
 | 9 | the plan | — | everything else clears; the total sits alone | the total | for one word | S-15 |
 | 10 | the plan | — | a clock runs beside the total and stops | `Clock` | ~2 s | S-04 |
 | 11 | the plan | — | two bars appear, one for fetching, one for the work | `CostBars`, work tiny | ms vs s | S-04 |
-| 12 | the plan | — | the bars redraw to true scale; the work bar nearly vanishes | `CostBars` to scale | hundreds of times | S-04 |
+| 12 | the plan | — | the bars redraw to true scale; the work bar nearly vanishes | `CostBars` to scale | about 50× | S-04 |
 | 13 | the plan | — | the bars hold; nothing else on screen | `CostBars` | the answer | S-14 |
 | 14 | the plan | — | a small cache shelf sketches itself in beside the bars | `ExpertCache`, outline | "keep some close" | S-08 |
 | 15 | the plan | — | the shelf finishes drawing and stays, empty | `ExpertCache`, empty | held open | S-08 |

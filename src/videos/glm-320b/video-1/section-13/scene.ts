@@ -46,7 +46,14 @@ import {
  * material and not this section's.
  */
 export const OTHER_MODEL = { total: '117B', active: '5.1B', experts: '128', chips: 1 }
-export const THIS_MODEL = { total: '321B', active: '18B', experts: '288', chips: 4 }
+/*
+ * `chips` is the accelerator count and it is **derived, not published**: ~306
+ * GiB is 328.6 GB, four 80 GB cards are 320 GB, and tensor-parallel size has
+ * to divide the 64 attention heads -- so the smallest workable count is eight,
+ * not four. Both this and §1 must say the same number; §1 reads `rigB.show(8)`.
+ * `research/glm/GROUND_TRUTH.md` §"How many GPUs".
+ */
+export const THIS_MODEL = { total: '321B', active: '18B', experts: '288', chips: 8 }
 
 export type SceneState = {
   /** `18`, alone, and then the two numbers as a measurement. */
@@ -94,7 +101,7 @@ export const INITIAL: SceneState = {
   diffs: { on: false, at: { x: 50, y: 18 }, scale: 0.52, lit: [0, 1, 2] },
   block2: { on: false, at: { x: 72, y: 42 }, scale: 0.5, lit: 'b' },
   rigA: { on: false, at: { x: 30, y: 73 }, scale: 1, count: 1 },
-  rigB: { on: false, at: { x: 72, y: 73 }, scale: 1, count: 4 },
+  rigB: { on: false, at: { x: 72, y: 73 }, scale: 1, count: 8 },
   verdict: {
     on: false,
     at: { x: 50, y: 48 },

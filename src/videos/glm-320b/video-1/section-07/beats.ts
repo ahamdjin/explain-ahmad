@@ -83,8 +83,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-same-two-things',
     title: 'On each floor it passes, three quick flashes fire in order',
     relation: 'so',
-    secs: 8,
-    vo: 'And every floor does the same two things. Look around. Pick experts. Do the work.',
+    secs: 13,
+    vo: 'And every floor does the same three things. Look around. Pick experts. Do the work. Well — nearly every floor. I’ll come back to that.',
     commands: [tower.climbTo(3), tower.flash('look')],
     /* In order, because the order is the argument. */
     stages: [

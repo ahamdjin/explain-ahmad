@@ -37,7 +37,8 @@
     "frames:export:reuse": "node scripts/export-frames.mjs --reuse",
     "check:strategy": "node scripts/check-strategy.mjs",
     "restamp": "node scripts/restamp.mjs",
-    "drift": "node scripts/drift.mjs"
+    "drift": "node scripts/drift.mjs",
+    "check:flow": "node scripts/check-flow.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

@@ -47,7 +47,7 @@ after the hook has landed.
 
 **3. It opened on the subject, not on a contradiction.** **S-01**: Trust opens
 *"During World War I, peace broke out."* — six words, contradiction complete,
-no topic named. Ours is now two models with the same headline number and four
+no topic named. Ours is now two models with the same headline number and eight
 times the hardware between them, which is also **S-15**, the only thing in this
 field nobody else is saying.
 
@@ -72,23 +72,24 @@ one and how good the evidence is; a `C` tier there means I inferred it.
 > **2.** *(one graphics card slides in under the left block)* This one runs on a
 > single graphics card.
 >
-> **3.** *(three more cards stack under the right block)* This one needs four.
+> **3.** *(seven more cards stack under the right block)* This one needs eight.
 
 No product names, no spec table, no "today we're talking about". The
 contradiction is complete and checkable at 0:13: gpt-oss-120b is ~58 GiB at
 MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not
-fit four. Table and sources: `STORY_SPINE.md` §1. Say **"about five percent"** —
+fit four — it needs **eight**. Table, working and sources:
+`research/glm/GROUND_TRUTH.md` §"How many GPUs". Say **"about five percent"** —
 4.4% and 5.6% are the same claim.
 
 ### Act 2 — the inversion and the promise (beats 4–6, 0:13–0:38) · **S-02**, **S-03**
 
-> **4.** *(the four cards stay. the phrase "only 5% active" writes itself > across >
+> **4.** *(the eight cards stay. the phrase "only 5% active" writes itself > across >
 > both blocks)* Everyone quotes that number to say these models are cheap now.
 > Both have it. Only one of them is.
 >
-> **5.** *(the two blocks hold, unequal)* Same five percent. Four times the machine.
+> **5.** *(the two blocks hold, unequal)* Same five percent. Eight times the machine.
 >
-> **6.** *(the right-hand block and its four cards slide away; one block left)* By
+> **6.** *(the right-hand block and its eight cards slide away; one block left)* By
 > the end of this you’ll know exactly what that number buys you — and what it
 > doesn’t. We’re going to follow one word all the way through.
 
@@ -113,7 +114,7 @@ inside it, and the earlier draft buried the payoff twenty words in, at about
 > learned while it was being trained. That’s what a parameter is.
 >
 > **9.** *(the marks resolve; about five percent of them go live)* And when a
-> word comes in, about five percent of them do something.
+> token comes in, about five percent of them do something.
 >
 > **10.** *(camera pushes in — the only move in the section)* Let's get closer.
 >
@@ -185,10 +186,10 @@ one thing now missing; §02 opens by banking exactly that. **S-14**.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the sheet | — | two model blocks arrive side by side, five percent live on each | two `Block`s, 5% lit | — | S-01 |
 | 2 | the sheet | — | one graphics card slides in under the left block | `MachineBox` ×1 | — | S-01 |
-| 3 | the sheet | — | three more cards stack under the right block | `MachineBox` ×4 | — | S-01 |
+| 3 | the sheet | — | seven more cards stack under the right block | `Rig` ×8 | — | S-01 |
 | 4 | the sheet | — | the quoted phrase writes itself across both blocks | handwritten note | **`only 5% active`** | S-02 |
 | 5 | the sheet | — | the blocks hold, visibly unequal underneath | both blocks, 1 vs 4 cards | — | S-02 |
-| 6 | the sheet | — | the right block and its four cards slide out of frame | one `Block` left | — | S-03 |
+| 6 | the sheet | — | the right block and its eight cards slide out of frame | one `Block` left | — | S-03 |
 | 7 | the sheet | — | the block settles alone, whole | `Block` solid | — | S-04 |
 | 8 | the sheet | — | it breaks into a field of separate marks | `Block` scattered | **`320,000,000,000`** | S-04 |
 | 9 | the sheet | — | the marks resolve and about five percent go live | `Block`, 5% lit | — | S-04 |
@@ -217,7 +218,7 @@ total here.** A hand-typed total is how this script came to claim 1:24 and
   what is underneath them. If the right-hand block ever gets its own moment,
   the section has become about two models instead of about one number.
 - **Beat 4's phrase is sticky and beats 2–3's counts are sticky.** Found by
-  rendering: without it, "one" left the screen as "four" arrived and the
+  rendering: without it, "one" left the screen as "eight" arrived and the
   contradiction never existed in a single frame. A comparison needs both halves
   visible at once or it is two facts in sequence.
 - **Beat 6 clears everything.** The second model and both rigs leave together,
@@ -258,8 +259,12 @@ total here.** A hand-typed total is how this script came to claim 1:24 and
   GLM-5.3-Flash is 5.6%. Saying *about five percent* makes one true sentence
   cover both, and the contradiction is honest at either precision.
   `storyboard/video-1/STORY_SPINE.md` §1.
-- **One card versus four is checkable**: ~58 GiB at MXFP4 fits one 80 GB
-  accelerator; ~306 GiB at FP8 does not fit four. Sources in the spine.
+- **One card versus eight is checkable, and was wrong until 2026-09-11.**
+  ~58 GiB at MXFP4 fits one 80 GB accelerator. ~306 GiB at FP8 is 328.6 GB and
+  does **not** fit four cards' 320 GB; tensor-parallel size must divide the 64
+  attention heads, so the smallest workable count is **eight**. This bullet
+  used to say "four" in the same breath as "does not fit four".
+  `research/glm/GROUND_TRUTH.md` §"How many GPUs".
 - **The two models are not named on screen.** Naming them invites "which is
   better", which is not the question. They are *two models*, and the difference
   between them is the only thing being claimed.
@@ -285,8 +290,9 @@ total here.** A hand-typed total is how this script came to claim 1:24 and
 - Beat 1: the two blocks must be the **same size** and read as the same kind of
   object. Their lit regions are deliberately **different patches** — the active
   part is not in the same place in both, and that is quietly true.
-- Beats 2–3: one card, then four. The four must not be a stack or a bigger box
-  — four separate objects, so the count is countable at a glance.
+- Beats 2–3: one card, then eight. The eight must not be a stack or a bigger
+  box — eight separate objects, so the count is countable at a glance. At eight
+  they may need two rows of four; they must still read as eight things.
 - Beat 5: the brace spans **both** blocks. `brace`'s x is its left edge.
 - Beat 12: nothing on screen but the 288 and the question.
 - Beat 15: the eight lit pieces and beat 9's live sliver are the same claim

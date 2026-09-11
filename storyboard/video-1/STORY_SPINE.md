@@ -88,7 +88,7 @@ its hook at 0:19, against research saying 30–40% of viewers are gone by 0:30
 Made in the first fifteen seconds, and it is the whole video:
 
 > **Two models. Both use about five percent of themselves to answer you. One
-> runs on a single graphics card. The other needs four.**
+> runs on a single graphics card. The other needs eight.**
 >
 > So the number everybody quotes — *"only 18 billion active"* — is not telling
 > you what you think it is.
@@ -101,11 +101,20 @@ Made in the first fifteen seconds, and it is the whole video:
 | Experts per sparse layer | 128 | **288** |
 | Routing | top-4 | **top-8** |
 | Footprint as shipped | ~58 GiB (MXFP4, 4.25 bit) | ~306 GiB (FP8) |
-| **Fits on** | **one 80 GB GPU** | **four** |
-| Squeezed to 4-bit | ~58 GiB | ~153 GiB — still two |
+| **Fits on** | **one 80 GB GPU** | **eight** |
+| Squeezed to 4-bit | ~58 GiB | ~153 GiB — still four |
 
 Sources: [gpt-oss model card](https://arxiv.org/pdf/2508.10925) ·
 [gpt-oss repo](https://github.com/openai/gpt-oss) · `research/glm/GROUND_TRUTH.md`
+
+**The card counts are derived, not published, and this table had them wrong.**
+It said *"four"* while §1's own board note said ~306 GiB *"does not fit four"* —
+and the note was right: 306 GiB is 328.6 GB against four cards' 320 GB. Five
+would be enough arithmetically but tensor-parallel size has to divide the 64
+attention heads, so the smallest workable size is **eight**. At 4-bit, 153 GiB
+is 164.3 GB, so *"still two"* was wrong too; it is **four**. The full working,
+and the rule never to restate a card count without dividing, is in
+`research/glm/GROUND_TRUTH.md`.
 
 The contradiction is honest at either precision, which is what makes it safe to
 open on. Say "about five percent" — 4.4 and 5.6 are the same claim.
@@ -115,16 +124,26 @@ open on. Say "about five percent" — 4.4 and 5.6 are the same claim.
 | | |
 | --- | --- |
 | **The want** | Everybody quotes *"320 billion parameters, only 18 billion active."* I want to know what that number actually buys — because two models with the same number need wildly different machines. |
-| **The wall** | Which experts are needed is decided from the word's *current* numbers, and those numbers change at every one of the 42 sparse layers. So the set is unknowable in advance and changes 42 times per word. And the trick that rescues this on other models — cache the ones that keep coming back — has almost nothing to grip when there are **288 experts per layer and 12,096 slots**. |
+| **The wall** | Which experts are needed is decided from the word's *current* numbers, and those numbers change at every one of the 42 sparse layers. So the set is unknowable in advance and changes 42 times per word. And the trick that rescues this on other models — cache the ones that keep coming back — is measured only where there are **eight** experts per layer, never where there are **288 per layer and 12,096 slots**. |
 | **The thesis** | **"Active parameters" is a compute number, not a memory number.** Sparse routing buys compute, not memory — and the finer you slice the experts, the more true that gets. |
 
 ### Why the thesis is worth eight minutes
 
 Fine-graining is not a mistake. More experts, smaller each, is *why* modern MoE
-models are good — better specialisation, better load balance. It is also
-precisely what defeats the caching trick that lets people run Mixtral on a
-laptop. **The better these models get at being sparse, the harder they get to
-hold.**
+models are good — better specialisation, better load balance. It also spreads
+the active weight across the whole checkpoint instead of leaving it in a corner
+you could keep nearby — which is the regime the caching trick that lets people
+run Mixtral on a laptop has never been measured in.
+
+**Scope, and it is narrow.** Every locality figure in
+`research/glm/OFFLOADING_AND_LOCALITY.md` comes from **eight**-expert, top-2
+models. There is no published measurement at 288 experts and top-8. So the
+spine may say that the trick is *unmeasured here* and that the box number
+cannot locate the operating point. It may **not** say that fine-graining
+"defeats" caching, that 12,096 slots leave it "almost nothing to grip", or that
+the difficulty is a proven law — this section said all three until 2026-09-11,
+while §12 had already been corrected to admit the opposite. **If this file and
+§12 disagree, §12 is right.**
 
 **Corrected 2026-09-11** — this used to end "Nobody has made that video."
 `research/COMPETITIVE_FIELD.md` checked the field properly, and that is only

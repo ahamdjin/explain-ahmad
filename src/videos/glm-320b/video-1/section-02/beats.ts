@@ -138,8 +138,17 @@ export const BEATS: Beat<Patch>[] = [
     id: 'these-are-tokens',
     title: 'The pieces settle into a row',
     relation: 'so',
-    secs: 7,
-    vo: 'These are called tokens. That’s all a token is. A chunk of text.',
+    secs: 12,
+    /*
+     * The last clause is what licenses the rest of the video's arithmetic.
+     * Every count -- 336, 2,688, ~8.5 GB, five percent -- is **per token**,
+     * and `GROUND_TRUTH.md` says so explicitly. The scripts used to say "per
+     * word" for those, three sections after teaching that a token is not a
+     * word. Saying the unit out loud once here is cheaper than hedging every
+     * figure later, and it lets the narration keep saying "word" about *this*
+     * sentence, where every token happens to be one.
+     */
+    vo: 'These are called tokens. That’s all a token is. A chunk of text. And from here on, whenever I count something, I’m counting tokens.',
     commands: [sentence.settle(), narrator.set({ pose: 'nod' })],
     overlays: [centred('8 tokens', 46, 66, { tone: 'measure', rotate: -2, sticky: true })],
   },

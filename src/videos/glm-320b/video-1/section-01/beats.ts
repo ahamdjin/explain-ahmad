@@ -24,7 +24,7 @@ import {
  *
  * **Script v10.** Every beat cites a strategy from `skills/STRATEGY_LEDGER.md`
  * -- see the Storyboard table in the script. The opening is a *comparison*,
- * not a number: two models with the same headline figure and four times the
+ * not a number: two models with the same headline figure and eight times the
  * hardware between them, which `research/COMPETITIVE_FIELD.md` shows is the
  * one opening nobody else in the field is using. Two of the three competing
  * videos open the way v8 did.
@@ -76,22 +76,28 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'This one runs on a single graphics card.',
     commands: [rigA.show(1), narrator.pose('offer')],
     /* Sticky, because beat 3 is the comparison and a comparison needs both
-     * halves on screen at once. Non-sticky, "one" vanished as "four" arrived
+     * halves on screen at once. Non-sticky, "one" vanished as "eight" arrived
      * and the contradiction never existed in a single frame. */
     overlays: [note('one', 27, 80, { tone: 'measure', sticky: true })],
   },
   {
     n: 3,
-    id: 'four-cards',
-    title: 'Four of them',
+    id: 'eight-cards',
+    title: 'Eight of them',
     relation: 'wall',
     secs: 3,
     /* The contradiction is complete here, at about 0:13. Checkable:
-     * gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card; GLM-5.3-Flash
-     * is ~306 GiB at FP8 and does not fit four. STORY_SPINE.md §1. */
-    vo: 'This one needs four.',
-    commands: [rigB.show(4), narrator.pose('count')],
-    overlays: [note('four', 69, 80, { tone: 'cost', sticky: true })],
+     * gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card. GLM-5.3-Flash
+     * is ~306 GiB = 328.6 GB at FP8, so it does *not* fit four cards' 320 GB,
+     * and tensor-parallel size has to divide the 64 attention heads -- five is
+     * enough arithmetically and impossible in practice. Eight.
+     *
+     * This said "four" for a long time, directly above a comment saying
+     * ~306 GiB does not fit four. Nobody did the division.
+     * `research/glm/GROUND_TRUTH.md` §"How many GPUs". */
+    vo: 'This one needs eight.',
+    commands: [rigB.show(8), narrator.pose('count')],
+    overlays: [note('eight', 69, 80, { tone: 'cost', sticky: true })],
   },
 
   /* ═══ ACT 2 · THE INVERSION AND THE PROMISE (S-02, S-03) ════════════════
@@ -114,7 +120,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Level above, unequal below',
     relation: 'and-yet',
     secs: 4,
-    vo: 'Same five percent. Four times the machine.',
+    vo: 'Same five percent. Eight times the machine.',
     commands: [narrator.pose('weigh')],
     /* The brace spans both blocks: left block starts at ~17%, right ends at
      * ~85%. `brace`'s x is the LEFT EDGE, not the centre. */
@@ -172,7 +178,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Five percent goes live',
     relation: 'so',
     secs: 7,
-    vo: 'And when a word comes in, about five percent of them do something.',
+    vo: 'And when a token comes in, about five percent of them do something.',
     commands: [block.pack(), block.light('a'), word.arrive({ x: 13, y: 47 }, 0.9, 'dog')],
   },
   {

@@ -68,7 +68,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'what-is-kept',
     title: 'The eight earlier markers hold in place; none of them move',
     relation: 'so',
-    secs: 9,
+    secs: 12,
     /*
      * This is decode, not prefill. v9 marched all nine markers back to the
      * base and replayed the climb for every one of them, and filed the KV
@@ -80,7 +80,7 @@ export const BEATS: Beat<Patch>[] = [
      * sends only the ninth up from the base in beat 5. Checked by rendering:
      * `node scripts/capture-frames.mjs --section=section-10`.
      */
-    vo: 'But the eight before it don’t climb again. Everything the model worked out about them is still sitting there, kept.',
+    vo: 'But the eight before it don’t climb again. The state it needs from those earlier tokens is kept. That’s the bit it doesn’t have to redo.',
     commands: [tower.set({ kept: TOKENS }), loop.show({ x: 74, y: 50 }, 0.9), loop.start()],
   },
   {
@@ -109,12 +109,12 @@ export const BEATS: Beat<Patch>[] = [
      * 10, here). It must look like the same number arriving again, so the
      * counter runs rather than appearing.
      */
-    vo: 'Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one word.',
+    vo: 'Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one token.',
     commands: [loop.show({ x: 74, y: 50 }, 0.9), loop.start(), loop.faster(0.3)],
     stages: [{ at: 2600, commands: [tower.climbTo(45)] }],
     lateOverlays: {
       at: 5200,
-      overlays: [note('336 — for one word', 58, 18, { size: 'md', tone: 'measure', rotate: -2 })],
+      overlays: [note('336 — for one token', 58, 18, { size: 'md', tone: 'measure', rotate: -2 })],
     },
   },
   {
@@ -155,15 +155,17 @@ export const BEATS: Beat<Patch>[] = [
     title: 'A counter beside each produced word ticks 336 per token',
     relation: 'so',
     secs: 11,
-    vo: 'Your eight words cost two thousand, six hundred and eighty-eight visits, once. Every single word it writes back costs another three hundred and thirty-six.',
+    vo: 'Your eight tokens cost two thousand, six hundred and eighty-eight visits, once. Every token it writes back costs another three hundred and thirty-six.',
     commands: [],
-    overlays: [centred('2,688 once\n+336 a word', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
+    overlays: [centred('2,688 once\n+336 a token', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
   },
   {
     n: 12,
     id: 'not-known-in-advance',
     title: 'The running total climbs and does not stop',
-    relation: 'wall',
+    /* `and-yet`, not `wall`. This is the complication that *earns* the wall on
+     * beat 13; two walls in a row is two landings, which is none. */
+    relation: 'and-yet',
     secs: 11,
     /*
      * Deposit five, and the one that makes §11 inevitable. The counter must

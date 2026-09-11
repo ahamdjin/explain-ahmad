@@ -119,7 +119,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 5,
     vo: 'So how much did we actually carry in?',
-    commands: [path.clear(), count.run(VISITS, 'experts carried in — one word')],
+    commands: [path.clear(), count.run(VISITS, 'experts carried in — one token')],
   },
   {
     n: 8,
@@ -139,7 +139,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The total lands and a label drops under it',
     relation: 'and-yet',
     secs: 5,
-    vo: 'For one word.',
+    vo: 'For one token.',
     commands: [
       count.off(),
       store.off(),
@@ -155,7 +155,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'A clock draws itself beside the 8 GB and runs',
     relation: 'wall',
     secs: 10,
-    vo: 'Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one word.',
+    vo: 'Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one token.',
     commands: [machine.off(), clock.show({ x: 74, y: 40 }, 1), clock.start()],
     overlays: [note('off a fast drive —\nroughly', 74, 62, { tone: 'cost', rotate: 3 })],
   },
@@ -165,7 +165,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'A second bar appears beside the first, almost invisible',
     relation: 'and-yet',
     secs: 8,
-    vo: 'And the work those eight experts actually did? Milliseconds.',
+    vo: 'And the expert computation itself? Milliseconds.',
     commands: [
       total.off(),
       clock.off(),
@@ -181,7 +181,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Both bars redraw to true scale, with the small one magnified',
     relation: 'therefore',
     secs: 11,
-    vo: 'There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more.',
+    vo: 'There it is. The fetching costs more than the thinking. Not a bit more — about fifty times more.',
     /* The most important frame in the video. To scale, and the enlargement of
      * the small bar is labelled on the frame. */
     commands: [bars.toScale()],
@@ -200,7 +200,7 @@ export const BEATS: Beat<Patch>[] = [
      * else in it. This is the answer to the question §1 asked. */
     vo: 'So, no. You can’t just store the part it uses. Not like that.',
     commands: [narrator.set({ pose: 'halt' })],
-    overlays: [centred(`~${GB_PER_WORD} GB a word — not like that`, 50, 88, { size: 'md', rotate: 1 })],
+    overlays: [centred(`~${GB_PER_WORD} GB a token — not like that`, 50, 88, { size: 'md', rotate: 1 })],
   },
   {
     n: 14,

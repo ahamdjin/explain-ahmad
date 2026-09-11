@@ -62,8 +62,8 @@ it picks again, and beat 8 shows one or two experts recurring without being
 >
 > **4.** The token doesn't get processed once. It climbs.
 >
-> **5.** And every floor does the same two things. Look around. Pick experts.
-> Do the work.
+> **5.** And every floor does the same three things. Look around. Pick
+> experts. Do the work. Well — nearly every floor. I'll come back to that.
 >
 ### Act 3 — the second bet (beats 6–7) · **S-05**
 
