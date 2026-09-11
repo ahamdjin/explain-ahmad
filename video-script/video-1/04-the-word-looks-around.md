@@ -34,53 +34,93 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 04`
 | Target | ~13 beats · ~1:30 |
 | Still forbidden | `layer` as a count |
 
+## What changed from v8
+
+**1. S-06 was cited on a beat that asked nothing.** v8's beat 2 — *"a token
+never stays on its own"* — is a statement, and calling it interpolated testing
+was a false citation. The question moved to beat 11, where it has a genuinely
+surprising answer: two rows that started *identical* end up nothing like each
+other. That is worth asking about; "is a word in a sentence" is not.
+
+**2. Attention was named twice, the first time too early.** v8 named it at beat
+9 — *"That's attention. That's the whole idea"* — and again at beat 13. Beat 9
+came before beats 10–12, which are the demonstration of why it matters, so the
+conclusion preceded its own evidence. The name now lands once, at beat 15,
+after the two `dog` rows have visibly diverged.
+
+**3. The backward-only rule had one line and no reason.** It is load-bearing —
+it is why §10's loop works the way it does — so beat 6 now says *why*: what is
+coming has not been decided yet.
+
+**4. The board said nine tokens.** Stale from before the tokenizer was
+measured. It is eight. `research/glm/TOKENIZER.md`.
+
 ## The script
 
 ### Act 1 — banking the fixed row (beat 1) · **S-14**
 
-> **1.** So the row is fixed — every "dog" starts out identical. Which can’t be
-> right, and it isn’t, for long.
->
-### Act 2 — a question before the mechanism (beat 2) · **S-06**
+> **1.** *(the three identical rows collapse back into one)* So the row is fixed
+> — every "dog" starts out identical. Which can't be right, and it isn't, for
+> long.
 
-> **2.** Because a token never stays on its own. It's sitting in a sentence.
->
-### Act 3 — the word reads the others (beats 3–12) · **S-04**
+### Act 2 — the word is not alone (beats 2–9) · **S-04**
 
-> **3.** *(the full sentence, all rows visible)* And before anything else
-> happens, every token gets to look at the others.
+> **2.** *(we pull back; the other tokens' rows are all there, in a line)*
+> Because a token never sits on its own. It's in a sentence — and so is
+> everything else.
 >
-> **4.** Here’s what looking means. Our token asks every other token one question:
-> how much do you matter to me?
+> **3.** *(our row lifts slightly out of the line)* And before anything else
+> happens, every one of them gets to look at the others.
+>
+> **4.** *(lines shoot from our row to every other row, all the same weight)*
+> Here's what looking means. Our word asks every other word one question. How
+> much do you matter to me?
 >
 > **5.** *(the lines thicken and thin)* Some matter a lot. Most barely matter at
 > all.
 >
-> **6.** And it can only look backwards — at the words already there. Not at
-> what's coming.
+> **6.** *(the lines running forward fade out and go)* And it can only look
+> backwards — at the words already there. Never at what's coming, because what's
+> coming hasn't been decided yet.
 >
-> **7.** Then it takes a bit of each one, in proportion, and mixes it into
-> itself.
+> **7.** *(material travels along the surviving lines into our row)* Then it
+> takes a bit of each one, in proportion, and mixes it into itself.
 >
-> **8.** *(the row visibly shifts)* And its row changes. Same token. New
-> numbers.
+> **8.** *(the row's values visibly change)* And its row changes. Same token.
+> New numbers.
 >
-> **9.** That's **attention**. That's the whole idea — every token adjusting
+> **9.** *(the same thing happening on every row at once)* And every word in the
+> sentence is doing that, at the same time, to itself.
+
+### Act 3 — the question (beats 10–11) · **S-06**
+
+> **10.** *(the sentence slides left; a second sentence assembles beside it)*
+> Now watch why that matters. "The dog barked." And "a hot dog."
+>
+> **11.** *(both `dog` rows lift out and align, still covered)* Same word both
+> times. Both of them started from the exact same row — the one we pulled out of
+> the table. How different do you reckon they end up?
+
+### Act 4 — the divergence (beats 12–14) · **S-04**
+
+> **12.** *(the rows uncover — clearly, obviously different)* Nothing like each
+> other.
+>
+> **13.** *(the row they started from ghosts in behind both, identical)* That's
+> what they both began as. Same row, both times.
+>
+> **14.** *(the ghost fades; the two rows hold apart)* So the numbers don't
+> belong to the word any more. They belong to **the word in this sentence**.
+
+### Act 5 — the name, and the wall (beats 15–16) · **S-12**, **S-14**
+
+> **15.** *(a handwritten label lands between the two rows)* That has a name.
+> It's called **attention**. And that's all attention is — every word adjusting
 > itself based on the company it's in.
 >
-> **10.** Now watch why that matters. "The dog barked." And "a hot dog."
->
-> **11.** *(both rows, clearly different)* Same word both times. Started as the
-> exact same row. Ended up nothing like each other.
->
-> **12.** So the numbers don't belong to the word any more. They belong to
-> **the word in this sentence**.
->
-### Act 4 — naming attention, after it has happened (beat 13) · **S-12**
-
-> **13.** And that’s attention. That’s all attention is. The row has changed — and it
-> changed because of this sentence. None of it could have been worked out
-> ahead of time.
+> **16.** *(the two rows hold apart; everything else recedes)* And that's
+> attention, done. The row has changed — and it changed because of this
+> sentence. None of it could have been worked out ahead of time.
 
 ## Storyboard
 
@@ -89,32 +129,45 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 04`
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the table | — | the three identical rows collapse back into one | `NumberRow` | the `dog` row | S-14 |
-| 2 | the first surface | **pull back** | we back off and the other tokens' rows are all there, in a line | `Sentence` + one row each | 9 tokens, 9 rows | S-06 |
+| 2 | the first surface | **pull back** | we back off and the other tokens' rows are all there, in a line | `Sentence` + one row each | 8 tokens, 8 rows | S-04 |
 | 3 | the first surface | — | our row lifts slightly out of the line | `Sentence`, `dog` raised | `dog` | S-04 |
-| 4 | the first surface | — | lines shoot from our row to every other row | `AttentionLines`, uniform | 8 lines | S-04 |
+| 4 | the first surface | — | lines shoot from our row to every other row, all the same weight | `AttentionLines`, uniform | 7 lines | S-04 |
 | 5 | the first surface | — | the lines thicken and thin — `ball` and `dropped` heavy, `the` almost nothing | `AttentionLines` weighted | weight by thickness | S-04 |
 | 6 | the first surface | — | the lines running *forward* to later tokens fade out and go | forward lines leaving | only backward lines remain | S-04 |
 | 7 | the first surface | — | material travels along the surviving lines into our row | flow along lines | the pull | S-04 |
 | 8 | the first surface | — | our row's values visibly change where the flow landed | `NumberRow` value change | before → after | S-04 |
-| 9 | the first surface | — | the lines withdraw; a label lands | `Note` | "attention" | S-04 |
+| 9 | the first surface | — | every other row does the same thing at once, briefly, then settles | all rows flickering | all of them, together | S-04 |
 | 10 | the first surface | — | the sentence slides left; a second sentence assembles beside it | two `Sentence`s | `the dog barked` / `a hot dog` | S-04 |
-| 11 | the first surface | — | both `dog` rows lift out and align — clearly different | two `NumberRow`s | two different rows | S-04 |
-| 12 | the first surface | — | the row they *started* from ghosts in behind both, identical | ghost row + two live | same start, two ends | S-04 |
-| 13 | the first surface | — | the ghost fades; the two rows hold apart | two rows | the divergence | S-12 |
+| 11 | the first surface | — | both `dog` rows lift out and align — still covered; nothing moves | two covered rows | **`how different?`** | S-06 |
+| 12 | the first surface | — | the covers come off; the two rows are obviously unalike | two `NumberRow`s | two different rows | S-04 |
+| 13 | the first surface | — | the row they *started* from ghosts in behind both, identical | ghost row + two live | same start, two ends | S-04 |
+| 14 | the first surface | — | the ghost fades; the two rows hold apart | two rows | the divergence | S-04 |
+| 15 | the first surface | — | a handwritten label lands between them | `Note` | **"attention"** | S-12 |
+| 16 | the first surface | — | everything but the two rows recedes | two rows, alone | the divergence, held | S-14 |
 
 ### Board notes
 
-- **One camera move**, at beat 2, and it does real work: it reveals that our
-  row was never alone. The whole section is that reveal.
-- Beat 6 is causal masking without the words. The forward lines **leave** —
-  they are not crossed out. Nothing in this video is crossed out.
-- **Beats 11–12 are the carrying frames.** Two different rows, with the
-  identical starting row ghosted behind them, on one frame. That single image
-  is the answer to §3's paradox.
-- Beat 5's weights are illustrative. Thickness only — no numbers on the lines,
-  or the frame claims a precision we do not have.
-- The two sentences are the video's one comparison example. They arrive here and
-  are reused by §5 beat 12.
+- **One camera move**, at beat 2, and it earns its place change: §3 ended on a
+  single row at the table, and this section needs the whole line of them.
+  Beats 3–16 are still.
+- **Beat 11 is the only covered frame in the video.** The two rows have to be
+  *present and unreadable* for the question to be a question. If the values are
+  visible, the viewer reads the answer instead of guessing it, and S-06 buys
+  nothing. `NCASE_4_MORE_DESIGN_PATTERNS.md` §2: the guess and the answer must
+  occupy the same space — so the covers come off in place at beat 12, and the
+  rows do not move between the two beats.
+- **Beat 6 removes the forward lines as an event**, not as an absence. A viewer
+  cannot notice a line that was never drawn, so beat 4 draws all of them and
+  beat 6 takes half away. The reason is spoken, because it is the constraint
+  §10's loop depends on.
+- **Beat 9 is cheap and load-bearing.** One flicker across every row, showing
+  that all of them do this at once. Without it, §8's correction — *there isn't
+  one token* — arrives as news rather than as something already glimpsed.
+- **The label lands at beat 15, once.** v8 named attention at beat 9 and again
+  at 13, and the first naming preceded the demonstration that earns it.
+- Beat 13's ghost row must be **visibly the same object** as §3's — same
+  drawing, same width — or *"same start"* is an assertion rather than a
+  recognition.
 
 ---
 
@@ -122,13 +175,16 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 04`
 
 | Beat | Job |
 | --- | --- |
-| 1 | **answer** — §3's problem, taken seriously in one line |
-| 2–3 | setup |
-| 4–8 | **teach** — attention, in five plain beats |
-| 9 | **teach** — the name, after the thing |
-| 10–11 | **turn** — the example. Nobody can misread it |
-| 12 | **therefore** — the sentence a viewer keeps |
-| 13 | **banked** — the first real deposit toward the ending |
+| 1 | **bank** — the row is identical every time, which cannot be right |
+| 2–3 | setup — the word is in a sentence, and so is everything else |
+| 4–5 | **teach** — looking means asking how much each other word matters |
+| 6 | **teach** — backwards only, and why |
+| 7–8 | **teach** — the mixing, and the row changing |
+| 9 | **teach** — all of them at once. The seed §8 spends |
+| 10–11 | **ask** — two identical starts. How far apart do they end? |
+| 12–14 | **teach** — nothing like each other, from the same beginning |
+| 15 | **name** — attention, after it has been watched working |
+| 16 | **the wall** — it changed because of *this* sentence |
 
 ## Truth notes
 
