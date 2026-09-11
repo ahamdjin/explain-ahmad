@@ -63,9 +63,31 @@ the rest can be authored to it.
 A beat that is *slightly* long is almost always better than one that is short.
 A viewer can wait; they cannot rewind a live watch.
 
+## Getting an actual file out — `npm run render`
+
+**`npm run record` produces silent video.** Playwright captures the page but
+not its audio, so the webm has no sound whether or not `VO` is wired into the
+section. That is a quiet trap: the browser plays the voice while it records,
+you hear it, and the file has nothing in it. Nothing in the repo said so and
+nothing joined the two halves back up, which is why this section exists.
+
+    npm run record              # silent video → output/recordings/*.webm
+    npm run render              # + public/vo/NN.mp3 → output/video/*.mp4
+    npm run render:join         # …and one output/video/video-1.mp4
+
+`render` muxes with `-shortest`, so a take ends at the shorter of picture and
+voice rather than freezing on a last frame or running out of picture. **If the
+two lengths differ by much, that is the signal to edit `secs`** -- see "Then fix
+the timing" above. A section with no voice track is still rendered, silent, and
+named in the output, because a missing take should be visible rather than
+skipped.
+
+Needs `ffmpeg` on the path. The join uses the concat demuxer and `-c copy`, so
+there is no second encode and no generation of loss.
+
 ## Looking at every frame at once
 
-`npm run frames:export` captures all 164 beats and writes them to
+`npm run frames:export` captures all 189 beats and writes them to
 **`~/Desktop/explain-ahmad-frames/`**, with one `index.html` covering the whole
 thing — every frame in order, each with its beat number, its title, the line
 said over it, and the timecode it starts at. One page, scrolled top to bottom,

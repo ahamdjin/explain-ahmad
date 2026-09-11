@@ -40,7 +40,9 @@
     "drift": "node scripts/drift.mjs",
     "check:flow": "node scripts/check-flow.mjs",
     "check:frames": "node scripts/check-flow.mjs",
-    "check:overlap": "node scripts/check-overlap.mjs"
+    "check:overlap": "node scripts/check-overlap.mjs",
+    "render": "node scripts/render.mjs",
+    "render:join": "node scripts/render.mjs --join"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",
