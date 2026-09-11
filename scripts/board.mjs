@@ -10,7 +10,7 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const ROOT = 'src/videos/glm-320b'
+const ROOT = 'src/videos/glm-320b/video-1'
 const SCRIPTS = await scriptIndex()
 /**
  * Which script belongs to which built section, derived rather than listed.
@@ -143,6 +143,16 @@ A(
 A('')
 A('⚑ the section\'s event · ❄ a frame that must read as a still')
 A('')
+
+/*
+ * A generator that finds nothing must fail. This wrote an empty BOARD.md and
+ * exited 0 after the sections moved under `video-1/`, which is worse than
+ * crashing: the gate went green and the board was gone.
+ */
+if (!dirs.length) {
+  console.error(`No sections found under ${ROOT}. Refusing to overwrite the board with nothing.`)
+  process.exit(1)
+}
 
 await writeFile('storyboard/video-1/BOARD.md', `${out.join('\n')}\n`, 'utf8')
 console.log(`storyboard/video-1/BOARD.md — ${dirs.length} sections, ${beatCount} beats, ${Math.floor(grand / 60)}:${String(Math.round(grand % 60)).padStart(2, '0')}`)

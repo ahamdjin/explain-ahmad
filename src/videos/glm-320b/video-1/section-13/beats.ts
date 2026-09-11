@@ -35,8 +35,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'eighteen-billion-active',
     title: 'The plan dissolves; `18` rises and holds alone',
     relation: 'want',
-    secs: 4,
-    vo: 'So. Eighteen billion active.',
+    secs: 8,
+    vo: 'Small, or fast. Not both. So — what did "five percent active" actually buy?',
     commands: [
       ground.at(GROUND_Y),
       big.show({ x: 50, y: 42 }, 1, { value: '18 billion', caption: 'active' }),
@@ -80,7 +80,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'all-of-it-in-reach',
     title: 'The block returns behind it, whole, and settles heavily',
     relation: 'wall',
-    secs: 11,
+    secs: 12,
     vo: 'But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it.',
     commands: [
       share.moveTo({ x: 50, y: 82 }, 0.6),
@@ -143,7 +143,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'about-five-percent-both',
     title: 'Both cards light their active share; the two shares match',
     relation: 'and-yet',
-    secs: 6,
+    secs: 7,
     vo: 'Both of them use about five percent of themselves to answer you.',
     commands: [cardA.set({ litShare: true }), cardB.set({ litShare: true })],
     overlays: [centred('about 5% — both of them', 50, 16, { size: 'md', tone: 'measure', rotate: -1 })],
@@ -177,7 +177,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-trend',
     title: 'The second card withdraws; ours holds with its four chips',
     relation: 'therefore',
-    secs: 10,
+    secs: 11,
     /* The sentence the viewer repeats to someone else. */
     vo: 'So the better these models get at using less of themselves, the more of them you have to keep lying around.',
     commands: [cardA.off(), cardB.moveTo({ x: 50, y: 48 }, 1.3), narrator.set({ pose: 'lean' })],
@@ -187,8 +187,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'cheap-to-run-not-small',
     title: 'Everything clears to one card',
     relation: 'therefore',
-    secs: 16,
-    vo: 'A three-hundred-and-twenty-billion-parameter model doing eighteen billion of work is still a three-hundred-and-twenty-billion-parameter model. It just isn’t a three-hundred-and-twenty-billion-parameter bill. And that’s the difference between something that’s cheap to run — and something that’s small.',
+    secs: 21,
+    vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs four. Now you know why. "Active parameters" is a compute number, not a memory number — and the finer you slice the experts, the wider that gap gets.',
     commands: [cardB.off(), verdict.show({ x: 50, y: 48 }, 1), narrator.off()],
   },
 ]

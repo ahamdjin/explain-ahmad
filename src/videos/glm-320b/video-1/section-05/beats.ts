@@ -33,8 +33,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'this-is-what-arrives',
     title: 'The changed row travels right and rests at the unlabelled desk',
     relation: 'want',
-    secs: 9,
-    vo: 'So: we’ve now got a row of numbers that’s specific to this sentence. This is what arrives here.',
+    secs: 14,
+    vo: 'So the row is specific to this sentence now. Which means something can finally read it — as it is — and choose. This is what arrives here.',
     commands: [
       ground.at(GROUND_Y),
       row.show({ x: 20, y: 40 }, 0.5),
@@ -51,7 +51,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'this-is-the-router',
     title: 'A small plaque lands on the desk',
     relation: 'so',
-    secs: 8,
+    secs: 9,
     vo: 'This is the router. It’s tiny compared to everything around it, and it has exactly one job.',
     commands: [desk.name(), desk.ring(), narrator.set({ pose: 'offer' })],
   },
@@ -60,7 +60,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'two-eighty-eight-in-front',
     title: 'We back off and the 288 fill the frame beyond the desk',
     relation: 'so',
-    secs: 5,
+    secs: 6,
     vo: 'In front of it: two hundred and eighty-eight experts.',
     commands: [
       /* Pull back. The router is tiny compared to what it is choosing from, and
@@ -95,7 +95,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'no-french-expert',
     title: 'It drops back; no labels appear on any of them',
     relation: 'wall',
-    secs: 13,
+    secs: 14,
     vo: 'Nobody assigned them subjects. There’s no French expert, no maths expert. They’re just two hundred and eighty-eight different blocks that came out of training different from each other.',
     /*
      * The most important frame in this section for not teaching a lie. The wall
@@ -114,7 +114,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'every-single-one',
     title: 'An empty score badge appears on all 288 at once',
     relation: 'so',
-    secs: 6,
+    secs: 7,
     vo: 'The router gives every single one of them a score. All 288.',
     commands: [hospital.ask()],
     overlays: [note('all of them', 14, 30, { tone: 'measure', rotate: -3, sticky: true })],
@@ -143,7 +143,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'eight-of-two-eighty-eight',
     title: 'A bracket draws around the eight and counts them against the wall',
     relation: 'and-yet',
-    secs: 8,
+    secs: 9,
     vo: 'Eight, out of two hundred and eighty-eight. The other two hundred and eighty do nothing at all.',
     commands: [count.show({ x: 15, y: 40 }, 1, { value: 8, label: 'of 288 did anything' })],
     overlays: [brace('288 — all of them scored', 24, 76, 56, { tone: 'measure', sticky: true })],
@@ -163,7 +163,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'look-what-the-scores-came-from',
     title: 'The row pulses; a line links it to the badges',
     relation: 'wall',
-    secs: 12,
+    secs: 13,
     vo: 'But look at what those scores were made from. These numbers. The ones that only existed a moment ago, because attention had just finished making them.',
     /* The section's whole argument in one image. */
     commands: [row.moveTo({ x: 15, y: 62 }, 0.4), row.pulse(), narrator.set({ pose: 'point' })],
@@ -177,7 +177,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'change-the-sentence',
     title: 'The second sentence swaps in; the row changes; the eight change',
     relation: 'therefore',
-    secs: 10,
+    secs: 12,
     vo: 'Change the sentence and the row changes. Change the row and the scores change. Change the scores and you get a different eight.',
     commands: [row2.show({ x: 15, y: 66 }, 0.34), hospital.remember(CHOSEN)],
     stages: [{ at: 2200, commands: [hospital.choose(OTHER)] }],
@@ -187,8 +187,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'could-not-have-been-earlier',
     title: 'The new eight hold; the old eight’s places stay marked',
     relation: 'and-yet',
-    secs: 10,
-    vo: 'And notice — that choice could not have been made any earlier than this. It needed the row to exist first.',
+    secs: 16,
+    vo: 'And that’s the router, done. Eight picked out of two hundred and eighty-eight — and that choice could not have been made any earlier than this. It needed the row to exist first.',
     /*
      * The vacated seats stay marked, because a new eight lighting up does not
      * read as *different* unless you can see where the old ones were. This is

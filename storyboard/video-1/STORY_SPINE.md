@@ -162,7 +162,7 @@ withheld from them.
 
 | # | Section | Teaches | Answers | → next | Adds to the answer |
 | --- | --- | --- | --- | --- | --- |
-| 1 | **What "18 billion active" means** | parameter, expert, active | a **different** 18B every word, chosen at the last moment | **therefore** watch it choose | the claim itself, stated plainly |
+| 1 | **What "five percent active" actually costs** | parameter, expert, active, Mixture of Experts | **about five percent runs — and that number does not predict the hardware** | **therefore** go and watch it choose | the contradiction: two models, same share, four times the machine |
 | 2 | **Your words become tokens** | token, token ID, vocabulary | your text is cut into pieces; each piece has a row number in a list of 154,880 | **but** a row number is a name, not a meaning | — |
 | 3 | **From an ID to a meaning** | embedding | the number is looked up in a huge table and comes back as a row of 4096 values | **but** that row is identical every time the word appears | the row is *fixed per token* — the first half of the paradox |
 | 4 | **The word looks around** | attention, context | each token reads the others and pulls in what matters, and its row **changes** | **therefore** the same word has different numbers in different sentences | **the numbers depend on the whole sentence** |

@@ -14,8 +14,8 @@
 
 ## The script
 
-> **1.** So every "dog" starts out identical. Which can't be right — and it
-> isn't, for long.
+> **1.** So the row is fixed — every "dog" starts out identical. Which can’t be
+> right, and it isn’t, for long.
 >
 > **2.** Because a token never stays on its own. It's sitting in a sentence.
 >
@@ -49,28 +49,29 @@
 > **12.** So the numbers don't belong to the word any more. They belong to
 > **the word in this sentence**.
 >
-> **13.** And notice — none of that could have been worked out ahead of time. It
-> depends entirely on what you typed.
+> **13.** And that’s attention. That’s all attention is. The row has changed — and it
+> changed because of this sentence. None of it could have been worked out
+> ahead of time.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the table | — | the three identical rows collapse back into one | `NumberRow` | the `dog` row |
-| 2 | the first surface | **pull back** | we back off and the other tokens' rows are all there, in a line | `Sentence` + one row each | 9 tokens, 9 rows |
-| 3 | the first surface | — | our row lifts slightly out of the line | `Sentence`, `dog` raised | `dog` |
-| 4 | the first surface | — | lines shoot from our row to every other row | `AttentionLines`, uniform | 8 lines |
-| 5 | the first surface | — | the lines thicken and thin — `ball` and `dropped` heavy, `the` almost nothing | `AttentionLines` weighted | weight by thickness |
-| 6 | the first surface | — | the lines running *forward* to later tokens fade out and go | forward lines leaving | only backward lines remain |
-| 7 | the first surface | — | material travels along the surviving lines into our row | flow along lines | the pull |
-| 8 | the first surface | — | our row's values visibly change where the flow landed | `NumberRow` value change | before → after |
-| 9 | the first surface | — | the lines withdraw; a label lands | `Note` | "attention" |
-| 10 | the first surface | — | the sentence slides left; a second sentence assembles beside it | two `Sentence`s | `the dog barked` / `a hot dog` |
-| 11 | the first surface | — | both `dog` rows lift out and align — clearly different | two `NumberRow`s | two different rows |
-| 12 | the first surface | — | the row they *started* from ghosts in behind both, identical | ghost row + two live | same start, two ends |
-| 13 | the first surface | — | the ghost fades; the two rows hold apart | two rows | the divergence |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the table | — | the three identical rows collapse back into one | `NumberRow` | the `dog` row | S-14 |
+| 2 | the first surface | **pull back** | we back off and the other tokens' rows are all there, in a line | `Sentence` + one row each | 9 tokens, 9 rows | S-06 |
+| 3 | the first surface | — | our row lifts slightly out of the line | `Sentence`, `dog` raised | `dog` | S-04 |
+| 4 | the first surface | — | lines shoot from our row to every other row | `AttentionLines`, uniform | 8 lines | S-04 |
+| 5 | the first surface | — | the lines thicken and thin — `ball` and `dropped` heavy, `the` almost nothing | `AttentionLines` weighted | weight by thickness | S-04 |
+| 6 | the first surface | — | the lines running *forward* to later tokens fade out and go | forward lines leaving | only backward lines remain | S-04 |
+| 7 | the first surface | — | material travels along the surviving lines into our row | flow along lines | the pull | S-04 |
+| 8 | the first surface | — | our row's values visibly change where the flow landed | `NumberRow` value change | before → after | S-04 |
+| 9 | the first surface | — | the lines withdraw; a label lands | `Note` | "attention" | S-04 |
+| 10 | the first surface | — | the sentence slides left; a second sentence assembles beside it | two `Sentence`s | `the dog barked` / `a hot dog` | S-04 |
+| 11 | the first surface | — | both `dog` rows lift out and align — clearly different | two `NumberRow`s | two different rows | S-04 |
+| 12 | the first surface | — | the row they *started* from ghosts in behind both, identical | ghost row + two live | same start, two ends | S-04 |
+| 13 | the first surface | — | the ghost fades; the two rows hold apart | two rows | the divergence | S-12 |
 
 ### Board notes
 

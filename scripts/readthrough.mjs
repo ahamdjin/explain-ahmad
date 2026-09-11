@@ -45,7 +45,7 @@ const suggest = (need) => Math.max(2.5, Math.round((need + 1.0) * 2) / 2)
  * cannot be transpiled and evaluated standalone.
  */
 async function builtSeconds() {
-  const root = 'src/videos/glm-320b'
+  const root = 'src/videos/glm-320b/video-1'
   const dirs = (await readdir(root, { withFileTypes: true }))
     .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name))
     .map((e) => e.name)

@@ -31,8 +31,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'starts-out-identical',
     title: 'The three identical rows collapse into one',
     relation: 'want',
-    secs: 8,
-    vo: 'So every "dog" starts out identical. Which can’t be right — and it isn’t, for long.',
+    secs: 10,
+    vo: 'So the row is fixed — every "dog" starts out identical. Which can’t be right, and it isn’t, for long.',
     commands: [
       ground.at(GROUND_Y),
       row.show({ x: 50, y: 44 }, 0.7),
@@ -44,7 +44,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'never-on-its-own',
     title: 'We back off; every token’s row is there, in a line',
     relation: 'so',
-    secs: 6,
+    secs: 7,
     vo: 'Because a token never stays on its own. It’s sitting in a sentence.',
     commands: [
       row.off(),
@@ -61,7 +61,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'every-token-looks',
     title: 'Our row lifts slightly out of the line',
     relation: 'so',
-    secs: 6,
+    secs: 7,
     vo: 'And before anything else happens, every token gets to look at the others.',
     commands: [line.raise(FOLLOWED)],
   },
@@ -70,7 +70,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'how-much-do-you-matter',
     title: 'Lines shoot from our row to every other row',
     relation: 'so',
-    secs: 9,
+    secs: 10,
     vo: 'Here’s what looking means. Our token asks every other token one question: how much do you matter to me?',
     commands: [line.ask()],
     lateOverlays: {
@@ -95,7 +95,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'only-backwards',
     title: 'The lines running forward fade out and go',
     relation: 'wall',
-    secs: 7,
+    secs: 9,
     vo: 'And it can only look backwards — at the words already there. Not at what’s coming.',
     commands: [line.mask()],
     clearSticky: true,
@@ -125,7 +125,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'thats-attention',
     title: 'The lines withdraw; a label lands',
     relation: 'so',
-    secs: 8,
+    secs: 9,
     vo: 'That’s attention. That’s the whole idea — every token adjusting itself based on the company it’s in.',
     commands: [line.withdraw(), line.raise(-1), narrator.set({ pose: 'nod' })],
     lateOverlays: {
@@ -172,8 +172,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'could-not-have-known',
     title: 'The ghost fades; the two rows hold apart',
     relation: 'and-yet',
-    secs: 10,
-    vo: 'And notice — none of that could have been worked out ahead of time. It depends entirely on what you typed.',
+    secs: 14,
+    vo: 'And that’s attention. That’s all attention is. The row has changed — and it changed because of this sentence. None of it could have been worked out ahead of time.',
     commands: [ghost.off(), narrator.set({ pose: 'think' })],
     /* Deposit one. Six of these, then §11 spends them. */
     lateOverlays: {

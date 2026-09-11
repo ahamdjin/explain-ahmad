@@ -39,8 +39,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'back-to-where-we-started',
     title: '`18` and `320` return and settle over the tower',
     relation: 'want',
-    secs: 6,
-    vo: 'Back to where we started. Eighteen billion out of three hundred and twenty.',
+    secs: 13,
+    vo: 'It re-chooses — every floor, every word, and it never stops. So: back to where we started. Could you just store the part it actually uses?',
     commands: [
       ground.at(GROUND_Y),
       tower.show({ x: 26, y: 48 }, 0.82),
@@ -53,7 +53,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'heres-the-plan',
     title: 'We slide across to the plan, assembling itself piece by piece',
     relation: 'so',
-    secs: 13,
+    secs: 14,
     vo: 'And here’s the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on.',
     /* Pan, to a place the viewer already knows. Drawn identically to §1. */
     commands: [
@@ -125,7 +125,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'three-thirty-six-times-twenty-six',
     title: '336 and 26 MB slide together; a total assembles',
     relation: 'so',
-    secs: 8,
+    secs: 9,
     vo: 'One expert is about twenty-six megabytes. Three hundred and thirty-six of them is about eight gigabytes.',
     commands: [count.hold()],
     overlays: [
@@ -194,9 +194,9 @@ export const BEATS: Beat<Patch>[] = [
     id: 'not-like-that',
     title: 'The bars hold; nothing else on screen',
     relation: 'therefore',
-    secs: 8,
+    secs: 15,
     /* "Not like that" is the hinge into §12 and is not optional. */
-    vo: 'So, no. You can’t just store the eighteen billion. Not like that.',
+    vo: 'So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next.',
     /* "So, no." A refusal, not agreement. */
     commands: [narrator.set({ pose: 'halt' })],
     overlays: [centred(`~${GB_PER_WORD} GB a word — not like that`, 50, 88, { size: 'md', rotate: 1 })],

@@ -17,8 +17,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'one-word-out-of-a-machine',
     title: 'The tower and the single word card hold, apart',
     relation: 'want',
-    secs: 8,
-    vo: 'So how do you get a paragraph out of a machine that produces one word?',
+    secs: 9,
+    vo: 'One word. So how do you get a paragraph out of a machine that produces one word?',
     commands: [
       ground.at(GROUND_Y),
       tower.show({ x: 28, y: 48 }, 0.82),
@@ -54,7 +54,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'from-the-beginning',
     title: 'All ten markers enter at the base together',
     relation: 'so',
-    secs: 5,
+    secs: 6,
     /* "From the beginning" is said about the **sentence**, not the work. The
      * KV cache is why that distinction matters, and it is the aside below. */
     vo: 'And the whole thing goes back in. From the beginning.',
@@ -122,7 +122,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'it-never-stops-choosing',
     title: 'The running total climbs and does not stop',
     relation: 'wall',
-    secs: 11,
+    secs: 12,
     vo: 'So it isn’t three hundred and thirty-six choices. It’s three hundred and thirty-six per token, per word it writes. It never stops choosing.',
     /* Deposit five, and the one that makes §11 inevitable. */
     commands: [loop.faster(1), narrator.set({ pose: 'push' })],
@@ -132,8 +132,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-question-we-started-with',
     title: 'Everything halts at once; the tower and the finished reply hold',
     relation: 'and-yet',
-    secs: 8,
-    vo: 'Which means we can finally ask the question we started with properly.',
+    secs: 9,
+    vo: 'So it never stops re-choosing. Which means we can finally ask the question we started with, properly.',
     /* Stop everything, then ask. The halt is what buys §11 its opening. */
     commands: [loop.halt(), tower.set({ markers: 0 }), narrator.set({ pose: 'think' })],
     clearSticky: true,

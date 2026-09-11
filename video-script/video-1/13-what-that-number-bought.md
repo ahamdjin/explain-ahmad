@@ -21,7 +21,7 @@ The answer is split, and the split is the whole video:
 
 ## The script
 
-> **1.** So. Eighteen billion active.
+> **1.** Small, or fast. Not both. So — what did "five percent active" actually buy?
 >
 > **2.** Here's what that number is actually telling you.
 >
@@ -53,30 +53,29 @@ The answer is split, and the split is the whole video:
 > **11.** So the better these models get at using less of themselves, the more
 > of them you have to keep lying around.
 >
-> **12.** A three-hundred-and-twenty-billion-parameter model doing eighteen
-> billion of work is still a three-hundred-and-twenty-billion-parameter model.
-> It just isn't a three-hundred-and-twenty-billion-parameter **bill**. And
-> that's the difference between something that's cheap to run — and something
-> that's small.
+> **12.** Two models. Both about five percent active. One of them runs on a single
+> card; the other one needs four. Now you know why. "Active parameters" is a
+> compute number, not a memory number — and the finer you slice the experts,
+> the wider that gap gets.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the plan | — | the plan dissolves; `18` rises and holds alone | `BigNumber` | `18B` |
-| 2 | the sheet | **pan** | we slide back to what §1 opened on: the number, and the block behind it | `BigNumber`, `Block` | `18 billion` over the block |
-| 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking |
-| 4 | the sheet | — | the block from §1 returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable |
-| 5 | the sheet | — | a label lands between the bar and the block | `Note` in `claim` orange | "efficient" |
-| 6 | the sheet | — | the bar and the block separate into two labelled halves | two columns | compute / memory |
-| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `ModelSheet`s, 1 chip vs 4 | 117B → 1 · 321B → 4 |
-| 8 | the sheet | — | both sheets light their active share; the two shares match | two lit patches | ~5% both |
-| 9 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones | two `Block`s, different grain | 128 vs 288 |
-| 10 | the sheet | — | the fine-grained one's chip stack grows while its pieces get smaller | grain vs chips | better · harder |
-| 11 | the sheet | — | the second sheet withdraws; ours holds with its four chips | one sheet, 4 chips | the trend |
-| 12 | the sheet | — | everything clears to one card | `VerdictCard` | **cheap to run ≠ small** |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the plan | — | the plan dissolves; `18` rises and holds alone | `BigNumber` | `18B` | S-14 |
+| 2 | the sheet | **pan** | we slide back to what §1 opened on: the number, and the block behind it | `BigNumber`, `Block` | `18 billion` over the block | S-04 |
+| 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking | S-04 |
+| 4 | the sheet | — | the block from §1 returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable | S-04 |
+| 5 | the sheet | — | a label lands between the bar and the block | `Note` in `claim` orange | "efficient" | S-04 |
+| 6 | the sheet | — | the bar and the block separate into two labelled halves | two columns | compute / memory | S-04 |
+| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `ModelSheet`s, 1 chip vs 4 | 117B → 1 · 321B → 4 | S-04 |
+| 8 | the sheet | — | both sheets light their active share; the two shares match | two lit patches | ~5% both | S-04 |
+| 9 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones | two `Block`s, different grain | 128 vs 288 | S-04 |
+| 10 | the sheet | — | the fine-grained one's chip stack grows while its pieces get smaller | grain vs chips | better · harder | S-15 |
+| 11 | the sheet | — | the second sheet withdraws; ours holds with its four chips | one sheet, 4 chips | the trend | S-11 |
+| 12 | the sheet | — | everything clears to one card | `VerdictCard` | **cheap to run ≠ small** | S-10 |
 
 ### Board notes
 

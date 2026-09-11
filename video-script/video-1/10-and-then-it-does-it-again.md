@@ -13,7 +13,8 @@
 
 ## The script
 
-> **1.** So how do you get a paragraph out of a machine that produces one word?
+> **1.** One word. So how do you get a paragraph out of a machine that produces one
+> word?
 >
 > **2.** You run it again.
 >
@@ -38,25 +39,26 @@
 > **10.** So it isn't three hundred and thirty-six choices. It's three hundred
 > and thirty-six **per token, per word it writes**. It never stops choosing.
 >
-> **11.** Which means we can finally ask the question we started with properly.
+> **11.** So it never stops re-choosing. Which means we can finally ask the question
+> we started with, properly.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | outside the tower | — | the tower and the single word card hold, apart | `Tower`, `WordCard` | one word |
-| 2 | outside the tower | — | the card flies back down to the base and joins the end of the sentence | card → `Sentence` | `…and it bounced` |
-| 3 | outside the tower | — | the sentence is now one token longer; a tenth marker appears | `Sentence` +1, 10 markers | 10 tokens |
-| 4 | outside the tower | — | all ten markers enter at the base together | `Tower`, 10 climbing | again |
-| 5 | outside the tower | — | the whole climb replays, faster | `Tower`, fast climb | 45 floors again |
-| 6 | outside the tower | — | another card drops out at the top | `WordCard` | the next word |
-| 7 | outside the tower | — | the cycle repeats, accelerating each time | `GenerateLoop` | again, and again |
-| 8 | outside the tower | — | the produced words accumulate as a line of text beside the tower | growing sentence | the reply, appearing |
-| 9 | outside the tower | — | a counter beside each produced word ticks 336 per token | `Counter`s | 336, per token, per word |
-| 10 | outside the tower | — | the running total climbs and does not stop | `Counter`, unbounded | it never stops |
-| 11 | outside the tower | — | everything halts at once; the tower and the finished reply hold | `Tower` + full reply | — |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | outside the tower | — | the tower and the single word card hold, apart | `Tower`, `WordCard` | one word | S-14 |
+| 2 | outside the tower | — | the card flies back down to the base and joins the end of the sentence | card → `Sentence` | `…and it bounced` | S-06 |
+| 3 | outside the tower | — | the sentence is now one token longer; a tenth marker appears | `Sentence` +1, 10 markers | 10 tokens | S-04 |
+| 4 | outside the tower | — | all ten markers enter at the base together | `Tower`, 10 climbing | again | S-04 |
+| 5 | outside the tower | — | the whole climb replays, faster | `Tower`, fast climb | 45 floors again | S-04 |
+| 6 | outside the tower | — | another card drops out at the top | `WordCard` | the next word | S-04 |
+| 7 | outside the tower | — | the cycle repeats, accelerating each time | `GenerateLoop` | again, and again | S-04 |
+| 8 | outside the tower | — | the produced words accumulate as a line of text beside the tower | growing sentence | the reply, appearing | S-04 |
+| 9 | outside the tower | — | a counter beside each produced word ticks 336 per token | `Counter`s | 336, per token, per word | S-04 |
+| 10 | outside the tower | — | the running total climbs and does not stop | `Counter`, unbounded | it never stops | S-04 |
+| 11 | outside the tower | — | everything halts at once; the tower and the finished reply hold | `Tower` + full reply | — | S-14 |
 
 ### Board notes
 

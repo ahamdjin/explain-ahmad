@@ -16,8 +16,8 @@ already knows it.
 
 ## The script
 
-> **1.** Except — people **do** run models like this on small machines. Right
-> now. And they're not lying about it.
+> **1.** So you can’t store only the active part. Except — people do run models like
+> this on small machines. Right now. And they’re not lying about it.
 >
 > **2.** So what are they doing that we just failed to do?
 >
@@ -52,29 +52,29 @@ already knows it.
 > **13.** There's no setting on that slider where it's both. That's the trade,
 > and on a model chopped this fine the exchange rate is brutal.
 >
-> **14.** So you **can** run it on less. It'll just be slow. That was never a
-> wall — it's a price.
+> **14.** So you can run it on less. It’ll just be slow. That was never a wall — it’s
+> a price.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the plan | — | the bars clear; a small machine slides in and runs, steadily, producing words | `SmallMachine` running | it works |
-| 2 | the plan | — | the machine keeps running while the numbers from §11 hang over it, unchanged | machine + 8 GB label | both true at once |
-| 3 | the plan | — | a box appears in the path between the drive and the machine | `ExpertCache`, empty | "cache" |
-| 4 | the plan | — | two words run through; a couple of the same blocks are used both times | two teams, overlap lit | some repeat |
-| 5 | the plan | — | those repeating blocks stay in the box instead of returning to the drive | `ExpertCache` filling | kept close |
-| 6 | the plan | — | the next word's fetches split: most come from the box, a few from the drive | short hops + long hops | hit / miss |
-| 7 | the plan | — | the machine speeds up; a small model tag appears on the box | machine faster, tag | 8 experts per floor |
-| 8 | the plan | — | a slider rises out of the floor under the box | `TradeSlider` | how much do you keep? |
-| 9 | the plan | — | the slider is dragged up: the box swells, the machine races, the machine's frame grows huge | slider high | fast, but big |
-| 10 | the plan | — | dragged down: the box shrinks, long hops multiply, the machine crawls | slider low | small, but slow |
-| 11 | the plan | — | the 288 wall and the 42 floors ghost in behind the box, dwarfing it | `Hospital` + `Tower` ghosted | 288 × 42 |
-| 12 | the plan | — | a count assembles from them and lands on the box | `Counter` | **12,096** slots |
-| 13 | the plan | — | the slider is dragged across its whole range; neither end ever shows both | slider sweeping | no good setting |
-| 14 | the plan | — | the slider settles mid-range; the machine runs, slowly, and keeps running | machine, slow, working | a price, not a wall |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the plan | — | the bars clear; a small machine slides in and runs, steadily, producing words | `SmallMachine` running | it works | S-14 |
+| 2 | the plan | — | the machine keeps running while the numbers from §11 hang over it, unchanged | machine + 8 GB label | both true at once | S-04 |
+| 3 | the plan | — | a box appears in the path between the drive and the machine | `ExpertCache`, empty | "cache" | S-04 |
+| 4 | the plan | — | two words run through; a couple of the same blocks are used both times | two teams, overlap lit | some repeat | S-04 |
+| 5 | the plan | — | those repeating blocks stay in the box instead of returning to the drive | `ExpertCache` filling | kept close | S-04 |
+| 6 | the plan | — | the next word's fetches split: most come from the box, a few from the drive | short hops + long hops | hit / miss | S-04 |
+| 7 | the plan | — | the machine speeds up; a small model tag appears on the box | machine faster, tag | 8 experts per floor | S-04 |
+| 8 | the plan | — | a slider rises out of the floor under the box | `TradeSlider` | how much do you keep? | S-04 |
+| 9 | the plan | — | the slider is dragged up: the box swells, the machine races, the machine's frame grows huge | slider high | fast, but big | S-15 |
+| 10 | the plan | — | dragged down: the box shrinks, long hops multiply, the machine crawls | slider low | small, but slow | S-15 |
+| 11 | the plan | — | the 288 wall and the 42 floors ghost in behind the box, dwarfing it | `Hospital` + `Tower` ghosted | 288 × 42 | S-09 |
+| 12 | the plan | — | a count assembles from them and lands on the box | `Counter` | **12,096** slots | S-09 |
+| 13 | the plan | — | the slider is dragged across its whole range; neither end ever shows both | slider sweeping | no good setting | S-15 |
+| 14 | the plan | — | the slider settles mid-range; the machine runs, slowly, and keeps running | machine, slow, working | a price, not a wall | S-14 |
 
 ### Board notes
 

@@ -20,8 +20,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'what-do-they-do',
     title: 'The eight lift forward; the 280 recede',
     relation: 'want',
-    secs: 5,
-    vo: 'Right. Eight experts picked. What do they actually do with it?',
+    secs: 9,
+    vo: 'Right — eight picked, out of two hundred and eighty-eight. What do they actually do with it?',
     commands: [
       ground.at(GROUND_Y),
       /*
@@ -41,7 +41,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'each-takes-the-row',
     title: 'The row copies eight times, one copy into each',
     relation: 'so',
-    secs: 6,
+    secs: 7,
     vo: 'Each one takes the row, and puts out a different row.',
     commands: [blend.copy(), narrator.set({ pose: 'point' })],
   },
@@ -60,7 +60,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'not-an-equal-say',
     title: 'Each output takes the size of its expert’s score',
     relation: 'so',
-    secs: 10,
+    secs: 11,
     vo: 'And they don’t get an equal say. The router already scored them, so the ones that scored higher count for more.',
     commands: [blend.weigh()],
     lateOverlays: {
@@ -91,7 +91,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'a-single-row',
     title: 'One row settles, the same length as the one that went in',
     relation: 'therefore',
-    secs: 8,
+    secs: 9,
     vo: 'And out comes a single row. Same length as the one that went in. Completely different numbers.',
     commands: [blend.done()],
     clearSticky: true,
@@ -133,12 +133,12 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-room-gets-edges',
     title: 'The room’s walls, floor and ceiling draw themselves in',
     relation: 'and-yet',
-    secs: 7,
+    secs: 11,
     /*
      * Nothing is said over this. The frame is the whole beat: the room becomes
      * a bounded thing, so that §7 can take it away and make it one floor.
      */
-    vo: 'Which raises the obvious question — how many steps are there?',
+    vo: 'And that’s one full step, done. Look around, choose, work. Which raises the obvious question — how many steps are there?',
     commands: [room.draw(), ground.at(GROUND_Y)],
     lateOverlays: {
       at: 3000,

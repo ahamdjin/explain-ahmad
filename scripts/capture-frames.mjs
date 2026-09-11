@@ -41,7 +41,7 @@ const OUT = path.resolve(args.get('out') ?? `frames/${SECTION}`)
  * imports the story verbs, so it cannot be transpiled and evaluated standalone.
  */
 async function loadFrameMeta() {
-  const source = await readFile(path.resolve(`src/videos/glm-320b/${SECTION}/beats.ts`), 'utf8')
+  const source = await readFile(path.resolve(`src/videos/glm-320b/video-1/${SECTION}/beats.ts`), 'utf8')
   const blocks = source.split(/\n {2}\{\n/).slice(1)
   const frames = []
 

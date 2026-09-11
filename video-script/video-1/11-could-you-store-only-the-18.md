@@ -26,8 +26,8 @@ arithmetic the viewer can follow, rather than a claim from authority.
 
 ## The script
 
-> **1.** Back to where we started. Eighteen billion out of three hundred and
-> twenty.
+> **1.** It re-chooses — every floor, every word, and it never stops. So: back to
+> where we started. Could you just store the part it actually uses?
 >
 > **2.** And here's the plan, stated honestly: keep the whole model on a drive.
 > When the router picks its eight, go and get those eight. Do the work. Move on.
@@ -58,27 +58,29 @@ arithmetic the viewer can follow, rather than a claim from authority.
 > **12.** *(the bars, to scale)* There it is. **The fetching costs more than the
 > thinking.** Not a bit more — hundreds of times more.
 >
-> **13.** So, no. You can't just store the eighteen billion. Not like that.
+> **13.** So, no. You can’t just store the eighteen billion. Not like that. Although —
+> if you’re sitting there thinking 'just keep the popular ones nearby', hold
+> that thought. You’re right. That’s next.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | outside the tower | — | the reply clears; `18` and `320` return and settle over the tower | `ModelSheet` over `Tower` | 18 / 320 |
-| 2 | the plan | **pan** | we slide across to the plan from §1, assembling itself piece by piece | `Store`, `FrontDesk`, `SmallMachine` | drive → router → eight → machine |
-| 3 | the plan | — | eight blocks fly from the drive into the machine; the work completes; a tick lands | `FetchPath` active | floor 1 — it works |
-| 4 | the plan | — | eight *different* blocks fly across | `FetchPath`, new eight | floor 2 |
-| 5 | the plan | — | eight more | `FetchPath` | floor 3 |
-| 6 | the plan | — | the flights speed up until the path is continuously full | `FetchPath` `congested` | 42 times, one token |
-| 7 | the plan | — | the flights stop; a counter lands | `Counter` | **336** |
-| 8 | the plan | — | 336 and 26 MB slide together; a total assembles | `Counter`, arithmetic | 336 × 26 MB |
-| 9 | the plan | — | the total lands and a label drops under it | `BigNumber`, `Note` | **~8 GB** — for one word |
-| 10 | the plan | — | a clock draws itself beside the 8 GB and runs | clock, `Counter` | **~1.5 s** |
-| 11 | the plan | — | a second bar appears beside the first, almost invisible | `CostBars`, work bar | milliseconds |
-| 12 | the plan | — | both bars redraw to true scale; the small one needs a magnified inset to be visible at all | `CostBars` to scale | fetch vs work |
-| 13 | the plan | — | the bars hold; nothing else on screen | `CostBars` | — |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | outside the tower | — | the reply clears; `18` and `320` return and settle over the tower | `ModelSheet` over `Tower` | 18 / 320 | S-14 |
+| 2 | the plan | **pan** | we slide across to the plan from §1, assembling itself piece by piece | `Store`, `FrontDesk`, `SmallMachine` | drive → router → eight → machine | S-04 |
+| 3 | the plan | — | eight blocks fly from the drive into the machine; the work completes; a tick lands | `FetchPath` active | floor 1 — it works | S-04 |
+| 4 | the plan | — | eight *different* blocks fly across | `FetchPath`, new eight | floor 2 | S-04 |
+| 5 | the plan | — | eight more | `FetchPath` | floor 3 | S-04 |
+| 6 | the plan | — | the flights speed up until the path is continuously full | `FetchPath` `congested` | 42 times, one token | S-04 |
+| 7 | the plan | — | the flights stop; a counter lands | `Counter` | **336** | S-04 |
+| 8 | the plan | — | 336 and 26 MB slide together; a total assembles | `Counter`, arithmetic | 336 × 26 MB | S-04 |
+| 9 | the plan | — | the total lands and a label drops under it | `BigNumber`, `Note` | **~8 GB** — for one word | S-15 |
+| 10 | the plan | — | a clock draws itself beside the 8 GB and runs | clock, `Counter` | **~1.5 s** | S-08 |
+| 11 | the plan | — | a second bar appears beside the first, almost invisible | `CostBars`, work bar | milliseconds | S-09 |
+| 12 | the plan | — | both bars redraw to true scale; the small one needs a magnified inset to be visible at all | `CostBars` to scale | fetch vs work | S-04 |
+| 13 | the plan | — | the bars hold, then a small cache shelf sketches itself in and stays | `CostBars` + `ExpertCache` ghost | — | S-08 |
 
 ### Board notes
 

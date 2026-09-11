@@ -12,7 +12,8 @@
 
 ## The script
 
-> **1.** At the top of the stack we've got a row for every token in your prompt.
+> **1.** So every token in your prompt pays its own three hundred and thirty-six, all
+> at once. At the top of the stack we’ve got a row for every one of them.
 >
 > **2.** But only one of them matters right now. The last one.
 >
@@ -34,24 +35,26 @@
 > **9.** All of that. Forty-five floors, three hundred and thirty-six experts
 > per token, every token in your prompt.
 >
-> **10.** And what comes out the other end is **one word**.
+> **10.** All of that. Forty-five floors, three hundred and thirty-six experts per
+> token, every token in your prompt. And what comes out the other end is one
+> word.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the top floor | **push in** | we rise to the top and arrive alongside the waiting markers | top of `Tower` | nine rows |
-| 2 | the top floor | — | each marker unfolds into its finished row, nine in a line | 9 `NumberRow`s | one per token |
-| 3 | the top floor | — | the first eight dim; only the last stays lit | 8 dim, 1 lit | the last one |
-| 4 | the top floor | — | the last row lifts clear of the others | one `NumberRow` | `it` |
-| 5 | the top floor | — | the vocabulary list from §2 rises again beside it | `Vocabulary` returning | 154,880 |
-| 6 | the top floor | — | a value spreads down the entire list, every entry getting one | scores across list | every token scored |
-| 7 | the top floor | — | the list reorders; a handful rise to the top | top candidates | `was` `is` `bounced` … |
-| 8 | the top floor | — | one entry is lifted out of the list | one entry | the pick |
-| 9 | the top floor | — | it becomes a word card and drops clear of the tower | `WordCard` | **`bounced`** |
-| 10 | outside the tower | **pull back** | we fall away until the whole tower and the single small card share the frame | `Tower` + one `WordCard` | all that → one word |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the top floor | **push in** | we rise to the top and arrive alongside the waiting markers | top of `Tower` | nine rows | S-14 |
+| 2 | the top floor | — | each marker unfolds into its finished row, nine in a line | 9 `NumberRow`s | one per token | S-04 |
+| 3 | the top floor | — | the first eight dim; only the last stays lit | 8 dim, 1 lit | the last one | S-04 |
+| 4 | the top floor | — | the last row lifts clear of the others | one `NumberRow` | `it` | S-04 |
+| 5 | the top floor | — | the vocabulary list from §2 rises again beside it | `Vocabulary` returning | 154,880 | S-04 |
+| 6 | the top floor | — | a value spreads down the entire list, every entry getting one | scores across list | every token scored | S-04 |
+| 7 | the top floor | — | the list reorders; a handful rise to the top | top candidates | `was` `is` `bounced` … | S-04 |
+| 8 | the top floor | — | one entry is lifted out of the list | one entry | the pick | S-04 |
+| 9 | the top floor | — | it becomes a word card and drops clear of the tower | `WordCard` | **`bounced`** | S-04 |
+| 10 | outside the tower | **pull back** | we fall away until the whole tower and the single small card share the frame | `Tower` + one `WordCard` | all that → one word | S-14 |
 
 ### Board notes
 

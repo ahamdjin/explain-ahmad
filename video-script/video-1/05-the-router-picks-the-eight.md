@@ -13,8 +13,8 @@
 
 ## The script
 
-> **1.** So: we've now got a row of numbers that's specific to this sentence.
-> This is what arrives here.
+> **1.** So the row is specific to this sentence now. Which means something can
+> finally read it — as it is — and choose. This is what arrives here.
 >
 > **2.** *(the desk, named at last)* This is the **router**. It's tiny compared
 > to everything around it, and it has exactly one job.
@@ -49,28 +49,29 @@
 > **12.** Change the sentence and the row changes. Change the row and the scores
 > change. Change the scores and you get a different eight.
 >
-> **13.** And notice — that choice could not have been made any earlier than
+> **13.** And that’s the router, done. Eight picked out of two hundred and
+> eighty-eight — and that choice could not have been made any earlier than
 > this. It needed the row to exist first.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the desk | **pan** | the changed row travels right and comes to rest at the unlabelled desk | `NumberRow`, `FrontDesk` | the post-attention row |
-| 2 | the desk | — | a small plaque lands on the desk | `FrontDesk` named | "router" |
-| 3 | the room | **pull back** | we back off and the 288 fill the frame beyond the desk | `Hospital`, 288 | 36 × 8 |
-| 4 | the room | — | one expert lifts out and opens: a row goes in, a different row comes out | one `Specialist`, enlarged | row in → row out |
-| 5 | the room | — | it drops back into the wall; no labels appear on any of them | `Hospital`, all plain | no names, anywhere |
-| 6 | the room | — | an empty score badge appears on all 288 at once | 288 badges | 288 |
-| 7 | the room | — | a sweep crosses the whole wall left to right, filling every badge as it passes | `Hospital` `scoring` | every one, not just the winners |
-| 8 | the room | — | the eight highest rise forward; the other 280 go flat | `Hospital` `lit` + `focus` | 8 |
-| 9 | the room | — | a bracket draws around the eight and counts them against the wall | `Brace`, `Counter` | 8 of 288 |
-| 10 | the room | — | a ninth, dashed and unscored, slides in beside the eight | shared `Specialist` | +1 always on |
-| 11 | the room | — | the row that produced the scores pulses; a line links it to the badges | `NumberRow` → badges | the dependency |
-| 12 | the room | — | the second sentence swaps in off to the side; the row changes; the eight change | two rows, two teams | `hot dog` → different eight |
-| 13 | the room | — | the new eight hold; the old eight's empty places stay marked | `was` markers | which ones moved |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the desk | **pan** | the changed row travels right and comes to rest at the unlabelled desk | `NumberRow`, `FrontDesk` | the post-attention row | S-14 |
+| 2 | the desk | — | a small plaque lands on the desk | `FrontDesk` named | "router" | S-13 |
+| 3 | the room | **pull back** | we back off and the 288 fill the frame beyond the desk | `Hospital`, 288 | 36 × 8 | S-13 |
+| 4 | the room | — | one expert lifts out and opens: a row goes in, a different row comes out | one `Specialist`, enlarged | row in → row out | S-04 |
+| 5 | the room | — | it drops back into the wall; no labels appear on any of them | `Hospital`, all plain | no names, anywhere | S-04 |
+| 6 | the room | — | an empty score badge appears on all 288 at once | 288 badges | 288 | S-04 |
+| 7 | the room | — | a sweep crosses the whole wall left to right, filling every badge as it passes | `Hospital` `scoring` | every one, not just the winners | S-04 |
+| 8 | the room | — | the eight highest rise forward; the other 280 go flat | `Hospital` `lit` + `focus` | 8 | S-04 |
+| 9 | the room | — | a bracket draws around the eight and counts them against the wall | `Brace`, `Counter` | 8 of 288 | S-04 |
+| 10 | the room | — | a ninth, dashed and unscored, slides in beside the eight | shared `Specialist` | +1 always on | S-04 |
+| 11 | the room | — | the row that produced the scores pulses; a line links it to the badges | `NumberRow` → badges | the dependency | S-04 |
+| 12 | the room | — | the second sentence swaps in off to the side; the row changes; the eight change | two rows, two teams | `hot dog` → different eight | S-04 |
+| 13 | the room | — | the new eight hold; the old eight's empty places stay marked | `was` markers | which ones moved | S-12 |
 
 ### Board notes
 

@@ -12,7 +12,8 @@
 
 ## The script
 
-> **1.** Right. Eight experts picked. What do they actually do with it?
+> **1.** Right — eight picked, out of two hundred and eighty-eight. What do they
+> actually do with it?
 >
 > **2.** *(the row copies into eight)* Each one takes the row, and puts out a
 > different row.
@@ -37,25 +38,26 @@
 >
 > **10.** And that is one step. Done. Finished.
 >
-> **11.** Which raises the obvious question — how many steps are there?
+> **11.** And that’s one full step, done. Look around, choose, work. Which raises the
+> obvious question — how many steps are there?
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the room | — | the eight lift forward out of the wall; the 280 recede into the background | 8 `Specialist`s forward | 8 |
-| 2 | the room | — | the row copies eight times, one copy travelling into each | 8 identical rows | same input |
-| 3 | the room | — | eight visibly different rows emerge on the far side | 8 different `NumberRow`s | 8 different outputs |
-| 4 | the room | — | each output takes on the size of its expert's score | 8 rows, weighted | bigger = higher score |
-| 5 | the room | — | the eight converge and merge into a single row, larger ones dominating | 8 → 1 `NumberRow` | the blend |
-| 6 | the room | — | the dashed shared expert's output joins the merge from the side | +1 joining | always on |
-| 7 | the room | — | one row settles, the same length as the one that went in | one `NumberRow` | one row out |
-| 8 | the room | — | the row that arrived ghosts in beside it for comparison | before + after | same length, new values |
-| 9 | the room | — | the ghost fades; a label lands on the survivor | `Note` | "thought about, once" |
-| 10 | the room | — | everything else clears; the row is alone in the room | one row, empty room | — |
-| 11 | the room | — | the room's walls, floor and ceiling draw themselves in around the row | the room, bounded | one step, done |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the room | — | the eight lift forward out of the wall; the 280 recede into the background | 8 `Specialist`s forward | 8 | S-14 |
+| 2 | the room | — | the row copies eight times, one copy travelling into each | 8 identical rows | same input | S-13 |
+| 3 | the room | — | eight visibly different rows emerge on the far side | 8 different `NumberRow`s | 8 different outputs | S-04 |
+| 4 | the room | — | each output takes on the size of its expert's score | 8 rows, weighted | bigger = higher score | S-04 |
+| 5 | the room | — | the eight converge and merge into a single row, larger ones dominating | 8 → 1 `NumberRow` | the blend | S-04 |
+| 6 | the room | — | the dashed shared expert's output joins the merge from the side | +1 joining | always on | S-04 |
+| 7 | the room | — | one row settles, the same length as the one that went in | one `NumberRow` | one row out | S-04 |
+| 8 | the room | — | the row that arrived ghosts in beside it for comparison | before + after | same length, new values | S-04 |
+| 9 | the room | — | the ghost fades; a label lands on the survivor | `Note` | "thought about, once" | S-04 |
+| 10 | the room | — | everything else clears; the row is alone in the room | one row, empty room | — | S-04 |
+| 11 | the room | — | the room's walls, floor and ceiling draw themselves in around the row | the room, bounded | one step, done | S-12 |
 
 ### Board notes
 

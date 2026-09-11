@@ -34,8 +34,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'that-thing-does',
     title: 'The desk holds; the 288 dim behind it',
     relation: 'want',
-    secs: 10,
-    vo: 'So — who picks the eight. That thing does. And to find out how, we have to follow something in.',
+    secs: 16,
+    vo: 'So — eight out of two hundred and eighty-eight, and something in there does the picking. To find out how it picks, we have to follow something in. Let’s send it a sentence.',
     commands: [
       ground.at(GROUND_Y),
       hospital.show({ x: 52, y: 46 }, 0.86, { staffed: true, dim: true }),
@@ -104,7 +104,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-first-thing',
     title: 'The card lands and settles',
     relation: 'so',
-    secs: 5,
+    secs: 6,
     vo: 'And this is the first thing that happens to it.',
     /* It lands, at full size, and the narrator comes back to it. */
     commands: [sentence.moveTo(SURFACE, 1), narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' })],
@@ -114,7 +114,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'it-gets-cut-up',
     title: 'The sentence fractures into uneven pieces, in place',
     relation: 'wall',
-    secs: 10,
+    secs: 11,
     vo: 'It gets cut up. Into pieces about the size of a word — sometimes a whole word, sometimes half of one.',
     commands: [sentence.fracture()],
     /* `dropp` + `ed` is the label's whole job. The voice says "sometimes half
@@ -154,7 +154,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'one-big-list',
     title: 'A tall list rises beside the row',
     relation: 'so',
-    secs: 6,
+    secs: 7,
     vo: 'And every token the model knows about lives in one big list.',
     commands: [vocab.show({ x: 84, y: 46 }, 1.5), narrator.set({ pose: 'point' })],
   },
@@ -163,7 +163,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'a-hundred-fifty-four-thousand',
     title: 'The list scrolls fast, decelerates, stops',
     relation: 'so',
-    secs: 7,
+    secs: 8,
     vo: 'This one has a hundred and fifty-four thousand, eight hundred and eighty entries in it.',
     commands: [vocab.scroll()],
     lateOverlays: {
@@ -176,7 +176,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'a-row-number',
     title: 'The `dog` piece flies to the list and returns with a number',
     relation: 'so',
-    secs: 11,
+    secs: 12,
     /*
      * Hedged on purpose. 4021 has not been measured from the real tokenizer,
      * and an unmeasured ID presented as fact is the one kind of error an
@@ -199,7 +199,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'thats-a-token-id',
     title: 'The letters fade off the card; the digits stay',
     relation: 'so',
-    secs: 7,
+    secs: 8,
     vo: 'That number is called a token ID. And it’s the only thing that carries on.',
     commands: [chip.becomes(), narrator.set({ pose: 'nod' })],
     overlays: [centred('token ID', 46, 84, { tone: 'measure', rotate: -3 })],
@@ -209,8 +209,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'no-meaning-in-it',
     title: 'The list withdraws; the number is alone in frame',
     relation: 'and-yet',
-    secs: 17,
-    vo: 'But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all.',
+    secs: 22,
+    vo: 'And that’s your sentence turned into numbers — that part’s done. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all.',
     /*
      * Nothing else may be on screen. The absence is the argument, and it is
      * the setup for §3 — so the sentence, the list and the narrator all go.

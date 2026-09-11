@@ -13,7 +13,8 @@
 
 ## The script
 
-> **1.** Forty-five.
+> **1.** That’s one step — look around, choose, work. Here’s how many steps there
+> are. Forty-five.
 >
 > **2.** *(the camera pulls back — the room becomes one floor)* That room we've
 > been standing in this whole time is one floor.
@@ -25,10 +26,11 @@
 > **5.** And every floor does the same two things. Look around. Pick experts.
 > Do the work.
 >
-> **6.** *(the row changing on each floor)* Which means the row arriving at
-> floor two is not the row that arrived at floor one.
+> **6.** *(the row changing on each floor)* So: same word, one floor up. Do you
+> reckon it picks the same eight?
 >
-> **7.** Different row. *(beat)* Different scores.
+> **7.** No. Because the row arriving at floor two is not the row that arrived at
+> floor one. Different row, different scores, different eight.
 >
 > **8.** *(a new eight lights, one floor up)* Different eight.
 >
@@ -43,28 +45,29 @@
 > **12.** *(the counter runs)* Which means this isn't eight expert visits for
 > this token. It's three hundred and thirty-six.
 >
-> **13.** Three hundred and thirty-six choices, for one token — and every single
-> one of them needed the floor below to finish before it could be made.
+> **13.** Three hundred and thirty-six choices, for one token — and every single one
+> of them needed the floor below to finish before it could be made. Nobody
+> quotes that number. It’s the one that matters.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the room | — | the room holds, bounded, with the row inside it | the room, one row | — |
-| 2 | the tower | **pull back** | we keep backing away and the room shrinks until it is one floor with others above and below | `Tower`, room highlighted | one floor |
-| 3 | the tower | — | floors continue stacking upward until the count draws itself | `Tower`, 45 floors | 45 |
-| 4 | the tower | — | a marker carrying the row starts climbing from floor one | `Tower` + climbing marker | the token |
-| 5 | the tower | — | on each floor it passes, three quick flashes fire in order | flashes per floor | look · pick · work |
-| 6 | the tower | — | the row is shown at floor one and floor two — different values | two `NumberRow`s | floor 1 vs floor 2 |
-| 7 | the tower | — | the two rows hold side by side | two rows | different |
-| 8 | the tower | — | floor two's eight light, in different positions from floor one's | two floors, two teams | different eight |
-| 9 | the tower | — | the climb resumes; every floor lights a different eight as it passes | `Tower` climbing | fresh each floor |
-| 10 | the tower | — | the bottom three floors redraw themselves plain, without expert walls | `Tower`, 3 dense marked | 3 dense · 42 sparse |
-| 11 | the tower | — | 42 and 8 slide together and a multiplication draws itself | `Counter`, `8 × 42` | 8 × 42 |
-| 12 | the tower | — | the counter runs up the tower floor by floor and stops | `Counter` running | **336** |
-| 13 | the tower | — | 336 holds while a single line traces the whole climb bottom to top | `Counter`, trace line | every one needed the one below |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the room | — | the room holds, bounded, with the row inside it | the room, one row | — | S-14 |
+| 2 | the tower | **pull back** | we keep backing away and the room shrinks until it is one floor with others above and below | `Tower`, room highlighted | one floor | S-04 |
+| 3 | the tower | — | floors continue stacking upward until the count draws itself | `Tower`, 45 floors | 45 | S-04 |
+| 4 | the tower | — | a marker carrying the row starts climbing from floor one | `Tower` + climbing marker | the token | S-04 |
+| 5 | the tower | — | on each floor it passes, three quick flashes fire in order | flashes per floor | look · pick · work | S-04 |
+| 6 | the tower | — | everything stops; the question holds on screen | floor 1 row, still | **`same eight?`** | S-05 |
+| 7 | the tower | — | the floor-two row appears beside it, visibly different | two `NumberRow`s | floor 1 vs floor 2 | S-05 |
+| 8 | the tower | — | floor two's eight light, in different positions from floor one's | two floors, two teams | different eight | S-04 |
+| 9 | the tower | — | the climb resumes; every floor lights a different eight as it passes | `Tower` climbing | fresh each floor | S-04 |
+| 10 | the tower | — | the bottom three floors redraw themselves plain, without expert walls | `Tower`, 3 dense marked | 3 dense · 42 sparse | S-04 |
+| 11 | the tower | — | 42 and 8 slide together and a multiplication draws itself | `Counter`, `8 × 42` | 8 × 42 | S-04 |
+| 12 | the tower | — | the counter runs up the tower floor by floor and stops | `Counter` running | **336** | S-04 |
+| 13 | the tower | — | 336 holds while a single line traces the whole climb bottom to top | `Counter`, trace line | every one needed the one below | S-15 |
 
 ### Board notes
 

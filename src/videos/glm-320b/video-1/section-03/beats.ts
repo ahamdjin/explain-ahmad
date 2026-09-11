@@ -33,8 +33,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'how-it-gets-meaning',
     title: '`4021` alone; a table edge rises into frame',
     relation: 'want',
-    secs: 6,
-    vo: 'Here’s how it gets meaning out of a row number.',
+    secs: 14,
+    vo: 'So every piece has a row number now — and a row number is only a name. A name has to turn into a meaning somewhere. Here’s where.',
     commands: [
       ground.at(GROUND_Y),
       chip.show({ x: 46, y: 46 }, 1, { becomes: true }),
@@ -49,7 +49,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-model-has-a-table',
     title: 'We back away; the table runs past the top of frame',
     relation: 'so',
-    secs: 10,
+    secs: 11,
     vo: 'The model has a table. One row for every token in that list — all hundred and fifty-four thousand of them.',
     commands: [
       table.moveTo({ x: 24, y: 50 }, 1),
@@ -70,7 +70,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'which-row-to-fetch',
     title: 'The number travels up the table to its own row',
     relation: 'so',
-    secs: 5,
+    secs: 6,
     vo: 'The ID is just which row to go and fetch.',
     commands: [table.seek(), chip.moveTo({ x: 34, y: 46 }, 0.6)],
   },
@@ -100,7 +100,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'called-an-embedding',
     title: 'The row holds; a label lands on it',
     relation: 'so',
-    secs: 9,
+    secs: 10,
     vo: 'This row is called an embedding. And it’s the first thing in the whole machine that actually means something.',
     commands: [dog.set({ extend: false }), dog.moveTo({ x: 64, y: 32 }, 0.58), narrator.set({ pose: 'nod' })],
     clearSticky: true,
@@ -184,8 +184,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'same-word-same-row',
     title: 'The same row is pulled twice more; all three are identical',
     relation: 'and-yet',
-    secs: 16,
-    vo: 'But here’s the thing to hold on to. This row is stored in a table. Which means it is exactly the same every single time the word "dog" turns up. Same word, same row, always.',
+    secs: 23,
+    vo: 'And that’s the lookup, done — the word is four thousand and ninety-six numbers now. But here’s the thing to hold on to. This row is stored in a table. Which means it is exactly the same every single time the word "dog" turns up. Same word, same row, always.',
     commands: [dog.moveTo({ x: 60, y: 30 }, 0.62), narrator.set({ pose: 'think' })],
     /* Three identical rows on one frame. Not hedged, because it is true — the
      * embedding table is a fixed lookup — and the paradox §4 resolves only

@@ -24,7 +24,7 @@ const current = [
  * the index can be read as an argument rather than as a table of contents.
  */
 const sections = [
-  { to: '/section-01', title: '01 — What "18 billion active" means', meta: 'a different 18 billion every word' },
+  { to: '/section-01', title: '01 — What “five percent active” actually costs', meta: 'two models, same five percent, four times the machine' },
   { to: '/section-02', title: '02 — Your words become tokens', meta: 'a row number is a name, not a meaning' },
   { to: '/section-03', title: '03 — From an ID to a meaning', meta: 'the row is fixed per token' },
   { to: '/section-04', title: '04 — The word looks around', meta: 'the numbers depend on the whole sentence' },

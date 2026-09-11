@@ -13,8 +13,8 @@
 
 ## The script
 
-> **1.** Now. I've been following one token this whole time, and I owe you a
-> correction.
+> **1.** Three hundred and thirty-six, for one token. Now — I’ve been following one
+> token this whole time, and I owe you a correction.
 >
 > **2.** *(the whole sentence enters at once)* It doesn't go in on its own. Your
 > entire prompt goes in together.
@@ -43,25 +43,26 @@
 > **10.** And every one of them decided on the spot, from numbers that didn't
 > exist until a moment before.
 >
-> **11.** So all of that happens. *(beat)* And what comes out?
+> **11.** So every token pays its own three hundred and thirty-six. All of that
+> happens. And what comes out?
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the tower | — | the single marker holds partway up | `Tower`, 1 marker | one token |
-| 2 | the tower | — | eight more markers appear at the base beside it, one per token | `Tower`, 9 markers | 9 tokens |
-| 3 | the tower | — | all nine climb together, side by side, floor by floor | `Tower`, 9 climbing | together |
-| 4 | the tower | — | lines appear between the markers on the floor they are all standing on | cross-marker lines | attention, between |
-| 5 | the tower | — | the lines redraw on each new floor as they climb | lines per floor | on every floor |
-| 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | "transformer" |
-| 7 | the tower | — | the plate settles; the climb continues behind it | plaque + climb | the shape, named |
-| 8 | the tower | — | a small counter appears above every marker | 9 `Counter`s | 336 each |
-| 9 | the tower | — | all nine counters run at once and a total assembles beneath them | 9 counters + total | 9 × 336 |
-| 10 | the tower | — | the total lands and holds | `Counter` | **3,024** |
-| 11 | the tower | — | the markers arrive at the top floor and stop dead | `Tower`, markers at top | all nine, waiting |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the tower | — | the single marker holds partway up | `Tower`, 1 marker | one token | S-14 |
+| 2 | the tower | — | eight more markers appear at the base beside it, one per token | `Tower`, 9 markers | 9 tokens | S-04 |
+| 3 | the tower | — | all nine climb together, side by side, floor by floor | `Tower`, 9 climbing | together | S-04 |
+| 4 | the tower | — | lines appear between the markers on the floor they are all standing on | cross-marker lines | attention, between | S-04 |
+| 5 | the tower | — | the lines redraw on each new floor as they climb | lines per floor | on every floor | S-04 |
+| 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | "transformer" | S-04 |
+| 7 | the tower | — | the plate settles; the climb continues behind it | plaque + climb | the shape, named | S-04 |
+| 8 | the tower | — | a small counter appears above every marker | 9 `Counter`s | 336 each | S-04 |
+| 9 | the tower | — | all nine counters run at once and a total assembles beneath them | 9 counters + total | 9 × 336 | S-04 |
+| 10 | the tower | — | the total lands and holds | `Counter` | **3,024** | S-04 |
+| 11 | the tower | — | the markers arrive at the top floor and stop dead | `Tower`, markers at top | all nine, waiting | S-14 |
 
 ### Board notes
 

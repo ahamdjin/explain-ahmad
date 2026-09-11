@@ -50,7 +50,7 @@ const Old07 = lazy(() => import('./glm-320b/superseded/section-07/Section07'))
 const Old08 = lazy(() => import('./glm-320b/superseded/section-08/Section08'))
 
 export const videoRoutes: VideoRouteDefinition[] = [
-  { slug: 'section-01', title: 'Section 01 — What "18 billion active" means', component: Section01 },
+  { slug: 'section-01', title: 'Section 01 — What “five percent active” actually costs', component: Section01 },
   { slug: 'section-02', title: 'Section 02 — Your words become tokens', component: Section02 },
   { slug: 'section-03', title: 'Section 03 — From an ID to a meaning', component: Section03 },
   { slug: 'section-04', title: 'Section 04 — The word looks around', component: Section04 },

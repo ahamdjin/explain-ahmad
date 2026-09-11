@@ -35,9 +35,9 @@ export const BEATS: Beat<Patch>[] = [
     id: 'people-do-run-these',
     title: 'The bars clear; a small machine slides in and runs, steadily',
     relation: 'wall',
-    secs: 9,
+    secs: 13,
     /* The concession, and it must be generous. It works before we qualify it. */
-    vo: 'Except — people do run models like this on small machines. Right now. And they’re not lying about it.',
+    vo: 'So you can’t store only the active part. Except — people do run models like this on small machines. Right now. And they’re not lying about it.',
     commands: [
       ground.at(GROUND_Y),
       machine.show({ x: 72, y: 54 }, 1),
@@ -51,7 +51,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'what-are-they-doing',
     title: 'The machine keeps running while §11’s numbers hang over it',
     relation: 'and-yet',
-    secs: 6,
+    secs: 7,
     vo: 'So what are they doing that we just failed to do?',
     /* Both true at once. That tension is the section. */
     commands: [hangover.show({ x: 72, y: 14 }, 1)],
@@ -85,7 +85,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'quite-often-the-same',
     title: 'The repeating blocks stay in the box instead of returning',
     relation: 'so',
-    secs: 7,
+    secs: 8,
     /*
      * "Quite often" and no number. Nobody has published an overlap figure for
      * 288 experts at top-8, so the frame shows a couple staying and claims
@@ -100,7 +100,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'only-fetch-the-misses',
     title: 'The next word’s fetches split: most from the box, a few from the drive',
     relation: 'so',
-    secs: 13,
+    secs: 14,
     vo: 'So you don’t fetch every time. You keep the ones that keep coming back in fast memory, and you only go to the drive for the ones you’re missing.',
     commands: [cache.fill(7), cache.hit(5), path.fetch(3)],
     overlays: [note('short hop = a hit\nlong hop = a miss', 22, 30, { tone: 'measure', rotate: -3 })],
@@ -110,7 +110,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'and-it-works',
     title: 'The machine speeds up; a model tag appears on the box',
     relation: 'hope',
-    secs: 10,
+    secs: 11,
     vo: 'And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need.',
     /* The tag is the load-bearing honesty: which regime that figure came from. */
     commands: [
@@ -134,7 +134,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'keep-more-and-its-big',
     title: 'Dragged up: the box swells, the machine races, its frame grows huge',
     relation: 'wall',
-    secs: 10,
+    secs: 12,
     vo: 'Keep more, and it’s fast — but now you need a big machine again, which is the thing we were trying to avoid.',
     commands: [slider.drive(0.95), path.fetch(1), cache.fill(24), cache.hit(20)],
     overlays: [note('fast. and enormous.', 72, 88, { tone: 'cost', rotate: 2 })],
@@ -154,7 +154,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'remember-what-were-choosing-from',
     title: 'The 288 wall and the 42 floors ghost in behind the box, dwarfing it',
     relation: 'and-yet',
-    secs: 8,
+    secs: 9,
     vo: 'And remember what we’re choosing from. Two hundred and eighty-eight experts, on each of forty-two floors.',
     commands: [
       wall.show({ x: 43, y: 36 }, 0.62),
@@ -178,7 +178,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'no-setting-where-its-both',
     title: 'The slider is dragged across its whole range; neither end shows both',
     relation: 'therefore',
-    secs: 11,
+    secs: 12,
     vo: 'There’s no setting on that slider where it’s both. That’s the trade, and on a model chopped this fine the exchange rate is brutal.',
     commands: [count.hold(), wall.off(), tower.off(), slider.drive(0.92)],
     clearSticky: true,

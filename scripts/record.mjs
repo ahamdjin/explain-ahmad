@@ -27,7 +27,7 @@ const OUT = path.resolve(args.get('out') ?? 'output/recordings')
 
 /** Runtime comes from the beats, so the recorder never guesses. */
 async function plannedSeconds() {
-  const root = 'src/videos/glm-320b'
+  const root = 'src/videos/glm-320b/video-1'
   const dirs = (await readdir(root, { withFileTypes: true }))
     .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name))
     .map((e) => e.name)

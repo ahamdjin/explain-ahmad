@@ -9,7 +9,7 @@ const args = new Map(process.argv.slice(2).map(arg => {
   return [key, value.join('=') || 'true']
 }))
 const base = args.get('url') ?? 'http://127.0.0.1:5174'
-const result = await build({ entryPoints: ['src/videos/glm-320b/gpt-section-01/beats.ts'], bundle: true, write: false, format: 'esm', platform: 'node' })
+const result = await build({ entryPoints: ['src/videos/glm-320b/superseded/gpt-section-01/beats.ts'], bundle: true, write: false, format: 'esm', platform: 'node' })
 const { BEATS, RUNTIME_SECONDS } = await import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString('base64')}`)
 const out = path.resolve('output/playwright/gpt-section-01')
 await mkdir(out, { recursive: true })

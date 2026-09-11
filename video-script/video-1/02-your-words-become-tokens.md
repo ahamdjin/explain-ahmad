@@ -20,8 +20,9 @@ model doesn't read that, not as letters"* — with nothing happening on it and n
 answer to *where am I*. Now the prompt physically goes in, the camera follows
 it, and the splitting happens in front of us. See `skills/SPATIAL_CONTINUITY.md`.
 
-> **1.** *(the desk from §1, still unlabelled)* So — who picks the eight. That
-> thing does. And to find out how, we have to follow something in.
+> **1.** *(the desk from §1, still unlabelled)* So — eight out of two hundred and
+> eighty-eight, and something in there does the picking. To find out how it
+> picks, we have to follow something in. Let’s send it a sentence.
 >
 > **2.** *(a prompt card slides in and stops at the entrance)* This is what you
 > typed.
@@ -54,29 +55,30 @@ it, and the splitting happens in front of us. See `skills/SPATIAL_CONTINUITY.md`
 > **11.** *(the word fades off the card, leaving only `4021`)* That number is
 > called a **token ID**. And it's the only thing that carries on.
 >
-> **12.** *(the number sits alone; the list slides away)* **But** think about
-> what that number actually is. It's a row number. Four thousand and twenty-one
-> doesn't mean *dog* — it means *the four thousand and twenty-first thing on our
-> list*. There's no meaning in it at all.
+> **12.** *(the number sits alone; the list slides away)* And that’s your sentence
+> turned into numbers — that part’s done. But think about what that number
+> actually is. It’s a row number. Four thousand and twenty-one doesn’t mean
+> dog — it means the four thousand and twenty-first thing on our list. There’s
+> no meaning in it at all.
 
 ---
 
 ## Storyboard
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | inside, one part | — | the desk holds; the 288 dim behind it | `FrontDesk` (unnamed), `Hospital` dim | — |
-| 2 | at the entrance | **pan** | a prompt card slides in from the left and stops | `Sentence` card, the doorway | **`The dog dropped the ball, and it`** |
-| 3 | the first surface | **follow** | the card passes through the doorway, camera travels with it | card moving, doorway passing | the same card |
-| 4 | the first surface | — | the card lands and settles | `Sentence` at rest | the same card |
-| 5 | the first surface | — | the sentence fractures into uneven pieces **in place** | `Sentence` → `split` state | `The` `dog` `dropp` `ed` `the` `ball` `,` `and` `it` |
-| 6 | the first surface | — | the pieces slide into an even row | `Sentence` `split`, spaced | 9 tokens |
-| 7 | the first surface | — | `understanding` drops in above, breaks into 3, leaves | one extra `WordCard` → 3 | `under` `stand` `ing` |
-| 8 | the first surface | — | a tall list rises from below beside the row | `Vocabulary` entering | the list |
-| 9 | the first surface | — | the list scrolls fast, decelerates, stops on a real entry | `Vocabulary` scrolling | `154,880` entries |
-| 10 | the first surface | — | the `dog` piece flies to the list, touches a row, returns with a number | `WordCard` dog → `Vocabulary` → back | **`dog` → `4021`** |
-| 11 | the first surface | — | the letters fade off the card; the digits stay | `WordCard` `becomes` state | `4021` |
-| 12 | the first surface | — | the list withdraws; the number is left alone in frame | `4021` only | `4021` |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | inside, one part | — | the desk holds; the 288 dim behind it | `FrontDesk` (unnamed), `Hospital` dim | — | S-14 |
+| 2 | at the entrance | **pan** | a prompt card slides in from the left and stops | `Sentence` card, the doorway | **`The dog dropped the ball, and it`** | S-04 |
+| 3 | the first surface | **follow** | the card passes through the doorway, camera travels with it | card moving, doorway passing | the same card | S-04 |
+| 4 | the first surface | — | the card lands and settles | `Sentence` at rest | the same card | S-04 |
+| 5 | the first surface | — | the sentence fractures into uneven pieces **in place** | `Sentence` → `split` state | `The` `dog` `dropp` `ed` `the` `ball` `,` `and` `it` | S-04 |
+| 6 | the first surface | — | the pieces slide into an even row | `Sentence` `split`, spaced | 9 tokens | S-04 |
+| 7 | the first surface | — | `understanding` drops in above, breaks into 3, leaves | one extra `WordCard` → 3 | `under` `stand` `ing` | S-04 |
+| 8 | the first surface | — | a tall list rises from below beside the row | `Vocabulary` entering | the list | S-04 |
+| 9 | the first surface | — | the list scrolls fast, decelerates, stops on a real entry | `Vocabulary` scrolling | `154,880` entries | S-04 |
+| 10 | the first surface | — | the `dog` piece flies to the list, touches a row, returns with a number | `WordCard` dog → `Vocabulary` → back | **`dog` → `4021`** | S-04 |
+| 11 | the first surface | — | the letters fade off the card; the digits stay | `WordCard` `becomes` state | `4021` | S-04 |
+| 12 | the first surface | — | the list withdraws; the number is left alone in frame | `4021` only | `4021` | S-14 |
 
 ### Board notes
 

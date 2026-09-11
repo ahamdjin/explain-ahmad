@@ -49,7 +49,11 @@ for (const file of files) {
   const cols = header[1].split('|').map((c) => c.trim().toLowerCase())
   const at = cols.findIndex((c) => c === 'strategy')
 
-  const rows = [...text.matchAll(/^\|\s*(\d+)\s*\|(.+)\|\s*$/gm)]
+  /* Only the storyboard block. Several scripts carry a second table further
+   * down -- a beat-purpose table -- whose rows also start with a number, and
+   * reading those was reporting beats as uncited that do not exist. */
+  const block = text.split('## Storyboard')[1]?.split(/\n#{2,3} /)[0] ?? ''
+  const rows = [...block.matchAll(/^\|\s*(\d+)\s*\|(.+)\|\s*$/gm)]
   if (!rows.length) {
     problems.push(`${file} — has a Strategy column but no numbered beat rows`)
     continue

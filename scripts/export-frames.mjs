@@ -29,7 +29,7 @@ for (const raw of process.argv.slice(2)) {
 /** Findable without being told where it is. */
 const DEFAULT_OUT = path.join(homedir(), 'Desktop', 'explain-ahmad-frames')
 const OUT = path.resolve((args.get('out') ?? DEFAULT_OUT).replace(/^~/, homedir()))
-const ROOT = 'src/videos/glm-320b'
+const ROOT = 'src/videos/glm-320b/video-1'
 const SKIP_CAPTURE = args.has('reuse')
 
 /** Section number -> its title, from the script's H1. */

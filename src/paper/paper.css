@@ -1413,3 +1413,13 @@
   opacity: 0.5;
 }
 
+
+/* §1's machine row: the cards a model has to fit on. Laid out here rather than
+   inline so the gap is one number, and so the row centres on its Slot anchor
+   the way every other actor does. */
+.s1-rig {
+  display: flex;
+  gap: 0.9cqw;
+  align-items: flex-end;
+  justify-content: center;
+}

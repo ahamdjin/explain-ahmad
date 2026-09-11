@@ -39,6 +39,19 @@ export type SceneState = {
     lifted: boolean
     heavy: boolean
   }
+  /**
+   * Beats 1–6. The second model, and the machines under both.
+   *
+   * The contradiction the section opens on is *comparative* — two models with
+   * the same headline number and four times the hardware between them — so it
+   * needs a second block. It is a separate actor rather than a second state of
+   * `block` because for six beats they are on screen together.
+   * `research/COMPETITIVE_FIELD.md`: no other video in the field shows two.
+   */
+  block2: { on: boolean; at: At; scale: number; scatter: boolean; lit?: PatchName; heavy: boolean }
+  /** The cards under a block. `count` is how many it takes to hold the model. */
+  rigA: { on: boolean; at: At; scale: number; count: number }
+  rigB: { on: boolean; at: At; scale: number; count: number }
   /** Beats 9–12. Three words, three different patches. Separate actors on
    *  purpose: the event is two of them on screen at once. */
   word: { on: boolean; at: At; scale: number; label: string }
@@ -78,6 +91,9 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   big: { on: false, at: { x: 50, y: 44 }, scale: 1, value: '320,000,000,000', caption: '' },
   block: { on: false, at: { x: 50, y: 47 }, scale: 1, scatter: true, lifted: false, heavy: false },
+  block2: { on: false, at: { x: 72, y: 42 }, scale: 0.5, scatter: false, heavy: false },
+  rigA: { on: false, at: { x: 30, y: 73 }, scale: 1, count: 1 },
+  rigB: { on: false, at: { x: 72, y: 73 }, scale: 1, count: 4 },
   word: { on: false, at: { x: 11, y: 47 }, scale: 0.9, label: 'dog' },
   word2: { on: false, at: { x: 11, y: 64 }, scale: 0.9, label: 'cat' },
   word3: { on: false, at: { x: 11, y: 81 }, scale: 0.9, label: 'it' },
@@ -110,6 +126,9 @@ export function applyPatches(base: SceneState, patches: Patch[]): SceneState {
   const next = {
     big: { ...base.big },
     block: { ...base.block },
+    block2: { ...base.block2 },
+    rigA: { ...base.rigA },
+    rigB: { ...base.rigB },
     word: { ...base.word },
     word2: { ...base.word2 },
     word3: { ...base.word3 },
@@ -166,6 +185,25 @@ export const block = {
   moveTo: (at: At, scale: number): Patch => ({ block: { at, scale } }),
   off: (): Patch => ({ block: { on: false } }),
 }
+
+/** The second model. Same verbs as `block`, minus the ones only §1's own
+ *  block needs -- it exists to be compared and then to leave. */
+export const block2 = {
+  arrive: (at: At, scale: number): Patch => ({ block2: { on: true, at, scale, scatter: false } }),
+  light: (lit?: PatchName): Patch => ({ block2: { lit } }),
+  moveTo: (at: At, scale: number): Patch => ({ block2: { at, scale } }),
+  off: (): Patch => ({ block2: { on: false } }),
+}
+
+const rigVerbs = <K extends 'rigA' | 'rigB'>(key: K) => ({
+  /** `count` cards slide in under a block. One card is one 80 GB accelerator. */
+  show: (count: number, at?: At, scale = 1): Patch =>
+    ({ [key]: { on: true, count, scale, ...(at ? { at } : {}) } }) as Patch,
+  off: (): Patch => ({ [key]: { on: false } }) as Patch,
+})
+
+export const rigA = rigVerbs('rigA')
+export const rigB = rigVerbs('rigB')
 
 const wordVerbs = <K extends 'word' | 'word2' | 'word3'>(key: K) => ({
   arrive: (at: At, scale = 0.9, label?: string): Patch =>

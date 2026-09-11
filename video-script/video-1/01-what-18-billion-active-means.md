@@ -178,24 +178,24 @@ one thing now missing; §02 opens by banking exactly that. **S-14**.
 
 ## Storyboard
 
-| # | Place | Event | Strategy | Relation | Secs |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the sheet | two models arrive, both 5% live | S-01 | want | 5 |
-| 2 | the sheet | one card under the left | S-01 | so | 4 |
-| 3 | the sheet | four cards under the right | S-01 | wall | 4 |
-| 4 | the sheet | the quoted number writes itself across both | S-02 | and-yet | 7 |
-| 5 | the sheet | the blocks hold, unequal | S-02 | and-yet | 4 |
-| 6 | the sheet | the second model leaves | S-03 | therefore | 6 |
-| 7 | the sheet | one block, whole | S-04 | so | 3 |
-| 8 | the sheet | it breaks into marks | S-04 | so | 7 |
-| 9 | the sheet | five percent goes live | S-04 | so | 5 |
-| 10 | inside | push in | S-04 | so | 3 |
-| 11 | inside | the 288 appear | S-04 | so | 6 |
-| 12 | inside | nothing moves — the viewer bets | S-05 | want | 5 |
-| 13 | inside | eight light up in place | S-05 | and-yet | 4 |
-| 14 | inside | the other 280 stay flat | S-05 | so | 5 |
-| 15 | inside | the eight line up with beat 9's sliver | S-14 | therefore | 5 |
-| 16 | inside | the arrangement is named | S-12 | so | 6 |
-| 17 | inside | everything recedes but the eight | S-14 | and-yet | 5 |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the sheet | — | two model blocks arrive side by side, five percent live on each | two `Block`s, 5% lit | — | S-01 |
+| 2 | the sheet | — | one graphics card slides in under the left block | `MachineBox` ×1 | — | S-01 |
+| 3 | the sheet | — | three more cards stack under the right block | `MachineBox` ×4 | — | S-01 |
+| 4 | the sheet | — | the quoted phrase writes itself across both blocks | handwritten note | **`only 5% active`** | S-02 |
+| 5 | the sheet | — | the blocks hold, visibly unequal underneath | both blocks, 1 vs 4 cards | — | S-02 |
+| 6 | the sheet | — | the right block and its four cards slide out of frame | one `Block` left | — | S-03 |
+| 7 | the sheet | — | the block settles alone, whole | `Block` solid | — | S-04 |
+| 8 | the sheet | — | it breaks into a field of separate marks | `Block` scattered | **`320,000,000,000`** | S-04 |
+| 9 | the sheet | — | the marks resolve and about five percent go live | `Block`, 5% lit | — | S-04 |
+| 10 | inside | **push in** | the camera moves in on the lit region | the block filling frame | — | S-04 |
+| 11 | inside | — | 288 separate pieces appear in rows | `Hospital` staffed | — | S-04 |
+| 12 | inside | — | everything stops; the question holds on screen | the 288, still | **`how many run?`** | S-05 |
+| 13 | inside | — | eight of them light, in place | `Hospital` lit ×8 | — | S-05 |
+| 14 | inside | — | the other 280 stay flat and grey | `Hospital` quiet | — | S-05 |
+| 15 | inside | — | the eight line up with beat 9's live sliver | brace between them | — | S-14 |
+| 16 | inside | — | the arrangement holds and takes its name | plaque | **`Mixture of Experts`** | S-12 |
+| 17 | inside, one part | **push in** | everything recedes but the eight | `Hospital` focus | — | S-14 |
 
 Total ≈ 1:24. Beat seconds are a 145-wpm floor; set them from the recording.

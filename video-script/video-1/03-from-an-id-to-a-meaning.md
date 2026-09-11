@@ -14,7 +14,8 @@
 
 ## The script
 
-> **1.** Here's how it gets meaning out of a row number.
+> **1.** So every piece has a row number now — and a row number is only a name. A
+> name has to turn into a meaning somewhere. Here’s where.
 >
 > **2.** *(a very tall table)* The model has a table. One row for every token
 > in that list — all hundred and fifty-four thousand of them.
@@ -47,29 +48,30 @@
 >
 > **12.** And that's what goes into the model. Not "dog". This.
 >
-> **13.** **But** here's the thing to hold on to. This row is stored in a table.
-> Which means it is *exactly the same* every single time the word "dog" turns
-> up. Same word, same row, always.
+> **13.** And that’s the lookup, done — the word is four thousand and ninety-six
+> numbers now. But here’s the thing to hold on to. This row is stored in a
+> table. Which means it is exactly the same every single time the word "dog"
+> turns up. Same word, same row, always.
 
 ## Storyboard
 
 `npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
 
-| beat | where | camera | what happens | on screen | example |
-| --- | --- | --- | --- | --- | --- |
-| 1 | the first surface | — | `4021` sits alone; the bottom edge of a huge table rises into frame | `4021`, a table edge | `4021` |
-| 2 | the table | **pull back** | we back away and the table's full height comes into view, rows running past the top of frame | `EmbeddingTable` | 154,880 rows |
-| 3 | the table | — | the number travels up the table and stops at its own row | `4021` moving | row 4021 |
-| 4 | the table | — | that row slides out of the table and comes forward | `EmbeddingTable`, row extracted | row 4021 |
-| 5 | the table | — | the extracted row extends sideways past both edges of frame | `NumberRow` extending | 4096 values |
-| 6 | the table | — | the row holds; a handwritten label lands on it | `NumberRow`, `Note` | "embedding" |
-| 7 | the table | — | two more rows slide out and stack under it | 3 `NumberRow`s | `dog`, `cat` |
-| 8 | the table | — | the `dog` and `cat` rows align; the values that nearly match light up | `NumberRow` `compare` | many matches |
-| 9 | the table | — | a third row slides out and aligns; almost nothing lights | 3 rows aligned | `Tuesday` |
-| 10 | the table | — | the three rows collapse into three points, spaced by how alike they are | rows → `Space` points | dog·cat close, Tuesday far |
-| 11 | the table | — | the points hold; a brace measures the two distances | points, `Brace` | the two gaps |
-| 12 | the table | — | the points unfold back into the `dog` row, alone | one `NumberRow` | row for `dog` |
-| 13 | the table | — | the same row is pulled from the table twice more; all three are identical | 3 identical rows | identical, every time |
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the first surface | — | `4021` sits alone; the bottom edge of a huge table rises into frame | `4021`, a table edge | `4021` | S-14 |
+| 2 | the table | **pull back** | we back away and the table's full height comes into view, rows running past the top of frame | `EmbeddingTable` | 154,880 rows | S-04 |
+| 3 | the table | — | the number travels up the table and stops at its own row | `4021` moving | row 4021 | S-04 |
+| 4 | the table | — | that row slides out of the table and comes forward | `EmbeddingTable`, row extracted | row 4021 | S-04 |
+| 5 | the table | — | the extracted row extends sideways past both edges of frame | `NumberRow` extending | 4096 values | S-04 |
+| 6 | the table | — | the row holds; a handwritten label lands on it | `NumberRow`, `Note` | "embedding" | S-04 |
+| 7 | the table | — | two more rows slide out and stack under it | 3 `NumberRow`s | `dog`, `cat` | S-04 |
+| 8 | the table | — | the `dog` and `cat` rows align; the values that nearly match light up | `NumberRow` `compare` | many matches | S-04 |
+| 9 | the table | — | a third row slides out and aligns; almost nothing lights | 3 rows aligned | `Tuesday` | S-04 |
+| 10 | the table | — | the three rows collapse into three points, spaced by how alike they are | rows → `Space` points | dog·cat close, Tuesday far | S-04 |
+| 11 | the table | — | the points hold; a brace measures the two distances | points, `Brace` | the two gaps | S-04 |
+| 12 | the table | — | the points unfold back into the `dog` row, alone | one `NumberRow` | row for `dog` | S-04 |
+| 13 | the table | — | the same row is pulled from the table twice more; all three are identical | 3 identical rows | identical, every time | S-14 |
 
 ### Board notes
 

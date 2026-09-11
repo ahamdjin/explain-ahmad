@@ -39,7 +39,7 @@ const FROM_SCRIPTS = args.has('scripts')
  * that silently describes the wrong thing is worse than one that is missing.
  */
 const { readdir: readDir } = await import('node:fs/promises')
-const SECTIONS = (await readDir('src/videos/glm-320b', { withFileTypes: true }))
+const SECTIONS = (await readDir('src/videos/glm-320b/video-1', { withFileTypes: true }))
   .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name))
   .map((e) => e.name.slice(-2))
   .sort()
@@ -109,7 +109,7 @@ if (FROM_SCRIPTS) {
   }
 } else {
   for (const n of SECTIONS) {
-    const source = await readFile(`src/videos/glm-320b/section-${n}/beats.ts`, 'utf8')
+    const source = await readFile(`src/videos/glm-320b/video-1/section-${n}/beats.ts`, 'utf8')
     for (const block of source.split(/\n {2}\{\n/).slice(1)) {
       const num = block.match(/^ {4}n: (\d+),/)
       if (!num) continue
