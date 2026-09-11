@@ -1,6 +1,6 @@
 # Section 06 — Forty-two floors
 
-> **Built.** 11 beats, 0:55. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 11 beats, 0:55. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-06` · in sequence: `/watch?section=6`
 
 ## Contract

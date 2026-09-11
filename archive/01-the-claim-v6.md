@@ -3,10 +3,10 @@
 Status: **SCRIPT v6.** Replaces `01-opening-narration.md`, whose closing
 question was its opening question.
 
-Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
-Numbers: `research/glm/GROUND_TRUTH.md` · Words: `storyboard/VOCABULARY_LEDGER.md`
+Spine: `storyboard/video-1/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
+Numbers: `research/glm/GROUND_TRUTH.md` · Words: `storyboard/video-1/VOCABULARY_LEDGER.md`
 
-> **Built.** 21 beats, 1:46. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 21 beats, 1:46. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-01` · in sequence: `/watch?section=1`
 
 ## Contract

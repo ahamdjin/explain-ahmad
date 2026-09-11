@@ -1,7 +1,7 @@
 /**
  * Section 06 scene -- forty-two floors.
  *
- * Script: video-script/06-forty-two-floors.md
+ * Script: video-script/video-1/06-forty-two-floors.md
  *
  * Everything so far has happened in one room, and the viewer has quietly
  * assumed that room *is* the model. The pull-back is the biggest single "oh"

@@ -1,0 +1,78 @@
+import { BigNumber, Block, Slot } from '../../../../paper'
+import { Hospital } from '../../../../paper/cast/Hospital'
+import { Narrator } from '../../../../paper/cast/Narrator'
+import { FrontDesk, WordCard } from '../../../../paper/cast/Props'
+import { type Feel } from '../../../../paper/motion'
+import { type SceneState } from './scene'
+
+/**
+ * Every actor is mounted here exactly once and stays mounted for the whole
+ * section. Beats only change the props it animates toward, so objects move and
+ * reconfigure instead of being destroyed and rebuilt.
+ *
+ * Nothing in this file may be wrapped in AnimatePresence keyed on the beat.
+ * That was the original mistake in this repo: it made every beat a slide
+ * replacement, and no amount of easing work makes a slideshow feel like one
+ * continuous world.
+ */
+export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
+  return (
+    <>
+      {scene.ground.on ? (
+        <div className="s1-ground" style={{ top: `${scene.ground.y}%` }} aria-hidden="true" />
+      ) : null}
+
+      <Slot on={scene.block.on} at={scene.block.at} scale={scene.block.scale} z={1} feel={feel}>
+        <Block
+          scatter={scene.block.scatter}
+          lit={scene.block.lit}
+          ghost={scene.block.ghost}
+          lifted={scene.block.lifted}
+          heavy={scene.block.heavy}
+        />
+      </Slot>
+
+      <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel}>
+        <Hospital
+          sign={scene.hospital.sign}
+          plaque={scene.hospital.plaque}
+          staffed={scene.hospital.staffed}
+          lit={scene.hospital.lit}
+          was={scene.hospital.was}
+          focus={scene.hospital.focus}
+          quiet={scene.hospital.quiet}
+          heavy={scene.hospital.heavy}
+          bunks={scene.hospital.bunks}
+          doorsOpen={scene.hospital.doorsOpen}
+        />
+      </Slot>
+
+      <Slot on={scene.big.on} at={scene.big.at} scale={scene.big.scale} z={4} feel={feel}>
+        <BigNumber value={scene.big.value} caption={scene.big.caption} />
+      </Slot>
+
+      <Slot on={scene.desk.on} at={scene.desk.at} scale={scene.desk.scale} z={4} feel={feel}>
+        <FrontDesk named={scene.desk.named} ringed={scene.desk.ringed} />
+      </Slot>
+
+      <Slot on={scene.word.on} at={scene.word.at} scale={scene.word.scale} z={5} feel={feel}>
+        <WordCard label={scene.word.label} />
+      </Slot>
+      <Slot on={scene.word2.on} at={scene.word2.at} scale={scene.word2.scale} z={5} feel={feel}>
+        <WordCard label={scene.word2.label} />
+      </Slot>
+      <Slot on={scene.word3.on} at={scene.word3.at} scale={scene.word3.scale} z={5} feel={feel}>
+        <WordCard label={scene.word3.label} />
+      </Slot>
+
+      <Slot on={scene.narrator.on} at={scene.narrator.at} z={7} feel={feel}>
+        <Narrator
+          pose={scene.narrator.pose}
+          style={scene.narrator.style}
+          flip={scene.narrator.flip}
+          scale={scene.narrator.scale}
+        />
+      </Slot>
+    </>
+  )
+}

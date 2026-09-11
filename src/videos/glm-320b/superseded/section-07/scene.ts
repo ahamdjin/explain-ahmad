@@ -1,7 +1,7 @@
 /**
  * Section 07 scene -- the answer.
  *
- * Script: video-script/07-the-answer.md
+ * Script: video-script/video-1/07-the-answer.md
  *
  * The section 1 plan is rebuilt here deliberately, frame for frame, and then
  * *run*. It works for the first fetch and fails on the repeat. Letting the hope

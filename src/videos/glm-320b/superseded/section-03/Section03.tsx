@@ -12,7 +12,7 @@ const VO: string | undefined = undefined
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 03. Script: video-script/03-the-word-becomes-numbers.md */
+/** Section 03. Script: video-script/video-1/03-the-word-becomes-numbers.md */
 export default function Section03({
   onFinish,
   autoplay,

@@ -13,7 +13,7 @@ import './section-02.css'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 02 -- follow one word in. Script: video-script/02-follow-one-word.md */
+/** Section 02 -- follow one word in. Script: video-script/video-1/02-follow-one-word.md */
 export default function Section02({
   onFinish,
   autoplay,

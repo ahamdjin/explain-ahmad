@@ -37,14 +37,14 @@ function boardRows(markdown) {
   return rows
 }
 
-const files = (await readdir('video-script')).filter((f) => /^\d\d-.+\.md$/.test(f)).sort()
+const files = (await readdir('video-script/video-1')).filter((f) => /^\d\d-.+\.md$/.test(f)).sort()
 const problems = []
 const journey = []
 let checked = 0
 let boarded = 0
 
 for (const file of files) {
-  const md = await readFile(`video-script/${file}`, 'utf8')
+  const md = await readFile(`video-script/video-1/${file}`, 'utf8')
   const beats = beatNumbers(md)
   if (!beats.length) continue
   checked += 1

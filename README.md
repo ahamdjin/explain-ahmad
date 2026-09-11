@@ -6,8 +6,8 @@ Interactive explainer project. The current video is about **why GLM-5.3-Flash ca
 
 Use these files in this order:
 
-1. `video-script/01-opening-narration.md` — **current spoken script**. Only the opening is written here so far.
-2. `storyboard/SECTION_MAP.md` — **authoritative current story / section structure**.
+1. `video-script/video-1/01-opening-narration.md` — **current spoken script**. Only the opening is written here so far.
+2. `storyboard/video-1/SECTION_MAP.md` — **authoritative current story / section structure**.
 3. `research/glm/GLM_V7_ATTENTION_MOE_RESEARCH.md` — **current GLM technical reference**.
 4. `research/ncase/NCASE_STUDY_INDEX.md` — entry point for teaching / Nicky Case research.
 5. `art-direction/GLM_PAPER_WORLD.md` — current visual language.
@@ -19,7 +19,7 @@ Use these files in this order:
 
 The active route is:
 
-`src/videos/glm-320b/v9/Glm320bProductionV9.tsx`
+`src/videos/glm-320b/superseded/v9/Glm320bProductionV9.tsx`
 
 Earlier loose V1–V8 GLM implementations and stylesheets have been removed from the working tree. Git history preserves them if needed.
 
@@ -218,7 +218,7 @@ npm run dev
 | `npm run check` | typecheck, then the story-chain gates |
 | `npm run check:chain` | every section's links meet, and none is circular |
 | `npm run smoke` | open all 19 routes, fail on any error |
-| `npm run board` | regenerate `storyboard/BOARD.md` from the beats |
+| `npm run board` | regenerate `storyboard/video-1/BOARD.md` from the beats |
 | `npm run palette` | regenerate the CSS custom properties from `palette.ts` |
 | `npm run frames:all` | one still per beat, plus a contact sheet |
 | `npm run record` | the whole run to video, at authored timing |

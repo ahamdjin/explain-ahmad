@@ -12,7 +12,7 @@ const VO: string | undefined = undefined
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 03. Script: video-script/04-where-the-numbers-change.md */
+/** Section 03. Script: video-script/video-1/04-where-the-numbers-change.md */
 export default function Section04({
   onFinish,
   autoplay,

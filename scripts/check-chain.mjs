@@ -31,7 +31,7 @@
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const DIR = 'video-script'
+const DIR = 'video-script/video-1'
 const CHAIN = (await readdir(DIR)).filter((file) => /^\d\d-.+\.md$/.test(file)).sort()
 
 /** Compare on meaning, not on punctuation: quotes and dashes drift. */

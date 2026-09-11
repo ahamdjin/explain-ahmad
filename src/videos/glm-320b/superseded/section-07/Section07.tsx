@@ -13,7 +13,7 @@ import './section-07.css'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 07 -- the answer. Script: video-script/07-the-answer.md */
+/** Section 07 -- the answer. Script: video-script/video-1/07-the-answer.md */
 export default function Section07({
   onFinish,
   autoplay,

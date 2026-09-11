@@ -18,7 +18,7 @@ goes nowhere. See `skills/STORY_STRUCTURE.md` for the gates.
 | **The wall** | Which experts are needed is decided from the word's current numbers, and those numbers change at every one of the 42 sparse layers. So the set you need is unknowable in advance and changes 42 times per word — and fetching a set costs more than the work it does. |
 | **The thesis** | Sparse routing buys you **compute**, not **memory**. A 320B model doing 18B of work per word is still a 320B model that has to be reachable. |
 
-The wall is verified in `video-script/01-the-night-shift.md` §3 (336 expert
+The wall is verified in `video-script/video-1/01-the-night-shift.md` §3 (336 expert
 visits per word, ~8 GB, cross-checked three ways). **It is written here even
 though Section 01 never says it** — a section built without knowing the answer
 ends on a hazard sign, because the author has nothing to aim at.
@@ -140,10 +140,10 @@ Consequences that now bind every section:
 | File | Holds |
 | --- | --- |
 | `skills/STORY_STRUCTURE.md` | the four gates, run before any art |
-| `storyboard/STORY_SPINE.md` | this file — want, wall, thesis, question chain |
-| `storyboard/VOCABULARY_LEDGER.md` | what the viewer owns per section; banned terms |
+| `storyboard/video-1/STORY_SPINE.md` | this file — want, wall, thesis, question chain |
+| `storyboard/video-1/VOCABULARY_LEDGER.md` | what the viewer owns per section; banned terms |
 | `research/glm/GROUND_TRUTH.md` | every on-screen number, single source |
-| `storyboard/SECTION_MAP.md` | per-section detail, in question-chain format |
+| `storyboard/video-1/SECTION_MAP.md` | per-section detail, in question-chain format |
 
 Remaining: rebuild Section 01 against the chain — the different-eight event, and
 an exit question that differs from its entry.

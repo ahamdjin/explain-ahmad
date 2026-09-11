@@ -6,7 +6,7 @@ and this is the only section that has to change someone's mind.
 Supersedes `08-why-it-cannot-fit.md`, which was written as an explanation rather
 than as a scene.
 
-> **Built.** 14 beats, 1:16. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 14 beats, 1:16. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-07` · in sequence: `/watch?section=7`
 
 ## Contract

@@ -1,19 +1,30 @@
-# GLM 320B explainer implementation
+# glm-320b
 
-## Current
+| folder | route | what it is |
+| --- | --- | --- |
+| **`video-1/`** | `/watch`, `/video-1` | **The film.** Thirteen sections, one folder each. |
+| `video-2-gpt/` | `/video-2` | ChatGPT's alternate 120-beat cut. A proposal, built on the superseded v9 engine. |
+| `superseded/` | `/old/section-NN`, `/why-320b-uses-18b`, `/gpt-section-01` | Earlier builds, kept routed so they can be compared. |
 
-The working implementation lives in:
+`src/videos/registry.tsx` is the authority for what is live. `npm run smoke`
+reads its route list from there, so a new section is covered the moment it is
+registered.
 
-`v9/Glm320bProductionV9.tsx`
+## A section, inside `video-1/`
 
-`src/videos/registry.tsx` is the final authority for the live route.
+```text
+section-NN/
+  scene.ts       the persistent scene: what exists, and its initial state
+  beats.ts       the beats: id, title, vo, secs, relation, patches
+  Stage.tsx      how a scene state is drawn
+  SectionNN.tsx  wires the two together through SectionRunner
+```
 
-Earlier loose V1–V8 implementations and stylesheets were removed from the working tree; Git history preserves them if they are ever needed.
+Actors are mounted once and never rebuilt. A beat issues **partial patches**
+that merge cumulatively, so persistence is the default. Never wrap a scene in
+`AnimatePresence` keyed on the beat or the world — that destroys and remounts,
+and every chapter boundary becomes a hard cut. `video-2-gpt/` does exactly that
+and is the worked example of why not; see `storyboard/video-2-gpt/GPT_REVIEW.md`.
 
-## Story authority
-
-Do not use implementation code as the final script or factual source. Use, in order:
-
-1. `video-script/`
-2. `storyboard/SECTION_MAP.md`
-3. `research/glm/GLM_V7_ATTENTION_MOE_RESEARCH.md`
+Story and script outrank this folder: `storyboard/video-1/STORY_SPINE.md`, then
+`video-script/video-1/`.

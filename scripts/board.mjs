@@ -1,5 +1,5 @@
 /**
- * Generates storyboard/BOARD.md from the beats themselves.
+ * Generates storyboard/video-1/BOARD.md from the beats themselves.
  *
  * A hand-written board drifts from the code within a day, and then two
  * documents disagree about what the video is. This one cannot: it is read out
@@ -20,13 +20,13 @@ const SCRIPTS = await scriptIndex()
  * The section number is the join key; the title comes out of the script's H1.
  */
 async function scriptIndex() {
-  const files = await readdir('video-script')
+  const files = await readdir('video-script/video-1')
   const index = {}
   for (const file of files.sort()) {
     const m = /^(\d\d)-.+\.md$/.exec(file)
     if (!m) continue
     if (index[m[1]]) continue
-    const md = await readFile(path.join('video-script', file), 'utf8')
+    const md = await readFile(path.join('video-script/video-1', file), 'utf8')
     const title = /^# Section \d+ — (.+)$/m.exec(md)?.[1]?.trim() ?? file
     index[m[1]] = [file, title]
   }
@@ -78,7 +78,7 @@ A('A hand-written board drifts from the code within a day, and then two')
 A('documents disagree about what the video is. This one is read out of each')
 A("section's `beats.ts`, so the board and the build are the same fact.")
 A('')
-A('Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`')
+A('Spine: `storyboard/video-1/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`')
 A('Chain check: `npm run check:chain` · Frames: `npm run frames:all`')
 A('')
 
@@ -96,7 +96,7 @@ for (const dir of dirs) {
   let exits = ''
   let event = ''
   if (scriptFile) {
-    const script = await readFile(path.join('video-script', scriptFile), 'utf8')
+    const script = await readFile(path.join('video-script/video-1', scriptFile), 'utf8')
     enters = field(script, 'Enters on')
     exits = field(script, 'Exits on')
     event = field(script, 'Event')
@@ -144,5 +144,5 @@ A('')
 A('⚑ the section\'s event · ❄ a frame that must read as a still')
 A('')
 
-await writeFile('storyboard/BOARD.md', `${out.join('\n')}\n`, 'utf8')
-console.log(`storyboard/BOARD.md — ${dirs.length} sections, ${beatCount} beats, ${Math.floor(grand / 60)}:${String(Math.round(grand % 60)).padStart(2, '0')}`)
+await writeFile('storyboard/video-1/BOARD.md', `${out.join('\n')}\n`, 'utf8')
+console.log(`storyboard/video-1/BOARD.md — ${dirs.length} sections, ${beatCount} beats, ${Math.floor(grand / 60)}:${String(Math.round(grand % 60)).padStart(2, '0')}`)

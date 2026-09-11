@@ -1,7 +1,7 @@
 /**
  * Section 05 scene -- new numbers, new team.
  *
- * Script: video-script/05-new-numbers-new-team.md
+ * Script: video-script/video-1/05-new-numbers-new-team.md
  *
  * Carries the one interaction in the video, because the claim the whole answer
  * rests on is the one the viewer should verify themselves. Per

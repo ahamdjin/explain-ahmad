@@ -215,7 +215,7 @@ export default function PaperCatalogue() {
       <p className="pc-note">
         The pieces that turn a number into a quantity you can see, and the two tables the video
         looks things up in. Built for the 13-section rebuild — see{' '}
-        <code>video-script/READ_ALOUD.md</code>.
+        <code>video-script/video-1/READ_ALOUD.md</code>.
       </p>
       <div className="pc-grid">
         <Item name="BigNumber" note="the only thing in the frame" wide>

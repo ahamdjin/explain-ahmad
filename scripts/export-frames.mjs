@@ -35,10 +35,10 @@ const SKIP_CAPTURE = args.has('reuse')
 /** Section number -> its title, from the script's H1. */
 async function titles() {
   const found = {}
-  for (const file of (await readdir('video-script')).sort()) {
+  for (const file of (await readdir('video-script/video-1')).sort()) {
     const m = /^(\d\d)-.+\.md$/.exec(file)
     if (!m || found[m[1]]) continue
-    const md = await readFile(path.join('video-script', file), 'utf8')
+    const md = await readFile(path.join('video-script/video-1', file), 'utf8')
     found[m[1]] = /^# Section \d+ — (.+)$/m.exec(md)?.[1]?.trim() ?? file
   }
   return found

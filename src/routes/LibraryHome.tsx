@@ -17,7 +17,7 @@ const current = [
 ]
 
 /**
- * The thirteen-section chain. `storyboard/STORY_SPINE.md` v4.
+ * The thirteen-section chain. `storyboard/video-1/STORY_SPINE.md` v4.
  *
  * The `meta` line is what the section *adds*, not what it is about — that is
  * the load-bearing column of the spine's chain table, and having it here means

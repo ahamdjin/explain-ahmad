@@ -1,7 +1,7 @@
 /**
  * Section 03 scene -- the word becomes numbers.
  *
- * Script: video-script/03-the-word-becomes-numbers.md
+ * Script: video-script/video-1/03-the-word-becomes-numbers.md
  *
  * Exits on a contradiction rather than a question: section 1 proved the team
  * changes and this section proves the numbers do not. Both cannot be true,

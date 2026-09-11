@@ -4,9 +4,9 @@ Status: **SCRIPT v7.** Written to the v2 spine. Replaces `01-the-claim.md`
 (v6, built as 21 beats / 1:46), whose opening reached its hook at 0:19 and
 whose event overstated what the research supports.
 
-Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
+Spine: `storyboard/video-1/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
 Numbers: `research/glm/GROUND_TRUTH.md` · Audience: `research/RETENTION_AND_ANGLE.md`
-Words: `storyboard/VOCABULARY_LEDGER.md` · Timing: `npm run timing`
+Words: `storyboard/video-1/VOCABULARY_LEDGER.md` · Timing: `npm run timing`
 
 ## Contract
 

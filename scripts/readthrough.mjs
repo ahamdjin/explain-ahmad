@@ -1,5 +1,5 @@
 /**
- * Generates `video-script/READ_ALOUD.md` — the whole video, start to finish,
+ * Generates `video-script/video-1/READ_ALOUD.md` — the whole video, start to finish,
  * with a timecode against every line.
  *
  * The per-section scripts are written for *building*: contract, line jobs,
@@ -20,7 +20,7 @@
  * ## Where the seconds come from
  *
  * From the **built beats**, when the section is built. This document and
- * `storyboard/BOARD.md` used to disagree about the runtime by two and a half
+ * `storyboard/video-1/BOARD.md` used to disagree about the runtime by two and a half
  * minutes -- 19:16 against 21:36 -- because this one estimated the time each
  * line needs while the board read the `secs` the viewer actually gets. Two
  * generated documents disagreeing about the length of the video is the exact
@@ -33,7 +33,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises'
 
 const WPM = 145
 const WPS = WPM / 60
-const OUT = 'video-script/READ_ALOUD.md'
+const OUT = 'video-script/video-1/READ_ALOUD.md'
 
 /** What the line needs, plus a beat of air, to the half second. */
 const suggest = (need) => Math.max(2.5, Math.round((need + 1.0) * 2) / 2)
@@ -72,7 +72,7 @@ const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStar
 
 /** The section names the spine currently asks for, in order. */
 async function spineChain() {
-  const spine = await readFile('storyboard/STORY_SPINE.md', 'utf8')
+  const spine = await readFile('storyboard/video-1/STORY_SPINE.md', 'utf8')
   const table = spine.split('## 4. The chain')[1]?.split('\n###')[0] ?? ''
   const names = []
   for (const line of table.split('\n')) {
@@ -133,12 +133,12 @@ function parseScript(markdown) {
 }
 
 const chain = await spineChain()
-const files = (await readdir('video-script')).filter((f) => /^\d\d-.+\.md$/.test(f)).sort()
+const files = (await readdir('video-script/video-1')).filter((f) => /^\d\d-.+\.md$/.test(f)).sort()
 
 const sections = []
 for (const file of files) {
   const num = Number(file.slice(0, 2))
-  const md = await readFile(`video-script/${file}`, 'utf8')
+  const md = await readFile(`video-script/video-1/${file}`, 'utf8')
   const parsed = parseScript(md)
   if (!parsed.beats.length) continue
   sections.push({ num, file, ...parsed, board: parseBoard(md), wanted: chain[num] })
@@ -156,11 +156,11 @@ out.push('you are explaining what is on the screen, never the other way round. S
 out.push('`skills/SPATIAL_CONTINUITY.md`, checked by `npm run check:board`.')
 out.push('')
 out.push('Timings are the `secs` the built beats actually hold — the same figures as')
-out.push('`storyboard/BOARD.md`. They are still **planned, not measured**: each was set')
+out.push('`storyboard/video-1/BOARD.md`. They are still **planned, not measured**: each was set')
 out.push(`from ${WPM} words per minute plus a beat of air. Record first, then measure, then`)
 out.push('edit the seconds. See `docs/VOICE_OVER.md`.')
 out.push('')
-out.push('Promise: `storyboard/STORY_SPINE.md` · Per-section detail: the numbered scripts')
+out.push('Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered scripts')
 out.push('')
 
 const stale = sections.filter((s) => s.wanted && s.title !== s.wanted)

@@ -12,7 +12,7 @@ const VO: string | undefined = undefined
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 03. Script: video-script/06-forty-two-floors.md */
+/** Section 03. Script: video-script/video-1/06-forty-two-floors.md */
 export default function Section06({
   onFinish,
   autoplay,

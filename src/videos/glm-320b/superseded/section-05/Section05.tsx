@@ -14,7 +14,7 @@ import './section-05.css'
 import '@fontsource/patrick-hand/400.css'
 import '@fontsource/caveat/400.css'
 
-/** Section 05. Script: video-script/05-new-numbers-new-team.md */
+/** Section 05. Script: video-script/video-1/05-new-numbers-new-team.md */
 export default function Section05({
   onFinish,
   autoplay,

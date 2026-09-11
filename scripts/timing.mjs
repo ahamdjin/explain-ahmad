@@ -90,7 +90,7 @@ function suggest(need) {
 const rows = []
 if (FROM_SCRIPTS) {
   const { readdir } = await import('node:fs/promises')
-  const files = (await readdir('video-script')).filter((f) => /^\d\d-/.test(f)).sort()
+  const files = (await readdir('video-script/video-1')).filter((f) => /^\d\d-/.test(f)).sort()
   const seen = new Set()
   for (const file of files) {
     const sec = file.slice(0, 2)
@@ -99,7 +99,7 @@ if (FROM_SCRIPTS) {
       console.log(`  (skipping ${file} -- §${sec} already read from another file)`)
       continue
     }
-    const beats = scriptBeats(await readFile(`video-script/${file}`, 'utf8'))
+    const beats = scriptBeats(await readFile(`video-script/video-1/${file}`, 'utf8'))
     if (!beats.length) continue
     seen.add(sec)
     for (const b of beats) {

@@ -18,7 +18,7 @@ import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const LEDGER = 'skills/STRATEGY_LEDGER.md'
-const SCRIPTS = 'video-script'
+const SCRIPTS = 'video-script/video-1'
 
 /* ---- the ledger is the authority for which IDs exist ---- */
 const ledger = await readFile(LEDGER, 'utf8')

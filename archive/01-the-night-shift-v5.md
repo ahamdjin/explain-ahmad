@@ -139,7 +139,7 @@ they belong to Section 02+. The derivation in section 3 above stays here because
 it is what makes Section 01 honest: we now know what the wall is, so the
 question we end on is a real one with a real answer, not a tease.
 
-The Section 01 shooting board is `storyboard/section-01/STORYBOARD_V5.md`
+The Section 01 shooting board is `storyboard/video-1/section-01/STORYBOARD_V5.md`
 (31 beats, 2:12, timed against the narration).
 
 ### Generic framing - no personal hardware
@@ -351,7 +351,7 @@ section doesn't work and no motion pass will rescue it.
 
 - `01-five-year-old.md` — the office. Density rules were right, metaphor wasn't.
 - `01-headache-chain.md` — superseded.
-- Library metaphor in `storyboard/section-01/FRAMES.md` (locked v2) — superseded,
+- Library metaphor in `storyboard/video-1/section-01/FRAMES.md` (locked v2) — superseded,
   along with the "create the headache, not answer it" rule.
 - `08-why-it-cannot-fit.md` — still the precise version (bandwidth, batching,
   why not even a 4-bit quant saves you). Acts 3-4 give it a story shape to sit in.

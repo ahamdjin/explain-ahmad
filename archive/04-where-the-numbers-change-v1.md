@@ -1,6 +1,6 @@
 # Section 04 — Where the numbers change
 
-> **Built.** 11 beats, 0:54. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 11 beats, 0:54. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-04` · in sequence: `/watch?section=4`
 
 ## Contract

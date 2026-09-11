@@ -1,6 +1,6 @@
 # Section 08 — The verdict
 
-> **Built.** 8 beats, 0:47. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 8 beats, 0:47. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-08` · in sequence: `/watch?section=8`
 
 ## Contract

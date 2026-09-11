@@ -1,8 +1,8 @@
 # Section 02 — Follow one word in
 
-Spine: `storyboard/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
+Spine: `storyboard/video-1/STORY_SPINE.md` · Gates: `skills/STORY_STRUCTURE.md`
 
-> **Built.** 10 beats, 0:46. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 10 beats, 0:46. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-02` · in sequence: `/watch?section=2`
 
 ## Contract

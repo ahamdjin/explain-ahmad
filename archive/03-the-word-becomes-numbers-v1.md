@@ -1,6 +1,6 @@
 # Section 03 — The word becomes numbers
 
-> **Built.** 10 beats, 0:49. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 10 beats, 0:49. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-03` · in sequence: `/watch?section=3`
 
 ## Contract

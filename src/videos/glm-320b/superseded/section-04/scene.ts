@@ -1,7 +1,7 @@
 /**
  * Section 04 scene -- where the numbers change.
  *
- * Script: video-script/04-where-the-numbers-change.md
+ * Script: video-script/video-1/04-where-the-numbers-change.md
  *
  * Resolves section 3's contradiction. The example does the work: "the dog
  * barked" against "a hot dog". Everyone knows those mean different things

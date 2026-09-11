@@ -9,7 +9,7 @@ import { PALETTE } from '../palette'
  * available* -- shelving is free and retrieval is free -- so a library has no
  * way to express a cost of absence, and the wall has to be faked with a hazard
  * sign. A hospital that keeps specialists on site is not absurd, it is correct,
- * and for the model's own reason. See video-script/01-the-night-shift.md §4.
+ * and for the model's own reason. See video-script/video-1/01-the-night-shift.md §4.
  *
  * Section 01 never states that reason. It only has to make the plan look
  * obviously right, so the closing question stings.

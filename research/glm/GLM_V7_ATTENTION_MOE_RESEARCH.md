@@ -45,7 +45,7 @@ were missing and are load-bearing for the memory argument:
 - Natively multimodal; attention is **hybrid KDA + sparse MLA**, which reinforces
   the existing rule not to imply vanilla softmax self-attention throughout.
 
-Derived from the above, used in `video-script/07-the-answer.md`:
+Derived from the above, used in `video-script/video-1/07-the-answer.md`:
 
 - 45 layers − 3 dense = **42 sparse routing layers**.
 - 42 × 288 = **12,096 routed experts** in the model.

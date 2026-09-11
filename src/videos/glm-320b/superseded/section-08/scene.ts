@@ -1,7 +1,7 @@
 /**
  * Section 08 scene -- the verdict.
  *
- * Script: video-script/08-the-verdict.md
+ * Script: video-script/video-1/08-the-verdict.md
  *
  * A verdict, not a recap. The want was "they called it efficient -- is that
  * true?", and the answer is genuinely split: true about compute, false about

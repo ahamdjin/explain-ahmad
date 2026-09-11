@@ -14,32 +14,32 @@ export type VideoRouteDefinition = {
  * own, and `/watch` is the product. `npm run smoke` reads its route list out of
  * this file, so a new section is covered the moment it is registered here.
  */
-const Section01 = lazy(() => import('./glm-320b/section-01/Section01'))
-const Section02 = lazy(() => import('./glm-320b/section-02/Section02'))
-const Section03 = lazy(() => import('./glm-320b/section-03/Section03'))
-const Section04 = lazy(() => import('./glm-320b/section-04/Section04'))
-const Section05 = lazy(() => import('./glm-320b/section-05/Section05'))
-const Section06 = lazy(() => import('./glm-320b/section-06/Section06'))
-const Section07 = lazy(() => import('./glm-320b/section-07/Section07'))
-const Section08 = lazy(() => import('./glm-320b/section-08/Section08'))
-const Section09 = lazy(() => import('./glm-320b/section-09/Section09'))
-const Section10 = lazy(() => import('./glm-320b/section-10/Section10'))
-const Section11 = lazy(() => import('./glm-320b/section-11/Section11'))
-const Section12 = lazy(() => import('./glm-320b/section-12/Section12'))
-const Section13 = lazy(() => import('./glm-320b/section-13/Section13'))
+const Section01 = lazy(() => import('./glm-320b/video-1/section-01/Section01'))
+const Section02 = lazy(() => import('./glm-320b/video-1/section-02/Section02'))
+const Section03 = lazy(() => import('./glm-320b/video-1/section-03/Section03'))
+const Section04 = lazy(() => import('./glm-320b/video-1/section-04/Section04'))
+const Section05 = lazy(() => import('./glm-320b/video-1/section-05/Section05'))
+const Section06 = lazy(() => import('./glm-320b/video-1/section-06/Section06'))
+const Section07 = lazy(() => import('./glm-320b/video-1/section-07/Section07'))
+const Section08 = lazy(() => import('./glm-320b/video-1/section-08/Section08'))
+const Section09 = lazy(() => import('./glm-320b/video-1/section-09/Section09'))
+const Section10 = lazy(() => import('./glm-320b/video-1/section-10/Section10'))
+const Section11 = lazy(() => import('./glm-320b/video-1/section-11/Section11'))
+const Section12 = lazy(() => import('./glm-320b/video-1/section-12/Section12'))
+const Section13 = lazy(() => import('./glm-320b/video-1/section-13/Section13'))
 
 /** Kept routed so the two openings can still be compared side by side. */
-const Glm320bVideo = lazy(() => import('./glm-320b/v9/Glm320bProductionV9'))
-const GptSection01 = lazy(() => import('./glm-320b/gpt-section-01/Section01'))
+const Glm320bVideo = lazy(() => import('./glm-320b/superseded/v9/Glm320bProductionV9'))
+const GptSection01 = lazy(() => import('./glm-320b/superseded/gpt-section-01/Section01'))
 
 /**
  * Video 2: the GPT alternate cut. 120 beats over v9's worlds, so it is a
  * *proposal* rendered in the superseded engine, not a second finished video.
- * `storyboard/GPT.md` and `video-script/GPT.md` are its script.
+ * `storyboard/video-2-gpt/GPT.md` and `video-script/video-2-gpt/GPT.md` are its script.
  */
-const GptWatch = lazy(() => import('./glm-320b/gpt-watch/GptWatch'))
+const GptWatch = lazy(() => import('./glm-320b/video-2-gpt/gpt-watch/GptWatch'))
 
-/** The superseded eight-section build. `storyboard/STORY_SPINE.md` §7. */
+/** The superseded eight-section build. `storyboard/video-1/STORY_SPINE.md` §7. */
 const Old01 = lazy(() => import('./glm-320b/superseded/section-01/Section01'))
 const Old02 = lazy(() => import('./glm-320b/superseded/section-02/Section02'))
 const Old03 = lazy(() => import('./glm-320b/superseded/section-03/Section03'))

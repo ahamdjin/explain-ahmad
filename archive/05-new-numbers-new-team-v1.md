@@ -1,6 +1,6 @@
 # Section 05 — New numbers, new team
 
-> **Built.** 11 beats, 0:54. Board: `storyboard/BOARD.md` (generated).
+> **Built.** 11 beats, 0:54. Board: `storyboard/video-1/BOARD.md` (generated).
 > Route: `/section-05` · in sequence: `/watch?section=5`
 
 ## Contract

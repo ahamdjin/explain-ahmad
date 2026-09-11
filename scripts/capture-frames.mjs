@@ -2,7 +2,7 @@
  * Captures Section 01 storyboard frames.
  *
  * Separate from capture-beats.mjs because Section 01 is authored as beats
- * against storyboard/section-01/STORYBOARD_V5.md, not as beats in story.ts.
+ * against storyboard/video-1/section-01/STORYBOARD_V5.md, not as beats in story.ts.
  */
 import { spawn } from 'node:child_process'
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
@@ -165,7 +165,7 @@ function sheet(list) {
   span { font-size:12px; color:#5F5A53; }
 </style>
 <h1>Section 01 — ${list.length} frames at ${WIDTH}x${HEIGHT}</h1>
-<p class="sub">Compare against storyboard/section-01/STORYBOARD_V5.md</p>
+<p class="sub">Compare against storyboard/video-1/section-01/STORYBOARD_V5.md</p>
 <div class="grid">
 ${list
   .map(

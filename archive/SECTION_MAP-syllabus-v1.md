@@ -18,7 +18,7 @@ The approved art direction is `art-direction/GLM_PAPER_WORLD.md`.
 
 **Purpose:** Create the central question before teaching the machinery.
 
-**Narration source:** `video-script/01-opening-narration.md`
+**Narration source:** `video-script/video-1/01-opening-narration.md`
 
 **Visual world:** Paper model profile → parameter field → playful MoE expert world → router → RAM/storage hypothesis.
 

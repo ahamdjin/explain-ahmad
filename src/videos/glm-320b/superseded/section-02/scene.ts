@@ -3,7 +3,7 @@ import { CAMERA_HOME, type CameraState } from '../../../../paper'
 /**
  * Section 02 scene -- follow one word in.
  *
- * Script: video-script/02-follow-one-word.md
+ * Script: video-script/video-1/02-follow-one-word.md
  *
  * A transition section is the easiest place in a video to lose someone, so this
  * one is not a corridor: it carries its own reveal, which is that the router

@@ -23,18 +23,35 @@ never fixed by changing the art.
 
 There are two cuts, and this table is the only place that says which is which.
 
-| | route | code | script | status |
-| --- | --- | --- | --- | --- |
-| **Video 1** | `/watch` (`/video-1`) | `src/videos/glm-320b/section-01..13/` | `video-script/01..13` | **the film** |
-| Video 2 | `/video-2` | `src/videos/glm-320b/gpt-watch/` | `video-script/GPT.md` | a proposal, drawn in the superseded v9 engine |
+Everything for one video sits under a folder of that video's name, in all
+three places:
 
-Everything else routed from `/` — `why-320b-uses-18b` (v9), `gpt-section-01`,
-`old/section-01..08` — is kept reachable for comparison and is superseded.
+| | **Video 1 — the film** | Video 2 — a proposal |
+| --- | --- | --- |
+| route | `/watch`, `/video-1` | `/video-2` |
+| script | `video-script/video-1/` | `video-script/video-2-gpt/` |
+| story | `storyboard/video-1/` | `storyboard/video-2-gpt/` |
+| code | `src/videos/glm-320b/video-1/` | `src/videos/glm-320b/video-2-gpt/` |
+| status | 13 sections, 164 beats, ~21 min | 120 beats, on the superseded v9 engine |
+
+Everything superseded lives in `src/videos/glm-320b/superseded/` and stays
+routed (`/old/section-NN`, `/why-320b-uses-18b`, `/gpt-section-01`) so the cuts
+can be compared. Nothing there is authoritative.
+
+**The tooling only reads `video-1/`.** `board`, `check:chain`, `check:board`,
+`check:strategy`, `timing` and `readthrough` all point at
+`video-script/video-1/`.
 
 ## `skills/`
 Reusable rules for how explainers are designed and built: explanation design,
 continuity, diagram grammar, interaction patterns, visual system, refinement
 standards. These are **not video-specific**.
+
+`skills/STRATEGY_LEDGER.md` is the one that gates the writing: every technique
+used in a beat must be named there with a **teacher** and an **evidence tier**
+(A = primary source read directly, B = trade blog with no study behind it,
+C = my own inference with no source). `npm run check:strategy` enforces it and
+reports what share of the video rests on tier C.
 
 ## `research/`
 Source notes and factual research used to understand a topic or study other
@@ -60,14 +77,14 @@ composition rules, and what must be avoided.
 ## `video-script/`
 What Ahmad plans to **say**.
 
-`01-…` through `13-…` are the current spoken script for Video 1, one file per
-section, and `READ_ALOUD.md` is the whole thing in order for recording.
-`GPT.md` is Video 2's alternate narration and is a proposal.
+`video-1/01-…` through `video-1/13-…` are the current spoken script, one file
+per section, and `video-1/READ_ALOUD.md` is the whole thing in order for
+recording. `video-2-gpt/GPT.md` is a proposal. Each folder has its own README.
 
 ## `storyboard/`
 The pre-production bridge between script and implementation.
 
-`storyboard/STORY_SPINE.md` is the authoritative chain for Video 1 — what each
+`storyboard/video-1/STORY_SPINE.md` is the authoritative chain for Video 1 — what each
 section adds and how it hands off. `SECTION_MAP.md` is the earlier high-level
 map and is kept for reference. `BOARD.md` is generated. `GPT.md` is Video 2's
 120-beat board and is a proposal.
@@ -96,7 +113,7 @@ src/paper/          the reusable library -- the only part Video 1 uses
   cast/             people and story objects (Narrator, Hospital, Memory, ...)
   props/            the object library (books, hardware, creatures, vehicles)
   paper.css         the generated palette block, component styles, the paper
-src/videos/glm-320b/section-0N/
+src/videos/glm-320b/video-1/section-NN/
   scene.ts          the persistent scene: what exists, and its initial state
   beats.ts          the beats: id, title, vo, secs, relation, patches
   Stage.tsx         how a scene state is drawn
@@ -117,8 +134,8 @@ automatically be redesigned.
 
 | file | from | command |
 | --- | --- | --- |
-| `storyboard/BOARD.md` | every section's `beats.ts` | `npm run board` |
-| `video-script/READ_ALOUD.md` | every section's `beats.ts` | `npm run board` |
+| `storyboard/video-1/BOARD.md` | every section's `beats.ts` | `npm run board` |
+| `video-script/video-1/READ_ALOUD.md` | every section's `beats.ts` | `npm run board` |
 | the palette block in `src/paper/paper.css` | `src/paper/palette.ts` | `npm run palette` |
 
 ## Stylesheets

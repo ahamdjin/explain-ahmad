@@ -5,7 +5,7 @@ There is no audio yet. This is the plumbing and how to use it.
 ## How the timing works
 
 Every beat declares `secs`. Those add up to the section runtime and to the
-**21:39** in `storyboard/BOARD.md`, and they are what autoplay runs on.
+**21:39** in `storyboard/video-1/BOARD.md`, and they are what autoplay runs on.
 
 The current numbers were set from a word count at 145 words per minute plus
 about a second of air, which is why `npm run timing` reports 76% talking and no
@@ -19,7 +19,7 @@ their own clocks and one of them stuttered.
 
 ## Adding a track
 
-1. Record from **`video-script/READ_ALOUD.md`** — the whole video in one
+1. Record from **`video-script/video-1/READ_ALOUD.md`** — the whole video in one
    document, every line with the timecode it starts at, the place the beat
    leaves you in, and the event the line is describing. That last column is the
    one to watch while reading: you are describing what is on the screen, never
@@ -28,7 +28,7 @@ their own clocks and one of them stuttered.
    The per-section scripts (`video-script/0N-*.md`) hold the contract, the
    board and the truth notes. They are for building, not for reading aloud.
 2. Save it as `public/vo/0N.mp3`.
-3. In `src/videos/glm-320b/section-0N/Section0N.tsx`, set:
+3. In `src/videos/glm-320b/video-1/section-NN/SectionNN.tsx`, set:
 
    ```ts
    const VO: string | undefined = '/vo/01.mp3'

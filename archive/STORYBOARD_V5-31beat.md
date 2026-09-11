@@ -1,13 +1,13 @@
 # Section 01 - Storyboard v5 (SHOOTING BOARD)
 
 Status: **SUPERSEDED.** This boarded the 31-beat version of Section 01, which
-asked the same question three times. Replaced by `video-script/01-the-claim.md`
-(21 beats) and the generated `storyboard/BOARD.md`. Kept for the frozen-frame
+asked the same question three times. Replaced by `video-script/video-1/01-the-claim.md`
+(21 beats) and the generated `storyboard/video-1/BOARD.md`. Kept for the frozen-frame
 and composition notes only.
 
-Old status: **BEAT-BY-BEAT BOARD.** Timed against `video-script/01-the-claim.md`.
+Old status: **BEAT-BY-BEAT BOARD.** Timed against `video-script/video-1/01-the-claim.md`.
 
-This is the board implementation must match. Story rationale: `video-script/01-the-night-shift.md`.
+This is the board implementation must match. Story rationale: `video-script/video-1/01-the-night-shift.md`.
 
 ## Contract
 
