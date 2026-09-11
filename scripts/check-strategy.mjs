@@ -23,8 +23,9 @@ const SCRIPTS = 'video-script/video-1'
 /* ---- the ledger is the authority for which IDs exist ---- */
 const ledger = await readFile(LEDGER, 'utf8')
 const strategies = new Map()
-for (const m of ledger.matchAll(/^### (S-\d+) · ([^·\n]+?) · \*\*tier ([ABC])/gm)) {
-  strategies.set(m[1], { name: m[2].trim(), tier: m[3] })
+for (const m of ledger.matchAll(/^### (S-\d+) · ([^·\n]+?) · \*\*tier ([ABC])([^\n]*)$/gm)) {
+  const strength = m[4].match(/\*(measured|observed|asserted|inferred)\*/)?.[1] ?? 'unmarked'
+  strategies.set(m[1], { name: m[2].trim(), tier: m[3], strength })
 }
 if (!strategies.size) {
   console.error(`No strategies parsed out of ${LEDGER}. Has its heading format changed?`)
@@ -82,7 +83,7 @@ for (const file of files) {
 /* ---- report ---- */
 console.log(`\n${strategies.size} strategies in the ledger:`)
 const byTier = { A: [], B: [], C: [] }
-for (const [id, s] of strategies) byTier[s.tier].push(`${id} ${s.name}`)
+for (const [id, s] of strategies) byTier[s.tier].push(`${id} ${s.name}  [${s.strength}]`)
 for (const tier of ['A', 'B', 'C']) {
   const label = { A: 'primary source, read directly', B: 'trade source, no study seen', C: 'inferred, no source' }[tier]
   console.log(`  tier ${tier} (${label}): ${byTier[tier].length}`)
@@ -105,13 +106,33 @@ if (usage.size) {
   let total = 0
   for (const [id, n] of sorted) {
     const s = strategies.get(id)
-    console.log(`  ${id}  tier ${s.tier}  ${String(n).padStart(3)} beats   ${s.name}`)
+    console.log(`  ${id}  tier ${s.tier}  ${s.strength.padEnd(9)} ${String(n).padStart(3)} beats   ${s.name}`)
     total += n
     if (s.tier === 'C') cTier += n
   }
   const pct = Math.round((cTier / total) * 100)
   console.log(`\n  ${cTier} of ${total} cited beats (${pct}%) rest on a tier-C strategy — inferred, no source.`)
   if (pct > 25) console.log('  That is high. A quarter of the teaching resting on my own guesses needs a real source or a cut.')
+
+  /*
+   * Provenance is not strength. A row can be tier A -- I read the source --
+   * and still be one practitioner's habit rather than a finding. A reviewer
+   * caught the ledger conflating the two, so the gate reports both.
+   */
+  const byStrength = new Map()
+  for (const [id, n] of usage) {
+    const k = strategies.get(id).strength
+    byStrength.set(k, (byStrength.get(k) ?? 0) + n)
+  }
+  console.log('\n  By how well the rule itself is evidenced:')
+  for (const k of ['measured', 'observed', 'asserted', 'inferred', 'unmarked']) {
+    const n = byStrength.get(k) ?? 0
+    if (n) console.log(`    ${k.padEnd(9)} ${String(n).padStart(3)} beats`)
+  }
+  const measured = byStrength.get('measured') ?? 0
+  console.log(`\n  Only ${measured} of ${total} cited beats rest on a controlled study. The rest is`)
+  console.log('  practice and opinion, which is normal for storytelling and is not a')
+  console.log('  licence to call any of it settled.')
 }
 
 /* Unused tier-A strategies are a missed opportunity, not a failure. */

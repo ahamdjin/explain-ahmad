@@ -80,8 +80,17 @@ percent of the model* are different claims about different things.
   causes the other. §1 v10 said *"there's your five percent, that's where it
   comes from"* over a frame of eight lit experts, which is exactly this error,
   and it was caught in review rather than by any gate.
-- **The shared expert is always on.** Never say "the other 280 do nothing" —
-  281 are idle and one is not.
+- **The shared expert is a 289th expert, not one of the 288.** `config.json`
+  has `n_routed_experts: 288` and `n_shared_experts: 1` — the shared one is
+  *additional*. So of the routed experts, 8 run and **280 are idle**, and the
+  shared expert runs on top of that.
+
+  This bullet used to read *"never say the other 280 do nothing — 281 are idle
+  and one is not"*, which was wrong, and wrong in the worst direction: the
+  authority file contradicted a script that was right. It was written while
+  fixing a real omission in §1 and never revisited when the fix was corrected.
+  A reviewer found it. **If a script and this file disagree, check this file
+  first — it is not automatically the one that is right.**
 - **Never cross-multiply organisation units with space units.** Experts are
   288 *per sparse layer*; gigabytes are space. "288 experts need 288 GB" is a
   lie. An expert is ~1/40th of a gigabyte.

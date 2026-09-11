@@ -19,7 +19,7 @@ Teacher for the shape: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §1
 | Teaches | parameter, expert, active, Mixture of Experts |
 | Answers | **"five percent active" does not predict what hardware you need** |
 | Exits on | who picks the eight, and why is *that* the expensive question? |
-| Target | 17 beats · **2:13** (`npm run restamp 01`) |
+| Target | 17 beats · see `npm run restamp 01` for the coded runtime |
 | Never says | `token`, `layer`, `attention`, `bandwidth`, `VRAM`, `router` |
 | **Must not say** | why you cannot store only the active part. **That is §11.** |
 | Hard-bet budget | **uses 1 of 2** (beat 12). The other is reserved for §07. |
@@ -63,7 +63,7 @@ beat 4: the number you have been quoting is the number that misled you.
 Strategy IDs are load-bearing. `skills/STRATEGY_LEDGER.md` says who taught each
 one and how good the evidence is; a `C` tier there means I inferred it.
 
-### Act 1 — the contradiction (beats 1–3, 0:00–0:14) · **S-01**
+### Act 1 — the contradiction (beats 1–3, 0:00–0:13) · **S-01**
 
 > **1.** *(two paper blocks, side by side, identical. five percent of each is > live;
 > the rest is grey)* Two AI models. Both use about five percent of themselves
@@ -80,28 +80,31 @@ MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not
 fit four. Table and sources: `STORY_SPINE.md` §1. Say **"about five percent"** —
 4.4% and 5.6% are the same claim.
 
-### Act 2 — the inversion and the promise (beats 4–6, 0:14–0:43) · **S-02**, **S-03**
+### Act 2 — the inversion and the promise (beats 4–6, 0:13–0:38) · **S-02**, **S-03**
 
-> **4.** *(the four cards stay. the phrase "only 5% active" writes itself > across
-> both blocks)* Everyone quotes that number to say these models are cheap to
-> run now. Both have it. Only one of them is.
+> **4.** *(the four cards stay. the phrase "only 5% active" writes itself > across >
+> both blocks)* Everyone quotes that number to say these models are cheap now.
+> Both have it. Only one of them is.
 >
 > **5.** *(the two blocks hold, unequal)* Same five percent. Four times the machine.
 >
-> **6.** *(the right-hand block and its four cards slide away; one block left)* So
-> what is that number actually telling you? I’m going to follow one word all
-> the way through, and by the end you’ll know exactly what it buys — and what
-> it doesn’t.
+> **6.** *(the right-hand block and its four cards slide away; one block left)* By
+> the end of this you’ll know exactly what that number buys you — and what it
+> doesn’t. We’re going to follow one word all the way through.
 
 Beat 4 is the whole reason the opening works. `STORY_SPINE.md` §3 says the
 audience for an MoE video *already believes it understands MoE* — "only a few
 parts run, so you only need to load a few parts, it's cheaper." Beat 4 names
 that belief back to them as the thing that is about to break.
 
-Beat 6 is the promise, at ~0:26, inside the only retention deadline I would
-defend as tier A.
+Beat 6 **opens** on the value — *"by the end of this you'll know"* — rather
+than working up to it. That matters: a reviewer pointed out that the beat
+starting inside the deadline is not the same as the promise being *spoken*
+inside it, and the earlier draft buried the payoff twenty words in, at about
+0:37. The pivot question that used to sit in front of it is gone entirely.
+`npm run restamp 01` prints where it actually lands.
 
-### Act 3 — now the words, because now they are earned (beats 7–11, 0:43–1:23) · **S-04**
+### Act 3 — now the words, because now they are earned (beats 7–11, 0:38–1:18) · **S-04**
 
 > **7.** *(the block sits alone, whole)* This is the model. All of it.
 >
@@ -123,7 +126,7 @@ by describing a general result or definition"* — let examples precede
 generality. "Parameter" arrives at beat 8, after the viewer has watched the
 block behave twice. v8 defined three terms inside twenty seconds.
 
-### Act 4 — the bet (beats 12–13, 1:23–1:36) · **S-05**
+### Act 4 — the bet (beats 12–13, 1:18–1:31) · **S-05**
 
 > **12.** *(the 288 sit still. nothing moves. the question stays up)* Two
 > hundred and eighty-eight of them. One word comes in. **How many do you
@@ -142,7 +145,7 @@ beat in the section. `skills/ncase/NCASE_4_MORE_DESIGN_PATTERNS.md` §2: the
 guess and the answer must occupy **the same space** — the 288 do not move
 between beat 12 and beat 13, and the eight light up in place.
 
-### Act 5 — the name and the wall (beats 14–17, 1:36–2:18) · **S-12**, **S-14**
+### Act 5 — the name and the wall (beats 14–17, 1:31–2:13) · **S-12**, **S-14**
 
 > **14.** *(the 280 stay grey)* Eight get picked. The other two hundred and eighty do
 > nothing at all.
@@ -198,7 +201,10 @@ one thing now missing; §02 opens by banking exactly that. **S-14**.
 | 16 | inside | — | the arrangement holds and takes its name | plaque | **`Mixture of Experts`** | S-12 |
 | 17 | inside, one part | **push in** | everything recedes but the eight | `Hospital` focus | — | S-14 |
 
-Total ≈ 1:24. Beat seconds are a 145-wpm floor; set them from the recording.
+Beat seconds are a 145-wpm floor plus a breath; set them from the recording.
+The coded runtime is whatever `npm run restamp 01` prints — **do not write a
+total here.** A hand-typed total is how this script came to claim 1:24 and
+2:13 in the same file while the code said 2:15.
 
 ### Board notes
 

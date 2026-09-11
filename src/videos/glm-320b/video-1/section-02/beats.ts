@@ -112,18 +112,25 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 5,
     id: 'it-gets-cut-up',
-    title: 'The sentence fractures into uneven pieces, in place',
+    title: 'The sentence fractures into pieces, in place',
     relation: 'wall',
     secs: 9,
-    vo: 'It gets cut up. Into pieces — and for this sentence, every piece happens to be a whole word.',
+    /*
+     * **"Mostly", not "every".** The measured split is
+     * `The | dog | dropped | the | ball | , | and | it` -- and the comma is a
+     * token that is not a word, so "every piece happens to be a whole word"
+     * was false by one piece. A reviewer caught it. Saying *mostly along word
+     * boundaries* is true, and it leaves beat 7 the job of breaking the
+     * expectation it sets up.
+     *
+     * The old `…half a word` note is gone with it: it pointed at the invented
+     * `dropp` + `ed` split, and there is nothing in this frame for it to name.
+     */
+    vo: 'It gets cut up. Into pieces — and this sentence happens to break mostly along the words.',
     commands: [sentence.fracture()],
-    /* `dropp` + `ed` is the label's whole job. The voice says "sometimes half
-     * of one"; the note points at the half. */
-    /* The note has to sit on the split it is naming. Placed at the horizon it
-     * was just a red word at the bottom of the frame pointing at nothing. */
     lateOverlays: {
       at: 3200,
-      overlays: [note('…half a word', 41, 38, { tone: 'cost', rotate: 4 })],
+      overlays: [note('the comma too', 61, 62, { tone: 'ink', rotate: 3 })],
     },
   },
   {

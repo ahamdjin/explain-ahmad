@@ -8,23 +8,50 @@ Researched 2026-09-11. Ahmad's rule, which created this file:
 So: **no beat gets a technique that is not named here.** A beat cites a
 strategy ID, and this file says who taught it and how well it is evidenced.
 
-## Evidence tiers — read these before trusting a row
+## Two axes, because one was hiding a problem
 
-| tier | means |
+The first version of this file had a single A/B/C tier, and a reviewer caught
+what that conflated:
+
+> *"Tier A currently means primary source personally verified, not necessarily
+> strong experimental evidence this exact storytelling rule works. Nicky Case
+> using two hard bets does not scientifically establish two or three is
+> optimal."*
+
+That is exactly right, and it was the most useful criticism this file has had.
+**Reading a source carefully and the source being evidence are different
+things.** So every row now carries both.
+
+### Provenance — did I actually read it?
+
+| | means |
 | --- | --- |
-| **A** | Primary source read directly. Verbatim text, a paper's own abstract, or the artefact's own source code. Quotable. |
-| **B** | Trade press, marketing blog, or content-industry aggregate. Plausible and directionally useful. **No study behind it that I have seen.** Do not put a B number on screen. |
-| **C** | **My inference.** No source. Reasonable, untested, and labelled so nobody later mistakes it for research. |
+| **A** | Primary source read directly: verbatim text, a paper's abstract, or the artefact's own source. Quotable. |
+| **B** | Trade press or content-marketing blog. **No study behind it that I have seen.** Never put a B number on screen. |
+| **C** | **My inference.** No source at all. |
 
-Nothing here is tier A unless I opened the source myself on 2026-09-11. Four
-rows that looked like research when I first wrote them have been demoted to B
-or C.
+### Strength — is it evidence that the rule *works*?
+
+| | means | how much weight |
+| --- | --- | --- |
+| **measured** | A controlled study reports the effect, with numbers. | Follow it. |
+| **observed** | A practitioner whose work demonstrably holds attention does this. It worked *there*, once, confounded with everything else about the piece. | A good default, not a law. |
+| **asserted** | Someone credible states it as a rule without showing the test. | A hypothesis with a name attached. |
+| **inferred** | I reasoned it out. Nothing behind it. | Cut first when something has to go. |
+
+**Only two rows are `measured`: S-05's mechanism and S-06.** Both are
+psychology papers. Everything else in this file is one practitioner's practice
+or somebody's stated opinion, and the *numbers* inside those rules — two hard
+bets, a reversal at two-thirds, thirty seconds — are **observations of single
+works, not findings**. Case used prediction twice in Trust; that is a fact
+about Trust, not a discovered optimum. Treat those figures as a starting
+budget, and change them if the read-through says otherwise.
 
 ---
 
 ## The strategies
 
-### S-01 · Concrete contradiction open · **tier A**
+### S-01 · Concrete contradiction open · **tier A** · *observed*
 
 **Teacher:** Nicky Case, *The Evolution of Trust* — `words.html` from
 `github.com/ncase/trust@gh-pages`, CC0, read directly.
@@ -34,7 +61,7 @@ its own terms. No topic sentence, no subject name, no number.
 
 **Rule:** the first sentence is a contradiction, not a subject.
 
-### S-02 · Invert onto the viewer's present · **tier A**
+### S-02 · Invert onto the viewer's present · **tier A** · *observed*
 
 **Teacher:** same source, third move.
 
@@ -49,7 +76,7 @@ soldiers in a trench.* Without this move the opening is an anecdote.
 **Ours, unused:** another model, also ~5% active, fits one card where GLM needs
 four. Full table and sources in `STORY_SPINE.md` §1.
 
-### S-03 · State the outcome early · **tier A**
+### S-03 · State the outcome early · **tier A** · *asserted*
 
 **Teachers, two independent:**
 
@@ -68,7 +95,7 @@ I built §01 v9 to ask without promising. Ahmad's call — intro asks, §11
 answers — stands for the **mechanism**. The *promise* has to be in the first
 thirty seconds regardless, and v9 beat 10 was too late and too vague.
 
-### S-04 · Concrete before abstract · **tier A**
+### S-04 · Concrete before abstract · **tier A** · *asserted*
 
 **Teacher:** Grant Sanderson, *Concrete before Abstract*, ODSC India 2019.
 Abstract: *"resist the temptation to open a topic by describing a general
@@ -84,7 +111,7 @@ one from a coin machine the reader has already operated.
 **Ours, broken:** §01 v8 defined *parameter*, *expert* and *active* inside
 twenty seconds.
 
-### S-05 · Place Your Bets · **tier A**, and **scarce**
+### S-05 · Place Your Bets · **tier A**, and **scarce** · *measured*
 
 **Teachers:**
 - Name and design pattern: Nicky Case, *Explorable Explanations: 4 More Design
@@ -104,7 +131,15 @@ minute piece there are exactly **two** commit-and-branch predictions
 the correct answer is genuinely counterintuitive.** A guess the viewer gets
 right is worse than none — it confirms a model we want to break.
 
-### S-06 · Interpolated testing · **tier A** — and it is the one that answers Ahmad's doubt
+**The mechanism is `measured`; the number two is `observed`, and only once.**
+Richland et al. establish that a failed guess before instruction helps. Nothing
+establishes that *two* is the right count for a twenty-minute video — that is
+counted off one artefact, Trust, confounded with everything else Trust does.
+Take it as a starting budget. If the read-through wants a third, the paper does
+not forbid it; what the paper does say is that the guess has to be one the
+viewer can get wrong.
+
+### S-06 · Interpolated testing · **tier A** — and it is the one that answers Ahmad's doubt · *measured*
 
 **Teacher:** **Szpunar, K. K., Khan, N. Y., & Schacter, D. L. (2013).
 Interpolated memory tests reduce mind wandering and improve learning of online
@@ -123,7 +158,7 @@ prediction pattern **does** transfer to video — with the condition that it be
 how many are *hard commit-and-branch* bets; S-06 says the softer "what do you
 think happens next" beat should recur.
 
-### S-07 · Pattern interrupt every 20–40 seconds · **tier B**
+### S-07 · Pattern interrupt every 20–40 seconds · **tier B** · *asserted*
 
 **Source:** narrationbox.com/blog/why-viewers-drop-off-after-30-seconds-youtube
 — a content-marketing blog. Its five-phase opening is *"Direct statement of the
@@ -133,13 +168,13 @@ variation. Pattern interrupts every 20 to 40 seconds."*
 Directionally consistent with S-06's mechanism, which is why it is kept. **No
 study behind the 20–40 number.** Do not quote it as a fact.
 
-### S-08 · Micro open loops · **tier B**
+### S-08 · Micro open loops · **tier B** · *asserted*
 
 **Source:** same. Teasing a specific thing revealed later. Distinct from
 withholding the promise (S-03) — a loop is *"I'll come back to why 288 matters"*,
 not an unlabelled video.
 
-### S-09 · Late reversal of a taught belief · **tier A**
+### S-09 · Late reversal of a taught belief · **tier A** · *observed*
 
 **Teacher:** Case, Trust, noise chapter, verbatim: *"As cool as Copycat is, it
 has a huge, fatal weakness I haven't mentioned yet."*
@@ -154,7 +189,7 @@ taught them to believe** — not a misconception they arrived with.
 but nothing earlier teaches the viewer to expect caching to save them, so there
 is no belief to take back. Fixable in §11.
 
-### S-10 · Close by reusing the opening's nouns figuratively · **tier A**
+### S-10 · Close by reusing the opening's nouns figuratively · **tier A** · *observed*
 
 **Teacher:** Case, Trust outro: *"…we can stop firing at each other, get out of
 our own trenches, cross No Man's Land to come together… to live and let live."*
@@ -162,7 +197,7 @@ our own trenches, cross No Man's Land to come together… to live and let live."
 Not merely showing the opening image again — the opening's **literal nouns
 return as metaphor**.
 
-### S-11 · Thesis once, one sentence, at the end · **tier A**
+### S-11 · Thesis once, one sentence, at the end · **tier A** · *observed*
 
 **Teacher:** Case, Trust outro: *"What the game is, defines what the players
 do."* Said once. At the end.
@@ -170,14 +205,14 @@ do."* Said once. At the end.
 **Ours:** *"Active parameters is a compute number, not a memory number"* is in
 the spine and is never said as one sentence in the script.
 
-### S-12 · Name the mechanism at the close, not the open · **tier C — my inference**
+### S-12 · Name the mechanism at the close, not the open · **tier C — my inference** · *inferred*
 
 Extrapolated from Trust withholding its own title word ("evolution") until the
 mechanism earns it. **I have no source saying this works at section scale.** It
 is the pattern I chose for the thirteen chapter walls in `STORY_SPINE.md` §5,
 and it is untested. Labelled C so it is not mistaken for S-01–S-11.
 
-### S-13 · Give recurring mechanisms faces and names · **tier A**
+### S-13 · Give recurring mechanisms faces and names · **tier A** · *observed*
 
 **Teacher:** Case, Trust — Copycat, Grudger, Detective, Simpleton, Copykitten.
 Cashed in by sentences like *"Simpleton is actually capable of exploiting
@@ -185,7 +220,7 @@ Always Cooperate"*, which is only readable because both nouns are characters.
 
 **Ours:** 288 anonymous boxes and a desk.
 
-### S-14 · Bank, then complicate (therefore / but) · **tier A**
+### S-14 · Bank, then complicate (therefore / but) · **tier A** · *asserted*
 
 **Teachers:** `skills/ncase/NCASE_LEARNING_AND_EXPLANATION_NOTES.md` records
 Case's **BUT → THEREFORE** story flow; our own
@@ -195,7 +230,7 @@ Case's **BUT → THEREFORE** story flow; our own
 clause*, then adds the but. One clause, never a recap — recaps are where
 retention dies.
 
-### S-15 · Novelty — offer what search cannot · **tier A**
+### S-15 · Novelty — offer what search cannot · **tier A** · *asserted*
 
 **Teacher:** Sanderson, SoME criteria, verbatim: *"It doesn't necessarily have
 to be an original idea or original topic, but it should offer someone an

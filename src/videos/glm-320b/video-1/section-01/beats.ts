@@ -51,7 +51,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'two-models',
     title: 'Two models, both five percent active',
     relation: 'want',
-    secs: 7,
+    secs: 6,
     vo: 'Two AI models. Both use about five percent of themselves to answer you.',
     commands: [
       ground.at(GROUND_Y),
@@ -103,8 +103,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-number-everybody-quotes',
     title: 'The number everybody quotes',
     relation: 'and-yet',
-    secs: 10,
-    vo: 'Everyone quotes that number to say these models are cheap to run now. Both have it. Only one of them is.',
+    secs: 9,
+    vo: 'Everyone quotes that number to say these models are cheap now. Both have it. Only one of them is.',
     commands: [narrator.pose('confide')],
     overlays: [centred('“only 5% active”', 51, 20, { size: 'md', rotate: -2, sticky: true })],
   },
@@ -125,11 +125,11 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-promise',
     title: 'The promise',
     relation: 'therefore',
-    secs: 15,
+    secs: 12,
     /* S-03. Sanderson's SoME criterion, verbatim: "It should be clear to the
      * reader/viewer within the first 30 seconds why they should care." This
      * lands at about 0:26. Withhold the mechanism, never the promise. */
-    vo: 'So what is that number actually telling you? I’m going to follow one word all the way through, and by the end you’ll know exactly what it buys — and what it doesn’t.',
+    vo: 'By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through.',
     commands: [
       block2.off(),
       rigA.off(),

@@ -11,18 +11,18 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 01 — What "five percent active" actually costs
 
-`17` beats · `2:18` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
+`17` beats · `2:13` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
 
 - **Exits on** — who picks the eight, and why is that the expensive question?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `two-models` | 7 | want | Two models, both five percent active | Two AI models. Both use about five percent of themselves to answer you. |
+| 1 | `two-models` | 6 | want | Two models, both five percent active | Two AI models. Both use about five percent of themselves to answer you. |
 | 2 | `one-card` | 4 | so | One graphics card | This one runs on a single graphics card. |
 | 3 | `four-cards` | 3 | wall | Four of them | This one needs four. |
-| 4 | `the-number-everybody-quotes` | 10 | and-yet | The number everybody quotes | Everyone quotes that number to say these models are cheap to run now. Both have it. Only one of them is. |
+| 4 | `the-number-everybody-quotes` | 9 | and-yet | The number everybody quotes | Everyone quotes that number to say these models are cheap now. Both have it. Only one of them is. |
 | 5 | `unequal` | 4 | and-yet | Level above, unequal below | Same five percent. Four times the machine. |
-| 6 | `the-promise` | 15 | therefore | The promise | So what is that number actually telling you? I’m going to follow one word all the way through, and by the end you’ll know exactly what it buys — and what it doesn’t. |
+| 6 | `the-promise` | 12 | therefore | The promise | By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through. |
 | 7 | `this-is-the-model` | 5 | so | The model, whole | This is the model. All of it. |
 | 8 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. |
 | 9 | `five-percent-lights` | 7 | so | Five percent goes live | And when a word comes in, about five percent of them do something. |
@@ -48,7 +48,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 2 | `this-is-what-you-typed` | 4 | so | A prompt card slides in and stops at the entrance | This is what you typed. |
 | 3 | `in-it-goes` | 4 | so | It passes through the doorway; the camera travels with it | In it goes. |
 | 4 | `the-first-thing` | 5 | so | The card lands and settles | And this is the first thing that happens to it. |
-| 5 | `it-gets-cut-up` | 9 | wall | The sentence fractures into uneven pieces, in place | It gets cut up. Into pieces — and for this sentence, every piece happens to be a whole word. |
+| 5 | `it-gets-cut-up` | 9 | wall | The sentence fractures into pieces, in place | It gets cut up. Into pieces — and this sentence happens to break mostly along the words. |
 | 6 | `these-are-tokens` | 7 | so | The pieces settle into a row | These are called tokens. That’s all a token is. A chunk of text. |
 | 7 | `unbelievable-is-three` | 12 | and-yet | `unbelievable` drops in, shatters into three, and leaves | Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have. |
 | 8 | `one-big-list` | 10 | so | A tall list rises beside the row | And every token it knows about lives in one big list. How long do you reckon that list is? |
@@ -298,7 +298,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 | § | Section | Beats | Runtime | Hands forward |
 | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | 17 | 2:18 | who picks the eight, and why is that the expensive question? |
+| 01 | What "five percent active" actually costs | 17 | 2:13 | who picks the eight, and why is that the expensive question? |
 | 02 | Your words become tokens | 13 | 1:56 | a row number is a name. So how does a name become a meaning? |
 | 03 | From an ID to a meaning | 13 | 2:07 | — |
 | 04 | The word looks around | 13 | 1:52 | — |
@@ -311,7 +311,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 11 | So could you store only the 18 billion? | 13 | 1:59 | — |
 | 12 | How people actually run these | 14 | 2:16 | — |
 | 13 | What that number actually bought | 12 | 2:06 | (none — the thesis lands) |
-| | **whole piece** | **164** | **24:37** | |
+| | **whole piece** | **164** | **24:32** | |
 
 ⚑ the section's event · ❄ a frame that must read as a still
 

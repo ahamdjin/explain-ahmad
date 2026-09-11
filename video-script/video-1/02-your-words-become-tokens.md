@@ -20,7 +20,7 @@ Strategies: `skills/STRATEGY_LEDGER.md`
 | Answers | your text is cut into pieces, and every possible piece has a number |
 | Exits on | a row number is a **name**. So how does a name become a meaning? |
 | → next | **but** a number like that is a name, not a meaning |
-| Target | 13 beats · **1:55** (`npm run restamp 02`) |
+| Target | 13 beats · see `npm run restamp 02` for the coded runtime |
 | Still forbidden | `embedding`, `attention`, `layer`, `router` |
 | Hard-bet budget | **uses 0 of 2.** Both are spent — §01 and §07. Beat 8 is a *soft* question (S-06), which is not rationed |
 
@@ -74,7 +74,7 @@ in front of us. See `skills/SPATIAL_CONTINUITY.md`.
 ### Act 3 — it gets cut up (beats 5–7) · **S-04**
 
 > **5.** *(the sentence breaks into pieces, in place)* It gets cut up. Into pieces —
-> and for this sentence, every piece happens to be a whole word.
+> and this sentence happens to break mostly along the words.
 >
 > **6.** *(the pieces settle in a row)* These are called **tokens**. That’s all
 > a token is. A chunk of text.
@@ -122,7 +122,7 @@ on the one thing now missing. §03 opens by banking exactly that.
 | 2 | at the entrance | **pan** | a prompt card slides in from the left and stops | `Sentence` card, the doorway | **`The dog dropped the ball, and it`** | S-04 |
 | 3 | the first surface | **follow** | the card passes through the doorway, camera travels with it | card moving, doorway passing | the same card | S-04 |
 | 4 | the first surface | — | the card lands and settles | `Sentence` at rest | the same card | S-04 |
-| 5 | the first surface | — | the sentence fractures into pieces **in place** | `Sentence` → `split` state | `The` `dog` `dropped` `the` `ball` `,` `and` `it` — 8, all whole words | S-04 |
+| 5 | the first surface | — | the sentence fractures into pieces **in place** | `Sentence` → `split` state | `The` `dog` `dropped` `the` `ball` `,` `and` `it` — 8 pieces, 7 words and a comma | S-04 |
 | 6 | the first surface | — | the pieces slide into an even row | `Sentence` `split`, spaced | 8 tokens | S-04 |
 | 7 | the first surface | — | `unbelievable` drops in above, shatters into 3, leaves | one extra `WordCard` → 3 | **`un` `belie` `vable`** | S-04 |
 | 8 | the first surface | — | the list rises and keeps rising past the top of frame; then everything stops and the question holds | `Vocabulary` entering, no end in sight | **`how long?`** | S-06 |
@@ -143,8 +143,10 @@ on the one thing now missing. §03 opens by banking exactly that.
 - **The split happens in place** (beat 5). The card must not be replaced by a
   new row of cards — it is the same object coming apart, which is what makes
   tokens feel like *pieces of your sentence* rather than a new set of objects.
-- **The uneven split is load-bearing.** `dropp` + `ed` on screen is what stops
-  the viewer learning "token = word". If the split is even, §4's example breaks.
+- **The token-is-not-a-word lesson lives in beat 7, not beat 5.** It used to be
+  beat 5's job, carried by a `dropp` + `ed` split that the real tokenizer does
+  not produce. Beat 5 now sets the naive expectation honestly — this sentence
+  *does* break mostly along words — and beat 7 breaks it with a real split.
 - Beat 10 is a **round trip** — go, touch, come back changed. That is what makes
   a lookup feel like a lookup instead of a substitution.
 - Beat 12 leaves the number **alone in an empty frame**. The absence is the
@@ -175,12 +177,15 @@ on the one thing now missing. §03 opens by banking exactly that.
 ## Truth notes
 
 - 154,880 is this model’s vocabulary size, from `config.json`. `GROUND_TRUTH.md`.
-- **Token ID 5562 for "dog" is invented**, so beat 10 is hedged — it says
-  *"let’s say"*. That is the fix as built. If the real ID is ever measured from
-  the tokenizer, drop the hedge and use the measured number; until then the
-  hedge is not optional, because an unmeasured ID presented as fact is the one
-  kind of error an expert viewer will find instantly.
-- **The split is measured, and it is 8 pieces, all whole words.** v8 showed
+- **Token ID 5562 is measured**, from GLM-5.3-Flash's own tokenizer on
+  2026-09-11 — `research/glm/TOKENIZER.md`, reproducible with
+  `scripts/tokenize-glm.py`. The hedge (*"let's say"*) is gone because it is no
+  longer a guess. Note it is ` dog` **with its leading space**: bare `dog` is
+  18427, a different token, so if a frame ever shows the piece without the
+  space the number on screen becomes wrong.
+- **The split is measured: 8 pieces — seven words and a comma.** Not "all
+  whole words"; the comma is a token and is not a word, which is one piece out
+  of eight and was enough to make the earlier phrasing false. v8 showed
   `dropp` + `ed` and claimed nine; the real tokenizer gives `dropped` whole.
   That also changes §8's on-screen total from 3,024 to **2,688**, because the
   pieces are countable beside it. `research/glm/TOKENIZER.md`.
@@ -207,8 +212,9 @@ on the one thing now missing. §03 opens by banking exactly that.
 
 - Beat 2 uses the running prompt: **`The dog dropped the ball, and it`** — the
   same sentence every section that needs text will use.
-- Beat 5: the pieces are all whole words for *this* sentence, and the frame
-  must not imply that is general — beat 7 exists to break it. Do not invent an
+- Beat 5: the pieces break *mostly* along words for this sentence — the comma
+  is the exception, and the note names it. The frame must not imply the
+  word-boundary split is general; beat 7 exists to break it. Do not invent an
   uneven split here to make the point earlier.
 - Beat 8: the list must run **off the top of the frame** before it stops. If the
   whole list is visible, the question is rhetorical and the viewer does not
