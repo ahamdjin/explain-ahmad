@@ -34,51 +34,88 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 03`
 | Target | ~13 beats · ~1:25 |
 | Still forbidden | `attention`, `layer` |
 
+## What changed from v8
+
+**1. It named the thing before showing it behave.** v8's beat 6 landed the word
+*embedding* and asserted *"it's the first thing that actually means something"*
+— and then spent beats 7 to 11 demonstrating why. The evidence arrived after
+the conclusion, which is the order S-04 exists to forbid. The name and the
+claim now land together at beat 12, once `dog`, `cat` and `Tuesday` have been
+on screen.
+
+**2. Nothing was ever asked.** Thirteen beats of telling. Beat 6 is now a soft
+question — *what could one short word need four thousand numbers for?* — which
+is the question the next five beats answer, and it is the honest place for one
+because the viewer has just watched a row run off both edges of the frame.
+S-06, and soft rather than a bet: the hard-bet budget is spent on §1 and §7.
+
+**3. The closing beat carried fifty words.** Naming the lookup as finished and
+landing *the same row every time* are two jobs. They are now beats 13–15, and
+the identical-row frame gets its own hold, because it is the setup §4 spends.
+
 ## The script
 
 ### Act 1 — banking the row number (beat 1) · **S-14**
 
-> **1.** So every piece has a row number now — and a row number is only a name. A
-> name has to turn into a meaning somewhere. Here’s where.
->
-### Act 2 — the lookup, in front of you (beats 2–12) · **S-04**
+> **1.** *(`5562` alone; the bottom edge of a huge table rises into frame)* So
+> every piece has a row number now — and a row number is only a name. A name
+> has to turn into a meaning somewhere. Here's where.
 
-> **2.** *(a very tall table)* The model has a table. One row for every token
-> in that list — all hundred and fifty-four thousand of them.
->
-> **3.** The ID is just which row to go and fetch.
->
-> **4.** *(row 5562 slides out)* So token five thousand, five hundred and sixty-two pulls out
-> this row.
->
-> **5.** *(the row extends past the frame)* Four thousand and ninety-six numbers.
-> For one small piece of text.
->
-> **6.** This row is called an **embedding**. And it's the first thing in the
-> whole machine that actually means something.
->
-> **7.** Here’s why it means something. Let’s pull out "dog", and "cat".
->
-> **8.** *(the rows line up, mostly similar)* They're not the same — but they're
-> close. Lots of these numbers nearly match.
->
-> **9.** *(a third row, clearly different)* Now "Tuesday". Not close to either
-> of them.
->
-> **10.** Nobody sat down and made that happen. Training did it. Words that get
-> used in similar ways ended up with similar rows.
->
-> **11.** So the meaning isn't in any one number. It's in **where the row sits**
-> relative to all the other rows.
->
-> **12.** And that's what goes into the model. Not "dog". This.
->
-### Act 3 — the wall — the same row, every time (beat 13) · **S-14**
+### Act 2 — the lookup, in front of you (beats 2–5) · **S-04**
 
-> **13.** And that’s the lookup, done — the word is four thousand and ninety-six
-> numbers now. But here’s the thing to hold on to. This row is stored in a
-> table. Which means it is exactly the same every single time the word "dog"
-> turns up. Same word, same row, always.
+> **2.** *(we pull back; the table's full height comes into view)* The model has
+> a table. One row for every token in that list — all hundred and fifty-four
+> thousand of them.
+>
+> **3.** *(the number travels up the table)* The ID is just which row to go and
+> fetch.
+>
+> **4.** *(row 5562 slides out and comes forward)* So token five thousand, five
+> hundred and sixty-two pulls out this row.
+>
+> **5.** *(the row extends past both edges of frame)* Four thousand and
+> ninety-six numbers. For one small piece of text.
+
+### Act 3 — the question, and the answer (beat 6) · **S-06**
+
+> **6.** *(the row holds; nothing moves)* Which seems like a lot. What could one
+> short word possibly need four thousand numbers for?
+
+### Act 4 — what the numbers are for (beats 7–11) · **S-04**
+
+> **7.** *(two more rows slide out and stack under it)* Here's what. Let's pull
+> out two more — "dog", and "cat".
+>
+> **8.** *(the rows align; the values that nearly match light up)* They're not
+> the same. But they're close. Lots of these numbers nearly match.
+>
+> **9.** *(a third row aligns; almost nothing lights)* Now "Tuesday". Not close
+> to either of them.
+>
+> **10.** *(the three rows collapse into three points, spaced by likeness)*
+> Nobody sat down and arranged that. Training did it. Words that get used in
+> similar ways ended up with similar rows.
+>
+> **11.** *(a brace measures the two distances)* So the meaning isn't in any one
+> number. It's in **where the row sits** relative to all the other rows.
+
+### Act 5 — the name, now that it is earned (beat 12) · **S-12**
+
+> **12.** *(the points unfold back into the `dog` row; a handwritten label lands
+> on it)* This row has a name. It's called an **embedding**. And it's the first
+> thing in the whole machine that actually means something.
+
+### Act 6 — the wall (beats 13–15) · **S-14**
+
+> **13.** *(the `dog` row alone in frame)* And that's the lookup, done. That's
+> what goes into the model. Not "dog". This.
+>
+> **14.** *(the same row is pulled from the table a second time)* But here's the
+> thing to hold on to. This row is stored in a table.
+>
+> **15.** *(pulled a third time; all three sit identical)* Which means it is
+> exactly the same, every single time the word "dog" turns up. Same word, same
+> row, always.
 
 ## Storyboard
 
@@ -91,27 +128,37 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 03`
 | 3 | the table | — | the number travels up the table and stops at its own row | `5562` moving | row 5562 | S-04 |
 | 4 | the table | — | that row slides out of the table and comes forward | `EmbeddingTable`, row extracted | row 5562 | S-04 |
 | 5 | the table | — | the extracted row extends sideways past both edges of frame | `NumberRow` extending | 4096 values | S-04 |
-| 6 | the table | — | the row holds; a handwritten label lands on it | `NumberRow`, `Note` | "embedding" | S-04 |
+| 6 | the table | — | everything stops; the row holds and the question sits under it | `NumberRow`, still | **`what for?`** | S-06 |
 | 7 | the table | — | two more rows slide out and stack under it | 3 `NumberRow`s | `dog`, `cat` | S-04 |
 | 8 | the table | — | the `dog` and `cat` rows align; the values that nearly match light up | `NumberRow` `compare` | many matches | S-04 |
 | 9 | the table | — | a third row slides out and aligns; almost nothing lights | 3 rows aligned | `Tuesday` | S-04 |
 | 10 | the table | — | the three rows collapse into three points, spaced by how alike they are | rows → `Space` points | dog·cat close, Tuesday far | S-04 |
 | 11 | the table | — | the points hold; a brace measures the two distances | points, `Brace` | the two gaps | S-04 |
-| 12 | the table | — | the points unfold back into the `dog` row, alone | one `NumberRow` | row for `dog` | S-04 |
-| 13 | the table | — | the same row is pulled from the table twice more; all three are identical | 3 identical rows | identical, every time | S-14 |
+| 12 | the table | — | the points unfold back into the `dog` row and a handwritten label lands on it | `NumberRow`, `Note` | **"embedding"** | S-12 |
+| 13 | the table | — | the label settles; the row sits alone in frame | one `NumberRow` | row for `dog` | S-14 |
+| 14 | the table | — | the same row is pulled from the table a second time, beside the first | 2 identical rows | pulled again | S-14 |
+| 15 | the table | — | pulled a third time; all three sit identical, unchanged | 3 identical rows | identical, every time | S-14 |
 
 ### Board notes
 
-- **One camera move**, at beat 2, and it exists to make the table's height felt.
-  After that the section is still for eleven beats.
-- **Beats 8–11 are the carrying frames.** dog / cat / Tuesday. If that image
-  does not teach "meaning is where the row sits", the section fails and no
-  motion pass saves it.
-- Beat 10 turns rows into points. That is a **representation change**, so it
-  must be animated as a fold — the same objects rearranging, never a cut to a
-  scatter plot. See the truth note.
-- Beat 13 is the deposit. **Three identical rows on one frame** is the whole
-  setup for §4, so it is a picture and not a line of voice-over.
+- **One camera move**, at beat 2, and it earns a place change from the surface
+  §2 ended on out to the table. Beats 3–15 are still.
+- **Beat 6 is the only held beat**, and it holds on a row that is running off
+  both edges of the frame. The question only works if the excess is visible —
+  if the row fits on screen, four thousand numbers does not feel like a lot and
+  nobody wonders what they are for.
+- **Beat 10 is the frame that must not be a diagram of meaning.** Three points
+  and two gaps. Any axis labels, any named dimensions, and the viewer learns
+  that embeddings have interpretable directions, which is a harder thing to
+  unlearn than it is to avoid teaching.
+- **The label lands at beat 12, not beat 6.** v8 named it before the evidence.
+  The word has to attach to something the viewer has already watched behave,
+  which is the whole of S-04 and the reason `NCASE_EVOLUTION_OF_TRUST.md` §2
+  matters: the payoff matrix is a summary of a coin machine you already used.
+- **Beats 14–15 are the seed §4 spends.** The identical rows need a real hold —
+  three of them, visibly unchanged — because §4 opens by finding that
+  intolerable. If the sameness is a throwaway here, §4's *but* has nothing to
+  push against.
 
 ---
 
@@ -119,13 +166,16 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 03`
 
 | Beat | Job |
 | --- | --- |
-| 1–4 | **answer** — the lookup, plainly |
-| 5–6 | **teach** — the row, its size, its name |
-| 7–9 | **teach** — the example. This is the section's job and it gets three beats |
-| 10 | **teach** — where it came from, so it isn't magic |
-| 11 | **teach** — the one sentence a viewer should keep |
-| 12 | answer — the handoff |
-| 13 | **but** — the row is fixed. **This is the setup for §4 and it must land flatly** |
+| 1 | **bank** — a row number is only a name |
+| 2–4 | **teach** — the table, and what an ID is for |
+| 5 | setup — the size of one row, visibly too big |
+| 6 | **ask** — what could a word need four thousand numbers for? |
+| 7–9 | **teach** — dog, cat, Tuesday: likeness is the answer |
+| 10 | **teach** — and nobody designed it |
+| 11 | **teach** — meaning is position, not any one number |
+| 12 | **name** — embedding, once it has been watched behaving |
+| 13 | **the handoff** — this is what goes in, not the word |
+| 14–15 | **the wall** — and it is the same row every single time |
 
 ## Truth notes
 
