@@ -168,6 +168,11 @@ variation. Pattern interrupts every 20 to 40 seconds."*
 Directionally consistent with S-06's mechanism, which is why it is kept. **No
 study behind the 20–40 number.** Do not quote it as a fact.
 
+**Cited by no beat, deliberately.** It is not a technique a single beat can use;
+it is a property of the cut. The build satisfies it structurally -- 189 beats
+across ~30 minutes is a change of picture every ~9.5 seconds, and `check:flow`
+fails any beat that changes nothing. `npm run timing`.
+
 ### S-08 · Micro open loops · **tier B** · *asserted*
 
 **Source:** same. Teasing a specific thing revealed later. Distinct from
@@ -185,9 +190,16 @@ piece itself built. Roughly two-thirds through, the belief is taken away.
 **Rule:** one reversal at ~⅔, and it must reverse something **this video
 taught them to believe** — not a misconception they arrived with.
 
-**Ours:** §12 (caching works, but not at 12,096 slots) is in the right place
-but nothing earlier teaches the viewer to expect caching to save them, so there
-is no belief to take back. Fixable in §11.
+**Ours:** §12 (caching works, but not at 12,096 slots) is in the right place,
+and **§11 beats 14-15 now plant the belief it reverses** -- an empty cache shelf
+sketched in beside the bars, with the narration endorsing it out loud: *you're
+right*. That is the whole point of the rule: the belief has to be one this video
+taught them, not one they walked in with.
+
+Until 2026-09-11 this entry read *"nothing earlier teaches the viewer to expect
+caching to save them, so there is no belief to take back. Fixable in §11"*. It
+was fixed in §11, and the ledger went on describing a hole that had been filled
+-- see `section-11/scene.ts`, `shelf`.
 
 ### S-10 · Close by reusing the opening's nouns figuratively · **tier A** · *observed*
 

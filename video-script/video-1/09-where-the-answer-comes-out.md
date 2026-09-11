@@ -30,7 +30,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
 | Answers | the last position gets turned into a score for every token in the list, and one is chosen |
 | Exits on | all that machinery, and one token comes out? |
 | → next | **therefore** one word comes out — out of all that |
-| Target | ~10 beats · ~1:00 |
+| Built | 12 beats · 1:39 · `npm run timing` is the authority |
 
 ## What changed from v8
 

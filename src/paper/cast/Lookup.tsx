@@ -275,32 +275,113 @@ export function EmbeddingTable({
  * coordinates. If a viewer could read a position off it, the frame would be
  * lying. See video-script/03 truth notes.
  */
-export function Space({ show }: { show: boolean }) {
+export function Space({
+  show,
+  /**
+   * Draw the two distances as measures, labelled.
+   *
+   * **These live in here, not as page overlays.** §3 beat 11 used two
+   * `brace()` overlays positioned by hand-tuned stage percentages, while the
+   * points live in this SVG's own coordinates behind a `Slot` at 58/52 scale
+   * 1.4. There is no percentage that tracks that, so the "close" measure drew
+   * itself to the *left* of `dog` and the "nothing like it" label landed on top
+   * of `Tuesday`.
+   *
+   * It is the same lesson `Attention` already carries: a measure of the gap
+   * between two objects has to be drawn by whatever draws the objects, or it
+   * drifts the moment either one moves. `skills/SPATIAL_CONTINUITY.md`.
+   */
+  measures = false,
+}: {
+  show: boolean
+  measures?: boolean
+}) {
+  /* One source for the positions. Everything else here is derived from it. */
   const points = [
     { label: 'dog', x: 34, y: 44 },
     { label: 'cat', x: 44, y: 36 },
     { label: 'Tuesday', x: 82, y: 74 },
   ]
+  const at = (p: (typeof points)[number]) => ({ x: p.x * 4.6, y: p.y * 3 })
+  const [dog, cat, tuesday] = points.map(at)
+
+  /** A span with end ticks, drawn under the pair it measures. */
+  const Measure = ({
+    a,
+    b,
+    label,
+    colour,
+    drop,
+  }: {
+    a: { x: number; y: number }
+    b: { x: number; y: number }
+    label: string
+    colour: string
+    drop: number
+  }) => {
+    const y = Math.max(a.y, b.y) + drop
+    return (
+      <g stroke={colour} strokeWidth="2.4" fill="none">
+        <path d={`M${a.x} ${y}h${b.x - a.x}`} />
+        <path d={`M${a.x} ${y - 6}v12M${b.x} ${y - 6}v12`} />
+        <text
+          x={(a.x + b.x) / 2}
+          y={y + 30}
+          textAnchor="middle"
+          className="s1-space-m"
+          fill={colour}
+          stroke="none"
+        >
+          {label}
+        </text>
+      </g>
+    )
+  }
+
   return (
     <div className="s1-space">
-      <svg viewBox="0 0 460 300" aria-hidden="true">
+      <svg viewBox="0 0 460 340" aria-hidden="true">
+        {/* The links, derived from the same points rather than written twice. */}
         <g stroke={PALETTE.relateInk} strokeWidth="2.2" strokeDasharray="5 5" opacity={show ? 0.8 : 0}>
-          <path d="M156 132 202 108" />
-          <path d="M202 108 378 222" />
+          <path d={`M${dog.x} ${dog.y} ${cat.x} ${cat.y}`} />
+          <path d={`M${cat.x} ${cat.y} ${tuesday.x} ${tuesday.y}`} />
         </g>
-        {points.map((p, i) => (
-          <motion.g
-            key={p.label}
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: show ? 1 : 0, scale: show ? 1 : 0.7 }}
-            transition={{ type: 'spring', stiffness: 120, damping: 16, delay: i * 0.12 }}
-          >
-            <circle cx={p.x * 4.6} cy={p.y * 3} r="11" fill={PALETTE.tealWash} stroke={ROLE.word} strokeWidth="2.8" />
-            <text x={p.x * 4.6} y={p.y * 3 + 34} textAnchor="middle" className="s1-space-t" fill={INK}>
-              {p.label}
-            </text>
-          </motion.g>
-        ))}
+
+        {points.map((p, i) => {
+          const c = at(p)
+          return (
+            <motion.g
+              key={p.label}
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: show ? 1 : 0, scale: show ? 1 : 0.7 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 16, delay: i * 0.12 }}
+            >
+              <circle cx={c.x} cy={c.y} r="11" fill={PALETTE.tealWash} stroke={ROLE.word} strokeWidth="2.8" />
+              <text x={c.x} y={c.y + 34} textAnchor="middle" className="s1-space-t" fill={INK}>
+                {p.label}
+              </text>
+            </motion.g>
+          )
+        })}
+
+        {/*
+          Different drops, so the two measures and the three point labels never
+          share a line. `nothing like it` used to be drawn straight through the
+          word `Tuesday`.
+        */}
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: measures && show ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/*
+            The two measures span exactly the two pairs the dashed links join
+            -- dog→cat and cat→Tuesday. Measuring dog→Tuesday while the link
+            drew cat→Tuesday pointed at two different gaps in one frame.
+          */}
+          <Measure a={dog} b={cat} label="close" colour={ROLE.word} drop={56} />
+          <Measure a={cat} b={tuesday} label="nothing like it" colour={ROLE.cost} drop={58} />
+        </motion.g>
       </svg>
     </div>
   )

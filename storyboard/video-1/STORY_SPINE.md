@@ -49,7 +49,13 @@ is only worth anything to someone who has seen the machine. So v4 teaches the
 full pipeline and uses the memory question as the **payoff**, not as a mystery
 running underneath.
 
-Runtime lands around **21 minutes** as built (16.6 of it speaking). The risk of that shape is a payoff at
+Runtime lands around **30 minutes** as built (21.7 of it speaking, at 145 wpm
+across 189 beats and 3,145 words). This said 21 minutes until 2026-09-11, when
+`npm run timing` was read against the finished build rather than the 165-beat
+draft it was written for -- a nine-minute error in the one document the voice
+over is planned from. **Run `npm run timing`; do not trust a number typed in
+prose.** Ahmad's position above stands: longer is fine as long as all of it
+makes sense. The risk of that shape is a payoff at
 minute twelve, and the answer to it is in §4 below: every mechanism section
 must add one *reason you could not have known in advance*. The teaching is the
 answer being assembled, not a detour before it.

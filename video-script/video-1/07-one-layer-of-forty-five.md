@@ -32,7 +32,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 07`
 | Exits on | 336 expert visits for one token. But a sentence isn't one token. |
 | → next | **therefore** 336 visits, every one needing the floor below to finish first |
 | Banks | **336 visits, not one** |
-| Target | ~13 beats · ~1:25 |
+| Built | 13 beats · 2:07 · `npm run timing` is the authority |
 
 **5. "336 choices" flattened the hierarchy.** There are **42 routing
 decisions**, each selecting **8 experts**, giving **336 expert visits**. This

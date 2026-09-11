@@ -71,7 +71,11 @@ export const BEATS: Beat<Patch>[] = [
       path.fetch(4),
       cache.show({ x: 43, y: 50 }, 1, { filled: 0 }),
     ],
-    overlays: [note('cache', 40, 76, { size: 'md', rotate: -2 })],
+    /* Directly above the box. At 40/76 it sat a quarter of the frame below
+     * the thing it names, in open paper, while the box carried its own "kept
+     * close" plaque -- so the frame had two labels for one object and the
+     * loose one was nearest nothing. */
+    overlays: [note('cache', 43, 30, { size: 'md', rotate: -2 })],
   },
   {
     n: 4,
@@ -128,7 +132,14 @@ export const BEATS: Beat<Patch>[] = [
     title: 'A slider rises out of the floor under the box',
     relation: 'so',
     secs: 9,
-    vo: 'Which turns the whole thing into one question. How much do you keep close?',
+    /*
+     * Frames the dial; does **not** ask. Beat 9 is the question, and it is the
+     * most valuable still frame in the video. Asking here as well ("how much
+     * do you keep close?" then "where do you reckon the good setting is?") is
+     * the same question twice, and the second one inherits a viewer already
+     * holding the first -- so the commitment S-05 depends on never happens.
+     */
+    vo: 'Which turns the whole thing into one dial. How much you keep close.',
     commands: [slider.show({ x: 17, y: 78 }, 1)],
   },
   {
@@ -197,7 +208,12 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Twelve thousand and ninety-six slots.',
     /* Built on screen, the way 336 was in §7. */
     commands: [count.run(SLOTS, 'places an expert could be')],
-    overlays: [note('288 × 42', 40, 18, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
+    /*
+     * Left of the count, not on it. At 40/18 the working printed straight
+     * through the 12,096 it produces -- the payoff figure of the section,
+     * made unreadable by its own arithmetic.
+     */
+    overlays: [note('288 × 42', 28, 17, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
   },
   {
     n: 14,

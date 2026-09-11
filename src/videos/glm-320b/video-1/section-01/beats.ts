@@ -70,10 +70,17 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 2,
     id: 'one-card',
-    title: 'One graphics card',
+    title: 'One chip',
     relation: 'so',
     secs: 4,
-    vo: 'This one runs on a single graphics card.',
+    /*
+     * **"Chip", not "graphics card."** An 80 GB accelerator is not a gaming
+     * GPU, and §13's truth notes say so in as many words. It matters more here
+     * than as a wording nit: S-10 closes the video by redrawing this exact
+     * frame and reusing its nouns, and §13 beat 7 says "fits on one chip". A
+     * ring that opens on one noun and closes on another is not a ring.
+     */
+    vo: 'This one runs on a single chip.',
     commands: [rigA.show(1), narrator.pose('offer')],
     /* Sticky, because beat 3 is the comparison and a comparison needs both
      * halves on screen at once. Non-sticky, "one" vanished as "eight" arrived
@@ -257,8 +264,7 @@ export const BEATS: Beat<Patch>[] = [
      * everything, which the next beat now handles.
      */
     vo: 'Eight get picked. The other two hundred and eighty do nothing at all.',
-    commands: [],
-    overlays: [brace('280 idle', 22, 70, 60, { tone: 'ink' })],
+    commands: [hospital.idle('280 idle')],
   },
   {
     n: 15,

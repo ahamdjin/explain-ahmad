@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "check": "tsc -b && node scripts/check-chain.mjs",
+    "check": "tsc -b && node scripts/check-board.mjs && node scripts/check-chain.mjs && node scripts/check-strategy.mjs && node scripts/check-flow.mjs --static && node scripts/timing.mjs && node scripts/drift.mjs",
     "check:chain": "node scripts/check-chain.mjs",
     "check:board": "node scripts/check-board.mjs",
     "smoke": "node scripts/smoke.mjs",
@@ -38,7 +38,9 @@
     "check:strategy": "node scripts/check-strategy.mjs",
     "restamp": "node scripts/restamp.mjs",
     "drift": "node scripts/drift.mjs",
-    "check:flow": "node scripts/check-flow.mjs"
+    "check:flow": "node scripts/check-flow.mjs",
+    "check:frames": "node scripts/check-flow.mjs",
+    "check:overlap": "node scripts/check-overlap.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

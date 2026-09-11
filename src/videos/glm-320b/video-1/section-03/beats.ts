@@ -93,9 +93,21 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'and-yet',
     secs: 8,
     vo: 'Four thousand and ninety-six numbers. For one small piece of text.',
-    commands: [dog.set({ extend: true }), dog.moveTo({ x: 54, y: 40 }, 0.8)],
+    /*
+     * The board asks for the row to run "past both edges of frame", and it
+     * cannot do that while the table stands in the middle of the left third:
+     * the row was printed across rows 5557-5560 and read as sitting *on* the
+     * table it had just been pulled out of. So the table withdraws to the edge
+     * here and **comes back at beat 14**, on the line "this row is stored in a
+     * table" -- which turns a piece of housekeeping into that beat's event.
+     *
+     * The brace stops at 82 rather than 96. It was drawn straight through the
+     * narrator, who has stood at 91/70 since beat 1.
+     */
+    commands: [table.moveTo({ x: 6, y: 50 }, 1), dog.set({ extend: true }), dog.moveTo({ x: 54, y: 40 }, 0.8)],
+    clearSticky: true,
     overlays: [
-      brace('4,096 numbers — for one piece of text', 12, 62, 84, { tone: 'measure', sticky: true }),
+      brace('4,096 numbers — for one piece of text', 26, 62, 56, { tone: 'measure', voice: 'figure', sticky: true }),
     ],
   },
   {
@@ -187,8 +199,14 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'and-yet',
     secs: 10,
     vo: 'So the meaning isn’t in any one number. It’s in where the row sits relative to all the other rows.',
-    commands: [narrator.set({ pose: 'aha' })],
-    overlays: [brace('close', 42, 42, 12, { tone: 'word' }), brace('nothing like it', 52, 72, 26, { tone: 'cost' })],
+    /*
+     * The two measures are drawn by `Space` itself, from the same coordinates
+     * as the points. They used to be page-level `brace()` overlays at
+     * hand-tuned percentages, which cannot track a slot at 58/52 scale 1.4 --
+     * so "close" drew itself to the left of `dog` and "nothing like it" ran
+     * through the word `Tuesday`.
+     */
+    commands: [space.measure(), narrator.set({ pose: 'aha' })],
   },
   {
     n: 12,
@@ -227,7 +245,14 @@ export const BEATS: Beat<Patch>[] = [
     /* The turn. Said plainly, because the paradox §4 resolves only works if
      * this is stated flatly rather than hedged. */
     vo: 'But here’s the thing to hold on to. This row is stored in a table.',
-    commands: [dog.moveTo({ x: 60, y: 34 }, 0.62), again1.show({ x: 60, y: 52 }, 0.62), narrator.set({ pose: 'think' })],
+    /* The table comes back on the line that needs it. It stepped aside at beat
+     * 5 so the row could run edge to edge. */
+    commands: [
+      table.moveTo({ x: 24, y: 50 }, 1),
+      dog.moveTo({ x: 60, y: 34 }, 0.62),
+      again1.show({ x: 60, y: 52 }, 0.62),
+      narrator.set({ pose: 'think' }),
+    ],
   },
   {
     n: 15,

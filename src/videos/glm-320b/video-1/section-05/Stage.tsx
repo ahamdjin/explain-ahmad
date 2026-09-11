@@ -28,6 +28,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             doorsOpen={false}
             scoring={scene.hospital.scoring}
             badges={scene.hospital.badges}
+            idle={scene.hospital.idle}
           />
         </Slot>
 

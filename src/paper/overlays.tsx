@@ -21,6 +21,8 @@ export type Overlay = {
   tone?: Role
   size?: 'sm' | 'md' | 'lg' | 'xl'
   side?: 'top' | 'bottom'
+  /** Brace only: `figure` for a value the model produced, else the hand. */
+  voice?: 'hand' | 'figure'
   bow?: number
   dashed?: boolean
   backed?: boolean
@@ -79,6 +81,7 @@ export function Overlays({ overlays }: { overlays: Overlay[] }) {
                 width={overlay.width as string}
                 side={overlay.side}
                 tone={overlay.tone}
+                voice={overlay.voice}
               />
             )
 

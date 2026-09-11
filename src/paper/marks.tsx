@@ -88,6 +88,7 @@ export function Brace({
   width,
   side = 'bottom',
   tone = 'ink',
+  voice = 'hand',
 }: {
   label: string
   sub?: string
@@ -95,6 +96,17 @@ export function Brace({
   width: string
   side?: 'top' | 'bottom'
   tone?: Role
+  /**
+   * Which voice the label is in.
+   *
+   * `figure` is monospace, and in this video **mono means a value the model
+   * produced** -- number-row cells, counters, tower counts, the running cost.
+   * A brace saying "4,096 numbers" or "280 idle" is quoting a figure and earns
+   * it. A brace saying "close" or "same share" is the narrator pointing at a
+   * relation, and wearing a figure's typeface made it read as a measurement
+   * the video had taken. Default is the hand.
+   */
+  voice?: 'hand' | 'figure'
 }) {
   return (
     <motion.div
@@ -115,7 +127,7 @@ export function Brace({
           strokeLinecap="round"
         />
       </svg>
-      <span className="s1-brace-label">
+      <span className="s1-brace-label" data-voice={voice}>
         {label}
         {sub ? <em>{sub}</em> : null}
       </span>

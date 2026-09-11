@@ -31,7 +31,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 04`
 | Exits on | so the numbers depend on the sentence. Who reads them, and what do they decide? |
 | → next | **therefore** the same word carries different numbers in different sentences |
 | Banks | **the numbers depend on the whole sentence** |
-| Target | ~13 beats · ~1:30 |
+| Built | 16 beats · 2:29 · `npm run timing` is the authority |
 | Still forbidden | `layer` as a count |
 
 ## What changed from v8

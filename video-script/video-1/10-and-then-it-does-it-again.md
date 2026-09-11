@@ -32,7 +32,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 10`
 | Exits on | it never stops choosing. So could you store only the part it uses? |
 | → next | **therefore** every token of the reply pays 336 all over again |
 | Banks | **it never stops re-choosing** |
-| Target | ~14 beats · ~1:15 |
+| Built | 14 beats · 2:03 · `npm run timing` is the authority |
 
 ## What changed from v8
 

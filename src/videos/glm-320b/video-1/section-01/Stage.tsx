@@ -55,6 +55,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           heavy={scene.hospital.heavy}
           bunks={scene.hospital.bunks}
           doorsOpen={scene.hospital.doorsOpen}
+          idle={scene.hospital.idle}
         />
       </Slot>
 

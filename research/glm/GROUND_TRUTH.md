@@ -45,9 +45,14 @@ Verified 2026-09-09 against the model card, `config.json`, and the vLLM recipe.
 
 ### Cross-checks on the ~8 GB
 
-1. **Slots × size.** 12,096 × 25 MB ≈ **304 GB** — essentially the whole 306 GiB
-   checkpoint, so routed experts do dominate the weight, which is what makes the
-   2.8%-per-word figure the one that matters.
+1. **Slots × size.** 12,096 × 25.17 MB ≈ **304 GB**, which is **283 GiB** —
+   about **92% of the 306 GiB checkpoint**. Routed experts dominate the weight,
+   which is what makes the 2.8%-per-token figure the one that matters.
+
+   *Mind the units here.* This read "≈ 304 GB — essentially the whole 306 GiB
+   checkpoint", which puts 304 and 306 side by side as though they were the
+   same measurement. They are not: 304 GB is 283 GiB. The conclusion survives,
+   the arithmetic as written did not.
 2. **Direct.** `moe_intermediate_size` is **2048** (measured from `config.json`,
    2026-09-11), so one expert is 4096 × 2048 × 3 = 25.17 MB at FP8 and
    336 × 25.17 MB = **8.5 GB**.

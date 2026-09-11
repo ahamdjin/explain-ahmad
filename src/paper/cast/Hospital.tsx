@@ -43,6 +43,7 @@ export function Hospital({
   doorsOpen,
   scoring = false,
   badges = 'none',
+  idle,
 }: {
   sign: string
   plaque: string
@@ -68,6 +69,20 @@ export function Hospital({
    * the section is for.
    */
   badges?: 'none' | 'empty' | 'scored'
+  /**
+   * A brace under the wall counting the experts that did nothing -- "280 idle".
+   *
+   * It is drawn **here**, in the building's own viewBox, and not as a page
+   * overlay at a hand-tuned stage percentage. It was an overlay in both §1 and
+   * §5, and in both it drew straight through the entrance: no percentage can
+   * track a building that two beats earlier changed scale and camera. The rule
+   * is the one `Attention` and `Space` already follow -- **a measure of a thing
+   * is drawn by whatever draws the thing.**
+   *
+   * The label sits left of the doors (486-634) rather than centred under the
+   * brace, which is the one place a centred label cannot go.
+   */
+  idle?: string
 }) {
   const chosen = new Set(lit)
   /*
@@ -309,6 +324,27 @@ export function Hospital({
               </text>
             ))}
           </g>
+        ) : null}
+
+        {/* how many did nothing -- measured against the wall it counts */}
+        {idle ? (
+          <motion.g
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+          >
+            <path
+              d={`M${X0 - 10} 512v8q0 5 5 5h${(COLS * STEP_X) / 2 - 24}q5 0 5 5 0-5 5-5h${(COLS * STEP_X) / 2 - 24}q5 0 5-5v-8`}
+              fill="none"
+              stroke={PALETTE.red}
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <text x="286" y="566" textAnchor="middle" className="s1-hosp-idle" fill={PALETTE.red}>
+              {idle}
+            </text>
+          </motion.g>
         ) : null}
 
         {/* entrance */}

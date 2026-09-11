@@ -321,7 +321,11 @@ export function ModelCard({
 
   return (
     <div className="s1-mcard">
-      <svg viewBox="0 0 300 400" aria-hidden="true">
+      {/* 470 tall, not 400: eight chips need two rows and the note needs to sit
+          under them. In one row they ran off the card, under the narrator and
+          off the right edge of frame -- on the beat whose whole line is
+          "needs eight", with only seven countable. */}
+      <svg viewBox="0 0 300 470" aria-hidden="true">
         <path d="M8 8h284v250H8z" fill={PALETTE.paperLight} stroke={INK} strokeWidth="3.2" />
         <text x="150" y="40" textAnchor="middle" className="s1-mcard-name" fill={INK}>
           {name}
@@ -362,36 +366,44 @@ export function ModelCard({
           </text>
         </g>
 
-        {/* four chips, not a rack */}
+        {/*
+          A countable stack, never a rack -- and countable means **it has to
+          fit**. Four to a row, wrapping: one chip sits alone, eight read as
+          4 + 4, which is quicker to count than a row of eight anyway.
+        */}
         <g>
-          {Array.from({ length: chips }, (_, i) => (
-            <motion.g
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 140, damping: 16, delay: i * 0.1 }}
-            >
-              <rect
-                x={20 + i * 68}
-                y="286"
-                width="58"
-                height="58"
-                rx="6"
-                fill={PALETTE.paperShade}
-                stroke={INK}
-                strokeWidth="2.8"
-              />
-              <rect x={32 + i * 68} y="298" width="34" height="34" rx="3" fill={PALETTE.idleDim} stroke={INK} strokeWidth="2" />
-              {/* legs, so it reads as a chip and not as a tile */}
-              <g stroke={INK} strokeWidth="2" strokeLinecap="round">
-                <path d={`M${30 + i * 68} 344v8M${44 + i * 68} 344v8M${58 + i * 68} 344v8M${72 + i * 68} 344v8`} />
-              </g>
-            </motion.g>
-          ))}
+          {Array.from({ length: chips }, (_, i) => {
+            const x = 19 + (i % 4) * 68
+            const y = 286 + Math.floor(i / 4) * 74
+            return (
+              <motion.g
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 140, damping: 16, delay: i * 0.1 }}
+              >
+                <rect
+                  x={x}
+                  y={y}
+                  width="58"
+                  height="58"
+                  rx="6"
+                  fill={PALETTE.paperShade}
+                  stroke={INK}
+                  strokeWidth="2.8"
+                />
+                <rect x={x + 12} y={y + 12} width="34" height="34" rx="3" fill={PALETTE.idleDim} stroke={INK} strokeWidth="2" />
+                {/* legs, so it reads as a chip and not as a tile */}
+                <g stroke={INK} strokeWidth="2" strokeLinecap="round">
+                  <path d={`M${x + 10} ${y + 58}v8M${x + 24} ${y + 58}v8M${x + 38} ${y + 58}v8M${x + 52} ${y + 58}v8`} />
+                </g>
+              </motion.g>
+            )
+          })}
         </g>
 
         {note ? (
-          <text x="150" y="382" textAnchor="middle" className="s1-mcard-note" fill={INK}>
+          <text x="150" y={chips > 4 ? 452 : 382} textAnchor="middle" className="s1-mcard-note" fill={INK}>
             {note}
           </text>
         ) : null}

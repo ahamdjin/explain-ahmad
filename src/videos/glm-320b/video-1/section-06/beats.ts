@@ -100,7 +100,10 @@ export const BEATS: Beat<Patch>[] = [
     n: 6,
     id: 'not-an-equal-say',
     title: 'Each output takes the size of its expert’s score',
-    relation: 'so',
+    /* The spoken line opens "But not equally" -- a contradiction, so it gets
+     * the hanging `and-yet` spring rather than the quick `so`. A beat whose
+     * words turn and whose motion continues reads as a list item. */
+    relation: 'and-yet',
     secs: 11,
     vo: 'But not equally. The router already scored them, so the ones that scored higher count for more.',
     commands: [blend.weigh()],

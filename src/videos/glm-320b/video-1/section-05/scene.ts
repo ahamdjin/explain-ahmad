@@ -55,6 +55,8 @@ export type SceneState = {
     focus: boolean
     scoring: boolean
     badges: 'none' | 'empty' | 'scored'
+    /** Beat 9's count of the ones that did nothing, drawn by the building. */
+    idle: string
   }
   /**
    * `dog` / `French` / `maths`, trying to land on the eight and sliding off.
@@ -88,6 +90,7 @@ export const INITIAL: SceneState = {
     focus: false,
     scoring: false,
     badges: 'none',
+    idle: '',
   },
   plates: { on: false, at: { x: 51, y: 44 }, scale: 1.5, landing: false, falling: false },
   arcs: { on: false, at: { x: 15, y: 54 }, scale: 0.6 },
@@ -148,7 +151,15 @@ export const hospital = {
   choose: (lit: readonly number[]): Patch => ({ hospital: { lit, focus: true, scoring: false } }),
   /** Where the last set sat, so a new eight reads as *different*. */
   remember: (was: readonly number[]): Patch => ({ hospital: { was } }),
-  plain: (): Patch => ({ hospital: { badges: 'none', focus: false, lit: [] } }),
+  /**
+   * Beat 9. The 280 that did nothing, braced against the wall they sit in.
+   *
+   * This was a page overlay -- `brace('280 idle', 30, 62, 44)` -- and it drew
+   * through the entrance, because the building had changed both scale and
+   * camera two beats earlier and a stage percentage cannot follow that.
+   */
+  idle: (label: string): Patch => ({ hospital: { idle: label } }),
+  plain: (): Patch => ({ hospital: { badges: 'none', focus: false, lit: [], idle: '' } }),
 }
 
 export const camera = {

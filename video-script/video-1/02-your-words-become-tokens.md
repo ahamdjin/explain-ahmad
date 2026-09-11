@@ -20,7 +20,7 @@ Strategies: `skills/STRATEGY_LEDGER.md`
 | Answers | your text is cut into pieces, and every possible piece has a number |
 | Exits on | a row number has no meaning in it. So how does it know what anything means? |
 | → next | **but** a number like that is a name, not a meaning |
-| Target | 13 beats · see `npm run restamp 02` for the coded runtime |
+| Built | 13 beats · 2:01 · `npm run timing` is the authority |
 | Still forbidden | `embedding`, `attention`, `layer`, `router` |
 | Hard-bet budget | **uses 0 of 2.** Both are spent — §01 and §07. Beat 8 is a *soft* question (S-06), which is not rationed |
 

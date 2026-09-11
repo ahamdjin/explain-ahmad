@@ -32,7 +32,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 05`
 | Exits on | eight experts are picked. What do they actually do? |
 | → next | **therefore** the choice is made from numbers that only just existed |
 | Banks | **the choice depends on those numbers** |
-| Target | ~13 beats · ~1:25 |
+| Built | 16 beats · 3:03 · `npm run timing` is the authority |
 
 ## What changed from v8
 

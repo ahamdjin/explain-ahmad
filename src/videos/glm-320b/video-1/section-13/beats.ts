@@ -259,7 +259,11 @@ export const BEATS: Beat<Patch>[] = [
      * similar picture; an exact match reads as a return, which is the only
      * version that pays off seventeen beats of setup.
      */
-    vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs eight.',
+    /* S-10 pays out here, and it pays out in **nouns**: this line is §1 beat 2
+     * said back. §1 says "a single chip", so this says a single chip. It said
+     * "card" until 2026-09-11, which made the closing ring rhyme rather than
+     * return. */
+    vo: 'Two models. Both about five percent active. One of them runs on a single chip; the other one needs eight.',
     /*
      * §1's coordinates, exactly: blocks at 30/42 and 72/42 scale 0.5, rigs at
      * 30/73 and 72/73 with counts 1 and 4. If `section-01/scene.ts` moves,

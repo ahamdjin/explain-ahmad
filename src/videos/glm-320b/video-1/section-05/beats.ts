@@ -1,4 +1,4 @@
-import { brace, GROUND_Y, note, type Beat } from '../../../../paper'
+import { GROUND_Y, note, type Beat } from '../../../../paper'
 import {
   CHOSEN,
   OTHER,
@@ -73,10 +73,17 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 7,
     vo: 'In front of it: two hundred and eighty-eight experts. It has to pick some.',
+    /*
+     * The row moves **with** the pull-back. It used to hold at 40/44, which is
+     * where the building lands -- so the frame for this beat had the sentence's
+     * numbers printed across the third floor. An actor that does not move when
+     * the world does is not staying put, it is being overrun.
+     */
     commands: [
       camera.to({ x: 50, y: 48 }, 0.86),
       hospital.show({ x: 52, y: 44 }, 0.9, { staffed: true }),
       desk.moveTo({ x: 62, y: 74 }, 0.66),
+      row.moveTo({ x: 30, y: 78 }, 0.4),
       narrator.set({ pose: 'reach' }),
     ],
     lateOverlays: {
@@ -96,7 +103,12 @@ export const BEATS: Beat<Patch>[] = [
      * change the viewer watches rather than a state they arrived into.
      */
     vo: 'The row arrives. And the router does exactly one thing with it.',
-    commands: [row.moveTo({ x: 52, y: 74 }, 0.4), hospital.plain(), narrator.set({ pose: 'wonder' })],
+    /*
+     * It rests *beside* the desk, not on it. At 52/74 the row sat inside the
+     * router's ring -- for this beat and the eight after it, because nothing
+     * moved it again until beat 13.
+     */
+    commands: [row.moveTo({ x: 40, y: 78 }, 0.4), hospital.plain(), narrator.set({ pose: 'wonder' })],
   },
   {
     n: 5,
@@ -159,8 +171,10 @@ export const BEATS: Beat<Patch>[] = [
      * job, outside this wall. `GROUND_TRUTH.md`.
      */
     vo: 'Eight, out of two hundred and eighty-eight. The other two hundred and eighty do nothing at all.',
-    commands: [count.show({ x: 15, y: 40 }, 1, { value: 8, label: 'of 288 did anything' })],
-    overlays: [brace('280 idle', 30, 62, 44, { tone: 'cost' })],
+    commands: [
+      count.show({ x: 15, y: 40 }, 1, { value: 8, label: 'of 288 did anything' }),
+      hospital.idle('280 idle'),
+    ],
   },
   {
     n: 10,

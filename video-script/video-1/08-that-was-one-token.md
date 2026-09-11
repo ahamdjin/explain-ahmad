@@ -32,7 +32,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 08`
 | Exits on | all of that happens. What comes out? |
 | → next | **therefore** every token pays its own 336 |
 | Banks | **every token pays its own 336** |
-| Target | ~11 beats · ~1:10 |
+| Built | 14 beats · 2:08 · `npm run timing` is the authority |
 
 ## What changed from v8
 

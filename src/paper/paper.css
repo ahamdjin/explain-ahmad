@@ -270,6 +270,13 @@
   font: 400 27px/1 var(--hand);
 }
 
+/* A figure the model produced, so it wears the mono face -- the same rule
+   the brace labels follow. `marks.tsx`, `Brace`'s `voice` prop. */
+.s1-hosp-idle {
+  font: 400 26px/1 var(--mono);
+  letter-spacing: 0.02em;
+}
+
 .s1-hosp-z {
   font: 400 30px/1 var(--scrawl);
 }
@@ -541,12 +548,20 @@
   overflow: visible;
 }
 
+/* Mono is reserved for values the model produced, so a brace quoting a figure
+ * opts in and everything else stays in the narrator's hand. §3 beat 11's
+ * "close" used to render in monospace next to handwritten point labels. */
+.s1-brace-label[data-voice='figure'] {
+  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
+  letter-spacing: 0.07em;
+}
+
 .s1-brace-label {
   display: block;
   margin-top: 4px;
   text-align: center;
-  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
-  letter-spacing: 0.07em;
+  font: 400 clamp(12px, 1.3cqw, 25px) / 1.2 var(--scrawl);
+  letter-spacing: 0;
   white-space: nowrap;
 }
 
@@ -1055,6 +1070,14 @@
 .s1-vocab-cap,
 .s1-space-t {
   font: 400 17px/1 var(--hand);
+}
+
+/* The distance measures in §3 beat 11. Handwriting, not the mono the number
+ * rows use: "close" and "nothing like it" are relations the narrator is
+ * pointing at, not figures the machine produced. Mono in this video means a
+ * value that came out of the model. */
+.s1-space-m {
+  font: 400 16px/1 var(--scrawl);
 }
 
 /* Attention — the wiring between tokens ---------------------------------- */

@@ -19,7 +19,7 @@ Teacher for the shape: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §1
 | Teaches | parameter, expert, active, Mixture of Experts |
 | Answers | **"five percent active" does not predict what hardware you need** |
 | Exits on | who picks the eight, and why is *that* the expensive question? |
-| Target | 17 beats · see `npm run restamp 01` for the coded runtime |
+| Built | 17 beats · 2:13 · `npm run timing` is the authority |
 | Never says | `token`, `layer`, `attention`, `bandwidth`, `VRAM`, `router` |
 | **Must not say** | why you cannot store only the active part. **That is §11.** |
 | Hard-bet budget | **uses 1 of 2** (beat 12). The other is reserved for §07. |
@@ -69,8 +69,8 @@ one and how good the evidence is; a `C` tier there means I inferred it.
 > the rest is grey)* Two AI models. Both use about five percent of themselves
 > to answer you.
 >
-> **2.** *(one graphics card slides in under the left block)* This one runs on a
-> single graphics card.
+> **2.** *(one chip slides in under the left block)* This one runs on a
+> single chip.
 >
 > **3.** *(seven more cards stack under the right block)* This one needs eight.
 
@@ -185,7 +185,7 @@ one thing now missing; §02 opens by banking exactly that. **S-14**.
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the sheet | — | two model blocks arrive side by side, five percent live on each | two `Block`s, 5% lit | — | S-01 |
-| 2 | the sheet | — | one graphics card slides in under the left block | `MachineBox` ×1 | — | S-01 |
+| 2 | the sheet | — | one chip slides in under the left block | `MachineBox` ×1 | — | S-01 |
 | 3 | the sheet | — | seven more cards stack under the right block | `Rig` ×8 | — | S-01 |
 | 4 | the sheet | — | the quoted phrase writes itself across both blocks | handwritten note | **`only 5% active`** | S-02 |
 | 5 | the sheet | — | the blocks hold, visibly unequal underneath | both blocks, 1 vs 4 cards | — | S-02 |

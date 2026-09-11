@@ -41,7 +41,7 @@ export type SceneState = {
   again1: Placed
   again2: Placed
   /** Relative distance only. No axes, no grid, no coordinates. */
-  space: { on: boolean; show: boolean; at: At; scale: number }
+  space: { on: boolean; show: boolean; measures: boolean; at: At; scale: number }
   narrator: NarratorActor
   ground: GroundActor
   camera: CameraActor
@@ -55,7 +55,7 @@ export const INITIAL: SceneState = {
   tues: { on: false, at: { x: 58, y: 70 }, scale: 0.6, matches: false, label: 'Tuesday' },
   again1: { on: false, at: { x: 58, y: 52 }, scale: 0.6 },
   again2: { on: false, at: { x: 58, y: 70 }, scale: 0.6 },
-  space: { on: false, show: false, at: { x: 58, y: 52 }, scale: 1.4 },
+  space: { on: false, show: false, measures: false, at: { x: 58, y: 52 }, scale: 1.4 },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
   camera: { ...INITIAL_CAMERA },
@@ -94,7 +94,9 @@ export const table = {
  */
 export const space = {
   fold: (): Patch => ({ space: { on: true, show: true } }),
-  unfold: (): Patch => ({ space: { on: false, show: false } }),
+  /** Beat 11. The two gaps, measured by the thing that draws the points. */
+  measure: (): Patch => ({ space: { measures: true } }),
+  unfold: (): Patch => ({ space: { on: false, show: false, measures: false } }),
 }
 
 export const camera = {

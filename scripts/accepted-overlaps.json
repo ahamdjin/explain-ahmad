@@ -1,0 +1,4 @@
+{
+  "_why": "Overlap is not always a fault. A label belongs on the thing it labels, and some beats are *about* one object landing on another. Every entry needs a reason, because an entry without an argument behind it is a collision someone silenced rather than fixed. `node scripts/check-overlap.mjs`.",
+  "accepted": []
+}

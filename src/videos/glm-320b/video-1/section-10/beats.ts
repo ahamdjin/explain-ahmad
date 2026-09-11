@@ -46,7 +46,15 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 7,
     vo: 'No. It starts at the bottom. Floor one, same as the first word did.',
-    commands: [out.moveTo({ x: 30, y: 92 }, 0.3), tower.set({ floor: 1 })],
+    /*
+     * To the tower's base, which is what the board asks for and what the line
+     * says: *"It starts at the bottom. Floor one."* At 30/92 it dropped onto
+     * the sentence strip instead and covered two of its words, so the frame
+     * showed the new token replacing "the ball," rather than starting a climb.
+     * It joins the end of the sentence on the **next** beat, which is the beat
+     * whose line says so.
+     */
+    commands: [out.moveTo({ x: 31, y: 78 }, 0.3), tower.set({ floor: 1 })],
   },
   {
     n: 4,
@@ -67,7 +75,11 @@ export const BEATS: Beat<Patch>[] = [
     n: 5,
     id: 'what-is-kept',
     title: 'The eight earlier markers hold in place; none of them move',
-    relation: 'so',
+    /* "But the eight before it don't climb again." This is the beat that
+     * separates decode from prefill -- the single correction v10 was written
+     * for -- and it was tagged `so`, which is the relation for the thing it
+     * is contradicting. */
+    relation: 'and-yet',
     secs: 12,
     /*
      * This is decode, not prefill. v9 marched all nine markers back to the

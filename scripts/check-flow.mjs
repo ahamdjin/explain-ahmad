@@ -46,6 +46,11 @@ async function beatsOf(dir) {
       hasOverlays: /\n {4}(late)?[Oo]verlays/.test(b),
       sticky: (b.match(/sticky: true/g) ?? []).length,
       clears: /clearSticky: true/.test(b),
+      /* Which actors this beat brings on and which it takes away. */
+      shows: [...commands.matchAll(/(\w+)\.show\(/g)].map((m) => m[1]),
+      hides: [...commands.matchAll(/(\w+)\.off\(/g)].map((m) => m[1]),
+      /* A beat that only repeats the previous beat's commands verbatim. */
+      commands: commands.replace(/\s+/g, ' ').trim(),
     }
   })
 }
@@ -106,6 +111,58 @@ for (const dir of dirs) {
      * a gap in the narration. */
     if (prev && next && !b.vo && !prev.vo && !next.vo) {
       problems.push(`${sec} b${b.n}: third consecutive beat with no voice-over`)
+    }
+
+    /* Two beats issuing byte-identical commands is a copy-paste, not a beat. */
+    if (prev && b.commands && b.commands === prev.commands) {
+      problems.push(`${sec} b${prev.n}→b${b.n}: identical command lists — one of these is a duplicate`)
+    }
+
+    /* An actor shown and turned off in the same beat never renders. */
+    for (const actor of b.shows) {
+      if (b.hides.includes(actor)) {
+        problems.push(`${sec} b${b.n}: \`${actor}\` is shown and turned off in the same beat`)
+      }
+    }
+
+    /*
+     * A section *should* end on a question -- that is the chapter wall, and
+     * `check:chain` already verifies the next section enters on exactly that
+     * sentence. Only the last section of the video has nobody to answer it.
+     */
+    if (/\?['"]?\s*$/.test(b.vo.trim()) && !next && dir === dirs[dirs.length - 1]) {
+      problems.push(`${sec} b${b.n}: the video ends on a question nothing answers`)
+    }
+  })
+
+  /*
+   * Every beat that asks a question must be answered by the beat after it.
+   *
+   * S-05 (place your bets) and S-06 (interpolated testing) both depend on the
+   * answer arriving immediately -- a guess left hanging across two beats stops
+   * being a guess and becomes a mystery, which is the structure the earlier
+   * drafts died of. Asked *and* answered in one beat is the other failure, and
+   * it is what §10's "you run it again" and §12's slider both used to do.
+   */
+  beats.forEach((b, i) => {
+    const next = beats[i + 1]
+    const asks = /\?/.test(b.vo)
+    if (!asks) return
+    const answeredHere = b.vo.trim().indexOf('?') < b.vo.trim().length - 2
+    if (answeredHere) {
+      notes.push(`${sec} b${b.n} asks and answers in the same breath — check that is deliberate`)
+    }
+    /*
+     * Beat 1 is exempt: the chapter wall opens by banking and then asking what
+     * the section is for, and a bet landing one beat later is the house shape
+     * (§6, §10). Two questions *inside* a section is the real fault -- the
+     * second one inherits a viewer who is still holding the first, and the
+     * commitment S-05 depends on never happens. §12 asked "how much do you
+     * keep close?" and then "where do you reckon the good setting is?", which
+     * is the same question twice.
+     */
+    if (next && /\?/.test(next.vo) && !answeredHere && b.n > 1) {
+      problems.push(`${sec} b${b.n}→b${next.n}: a question followed by another question, nothing answered between`)
     }
   })
 
@@ -175,6 +232,74 @@ if (!STATIC_ONLY) {
       }
     }
   }
+  /*
+   * The seams between sections, which is where "each beat against the one
+   * before it" stops being answerable inside a single file.
+   *
+   * A section whose storyboard gives beat 1 no camera move is claiming the
+   * viewer is still standing where the last section left them. If the last
+   * frame of §N and the first frame of §N+1 then look nothing alike, the claim
+   * is false and the cut jumps — the exact fault the whole persistent-scene
+   * architecture exists to prevent, and the one thing `check:board` cannot see
+   * because it reads boards rather than pictures.
+   */
+  for (let i = 1; i < dirs.length; i += 1) {
+    const prev = dirs[i - 1]
+    const here = dirs[i]
+    let a
+    let b
+    try {
+      const pf = (await readdir(path.join(FRAMES, prev))).filter((f) => f.endsWith('.png')).sort()
+      const hf = (await readdir(path.join(FRAMES, here))).filter((f) => f.endsWith('.png')).sort()
+      if (!pf.length || !hf.length) continue
+      a = path.resolve(FRAMES, prev, pf[pf.length - 1])
+      b = path.resolve(FRAMES, here, hf[0])
+    } catch {
+      continue
+    }
+
+    /* Does this section claim to continue, or does it declare a move? */
+    const boardFile = (await readdir('video-script/video-1')).find((f) =>
+      f.startsWith(here.replace('section-', '')),
+    )
+    const board = await readFile(path.join('video-script/video-1', boardFile), 'utf8')
+    const firstRow = board.slice(board.indexOf('| beat | where | camera |')).split('\n')[2] ?? ''
+    const camera = (firstRow.split('|')[3] ?? '').trim()
+    const continues = camera === '—' || camera === '-' || camera === ''
+
+    const diff = await page.evaluate(async ([p, q]) => {
+      const load = (src) =>
+        new Promise((res) => {
+          const img = new Image()
+          img.onload = () => res(img)
+          img.src = src
+        })
+      const draw = async (src) => {
+        const img = await load(src)
+        const c = new OffscreenCanvas(160, 90)
+        const ctx = c.getContext('2d')
+        ctx.drawImage(img, 0, 0, 160, 90)
+        return ctx.getImageData(0, 0, 160, 90).data
+      }
+      const [x, y] = [await draw(p), await draw(q)]
+      let sum = 0
+      for (let k = 0; k < x.length; k += 4) {
+        sum += Math.abs(x[k] - y[k]) + Math.abs(x[k + 1] - y[k + 1]) + Math.abs(x[k + 2] - y[k + 2])
+      }
+      return sum / (x.length / 4) / 3
+    }, [`file://${a}`, `file://${b}`])
+
+    const label = `${prev.replace('section-', '§')}→${here.replace('section-', '§')}`
+    if (continues && diff > 14) {
+      problems.push(
+        `${label}: board declares no camera move, but the frames jump (Δ${diff.toFixed(1)}) — ` +
+          `either the handoff needs a move on the board or the first beat needs to hold what the last one left`,
+      )
+    } else {
+      notes.push(`${label}: ${continues ? 'continues' : `camera "${camera}"`}, Δ${diff.toFixed(1)}`)
+    }
+  }
+
   await browser.close()
 }
 

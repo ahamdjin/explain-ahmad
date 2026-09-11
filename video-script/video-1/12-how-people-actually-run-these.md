@@ -35,7 +35,7 @@ already knows it.
 | Answers | experts repeat, so you keep the frequent ones close — and it genuinely works |
 | Exits on | it's a price, not a wall. So what did "five percent active" actually get us? |
 | → next | **but** with 12,096 expert slots, nothing about "five percent active" tells you where the good setting is |
-| Target | ~16 beats · ~1:50 |
+| Built | 16 beats · 2:47 · `npm run timing` is the authority |
 
 ## What changed from v8
 
@@ -103,8 +103,8 @@ locate it**. That is a claim we can defend, and it still lands §13.
 > works. Genuinely. On a model with eight experts on each floor, a small cache
 > catches most of what you need.
 >
-> **8.** *(a slider rises out of the floor under the box)* Which turns the whole
-> thing into one question. **How much do you keep close?**
+> **8.** *(a slider rises out of the floor under the box)* Which turns the
+> whole thing into one dial. **How much you keep close.**
 
 ### Act 3 — the question (beat 9) · **S-06**
 
@@ -156,7 +156,7 @@ locate it**. That is a claim we can defend, and it still lands §13.
 | 5 | the plan | — | those repeating blocks stay in the box instead of returning to the drive | `ExpertCache` filling | kept close | S-04 |
 | 6 | the plan | — | the next word's fetches split: most come from the box, a few from the drive | short hops + long hops | hit / miss | S-04 |
 | 7 | the plan | — | the machine speeds up; a small model tag appears on the box | machine faster, tag | 8 experts per floor | S-04 |
-| 8 | the plan | — | a slider rises out of the floor under the box | `TradeSlider` | how much do you keep? | S-04 |
+| 8 | the plan | — | a slider rises out of the floor under the box | `TradeSlider` | one dial | S-04 |
 | 9 | the plan | — | the slider holds untouched at neither end; nothing moves | `TradeSlider`, still | **`where's the good setting?`** | S-06 |
 | 10 | the plan | — | the slider is dragged up: the box swells, the machine races, its frame grows huge | slider high | fast, but big | S-04 |
 | 11 | the plan | — | dragged down: the box shrinks, long hops multiply, the machine crawls | slider low | small, but slow | S-04 |
@@ -211,7 +211,7 @@ locate it**. That is a claim we can defend, and it still lands §13.
 | 2–3 | **answer** — caching, and it is the viewer's own idea |
 | 4–6 | **teach** — experts repeat, so keep the repeaters close |
 | 7 | **confirm** — it genuinely works, at eight experts a floor |
-| 8 | **frame** — it all reduces to one dial |
+| 8 | **frame** — it all reduces to one dial, stated not asked |
 | 9 | **ask** — where is the good setting? |
 | 10–11 | **teach** — both ends fail, differently |
 | 12–15 | **the reversal** — 12,096 slots, and the box number can't locate the setting |

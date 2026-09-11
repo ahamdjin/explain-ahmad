@@ -72,6 +72,8 @@ export type SceneState = {
     heavy: boolean
     bunks: boolean
     doorsOpen: boolean
+    /** Beat 14's "280 idle", braced against the wall by the building itself. */
+    idle: string
   }
   /** Beat 18. Present, unlabelled, and not named until §5. */
   desk: { on: boolean; at: At; scale: number; named: boolean; ringed: boolean }
@@ -111,6 +113,7 @@ export const INITIAL: SceneState = {
     heavy: false,
     bunks: false,
     doorsOpen: false,
+    idle: '',
   },
   desk: { on: false, at: { x: 15, y: 76 }, scale: 0.8, named: false, ringed: false },
   /* `plain` is the host. `paper/scene.ts` explains why. */
@@ -222,6 +225,14 @@ export const hospital = {
   label: (sign: string, plaque: string): Patch => ({ hospital: { sign, plaque } }),
   staff: (): Patch => ({ hospital: { staffed: true } }),
   choose: (lit: readonly number[]): Patch => ({ hospital: { lit, focus: true } }),
+  /**
+   * Beat 14. How many did nothing, measured against the wall they sit in.
+   *
+   * A page overlay before -- `brace('280 idle', 22, 70, 60)` -- drawn at a
+   * stage percentage against a building this section moves and rescales four
+   * times. `paper/cast/Hospital.tsx`, `idle`.
+   */
+  idle: (label: string): Patch => ({ hospital: { idle: label } }),
   moveTo: (at: At, scale: number): Patch => ({ hospital: { at, scale } }),
   off: (): Patch => ({ hospital: { on: false } }),
 }

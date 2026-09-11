@@ -215,7 +215,7 @@ export function ArchSheet({ pushed }: { pushed: boolean }) {
  *
  * **One card is one ~80 GB accelerator.** That is the only meaning this row
  * ever carries, and it is why the counts in the video are 1 and 4:
- * `gpt-oss-120b` is ~58 GiB at MXFP4 and fits a single card, while
+ * `gpt-oss-120b` is ~58 GiB at MXFP4 and fits a single chip, while
  * GLM-5.3-Flash is ~306 GiB at FP8 and does not fit four.
  * `research/glm/GROUND_TRUTH.md`.
  *

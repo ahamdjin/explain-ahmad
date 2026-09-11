@@ -33,7 +33,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | Answers | no — you would fetch about 8.5 GB per token, against milliseconds of actual work |
 | Exits on | so you can't store only the active part. But people run big models on small machines. |
 | → next | **but** people run models like this on small machines every day |
-| Target | ~13 beats · ~1:25 |
+| Built | 15 beats · 2:11 · `npm run timing` is the authority |
 
 ## The numbers — `research/glm/GROUND_TRUTH.md`
 
@@ -42,7 +42,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | One expert | ~25 MB |
 | Expert visits per token | 336 |
 | **Routed weight per word, if not resident** | **~8.5 GB** |
-| Off a fast drive at ~5 GB/s | **~1.6 s** |
+| Off a fast drive at ~5 GB/s | **~1.7 s** | 8.46 GB ÷ 5 |
 | The compute itself | milliseconds |
 | Penalty | **~50×** |
 
@@ -190,7 +190,7 @@ deliberately, in its own frame, and it has to be endorsed: *you're right*.
 - **Never claim all 320B must sit in GPU VRAM.** Real systems shard, cache,
   quantize and offload. The honest claim is that efficient serving needs *fast
   access* to whichever experts routing picks.
-- ~1.6 s is derived from a typical SSD rate. **Say "roughly".** Confirm
+- ~1.7 s is derived from a typical SSD rate. **Say "roughly".** Confirm
   `moe_intermediate_size` before recording.
 - Beat 13's **"not like that"** is the hinge into §12 and is not optional. It is
   what stops this section from being the overclaim the earlier drafts made. See
@@ -203,7 +203,7 @@ deliberately, in its own frame, and it has to be endorsed: *you're right*.
 - The plan must be drawn **identically** to §1 beat 13. The callback only works
   if it is the same object.
 - Beat 12's two bars are the most important prop in the video and must be **to
-  scale**. If milliseconds against 1.6 s cannot be drawn honestly on one frame,
+  scale**. If milliseconds against 1.7 s cannot be drawn honestly on one frame,
   the small bar gets a magnified inset — never a fudged ratio.
 - Cost bars are `cost` (red). `art-direction/PALETTE.md`.
 

@@ -63,7 +63,7 @@ export type SceneState = {
 
 export const INITIAL: SceneState = {
   machine: { on: false, at: { x: 74, y: 54 }, scale: 1, words: [] },
-  hangover: { on: false, at: { x: 74, y: 16 }, scale: 1, text: '~8 GB a word · ~1.5 s' },
+  hangover: { on: false, at: { x: 74, y: 16 }, scale: 1, text: '~8.5 GB a token · ~1.7 s' },
   store: { on: false, at: { x: 12, y: 50 }, scale: 0.56, label: 'the whole model, on a drive' },
   path: { on: false, at: { x: 34, y: 44 }, scale: 0.62, items: 0, jammed: false },
   cache: { on: false, at: { x: 43, y: 50 }, scale: 1, filled: 0, hits: 0, tag: '' },

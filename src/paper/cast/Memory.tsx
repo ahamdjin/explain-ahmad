@@ -227,8 +227,13 @@ export function CostBars({
           style={{ transformOrigin: '8px 48px' }}
           transition={{ type: 'spring', stiffness: 60, damping: 18 }}
         />
+        {/*
+          8.46 GB off a ~5 GB/s drive. Hardcoded here and in §11's `clock`, and
+          the two disagreed -- this said 1.5 s while the section's own table
+          said 1.6 and the true division is 1.7. `section-11/scene.ts`.
+        */}
         <text x={FULL + 26} y="88" className="s1-bar-fig" fill={PALETTE.red}>
-          ~1.5 s
+          ~1.7 s
         </text>
 
         <motion.g animate={{ opacity: show === 'both' ? 1 : 0 }} transition={{ duration: 0.35 }}>

@@ -35,13 +35,24 @@ import {
 /**
  * The arithmetic, from `research/glm/GROUND_TRUTH.md`.
  *
- * ~1.6 s is derived from a typical SSD rate, so the video says **"roughly"**.
- * `moe_intermediate_size` should be confirmed before recording — the per-expert
- * figure is what the 8 GB rests on.
+ * ~1.7 s is 8.46 GB off a ~5 GB/s drive. It is derived from a typical rate
+ * rather than measured, so the spoken line says "the better part of two
+ * seconds" and never a decimal. The on-screen clock read ~1.5 s, which is not
+ * the better part of two anything.
+ *
+ * `moe_intermediate_size` **is** confirmed: 2048, read from `config.json` on
+ * 2026-09-11, so one expert is 4096 × 2048 × 3 = 25.17 MB at FP8 and 336 of
+ * them is 8.46 GB. That arithmetic is the only thing holding up this section's
+ * answer, so it is a measured number and not an estimate.
+ *
+ * **These have to agree with the spoken line**, which says "about twenty-five"
+ * and "about eight and a half". `MB_PER_EXPERT` read 26 and `GB_PER_TOKEN` read
+ * 8 while the narrator said 25 and 8.5 -- the frame contradicting the voice
+ * over the top of it. `research/glm/GROUND_TRUTH.md`.
  */
 export const VISITS = 336
-export const MB_PER_EXPERT = 26
-export const GB_PER_WORD = 8
+export const MB_PER_EXPERT = 25
+export const GB_PER_TOKEN = 8.5
 
 export type SceneState = {
   /** The tower, still there, with the two numbers settling over it. */
@@ -53,7 +64,16 @@ export type SceneState = {
   machine: Placed & { filled: boolean }
   path: Placed & { items: number; jammed: boolean }
   count: { on: boolean; at: At; scale: number; value: number; label: string; run: boolean }
-  /** ~8 GB, for one word. */
+  /**
+   * ~8.5 GB, for one token.
+   *
+   * **Token, not word.** §2 beat 6 spends a whole clause establishing the rule
+   * -- *"from here on, whenever I count something, I'm counting tokens"* -- and
+   * this caption read "for one word" while the narrator said "For one token"
+   * over the top of it, in the same beat. The licence §2 grants is to keep
+   * saying "word" about *this sentence*, where every token happens to be one.
+   * It is not a licence to put a figure on screen against the wrong unit.
+   */
   total: { on: boolean; at: At; scale: number; value: string; caption: string }
   clock: Placed & { seconds: number; running: boolean; label: string }
   bars: Placed & { show: 'fetch' | 'both'; ratio: string; inset: boolean }
@@ -80,9 +100,15 @@ export const INITIAL: SceneState = {
   desk: { on: false, at: { x: 44, y: 66 }, scale: 0.5, named: true },
   machine: { on: false, at: { x: 80, y: 44 }, scale: 0.8, filled: false },
   path: { on: false, at: { x: 50, y: 40 }, scale: 0.9, items: 0, jammed: false },
-  count: { on: false, at: { x: 50, y: 74 }, scale: 1, value: VISITS, label: '', run: false },
-  total: { on: false, at: { x: 50, y: 40 }, scale: 1, value: '~8 GB', caption: 'for one word' },
-  clock: { on: false, at: { x: 80, y: 44 }, scale: 1, seconds: 1.5, running: false, label: '~1.5 s' },
+  /*
+   * Right of the router, not on it. At 50/74 the counter's digits landed
+   * across the desk (40-50, 63-77) for every beat it was on screen -- the
+   * number the section is built on, printed over the mechanism that produces
+   * it.
+   */
+  count: { on: false, at: { x: 62, y: 74 }, scale: 1, value: VISITS, label: '', run: false },
+  total: { on: false, at: { x: 50, y: 40 }, scale: 1, value: '~8.5 GB', caption: 'for one token' },
+  clock: { on: false, at: { x: 80, y: 44 }, scale: 1, seconds: 1.7, running: false, label: '~1.7 s' },
   bars: { on: false, at: { x: 50, y: 48 }, scale: 1, show: 'fetch', ratio: '', inset: false },
   shelf: { on: false, at: { x: 24, y: 80 }, scale: 0.58, outline: true },
   narrator: { ...INITIAL_NARRATOR },

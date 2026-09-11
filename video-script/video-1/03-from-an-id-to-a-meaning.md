@@ -32,7 +32,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 03`
 | Exits on | that row is the same every single time. So how does the word ever mean two things? |
 | → next | **but** that row is identical every single time the word appears |
 | Banks | the row is **fixed per token** — half of the paradox §4 resolves |
-| Target | ~13 beats · ~1:25 |
+| Built | 15 beats · 2:21 · `npm run timing` is the authority |
 | Still forbidden | `attention`, `layer` |
 
 ## What changed from v8

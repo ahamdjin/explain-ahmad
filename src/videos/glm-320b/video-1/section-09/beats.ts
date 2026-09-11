@@ -44,7 +44,9 @@ export const BEATS: Beat<Patch>[] = [
     n: 3,
     id: 'only-one-matters',
     title: 'The first seven dim; only the last stays lit',
-    relation: 'so',
+    /* "But only one of them matters right now" -- the turn that makes the
+     * whole section possible, and it was moving like a consequence. */
+    relation: 'and-yet',
     secs: 7,
     vo: 'But only one of them matters right now. The last one.',
     commands: [rows.only(LAST)],
@@ -74,7 +76,14 @@ export const BEATS: Beat<Patch>[] = [
      * because it is the last time it appears.
      */
     vo: 'So that final row gets compared against the whole list. All hundred and fifty-four thousand, eight hundred and eighty of them.',
-    commands: [vocab.show({ x: 76, y: 48 }, 1.5)],
+    /*
+     * 72/48 at 1.15, which is exactly where and how big §2 draws it. Two
+     * reasons. It is **the same object returning** -- S-10 works on sameness,
+     * and a list that comes back a different size reads as a different list.
+     * And at 76/48 scale 1.5 it spanned 60-92% and stood on top of the
+     * narrator, who has been at 91/70 since beat 1.
+     */
+    commands: [vocab.show({ x: 72, y: 48 }, 1.15)],
     lateOverlays: {
       at: 2400,
       overlays: [note('the same list from earlier —\n154,880 entries', 28, 18, { size: 'md', tone: 'measure', rotate: 2, sticky: true })],
@@ -118,7 +127,10 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 6,
     vo: 'That’s your next word. That’s the output.',
-    commands: [out.show({ x: 30, y: 72 }, 0.8), narrator.set({ pose: 'nod' })],
+    /* Below the sentence, not through it. The sentence sits at y 56-68 and the
+     * card was landing at 65-79, so the word this whole section produces was
+     * printed across the words it came from. */
+    commands: [out.show({ x: 30, y: 80 }, 0.8), narrator.set({ pose: 'nod' })],
   },
   {
     n: 10,

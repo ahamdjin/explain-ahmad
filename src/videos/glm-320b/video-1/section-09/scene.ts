@@ -68,7 +68,7 @@ export const INITIAL: SceneState = {
   tower: { on: false, at: { x: 50, y: 48 }, scale: 1, floor: 45, markers: TOKENS },
   rows: { on: false, at: { x: 46, y: 52 }, scale: 0.5, focus: -1 },
   last: { on: false, at: { x: 26, y: 34 }, scale: 0.4, label: '“it” — the last position' },
-  vocab: { on: false, at: { x: 76, y: 50 }, scale: 1.4, scores: false, candidates: false, picked: false },
+  vocab: { on: false, at: { x: 72, y: 48 }, scale: 1.15, scores: false, candidates: false, picked: false },
   out: { on: false, at: { x: 30, y: 74 }, scale: 0.8, label: 'bounced' },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },

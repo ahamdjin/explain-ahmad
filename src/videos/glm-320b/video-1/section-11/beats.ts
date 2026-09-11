@@ -1,6 +1,6 @@
 import { centred, GROUND_Y, note, tick, type Beat } from '../../../../paper'
 import {
-  GB_PER_WORD,
+  GB_PER_TOKEN,
   MB_PER_EXPERT,
   VISITS,
   bars,
@@ -169,6 +169,13 @@ export const BEATS: Beat<Patch>[] = [
     commands: [
       total.off(),
       clock.off(),
+      /*
+       * The path leaves *here*, with the traffic it carried. `path.clear()` at
+       * beat 7 emptied it but left the route drawn, so the flight path stayed
+       * printed across the cost bars for the rest of the section -- including
+       * beat 13, whose own board note reads "nothing else on screen".
+       */
+      path.off(),
       bars.fetch(),
       bars.both('about 50× more'),
       /* Two things held against each other -- the frame is a comparison. */
@@ -200,7 +207,7 @@ export const BEATS: Beat<Patch>[] = [
      * else in it. This is the answer to the question §1 asked. */
     vo: 'So, no. You can’t just store the part it uses. Not like that.',
     commands: [narrator.set({ pose: 'halt' })],
-    overlays: [centred(`~${GB_PER_WORD} GB a token — not like that`, 50, 88, { size: 'md', rotate: 1 })],
+    overlays: [centred(`~${GB_PER_TOKEN} GB a token — not like that`, 50, 88, { size: 'md', rotate: 1 })],
   },
   {
     n: 14,

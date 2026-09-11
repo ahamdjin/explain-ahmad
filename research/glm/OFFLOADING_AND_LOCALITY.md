@@ -10,7 +10,7 @@ claim.
 ## 1. The problem with what we were about to say
 
 Section 07 said: 336 expert visits × ~26 MB ≈ **8 GB per word**, off an SSD at
-~5 GB/s ≈ **~1.6 seconds per word**, against milliseconds of compute — a ~50×
+~5 GB/s ≈ **~1.7 seconds per word**, against milliseconds of compute — a ~50×
 penalty. The arithmetic is right. The conclusion — *so you cannot run it on
 less memory* — is **wrong as stated**, and the audience most likely to comment
 is the audience that already knows it is wrong.
@@ -97,7 +97,7 @@ and `beats.ts`; a table like this is worthless if it records intentions.
 | §5 b15 | "you get a different eight" | a fresh decision, and *mostly* a different eight | **done** v10 |
 | §7 b7–8 | "No." / "Different eight." | it picks again; one or two recur without being *kept* | **done** v10 |
 | §7 | "so you can't run it on less memory" | "you *can* — people do — and here is the price, and here is why it gets worse, not better" | **done** v9 |
-| §7 | ~1.6 s/word presented as the fact | the **naive** cost. Then caching. Then why 12,096 slots defeats the cache | **done** v9 |
+| §7 | ~1.7 s/word presented as the fact | the **naive** cost. Then caching. Then why 12,096 slots defeats the cache | **done** v9 |
 | §8 | compute not memory | compute not memory, **and the trend** | **done** v9 |
 | §12 b14 | "no setting where it's both… the exchange rate is brutal" | the trade is real; the repeat rate is measured only for coarse models; **the box number cannot locate the setting** | **done** v10 |
 | §13 b9 | "the difference is that this one is chopped finer" | three differences — parameters, precision, granularity — and only the third is interesting, and not because of file size | **done** v10 |

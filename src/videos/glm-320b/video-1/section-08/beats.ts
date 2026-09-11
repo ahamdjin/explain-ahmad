@@ -194,7 +194,9 @@ export const BEATS: Beat<Patch>[] = [
     commands: [narrator.set({ pose: 'wonder' })],
     lateOverlays: {
       at: 3000,
-      overlays: [centred('and what comes out?', 50, 12, { size: 'md', rotate: -2 })],
+      /* Left of the tower, which stands at 35-65 and had the question printed
+       * across its roof. */
+      overlays: [note('and what comes out?', 16, 24, { size: 'md', rotate: -2 })],
     },
   },
 ]

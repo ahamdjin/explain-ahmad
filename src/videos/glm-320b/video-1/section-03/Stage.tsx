@@ -69,7 +69,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </Slot>
 
         <Slot on={scene.space.on} at={scene.space.at} scale={scene.space.scale} z={3} feel={feel}>
-          <Space show={scene.space.show} />
+          <Space show={scene.space.show} measures={scene.space.measures} />
         </Slot>
 
         <Slot on={scene.chip.on} at={scene.chip.at} scale={scene.chip.scale} z={6} feel={feel}>

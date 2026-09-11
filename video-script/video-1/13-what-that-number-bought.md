@@ -29,7 +29,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 13`
 | Enters on | it's a price, not a wall. So what did "five percent active" actually get us? |
 | Answers | **compute, not memory** — and the number on the box cannot tell you which machine you need |
 | Exits on | *(none — the thesis lands)* |
-| Target | ~15 beats · ~1:30 |
+| Built | 15 beats · 2:51 · `npm run timing` is the authority |
 
 ## The job
 
@@ -142,7 +142,7 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 ### Act 6 — back to the two models (beats 14–15) · **S-10**
 
 > **14.** *(§1's opening frame, redrawn exactly — two sheets, one chip and eight)*
-> Two models. Both about five percent active. One of them runs on a single card;
+> Two models. Both about five percent active. One of them runs on a single chip;
 > the other one needs eight.
 >
 > **15.** *(nothing moves)* Now you know why.

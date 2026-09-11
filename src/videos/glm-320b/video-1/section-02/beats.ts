@@ -50,8 +50,16 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 4,
     vo: 'This is what you typed.',
+    /*
+     * Placed for the zoom, not for the wide frame. `camera.to(50/60, 1.3)`
+     * maps a stage x to 50 + (x-50) x 1.3, so the card at 26 landed centred on
+     * 19 with its left half off the edge, and §1's desk at 14 was cut in half.
+     * Anything placed in a beat that also moves the camera has to be placed in
+     * the frame the camera ends on.
+     */
     commands: [
-      sentence.show({ x: 26, y: 66 }, 0.5),
+      sentence.show({ x: 38, y: 58 }, 0.5),
+      desk.moveTo({ x: 27, y: 78 }, 0.66),
       hospital.open(),
       /* Pan to the entrance. The doorway is what we are about to use, so the
        * frame has to admit it exists before we go through it. */
@@ -60,7 +68,7 @@ export const BEATS: Beat<Patch>[] = [
     ],
     lateOverlays: {
       at: 2400,
-      overlays: [note('your prompt', 22, 78, { tone: 'word', rotate: -4 })],
+      overlays: [note('your prompt', 34, 62, { tone: 'word', rotate: -4 })],
     },
   },
   {
@@ -176,7 +184,27 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 10,
     vo: 'And every token it knows about lives in one big list. How long do you reckon that list is?',
-    commands: [extra.off(), vocab.show({ x: 84, y: 46 }, 1.5), narrator.set({ pose: 'point' })],
+    /*
+     * The list is tall, so the frame has to be *made* for it rather than the
+     * list squeezed into what was left. At 84/46 scale 1.5 it ran off the right
+     * edge (to 100%), printed itself over the last two word-cards, and swallowed
+     * the narrator whole. The sentence gives up the right half and steps up;
+     * the narrator comes down to the left and points across at the new thing.
+     */
+    commands: [
+      extra.off(),
+      sentence.moveTo({ x: 34, y: 34 }, 0.72),
+      vocab.show({ x: 80, y: 48 }, 1.15),
+      narrator.show({ x: 30, y: 76 }, 1, { pose: 'point', flip: false }),
+    ],
+    /*
+     * "8 tokens" was pinned at 46/66 to label a sentence that has just moved to
+     * 34/34, so it was left floating in open paper across the narrator. A
+     * sticky label survives its subject moving, which is the whole hazard of
+     * sticky: it has to be re-placed, not merely allowed to persist.
+     */
+    clearSticky: true,
+    overlays: [centred('8 tokens', 34, 45, { tone: 'measure', rotate: -2, sticky: true })],
   },
   {
     n: 9,
@@ -188,7 +216,9 @@ export const BEATS: Beat<Patch>[] = [
     commands: [vocab.scroll()],
     lateOverlays: {
       at: 2600,
-      overlays: [note('154,880\nentries', 84, 84, { tone: 'measure', rotate: 3, sticky: true })],
+      /* Above the list, not below it: `Vocabulary` draws its own caption along
+       * the bottom edge, and two labels were landing in the same place. */
+      overlays: [note('154,880\nentries', 80, 11, { tone: 'measure', rotate: 3, sticky: true })],
     },
   },
   {
@@ -207,7 +237,9 @@ export const BEATS: Beat<Patch>[] = [
       sentence.follow(FOLLOWED),
       /* The round trip. Go, touch, come back changed — three moves on one
        * object, which is what makes a lookup feel like a lookup. */
-      chip.show({ x: 30, y: 50 }, 0.55, { label: PROMPT[FOLLOWED] }),
+      /* It leaves *from the card*. The sentence moved up and left at beat 8,
+       * so a chip starting at 30/50 departed from open paper. */
+      chip.show({ x: 17, y: 34 }, 0.55, { label: PROMPT[FOLLOWED] }),
     ],
     stages: [
       { at: 900, commands: [chip.moveTo({ x: 80, y: 46 }, 0.5), vocab.land(5562)] },

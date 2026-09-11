@@ -14,11 +14,11 @@ edit the seconds. See `docs/VOICE_OVER.md`.
 
 Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered scripts
 
-**Total: 13 sections · 189 beats · 3708 words · 29:45**
+**Total: 13 sections · 189 beats · 3706 words · 29:45**
 
 | § | section | from | length | beats | words |
 | --- | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | `0:00` | 133s | 17 | 673 |
+| 01 | What "five percent active" actually costs | `0:00` | 133s | 17 | 672 |
 | 02 | Your words become tokens | `2:13` | 121s | 13 | 275 |
 | 03 | From an ID to a meaning | `4:14` | 141s | 15 | 247 |
 | 04 | The word looks around | `6:35` | 149s | 16 | 266 |
@@ -29,17 +29,17 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | 09 | Where the answer comes out | `18:14` | 99s | 12 | 155 |
 | 10 | And then it does the whole thing again | `19:53` | 123s | 14 | 209 |
 | 11 | So could you store only the 18 billion? | `21:56` | 131s | 15 | 261 |
-| 12 | How people actually run these | `24:07` | 167s | 16 | 292 |
+| 12 | How people actually run these | `24:07` | 167s | 16 | 291 |
 | 13 | What that number actually bought | `26:54` | 171s | 15 | 323 |
 
 ## §01 — What "five percent active" actually costs
 
-`0:00` → `2:13` · 17 beats · 673 words · 133s · `01-what-18-billion-active-means.md`
+`0:00` → `2:13` · 17 beats · 672 words · 133s · `01-what-18-billion-active-means.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
 | `0:00` | Two AI models. Both use about five percent of themselves to answer you. | the sheet | two model blocks arrive side by side, five percent live on each |
-| `0:06` | This one runs on a single graphics card. | the sheet | one graphics card slides in under the left block |
+| `0:06` | This one runs on a single chip. | the sheet | one chip slides in under the left block |
 | `0:10` | This one needs eight. No product names, no spec table, no "today we're talking about". The contradiction is complete and checkable at 0:13: gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not fit four — it needs eight. Table, working and sources: research/glm/GROUNDTRUTH.md §"How many GPUs". Say "about five percent" — 4.4% and 5.6% are the same claim. | the sheet | seven more cards stack under the right block |
 | `0:13` | Everyone quotes that number to say these models are cheap now. Both have it. Only one of them is. | the sheet | the quoted phrase writes itself across both blocks |
 | `0:22` | Same five percent. Eight times the machine. | the sheet | the blocks hold, visibly unequal underneath |
@@ -269,7 +269,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 
 ## §12 — How people actually run these
 
-`24:07` → `26:54` · 16 beats · 292 words · 167s · `12-how-people-actually-run-these.md`
+`24:07` → `26:54` · 16 beats · 291 words · 167s · `12-how-people-actually-run-these.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
@@ -280,7 +280,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `24:45` | The next token quite often wants some of the same experts the last one did. So you don't fetch every time. | the plan | those repeating blocks stay in the box instead of returning to the drive |
 | `24:55` | You keep the ones that keep coming back close, and you only go to the drive for the ones you're missing. | the plan | the next word's fetches split: most come from the box, a few from the drive |
 | `25:09` | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. | the plan | the machine speeds up; a small model tag appears on the box |
-| `25:20` | Which turns the whole thing into one question. How much do you keep close? | the plan | a slider rises out of the floor under the box |
+| `25:20` | Which turns the whole thing into one dial. How much you keep close. | the plan | a slider rises out of the floor under the box |
 | `25:29` | Before I move it — where do you reckon the good setting is? | the plan | the slider holds untouched at neither end; nothing moves |
 | `25:39` | Keep more, and it's fast — but now you need a big machine again, which is the thing we were trying to avoid. | the plan | the slider is dragged up: the box swells, the machine races, its frame grows huge |
 | `25:51` | Keep less, the machine gets small — and the misses pile up, and it crawls. | the plan | dragged down: the box shrinks, long hops multiply, the machine crawls |
@@ -309,5 +309,5 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `28:42` | Chopping finer is exactly why it's better — better at specialising, better at spreading the load. It's also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby. | the sheet | each sheet's block divides — one into coarse pieces, one into many fine ones; the fine one's lit share scatters across the whole sheet |
 | `29:00` | So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn't move. | the sheet | the second sheet withdraws; a trend line continues past the edge of frame |
 | `29:15` | "Active parameters" is a compute number. It was never a memory number. | the sheet | everything clears to a single line of handwriting |
-| `29:26` | Two models. Both about five percent active. One of them runs on a single card; the other one needs eight. | the sheet | §1's opening frame redraws itself exactly: two sheets, one chip and eight |
+| `29:26` | Two models. Both about five percent active. One of them runs on a single chip; the other one needs eight. | the sheet | §1's opening frame redraws itself exactly: two sheets, one chip and eight |
 | `29:38` | Now you know why. | the sheet | nothing moves |

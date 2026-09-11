@@ -30,7 +30,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 06`
 | Answers | each takes the row and returns a different one; the eight get blended into a single row |
 | Exits on | how many steps are there? |
 | → next | **therefore** the token leaves changed — and that was one step |
-| Target | ~11 beats · ~1:05 |
+| Built | 13 beats · 1:52 · `npm run timing` is the authority |
 
 ## What changed from v8
 
