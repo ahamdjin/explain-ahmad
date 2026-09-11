@@ -19,7 +19,7 @@ them and failed to prevent the other:
 2. **No section ever names itself.** "Attention" is spoken ten times, always in
    passing, never as *"this part is called attention, and it starts now."*
    Sections chain their *questions* but never bank their *answers*, so nothing
-   accumulates and 21 minutes reads as one run-on. **v5: §5 below.**
+   accumulates and 30 minutes reads as one run-on. **v5: §5 below.**
 
 v4's other decision — teach the whole machine rather than theorise about it —
 was right and stands.
@@ -56,7 +56,9 @@ draft it was written for -- a nine-minute error in the one document the voice
 over is planned from. **Run `npm run timing`; do not trust a number typed in
 prose.** Ahmad's position above stands: longer is fine as long as all of it
 makes sense. The risk of that shape is a payoff at
-minute twelve, and the answer to it is in §4 below: every mechanism section
+minute twenty-two -- §11 is where the question from minute one gets answered,
+and `npm run timing` is where that number comes from, not this sentence. The
+answer to the risk is in §4 below: every mechanism section
 must add one *reason you could not have known in advance*. The teaching is the
 answer being assembled, not a detour before it.
 
@@ -135,6 +137,9 @@ open on. Say "about five percent" — 4.4 and 5.6 are the same claim.
 
 ### Why the thesis is worth eight minutes
 
+*(Eight is the argument's weight, not a runtime. The build spends ~20 minutes
+reaching it. `npm run timing`.)*
+
 Fine-graining is not a mistake. More experts, smaller each, is *why* modern MoE
 models are good — better specialisation, better load balance. It also spreads
 the active weight across the whole checkpoint instead of leaving it in a corner
@@ -176,7 +181,14 @@ understands MoE:
 They are **right about the compute and wrong about the memory**, and they will
 not be moved by being told. They have to watch the reasonable version of their
 own idea get built, work, and then fail for a reason they can see. That is what
-Sections 6 and 7 are for, and it is why they get 27% of the runtime.
+Sections 6 and 7 are for.
+
+This used to claim they get **27% of the runtime**. They get **13%** -- 3:59 of
+29:45. Either the claim was written against a different chain or it was never
+checked; `npm run timing` is the authority, and if 13% is too little for the
+only two sections that build the viewer's own idea and then break it, that is a
+real question this file should be asking rather than a number it should be
+asserting.
 
 ## 4. The chain — 13 sections
 
@@ -232,8 +244,10 @@ that banks it, e.g.:
 
 > *"And notice — nothing about that could have been worked out ahead of time."*
 
-Six deposits, then §11 spends them. A viewer at minute nine should feel the
-answer arriving, not waiting.
+Six deposits, then §11 spends them -- at **21:56**, not the minute nine this
+once said. That is the shape's biggest open question and it is stated here
+plainly rather than buried: a viewer has to hold six deposits for twenty
+minutes before any of them is spent.
 
 ## 5. The chapter wall — how a section announces and closes itself
 
@@ -256,7 +270,7 @@ Every section gets exactly two load-bearing beats:
 
 The failure v4 had is that openings carried the *question* forward
 (*"So — who picks the eight"*) without ever banking the *answer*. A viewer who
-never gets to keep anything never accumulates anything, and 21 minutes of open
+never gets to keep anything never accumulates anything, and 30 minutes of open
 questions feels like drift. **Bank first, then complicate.**
 
 Two rules that keep this from becoming recap:

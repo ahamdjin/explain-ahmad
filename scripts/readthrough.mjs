@@ -112,7 +112,24 @@ function parseScript(markdown) {
    */
   const re = /^> \*\*(\d+)\.\*\*([\s\S]*?)(?=^> \*\*\d+\.\*\*|^#|^---|(?![\s\S]))/gm
   for (const m of body.matchAll(re)) {
+    /*
+     * **Only the blockquote is the script.**
+     *
+     * The match above runs to the next beat marker, and an act's closing prose
+     * note is neither `>`-quoted nor a heading -- so every beat that ended an
+     * act had its production notes glued onto its spoken line. §1 beat 3 read:
+     *
+     *   "This one needs eight. No product names, no spec table, no "today
+     *    we're talking about". The contradiction is complete and checkable at
+     *    0:13: gpt-oss-120b is ~58 GiB at MXFP4..."
+     *
+     * That is a recording script instructing you to read the reasons aloud,
+     * and it inflated every affected beat's word count and timecode with it.
+     */
     const raw = m[2]
+      .split('\n')
+      .filter((l, i) => i === 0 || l.startsWith('>'))
+      .join('\n')
     /* Italic parens are stage directions: shown, never spoken, never timed. */
     const stage = [...raw.matchAll(/\*\(([\s\S]*?)\)\*/g)].map((d) => d[1].replace(/\s+/g, ' ').trim())
     const spoken = raw

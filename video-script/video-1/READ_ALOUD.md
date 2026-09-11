@@ -14,51 +14,51 @@ edit the seconds. See `docs/VOICE_OVER.md`.
 
 Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered scripts
 
-**Total: 13 sections · 189 beats · 3706 words · 29:45**
+**Total: 13 sections · 189 beats · 3144 words · 29:45**
 
 | § | section | from | length | beats | words |
 | --- | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | `0:00` | 133s | 17 | 672 |
-| 02 | Your words become tokens | `2:13` | 121s | 13 | 275 |
+| 01 | What "five percent active" actually costs | `0:00` | 133s | 17 | 255 |
+| 02 | Your words become tokens | `2:13` | 121s | 13 | 231 |
 | 03 | From an ID to a meaning | `4:14` | 141s | 15 | 247 |
 | 04 | The word looks around | `6:35` | 149s | 16 | 266 |
-| 05 | The router picks the eight | `9:04` | 183s | 16 | 379 |
+| 05 | The router picks the eight | `9:04` | 183s | 16 | 334 |
 | 06 | The experts do the work | `12:07` | 112s | 13 | 173 |
 | 07 | That was one layer. There are 45. | `13:59` | 127s | 13 | 237 |
 | 08 | That was one token. Here's the sentence. | `16:06` | 128s | 14 | 218 |
 | 09 | Where the answer comes out | `18:14` | 99s | 12 | 155 |
 | 10 | And then it does the whole thing again | `19:53` | 123s | 14 | 209 |
-| 11 | So could you store only the 18 billion? | `21:56` | 131s | 15 | 261 |
+| 11 | So could you store only the 18 billion? | `21:56` | 131s | 15 | 205 |
 | 12 | How people actually run these | `24:07` | 167s | 16 | 291 |
 | 13 | What that number actually bought | `26:54` | 171s | 15 | 323 |
 
 ## §01 — What "five percent active" actually costs
 
-`0:00` → `2:13` · 17 beats · 672 words · 133s · `01-what-18-billion-active-means.md`
+`0:00` → `2:13` · 17 beats · 255 words · 133s · `01-what-18-billion-active-means.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
 | `0:00` | Two AI models. Both use about five percent of themselves to answer you. | the sheet | two model blocks arrive side by side, five percent live on each |
 | `0:06` | This one runs on a single chip. | the sheet | one chip slides in under the left block |
-| `0:10` | This one needs eight. No product names, no spec table, no "today we're talking about". The contradiction is complete and checkable at 0:13: gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not fit four — it needs eight. Table, working and sources: research/glm/GROUNDTRUTH.md §"How many GPUs". Say "about five percent" — 4.4% and 5.6% are the same claim. | the sheet | seven more cards stack under the right block |
+| `0:10` | This one needs eight. | the sheet | seven more cards stack under the right block |
 | `0:13` | Everyone quotes that number to say these models are cheap now. Both have it. Only one of them is. | the sheet | the quoted phrase writes itself across both blocks |
 | `0:22` | Same five percent. Eight times the machine. | the sheet | the blocks hold, visibly unequal underneath |
-| `0:26` | By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through. Beat 4 is the whole reason the opening works. STORYSPINE.md §3 says the audience for an MoE video already believes it understands MoE — "only a few parts run, so you only need to load a few parts, it's cheaper." Beat 4 names that belief back to them as the thing that is about to break. Beat 6 opens on the value — "by the end of this you'll know" — rather than working up to it. That matters: a reviewer pointed out that the beat starting inside the deadline is not the same as the promise being spoken inside it, and the earlier draft buried the payoff twenty words in, at about 0:37. The pivot question that used to sit in front of it is gone entirely. npm run restamp 01 prints where it actually lands. | the sheet | the right block and its eight cards slide out of frame |
+| `0:26` | By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through. | the sheet | the right block and its eight cards slide out of frame |
 | `0:38` | This is the model. All of it. | the sheet | the block settles alone, whole |
 | `0:43` | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. | the sheet | it breaks into a field of separate marks |
 | `0:56` | And when a token comes in, about five percent of them do something. | the sheet | the marks resolve and about five percent go live |
 | `1:03` | Let's get closer. | **push in** → inside | the camera moves in on the lit region |
-| `1:06` | Up close, it’s not one lump. This is one small part of the model — and there are two hundred and eighty-eight separate pieces in it. Sanderson, Concrete before Abstract: "resist the temptation to open a topic by describing a general result or definition" — let examples precede generality. "Parameter" arrives at beat 8, after the viewer has watched the block behave twice. v8 defined three terms inside twenty seconds. | inside | 288 separate pieces appear in rows |
+| `1:06` | Up close, it’s not one lump. This is one small part of the model — and there are two hundred and eighty-eight separate pieces in it. | inside | 288 separate pieces appear in rows |
 | `1:18` | Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run? | inside | everything stops; the question holds on screen |
-| `1:27` | Eight. This is one of only two hard bets in the whole video, and it is spent here because the answer is genuinely counterintuitive — eight of 288 is 2.8%, and nobody guesses that low. Richland, Kornell & Kao (2009) is why the wrong guess still helps: attempting an answer before instruction improves retention even for items the learner got wrong. Beat 12 is a held beat with nothing happening, on purpose. It is the only such beat in the section. skills/ncase/NCASE4MOREDESIGNPATTERNS.md §2: the guess and the answer must occupy the same space — the 288 do not move between beat 12 and beat 13, and the eight light up in place. | inside | eight of them light, in place |
+| `1:27` | Eight. | inside | eight of them light, in place |
 | `1:31` | Eight get picked. The other two hundred and eighty do nothing at all. | inside | the other 280 stay flat and grey |
 | `1:40` | You might think that’s the five percent. It isn’t — this is one small part of the model, and there’s more in here than these, and plenty that runs every time regardless. Hold onto that. | inside | the eight line up with beat 9's live sliver |
 | `1:55` | And this has a name. It's called a Mixture of Experts. Those pieces are the experts. | inside | the arrangement holds and takes its name |
-| `2:04` | So — who picks the eight? And why does that turn out to be the expensive question? Beat 16 names the mechanism after the viewer has watched it work — S-12, which is tier C: my inference from Trust withholding its own title word. Not sourced, and flagged as such. Beat 17 is the chapter wall. It states what the section settled and names the one thing now missing; §02 opens by banking exactly that. S-14. | **push in** → inside, one part | everything recedes but the eight |
+| `2:04` | So — who picks the eight? And why does that turn out to be the expensive question? | **push in** → inside, one part | everything recedes but the eight |
 
 ## §02 — Your words become tokens
 
-`2:13` → `4:14` · 13 beats · 275 words · 121s · `02-your-words-become-tokens.md`
+`2:13` → `4:14` · 13 beats · 231 words · 121s · `02-your-words-become-tokens.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
@@ -74,7 +74,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `3:29` | So each piece gets swapped for where it sits in that list. A row number. This one is five thousand, five hundred and sixty-two. | the first surface | the ` dog` piece flies to the list, touches a row, returns with a number |
 | `3:41` | That number is called a token ID. And it’s the only thing that carries on. | the first surface | the letters fade off the card; the digits stay |
 | `3:49` | And that’s the cutting up done — your sentence is numbers now. That’s all a tokeniser is. | the first surface | the list, the sentence and the narrator all leave; the number is alone |
-| `3:58` | But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all. Beat 12 is the chapter wall. It names the part of the machine that is now behind us — that’s all a tokeniser is — states what the viewer owns, and ends on the one thing now missing. §03 opens by banking exactly that. | the first surface | the number holds, and a note lands beside it |
+| `3:58` | But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all. | the first surface | the number holds, and a note lands beside it |
 
 ## §03 — From an ID to a meaning
 
@@ -123,7 +123,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 
 ## §05 — The router picks the eight
 
-`9:04` → `12:07` · 16 beats · 379 words · 183s · `05-the-router-picks-the-eight.md`
+`9:04` → `12:07` · 16 beats · 334 words · 183s · `05-the-router-picks-the-eight.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
@@ -141,7 +141,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `11:02` | And there's one more, over here. It isn't one of the two hundred and eighty-eight, and it never gets scored — it just runs, for every word, whatever the word is. So: eight picked, plus that one. | the room | a ninth slides in **from outside the wall**, already lit, and sits apart from the eight |
 | `11:18` | But look at what those scores were made from. These numbers. | the room | the row that produced the scores pulses; a line links it to the badges |
 | `11:26` | The ones that didn't exist a moment ago. Attention had only just finished making them. | the room | attention's arcs ghost in behind the row and fade, showing where it came from |
-| `11:35` | Change the sentence, and the row changes. Change the row, and the scores change. Change the scores, and it picks again — a fresh decision, and mostly a different eight. Act 4 is the section's reason to exist, and it is the argument research/COMPETITIVEFIELD.md shows nobody else is making. Every competing video explains top-k routing; none of them dwells on when the choice becomes knowable. §11's entire answer is a consequence of these three beats. | the room | a second sentence swaps in off to the side; the row changes; most of the eight change, one or two hold |
+| `11:35` | Change the sentence, and the row changes. Change the row, and the scores change. Change the scores, and it picks again — a fresh decision, and mostly a different eight. | the room | a second sentence swaps in off to the side; the row changes; most of the eight change, one or two hold |
 | `11:51` | And that's the router, done. Eight picked out of two hundred and eighty-eight — and that choice could not have been made any earlier than this. It needed the row to exist first. | the room | the new eight hold; the old eight's empty places stay marked |
 
 ## §06 — The experts do the work
@@ -247,7 +247,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 
 ## §11 — So could you store only the 18 billion?
 
-`21:56` → `24:07` · 15 beats · 261 words · 131s · `11-could-you-store-only-the-18.md`
+`21:56` → `24:07` · 15 beats · 205 words · 131s · `11-could-you-store-only-the-18.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
@@ -265,7 +265,7 @@ Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered
 | `23:29` | There it is. The fetching costs more than the thinking. Not a bit more — about fifty times more. | the plan | the bars redraw to true scale; the work bar nearly vanishes |
 | `23:40` | So, no. You can't just store the part it uses. Not like that. | the plan | the bars hold; nothing else on screen |
 | `23:50` | Although — if you're sitting there thinking "just keep the popular ones nearby" — | the plan | a small cache shelf sketches itself in beside the bars |
-| `23:59` | Hold that thought. You're right. That's next. Beats 14–15 are not a tease for its own sake. §12's reversal only works if the viewer arrives there believing caching solves this — S-09 requires a belief this video taught them, not one they brought. So the belief has to be planted deliberately, in its own frame, and it has to be endorsed: you're right. | the plan | the shelf finishes drawing and stays, empty |
+| `23:59` | Hold that thought. You're right. That's next. | the plan | the shelf finishes drawing and stays, empty |
 
 ## §12 — How people actually run these
 

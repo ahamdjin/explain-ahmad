@@ -5,12 +5,17 @@ There is no audio yet. This is the plumbing and how to use it.
 ## How the timing works
 
 Every beat declares `secs`. Those add up to the section runtime and to the
-**21:39** in `storyboard/video-1/BOARD.md`, and they are what autoplay runs on.
+**29:45** in `storyboard/video-1/BOARD.md`, and they are what autoplay runs on.
 
 The current numbers were set from a word count at 145 words per minute plus
-about a second of air, which is why `npm run timing` reports 76% talking and no
+about a second of air, which is why `npm run timing` reports 73% talking and no
 beat that cannot be said. That is a *floor*, not a performance: it guarantees
 the line fits, and nothing more.
+
+**Regenerate before trusting either figure.** `npm run board` writes BOARD.md
+and `npm run timing` reads the build; this file said 21:39 and 76% against a
+189-beat build that runs 29:45 at 73%, because the numbers were typed once and
+the build grew underneath them.
 
 **When a voice track exists it becomes the master clock.** Beats then follow
 `audio.currentTime` rather than a timer, so a beat cannot drift out of sync

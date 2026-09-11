@@ -72,8 +72,12 @@ fine-grained experts → full pipeline.
 losses. **It never reaches memory or "can you run it".** It is the deepest
 architecture treatment in the field and it is not asking our question.
 
-**And it is 29 minutes with 34K views** — the most-watched of the three. Our
-21 minutes is not the problem.
+**And it is 29 minutes with 34K views** — the most-watched of the three. Ours
+is **29:45** (`npm run timing`), so length is not the differentiator either
+way: the most-watched video in this field is the same length as ours, and the
+3:35 one has a tenth of the views. This paragraph said "our 21 minutes" while
+the build ran 29:45, which made the comparison read as a margin we do not have.
+The difference is the question being asked, not the runtime.
 
 ### C — *Mixture of Experts (MoE) — More Parameters, Same Compute*
 `youtube.com/watch?v=X-gfpWG6XDU` · 2026-05-31 · **3:35** · 3,422 views

@@ -18,7 +18,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `two-models` | 6 | want | Two models, both five percent active | Two AI models. Both use about five percent of themselves to answer you. |
-| 2 | `one-card` | 4 | so | One graphics card | This one runs on a single graphics card. |
+| 2 | `one-card` | 4 | so | One chip | This one runs on a single chip. |
 | 3 | `eight-cards` | 3 | wall | Eight of them | This one needs eight. |
 | 4 | `the-number-everybody-quotes` | 9 | and-yet | The number everybody quotes | Everyone quotes that number to say these models are cheap now. Both have it. Only one of them is. |
 | 5 | `unequal` | 4 | and-yet | Level above, unequal below | Same five percent. Eight times the machine. |
@@ -149,7 +149,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 3 | `eight-different-answers` | 8 | so | Eight visibly different rows emerge on the far side | And eight different rows come out. Same numbers going in. Eight different answers coming out. |
 | 4 | `which-one-wins` | 8 | and-yet | The eight outputs hold side by side; nothing moves | So — eight answers. Which one wins? |
 | 5 | `none-of-them` | 6 | so | All eight stay; none dims, none leaves | None of them. They all count. |
-| 6 | `not-an-equal-say` | 11 | so | Each output takes the size of its expert’s score | But not equally. The router already scored them, so the ones that scored higher count for more. |
+| 6 | `not-an-equal-say` | 11 | and-yet | Each output takes the size of its expert’s score | But not equally. The router already scored them, so the ones that scored higher count for more. |
 | 7 | `blended-in-proportion` | 6 | so | The eight converge and merge, larger ones dominating | They get blended together, in proportion to those scores. |
 | 8 | `plus-the-always-on` | 7 | so | The dashed shared expert’s output joins the merge | And the one that’s always on gets blended in too. |
 | 9 | `a-single-row` | 9 | therefore | One row settles, the same length as the one that went in | Out comes a single row. Same length as the one that went in. Completely different numbers. |
@@ -216,7 +216,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | --- | --- | --- | --- | --- | --- |
 | 1 | `a-row-for-every-token` | 15 | want | We rise to the top and arrive alongside the waiting markers | So every token in your prompt pays its own three hundred and thirty-six, all at once. At the top of the stack there’s a row for every one of them. |
 | 2 | `eight-finished-rows` | 6 | so | Each marker unfolds into its finished row, eight in a line | Eight rows. One per token, all of them finished. |
-| 3 | `only-one-matters` | 7 | so | The first seven dim; only the last stays lit | But only one of them matters right now. The last one. |
+| 3 | `only-one-matters` | 7 | and-yet | The first seven dim; only the last stays lit | But only one of them matters right now. The last one. |
 | 4 | `next-attaches-to-the-end` | 9 | so | The last row lifts clear of the others | Because the job is to work out what comes next — and next attaches to the end. |
 | 5 | `the-list-returns` | 11 | so | §2’s list rises again beside it | So that final row gets compared against the whole list. All hundred and fifty-four thousand, eight hundred and eighty of them. |
 | 6 | `every-one-gets-a-score` | 9 | so | A value spreads down the entire list, every entry getting one | Every single one gets a score. How well does this word fit — right here, right now? |
@@ -240,7 +240,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 2 | `does-it-get-a-shortcut` | 10 | and-yet | The card hovers near the base; nothing else moves | The model has just done all of that work. So to make the next word — does this one get a shortcut? |
 | 3 | `no-shortcut` | 7 | so | The card drops to the base and sits on floor one | No. It starts at the bottom. Floor one, same as the first word did. |
 | 4 | `joins-the-end` | 7 | so | The sentence is now one token longer; a ninth marker appears | The word it just made joins the end of your sentence. |
-| 5 | `what-is-kept` | 12 | so | The eight earlier markers hold in place; none of them move | But the eight before it don’t climb again. The state it needs from those earlier tokens is kept. That’s the bit it doesn’t have to redo. |
+| 5 | `what-is-kept` | 12 | and-yet | The eight earlier markers hold in place; none of them move | But the eight before it don’t climb again. The state it needs from those earlier tokens is kept. That’s the bit it doesn’t have to redo. |
 | 6 | `just-the-new-word` | 9 | so | Only the ninth marker enters the base and climbs alone | Just the new word goes up. All forty-five floors, reading the kept work as it passes. |
 | 7 | `three-thirty-six-for-this-word` | 12 | so | 42 of the 45 floors light as it passes; a counter runs with it | Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one token. |
 | 8 | `another-word-comes-out` | 4 | so | Another card drops out at the top | And another word comes out. |
@@ -292,7 +292,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 5 | `quite-often-the-same` | 10 | so | The repeating blocks stay in the box instead of returning | The next token quite often wants some of the same experts the last one did. So you don’t fetch every time. |
 | 6 | `only-fetch-the-misses` | 14 | so | The next word’s fetches split: most from the box, a few from the drive | You keep the ones that keep coming back close, and you only go to the drive for the ones you’re missing. |
 | 7 | `and-it-works` | 11 | hope | The machine speeds up; a model tag appears on the box | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. |
-| 8 | `how-much-do-you-keep` | 9 | so | A slider rises out of the floor under the box | Which turns the whole thing into one question. How much do you keep close? |
+| 8 | `how-much-do-you-keep` | 9 | so | A slider rises out of the floor under the box | Which turns the whole thing into one dial. How much you keep close. |
 | 9 | `wheres-the-good-setting` | 10 | and-yet | The slider holds untouched at neither end; nothing moves | Before I move it — where do you reckon the good setting is? |
 | 10 | `keep-more-and-its-big` | 12 | and-yet | Dragged up: the box swells, the machine races, its frame grows huge | Keep more, and it’s fast — but now you need a big machine again, which is the thing we were trying to avoid. |
 | 11 | `keep-less-and-it-crawls` | 9 | wall | Dragged down: the box shrinks, long hops multiply, it crawls | Keep less, the machine gets small — and the misses pile up, and it crawls. |
@@ -324,7 +324,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 11 | `better-and-harder` | 18 | and-yet | The fine-grained one’s chips grow while its pieces get smaller | Chopping finer is exactly why it’s better — better at specialising, better at spreading the load. It’s also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby. |
 | 12 | `the-trend` | 15 | therefore | The second card withdraws; ours holds with its eight chips | So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn’t move. |
 | 13 | `a-compute-number` | 11 | therefore | Everything clears to a single line of handwriting | "Active parameters" is a compute number. It was never a memory number. |
-| 14 | `two-models-one-card-and-eight` | 12 | so | §1’s opening frame redraws itself exactly: two sheets, one chip and eight | Two models. Both about five percent active. One of them runs on a single card; the other one needs eight. |
+| 14 | `two-models-one-card-and-eight` | 12 | so | §1’s opening frame redraws itself exactly: two sheets, one chip and eight | Two models. Both about five percent active. One of them runs on a single chip; the other one needs eight. |
 | 15 | `now-you-know-why` | 7 | and-yet | Nothing moves | Now you know why. |
 
 ---
