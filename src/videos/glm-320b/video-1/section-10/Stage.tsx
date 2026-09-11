@@ -18,7 +18,8 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {scene.ground.on ? <Ground y={scene.ground.y} /> : null}
 
       <Slot on={scene.tower.on} at={scene.tower.at} scale={scene.tower.scale} z={1} feel={feel}>
-        <Tower floor={scene.tower.floor} markers={scene.tower.markers} />
+        <Tower floor={scene.tower.floor} markers={scene.tower.markers}
+          kept={scene.tower.kept} />
       </Slot>
 
       <Slot on={scene.line.on} at={scene.line.at} scale={scene.line.scale} z={3} feel={feel}>
@@ -40,16 +41,17 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       </Slot>
 
       <Slot on={scene.aside.on} at={scene.aside.at} scale={scene.aside.scale} z={8} feel={feel}>
-        <Aside chip="doesn’t it reuse the earlier work?" title="The KV cache">
+        <Aside chip="what exactly is kept?" title="The KV cache">
           <p>
-            Yes — and it matters. Real systems keep the attention keys and values for the tokens
-            already in the sentence, so those are not recomputed from scratch each step. So
-            &ldquo;from the beginning&rdquo; is true of the <b>sentence</b>, not of the work.
+            The attention keys and values for every token already in the sentence. They are stored,
+            so those positions are not pushed through the stack again — only the new one is. That is
+            the difference between <b>prefill</b>, where the whole prompt climbs at once, and{' '}
+            <b>decode</b>, where one token climbs at a time.
           </p>
           <p>
-            But the <b>expert routing is genuinely redone</b> for each new token at every one of the
-            42 sparse floors. The cache saves you none of that — which is why it removes an
-            objection without weakening the point.
+            What the cache does <b>not</b> save you is the routing. Every one of the 42 sparse
+            floors runs its router again for the new position, so the 336 expert visits are paid in
+            full, every word. That is why conceding the cache costs the argument nothing.
           </p>
         </Aside>
       </Slot>

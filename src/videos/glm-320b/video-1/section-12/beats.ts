@@ -178,8 +178,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'no-setting-where-its-both',
     title: 'The slider is dragged across its whole range; neither end shows both',
     relation: 'therefore',
-    secs: 12,
-    vo: 'There’s no setting on that slider where it’s both. That’s the trade, and on a model chopped this fine the exchange rate is brutal.',
+    secs: 16,
+    vo: 'So it’s a trade — and where the good setting sits depends on how often the experts repeat. On eight-expert models, people have measured that. Nobody has measured it for twelve thousand slots.',
     commands: [count.hold(), wall.off(), tower.off(), slider.drive(0.92)],
     clearSticky: true,
     stages: [

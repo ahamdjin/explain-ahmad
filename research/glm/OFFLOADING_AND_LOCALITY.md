@@ -88,12 +88,33 @@ essentially the moment you need them
 
 ## 5. What this obliges us to change
 
-| Where | Was | Must become |
-| --- | --- | --- |
-| §1 event | "a **completely** different eight" | a different eight, and **show which ones stayed** — partial overlap is true, and it sets up caching honestly |
-| §7 | "so you can't run it on less memory" | "you *can* — people do — and here is the price, and here is why it gets worse, not better" |
-| §7 | ~1.6 s/word presented as the fact | the **naive** cost. Then caching. Then why 12,096 slots defeats the cache |
-| §8 | compute not memory | compute not memory, **and the trend** |
+Reviewed 2026-09-11. **Done** means the line is corrected in both the script
+and `beats.ts`; a table like this is worthless if it records intentions.
+
+| Where | Was | Must become | State |
+| --- | --- | --- | --- |
+| §1 event | "a **completely** different eight" | a different eight, and **show which ones stayed** — partial overlap is true, and it sets up caching honestly | **done** v10 |
+| §5 b15 | "you get a different eight" | a fresh decision, and *mostly* a different eight | **done** v10 |
+| §7 b7–8 | "No." / "Different eight." | it picks again; one or two recur without being *kept* | **done** v10 |
+| §7 | "so you can't run it on less memory" | "you *can* — people do — and here is the price, and here is why it gets worse, not better" | **done** v9 |
+| §7 | ~1.6 s/word presented as the fact | the **naive** cost. Then caching. Then why 12,096 slots defeats the cache | **done** v9 |
+| §8 | compute not memory | compute not memory, **and the trend** | **done** v9 |
+| §12 b14 | "no setting where it's both… the exchange rate is brutal" | the trade is real; the repeat rate is measured only for coarse models; **the box number cannot locate the setting** | **done** v10 |
+| §13 b9 | "the difference is that this one is chopped finer" | three differences — parameters, precision, granularity — and only the third is interesting, and not because of file size | **done** v10 |
+
+### The limit this file sets, stated once
+
+**There is no published expert-locality measurement for 288 experts at top-8.**
+Everything in §2 above is Mixtral-class: 8 experts, top-2. So the video may
+argue the *direction* — 12,096 slots against a cache that saturates near 384,
+and ~2.8% random overlap against Mixtral's 12.5–25% — and may not state an
+exchange rate, a hit rate, or a good operating point for this model. §12 v9
+did state one. If a future beat wants to, it needs a measurement in this file
+first.
+
+The two rows above that sat unpaid from 2026-09-09 to 2026-09-11 (§5 and §7's
+overlap) are the argument for the State column. Both were found by an outside
+reviewer, not by any gate, and while they were unpaid §7 contradicted §12.
 
 ## 6. Still true, still verified
 

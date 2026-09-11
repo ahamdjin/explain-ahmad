@@ -111,7 +111,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'We fall away until the whole tower and one small card share the frame',
     relation: 'and-yet',
     secs: 14,
-    vo: 'All of that. Forty-five floors, three hundred and thirty-six experts per token, every token in your prompt. And what comes out the other end is one word.',
+    vo: 'All of that. Forty-five floors, three hundred and thirty-six expert visits per token, every token in your prompt. And what comes out the other end is one word.',
     /*
      * The carrying frame. The entire machine on one side, one small card on the
      * other, and no label -- scale contrast doing the teaching. The line is

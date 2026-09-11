@@ -1,6 +1,7 @@
 # Section 08 — That was one token. Here's the sentence.
 
-Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+Status: **SCRIPT v10.** Written to spine v5. Corrected against a technical
+review, 2026-09-11 — see "What changed" below. Every beat cites a strategy from
 `skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
 
 v8's interiors survive — they were built for spatial continuity and that work
@@ -51,6 +52,19 @@ between the attention wiring and the counters. It is the one word most viewers
 came in carrying an idea about, so it gets beats 6–7 and nothing else happens
 on them.
 
+**5. Beat 4 re-broke causal attention.** It said *"every token, on every
+floor, looking at all the others"*. §4 beat 6 explicitly taught the opposite —
+*"it can only look backwards… Never at what's coming"* — so v9 contradicted its
+own video twelve beats later, and did it while introducing the word
+*transformer*, where a viewer is paying most attention. Beat 4 now says each
+token pulls from the words behind it, and names it as the same backwards look
+already watched.
+
+**6. "What the word transformer actually means" was too broad.** The picture on
+screen includes MoE experts, and dense transformers are transformers too. It is
+now *the transformer stack*, and the feed-forward block — not "experts" — is
+what does the per-floor work in the naming sentence.
+
 ## The script
 
 ### Act 1 — banking 336, then the correction (beat 1) · **S-14**
@@ -67,9 +81,10 @@ on them.
 > **3.** *(all eight climb side by side)* Every token climbs at the same time.
 > All of them, all forty-five floors, together.
 >
-> **4.** *(lines appear between the markers on the floor they share)* And
-> attention is the wiring between them. Every token, on every floor, looking at
-> all the others.
+> **4.** *(lines appear between the markers on the floor they share, each one
+> reaching backwards only)* And attention is the wiring between them. Every
+> token, on every floor, pulling from the words behind it — the same backwards
+> look, now happening to all of them at once.
 >
 > **5.** *(the lines redraw on each new floor as they climb)* That's what makes
 > it read your sentence as a sentence, instead of a list of separate words.
@@ -77,9 +92,9 @@ on them.
 ### Act 3 — the shape has a name (beats 6–7) · **S-12**
 
 > **6.** *(a plate slides onto the front of the tower)* And this whole
-> arrangement — the stack of floors, attention wiring them together, experts
-> doing the work on each one — this is what the word **transformer** actually
-> means.
+> arrangement — a stack of floors, attention wiring them together, a
+> feed-forward block doing the work on each one — this is the **transformer**
+> stack. That's the word. It's this shape.
 >
 > **7.** *(the plate settles; the climb continues behind it)* That's it. It
 > isn't a mysterious thing. It's this shape.
@@ -123,7 +138,7 @@ on them.
 | 3 | the tower | — | all eight climb together, side by side, floor by floor | `Tower`, 8 climbing | together | S-04 |
 | 4 | the tower | — | lines appear between the markers on the floor they are all standing on | cross-marker lines | attention, between | S-04 |
 | 5 | the tower | — | the lines redraw on each new floor as they climb | lines per floor | on every floor | S-04 |
-| 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | **"transformer"** | S-12 |
+| 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | **"transformer" stack** | S-12 |
 | 7 | the tower | — | the plate settles; the climb continues behind it | plaque + climb | the shape, named | S-12 |
 | 8 | the tower | — | a small counter appears above every marker, each reading 336 | 8 `Counter`s | 336 each | S-04 |
 | 9 | the tower | — | the counters hold; a blank total waits beneath them; nothing moves | 8 counters + blank | **`8 × 336 = ?`** | S-06 |
@@ -162,7 +177,7 @@ on them.
 | 1 | **bank**, then admit the simplification |
 | 2–3 | **correct** — the whole prompt, together |
 | 4–5 | **teach** — attention is the wiring between them |
-| 6–7 | **name** — this shape is what "transformer" means |
+| 6–7 | **name** — this shape is the transformer stack |
 | 8 | **teach** — every token pays its own 336 |
 | 9 | **ask** — eight of them. How many is that? |
 | 10–11 | **answer** — 2,688 |

@@ -1,6 +1,7 @@
 # Section 03 — From an ID to a meaning
 
-Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+Status: **SCRIPT v10.** Written to spine v5. Corrected against a technical
+review, 2026-09-11 — see "What changed" below. Every beat cites a strategy from
 `skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
 
 v8's interiors survive — they were built for spatial continuity and that work
@@ -53,6 +54,14 @@ S-06, and soft rather than a bet: the hard-bet budget is spent on §1 and §7.
 landing *the same row every time* are two jobs. They are now beats 13–15, and
 the identical-row frame gets its own hold, because it is the setup §4 spends.
 
+**5. Beat 8 defined closeness as coordinate agreement.** It said *"lots of
+these numbers nearly match"* over an animation that lit individual matching
+cells. Two nearby rows do mostly have nearby values, so the sentence was not
+false — but it teaches similarity *as* per-cell matching, which does not
+generalise, and beat 11 then has to undo it to say the meaning is in where the
+row sits. Beat 8 now lights the pair as one band and says they are close *as
+rows*. The animation stays; what it is claimed to prove does not.
+
 ## The script
 
 ### Act 1 — banking the row number (beat 1) · **S-14**
@@ -86,8 +95,9 @@ the identical-row frame gets its own hold, because it is the setup §4 spends.
 > **7.** *(two more rows slide out and stack under it)* Here's what. Let's pull
 > out two more — "dog", and "cat".
 >
-> **8.** *(the rows align; the values that nearly match light up)* They're not
-> the same. But they're close. Lots of these numbers nearly match.
+> **8.** *(the rows align and the whole pair lights as one band; individual
+> cells are never singled out)* They're not the same row. But taken whole,
+> they're close — the two rows sit near each other.
 >
 > **9.** *(a third row aligns; almost nothing lights)* Now "Tuesday". Not close
 > to either of them.
@@ -130,8 +140,8 @@ the identical-row frame gets its own hold, because it is the setup §4 spends.
 | 5 | the table | — | the extracted row extends sideways past both edges of frame | `NumberRow` extending | 4096 values | S-04 |
 | 6 | the table | — | everything stops; the row holds and the question sits under it | `NumberRow`, still | **`what for?`** | S-06 |
 | 7 | the table | — | two more rows slide out and stack under it | 3 `NumberRow`s | `dog`, `cat` | S-04 |
-| 8 | the table | — | the `dog` and `cat` rows align; the values that nearly match light up | `NumberRow` `compare` | many matches | S-04 |
-| 9 | the table | — | a third row slides out and aligns; almost nothing lights | 3 rows aligned | `Tuesday` | S-04 |
+| 8 | the table | — | the `dog` and `cat` rows align and light as a single band, edge to edge | `NumberRow` `compare` `whole` | close, as rows | S-04 |
+| 9 | the table | — | a third row slides out and aligns; its band stays unlit | 3 rows aligned | `Tuesday`, not close | S-04 |
 | 10 | the table | — | the three rows collapse into three points, spaced by how alike they are | rows → `Space` points | dog·cat close, Tuesday far | S-04 |
 | 11 | the table | — | the points hold; a brace measures the two distances | points, `Brace` | the two gaps | S-04 |
 | 12 | the table | — | the points unfold back into the `dog` row and a handwritten label lands on it | `NumberRow`, `Note` | **"embedding"** | S-12 |

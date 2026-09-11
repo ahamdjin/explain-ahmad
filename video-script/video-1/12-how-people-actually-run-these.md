@@ -1,6 +1,7 @@
 # Section 12 — How people actually run these
 
-Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+Status: **SCRIPT v10.** Written to spine v5. Corrected against a technical
+review, 2026-09-11 — see "What changed" below. Every beat cites a strategy from
 `skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
 
 v8's interiors survive — they were built for spatial continuity and that work
@@ -33,7 +34,7 @@ already knows it.
 | Teaches | caching, and the memory-for-speed trade |
 | Answers | experts repeat, so you keep the frequent ones close — and it genuinely works |
 | Exits on | it's a price, not a wall. So what did "five percent active" actually get us? |
-| → next | **but** with 12,096 expert slots there is no setting that is both small and fast |
+| → next | **but** with 12,096 expert slots, nothing about "five percent active" tells you where the good setting is |
 | Target | ~14 beats · ~1:35 |
 
 ## What changed from v8
@@ -55,6 +56,20 @@ worth more here than a correct one. S-06, soft.
 **3. Beat 1 ignored what §11 left on screen.** §11 now ends on a cache shelf,
 drawn and empty. This section has to pick that object up rather than clear the
 frame and introduce a new one.
+
+**4. Beat 14 asserted a measurement we do not have.** *"There's no setting on
+that slider where it's both… on a model chopped this fine, the exchange rate is
+brutal."* `research/glm/OFFLOADING_AND_LOCALITY.md` is explicit that **no
+locality measurement has been published for 288 experts at top-8** — every
+reassuring cache figure we cite comes from Mixtral-style 8-expert, top-2
+models. 12,096 slots against a cache that saturates near 384 is a real
+*direction*, not a measured exchange rate, and more experts also means smaller
+experts.
+
+The slider stays — it is the best thing in the section. What changed is the
+conclusion: the trade is real, the good setting depends on repeat rate, that
+rate is measured only for coarse models, and **the number on the box cannot
+locate it**. That is a claim we can defend, and it still lands §13.
 
 ## The script
 
@@ -114,8 +129,13 @@ frame and introduce a new one.
 > and ninety-six slots.
 >
 > **14.** *(the slider is dragged across its whole range; neither end shows
-> both)* There's no setting on that slider where it's both. That's the trade —
-> and on a model chopped this fine, the exchange rate is brutal.
+> both)* So it's a trade — and where the good setting sits depends on how often
+> the experts repeat. On eight-expert models, people have measured that. Nobody
+> has measured it for twelve thousand slots.
+>
+> **15.** *(a question mark settles over the middle of the slider's range)* So
+> the honest answer is that nobody knows where the good setting is. And "five
+> percent active" was never going to tell you.
 
 ### Act 6 — a price, not a wall (beat 15) · **S-14**
 
@@ -142,7 +162,8 @@ frame and introduce a new one.
 | 11 | the plan | — | dragged down: the box shrinks, long hops multiply, the machine crawls | slider low | small, but slow | S-04 |
 | 12 | the plan | — | the 288 wall and the 42 floors ghost in behind the box, dwarfing it | `Hospital` + `Tower` ghosted | 288 × 42 | S-09 |
 | 13 | the plan | — | a count assembles from them and lands on the box | `Counter` | **12,096** slots | S-09 |
-| 14 | the plan | — | the slider is dragged across its whole range; neither end ever shows both | slider sweeping | no good setting | S-09 |
+| 14 | the plan | — | the slider is dragged across its whole range; neither end ever shows both | slider sweeping | measured for 8, not for 12,096 | S-09 |
+| 15 | the plan | — | a question mark settles over the middle of the range, where a position would go | slider, `?` mid-range | nobody knows | S-09 |
 | 15 | the plan | — | the slider settles mid-range; the machine runs, slowly, and keeps running | machine, slow, working | a price, not a wall | S-14 |
 
 ### Board notes
@@ -182,7 +203,7 @@ frame and introduce a new one.
 | 8 | **frame** — it all reduces to one dial |
 | 9 | **ask** — where is the good setting? |
 | 10–11 | **teach** — both ends fail, differently |
-| 12–14 | **the reversal** — 12,096 slots, and no setting that is both |
+| 12–14 | **the reversal** — 12,096 slots, and the box number can't locate the setting |
 | 15 | **the wall** — a price, not a wall |
 
 ## Truth notes — mandatory

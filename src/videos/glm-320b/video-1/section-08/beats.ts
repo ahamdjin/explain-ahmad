@@ -60,8 +60,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'attention-is-the-wiring',
     title: 'Lines appear between the markers on the floor they share',
     relation: 'so',
-    secs: 11,
-    vo: 'And attention is the wiring between them. That’s what connects them — every token, on every floor, looking at all the others.',
+    secs: 15,
+    vo: 'And attention is the wiring between them. Every token, on every floor, pulling from the words behind it — the same backwards look, now happening to all of them at once.',
     /* §4 reframed at no cost: attention is the wiring *between* tokens, which
      * the viewer can only see now that there is more than one. */
     commands: [tower.wire()],

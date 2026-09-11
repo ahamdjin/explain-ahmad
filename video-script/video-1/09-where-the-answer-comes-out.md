@@ -35,7 +35,7 @@ Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 09`
 ## What changed from v8
 
 **1. Beats 9 and 10 were the same sentence twice.** Both opened *"All of that.
-Forty-five floors, three hundred and thirty-six experts…"*. The recap is worth
+Forty-five floors, three hundred and thirty-six expert visits…"*. The recap is worth
 having — it is the section's whole emotional point — but once, over three
 frames where the picture does the work, not twice in words.
 
@@ -85,7 +85,7 @@ it is eight, and beat 3 dims seven of them, not eight.
 > the frame)* All of that.
 >
 > **11.** *(the tower fills the frame; the card stays tiny)* Forty-five floors.
-> Three hundred and thirty-six experts per token. Every token in your prompt,
+> Three hundred and thirty-six expert visits per token. Every token in your prompt,
 > all the way up.
 >
 > **12.** *(nothing moves; the card sits there)* And what comes out the other end

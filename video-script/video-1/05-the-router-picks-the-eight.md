@@ -1,6 +1,7 @@
 # Section 05 — The router picks the eight
 
-Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
+Status: **SCRIPT v10.** Written to spine v5. Corrected against a technical
+review, 2026-09-11 — see "What changed" below. Every beat cites a strategy from
 `skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
 
 v8's interiors survive — they were built for spatial continuity and that work
@@ -66,6 +67,13 @@ the field is making.
 beat 2, which it must, since eleven beats then talk about it. Beat 13 is a
 chapter wall and nothing else, so it is **S-14**.
 
+**5. Beat 15 promised a different eight.** A changed row means the router runs
+again, not that all eight change — partial overlap between consecutive routing
+decisions is real and measured, and §12's whole caching argument depends on it.
+v9 made §7 and §12 contradict each other five sections apart. Beat 15 now says
+*a fresh decision, and mostly a different eight*.
+`research/glm/OFFLOADING_AND_LOCALITY.md` §5.
+
 ## The script
 
 ### Act 1 — banking the changed row (beat 1) · **S-14**
@@ -127,9 +135,10 @@ chapter wall and nothing else, so it is **S-14**.
 > ones that didn't exist a moment ago. Attention had only just finished making
 > them.
 >
-> **15.** *(a second sentence swaps in; the row changes; the eight change)*
-> Change the sentence, and the row changes. Change the row, and the scores
-> change. Change the scores, and you get a different eight.
+> **15.** *(a second sentence swaps in; the row changes; most of the eight
+> change)* Change the sentence, and the row changes. Change the row, and the
+> scores change. Change the scores, and it picks again — a fresh decision, and
+> mostly a different eight.
 
 Act 4 is the section's reason to exist, and it is the argument
 `research/COMPETITIVE_FIELD.md` shows nobody else is making. Every competing
@@ -163,7 +172,7 @@ knowable*. §11's entire answer is a consequence of these three beats.
 | 12 | the room | — | a ninth slides in **from outside the wall**, already lit, and sits apart from the eight | shared `Specialist`, separated | +1, never scored | S-04 |
 | 13 | the room | — | the row that produced the scores pulses; a line links it to the badges | `NumberRow` → badges | the dependency | S-15 |
 | 14 | the room | — | attention's arcs ghost in behind the row and fade, showing where it came from | §4's `AttentionArcs`, faint | made moments ago | S-15 |
-| 15 | the room | — | a second sentence swaps in off to the side; the row changes; the eight change | two rows, two teams | `hot dog` → different eight | S-15 |
+| 15 | the room | — | a second sentence swaps in off to the side; the row changes; most of the eight change, one or two hold | two rows, two teams | `hot dog` → picks again | S-15 |
 | 16 | the room | — | the new eight hold; the old eight's empty places stay marked | `was` markers | which ones moved | S-14 |
 
 ### Board notes

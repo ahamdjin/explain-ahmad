@@ -54,8 +54,21 @@ export type TowerFlash = 'look' | 'pick' | 'work'
 export function Tower({
   /** The floor the climbers are on. Also the highlighted floor. */
   floor = 0,
-  /** How many token markers are on the building. §8 puts nine here. */
+  /** How many token markers are on the building. §8 puts eight here. */
   markers = 0,
+  /**
+   * How many of those markers are *kept* -- already finished, held at the top,
+   * dimmed, and not climbing.
+   *
+   * This exists for §10, which is **decode, not prefill**. Only the newly
+   * chosen token is pushed through the 45 layers; the earlier positions are
+   * reused from the KV cache. The section used to march all nine markers back
+   * to the base and replay the climb, which is the prefill picture, and filed
+   * the cache as an aside -- a caption cannot correct the main image. So the
+   * first `kept` markers hold at the top and only the remainder climbs.
+   * `research/glm/GROUND_TRUTH.md`.
+   */
+  kept = 0,
   /** The three-flash sequence on the current floor: look · pick · work. */
   flash,
   /** Light the current floor's eight, and the floor below's, differently. */
@@ -74,6 +87,7 @@ export function Tower({
 }: {
   floor?: number
   markers?: number
+  kept?: number
   flash?: TowerFlash
   teams?: boolean
   wiring?: boolean
@@ -223,22 +237,39 @@ export function Tower({
           </g>
         ) : null}
 
-        {/* the climbers */}
-        {markerXs.map((x, i) => (
+        {/* the climbers -- and, in §10, the ones that are not climbing */}
+        {markerXs.map((x, i) => {
+          /*
+           * A kept marker sits at the top, where it finished, dimmed. It must
+           * stay legible: if it fades far enough to read as "gone", the viewer
+           * sees one word climbing an empty tower and loses the reason this
+           * pass is cheaper than the first one. That *is* the argument.
+           */
+          const isKept = i < kept
+          return (
           <motion.g
             key={i}
             initial={false}
-            animate={{ y: floorY(Math.max(1, floor)) + FLOOR_H / 2 }}
-            transition={{ type: 'spring', stiffness: 70, damping: 18, delay: i * 0.015 }}
+            animate={{ y: isKept ? floorY(FLOORS) + FLOOR_H / 2 : floorY(Math.max(1, floor)) + FLOOR_H / 2 }}
+            transition={{ type: 'spring', stiffness: 70, damping: 18, delay: isKept ? 0 : i * 0.015 }}
+            opacity={isKept ? 0.34 : 1}
           >
-            <circle cx={x} cy={0} r="6.6" fill={PALETTE.teal2} stroke={INK} strokeWidth="2" />
+            <circle
+              cx={x}
+              cy={0}
+              r="6.6"
+              fill={isKept ? PALETTE.paperShade : PALETTE.teal2}
+              stroke={INK}
+              strokeWidth={isKept ? 1.4 : 2}
+            />
             {counters ? (
               <text x={x} y={-13} textAnchor="middle" className="s1-tower-count" fill={PALETTE.blueInk}>
                 {counters}
               </text>
             ) : null}
           </motion.g>
-        ))}
+          )
+        })}
 
         {/* the shape, named */}
         {plaque ? (

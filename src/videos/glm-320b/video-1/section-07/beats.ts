@@ -10,8 +10,11 @@ import { VISITS, camera, count, ground, narrator, room, rowA, rowB, tower, type 
  * hanging for a second — that is the house style, and it is what stops this
  * from becoming the mystery structure the earlier drafts died of.
  *
- * **Beats 6-8 are the carrying frames**: two floors, two rows, two different
- * eights, on one frame.
+ * **Beats 6-8 are the carrying frames**: two floors, two rows, two routing
+ * decisions, on one frame. Beat 8 shows *partial* overlap on purpose -- a
+ * fresh decision usually lands on a different eight, but not always, and
+ * section 12's caching argument needs that to be true here.
+ * `research/glm/OFFLOADING_AND_LOCALITY.md` section 5.
  */
 export const BEATS: Beat<Patch>[] = [
   {
@@ -96,10 +99,10 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 6,
     id: 'not-the-same-row',
-    title: 'The row at floor one and floor two — different values',
+    title: 'The row at floor one and floor two — pick again, or keep?',
     relation: 'so',
-    secs: 8,
-    vo: 'So: same word, one floor up. Do you reckon it picks the same eight?',
+    secs: 9,
+    vo: 'So: same word, one floor up. Does it pick again — or does it keep the eight it’s got?',
     commands: [tower.flash(undefined), tower.climbTo(2), rowA.show({ x: 18, y: 32 }, 0.32)],
     stages: [{ at: 1600, commands: [rowB.show({ x: 18, y: 52 }, 0.32)] }],
   },
@@ -109,27 +112,27 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The two rows hold side by side',
     relation: 'so',
     secs: 12,
-    vo: 'No. Because the row arriving at floor two is not the row that arrived at floor one. Different row, different scores, different eight.',
+    vo: 'It picks again. Every floor runs its own router, from scratch — because the row arriving at floor two is not the row that arrived at floor one.',
     commands: [],
     overlays: [note('different row →\ndifferent scores', 18, 68, { tone: 'measure', rotate: -2 })],
   },
   {
     n: 8,
-    id: 'different-eight',
-    title: 'Floor two’s eight light, in different positions from floor one’s',
+    id: 'picks-again',
+    title: 'Floor two’s eight light — mostly new positions, one or two held',
     relation: 'wall',
-    secs: 6,
-    vo: 'Different eight.',
+    secs: 11,
+    vo: 'Usually a different eight. Sometimes a couple come up again — it isn’t keeping them, it just scored them highest twice.',
     commands: [tower.showTeams()],
     overlays: [note('two floors,\ntwo teams', 84, 44, { tone: 'cost', rotate: 3 })],
   },
   {
     n: 9,
     id: 'every-floor-picks-fresh',
-    title: 'The climb resumes; every floor lights a different eight',
+    title: 'The climb resumes; every floor runs its own router',
     relation: 'so',
     secs: 7,
-    vo: 'Every floor picks fresh. Same token, same model, new team.',
+    vo: 'Forty-two floors, forty-two decisions. Same token, same model, and it commits to nothing.',
     commands: [rowA.off(), rowB.off()],
     stages: [
       { at: 700, commands: [tower.climbTo(14)] },
@@ -183,7 +186,7 @@ export const BEATS: Beat<Patch>[] = [
     title: '336 holds while a line traces the whole climb, bottom to top',
     relation: 'and-yet',
     secs: 16,
-    vo: 'Three hundred and thirty-six choices, for one token — and every single one of them needed the floor below to finish before it could be made. Nobody quotes that number. It’s the one that matters.',
+    vo: 'Three hundred and thirty-six expert visits, for one token — and every single one of them needed the floor below to finish before it could be made. Nobody quotes that number. It’s the one that matters.',
     commands: [count.hold(), tower.trace(), narrator.set({ pose: 'think' })],
     clearSticky: true,
     /* Deposit three, and the strongest one. */

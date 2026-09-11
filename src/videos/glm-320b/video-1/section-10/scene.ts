@@ -36,7 +36,8 @@ export const PREFILL = PROMPT.length * 336
 export const visitsAfter = (words: number) => PREFILL + words * 336
 
 export type SceneState = {
-  tower: Placed & { floor: number; markers: number }
+  /** `kept` markers hold at the top, dimmed; the rest climb. Beats 4-5. */
+  tower: Placed & { floor: number; markers: number; kept: number }
   /** The prompt, growing by one token every time round. */
   line: Placed & { words: readonly string[] }
   /** The word that just came out, before it goes back on the end. */
@@ -56,7 +57,7 @@ export type SceneState = {
 }
 
 export const INITIAL: SceneState = {
-  tower: { on: false, at: { x: 26, y: 48 }, scale: 0.82, floor: 0, markers: 0 },
+  tower: { on: false, at: { x: 26, y: 48 }, scale: 0.82, floor: 0, markers: 0, kept: 0 },
   line: { on: false, at: { x: 26, y: 93 }, scale: 0.32, words: PROMPT },
   out: { on: false, at: { x: 62, y: 22 }, scale: 0.62, label: REPLY[0] },
   loop: { on: false, at: { x: 72, y: 50 }, scale: 1, words: [], pace: 0.14, cycling: false, halted: false },

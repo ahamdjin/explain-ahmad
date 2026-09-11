@@ -150,11 +150,18 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 9,
-    id: 'chopped-finer',
-    title: 'Each card’s block divides — one coarse, one into many fine pieces',
+    id: 'three-things-differ',
+    title: 'Three chips land beside the second card: parameters, precision, grain',
     relation: 'so',
-    secs: 7,
-    vo: 'The difference is that this one is chopped finer. More experts, smaller each.',
+    secs: 16,
+    /*
+     * The three differences, separated before any of them is blamed. v9 said
+     * "the difference is that this one is chopped finer" over a frame that
+     * divided the blocks, which made granularity look like the cause of the
+     * footprint. It is not: 116.8B vs 321B and MXFP4 vs FP8 account for ~58
+     * GiB against ~306 GiB almost entirely. See this section's truth notes.
+     */
+    vo: 'Three things differ, and only one of them is interesting. It’s nearly three times the parameters. It ships at twice the precision per weight. And it’s chopped finer — more experts, smaller each.',
     commands: [],
     overlays: [
       note(`${OTHER_MODEL.experts} per floor`, 28, 82, { tone: 'measure', rotate: -2 }),
@@ -163,6 +170,16 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 10,
+    id: 'only-the-third-is-interesting',
+    title: 'The first two chips grey out; the granularity chip stays lit',
+    relation: 'and-yet',
+    secs: 13,
+    vo: 'The first two are just size — that’s why the file is bigger. The third one is the interesting one, and it isn’t about the file at all.',
+    commands: [],
+    overlays: [note('size · size · the interesting one', 50, 14, { size: 'md', tone: 'measure', rotate: -1 })],
+  },
+  {
+    n: 11,
     id: 'better-and-harder',
     title: 'The fine-grained one’s chips grow while its pieces get smaller',
     relation: 'and-yet',
@@ -173,7 +190,7 @@ export const BEATS: Beat<Patch>[] = [
     overlays: [note('better · and harder to hold', 62, 12, { size: 'md', tone: 'cost', rotate: 2 })],
   },
   {
-    n: 11,
+    n: 12,
     id: 'the-trend',
     title: 'The second card withdraws; ours holds with its four chips',
     relation: 'therefore',
@@ -183,7 +200,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [cardA.off(), cardB.moveTo({ x: 50, y: 48 }, 1.3), narrator.set({ pose: 'lean' })],
   },
   {
-    n: 12,
+    n: 13,
     id: 'cheap-to-run-not-small',
     title: 'Everything clears to one card',
     relation: 'therefore',

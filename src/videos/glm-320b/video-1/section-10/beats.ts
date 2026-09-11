@@ -29,44 +29,56 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 2,
-    id: 'you-run-it-again',
-    title: 'The card flies back to the base and joins the end of the sentence',
-    relation: 'so',
-    secs: 4,
-    vo: 'You run it again.',
+    id: 'does-it-get-a-shortcut',
+    title: 'The card hovers near the base; nothing else moves',
+    relation: 'and-yet',
+    secs: 10,
+    /* A question, not the answer -- S-06 needs a wrong intuition on offer, and
+     * "it can skip ahead, the model just did all that" is a real one. v9 put
+     * the answer here and cited S-06 on it, which is not a question. */
+    vo: 'The model has just done all of that work. So to make the next word — does this one get a shortcut?',
     commands: [out.moveTo({ x: 30, y: 88 }, 0.3)],
   },
   {
     n: 3,
     id: 'added-onto-the-end',
-    title: 'The sentence is now one token longer; a tenth marker appears',
+    title: 'The sentence is now one token longer; a ninth marker appears',
     relation: 'so',
-    secs: 7,
-    vo: 'The word it just made gets added onto the end of your sentence.',
-    commands: [out.off(), line.grow([...PROMPT, REPLY[0]]), tower.set({ markers: TOKENS + 1, floor: 1 })],
+    secs: 12,
+    vo: 'No. It starts at the bottom, floor one, same as the first word did. And the word it just made joins the end of your sentence.',
+    commands: [out.off(), line.grow([...PROMPT, REPLY[0]]), tower.set({ markers: TOKENS + 1, floor: 1, kept: 0 })],
     lateOverlays: {
       at: 2600,
-      overlays: [note('10 tokens now', 28, 86, { tone: 'measure', rotate: -3 })],
+      overlays: [note('9 tokens now', 28, 86, { tone: 'measure', rotate: -3 })],
     },
   },
   {
     n: 4,
-    id: 'from-the-beginning',
-    title: 'All ten markers enter at the base together',
+    id: 'what-is-kept',
+    title: 'The eight earlier markers hold in place; none of them move',
     relation: 'so',
-    secs: 6,
-    /* "From the beginning" is said about the **sentence**, not the work. The
-     * KV cache is why that distinction matters, and it is the aside below. */
-    vo: 'And the whole thing goes back in. From the beginning.',
-    commands: [tower.climbTo(3), loop.show({ x: 74, y: 50 }, 0.9), loop.start()],
+    secs: 9,
+    /*
+     * This is decode, not prefill. v9 marched all nine markers back to the
+     * base and replayed the climb for every one of them, and filed the KV
+     * cache as an *aside* -- which cannot work, because the main picture was
+     * teaching the thing the aside was there to correct. GROUND_TRUTH is
+     * explicit: only the new token is pushed through the 45 layers.
+     *
+     * `Tower`'s `kept` prop holds the eight at the top, dimmed and still, and
+     * sends only the ninth up from the base in beat 5. Checked by rendering:
+     * `node scripts/capture-frames.mjs --section=section-10`.
+     */
+    vo: 'But the eight before it don’t climb again. Everything the model worked out about them is still sitting there, kept.',
+    commands: [tower.set({ kept: TOKENS }), loop.show({ x: 74, y: 50 }, 0.9), loop.start()],
   },
   {
     n: 5,
     id: 'forty-five-floors-again',
-    title: 'The whole climb replays, faster',
+    title: 'Only the new marker climbs, reading the kept work as it passes',
     relation: 'so',
-    secs: 8,
-    vo: 'New sentence — one word longer. Forty-five floors. Look around, pick experts, do the work.',
+    secs: 13,
+    vo: 'Just the new word goes up. All forty-five floors. Forty-two of them choose — eight experts each time. Three hundred and thirty-six expert visits, for this one word.',
     /* The aside opens without stopping the loop behind it. */
     commands: [aside.show({ x: 15, y: 18 }, 1), loop.faster(0.3)],
     stages: [
@@ -112,10 +124,10 @@ export const BEATS: Beat<Patch>[] = [
     id: 'full-stack-fresh-choices',
     title: 'A counter beside each produced word ticks 336 per token',
     relation: 'so',
-    secs: 6,
-    vo: 'Every single word of that reply. Full stack. Fresh choices.',
+    secs: 11,
+    vo: 'Your eight words cost two thousand, six hundred and eighty-eight visits, once. Every single word it writes back costs another three hundred and thirty-six.',
     commands: [],
-    overlays: [centred('336 — for each\none of them', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
+    overlays: [centred('2,688 once\n+336 a word', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
   },
   {
     n: 10,
@@ -123,7 +135,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The running total climbs and does not stop',
     relation: 'wall',
     secs: 12,
-    vo: 'So it isn’t three hundred and thirty-six choices. It’s three hundred and thirty-six per token, per word it writes. It never stops choosing.',
+    vo: 'And it doesn’t know which experts the next word needs until the next word is halfway up. It never stops re-choosing.',
     /* Deposit five, and the one that makes §11 inevitable. */
     commands: [loop.faster(1), narrator.set({ pose: 'push' })],
   },
