@@ -1,8 +1,7 @@
 import { BigNumber, Block, Slot } from '../../../../paper'
-import { MachineBox } from '../../../../paper/props/Machines'
 import { Hospital } from '../../../../paper/cast/Hospital'
 import { Narrator } from '../../../../paper/cast/Narrator'
-import { FrontDesk, WordCard } from '../../../../paper/cast/Props'
+import { FrontDesk, Rig, WordCard } from '../../../../paper/cast/Props'
 import { type Feel } from '../../../../paper/motion'
 import { type SceneState } from './scene'
 
@@ -16,23 +15,6 @@ import { type SceneState } from './scene'
  * replacement, and no amount of easing work makes a slideshow feel like one
  * continuous world.
  */
-/**
- * The machines a model has to fit on, drawn as a row of cards.
- *
- * Local to §1 because one card means one 80 GB accelerator *here* and nowhere
- * else yet. If §11 or §12 ever wants the same row, it moves to `paper/props`
- * with the meaning written down -- not before. `skills/ASSET_LIBRARY.md`.
- */
-function Rig({ count }: { count: number }) {
-  return (
-    <div className="s1-rig">
-      {Array.from({ length: count }, (_, i) => (
-        <MachineBox key={i} size={92} shape="mini" />
-      ))}
-    </div>
-  )
-}
-
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   return (
     <>

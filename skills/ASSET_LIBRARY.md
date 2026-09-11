@@ -121,3 +121,18 @@ person explaining something rather than as a cast performing a script.
 Two figures that do share a frame must be distinguishable at a glance. Two
 built from the same primitives, twenty percent apart, read as a continuity
 error rather than as a cast.
+
+
+## `Rig` — a row of graphics cards (moved 2026-09-11)
+
+**One card is one ~80 GB accelerator.** It lived local to §1 with a note saying
+it should move here only if another section wanted the same row. §13 beat 14
+wanted it: S-10 closes the video by redrawing §1's opening frame, and a close
+built from different objects reads as a similar picture rather than a return.
+
+§13 had been drawing that close with `ModelCard`s -- titled, gridded,
+captioned -- against an opening made of plain `Block` sheets and card rows. The
+gap was invisible to every gate and to reading the code; it showed up by
+putting the two rendered frames side by side.
+
+Both sections now draw it from `paper/cast/Props`, at §1's coordinates.

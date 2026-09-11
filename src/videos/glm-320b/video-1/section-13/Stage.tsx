@@ -1,4 +1,4 @@
-import { BigNumber, Block, Camera, Differences, Ground, ModelCard, Slot } from '../../../../paper'
+import { BigNumber, Block, Camera, Differences, Ground, ModelCard, Rig, Slot } from '../../../../paper'
 import { ShareBar } from '../../../../paper/cast/Boards'
 import { VerdictCard } from '../../../../paper/cast/Aside'
 import { Narrator } from '../../../../paper/cast/Narrator'
@@ -14,6 +14,23 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         {/* §1's block, returning whole. Same component, same grain. */}
         <Slot on={scene.block.on} at={scene.block.at} scale={scene.block.scale} z={1} feel={feel}>
           <Block heavy={scene.block.heavy} grain={scene.block.grain} lit={scene.block.lit} />
+        </Slot>
+
+        {/*
+          Beats 14-15: §1's opening frame, redrawn from the *same objects* --
+          two plain `Block` sheets and two rows of graphics cards, at §1's own
+          coordinates. Not the `ModelCard`s below, which are evidence in the
+          middle of the section and were never what §1 opened on.
+          See `scene.ts` on `block2` for why the distinction matters.
+        */}
+        <Slot on={scene.block2.on} at={scene.block2.at} scale={scene.block2.scale} z={1} feel={feel}>
+          <Block lit={scene.block2.lit} />
+        </Slot>
+        <Slot on={scene.rigA.on} at={scene.rigA.at} scale={scene.rigA.scale} z={2} feel={feel}>
+          <Rig count={scene.rigA.count} />
+        </Slot>
+        <Slot on={scene.rigB.on} at={scene.rigB.at} scale={scene.rigB.scale} z={2} feel={feel}>
+          <Rig count={scene.rigB.count} />
         </Slot>
 
         <Slot on={scene.share.on} at={scene.share.at} scale={scene.share.scale} z={3} feel={feel}>

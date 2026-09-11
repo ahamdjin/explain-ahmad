@@ -62,6 +62,23 @@ export type SceneState = {
    * Beats 9-10. `paper/cast/Plates.tsx`.
    */
   diffs: Placed & { lit: readonly number[] }
+  /**
+   * §1's opening frame, to be redrawn **exactly** at beats 14-15.
+   *
+   * S-10 closes by reusing the opening's nouns, and a near-miss is worse than
+   * nothing: a similar picture reads as a similar picture, while an identical
+   * one reads as a *return*. The close used `ModelCard`s -- titled, gridded,
+   * captioned -- against an opening made of plain `Block` sheets and rows of
+   * graphics cards. Different objects, so seventeen beats of setup paid out
+   * into a frame the viewer had never seen.
+   *
+   * Positions and scales are copied from `section-01/scene.ts` and must stay
+   * in step with it: block at 30/42 and 72/42 scale 0.5, rigs at 30/73 and
+   * 72/73 scale 1, counts 1 and 4.
+   */
+  block2: Placed & { lit?: 'a' | 'b' }
+  rigA: Placed & { count: number }
+  rigB: Placed & { count: number }
   verdict: { on: boolean; at: At; scale: number; lines: [string, string] }
   narrator: NarratorActor
   ground: GroundActor
@@ -75,6 +92,9 @@ export const INITIAL: SceneState = {
   cardA: { on: false, at: { x: 30, y: 50 }, scale: 1, chips: 0, grain: 'coarse', litShare: false, note: '' },
   cardB: { on: false, at: { x: 70, y: 50 }, scale: 1, chips: 0, grain: 'fine', litShare: false, note: '' },
   diffs: { on: false, at: { x: 50, y: 18 }, scale: 0.52, lit: [0, 1, 2] },
+  block2: { on: false, at: { x: 72, y: 42 }, scale: 0.5, lit: 'b' },
+  rigA: { on: false, at: { x: 30, y: 73 }, scale: 1, count: 1 },
+  rigB: { on: false, at: { x: 72, y: 73 }, scale: 1, count: 4 },
   verdict: {
     on: false,
     at: { x: 50, y: 48 },
@@ -105,6 +125,9 @@ export const diffs = {
   /* Granularity is index 2, and it is the only one that is not about size. */
   onlyGranularity: (): Patch => ({ diffs: { lit: [2] } }),
 }
+export const block2 = a('block2')
+export const rigA = a('rigA')
+export const rigB = a('rigB')
 export const verdict = a('verdict')
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }

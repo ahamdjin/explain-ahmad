@@ -6,9 +6,12 @@ import {
   block,
   cardA,
   cardB,
+  block2,
   diffs,
   ground,
   narrator,
+  rigA,
+  rigB,
   share,
   verdict,
   type Patch,
@@ -248,12 +251,34 @@ export const BEATS: Beat<Patch>[] = [
      * version that pays off seventeen beats of setup.
      */
     vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs four.',
+    /*
+     * §1's coordinates, exactly: blocks at 30/42 and 72/42 scale 0.5, rigs at
+     * 30/73 and 72/73 with counts 1 and 4. If `section-01/scene.ts` moves,
+     * this moves with it -- the whole point of the beat is that the viewer
+     * recognises the frame, and a shifted copy is a different picture.
+     */
     commands: [
-      cardA.show({ x: 28, y: 48 }, 1.18),
-      cardB.show({ x: 72, y: 48 }, 1.18),
+      /*
+       * `fine` on both, because §1's block state has no `grain` field at all
+       * and `Block` defaults to fine -- so §1's two sheets look identical in
+       * grain, and an exact return has to as well. The coarse/fine contrast
+       * belongs to beats 9-11, where it is the argument; here it would make
+       * the returning frame a *different* frame.
+       */
+      block.show({ x: 30, y: 42 }, 0.5, { grain: 'fine', lit: 'a', heavy: false }),
+      block2.show({ x: 72, y: 42 }, 0.5, { lit: 'b' }),
+      rigA.show({ x: 30, y: 73 }, 1, { count: 1 }),
+      rigB.show({ x: 72, y: 73 }, 1, { count: 4 }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
     ],
     clearSticky: true,
+    lateOverlays: {
+      at: 3600,
+      overlays: [
+        note('one', 27, 82, { tone: 'measure', sticky: true }),
+        note('four', 69, 82, { tone: 'cost', sticky: true }),
+      ],
+    },
   },
   {
     n: 15,

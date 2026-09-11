@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { INK } from '../ink'
 import { expertColor } from '../palette'
 import { PALETTE } from '../palette'
+import { MachineBox } from '../props/Machines'
 
 /**
  * The word entering the model.
@@ -205,5 +206,32 @@ export function ArchSheet({ pushed }: { pushed: boolean }) {
         ))}
       </svg>
     </motion.div>
+  )
+}
+
+
+/**
+ * The machines a model has to fit on, drawn as a row of cards.
+ *
+ * **One card is one ~80 GB accelerator.** That is the only meaning this row
+ * ever carries, and it is why the counts in the video are 1 and 4:
+ * `gpt-oss-120b` is ~58 GiB at MXFP4 and fits a single card, while
+ * GLM-5.3-Flash is ~306 GiB at FP8 and does not fit four.
+ * `research/glm/GROUND_TRUTH.md`.
+ *
+ * It began local to §1, with a note saying it should move here *if* another
+ * section ever wanted the same row -- and not before. §13 beat 14 wants it,
+ * because S-10 closes the video by redrawing §1's opening frame and a close
+ * built from different objects reads as a different picture rather than a
+ * return. So this is that move, and the two sections now draw the same object
+ * from the same place. `skills/ASSET_LIBRARY.md`.
+ */
+export function Rig({ count }: { count: number }) {
+  return (
+    <div className="s1-rig">
+      {Array.from({ length: count }, (_, i) => (
+        <MachineBox key={i} size={92} shape="mini" />
+      ))}
+    </div>
   )
 }
