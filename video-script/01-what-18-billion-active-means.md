@@ -1,178 +1,201 @@
 # Section 01 — What "five percent active" actually costs
 
-Status: **SCRIPT v9.** Written to spine v5 — *the intro asks, §11 answers.*
-Replaces v8, which opened on a bare number and gave the whole answer away at
-1:20. v8's own note argued for that; Ahmad watched it and reported the video
-"feels disconnected", with no sense of where the intro ended. He is right, and
-the cause is below.
+Status: **SCRIPT v10.** Every beat cites a strategy from
+`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
 
-Spine: `storyboard/STORY_SPINE.md` · Numbers: `research/glm/GROUND_TRUTH.md`
-Hook research: `research/RETENTION_AND_ANGLE.md` ·
-Method: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md`
+Replaces v9 (written the same day, before the research). v9 was built on a
+three-phase retention frame that turns out to be **tier B** — a marketing blog,
+no study — and it got three things wrong as a result. See *What the research
+changed* below.
+
+Spine: `storyboard/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
+Strategies: `skills/STRATEGY_LEDGER.md` ·
+Teacher for the shape: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §1
 
 ## Contract
 
 | | |
 | --- | --- |
 | Teaches | parameter, expert, active, Mixture of Experts |
-| Answers | **about five percent of it runs — and that number does not predict the hardware** |
+| Answers | **"five percent active" does not predict what hardware you need** |
 | Exits on | who picks the eight, and why is *that* the expensive question? |
-| Therefore | so we go and watch it choose — which is the rest of the video |
-| Target | ~19 beats · ~1:22 |
+| Target | ~17 beats · ~1:25 |
 | Never says | `token`, `layer`, `attention`, `bandwidth`, `VRAM`, `router` |
 | **Must not say** | why you cannot store only the active part. **That is §11.** |
+| Hard-bet budget | **uses 1 of 2** (beat 12). The other is reserved for §07. |
 
-## What changed, and why
+## What the research changed
 
-Three faults, all of them mine.
+Three corrections to my own v9 draft, each from a named source.
 
-**1. It opened on the subject.** `research/RETENTION_AND_ANGLE.md` scores the
-opening in three phases — pattern interrupt (0–5s), specific payoff promise
-(5–15s), stakes (15–30s) — and v8 missed all three: a number at 0:00, a
-definition at 0:07, and no stake at all. `NCASE_EVOLUTION_OF_TRUST.md` §1 is
-the same finding from the other direction: a piece about game theory opens on
-the Christmas truce, not on game theory. **Open on a concrete situation with a
-contradiction in it.** Ours is the thing every viewer has done — typing into a
-box and hitting enter.
+**1. The promise was too late.** v9 asked a question at 0:00 and did not say
+what the video would give you until beat 10, around 0:40. **S-03** kills that:
+Sanderson's SoME criterion is verbatim *"It should be clear to the
+reader/viewer within the first 30 seconds why they should care"*, and Trust
+states its outcome — *"game theory can help explain… and how we can fix it"* —
+**before** the first interaction. Withhold the *mechanism*, never the
+*promise*. The promise is now beat 6, at ~0:26.
 
-**2. The spine's own promise was never built.** `STORY_SPINE.md` §1 states the
-promise as *"Two models. Both use about five percent of themselves to answer
-you. One runs on a single graphics card. The other needs four."* That is a
-verifiable contradiction, it is what §4 of the retention research says to buy,
-and no competing video makes it. It is not in v8 anywhere. It is now beats 6–9.
+**2. The bet was in the wrong place and was the wrong bet.** v9 opened with
+*"how much of this thing just ran? Go on, guess"* at 0:08 — a deliberate held
+pause sitting exactly where the retention curve is steepest, delaying the hook.
+**S-05** also says hard prediction is *scarce*: Trust uses commit-and-branch
+prediction **exactly twice in twenty minutes**, and only where the answer is
+counterintuitive. "How much of it runs" is the video's premise, not a surprise.
+**"288 experts — how many run?"** is a real surprise, and it is now beat 12,
+after the hook has landed.
 
-**3. It answered its own question at 1:20** — *"That's the answer. That's the
-whole thing."* — and then §11 re-asked it fifteen minutes later. Ahmad's call:
-the intro asks, §11 answers. Those five beats are gone.
+**3. It opened on the subject, not on a contradiction.** **S-01**: Trust opens
+*"During World War I, peace broke out."* — six words, contradiction complete,
+no topic named. Ours is now two models with the same headline number and four
+times the hardware between them, which is also **S-15**, the only thing in this
+field nobody else is saying.
 
-## The one rule this section exists to obey
-
-**Ask the question. Prove it is a real question. Do not answer it.**
-
-The distinction that keeps this from being v2's mystery bug: v2 asserted an
-obstacle and refused to describe it. This section asserts *nothing* it does not
-show. Five percent is shown. The two machines are shown. The 288 and the eight
-are shown. What is withheld is only the **consequence**, and a withheld
-consequence with all its evidence on screen is a hook, not a cheat.
-`skills/STORY_STRUCTURE.md` §2.
+And the move v9 missed entirely — **S-02**, the inversion onto the viewer.
+Trust's third move is *"Meanwhile: it's 2017… we suck at trust"*: the
+historical fact was the setup, the payload is that it implicates you. Ours is
+beat 4: the number you have been quoting is the number that misled you.
 
 ---
 
 ## The script
 
-### Act 1 — the bet (beats 1–5, 0:00–0:20)
+Strategy IDs are load-bearing. `skills/STRATEGY_LEDGER.md` says who taught each
+one and how good the evidence is; a `C` tier there means I inferred it.
 
-> **1.** *(a prompt box, a cursor blinking in it; a message types itself)*
-> You type something. You hit enter.
->
-> **2.** *(the model arrives whole — one solid block, no label, no spec table)*
-> How much of this thing do you reckon just ran, to answer you?
->
-> **3.** *(nothing moves. the block sits there. the question stays up)*
-> Go on, guess. All of it? Half?
->
-> **4.** *(95% of the block goes grey. a thin live sliver stays)*
-> About five percent.
->
-> **5.** *(hold)*
-> Which sounds like very good news.
+### Act 1 — the contradiction (beats 1–3, 0:00–0:13) · **S-01**
 
-`Place Your Bets` — `skills/ncase/NCASE_4_MORE_DESIGN_PATTERNS.md` §2. The
-guess and the answer occupy the **same block in the same position**, because
-the pattern's whole power is spatial comparison. Beat 3 is a held beat with
-nothing happening on purpose: it is the only moment in the video that asks the
-viewer to commit to a belief, and it needs the air.
+> **1.** *(two paper blocks, side by side, identical. five percent of each is
+> live; the rest is grey)* Here are two AI models. Both of them use about five
+> percent of themselves to answer you.
+>
+> **2.** *(one graphics card slides in under the left block)* This one runs on
+> a single graphics card.
+>
+> **3.** *(three more cards stack under the right block)* This one needs four.
 
-### Act 2 — the contradiction (beats 6–10, 0:20–0:45)
-
-> **6.** *(a second block slides in beside the first. both get the same grey
-> treatment, the same live sliver)* Here are two models. Both of them use about
-> five percent of themselves to answer you.
->
-> **7.** *(one graphics card appears under the left block)* This one runs on a
-> single graphics card.
->
-> **8.** *(three more cards appear under the right block)* This one needs four.
->
-> **9.** *(the two sliver-percentages sit level with each other; the cards do
-> not)* Same five percent. Four times the machine.
->
-> **10.** *(the grey drains back in; one block remains)* So "five percent
-> active" is not telling you what you think it's telling you. And I want to
-> know what it *is* telling you — that's the video.
-
-Beats 7–8 are the promise, and they are checkable: gpt-oss-120b is ~58 GiB at
+No product names, no spec table, no "today we're talking about". The
+contradiction is complete and checkable at 0:13: gpt-oss-120b is ~58 GiB at
 MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not
-fit four. `STORY_SPINE.md` §1 carries the table and the sources. Say **"about
-five percent"** — 4.4% and 5.6% are the same claim, and the contradiction is
-honest at either precision.
+fit four. Table and sources: `STORY_SPINE.md` §1. Say **"about five percent"** —
+4.4% and 5.6% are the same claim.
 
-### Act 3 — now the words, because now they are needed (beats 11–14, 0:45–1:05)
+### Act 2 — the inversion and the promise (beats 4–6, 0:13–0:32) · **S-02**, **S-03**
 
-> **11.** *(the block breaks into a field of tiny separate marks)* Quick, so
-> the rest of this makes sense. A parameter is one number the model learned
-> while it was being trained.
+> **4.** *(the four cards stay. the phrase "only 5% active" writes itself
+> across both blocks)* "Only five percent active" is the number everybody
+> quotes to explain why these models are cheap to run now. Both of these have
+> it. Only one of them is cheap.
 >
-> **12.** *(the marks resolve back; the count sits under them)* Three hundred
-> and twenty billion of them. One very big file.
+> **5.** *(the two blocks hold, unequal)* So what is that number actually
+> telling you?
 >
-> **13.** *(camera pushes in — the only move in the section)* And they're not
-> one lump. Up close, they're in separate pieces.
->
-> **14.** *(288 of them, in rows)* Two hundred and eighty-eight, in each part
-> of the model. They're called experts.
+> **6.** *(the right-hand block and its four cards slide away; one block left)*
+> I'm going to follow one word all the way through this thing. By the end
+> you'll know exactly what "five percent active" buys you — and what it
+> doesn't.
 
-Vocabulary arrives at 0:45, not 0:07. `NCASE_EVOLUTION_OF_TRUST.md` §2: the
-abstraction is built out of a concrete thing the learner has already operated.
-By beat 11 the viewer has watched five percent of a block light up twice, so
-"parameter" is a name for something they have already seen behave.
+Beat 4 is the whole reason the opening works. `STORY_SPINE.md` §3 says the
+audience for an MoE video *already believes it understands MoE* — "only a few
+parts run, so you only need to load a few parts, it's cheaper." Beat 4 names
+that belief back to them as the thing that is about to break.
 
-### Act 4 — the handoff (beats 15–19, 1:05–1:22)
+Beat 6 is the promise, at ~0:26, inside the only retention deadline I would
+defend as tier A.
 
-> **15.** *(a word arrives; eight of the 288 light)* A word comes in. Eight of
-> them get used.
+### Act 3 — now the words, because now they are earned (beats 7–11, 0:32–0:56) · **S-04**
+
+> **7.** *(the block sits alone, whole)* This is the model. All of it.
 >
-> **16.** *(the other 280 stay flat and grey)* The other two hundred and eighty
-> do nothing at all.
+> **8.** *(it breaks into a field of tiny separate marks)* Three hundred and
+> twenty billion numbers in one very big file. Each one is something it learned
+> while it was being trained. That's what a parameter is.
 >
-> **17.** *(the eight lit ones and the grey sliver from beat 4 line up)*
+> **9.** *(the marks resolve; about five percent of them go live)* And when a
+> word comes in, about five percent of them do something.
+>
+> **10.** *(camera pushes in — the only move in the section)* Let's get closer.
+>
+> **11.** *(288 pieces, in rows)* Up close, they're not one lump. They're in
+> separate pieces — two hundred and eighty-eight of them, in each part of the
+> model.
+
+Sanderson, *Concrete before Abstract*: *"resist the temptation to open a topic
+by describing a general result or definition"* — let examples precede
+generality. "Parameter" arrives at beat 8, after the viewer has watched the
+block behave twice. v8 defined three terms inside twenty seconds.
+
+### Act 4 — the bet (beats 12–13, 0:56–1:06) · **S-05**
+
+> **12.** *(the 288 sit still. nothing moves. the question stays up)* Two
+> hundred and eighty-eight of them. One word comes in. **How many do you
+> reckon actually run?**
+>
+> **13.** *(eight light up. the other 280 stay flat)* Eight.
+
+This is **one of only two hard bets in the whole video**, and it is spent here
+because the answer is genuinely counterintuitive — eight of 288 is 2.8%, and
+nobody guesses that low. Richland, Kornell & Kao (2009) is why the wrong guess
+still helps: attempting an answer before instruction improves retention *even
+for items the learner got wrong*.
+
+Beat 12 is a held beat with nothing happening, on purpose. It is the only such
+beat in the section. `skills/ncase/NCASE_4_MORE_DESIGN_PATTERNS.md` §2: the
+guess and the answer must occupy **the same space** — the 288 do not move
+between beat 12 and beat 13, and the eight light up in place.
+
+### Act 5 — the name and the wall (beats 14–17, 1:06–1:25) · **S-12**, **S-14**
+
+> **14.** *(the 280 stay grey)* Eight do the work. The other two hundred and
+> eighty do nothing at all.
+>
+> **15.** *(the eight lit pieces line up with the live sliver from beat 9)*
 > There's your five percent. That's where it comes from.
 >
-> **18.** *(the whole arrangement sits still and gets its name)* This has a
-> name, by the way. It's called a Mixture of Experts.
+> **16.** *(the whole arrangement sits still)* And this has a name. It's called
+> a Mixture of Experts. Those pieces are the experts.
 >
-> **19.** *(the eight stay lit. everything else recedes)* So — who picks the
+> **17.** *(the eight stay lit; everything else recedes)* So — who picks the
 > eight? And why does that turn out to be the expensive question?
 
-**Beat 19 is the chapter wall.** It states what the section settled (five
-percent is eight of 288) and names the one thing that is now missing (who
-chooses). §02 opens by banking exactly that and adding its own *but*. This is
-the handoff pattern in `STORY_SPINE.md` §5, and it is the fix for "the whole
-story feels disconnected" — no title cards, no chrome, the narration carries
-the wall.
+Beat 16 names the mechanism **after** the viewer has watched it work — **S-12**,
+which is **tier C: my inference from Trust withholding its own title word.**
+Not sourced, and flagged as such.
+
+Beat 17 is the chapter wall. It states what the section settled and names the
+one thing now missing; §02 opens by banking exactly that. **S-14**.
+
+## What is deliberately not here
+
+- **No answer.** Why you cannot store only the active part is §11. This section
+  asserts nothing it does not show: five percent is shown, the two machines are
+  shown, the eight of 288 are shown. Only the *consequence* is held.
+- **No second hard bet.** Budget is two (S-05). The other is §07: *"same word,
+  next floor up — same eight?"*
+- **No stake about my own machine.** Ahmad's note: it is not relatable as an
+  opening. The inversion in beat 4 does that job instead, using the viewer's
+  own belief rather than my hardware.
 
 ## Storyboard
 
-| # | Place | Event | Relation | Secs |
-| --- | --- | --- | --- | --- |
-| 1 | the prompt | a message is typed and sent | want | 4 |
-| 2 | the sheet | the model arrives whole | want | 4 |
-| 3 | the sheet | nothing moves — the viewer guesses | want | 3 |
-| 4 | the sheet | 95% goes grey | and-yet | 4 |
-| 5 | the sheet | hold | so | 3 |
-| 6 | the sheet | a second model arrives beside it | and-yet | 5 |
-| 7 | the sheet | one card under the left | so | 4 |
-| 8 | the sheet | four cards under the right | wall | 5 |
-| 9 | the sheet | the percentages level, the cards do not | wall | 4 |
-| 10 | the sheet | the second model leaves; the question stays | therefore | 6 |
-| 11 | the sheet | the block breaks into marks | so | 6 |
-| 12 | the sheet | the marks resolve; the count lands | so | 4 |
-| 13 | inside | push in | so | 3 |
-| 14 | inside | the 288 appear | so | 6 |
-| 15 | inside | a word arrives; eight light | so | 4 |
-| 16 | inside | the other 280 stay flat | and-yet | 4 |
-| 17 | inside | the eight line up with the sliver | therefore | 4 |
-| 18 | inside | the arrangement is named | so | 4 |
-| 19 | inside | everything recedes but the eight | and-yet | 5 |
+| # | Place | Event | Strategy | Relation | Secs |
+| --- | --- | --- | --- | --- | --- |
+| 1 | the sheet | two models arrive, both 5% live | S-01 | want | 5 |
+| 2 | the sheet | one card under the left | S-01 | so | 4 |
+| 3 | the sheet | four cards under the right | S-01 | wall | 4 |
+| 4 | the sheet | the quoted number writes itself across both | S-02 | and-yet | 7 |
+| 5 | the sheet | the blocks hold, unequal | S-02 | and-yet | 4 |
+| 6 | the sheet | the second model leaves | S-03 | therefore | 6 |
+| 7 | the sheet | one block, whole | S-04 | so | 3 |
+| 8 | the sheet | it breaks into marks | S-04 | so | 7 |
+| 9 | the sheet | five percent goes live | S-04 | so | 5 |
+| 10 | inside | push in | S-04 | so | 3 |
+| 11 | inside | the 288 appear | S-04 | so | 6 |
+| 12 | inside | nothing moves — the viewer bets | S-05 | want | 5 |
+| 13 | inside | eight light up in place | S-05 | and-yet | 4 |
+| 14 | inside | the other 280 stay flat | S-05 | so | 5 |
+| 15 | inside | the eight line up with beat 9's sliver | S-14 | therefore | 5 |
+| 16 | inside | the arrangement is named | S-12 | so | 6 |
+| 17 | inside | everything recedes but the eight | S-14 | and-yet | 5 |
 
-Total ≈ 1:22. `npm run timing -- --scripts` after recording.
+Total ≈ 1:24. Beat seconds are a 145-wpm floor; set them from the recording.
