@@ -14,274 +14,275 @@ edit the seconds. See `docs/VOICE_OVER.md`.
 
 Promise: `storyboard/video-1/STORY_SPINE.md` · Per-section detail: the numbered scripts
 
-**Total: 13 sections · 163 beats · 3077 words · 24:38**
+**Total: 13 sections · 164 beats · 3128 words · 24:37**
 
 | § | section | from | length | beats | words |
 | --- | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | `0:00` | 139s | 17 | 597 |
-| 02 | Your words become tokens | `2:19` | 121s | 12 | 263 |
-| 03 | From an ID to a meaning | `4:20` | 127s | 13 | 234 |
-| 04 | The word looks around | `6:27` | 112s | 13 | 206 |
-| 05 | The router picks the eight | `8:19` | 141s | 13 | 273 |
-| 06 | The experts do the work | `10:40` | 86s | 11 | 152 |
-| 07 | That was one layer. There are 45. | `12:06` | 112s | 13 | 191 |
-| 08 | That was one token. Here's the sentence. | `13:58` | 101s | 11 | 191 |
-| 09 | Where the answer comes out | `15:39` | 81s | 10 | 153 |
-| 10 | And then it does the whole thing again | `17:00` | 82s | 11 | 142 |
-| 11 | So could you store only the 18 billion? | `18:22` | 114s | 13 | 188 |
-| 12 | How people actually run these | `20:16` | 136s | 14 | 244 |
-| 13 | What that number actually bought | `22:32` | 126s | 12 | 243 |
+| 01 | What "five percent active" actually costs | `0:00` | 138s | 17 | 610 |
+| 02 | Your words become tokens | `2:18` | 116s | 13 | 266 |
+| 03 | From an ID to a meaning | `4:14` | 127s | 13 | 236 |
+| 04 | The word looks around | `6:21` | 112s | 13 | 206 |
+| 05 | The router picks the eight | `8:13` | 141s | 13 | 273 |
+| 06 | The experts do the work | `10:34` | 86s | 11 | 152 |
+| 07 | That was one layer. There are 45. | `12:00` | 112s | 13 | 191 |
+| 08 | That was one token. Here's the sentence. | `13:52` | 101s | 11 | 193 |
+| 09 | Where the answer comes out | `15:33` | 81s | 10 | 153 |
+| 10 | And then it does the whole thing again | `16:54` | 82s | 11 | 142 |
+| 11 | So could you store only the 18 billion? | `18:16` | 119s | 13 | 219 |
+| 12 | How people actually run these | `20:15` | 136s | 14 | 244 |
+| 13 | What that number actually bought | `22:31` | 126s | 12 | 243 |
 
 ## §01 — What "five percent active" actually costs
 
-`0:00` → `2:19` · 17 beats · 597 words · 139s · `01-what-18-billion-active-means.md`
+`0:00` → `2:18` · 17 beats · 610 words · 138s · `01-what-18-billion-active-means.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `0:00` | Here are two AI models. Both of them use about five percent of themselves to answer you. | the sheet | two model blocks arrive side by side, five percent live on each |
-| `0:09` | This one runs on a single graphics card. | the sheet | one graphics card slides in under the left block |
-| `0:14` | This one needs four. No product names, no spec table, no "today we're talking about". The contradiction is complete and checkable at 0:13: gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not fit four. Table and sources: STORYSPINE.md §1. Say "about five percent" — 4.4% and 5.6% are the same claim. | the sheet | three more cards stack under the right block |
-| `0:18` | "Only five percent active" is the number everybody quotes to explain why these models are cheap to run now. Both of these have it. Only one of them is cheap. | the sheet | the quoted phrase writes itself across both blocks |
-| `0:32` | Same five percent. Four times the machine. So what is that number actually telling you? | the sheet | the blocks hold, visibly unequal underneath |
-| `0:40` | I'm going to follow one word all the way through this thing. By the end you'll know exactly what "five percent active" buys you — and what it doesn't. Beat 4 is the whole reason the opening works. STORYSPINE.md §3 says the audience for an MoE video already believes it understands MoE — "only a few parts run, so you only need to load a few parts, it's cheaper." Beat 4 names that belief back to them as the thing that is about to break. Beat 6 is the promise, at ~0:26, inside the only retention deadline I would defend as tier A. | the sheet | the right block and its four cards slide out of frame |
-| `0:54` | This is the model. All of it. | the sheet | the block settles alone, whole |
-| `0:59` | Three hundred and twenty billion numbers in one very big file. Each one is something it learned while it was being trained. That's what a parameter is. | the sheet | it breaks into a field of separate marks |
-| `1:12` | And when a word comes in, about five percent of them do something. | the sheet | the marks resolve and about five percent go live |
-| `1:19` | Let's get closer. | **push in** → inside | the camera moves in on the lit region |
-| `1:22` | Up close, they're not one lump. They're in separate pieces — two hundred and eighty-eight of them, in each part of the model. Sanderson, Concrete before Abstract: "resist the temptation to open a topic by describing a general result or definition" — let examples precede generality. "Parameter" arrives at beat 8, after the viewer has watched the block behave twice. v8 defined three terms inside twenty seconds. | inside | 288 separate pieces appear in rows |
-| `1:34` | Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run? | inside | everything stops; the question holds on screen |
-| `1:43` | Eight. This is one of only two hard bets in the whole video, and it is spent here because the answer is genuinely counterintuitive — eight of 288 is 2.8%, and nobody guesses that low. Richland, Kornell & Kao (2009) is why the wrong guess still helps: attempting an answer before instruction improves retention even for items the learner got wrong. Beat 12 is a held beat with nothing happening, on purpose. It is the only such beat in the section. skills/ncase/NCASE4MOREDESIGNPATTERNS.md §2: the guess and the answer must occupy the same space — the 288 do not move between beat 12 and beat 13, and the eight light up in place. | inside | eight of them light, in place |
-| `1:47` | Eight do the work. The other two hundred and eighty do nothing at all. | inside | the other 280 stay flat and grey |
-| `1:55` | There's your five percent. That's where it comes from. | inside | the eight line up with beat 9's live sliver |
-| `2:01` | And this has a name. It's called a Mixture of Experts. Those pieces are the experts. | inside | the arrangement holds and takes its name |
-| `2:10` | So — who picks the eight? And why does that turn out to be the expensive question? Beat 16 names the mechanism after the viewer has watched it work — S-12, which is tier C: my inference from Trust withholding its own title word. Not sourced, and flagged as such. Beat 17 is the chapter wall. It states what the section settled and names the one thing now missing; §02 opens by banking exactly that. S-14. | **push in** → inside, one part | everything recedes but the eight |
+| `0:00` | Two AI models. Both use about five percent of themselves to answer you. | the sheet | two model blocks arrive side by side, five percent live on each |
+| `0:07` | This one runs on a single graphics card. | the sheet | one graphics card slides in under the left block |
+| `0:11` | This one needs four. No product names, no spec table, no "today we're talking about". The contradiction is complete and checkable at 0:13: gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not fit four. Table and sources: STORYSPINE.md §1. Say "about five percent" — 4.4% and 5.6% are the same claim. | the sheet | three more cards stack under the right block |
+| `0:14` | Everyone quotes that number to say these models are cheap to run now. Both have it. Only one of them is. | the sheet | the quoted phrase writes itself across both blocks |
+| `0:24` | Same five percent. Four times the machine. | the sheet | the blocks hold, visibly unequal underneath |
+| `0:28` | So what is that number actually telling you? I’m going to follow one word all the way through, and by the end you’ll know exactly what it buys — and what it doesn’t. Beat 4 is the whole reason the opening works. STORYSPINE.md §3 says the audience for an MoE video already believes it understands MoE — "only a few parts run, so you only need to load a few parts, it's cheaper." Beat 4 names that belief back to them as the thing that is about to break. Beat 6 is the promise, at ~0:26, inside the only retention deadline I would defend as tier A. | the sheet | the right block and its four cards slide out of frame |
+| `0:43` | This is the model. All of it. | the sheet | the block settles alone, whole |
+| `0:48` | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. | the sheet | it breaks into a field of separate marks |
+| `1:01` | And when a word comes in, about five percent of them do something. | the sheet | the marks resolve and about five percent go live |
+| `1:08` | Let's get closer. | **push in** → inside | the camera moves in on the lit region |
+| `1:11` | Up close, it’s not one lump. This is one small part of the model — and there are two hundred and eighty-eight separate pieces in it. Sanderson, Concrete before Abstract: "resist the temptation to open a topic by describing a general result or definition" — let examples precede generality. "Parameter" arrives at beat 8, after the viewer has watched the block behave twice. v8 defined three terms inside twenty seconds. | inside | 288 separate pieces appear in rows |
+| `1:23` | Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run? | inside | everything stops; the question holds on screen |
+| `1:32` | Eight. This is one of only two hard bets in the whole video, and it is spent here because the answer is genuinely counterintuitive — eight of 288 is 2.8%, and nobody guesses that low. Richland, Kornell & Kao (2009) is why the wrong guess still helps: attempting an answer before instruction improves retention even for items the learner got wrong. Beat 12 is a held beat with nothing happening, on purpose. It is the only such beat in the section. skills/ncase/NCASE4MOREDESIGNPATTERNS.md §2: the guess and the answer must occupy the same space — the 288 do not move between beat 12 and beat 13, and the eight light up in place. | inside | eight of them light, in place |
+| `1:36` | Eight get picked. The other two hundred and eighty do nothing at all. | inside | the other 280 stay flat and grey |
+| `1:45` | You might think that’s the five percent. It isn’t — this is one small part of the model, and there’s more in here than these, and plenty that runs every time regardless. Hold onto that. | inside | the eight line up with beat 9's live sliver |
+| `2:00` | And this has a name. It's called a Mixture of Experts. Those pieces are the experts. | inside | the arrangement holds and takes its name |
+| `2:09` | So — who picks the eight? And why does that turn out to be the expensive question? Beat 16 names the mechanism after the viewer has watched it work — S-12, which is tier C: my inference from Trust withholding its own title word. Not sourced, and flagged as such. Beat 17 is the chapter wall. It states what the section settled and names the one thing now missing; §02 opens by banking exactly that. S-14. | **push in** → inside, one part | everything recedes but the eight |
 
 ## §02 — Your words become tokens
 
-`2:19` → `4:20` · 12 beats · 263 words · 121s · `02-your-words-become-tokens.md`
+`2:18` → `4:14` · 13 beats · 266 words · 116s · `02-your-words-become-tokens.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `2:19` | So — eight out of two hundred and eighty-eight, and something in there does the picking. To find out how it picks, we have to follow something in. Let’s send it a sentence. | inside, one part | the desk holds; the 288 dim behind it |
-| `2:35` | This is what you typed. | **pan** → at the entrance | a prompt card slides in from the left and stops |
-| `2:40` | In it goes. | **follow** → the first surface | the card passes through the doorway, camera travels with it |
-| `2:46` | And this is the first thing that happens to it. | the first surface | the card lands and settles |
-| `2:52` | It gets cut up. Into pieces about the size of a word — sometimes a whole word, sometimes half of one. | the first surface | the sentence fractures into uneven pieces **in place** |
-| `3:03` | These are called tokens. That’s all a token is. A chunk of text. | the first surface | the pieces slide into an even row |
-| `3:10` | Longer words come apart into more of them. "Understanding" is three. | the first surface | `understanding` drops in above, breaks into 3, leaves |
-| `3:17` | And every token it knows about lives in one big list. How long do you reckon that list is? | the first surface | the list rises and keeps rising past the top of frame; then everything stops and the question holds |
-| `3:27` | A hundred and fifty-four thousand, eight hundred and eighty. | the first surface | the list scrolls hard, decelerates, stops on a real entry |
-| `3:35` | So each piece gets swapped for where it sits in that list. A row number. Let’s say this one’s number four thousand and twenty-one. | the first surface | the `dog` piece flies to the list, touches a row, returns with a number |
-| `3:47` | That number is called a token ID. And it’s the only thing that carries on. | the first surface | the letters fade off the card; the digits stay |
-| `3:55` | And that’s the cutting up done — your sentence is numbers now, and that’s all a tokeniser is. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all. Beat 12 is the chapter wall. It names the part of the machine that is now behind us — that’s all a tokeniser is — states what the viewer owns, and ends on the one thing now missing. §03 opens by banking exactly that. | the first surface | the list withdraws; the number is left alone in frame |
+| `2:18` | So — eight out of two hundred and eighty-eight, and something in there does the picking. To see how, we have to follow something in. | inside, one part | the desk holds; the 288 dim behind it |
+| `2:30` | This is what you typed. | **pan** → at the entrance | a prompt card slides in from the left and stops |
+| `2:34` | In it goes. | **follow** → the first surface | the card passes through the doorway, camera travels with it |
+| `2:38` | And this is the first thing that happens to it. | the first surface | the card lands and settles |
+| `2:43` | It gets cut up. Into pieces — and for this sentence, every piece happens to be a whole word. | the first surface | the sentence fractures into pieces **in place** |
+| `2:52` | These are called tokens. That’s all a token is. A chunk of text. | the first surface | the pieces slide into an even row |
+| `2:59` | Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have. | the first surface | `unbelievable` drops in above, shatters into 3, leaves |
+| `3:11` | And every token it knows about lives in one big list. How long do you reckon that list is? | the first surface | the list rises and keeps rising past the top of frame; then everything stops and the question holds |
+| `3:21` | A hundred and fifty-four thousand, eight hundred and eighty. | the first surface | the list scrolls hard, decelerates, stops on a real entry |
+| `3:29` | So each piece gets swapped for where it sits in that list. A row number. This one is five thousand, five hundred and sixty-two. | the first surface | the ` dog` piece flies to the list, touches a row, returns with a number |
+| `3:41` | That number is called a token ID. And it’s the only thing that carries on. | the first surface | the letters fade off the card; the digits stay |
+| `3:49` | And that’s the cutting up done — your sentence is numbers now. That’s all a tokeniser is. | the first surface | the list, the sentence and the narrator all leave; the number is alone |
+| `3:58` | But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all. Beat 12 is the chapter wall. It names the part of the machine that is now behind us — that’s all a tokeniser is — states what the viewer owns, and ends on the one thing now missing. §03 opens by banking exactly that. | the first surface | the number holds, and a note lands beside it |
 
 ## §03 — From an ID to a meaning
 
-`4:20` → `6:27` · 13 beats · 234 words · 127s · `03-from-an-id-to-a-meaning.md`
+`4:14` → `6:21` · 13 beats · 236 words · 127s · `03-from-an-id-to-a-meaning.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `4:20` | So every piece has a row number now — and a row number is only a name. A name has to turn into a meaning somewhere. Here’s where. | the first surface | `4021` sits alone; the bottom edge of a huge table rises into frame |
-| `4:34` | The model has a table. One row for every token in that list — all hundred and fifty-four thousand of them. | **pull back** → the table | we back away and the table's full height comes into view, rows running past the top of frame |
-| `4:45` | The ID is just which row to go and fetch. | the table | the number travels up the table and stops at its own row |
-| `4:51` | So token four thousand and twenty-one pulls out this row. | the table | that row slides out of the table and comes forward |
-| `4:57` | Four thousand and ninety-six numbers. For one small piece of text. | the table | the extracted row extends sideways past both edges of frame |
-| `5:05` | This row is called an embedding. And it's the first thing in the whole machine that actually means something. | the table | the row holds; a handwritten label lands on it |
-| `5:15` | Here's why it means something. Let's pull out "dog", and "cat". | the table | two more rows slide out and stack under it |
-| `5:23` | They're not the same — but they're close. Lots of these numbers nearly match. | the table | the `dog` and `cat` rows align; the values that nearly match light up |
-| `5:31` | Now "Tuesday". Not close to either of them. | the table | a third row slides out and aligns; almost nothing lights |
-| `5:37` | Nobody sat down and made that happen. Training did it. Words that get used in similar ways ended up with similar rows. | the table | the three rows collapse into three points, spaced by how alike they are |
-| `5:48` | So the meaning isn't in any one number. It's in where the row sits relative to all the other rows. | the table | the points hold; a brace measures the two distances |
-| `5:58` | And that's what goes into the model. Not "dog". This. | the table | the points unfold back into the `dog` row, alone |
-| `6:04` | And that’s the lookup, done — the word is four thousand and ninety-six numbers now. But here’s the thing to hold on to. This row is stored in a table. Which means it is exactly the same every single time the word "dog" turns up. Same word, same row, always. | the table | the same row is pulled from the table twice more; all three are identical |
+| `4:14` | So every piece has a row number now — and a row number is only a name. A name has to turn into a meaning somewhere. Here’s where. | the first surface | `5562` sits alone; the bottom edge of a huge table rises into frame |
+| `4:28` | The model has a table. One row for every token in that list — all hundred and fifty-four thousand of them. | **pull back** → the table | we back away and the table's full height comes into view, rows running past the top of frame |
+| `4:39` | The ID is just which row to go and fetch. | the table | the number travels up the table and stops at its own row |
+| `4:45` | So token five thousand, five hundred and sixty-two pulls out this row. | the table | that row slides out of the table and comes forward |
+| `4:51` | Four thousand and ninety-six numbers. For one small piece of text. | the table | the extracted row extends sideways past both edges of frame |
+| `4:59` | This row is called an embedding. And it's the first thing in the whole machine that actually means something. | the table | the row holds; a handwritten label lands on it |
+| `5:09` | Here’s why it means something. Let’s pull out "dog", and "cat". | the table | two more rows slide out and stack under it |
+| `5:17` | They're not the same — but they're close. Lots of these numbers nearly match. | the table | the `dog` and `cat` rows align; the values that nearly match light up |
+| `5:25` | Now "Tuesday". Not close to either of them. | the table | a third row slides out and aligns; almost nothing lights |
+| `5:31` | Nobody sat down and made that happen. Training did it. Words that get used in similar ways ended up with similar rows. | the table | the three rows collapse into three points, spaced by how alike they are |
+| `5:42` | So the meaning isn't in any one number. It's in where the row sits relative to all the other rows. | the table | the points hold; a brace measures the two distances |
+| `5:52` | And that's what goes into the model. Not "dog". This. | the table | the points unfold back into the `dog` row, alone |
+| `5:58` | And that’s the lookup, done — the word is four thousand and ninety-six numbers now. But here’s the thing to hold on to. This row is stored in a table. Which means it is exactly the same every single time the word "dog" turns up. Same word, same row, always. | the table | the same row is pulled from the table twice more; all three are identical |
 
 ## §04 — The word looks around
 
-`6:27` → `8:19` · 13 beats · 206 words · 112s · `04-the-word-looks-around.md`
+`6:21` → `8:13` · 13 beats · 206 words · 112s · `04-the-word-looks-around.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `6:27` | So the row is fixed — every "dog" starts out identical. Which can’t be right, and it isn’t, for long. | the table | the three identical rows collapse back into one |
-| `6:37` | Because a token never stays on its own. It's sitting in a sentence. | **pull back** → the first surface | we back off and the other tokens' rows are all there, in a line |
-| `6:44` | And before anything else happens, every token gets to look at the others. | the first surface | our row lifts slightly out of the line |
-| `6:51` | Here's what looking means. Our token asks every other token one question: how much do you matter to me? | the first surface | lines shoot from our row to every other row |
-| `7:01` | Some matter a lot. Most barely matter at all. | the first surface | the lines thicken and thin — `ball` and `dropped` heavy, `the` almost nothing |
-| `7:07` | And it can only look backwards — at the words already there. Not at what's coming. | the first surface | the lines running *forward* to later tokens fade out and go |
-| `7:16` | Then it takes a bit of each one, in proportion, and mixes it into itself. | the first surface | material travels along the surviving lines into our row |
-| `7:24` | And its row changes. Same token. New numbers. | the first surface | our row's values visibly change where the flow landed |
-| `7:30` | That's attention. That's the whole idea — every token adjusting itself based on the company it's in. | the first surface | the lines withdraw; a label lands |
-| `7:39` | Now watch why that matters. "The dog barked." And "a hot dog." | the first surface | the sentence slides left; a second sentence assembles beside it |
-| `7:47` | Same word both times. Started as the exact same row. Ended up nothing like each other. | the first surface | both `dog` rows lift out and align — clearly different |
-| `7:56` | So the numbers don't belong to the word any more. They belong to the word in this sentence. | the first surface | the row they *started* from ghosts in behind both, identical |
-| `8:05` | And that’s attention. That’s all attention is. The row has changed — and it changed because of this sentence. None of it could have been worked out ahead of time. | the first surface | the ghost fades; the two rows hold apart |
+| `6:21` | So the row is fixed — every "dog" starts out identical. Which can’t be right, and it isn’t, for long. | the table | the three identical rows collapse back into one |
+| `6:31` | Because a token never stays on its own. It's sitting in a sentence. | **pull back** → the first surface | we back off and the other tokens' rows are all there, in a line |
+| `6:38` | And before anything else happens, every token gets to look at the others. | the first surface | our row lifts slightly out of the line |
+| `6:45` | Here’s what looking means. Our token asks every other token one question: how much do you matter to me? | the first surface | lines shoot from our row to every other row |
+| `6:55` | Some matter a lot. Most barely matter at all. | the first surface | the lines thicken and thin — `ball` and `dropped` heavy, `the` almost nothing |
+| `7:01` | And it can only look backwards — at the words already there. Not at what's coming. | the first surface | the lines running *forward* to later tokens fade out and go |
+| `7:10` | Then it takes a bit of each one, in proportion, and mixes it into itself. | the first surface | material travels along the surviving lines into our row |
+| `7:18` | And its row changes. Same token. New numbers. | the first surface | our row's values visibly change where the flow landed |
+| `7:24` | That's attention. That's the whole idea — every token adjusting itself based on the company it's in. | the first surface | the lines withdraw; a label lands |
+| `7:33` | Now watch why that matters. "The dog barked." And "a hot dog." | the first surface | the sentence slides left; a second sentence assembles beside it |
+| `7:41` | Same word both times. Started as the exact same row. Ended up nothing like each other. | the first surface | both `dog` rows lift out and align — clearly different |
+| `7:50` | So the numbers don't belong to the word any more. They belong to the word in this sentence. | the first surface | the row they *started* from ghosts in behind both, identical |
+| `7:59` | And that’s attention. That’s all attention is. The row has changed — and it changed because of this sentence. None of it could have been worked out ahead of time. | the first surface | the ghost fades; the two rows hold apart |
 
 ## §05 — The router picks the eight
 
-`8:19` → `10:40` · 13 beats · 273 words · 141s · `05-the-router-picks-the-eight.md`
+`8:13` → `10:34` · 13 beats · 273 words · 141s · `05-the-router-picks-the-eight.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `8:19` | So the row is specific to this sentence now. Which means something can finally read it — as it is — and choose. This is what arrives here. | **pan** → the desk | the changed row travels right and comes to rest at the unlabelled desk |
-| `8:33` | This is the router. It's tiny compared to everything around it, and it has exactly one job. | the desk | a small plaque lands on the desk |
-| `8:42` | In front of it: two hundred and eighty-eight experts. | **pull back** → the room | we back off and the 288 fill the frame beyond the desk |
-| `8:48` | And I should say what an expert actually is, because the name oversells it. It's a block of numbers that takes a row in and puts a different row out. That's all. | the room | one expert lifts out and opens: a row goes in, a different row comes out |
-| `9:03` | Nobody assigned them subjects. There's no French expert, no maths expert. They're just two hundred and eighty-eight different blocks that came out of training different from each other. | the room | it drops back into the wall; no labels appear on any of them |
-| `9:17` | The router gives every single one of them a score. All 288. | the room | an empty score badge appears on all 288 at once |
-| `9:24` | And the question it's scoring is: how well does this expert fit these numbers? | the room | a sweep crosses the whole wall left to right, filling every badge as it passes |
-| `9:32` | Then it keeps the best eight. That's it. That's the whole decision. | the room | the eight highest rise forward; the other 280 go flat |
-| `9:39` | Eight, out of two hundred and eighty-eight. The other two hundred and eighty do nothing at all. | the room | a bracket draws around the eight and counts them against the wall |
-| `9:48` | Oh — and one extra that runs every time, no matter what the word is. So: eight chosen, plus one always on. | the room | a ninth, dashed and unscored, slides in beside the eight |
-| `9:59` | But look at what those scores were made from. These numbers. The ones that only existed a moment ago, because attention had just finished making them. | the room | the row that produced the scores pulses; a line links it to the badges |
-| `10:12` | Change the sentence and the row changes. Change the row and the scores change. Change the scores and you get a different eight. | the room | the second sentence swaps in off to the side; the row changes; the eight change |
-| `10:24` | And that’s the router, done. Eight picked out of two hundred and eighty-eight — and that choice could not have been made any earlier than this. It needed the row to exist first. | the room | the new eight hold; the old eight's empty places stay marked |
+| `8:13` | So the row is specific to this sentence now. Which means something can finally read it — as it is — and choose. This is what arrives here. | **pan** → the desk | the changed row travels right and comes to rest at the unlabelled desk |
+| `8:27` | This is the router. It's tiny compared to everything around it, and it has exactly one job. | the desk | a small plaque lands on the desk |
+| `8:36` | In front of it: two hundred and eighty-eight experts. | **pull back** → the room | we back off and the 288 fill the frame beyond the desk |
+| `8:42` | And I should say what an expert actually is, because the name oversells it. It's a block of numbers that takes a row in and puts a different row out. That's all. | the room | one expert lifts out and opens: a row goes in, a different row comes out |
+| `8:57` | Nobody assigned them subjects. There's no French expert, no maths expert. They're just two hundred and eighty-eight different blocks that came out of training different from each other. | the room | it drops back into the wall; no labels appear on any of them |
+| `9:11` | The router gives every single one of them a score. All 288. | the room | an empty score badge appears on all 288 at once |
+| `9:18` | And the question it's scoring is: how well does this expert fit these numbers? | the room | a sweep crosses the whole wall left to right, filling every badge as it passes |
+| `9:26` | Then it keeps the best eight. That's it. That's the whole decision. | the room | the eight highest rise forward; the other 280 go flat |
+| `9:33` | Eight, out of two hundred and eighty-eight. The other two hundred and eighty do nothing at all. | the room | a bracket draws around the eight and counts them against the wall |
+| `9:42` | Oh — and one extra that runs every time, no matter what the word is. So: eight chosen, plus one always on. | the room | a ninth, dashed and unscored, slides in beside the eight |
+| `9:53` | But look at what those scores were made from. These numbers. The ones that only existed a moment ago, because attention had just finished making them. | the room | the row that produced the scores pulses; a line links it to the badges |
+| `10:06` | Change the sentence and the row changes. Change the row and the scores change. Change the scores and you get a different eight. | the room | the second sentence swaps in off to the side; the row changes; the eight change |
+| `10:18` | And that’s the router, done. Eight picked out of two hundred and eighty-eight — and that choice could not have been made any earlier than this. It needed the row to exist first. | the room | the new eight hold; the old eight's empty places stay marked |
 
 ## §06 — The experts do the work
 
-`10:40` → `12:06` · 11 beats · 152 words · 86s · `06-the-experts-do-the-work.md`
+`10:34` → `12:00` · 11 beats · 152 words · 86s · `06-the-experts-do-the-work.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `10:40` | Right — eight picked, out of two hundred and eighty-eight. What do they actually do with it? | the room | the eight lift forward out of the wall; the 280 recede into the background |
-| `10:49` | Each one takes the row, and puts out a different row. | the room | the row copies eight times, one copy travelling into each |
-| `10:56` | Same numbers going in. Eight different answers coming out. | the room | eight visibly different rows emerge on the far side |
-| `11:02` | And they don't get an equal say. The router already scored them, so the ones that scored higher count for more. | the room | each output takes on the size of its expert's score |
-| `11:13` | The eight get blended together, in proportion to their scores. | the room | the eight converge and merge into a single row, larger ones dominating |
-| `11:19` | Plus the one that always runs. | the room | the dashed shared expert's output joins the merge from the side |
-| `11:23` | And out comes a single row. Same length as the one that went in. Completely different numbers. | the room | one row settles, the same length as the one that went in |
-| `11:32` | That's the token, thought about, once. | the room | the row that arrived ghosts in beside it for comparison |
-| `11:37` | It arrived as "dog, in this sentence". It leaves as something more like "dog, in this sentence, having had eight blocks of the model applied to it". | the room | the ghost fades; a label lands on the survivor |
-| `11:50` | And that is one step. Done. Finished. | the room | everything else clears; the row is alone in the room |
-| `11:55` | And that’s one full step, done. Look around, choose, work. Which raises the obvious question — how many steps are there? | the room | the room's walls, floor and ceiling draw themselves in around the row |
+| `10:34` | Right — eight picked, out of two hundred and eighty-eight. What do they actually do with it? | the room | the eight lift forward out of the wall; the 280 recede into the background |
+| `10:43` | Each one takes the row, and puts out a different row. | the room | the row copies eight times, one copy travelling into each |
+| `10:50` | Same numbers going in. Eight different answers coming out. | the room | eight visibly different rows emerge on the far side |
+| `10:56` | And they don't get an equal say. The router already scored them, so the ones that scored higher count for more. | the room | each output takes on the size of its expert's score |
+| `11:07` | The eight get blended together, in proportion to their scores. | the room | the eight converge and merge into a single row, larger ones dominating |
+| `11:13` | Plus the one that always runs. | the room | the dashed shared expert's output joins the merge from the side |
+| `11:17` | And out comes a single row. Same length as the one that went in. Completely different numbers. | the room | one row settles, the same length as the one that went in |
+| `11:26` | That's the token, thought about, once. | the room | the row that arrived ghosts in beside it for comparison |
+| `11:31` | It arrived as "dog, in this sentence". It leaves as something more like "dog, in this sentence, having had eight blocks of the model applied to it". | the room | the ghost fades; a label lands on the survivor |
+| `11:44` | And that is one step. Done. Finished. | the room | everything else clears; the row is alone in the room |
+| `11:49` | And that’s one full step, done. Look around, choose, work. Which raises the obvious question — how many steps are there? | the room | the room's walls, floor and ceiling draw themselves in around the row |
 
 ## §07 — That was one layer. There are 45.
 
-`12:06` → `13:58` · 13 beats · 191 words · 112s · `07-one-layer-of-forty-five.md`
+`12:00` → `13:52` · 13 beats · 191 words · 112s · `07-one-layer-of-forty-five.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `12:06` | That’s one step — look around, choose, work. Here’s how many steps there are. Forty-five. | the room | the room holds, bounded, with the row inside it |
-| `12:14` | That room we've been standing in this whole time is one floor. | **pull back** → the tower | we keep backing away and the room shrinks until it is one floor with others above and below |
-| `12:22` | There are forty-five of them. | the tower | floors continue stacking upward until the count draws itself |
-| `12:27` | The token doesn't get processed once. It climbs. | the tower | a marker carrying the row starts climbing from floor one |
-| `12:32` | And every floor does the same two things. Look around. Pick experts. Do the work. | the tower | on each floor it passes, three quick flashes fire in order |
-| `12:40` | So: same word, one floor up. Do you reckon it picks the same eight? | the tower | everything stops; the question holds on screen |
-| `12:48` | No. Because the row arriving at floor two is not the row that arrived at floor one. Different row, different scores, different eight. | the tower | the floor-two row appears beside it, visibly different |
-| `13:00` | Different eight. | the tower | floor two's eight light, in different positions from floor one's |
-| `13:06` | Every floor picks fresh. Same token, same model, new team. | the tower | the climb resumes; every floor lights a different eight as it passes |
-| `13:13` | Now — three of the forty-five don't have experts at all. They're plain blocks that everything goes through. The other forty-two are the ones that choose. Those are called the sparse ones. | the tower | the bottom three floors redraw themselves plain, without expert walls |
-| `13:28` | Forty-two floors. Eight experts each. | the tower | 42 and 8 slide together and a multiplication draws itself |
-| `13:33` | Which means this isn't eight expert visits for this token. It's three hundred and thirty-six. | the tower | the counter runs up the tower floor by floor and stops |
-| `13:42` | Three hundred and thirty-six choices, for one token — and every single one of them needed the floor below to finish before it could be made. Nobody quotes that number. It’s the one that matters. | the tower | 336 holds while a single line traces the whole climb bottom to top |
+| `12:00` | That’s one step — look around, choose, work. Here’s how many steps there are. Forty-five. | the room | the room holds, bounded, with the row inside it |
+| `12:08` | That room we've been standing in this whole time is one floor. | **pull back** → the tower | we keep backing away and the room shrinks until it is one floor with others above and below |
+| `12:16` | There are forty-five of them. | the tower | floors continue stacking upward until the count draws itself |
+| `12:21` | The token doesn't get processed once. It climbs. | the tower | a marker carrying the row starts climbing from floor one |
+| `12:26` | And every floor does the same two things. Look around. Pick experts. Do the work. | the tower | on each floor it passes, three quick flashes fire in order |
+| `12:34` | So: same word, one floor up. Do you reckon it picks the same eight? | the tower | everything stops; the question holds on screen |
+| `12:42` | No. Because the row arriving at floor two is not the row that arrived at floor one. Different row, different scores, different eight. | the tower | the floor-two row appears beside it, visibly different |
+| `12:54` | Different eight. | the tower | floor two's eight light, in different positions from floor one's |
+| `13:00` | Every floor picks fresh. Same token, same model, new team. | the tower | the climb resumes; every floor lights a different eight as it passes |
+| `13:07` | Now — three of the forty-five don't have experts at all. They're plain blocks that everything goes through. The other forty-two are the ones that choose. Those are called the sparse ones. | the tower | the bottom three floors redraw themselves plain, without expert walls |
+| `13:22` | Forty-two floors. Eight experts each. | the tower | 42 and 8 slide together and a multiplication draws itself |
+| `13:27` | Which means this isn't eight expert visits for this token. It's three hundred and thirty-six. | the tower | the counter runs up the tower floor by floor and stops |
+| `13:36` | Three hundred and thirty-six choices, for one token — and every single one of them needed the floor below to finish before it could be made. Nobody quotes that number. It’s the one that matters. | the tower | 336 holds while a single line traces the whole climb bottom to top |
 
 ## §08 — That was one token. Here's the sentence.
 
-`13:58` → `15:39` · 11 beats · 191 words · 101s · `08-that-was-one-token.md`
+`13:52` → `15:33` · 11 beats · 193 words · 101s · `08-that-was-one-token.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `13:58` | Three hundred and thirty-six, for one token. Now — I’ve been following one token this whole time, and I owe you a correction. | the tower | the single marker holds partway up |
-| `14:10` | It doesn't go in on its own. Your entire prompt goes in together. | the tower | eight more markers appear at the base beside it, one per token |
-| `14:17` | Every token climbs at the same time. All of them, all forty-five floors, together. | the tower | all nine climb together, side by side, floor by floor |
-| `14:25` | And attention is the wiring between them. That's what connects them — every token, on every floor, looking at all the others. | the tower | lines appear between the markers on the floor they are all standing on |
-| `14:36` | That's what makes it read your sentence as a sentence, instead of a list of separate words. | the tower | the lines redraw on each new floor as they climb |
-| `14:45` | And this whole arrangement — the stack of floors, attention wiring them together, experts doing the work on each one — this is what the word transformer actually means. | the tower | a plate slides onto the front of the tower |
-| `14:59` | That's it. It's not a mysterious thing. It's this shape. | the tower | the plate settles; the climb continues behind it |
-| `15:05` | Which means each token in your prompt is doing its own three hundred and thirty-six. | the tower | a small counter appears above every marker |
-| `15:13` | Nine tokens in your sentence? That's three thousand and twenty-four expert visits. | the tower | all nine counters run at once and a total assembles beneath them |
-| `15:21` | And every one of them decided on the spot, from numbers that didn't exist until a moment before. | the tower | the total lands and holds |
-| `15:30` | So every token pays its own three hundred and thirty-six. All of that happens. And what comes out? | the tower | the markers arrive at the top floor and stop dead |
+| `13:52` | Three hundred and thirty-six, for one token. Now — I’ve been following one token this whole time, and I owe you a correction. | the tower | the single marker holds partway up |
+| `14:04` | It doesn't go in on its own. Your entire prompt goes in together. | the tower | eight more markers appear at the base beside it, one per token |
+| `14:11` | Every token climbs at the same time. All of them, all forty-five floors, together. | the tower | all nine climb together, side by side, floor by floor |
+| `14:19` | And attention is the wiring between them. That's what connects them — every token, on every floor, looking at all the others. | the tower | lines appear between the markers on the floor they are all standing on |
+| `14:30` | That's what makes it read your sentence as a sentence, instead of a list of separate words. | the tower | the lines redraw on each new floor as they climb |
+| `14:39` | And this whole arrangement — the stack of floors, attention wiring them together, experts doing the work on each one — this is what the word transformer actually means. | the tower | a plate slides onto the front of the tower |
+| `14:53` | That's it. It's not a mysterious thing. It's this shape. | the tower | the plate settles; the climb continues behind it |
+| `14:59` | Which means each token in your prompt is doing its own three hundred and thirty-six. | the tower | a small counter appears above every marker |
+| `15:07` | Eight tokens in your sentence? That’s two thousand, six hundred and eighty-eight expert visits. | the tower | all nine counters run at once and a total assembles beneath them |
+| `15:15` | And every one of them decided on the spot, from numbers that didn't exist until a moment before. | the tower | the total lands and holds |
+| `15:24` | So every token pays its own three hundred and thirty-six. All of that happens. And what comes out? | the tower | the markers arrive at the top floor and stop dead |
 
 ## §09 — Where the answer comes out
 
-`15:39` → `17:00` · 10 beats · 153 words · 81s · `09-where-the-answer-comes-out.md`
+`15:33` → `16:54` · 10 beats · 153 words · 81s · `09-where-the-answer-comes-out.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `15:39` | So every token in your prompt pays its own three hundred and thirty-six, all at once. At the top of the stack we’ve got a row for every one of them. | **push in** → the top floor | we rise to the top and arrive alongside the waiting markers |
-| `15:54` | But only one of them matters right now. The last one. | the top floor | each marker unfolds into its finished row, nine in a line |
-| `16:01` | Because the job is to work out what comes next — and next attaches to the end. | the top floor | the first eight dim; only the last stays lit |
-| `16:10` | So that final row gets compared against the whole list. All hundred and fifty-four thousand tokens. | the top floor | the last row lifts clear of the others |
-| `16:19` | Every one of them gets a score. How likely are you to be the next thing. | the top floor | the vocabulary list from §2 rises again beside it |
-| `16:24` | Most are hopeless. A few are plausible. | the top floor | a value spreads down the entire list, every entry getting one |
-| `16:30` | And one gets picked. | the top floor | the list reorders; a handful rise to the top |
-| `16:36` | That's your next word. That's the output. | the top floor | one entry is lifted out of the list |
-| `16:40` | All of that. Forty-five floors, three hundred and thirty-six experts per token, every token in your prompt. | the top floor | it becomes a word card and drops clear of the tower |
-| `16:46` | All of that. Forty-five floors, three hundred and thirty-six experts per token, every token in your prompt. And what comes out the other end is one word. | **pull back** → outside the tower | we fall away until the whole tower and the single small card share the frame |
+| `15:33` | So every token in your prompt pays its own three hundred and thirty-six, all at once. At the top of the stack we’ve got a row for every one of them. | **push in** → the top floor | we rise to the top and arrive alongside the waiting markers |
+| `15:48` | But only one of them matters right now. The last one. | the top floor | each marker unfolds into its finished row, nine in a line |
+| `15:55` | Because the job is to work out what comes next — and next attaches to the end. | the top floor | the first eight dim; only the last stays lit |
+| `16:04` | So that final row gets compared against the whole list. All hundred and fifty-four thousand tokens. | the top floor | the last row lifts clear of the others |
+| `16:13` | Every one of them gets a score. How likely are you to be the next thing. | the top floor | the vocabulary list from §2 rises again beside it |
+| `16:18` | Most are hopeless. A few are plausible. | the top floor | a value spreads down the entire list, every entry getting one |
+| `16:24` | And one gets picked. | the top floor | the list reorders; a handful rise to the top |
+| `16:30` | That's your next word. That's the output. | the top floor | one entry is lifted out of the list |
+| `16:34` | All of that. Forty-five floors, three hundred and thirty-six experts per token, every token in your prompt. | the top floor | it becomes a word card and drops clear of the tower |
+| `16:40` | All of that. Forty-five floors, three hundred and thirty-six experts per token, every token in your prompt. And what comes out the other end is one word. | **pull back** → outside the tower | we fall away until the whole tower and the single small card share the frame |
 
 ## §10 — And then it does the whole thing again
 
-`17:00` → `18:22` · 11 beats · 142 words · 82s · `10-and-then-it-does-it-again.md`
+`16:54` → `18:16` · 11 beats · 142 words · 82s · `10-and-then-it-does-it-again.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `17:00` | One word. So how do you get a paragraph out of a machine that produces one word? | outside the tower | the tower and the single word card hold, apart |
-| `17:09` | You run it again. | outside the tower | the card flies back down to the base and joins the end of the sentence |
-| `17:13` | The word it just made gets added onto the end of your sentence. | outside the tower | the sentence is now one token longer; a tenth marker appears |
-| `17:20` | And the whole thing goes back in. From the beginning. | outside the tower | all ten markers enter at the base together |
-| `17:26` | New sentence — one word longer. Forty-five floors. Look around, pick experts, do the work. | outside the tower | the whole climb replays, faster |
-| `17:34` | And another word comes out. | outside the tower | another card drops out at the top |
-| `17:38` | Then again. And again. One word at a time, until it decides to stop. | outside the tower | the cycle repeats, accelerating each time |
-| `17:47` | That's it. That's what's actually happening while you sit there watching a reply appear. | outside the tower | the produced words accumulate as a line of text beside the tower |
-| `17:55` | Every single word of that reply. Full stack. Fresh choices. | outside the tower | a counter beside each produced word ticks 336 per token |
-| `18:01` | So it isn't three hundred and thirty-six choices. It's three hundred and thirty-six per token, per word it writes. It never stops choosing. | outside the tower | the running total climbs and does not stop |
-| `18:13` | So it never stops re-choosing. Which means we can finally ask the question we started with, properly. | outside the tower | everything halts at once; the tower and the finished reply hold |
+| `16:54` | One word. So how do you get a paragraph out of a machine that produces one word? | outside the tower | the tower and the single word card hold, apart |
+| `17:03` | You run it again. | outside the tower | the card flies back down to the base and joins the end of the sentence |
+| `17:07` | The word it just made gets added onto the end of your sentence. | outside the tower | the sentence is now one token longer; a tenth marker appears |
+| `17:14` | And the whole thing goes back in. From the beginning. | outside the tower | all ten markers enter at the base together |
+| `17:20` | New sentence — one word longer. Forty-five floors. Look around, pick experts, do the work. | outside the tower | the whole climb replays, faster |
+| `17:28` | And another word comes out. | outside the tower | another card drops out at the top |
+| `17:32` | Then again. And again. One word at a time, until it decides to stop. | outside the tower | the cycle repeats, accelerating each time |
+| `17:41` | That's it. That's what's actually happening while you sit there watching a reply appear. | outside the tower | the produced words accumulate as a line of text beside the tower |
+| `17:49` | Every single word of that reply. Full stack. Fresh choices. | outside the tower | a counter beside each produced word ticks 336 per token |
+| `17:55` | So it isn't three hundred and thirty-six choices. It's three hundred and thirty-six per token, per word it writes. It never stops choosing. | outside the tower | the running total climbs and does not stop |
+| `18:07` | So it never stops re-choosing. Which means we can finally ask the question we started with, properly. | outside the tower | everything halts at once; the tower and the finished reply hold |
 
 ## §11 — So could you store only the 18 billion?
 
-`18:22` → `20:16` · 13 beats · 188 words · 114s · `11-could-you-store-only-the-18.md`
+`18:16` → `20:15` · 13 beats · 219 words · 119s · `11-could-you-store-only-the-18.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `18:22` | It re-chooses — every floor, every word, and it never stops. So: back to where we started. Could you just store the part it actually uses? | outside the tower | the reply clears; `18` and `320` return and settle over the tower |
-| `18:35` | And here's the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on. | **pan** → the plan | we slide across to the plan from §1, assembling itself piece by piece |
-| `18:49` | First token, first floor. Eight experts fetched. It works. | the plan | eight blocks fly from the drive into the machine; the work completes; a tick lands |
-| `18:57` | Second floor. New row, new eight. Fetch those as well. | the plan | eight *different* blocks fly across |
-| `19:03` | Third floor. Again. | the plan | eight more |
-| `19:07` | And again, and again — forty-two times, for one token. | the plan | the flights speed up until the path is continuously full |
-| `19:15` | So how much did we actually carry in? | the plan | the flights stop; a counter lands |
-| `19:20` | One expert is about twenty-six megabytes. Three hundred and thirty-six of them is about eight gigabytes. | the plan | 336 and 26 MB slide together; a total assembles |
-| `19:29` | For one word. | the plan | the total lands and a label drops under it |
-| `19:34` | Off a fast drive, that's roughly a second and a half. For one word. | the plan | a clock draws itself beside the 8 GB and runs |
-| `19:42` | And the work those eight experts actually did? Milliseconds. | the plan | a second bar appears beside the first, almost invisible |
-| `19:50` | There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more. | the plan | both bars redraw to true scale; the small one needs a magnified inset to be visible at all |
-| `20:01` | So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking 'just keep the popular ones nearby', hold that thought. You’re right. That’s next. | the plan | the bars hold, then a small cache shelf sketches itself in and stays |
+| `18:16` | It re-chooses — every floor, every word, and it never stops. So: back to where we started. Could you just store the part it actually uses? | outside the tower | the reply clears; `18` and `320` return and settle over the tower |
+| `18:29` | And here's the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on. | **pan** → the plan | we slide across to the plan from §1, assembling itself piece by piece |
+| `18:43` | First token, first floor. Eight experts fetched. It works. | the plan | eight blocks fly from the drive into the machine; the work completes; a tick lands |
+| `18:51` | Second floor. New row, new eight. Fetch those as well. | the plan | eight *different* blocks fly across |
+| `18:57` | Third floor. Again. | the plan | eight more |
+| `19:01` | And again, and again — forty-two times, for one token. | the plan | the flights speed up until the path is continuously full |
+| `19:09` | So how much did we actually carry in? | the plan | the flights stop; a counter lands |
+| `19:14` | One expert is about twenty-six megabytes. Three hundred and thirty-six of them is about eight gigabytes. | the plan | 336 and 25 MB slide together; a total assembles |
+| `19:26` | One expert is about twenty-five megabytes, at the precision this thing ships in. Three hundred and thirty-six of them is about eight and a half gigabytes. | the plan | the total lands and a label drops under it |
+| `19:31` | Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one word. | the plan | a clock draws itself beside the 8.5 GB and runs |
+| `19:41` | And the work those eight experts actually did? Milliseconds. | the plan | a second bar appears beside the first, almost invisible |
+| `19:49` | There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more. | the plan | both bars redraw to true scale; the small one needs a magnified inset to be visible at all |
+| `20:00` | So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking 'just keep the popular ones nearby', hold that thought. You’re right. That’s next. | the plan | the bars hold, then a small cache shelf sketches itself in and stays |
 
 ## §12 — How people actually run these
 
-`20:16` → `22:32` · 14 beats · 244 words · 136s · `12-how-people-actually-run-these.md`
+`20:15` → `22:31` · 14 beats · 244 words · 136s · `12-how-people-actually-run-these.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `20:16` | So you can’t store only the active part. Except — people do run models like this on small machines. Right now. And they’re not lying about it. | the plan | the bars clear; a small machine slides in and runs, steadily, producing words |
-| `20:29` | So what are they doing that we just failed to do? | the plan | the machine keeps running while the numbers from §11 hang over it, unchanged |
-| `20:36` | Caching. | the plan | a box appears in the path between the drive and the machine |
-| `20:40` | Here's the thing we noticed all the way back at the start. Experts repeat. Not always — but often enough to matter. | the plan | two words run through; a couple of the same blocks are used both times |
-| `20:51` | The next token quite often wants some of the same experts the last one did. | the plan | those repeating blocks stay in the box instead of returning to the drive |
-| `20:59` | So you don't fetch every time. You keep the ones that keep coming back in fast memory, and you only go to the drive for the ones you're missing. | the plan | the next word's fetches split: most come from the box, a few from the drive |
-| `21:13` | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. | the plan | the machine speeds up; a small model tag appears on the box |
-| `21:24` | Which turns the whole thing into one question. How much do you keep close? | the plan | a slider rises out of the floor under the box |
-| `21:33` | Keep more, and it's fast — but now you need a big machine again, which is the thing we were trying to avoid. | the plan | the slider is dragged up: the box swells, the machine races, the machine's frame grows huge |
-| `21:45` | Keep less, the machine gets small — and the misses pile up, and it crawls. | the plan | dragged down: the box shrinks, long hops multiply, the machine crawls |
-| `21:54` | And remember what we're choosing from. Two hundred and eighty-eight experts, on each of forty-two floors. | the plan | the 288 wall and the 42 floors ghost in behind the box, dwarfing it |
-| `22:03` | Twelve thousand and ninety-six slots. | the plan | a count assembles from them and lands on the box |
-| `22:10` | There's no setting on that slider where it's both. That's the trade, and on a model chopped this fine the exchange rate is brutal. | the plan | the slider is dragged across its whole range; neither end ever shows both |
-| `22:22` | So you can run it on less. It’ll just be slow. That was never a wall — it’s a price. | the plan | the slider settles mid-range; the machine runs, slowly, and keeps running |
+| `20:15` | So you can’t store only the active part. Except — people do run models like this on small machines. Right now. And they’re not lying about it. | the plan | the bars clear; a small machine slides in and runs, steadily, producing words |
+| `20:28` | So what are they doing that we just failed to do? | the plan | the machine keeps running while the numbers from §11 hang over it, unchanged |
+| `20:35` | Caching. | the plan | a box appears in the path between the drive and the machine |
+| `20:39` | Here's the thing we noticed all the way back at the start. Experts repeat. Not always — but often enough to matter. | the plan | two words run through; a couple of the same blocks are used both times |
+| `20:50` | The next token quite often wants some of the same experts the last one did. | the plan | those repeating blocks stay in the box instead of returning to the drive |
+| `20:58` | So you don't fetch every time. You keep the ones that keep coming back in fast memory, and you only go to the drive for the ones you're missing. | the plan | the next word's fetches split: most come from the box, a few from the drive |
+| `21:12` | And it works. Genuinely. On a model with eight experts on each floor, a small cache catches most of what you need. | the plan | the machine speeds up; a small model tag appears on the box |
+| `21:23` | Which turns the whole thing into one question. How much do you keep close? | the plan | a slider rises out of the floor under the box |
+| `21:32` | Keep more, and it's fast — but now you need a big machine again, which is the thing we were trying to avoid. | the plan | the slider is dragged up: the box swells, the machine races, the machine's frame grows huge |
+| `21:44` | Keep less, the machine gets small — and the misses pile up, and it crawls. | the plan | dragged down: the box shrinks, long hops multiply, the machine crawls |
+| `21:53` | And remember what we're choosing from. Two hundred and eighty-eight experts, on each of forty-two floors. | the plan | the 288 wall and the 42 floors ghost in behind the box, dwarfing it |
+| `22:02` | Twelve thousand and ninety-six slots. | the plan | a count assembles from them and lands on the box |
+| `22:09` | There's no setting on that slider where it's both. That's the trade, and on a model chopped this fine the exchange rate is brutal. | the plan | the slider is dragged across its whole range; neither end ever shows both |
+| `22:21` | So you can run it on less. It’ll just be slow. That was never a wall — it’s a price. | the plan | the slider settles mid-range; the machine runs, slowly, and keeps running |
 
 ## §13 — What that number actually bought
 
-`22:32` → `24:38` · 12 beats · 243 words · 126s · `13-what-that-number-bought.md`
+`22:31` → `24:37` · 12 beats · 243 words · 126s · `13-what-that-number-bought.md`
 
 | at | say | where | what happens |
 | --- | --- | --- | --- |
-| `22:32` | Small, or fast. Not both. So — what did "five percent active" actually buy? | the plan | the plan dissolves; `18` rises and holds alone |
-| `22:40` | Here's what that number is actually telling you. | **pan** → the sheet | we slide back to what §1 opened on: the number, and the block behind it |
-| `22:45` | Per word, this thing does the thinking of a model about a twentieth of its size. That's real. That's why it's quick, and why it's cheap to run per word. That part is completely true. | the sheet | a small work bar draws itself beside the sheet |
-| `23:01` | But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it. | the sheet | the block from §1 returns behind it, whole, and settles heavily |
-| `23:13` | So: "active parameters" is a compute number. It was never a memory number. | the sheet | a label lands between the bar and the block |
-| `23:21` | Sparse routing buys you compute. It doesn't buy you memory. | the sheet | the bar and the block separate into two labelled halves |
-| `23:29` | And here's the part I didn't expect. This model has a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs four. | the sheet | a second sheet slides in beside the first; chips stack under each |
-| `23:44` | Both of them use about five percent of themselves to answer you. | the sheet | both sheets light their active share; the two shares match |
-| `23:51` | The difference is that this one is chopped finer. More experts, smaller each. | the sheet | each sheet's block divides — one into coarse pieces, one into many fine ones |
-| `23:58` | Which is exactly why it's better — and exactly why it's harder to hold. | the sheet | the fine-grained one's chip stack grows while its pieces get smaller |
-| `24:06` | So the better these models get at using less of themselves, the more of them you have to keep lying around. | the sheet | the second sheet withdraws; ours holds with its four chips |
-| `24:17` | Two models. Both about five percent active. One of them runs on a single card; the other one needs four. Now you know why. "Active parameters" is a compute number, not a memory number — and the finer you slice the experts, the wider that gap gets. | the sheet | everything clears to one card |
+| `22:31` | Small, or fast. Not both. So — what did "five percent active" actually buy? | the plan | the plan dissolves; `18` rises and holds alone |
+| `22:39` | Here's what that number is actually telling you. | **pan** → the sheet | we slide back to what §1 opened on: the number, and the block behind it |
+| `22:44` | Per word, this thing does the thinking of a model about a twentieth of its size. That's real. That's why it's quick, and why it's cheap to run per word. That part is completely true. | the sheet | a small work bar draws itself beside the sheet |
+| `23:00` | But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it. | the sheet | the block from §1 returns behind it, whole, and settles heavily |
+| `23:12` | So: "active parameters" is a compute number. It was never a memory number. | the sheet | a label lands between the bar and the block |
+| `23:20` | Sparse routing buys you compute. It doesn't buy you memory. | the sheet | the bar and the block separate into two labelled halves |
+| `23:28` | And here’s the part I didn’t expect. This model has a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs four. | the sheet | a second sheet slides in beside the first; chips stack under each |
+| `23:43` | Both of them use about five percent of themselves to answer you. | the sheet | both sheets light their active share; the two shares match |
+| `23:50` | The difference is that this one is chopped finer. More experts, smaller each. | the sheet | each sheet's block divides — one into coarse pieces, one into many fine ones |
+| `23:57` | Which is exactly why it's better — and exactly why it's harder to hold. | the sheet | the fine-grained one's chip stack grows while its pieces get smaller |
+| `24:05` | So the better these models get at using less of themselves, the more of them you have to keep lying around. | the sheet | the second sheet withdraws; ours holds with its four chips |
+| `24:16` | Two models. Both about five percent active. One of them runs on a single card; the other one needs four. Now you know why. "Active parameters" is a compute number, not a memory number — and the finer you slice the experts, the wider that gap gets. | the sheet | everything clears to one card |

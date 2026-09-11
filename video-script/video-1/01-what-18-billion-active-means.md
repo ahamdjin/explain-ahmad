@@ -19,7 +19,7 @@ Teacher for the shape: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §1
 | Teaches | parameter, expert, active, Mixture of Experts |
 | Answers | **"five percent active" does not predict what hardware you need** |
 | Exits on | who picks the eight, and why is *that* the expensive question? |
-| Target | ~17 beats · ~1:25 |
+| Target | 17 beats · **2:13** (`npm run restamp 01`) |
 | Never says | `token`, `layer`, `attention`, `bandwidth`, `VRAM`, `router` |
 | **Must not say** | why you cannot store only the active part. **That is §11.** |
 | Hard-bet budget | **uses 1 of 2** (beat 12). The other is reserved for §07. |
@@ -63,14 +63,14 @@ beat 4: the number you have been quoting is the number that misled you.
 Strategy IDs are load-bearing. `skills/STRATEGY_LEDGER.md` says who taught each
 one and how good the evidence is; a `C` tier there means I inferred it.
 
-### Act 1 — the contradiction (beats 1–3, 0:00–0:13) · **S-01**
+### Act 1 — the contradiction (beats 1–3, 0:00–0:14) · **S-01**
 
-> **1.** *(two paper blocks, side by side, identical. five percent of each is
-> live; the rest is grey)* Here are two AI models. Both of them use about five
-> percent of themselves to answer you.
+> **1.** *(two paper blocks, side by side, identical. five percent of each is > live;
+> the rest is grey)* Two AI models. Both use about five percent of themselves
+> to answer you.
 >
-> **2.** *(one graphics card slides in under the left block)* This one runs on
-> a single graphics card.
+> **2.** *(one graphics card slides in under the left block)* This one runs on a
+> single graphics card.
 >
 > **3.** *(three more cards stack under the right block)* This one needs four.
 
@@ -80,20 +80,18 @@ MXFP4 and fits one 80 GB card; GLM-5.3-Flash is ~306 GiB at FP8 and does not
 fit four. Table and sources: `STORY_SPINE.md` §1. Say **"about five percent"** —
 4.4% and 5.6% are the same claim.
 
-### Act 2 — the inversion and the promise (beats 4–6, 0:13–0:32) · **S-02**, **S-03**
+### Act 2 — the inversion and the promise (beats 4–6, 0:14–0:43) · **S-02**, **S-03**
 
-> **4.** *(the four cards stay. the phrase "only 5% active" writes itself
-> across both blocks)* "Only five percent active" is the number everybody
-> quotes to explain why these models are cheap to run now. Both of these have
-> it. Only one of them is cheap.
+> **4.** *(the four cards stay. the phrase "only 5% active" writes itself > across
+> both blocks)* Everyone quotes that number to say these models are cheap to
+> run now. Both have it. Only one of them is.
 >
 > **5.** *(the two blocks hold, unequal)* Same five percent. Four times the machine.
-> So what is that number actually telling you?
 >
-> **6.** *(the right-hand block and its four cards slide away; one block left)*
-> I'm going to follow one word all the way through this thing. By the end
-> you'll know exactly what "five percent active" buys you — and what it
-> doesn't.
+> **6.** *(the right-hand block and its four cards slide away; one block left)* So
+> what is that number actually telling you? I’m going to follow one word all
+> the way through, and by the end you’ll know exactly what it buys — and what
+> it doesn’t.
 
 Beat 4 is the whole reason the opening works. `STORY_SPINE.md` §3 says the
 audience for an MoE video *already believes it understands MoE* — "only a few
@@ -103,29 +101,29 @@ that belief back to them as the thing that is about to break.
 Beat 6 is the promise, at ~0:26, inside the only retention deadline I would
 defend as tier A.
 
-### Act 3 — now the words, because now they are earned (beats 7–11, 0:32–0:56) · **S-04**
+### Act 3 — now the words, because now they are earned (beats 7–11, 0:43–1:23) · **S-04**
 
 > **7.** *(the block sits alone, whole)* This is the model. All of it.
 >
-> **8.** *(it breaks into a field of tiny separate marks)* Three hundred and
-> twenty billion numbers in one very big file. Each one is something it learned
-> while it was being trained. That's what a parameter is.
+> **8.** *(it breaks into a field of tiny separate marks)* Three hundred and twenty
+> billion numbers — that’s what there is to store. Each one is something it
+> learned while it was being trained. That’s what a parameter is.
 >
 > **9.** *(the marks resolve; about five percent of them go live)* And when a
 > word comes in, about five percent of them do something.
 >
 > **10.** *(camera pushes in — the only move in the section)* Let's get closer.
 >
-> **11.** *(288 pieces, in rows)* Up close, they're not one lump. They're in
-> separate pieces — two hundred and eighty-eight of them, in each part of the
-> model.
+> **11.** *(288 pieces, in rows)* Up close, it’s not one lump. This is one small part
+> of the model — and there are two hundred and eighty-eight separate pieces in
+> it.
 
 Sanderson, *Concrete before Abstract*: *"resist the temptation to open a topic
 by describing a general result or definition"* — let examples precede
 generality. "Parameter" arrives at beat 8, after the viewer has watched the
 block behave twice. v8 defined three terms inside twenty seconds.
 
-### Act 4 — the bet (beats 12–13, 0:56–1:06) · **S-05**
+### Act 4 — the bet (beats 12–13, 1:23–1:36) · **S-05**
 
 > **12.** *(the 288 sit still. nothing moves. the question stays up)* Two
 > hundred and eighty-eight of them. One word comes in. **How many do you
@@ -144,13 +142,15 @@ beat in the section. `skills/ncase/NCASE_4_MORE_DESIGN_PATTERNS.md` §2: the
 guess and the answer must occupy **the same space** — the 288 do not move
 between beat 12 and beat 13, and the eight light up in place.
 
-### Act 5 — the name and the wall (beats 14–17, 1:06–1:25) · **S-12**, **S-14**
+### Act 5 — the name and the wall (beats 14–17, 1:36–2:18) · **S-12**, **S-14**
 
-> **14.** *(the 280 stay grey)* Eight do the work. The other two hundred and
-> eighty do nothing at all.
+> **14.** *(the 280 stay grey)* Eight get picked. The other two hundred and eighty do
+> nothing at all.
 >
-> **15.** *(the eight lit pieces line up with the live sliver from beat 9)*
-> There's your five percent. That's where it comes from.
+> **15.** *(the eight lit pieces line up with the live sliver from beat 9)* You might
+> think that’s the five percent. It isn’t — this is one small part of the
+> model, and there’s more in here than these, and plenty that runs every time
+> regardless. Hold onto that.
 >
 > **16.** *(the whole arrangement sits still)* And this has a name. It's called
 > a Mixture of Experts. Those pieces are the experts.
@@ -259,6 +259,20 @@ Total ≈ 1:24. Beat seconds are a 145-wpm floor; set them from the recording.
   between them is the only thing being claimed.
 - **Nothing here says why you cannot store the active part.** That is §11, and
   saying it here is what v8 did wrong.
+- **Eight of 288 is not the five percent, and beat 15 exists to refuse that
+  sum.** `GROUND_TRUTH.md` calls this the disqualifying error: 8 ÷ 288 is 2.8%
+  of the routed weight in *one* sparse layer, while 18 ÷ 321 is 5.6% of the
+  model, and neither causes the other. Measured at FP8, the routed experts are
+  ~8.5 GB of an ~18 GB active path — **under half**. v10 said *"there's your
+  five percent, that's where it comes from"* over a frame of eight lit experts,
+  which is exactly the error, and a reviewer caught it rather than any gate.
+- **280 idle is correct, and the shared expert is a 289th object.**
+  `n_routed_experts` is 288 and `n_shared_experts` is 1 **on top of it** — the
+  always-on expert is not one of the 288. My first attempt at this said "279
+  idle, one always on", which was a worse error than the omission it fixed.
+  The shared expert has no frame in this section, so it is introduced in §5
+  beat 10 where it has a picture; §1 only has to avoid implying the 288 are
+  everything, which beat 15 now does.
 
 ## Frames
 

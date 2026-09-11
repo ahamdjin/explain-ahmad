@@ -67,6 +67,8 @@ export { note, centred, brace, arrow, tick } from './notes'
 /** The running prompt, and the numbers derived from it. */
 export {
   PROMPT,
+  PROMPT_IDS,
+  UNEVEN,
   FOLLOWED,
   TOKENS,
   VISITS_PER_TOKEN,

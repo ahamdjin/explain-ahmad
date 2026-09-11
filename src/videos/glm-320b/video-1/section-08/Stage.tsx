@@ -15,7 +15,7 @@ import {type SceneState} from './scene'
  *
  * It is there so the nine markers have nine visible causes: a viewer who can
  * count the pieces can check the arithmetic, which is exactly why the total is
- * 3,024 and not the tidier 3,360.
+ * 2,688 and not a tidier round number.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   return (

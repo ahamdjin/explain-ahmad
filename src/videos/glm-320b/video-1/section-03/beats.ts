@@ -31,7 +31,7 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
     id: 'how-it-gets-meaning',
-    title: '`4021` alone; a table edge rises into frame',
+    title: '`5562` alone; a table edge rises into frame',
     relation: 'want',
     secs: 14,
     vo: 'So every piece has a row number now — and a row number is only a name. A name has to turn into a meaning somewhere. Here’s where.',
@@ -80,7 +80,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'That row slides out of the table and comes forward',
     relation: 'so',
     secs: 6,
-    vo: 'So token four thousand and twenty-one pulls out this row.',
+    vo: 'So token five thousand, five hundred and sixty-two pulls out this row.',
     commands: [table.pull(), chip.off(), dog.show({ x: 66, y: 40 }, 0.62, { label: '' })],
   },
   {

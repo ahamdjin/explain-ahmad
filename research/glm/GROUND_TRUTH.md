@@ -37,31 +37,51 @@ Verified 2026-09-09 against the model card, `config.json`, and the vLLM recipe.
 | --- | --- | --- |
 | Expert visits per word | **336** | 8 routed × 42 sparse layers |
 | Total expert slots | 12,096 | 288 × 42 |
-| Share of routed weight touched per word | ~2.8% | 8 ÷ 288 |
-| One expert, approx | ~26 MB | see cross-checks |
-| **Routed weight to fetch per word, if not resident** | **~8 GB** | 336 × 26 MB |
+| Share of routed weight touched per word | ~2.8% | 8 ÷ 288, **one sparse layer** |
+| One expert | **~25 MB** | 4096 × 2048 × 3 at FP8. `TOKENIZER.md` |
+| **Routed weight to fetch per word, if not resident** | **~8.5 GB** | 336 × 25 MB |
 | Active 18B at shipped FP8 | ~18 GB | 1 byte per parameter |
 | Full checkpoint squeezed to 4-bit | ~153 GiB | still very large |
 
 ### Cross-checks on the ~8 GB
 
-1. **Slots × size.** 12,096 × 26 MB ≈ **314 GB** — essentially the whole 306 GiB
+1. **Slots × size.** 12,096 × 25 MB ≈ **304 GB** — essentially the whole 306 GiB
    checkpoint, so routed experts do dominate the weight, which is what makes the
    2.8%-per-word figure the one that matters.
-2. **Residual.** Active is 18B ≈ 18 GB at FP8. Attention, embeddings, the 3
-   dense layers and the shared expert are resident regardless (~10 GB). The
-   remainder — the routed part that would have to be fetched — is ~8 GB.
+2. **Direct.** `moe_intermediate_size` is **2048** (measured from `config.json`,
+   2026-09-11), so one expert is 4096 × 2048 × 3 = 25.17 MB at FP8 and
+   336 × 25.17 MB = **8.5 GB**.
 
-Two independent routes, same number.
+Two independent routes, same number. This used to say *"still to confirm:
+read `moe_intermediate_size`"* — it is now read. `research/glm/TOKENIZER.md`.
 
-**Still to confirm before recording:** read `moe_intermediate_size` from
-`config.json` and compute the routed-expert share directly rather than deriving
-it from the residual.
+### What is resident regardless — and why §1 must not conflate the two
+
+```
+attention (45 layers)  3.0 GB      shared expert × 42     1.1 GB
+3 dense FFN layers     0.5 GB      embeddings             0.6 GB
+                                   ─────────────────────────────
+                                   ~5.2 GB resident
+                                   +8.5 GB routed, per word
+```
+
+Against a card figure of 18B ≈ 18 GB, that leaves ~4 GB unaccounted for —
+vision tower, untied `lm_head`, norms, router. **Do not present this
+decomposition as complete.** What it does settle is that the routed experts are
+**under half** the active path, so *eight experts in one layer* and *five
+percent of the model* are different claims about different things.
 
 ## On-screen rules
 
 - **`18B active` is the path across the whole model**, not eight experts in one
   layer. This is the crux of the answer; getting it wrong invalidates it.
+  Concretely: 8 ÷ 288 = **2.8% of the routed weight in one sparse layer**;
+  18 ÷ 321 = **5.6% of the model**. They are not the same number and neither
+  causes the other. §1 v10 said *"there's your five percent, that's where it
+  comes from"* over a frame of eight lit experts, which is exactly this error,
+  and it was caught in review rather than by any gate.
+- **The shared expert is always on.** Never say "the other 280 do nothing" —
+  281 are idle and one is not.
 - **Never cross-multiply organisation units with space units.** Experts are
   288 *per sparse layer*; gigabytes are space. "288 experts need 288 GB" is a
   lie. An expert is ~1/40th of a gigabyte.

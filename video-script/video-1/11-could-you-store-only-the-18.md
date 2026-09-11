@@ -9,7 +9,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | --- | --- |
 | Enters on | it never stops choosing. So could you store only the part it uses? |
 | Teaches | memory vs storage |
-| Answers | no — you would fetch about 8 GB per word, against milliseconds of actual work |
+| Answers | no — you would fetch about 8.5 GB per word, against milliseconds of actual work |
 | → next | **but** people run models like this on small machines every day |
 | Target | ~13 beats · ~1:25 |
 
@@ -17,9 +17,9 @@ arithmetic the viewer can follow, rather than a claim from authority.
 
 | | |
 | --- | --- |
-| One expert | ~26 MB |
+| One expert | ~25 MB |
 | Expert visits per token | 336 |
-| **Routed weight per word, if not resident** | **~8 GB** |
+| **Routed weight per word, if not resident** | **~8.5 GB** |
 | Off a fast drive at ~5 GB/s | **~1.6 s** |
 | The compute itself | milliseconds |
 | Penalty | **~50×** |
@@ -47,13 +47,15 @@ arithmetic the viewer can follow, rather than a claim from authority.
 > **8.** One expert is about twenty-six megabytes. Three hundred and thirty-six
 > of them is **about eight gigabytes**.
 >
-> **9.** For one word.
+> **9.** One expert is about twenty-five megabytes, at the precision this thing ships
+> in. Three hundred and thirty-six of them is about eight and a half
+> gigabytes.
 >
-> **10.** Off a fast drive, that's **roughly a second and a half**. For one
-> word.
+> **10.** Off a fast drive — call it five gigabytes a second — that’s the better part
+> of two seconds. For one word.
 >
 > **11.** *(two bars appear)* And the work those eight experts actually did?
-> *(beat)* Milliseconds.
+> Milliseconds.
 >
 > **12.** *(the bars, to scale)* There it is. **The fetching costs more than the
 > thinking.** Not a bit more — hundreds of times more.
@@ -75,9 +77,9 @@ arithmetic the viewer can follow, rather than a claim from authority.
 | 5 | the plan | — | eight more | `FetchPath` | floor 3 | S-04 |
 | 6 | the plan | — | the flights speed up until the path is continuously full | `FetchPath` `congested` | 42 times, one token | S-04 |
 | 7 | the plan | — | the flights stop; a counter lands | `Counter` | **336** | S-04 |
-| 8 | the plan | — | 336 and 26 MB slide together; a total assembles | `Counter`, arithmetic | 336 × 26 MB | S-04 |
-| 9 | the plan | — | the total lands and a label drops under it | `BigNumber`, `Note` | **~8 GB** — for one word | S-15 |
-| 10 | the plan | — | a clock draws itself beside the 8 GB and runs | clock, `Counter` | **~1.5 s** | S-08 |
+| 8 | the plan | — | 336 and 25 MB slide together; a total assembles | `Counter`, arithmetic | 336 × 25 MB | S-04 |
+| 9 | the plan | — | the total lands and a label drops under it | `BigNumber`, `Note` | **~8.5 GB** — for one word | S-15 |
+| 10 | the plan | — | a clock draws itself beside the 8.5 GB and runs | clock, `Counter` | **~~1.7 s** | S-08 |
 | 11 | the plan | — | a second bar appears beside the first, almost invisible | `CostBars`, work bar | milliseconds | S-09 |
 | 12 | the plan | — | both bars redraw to true scale; the small one needs a magnified inset to be visible at all | `CostBars` to scale | fetch vs work | S-04 |
 | 13 | the plan | — | the bars hold, then a small cache shelf sketches itself in and stays | `CostBars` + `ExpertCache` ghost | — | S-08 |
@@ -90,7 +92,7 @@ arithmetic the viewer can follow, rather than a claim from authority.
 - **Beat 3 has to visibly succeed**, with a tick. A plan that never worked
   cannot break, and the failure has to be a discovery rather than a lecture.
 - **Beat 12 is the most important frame in the video.** The two bars, to true
-  scale. If milliseconds against 1.5 s cannot honestly share a frame, the small
+  scale. If milliseconds against ~1.7 s cannot honestly share a frame, the small
   bar gets a **magnified inset with the magnification labelled** — never a
   fudged ratio. A dishonest bar chart here would undo the whole video.
 - Beat 6's congestion is the only "jam" in the video and it is a **traffic**

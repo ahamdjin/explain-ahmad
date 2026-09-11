@@ -241,13 +241,13 @@ export default function PaperCatalogue() {
         </Item>
         <Item name="Vocabulary" note="hit, scrolling, scores — §2 and §9 share it" tall>
           <div className="pc-row">
-            <Vocabulary hit={4021} label="154,880 entries" />
+            <Vocabulary hit={5562} label="154,880 entries" />
             <Vocabulary scores label="every token, scored" />
           </div>
         </Item>
         <Item name="EmbeddingTable" note="one row per token; it continues past the top" tall>
           <div className="pc-row">
-            <EmbeddingTable seeking label="row 4021" />
+            <EmbeddingTable seeking label="row 5562" />
             <EmbeddingTable pulled label="pulled out" />
           </div>
         </Item>

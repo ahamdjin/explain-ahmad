@@ -22,7 +22,7 @@
 >
 > **3.** The ID is just which row to go and fetch.
 >
-> **4.** *(row 4021 slides out)* So token four thousand and twenty-one pulls out
+> **4.** *(row 5562 slides out)* So token five thousand, five hundred and sixty-two pulls out
 > this row.
 >
 > **5.** *(the row extends past the frame)* Four thousand and ninety-six numbers.
@@ -31,8 +31,7 @@
 > **6.** This row is called an **embedding**. And it's the first thing in the
 > whole machine that actually means something.
 >
-> **7.** Here's why it means something. *(two rows, side by side)* Let's pull
-> out "dog", and "cat".
+> **7.** Here’s why it means something. Let’s pull out "dog", and "cat".
 >
 > **8.** *(the rows line up, mostly similar)* They're not the same — but they're
 > close. Lots of these numbers nearly match.
@@ -59,10 +58,10 @@
 
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | the first surface | — | `4021` sits alone; the bottom edge of a huge table rises into frame | `4021`, a table edge | `4021` | S-14 |
+| 1 | the first surface | — | `5562` sits alone; the bottom edge of a huge table rises into frame | `5562`, a table edge | `5562` | S-14 |
 | 2 | the table | **pull back** | we back away and the table's full height comes into view, rows running past the top of frame | `EmbeddingTable` | 154,880 rows | S-04 |
-| 3 | the table | — | the number travels up the table and stops at its own row | `4021` moving | row 4021 | S-04 |
-| 4 | the table | — | that row slides out of the table and comes forward | `EmbeddingTable`, row extracted | row 4021 | S-04 |
+| 3 | the table | — | the number travels up the table and stops at its own row | `5562` moving | row 5562 | S-04 |
+| 4 | the table | — | that row slides out of the table and comes forward | `EmbeddingTable`, row extracted | row 5562 | S-04 |
 | 5 | the table | — | the extracted row extends sideways past both edges of frame | `NumberRow` extending | 4096 values | S-04 |
 | 6 | the table | — | the row holds; a handwritten label lands on it | `NumberRow`, `Note` | "embedding" | S-04 |
 | 7 | the table | — | two more rows slide out and stack under it | 3 `NumberRow`s | `dog`, `cat` | S-04 |

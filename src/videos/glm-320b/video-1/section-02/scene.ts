@@ -41,9 +41,10 @@ export type SceneState = {
   /** Carried in from §1, unlabelled, and dim. It is not the subject yet. */
   hospital: Placed & { staffed: boolean; doorsOpen: boolean; dim: boolean }
   desk: Placed
-  /** What you typed. One object, from whole card to nine pieces. */
+  /** What you typed. One object, from whole card to eight pieces. */
   sentence: Placed & { split: boolean; jumble: boolean; focus: number }
-  /** `understanding`, which arrives to break into three and then leaves. */
+  /** `unbelievable`, which arrives to shatter into three and then leaves. The
+   *  real tokenizer's split -- `un` / `belie` / `vable`. `prompt.ts`. */
   extra: Placed & { split: boolean; words: readonly string[] }
   /** Every token the model knows. The same object returns in §9. */
   vocab: Placed & { hit?: number; scrolling: boolean }
@@ -62,9 +63,9 @@ export const INITIAL: SceneState = {
   hospital: { on: false, at: { x: 52, y: 46 }, scale: 0.86, staffed: true, doorsOpen: false, dim: true },
   desk: { on: false, at: { x: 14, y: 78 }, scale: 0.66 },
   sentence: { on: false, at: { x: 50, y: 46 }, scale: 1, split: false, jumble: false, focus: -1 },
-  extra: { on: false, at: { x: 50, y: 22 }, scale: 0.6, split: false, words: ['understanding'] },
+  extra: { on: false, at: { x: 50, y: 22 }, scale: 0.6, split: false, words: ['unbelievable'] },
   vocab: { on: false, at: { x: 84, y: 48 }, scale: 1, hit: undefined, scrolling: false },
-  chip: { on: false, at: { x: 50, y: 46 }, scale: 0.55, label: 'dog', id: '4021', becomes: false },
+  chip: { on: false, at: { x: 50, y: 46 }, scale: 0.55, label: 'dog', id: '5562', becomes: false },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
   camera: { ...INITIAL_CAMERA },

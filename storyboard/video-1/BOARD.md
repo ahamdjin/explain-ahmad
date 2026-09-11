@@ -11,51 +11,52 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 01 — What "five percent active" actually costs
 
-`17` beats · `2:19` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
+`17` beats · `2:18` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
 
 - **Exits on** — who picks the eight, and why is that the expensive question?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `two-models` | 9 | want | Two models, both five percent active | Here are two AI models. Both of them use about five percent of themselves to answer you. |
-| 2 | `one-card` | 5 | so | One graphics card | This one runs on a single graphics card. |
-| 3 | `four-cards` | 4 | wall | Four of them | This one needs four. |
-| 4 | `the-number-everybody-quotes` | 14 | and-yet | The number everybody quotes | "Only five percent active" is the number everybody quotes to explain why these models are cheap to run now. Both of these have it. Only one of them is cheap. |
-| 5 | `unequal` | 8 | and-yet | Level above, unequal below | Same five percent. Four times the machine. So what is that number actually telling you? |
-| 6 | `the-promise` | 14 | therefore | The promise | I’m going to follow one word all the way through this thing. By the end you’ll know exactly what "five percent active" buys you — and what it doesn’t. |
+| 1 | `two-models` | 7 | want | Two models, both five percent active | Two AI models. Both use about five percent of themselves to answer you. |
+| 2 | `one-card` | 4 | so | One graphics card | This one runs on a single graphics card. |
+| 3 | `four-cards` | 3 | wall | Four of them | This one needs four. |
+| 4 | `the-number-everybody-quotes` | 10 | and-yet | The number everybody quotes | Everyone quotes that number to say these models are cheap to run now. Both have it. Only one of them is. |
+| 5 | `unequal` | 4 | and-yet | Level above, unequal below | Same five percent. Four times the machine. |
+| 6 | `the-promise` | 15 | therefore | The promise | So what is that number actually telling you? I’m going to follow one word all the way through, and by the end you’ll know exactly what it buys — and what it doesn’t. |
 | 7 | `this-is-the-model` | 5 | so | The model, whole | This is the model. All of it. |
-| 8 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers in one very big file. Each one is something it learned while it was being trained. That’s what a parameter is. |
+| 8 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. |
 | 9 | `five-percent-lights` | 7 | so | Five percent goes live | And when a word comes in, about five percent of them do something. |
 | 10 | `push-in` | 3 | so | The camera pushes into the block | Let’s get closer. |
-| 11 | `two-eighty-eight` | 12 | so | The surface resolves into 288 | Up close, they’re not one lump. They’re in separate pieces — two hundred and eighty-eight of them, in each part of the model. |
+| 11 | `two-eighty-eight` | 12 | so | The surface resolves into 288 | Up close, it’s not one lump. This is one small part of the model — and there are two hundred and eighty-eight separate pieces in it. |
 | 12 | `how-many-run` | 9 | want | Nothing happens. The viewer bets. | Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run? |
 | 13 | `eight` | 4 | and-yet | Eight | Eight. |
-| 14 | `the-other-280` | 8 | so | The other 280 do nothing | Eight do the work. The other two hundred and eighty do nothing at all. |
-| 15 | `theres-your-five-percent` | 6 | therefore | The eight are the five percent | There’s your five percent. That’s where it comes from. |
+| 14 | `the-other-280` | 9 | so | The other 280 do nothing | Eight get picked. The other two hundred and eighty do nothing at all. |
+| 15 | `not-the-whole-five-percent` | 15 | and-yet | Eight of 288 is not the five percent | You might think that’s the five percent. It isn’t — this is one small part of the model, and there’s more in here than these, and plenty that runs every time regardless. Hold onto that. |
 | 16 | `mixture-of-experts` | 9 | so | It takes its name | And this has a name. It’s called a Mixture of Experts. Those pieces are the experts. |
 | 17 | `who-picks-the-eight` | 9 | and-yet | The chapter wall | So — who picks the eight? And why does that turn out to be the expensive question? |
 
 ## Section 02 — Your words become tokens
 
-`12` beats · `2:01` · script: `video-script/02-your-words-become-tokens.md` · route: `/section-02`
+`13` beats · `1:56` · script: `video-script/02-your-words-become-tokens.md` · route: `/section-02`
 
 - **Enters on** — who picks the eight, and why is that the expensive question?
 - **Exits on** — a row number is a name. So how does a name become a meaning?
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `that-thing-does` | 16 | want | The desk holds; the 288 dim behind it | So — eight out of two hundred and eighty-eight, and something in there does the picking. To find out how it picks, we have to follow something in. Let’s send it a sentence. |
-| 2 | `this-is-what-you-typed` | 5 | so | A prompt card slides in and stops at the entrance | This is what you typed. |
-| 3 | `in-it-goes` | 6 | so | It passes through the doorway; the camera travels with it | In it goes. |
-| 4 | `the-first-thing` | 6 | so | The card lands and settles | And this is the first thing that happens to it. |
-| 5 | `it-gets-cut-up` | 11 | wall | The sentence fractures into uneven pieces, in place | It gets cut up. Into pieces about the size of a word — sometimes a whole word, sometimes half of one. |
+| 1 | `that-thing-does` | 12 | want | The desk holds; the 288 dim behind it | So — eight out of two hundred and eighty-eight, and something in there does the picking. To see how, we have to follow something in. |
+| 2 | `this-is-what-you-typed` | 4 | so | A prompt card slides in and stops at the entrance | This is what you typed. |
+| 3 | `in-it-goes` | 4 | so | It passes through the doorway; the camera travels with it | In it goes. |
+| 4 | `the-first-thing` | 5 | so | The card lands and settles | And this is the first thing that happens to it. |
+| 5 | `it-gets-cut-up` | 9 | wall | The sentence fractures into uneven pieces, in place | It gets cut up. Into pieces — and for this sentence, every piece happens to be a whole word. |
 | 6 | `these-are-tokens` | 7 | so | The pieces settle into a row | These are called tokens. That’s all a token is. A chunk of text. |
-| 7 | `understanding-is-three` | 7 | and-yet | `understanding` drops in, breaks into three, and leaves | Longer words come apart into more of them. "Understanding" is three. |
+| 7 | `unbelievable-is-three` | 12 | and-yet | `unbelievable` drops in, shatters into three, and leaves | Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have. |
 | 8 | `one-big-list` | 10 | so | A tall list rises beside the row | And every token it knows about lives in one big list. How long do you reckon that list is? |
 | 9 | `a-hundred-fifty-four-thousand` | 8 | so | The list scrolls fast, decelerates, stops | A hundred and fifty-four thousand, eight hundred and eighty. |
-| 10 | `a-row-number` | 12 | so | The `dog` piece flies to the list and returns with a number | So each piece gets swapped for where it sits in that list. A row number. Let’s say this one’s number four thousand and twenty-one. |
+| 10 | `a-row-number` | 12 | so | The `dog` piece flies to the list and returns with a number | So each piece gets swapped for where it sits in that list. A row number. This one is five thousand, five hundred and sixty-two. |
 | 11 | `thats-a-token-id` | 8 | so | The letters fade off the card; the digits stay | That number is called a token ID. And it’s the only thing that carries on. |
-| 12 | `no-meaning-in-it` | 25 | and-yet | The list withdraws; the number is alone in frame | And that’s the cutting up done — your sentence is numbers now, and that’s all a tokeniser is. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all. |
+| 12 | `thats-tokenising-done` | 9 | so | The list withdraws; the number is alone in frame | And that’s the cutting up done — your sentence is numbers now. That’s all a tokeniser is. |
+| 13 | `no-meaning-in-it` | 16 | and-yet | The number holds, and turns out to say nothing | But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all. |
 
 ## Section 03 — From an ID to a meaning
 
@@ -65,10 +66,10 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 | # | id | s | rel | Beat | Voice |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `how-it-gets-meaning` | 14 | want | `4021` alone; a table edge rises into frame | So every piece has a row number now — and a row number is only a name. A name has to turn into a meaning somewhere. Here’s where. |
+| 1 | `how-it-gets-meaning` | 14 | want | `5562` alone; a table edge rises into frame | So every piece has a row number now — and a row number is only a name. A name has to turn into a meaning somewhere. Here’s where. |
 | 2 | `the-model-has-a-table` | 11 | so | We back away; the table runs past the top of frame | The model has a table. One row for every token in that list — all hundred and fifty-four thousand of them. |
 | 3 | `which-row-to-fetch` | 6 | so | The number travels up the table to its own row | The ID is just which row to go and fetch. |
-| 4 | `this-row` | 6 | so | That row slides out of the table and comes forward | So token four thousand and twenty-one pulls out this row. |
+| 4 | `this-row` | 6 | so | That row slides out of the table and comes forward | So token five thousand, five hundred and sixty-two pulls out this row. |
 | 5 | `four-thousand-and-ninety-six` | 8 | and-yet | The row extends sideways past both edges of frame | Four thousand and ninety-six numbers. For one small piece of text. |
 | 6 | `called-an-embedding` | 10 | so | The row holds; a label lands on it | This row is called an embedding. And it’s the first thing in the whole machine that actually means something. |
 | 7 | `dog-and-cat` | 8 | so | Two more rows slide out and stack under it | Here’s why it means something. Let’s pull out "dog", and "cat". |
@@ -175,13 +176,13 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | --- | --- | --- | --- | --- | --- |
 | 1 | `i-owe-you-a-correction` | 12 | want | The single marker holds partway up | Three hundred and thirty-six, for one token. Now — I’ve been following one token this whole time, and I owe you a correction. |
 | 2 | `the-whole-prompt-goes-in` | 7 | so | Eight more markers appear at the base beside it | It doesn’t go in on its own. Your entire prompt goes in together. |
-| 3 | `all-at-the-same-time` | 8 | so | All nine climb together, side by side, floor by floor | Every token climbs at the same time. All of them, all forty-five floors, together. |
+| 3 | `all-at-the-same-time` | 8 | so | All eight climb together, side by side, floor by floor | Every token climbs at the same time. All of them, all forty-five floors, together. |
 | 4 | `attention-is-the-wiring` | 11 | so | Lines appear between the markers on the floor they share | And attention is the wiring between them. That’s what connects them — every token, on every floor, looking at all the others. |
 | 5 | `on-every-floor` | 9 | so | The lines redraw on each new floor as they climb | That’s what makes it read your sentence as a sentence, instead of a list of separate words. |
 | 6 | `this-is-a-transformer` | 14 | therefore | A plate slides onto the front of the tower | And this whole arrangement — the stack of floors, attention wiring them together, experts doing the work on each one — this is what the word transformer actually means. |
 | 7 | `not-a-mysterious-thing` | 6 | so | The plate settles; the climb continues behind it | That’s it. It’s not a mysterious thing. It’s this shape. |
 | 8 | `its-own-three-thirty-six` | 8 | so | A small counter appears above every marker | Which means each token in your prompt is doing its own three hundred and thirty-six. |
-| 9 | `nine-times-three-thirty-six` | 8 | so | All nine counters run at once and a total assembles beneath | Nine tokens in your sentence? That’s three thousand and twenty-four expert visits. |
+| 9 | `eight-times-three-thirty-six` | 8 | so | All eight counters run at once and a total assembles beneath | Eight tokens in your sentence? That’s two thousand, six hundred and eighty-eight expert visits. |
 | 10 | `decided-on-the-spot` | 9 | and-yet | The total lands and holds | And every one of them decided on the spot, from numbers that didn’t exist until a moment before. |
 | 11 | `and-what-comes-out` | 9 | and-yet | The markers arrive at the top floor and stop dead | So every token pays its own three hundred and thirty-six. All of that happens. And what comes out? |
 
@@ -226,7 +227,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 11 — So could you store only the 18 billion?
 
-`13` beats · `1:54` · script: `video-script/11-could-you-store-only-the-18.md` · route: `/section-11`
+`13` beats · `1:59` · script: `video-script/11-could-you-store-only-the-18.md` · route: `/section-11`
 
 - **Enters on** — it never stops choosing. So could you store only the part it uses?
 
@@ -239,9 +240,9 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 5 | `third-floor` | 4 | so | Eight more | Third floor. Again. |
 | 6 | `forty-two-times` | 8 | wall | The flights speed up until the path is continuously full | And again, and again — forty-two times, for one token. |
 | 7 | `how-much-did-we-carry` | 5 | so | The flights stop; a counter lands | So how much did we actually carry in? |
-| 8 | `three-thirty-six-times-twenty-six` | 9 | so | 336 and 26 MB slide together; a total assembles | One expert is about twenty-six megabytes. Three hundred and thirty-six of them is about eight gigabytes. |
+| 8 | `three-thirty-six-times-twenty-six` | 12 | so | 336 and 25 MB slide together; a total assembles | One expert is about twenty-five megabytes, at the precision this thing ships in. Three hundred and thirty-six of them is about eight and a half gigabytes. |
 | 9 | `for-one-word` | 5 | and-yet | The total lands and a label drops under it | For one word. |
-| 10 | `a-second-and-a-half` | 8 | wall | A clock draws itself beside the 8 GB and runs | Off a fast drive, that’s roughly a second and a half. For one word. |
+| 10 | `a-second-and-a-half` | 10 | wall | A clock draws itself beside the 8 GB and runs | Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one word. |
 | 11 | `and-the-work` | 8 | and-yet | A second bar appears beside the first, almost invisible | And the work those eight experts actually did? Milliseconds. |
 | 12 | `fetching-costs-more` | 11 | therefore | Both bars redraw to true scale, with the small one magnified | There it is. The fetching costs more than the thinking. Not a bit more — hundreds of times more. |
 | 13 | `not-like-that` | 15 | therefore | The bars hold; nothing else on screen | So, no. You can’t just store the eighteen billion. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next. |
@@ -297,8 +298,8 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 | § | Section | Beats | Runtime | Hands forward |
 | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | 17 | 2:19 | who picks the eight, and why is that the expensive question? |
-| 02 | Your words become tokens | 12 | 2:01 | a row number is a name. So how does a name become a meaning? |
+| 01 | What "five percent active" actually costs | 17 | 2:18 | who picks the eight, and why is that the expensive question? |
+| 02 | Your words become tokens | 13 | 1:56 | a row number is a name. So how does a name become a meaning? |
 | 03 | From an ID to a meaning | 13 | 2:07 | — |
 | 04 | The word looks around | 13 | 1:52 | — |
 | 05 | The router picks the eight | 13 | 2:21 | — |
@@ -307,10 +308,10 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 08 | That was one token. Here's the sentence. | 11 | 1:41 | — |
 | 09 | Where the answer comes out | 10 | 1:21 | — |
 | 10 | And then it does the whole thing again | 11 | 1:22 | — |
-| 11 | So could you store only the 18 billion? | 13 | 1:54 | — |
+| 11 | So could you store only the 18 billion? | 13 | 1:59 | — |
 | 12 | How people actually run these | 14 | 2:16 | — |
 | 13 | What that number actually bought | 12 | 2:06 | (none — the thesis lands) |
-| | **whole piece** | **163** | **24:38** | |
+| | **whole piece** | **164** | **24:37** | |
 
 ⚑ the section's event · ❄ a frame that must read as a still
 

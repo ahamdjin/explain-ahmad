@@ -40,7 +40,7 @@ export const CHOSEN = [41, 76, 103, 147, 168, 211, 245, 278] as const
 /** What the other sentence picks. Two overlap, and the video never counts them. */
 export const OTHER = [76, 118, 147, 190, 222, 251, 263, 284] as const
 
-export const DOG_SEED = 4021
+export const DOG_SEED = 5562
 
 export type SceneState = {
   /** The row as attention left it. This is what arrives at the desk. */

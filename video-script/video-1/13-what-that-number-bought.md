@@ -38,9 +38,9 @@ The answer is split, and the split is the whole video:
 > **6.** *(both, side by side)* Sparse routing buys you compute. It doesn't buy
 > you memory.
 >
-> **7.** And here's the part I didn't expect. *(two models appear)* This model
-> has a hundred and twenty billion parameters, and it fits on one chip. This one
-> has three hundred and twenty, and needs four.
+> **7.** And here’s the part I didn’t expect. This model has a hundred and twenty
+> billion parameters, and it fits on one chip. This one has three hundred and
+> twenty, and needs four.
 >
 > **8.** Both of them use about five percent of themselves to answer you.
 >

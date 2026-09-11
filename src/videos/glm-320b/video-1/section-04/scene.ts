@@ -26,7 +26,7 @@ import {
   type Placed,
 } from '../../../../paper'
 
-export const DOG_SEED = 4021
+export const DOG_SEED = 5562
 
 /**
  * The video's one comparison example, and the load-bearing one.

@@ -27,7 +27,7 @@ import { PALETTE } from '../palette'
  * hat left to characterise the figure, **the pose is the entire performance** --
  * so the register has to be wider than "happy, sad, pointing".
  *
- *   count    enumerating on fingers -- 336, 3,024, 12,096
+ *   count    enumerating on fingers -- 336, 2,688, 12,096
  *   weigh    two things held against each other. The trade-off pose, and the
  *            thesis of this whole video is a trade-off
  *   halt     a flat palm. "So, no. Not like that."

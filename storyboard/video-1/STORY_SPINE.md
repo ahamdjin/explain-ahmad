@@ -342,7 +342,10 @@ no `ModelSheet`, deliberately: *no spec read* is the first rule of that opening.
 So §13 beat 2 returns to what §1 actually opened with — the number, and the
 block behind it. A callback to a frame that does not exist is worse than none.
 
-**§8 is nine tokens, not ten.** The running prompt tokenises to nine pieces and
-they are on screen while the arithmetic happens, so it is 9 × 336 = **3,024**.
-The tidier 3,360 was not available to us. §2's token ID is hedged as *"let's
-say"* for the same reason — 4021 has not been measured from the tokenizer.
+**§8 is eight tokens, and §2's ID is 5562.** Both measured from GLM-5.3-Flash's
+own tokenizer on 2026-09-11 — `research/glm/TOKENIZER.md`, reproducible with
+`scripts/tokenize-glm.py`. Both used to be invented: the prompt was said to
+split as `dropp` + `ed` into nine pieces, and the ID was hedged as *"let's
+say 4021"*. The pieces are on screen while the arithmetic happens, so the
+count is checkable: 8 × 336 = **2,688**. The hedge on the ID is gone because
+the number is now real.

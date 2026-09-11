@@ -22,8 +22,8 @@
 > **3.** *(the full sentence, all rows visible)* And before anything else
 > happens, every token gets to look at the others.
 >
-> **4.** Here's what looking means. *(lines from our token to the rest)* Our
-> token asks every other token one question: **how much do you matter to me?**
+> **4.** Here’s what looking means. Our token asks every other token one question:
+> how much do you matter to me?
 >
 > **5.** *(the lines thicken and thin)* Some matter a lot. Most barely matter at
 > all.
@@ -40,8 +40,7 @@
 > **9.** That's **attention**. That's the whole idea — every token adjusting
 > itself based on the company it's in.
 >
-> **10.** Now watch why that matters. *(two sentences, side by side)* "The dog
-> barked." And "a hot dog."
+> **10.** Now watch why that matters. "The dog barked." And "a hot dog."
 >
 > **11.** *(both rows, clearly different)* Same word both times. Started as the
 > exact same row. Ended up nothing like each other.

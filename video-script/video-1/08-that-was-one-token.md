@@ -37,8 +37,8 @@
 > **8.** Which means each token in your prompt is doing its own three hundred
 > and thirty-six.
 >
-> **9.** *(counters multiplying)* Nine tokens in your sentence? That's three
-> thousand and twenty-four expert visits.
+> **9.** *(counters multiplying)* Eight tokens in your sentence? That’s two thousand,
+> six hundred and eighty-eight expert visits.
 >
 > **10.** And every one of them decided on the spot, from numbers that didn't
 > exist until a moment before.
@@ -60,8 +60,8 @@
 | 6 | the tower | — | a plate slides onto the front of the tower | `Tower`, plaque | "transformer" | S-04 |
 | 7 | the tower | — | the plate settles; the climb continues behind it | plaque + climb | the shape, named | S-04 |
 | 8 | the tower | — | a small counter appears above every marker | 9 `Counter`s | 336 each | S-04 |
-| 9 | the tower | — | all nine counters run at once and a total assembles beneath them | 9 counters + total | 9 × 336 | S-04 |
-| 10 | the tower | — | the total lands and holds | `Counter` | **3,024** | S-04 |
+| 9 | the tower | — | all nine counters run at once and a total assembles beneath them | 9 counters + total | 8 × 336 | S-04 |
+| 10 | the tower | — | the total lands and holds | `Counter` | **2,688** | S-04 |
 | 11 | the tower | — | the markers arrive at the top floor and stop dead | `Tower`, markers at top | all nine, waiting | S-14 |
 
 ### Board notes
@@ -74,7 +74,7 @@
   hidden rather than simplified away.
 - Beat 4 is the reframe of §4 at no cost: attention is the wiring *between*
   tokens, which the viewer only now sees because there is more than one.
-- **9 tokens × 336 = 3,024**, using the real running prompt
+- **8 tokens × 336 = 2,688**, using the real running prompt
   (`The dog dropped the ball, and it` → 9 tokens). Do not round to ten for a
   neater number — the prompt is on screen and a viewer can count it.
 - Beat 11's dead stop is the setup for §9. Silence, then the question.
@@ -95,7 +95,7 @@
 ## Truth notes
 
 - **The example is 9 tokens, not 10.** The running prompt tokenises to nine
-  pieces in §2, and it is on screen here, so 9 × 336 = **3,024**. Beat 9 said
+  pieces in §2, and it is on screen here, so 8 × 336 = **2,688**. Beat 9 said
   "ten tokens" in the first draft; corrected, because the pieces are countable
   on the frame and a viewer who counts them would catch us.
 

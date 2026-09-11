@@ -7,8 +7,8 @@
  * the section is about *how many things are happening at once* — and that only
  * reads from a distance.
  *
- * The arithmetic is **9 × 336 = 3,024**, not ten tokens and 3,360. The running
- * prompt tokenises to nine pieces in §2 and it is on screen here, so a viewer
+ * The arithmetic is **8 × 336 = 2,688**, measured. The running
+ * prompt tokenises to eight pieces in §2 and it is on screen here, so a viewer
  * can count it. The script's original "ten tokens" was corrected before this
  * was built; see the truth note in the script.
  */

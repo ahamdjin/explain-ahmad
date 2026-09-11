@@ -23,10 +23,10 @@ import {
 } from '../../../../paper'
 
 /** The seed the `dog` row is generated from. `cat` drifts from it; `Tuesday` doesn't. */
-export const DOG_SEED = 4021
+export const DOG_SEED = 5562
 
 export type SceneState = {
-  /** `4021`, carried in from §2's last frame. */
+  /** `5562`, carried in from §2's last frame. */
   chip: Placed & { label: string; id: string; becomes: boolean }
   /** 154,880 rows, running past the top of frame. The height is the point. */
   table: Placed & { pulled: boolean; seeking: boolean }
@@ -48,7 +48,7 @@ export type SceneState = {
 }
 
 export const INITIAL: SceneState = {
-  chip: { on: false, at: { x: 46, y: 46 }, scale: 1, label: 'dog', id: '4021', becomes: true },
+  chip: { on: false, at: { x: 46, y: 46 }, scale: 1, label: 'dog', id: '5562', becomes: true },
   table: { on: false, at: { x: 22, y: 50 }, scale: 1, pulled: false, seeking: false },
   dog: { on: false, at: { x: 58, y: 34 }, scale: 0.6, extend: false, matches: false, label: 'dog' },
   cat: { on: false, at: { x: 58, y: 52 }, scale: 0.6, matches: false, label: 'cat' },

@@ -35,7 +35,8 @@
     "frames:s13": "node scripts/capture-frames.mjs --section=section-13",
     "frames:export": "node scripts/export-frames.mjs",
     "frames:export:reuse": "node scripts/export-frames.mjs --reuse",
-    "check:strategy": "node scripts/check-strategy.mjs"
+    "check:strategy": "node scripts/check-strategy.mjs",
+    "restamp": "node scripts/restamp.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

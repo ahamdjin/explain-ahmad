@@ -1,4 +1,4 @@
-import { centred, FOLLOWED, GROUND_Y, note, PROMPT, type Beat } from '../../../../paper'
+import { centred, FOLLOWED, GROUND_Y, note, PROMPT, UNEVEN, type Beat } from '../../../../paper'
 import {
   camera,
   chip,
@@ -34,8 +34,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'that-thing-does',
     title: 'The desk holds; the 288 dim behind it',
     relation: 'want',
-    secs: 16,
-    vo: 'So — eight out of two hundred and eighty-eight, and something in there does the picking. To find out how it picks, we have to follow something in. Let’s send it a sentence.',
+    secs: 12,
+    vo: 'So — eight out of two hundred and eighty-eight, and something in there does the picking. To see how, we have to follow something in.',
     commands: [
       ground.at(GROUND_Y),
       hospital.show({ x: 52, y: 46 }, 0.86, { staffed: true, dim: true }),
@@ -48,7 +48,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'this-is-what-you-typed',
     title: 'A prompt card slides in and stops at the entrance',
     relation: 'so',
-    secs: 5,
+    secs: 4,
     vo: 'This is what you typed.',
     commands: [
       sentence.show({ x: 26, y: 66 }, 0.5),
@@ -68,7 +68,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'in-it-goes',
     title: 'It passes through the doorway; the camera travels with it',
     relation: 'so',
-    secs: 6,
+    secs: 4,
     vo: 'In it goes.',
     commands: [
       sentence.moveTo({ x: 50, y: 62 }, 0.44),
@@ -104,7 +104,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-first-thing',
     title: 'The card lands and settles',
     relation: 'so',
-    secs: 6,
+    secs: 5,
     vo: 'And this is the first thing that happens to it.',
     /* It lands, at full size, and the narrator comes back to it. */
     commands: [sentence.moveTo(SURFACE, 1), narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' })],
@@ -114,8 +114,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'it-gets-cut-up',
     title: 'The sentence fractures into uneven pieces, in place',
     relation: 'wall',
-    secs: 11,
-    vo: 'It gets cut up. Into pieces about the size of a word — sometimes a whole word, sometimes half of one.',
+    secs: 9,
+    vo: 'It gets cut up. Into pieces — and for this sentence, every piece happens to be a whole word.',
     commands: [sentence.fracture()],
     /* `dropp` + `ed` is the label's whole job. The voice says "sometimes half
      * of one"; the note points at the half. */
@@ -134,20 +134,24 @@ export const BEATS: Beat<Patch>[] = [
     secs: 7,
     vo: 'These are called tokens. That’s all a token is. A chunk of text.',
     commands: [sentence.settle(), narrator.set({ pose: 'nod' })],
-    overlays: [centred('9 tokens', 46, 66, { tone: 'measure', rotate: -2, sticky: true })],
+    overlays: [centred('8 tokens', 46, 66, { tone: 'measure', rotate: -2, sticky: true })],
   },
   {
     n: 7,
-    id: 'understanding-is-three',
-    title: '`understanding` drops in, breaks into three, and leaves',
+    id: 'unbelievable-is-three',
+    title: '`unbelievable` drops in, shatters into three, and leaves',
     relation: 'and-yet',
-    secs: 7,
-    vo: 'Longer words come apart into more of them. "Understanding" is three.',
+    secs: 12,
+    vo: 'Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have.',
     commands: [extra.show({ x: 46, y: 22 }, 0.6)],
-    stages: [
-      { at: 1500, commands: [extra.set({ split: true, words: ['under', 'stand', 'ing'] })] },
-      { at: 3600, commands: [extra.off()] },
-    ],
+    /*
+     * It does **not** leave inside this beat. It used to go at 3,600 ms of a
+     * 12-second beat, which left eight seconds of narration about a word that
+     * was no longer on screen -- and made the beat impossible to photograph
+     * for review, because the contact sheet settles after the last stage. It
+     * leaves on beat 8, when the list arrives and needs the room.
+     */
+    stages: [{ at: 1500, commands: [extra.set({ split: true, words: [...UNEVEN] })] }],
   },
   {
     n: 8,
@@ -156,7 +160,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 10,
     vo: 'And every token it knows about lives in one big list. How long do you reckon that list is?',
-    commands: [vocab.show({ x: 84, y: 46 }, 1.5), narrator.set({ pose: 'point' })],
+    commands: [extra.off(), vocab.show({ x: 84, y: 46 }, 1.5), narrator.set({ pose: 'point' })],
   },
   {
     n: 9,
@@ -178,11 +182,11 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 12,
     /*
-     * Hedged on purpose. 4021 has not been measured from the real tokenizer,
-     * and an unmeasured ID presented as fact is the one kind of error an
-     * expert viewer finds instantly. Drop the hedge if it is ever measured.
+     * The hedge is gone because the number is measured. 5562 is ` dog` with
+     * its leading space in GLM-5.3-Flash's real tokenizer; bare `dog` is
+     * 18427, which is a different token. `research/glm/TOKENIZER.md`.
      */
-    vo: 'So each piece gets swapped for where it sits in that list. A row number. Let’s say this one’s number four thousand and twenty-one.',
+    vo: 'So each piece gets swapped for where it sits in that list. A row number. This one is five thousand, five hundred and sixty-two.',
     commands: [
       sentence.follow(FOLLOWED),
       /* The round trip. Go, touch, come back changed — three moves on one
@@ -190,7 +194,7 @@ export const BEATS: Beat<Patch>[] = [
       chip.show({ x: 30, y: 50 }, 0.55, { label: PROMPT[FOLLOWED] }),
     ],
     stages: [
-      { at: 900, commands: [chip.moveTo({ x: 80, y: 46 }, 0.5), vocab.land(4021)] },
+      { at: 900, commands: [chip.moveTo({ x: 80, y: 46 }, 0.5), vocab.land(5562)] },
       { at: 2600, commands: [chip.moveTo({ x: 46, y: 74 }, 0.7)] },
     ],
   },
@@ -206,11 +210,12 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 12,
-    id: 'no-meaning-in-it',
+    id: 'thats-tokenising-done',
     title: 'The list withdraws; the number is alone in frame',
-    relation: 'and-yet',
-    secs: 25,
-    vo: 'And that’s the cutting up done — your sentence is numbers now, and that’s all a tokeniser is. But think about what that number actually is. It’s a row number. Four thousand and twenty-one doesn’t mean dog — it means the four thousand and twenty-first thing on our list. There’s no meaning in it at all.',
+    relation: 'so',
+    secs: 9,
+    /* S-12. The mechanism is named only now, after it has been watched. */
+    vo: 'And that’s the cutting up done — your sentence is numbers now. That’s all a tokeniser is.',
     /*
      * Nothing else may be on screen. The absence is the argument, and it is
      * the setup for §3 — so the sentence, the list and the narrator all go.
@@ -222,6 +227,20 @@ export const BEATS: Beat<Patch>[] = [
       chip.moveTo({ x: 46, y: 46 }, 1),
     ],
     clearSticky: true,
+  },
+  {
+    n: 13,
+    id: 'no-meaning-in-it',
+    title: 'The number holds, and turns out to say nothing',
+    relation: 'and-yet',
+    secs: 16,
+    /*
+     * Split out of beat 12, which carried 58 words in 25 seconds -- a
+     * monologue, not a beat. The naming and the *but* are two different jobs
+     * and each wants its own hold.
+     */
+    vo: 'But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all.',
+    commands: [],
     lateOverlays: {
       at: 3000,
       overlays: [centred('a name, not a meaning', 46, 62, { size: 'md', tone: 'cost', rotate: -2 })],

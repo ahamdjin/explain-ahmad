@@ -44,7 +44,7 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 3,
     id: 'all-at-the-same-time',
-    title: 'All nine climb together, side by side, floor by floor',
+    title: 'All eight climb together, side by side, floor by floor',
     relation: 'so',
     secs: 8,
     vo: 'Every token climbs at the same time. All of them, all forty-five floors, together.',
@@ -112,15 +112,17 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 9,
-    id: 'nine-times-three-thirty-six',
-    title: 'All nine counters run at once and a total assembles beneath',
+    id: 'eight-times-three-thirty-six',
+    title: 'All eight counters run at once and a total assembles beneath',
     relation: 'so',
     secs: 8,
     /*
-     * Nine, not ten. The prompt is on screen and a viewer can count it, so the
-     * neater number is not available to us. 9 x 336 = 3,024.
+     * Eight, measured from the real tokenizer on 2026-09-11 -- it used to say
+     * nine, off an invented split. The prompt is on screen and a viewer can
+     * count it, so the neater number is not available to us either way.
+     * 8 x 336 = 2,688. `research/glm/TOKENIZER.md`.
      */
-    vo: 'Nine tokens in your sentence? That’s three thousand and twenty-four expert visits.',
+    vo: 'Eight tokens in your sentence? That’s two thousand, six hundred and eighty-eight expert visits.',
     commands: [count.run(TOTAL, 'expert visits — one pass')],
     overlays: [note(`${TOKENS} × 336`, 84, 40, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
   },

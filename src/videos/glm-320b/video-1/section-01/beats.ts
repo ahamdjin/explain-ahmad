@@ -51,8 +51,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'two-models',
     title: 'Two models, both five percent active',
     relation: 'want',
-    secs: 9,
-    vo: 'Here are two AI models. Both of them use about five percent of themselves to answer you.',
+    secs: 7,
+    vo: 'Two AI models. Both use about five percent of themselves to answer you.',
     commands: [
       ground.at(GROUND_Y),
       block.scatter({ x: 30, y: 42 }, 0.5),
@@ -72,7 +72,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'one-card',
     title: 'One graphics card',
     relation: 'so',
-    secs: 5,
+    secs: 4,
     vo: 'This one runs on a single graphics card.',
     commands: [rigA.show(1), narrator.pose('offer')],
     /* Sticky, because beat 3 is the comparison and a comparison needs both
@@ -85,7 +85,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'four-cards',
     title: 'Four of them',
     relation: 'wall',
-    secs: 4,
+    secs: 3,
     /* The contradiction is complete here, at about 0:13. Checkable:
      * gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card; GLM-5.3-Flash
      * is ~306 GiB at FP8 and does not fit four. STORY_SPINE.md §1. */
@@ -103,8 +103,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-number-everybody-quotes',
     title: 'The number everybody quotes',
     relation: 'and-yet',
-    secs: 14,
-    vo: '"Only five percent active" is the number everybody quotes to explain why these models are cheap to run now. Both of these have it. Only one of them is cheap.',
+    secs: 10,
+    vo: 'Everyone quotes that number to say these models are cheap to run now. Both have it. Only one of them is.',
     commands: [narrator.pose('confide')],
     overlays: [centred('“only 5% active”', 51, 20, { size: 'md', rotate: -2, sticky: true })],
   },
@@ -113,8 +113,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'unequal',
     title: 'Level above, unequal below',
     relation: 'and-yet',
-    secs: 8,
-    vo: 'Same five percent. Four times the machine. So what is that number actually telling you?',
+    secs: 4,
+    vo: 'Same five percent. Four times the machine.',
     commands: [narrator.pose('weigh')],
     /* The brace spans both blocks: left block starts at ~17%, right ends at
      * ~85%. `brace`'s x is the LEFT EDGE, not the centre. */
@@ -125,11 +125,11 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-promise',
     title: 'The promise',
     relation: 'therefore',
-    secs: 14,
+    secs: 15,
     /* S-03. Sanderson's SoME criterion, verbatim: "It should be clear to the
      * reader/viewer within the first 30 seconds why they should care." This
      * lands at about 0:26. Withhold the mechanism, never the promise. */
-    vo: 'I’m going to follow one word all the way through this thing. By the end you’ll know exactly what "five percent active" buys you — and what it doesn’t.',
+    vo: 'So what is that number actually telling you? I’m going to follow one word all the way through, and by the end you’ll know exactly what it buys — and what it doesn’t.',
     commands: [
       block2.off(),
       rigA.off(),
@@ -159,7 +159,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'It breaks into marks',
     relation: 'so',
     secs: 13,
-    vo: 'Three hundred and twenty billion numbers in one very big file. Each one is something it learned while it was being trained. That’s what a parameter is.',
+    vo: 'Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is.',
     commands: [block.scatter({ x: 52, y: 46 }, 1), narrator.pose('count')],
     lateOverlays: {
       at: 3600,
@@ -191,7 +191,13 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The surface resolves into 288',
     relation: 'so',
     secs: 12,
-    vo: 'Up close, they’re not one lump. They’re in separate pieces — two hundred and eighty-eight of them, in each part of the model.',
+    /*
+     * "In each part of the model" was too broad: it is 288 per *sparse* layer,
+     * and 3 of the 45 layers have no experts at all. §1 may not say "layer",
+     * so the true form is to claim only what is on screen -- **this** part has
+     * 288 in it -- and let §7 establish how many such parts there are.
+     */
+    vo: 'Up close, it’s not one lump. This is one small part of the model — and there are two hundred and eighty-eight separate pieces in it.',
     commands: [block.off(), hospital.rise({ x: 52, y: 46 }, 0.86), hospital.staff(), ground.at(GROUND_Y)],
     lateOverlays: {
       at: 3400,
@@ -228,20 +234,52 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-other-280',
     title: 'The other 280 do nothing',
     relation: 'so',
-    secs: 8,
-    vo: 'Eight do the work. The other two hundred and eighty do nothing at all.',
+    secs: 9,
+    /*
+     * **280 is correct, and the detour that got here is worth recording.**
+     *
+     * A review said this beat omitted the always-on shared expert, which was
+     * true. My first fix said "279 idle, one always on" -- and that was a new
+     * and worse error, because `n_routed_experts` is 288 and
+     * `n_shared_experts` is 1 *on top of it*. The shared expert is not one of
+     * the 288. Of the 288 routed, 8 run and **280** do not.
+     *
+     * The shared expert is therefore a 289th object this section has no frame
+     * for, and a floating "always on" label pointing at nothing was worse than
+     * silence -- the render made that obvious. It is introduced properly in §5
+     * beat 10, which has a picture of it. §1 must simply not imply the 288 are
+     * everything, which the next beat now handles.
+     */
+    vo: 'Eight get picked. The other two hundred and eighty do nothing at all.',
     commands: [],
     overlays: [brace('280 idle', 22, 70, 60, { tone: 'ink' })],
   },
   {
     n: 15,
-    id: 'theres-your-five-percent',
-    title: 'The eight are the five percent',
-    relation: 'therefore',
-    secs: 6,
-    vo: 'There’s your five percent. That’s where it comes from.',
+    id: 'not-the-whole-five-percent',
+    title: 'Eight of 288 is not the five percent',
+    relation: 'and-yet',
+    secs: 15,
+    /*
+     * **The fix that matters most in this section.**
+     *
+     * v10 said "there's your five percent, that's where it comes from" over a
+     * frame of eight lit experts. That is the one error `GROUND_TRUTH.md`
+     * warns is disqualifying: 8 / 288 is 2.8% of the routed weight in *one*
+     * sparse layer; 18 / 321 is 5.6% of the *model*. Neither causes the other,
+     * and the routed experts are under half the active path -- attention, the
+     * embeddings, the dense layers and the shared expert are on regardless.
+     *
+     * So the beat now does the opposite job: it *refuses* the easy sum. That
+     * is stronger anyway, because the question it leaves -- then where does the
+     * five percent come from? -- is what §7 answers with 336 and §11 prices.
+     */
+    vo: 'You might think that’s the five percent. It isn’t — this is one small part of the model, and there’s more in here than these, and plenty that runs every time regardless. Hold onto that.',
     commands: [],
-    overlays: [centred('8 of 288', 50, 78, { size: 'md', rotate: -1 })],
+    overlays: [
+      centred('8 of 288 — here', 50, 76, { size: 'md', rotate: -1 }),
+      note('not 5% of the model', 50, 86, { tone: 'cost', rotate: 2 }),
+    ],
   },
 
   /* ═══ ACT 5 · THE NAME AND THE WALL (S-12, S-14) ════════════════════════ */

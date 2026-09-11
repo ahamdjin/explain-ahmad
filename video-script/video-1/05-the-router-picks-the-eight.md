@@ -42,9 +42,8 @@
 > **10.** Oh — and one extra that runs every time, no matter what the word is.
 > So: eight chosen, plus one always on.
 >
-> **11.** **But** look at what those scores were made from. *(the row)* These
-> numbers. The ones that only existed a moment ago, because attention had just
-> finished making them.
+> **11.** But look at what those scores were made from. These numbers. The ones that
+> only existed a moment ago, because attention had just finished making them.
 >
 > **12.** Change the sentence and the row changes. Change the row and the scores
 > change. Change the scores and you get a different eight.
