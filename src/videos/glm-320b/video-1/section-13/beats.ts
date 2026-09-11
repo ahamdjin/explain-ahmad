@@ -191,7 +191,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 18,
     /* The carrying frame. The trend, as a picture. */
     vo: 'Chopping finer is exactly why it’s better — better at specialising, better at spreading the load. It’s also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby.',
-    commands: [cardB.moveTo({ x: 72, y: 48 }, 1.24)],
+    commands: [cardB.moveTo({ x: 72, y: 50 }, 1.1)],
     overlays: [note('better · and harder to hold', 62, 12, { size: 'md', tone: 'cost', rotate: 2 })],
   },
   {
@@ -211,7 +211,11 @@ export const BEATS: Beat<Patch>[] = [
      * reads as exactly that law. `research/glm/OFFLOADING_AND_LOCALITY.md` §5.
      */
     vo: 'So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn’t move.',
-    commands: [cardA.off(), cardB.moveTo({ x: 50, y: 48 }, 1.3), narrator.set({ pose: 'lean' })],
+    /* 1.15, not 1.3. `ModelCard`'s viewBox grew from 400 to 470 tall so eight
+     * chips could wrap to two rows, and the card is width-constrained by CSS --
+     * so the same scale now reaches 17% further up and down. At 1.3 its title
+     * printed through the three difference plates above it. */
+    commands: [cardA.off(), cardB.moveTo({ x: 50, y: 50 }, 1.15), narrator.set({ pose: 'lean' })],
   },
   {
     n: 13,

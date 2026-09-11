@@ -65,7 +65,9 @@ export const BEATS: Beat<Patch>[] = [
     ],
     lateOverlays: {
       at: 3400,
-      overlays: [note('one row per token\n154,880 rows', 24, 90, { tone: 'measure', rotate: -3, sticky: true })],
+      /* Beside the table, not inside it. At 24/90 this sat on the table's own
+       * rows -- blue handwriting over blue row-marks -- for beats 2 to 4. */
+      overlays: [note('one row per token\n154,880 rows', 8, 84, { tone: 'measure', rotate: -3, sticky: true })],
     },
   },
   {
