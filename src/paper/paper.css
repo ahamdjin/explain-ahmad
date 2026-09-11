@@ -802,6 +802,15 @@
   font: 400 46px/1 var(--scrawl);
 }
 
+/* Name-plates that try to land on the experts and slide off ------------- */
+
+/* Handwritten, not set type: these are labels a person is trying to apply,
+ * and they have to look applied-by-hand so that failing to stick reads as the
+ * idea being wrong rather than the machine being unlabelled. §5 beat 10. */
+.s1-plate-label {
+  font: 400 40px/1 var(--scrawl);
+}
+
 /* A sentence, and what the focus word pays attention to ------------------ */
 
 .s1-sentence { width: 74cqw; }
@@ -1422,4 +1431,16 @@
   gap: 0.9cqw;
   align-items: flex-end;
   justify-content: center;
+}
+
+
+/* A sum the viewer is being asked to do, not told ------------------------- */
+
+/* §8 beat 9. The working is on screen and the figure is a gap. Rendered in
+ * the same size and weight as the answer will be, so beat 10 fills the space
+ * rather than replacing the object -- the total has to look like it arrived
+ * where the question was. */
+.s1-counter[data-blank='true'] strong {
+  color: var(--stone);
+  opacity: 0.7;
 }

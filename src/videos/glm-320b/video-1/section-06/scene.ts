@@ -32,7 +32,7 @@ export type SceneState = {
   /** The survivor, alone. Beat 10. */
   row: Placed & { label: string }
   /** Edges, for the first time. This is what §7 pulls back from. */
-  room: { on: boolean; bounded: boolean }
+  room: { on: boolean; bounded: boolean; more: boolean; scale: number }
   narrator: NarratorActor
   ground: GroundActor
 }
@@ -41,7 +41,7 @@ export const INITIAL: SceneState = {
   hospital: { on: false, at: { x: 52, y: 40 }, scale: 0.86, lit: CHOSEN, recede: false },
   blend: { on: false, at: { x: 50, y: 50 }, scale: 1, stage: 'idle', shared: false, ghost: false, label: '' },
   row: { on: false, at: { x: 50, y: 50 }, scale: 0.72, label: '' },
-  room: { on: false, bounded: false },
+  room: { on: false, bounded: false, more: false, scale: 1 },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
 }
@@ -86,4 +86,13 @@ export const blend = {
  */
 export const room = {
   draw: (): Patch => ({ room: { on: true, bounded: true } }),
+  /**
+   * Beat 13. The room gives up frame and neighbours appear at the edges.
+   *
+   * Shrinking *in place* rather than cutting away, because §7 beat 2 continues
+   * this exact move -- the room the viewer has stood in for two sections turns
+   * out to be one floor, and that only lands if it is the same object all the
+   * way through.
+   */
+  hintAtMore: (scale = 0.82): Patch => ({ room: { more: true, scale } }),
 }

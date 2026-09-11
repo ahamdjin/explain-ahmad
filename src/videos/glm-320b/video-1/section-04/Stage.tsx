@@ -40,6 +40,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             focus={FOLLOWED}
             raise={scene.line.raise}
             changed={scene.line.changed}
+            changedAll={scene.line.changedAll}
             attention={
               scene.line.lines
                 ? {
@@ -61,10 +62,10 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </Slot>
 
         <Slot on={scene.rowA.on} at={scene.rowA.at} scale={scene.rowA.scale} z={4} feel={feel}>
-          <NumberRow seed={311} shown={8} tone="measure" basis={DOG_SEED} drift={0.72} label="“dog” in “the dog barked”" />
+          <NumberRow seed={311} shown={8} tone="measure" basis={DOG_SEED} drift={0.72} label="“dog” in “the dog barked”" covered={scene.rowA.covered} />
         </Slot>
         <Slot on={scene.rowB.on} at={scene.rowB.at} scale={scene.rowB.scale} z={4} feel={feel}>
-          <NumberRow seed={9041} shown={8} tone="measure" basis={DOG_SEED} drift={0.78} label="“dog” in “a hot dog”" />
+          <NumberRow seed={9041} shown={8} tone="measure" basis={DOG_SEED} drift={0.78} label="“dog” in “a hot dog”" covered={scene.rowB.covered} />
         </Slot>
 
         {/* The row both of them started from. Same seed, no drift. */}

@@ -37,7 +37,13 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       </Slot>
 
       <Slot on={scene.count.on} at={scene.count.at} scale={scene.count.scale} z={5} feel={feel}>
-        <Counter value={scene.count.value} label={scene.count.label} run={scene.count.run} seconds={1.8} />
+        <Counter
+            value={scene.count.value}
+            label={scene.count.label}
+            run={scene.count.run}
+            blank={scene.count.blank}
+            seconds={1.8}
+          />
       </Slot>
 
       <Slot on={scene.narrator.on} at={scene.narrator.at} z={7} feel={feel}>

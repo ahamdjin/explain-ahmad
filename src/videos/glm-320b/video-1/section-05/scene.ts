@@ -56,6 +56,14 @@ export type SceneState = {
     scoring: boolean
     badges: 'none' | 'empty' | 'scored'
   }
+  /**
+   * `dog` / `French` / `maths`, trying to land on the eight and sliding off.
+   * The only labels the video ever puts on an expert, and they are there to
+   * be removed. Beat 10. `paper/cast/Plates.tsx`.
+   */
+  plates: Placed & { landing: boolean; falling: boolean }
+  /** §4's arcs, ghosted back in behind the row. Beat 14. */
+  arcs: Placed
   /** One expert, lifted out and opened. A row in, a different row out. */
   open: Placed
   /** The one that runs every time, whatever the word is. Dashed, neutral. */
@@ -81,6 +89,8 @@ export const INITIAL: SceneState = {
     scoring: false,
     badges: 'none',
   },
+  plates: { on: false, at: { x: 50, y: 30 }, scale: 0.7, landing: false, falling: false },
+  arcs: { on: false, at: { x: 15, y: 54 }, scale: 0.6 },
   open: { on: false, at: { x: 50, y: 48 }, scale: 1 },
   shared: { on: false, at: { x: 84, y: 34 }, scale: 1 },
   count: { on: false, at: { x: 16, y: 46 }, scale: 1, value: 8, label: 'of 288' },
@@ -98,7 +108,21 @@ const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
 export const row = { ...a('row'), pulse: (): Patch => ({ row: { pulse: true } }) }
 export const row2 = a('row2')
+export const arcs = a('arcs')
 export const open = a('open')
+
+/**
+ * Beat 10. The plates land, then fail.
+ *
+ * Two calls, not one: they have to be *on* the eight and plausible before
+ * they slide, or the viewer never sees the belief being held -- only a label
+ * that was never going to fit, which corrects nothing.
+ */
+export const plates = {
+  ...a('plates'),
+  land: (): Patch => ({ plates: { on: true, landing: true, falling: false } }),
+  slideOff: (): Patch => ({ plates: { landing: false, falling: true } }),
+}
 export const shared = a('shared')
 export const count = a('count')
 export const narrator = a('narrator')

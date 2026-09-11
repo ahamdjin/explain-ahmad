@@ -38,7 +38,7 @@ export type SceneState = {
   }
   /** The prompt at the base, so every marker has a visible cause. */
   line: Placed
-  count: { on: boolean; at: At; scale: number; value: number; label: string; run: boolean }
+  count: { on: boolean; at: At; scale: number; value: number; label: string; run: boolean; blank: boolean }
   narrator: NarratorActor
   ground: GroundActor
 }
@@ -46,7 +46,7 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   tower: { on: false, at: { x: 50, y: 48 }, scale: 1, floor: 0, markers: 0, wiring: false, plaque: '', counters: '' },
   line: { on: false, at: { x: 50, y: 92 }, scale: 0.4 },
-  count: { on: false, at: { x: 84, y: 56 }, scale: 1, value: TOTAL, label: '', run: false },
+  count: { on: false, at: { x: 84, y: 56 }, scale: 1, value: TOTAL, label: '', run: false, blank: false },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
 }
@@ -83,6 +83,8 @@ export const tower = {
 
 export const count = {
   ...a('count'),
-  run: (value: number, label: string): Patch => ({ count: { on: true, value, label, run: true } }),
+  run: (value: number, label: string): Patch => ({ count: { on: true, value, label, run: true, blank: false } }),
   hold: (): Patch => ({ count: { run: false } }),
+  /** Beat 9. The working is on screen; the figure is not. */
+  ask: (label: string): Patch => ({ count: { on: true, blank: true, run: false, label } }),
 }

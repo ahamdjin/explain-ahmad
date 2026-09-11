@@ -57,6 +57,17 @@ export type SceneState = {
   total: { on: boolean; at: At; scale: number; value: string; caption: string }
   clock: Placed & { seconds: number; running: boolean; label: string }
   bars: Placed & { show: 'fetch' | 'both'; ratio: string; inset: boolean }
+  /**
+   * The cache shelf, sketched in at the very end and left **empty**. Beats
+   * 14-15.
+   *
+   * §12's reversal only works if the viewer arrives there already believing
+   * that caching solves this -- S-09 needs a belief *this video taught them*,
+   * not one they brought with them. So the belief is planted deliberately, in
+   * its own frame, and endorsed out loud: *you're right*. Empty, because §12
+   * is what fills it.
+   */
+  shelf: Placed & { outline: boolean }
   narrator: NarratorActor
   ground: GroundActor
   camera: CameraActor
@@ -73,6 +84,7 @@ export const INITIAL: SceneState = {
   total: { on: false, at: { x: 50, y: 40 }, scale: 1, value: '~8 GB', caption: 'for one word' },
   clock: { on: false, at: { x: 80, y: 44 }, scale: 1, seconds: 1.5, running: false, label: '~1.5 s' },
   bars: { on: false, at: { x: 50, y: 48 }, scale: 1, show: 'fetch', ratio: '', inset: false },
+  shelf: { on: false, at: { x: 74, y: 56 }, scale: 0.76, outline: true },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
   camera: { ...INITIAL_CAMERA },
@@ -91,6 +103,12 @@ export const store = a('store')
 export const desk = a('desk')
 export const machine = a('machine')
 export const total = a('total')
+/** Beat 14 sketches it; beat 15 lets it finish and stay, still empty. */
+export const shelf = {
+  ...a('shelf'),
+  finish: (): Patch => ({ shelf: { outline: false } }),
+}
+
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
 

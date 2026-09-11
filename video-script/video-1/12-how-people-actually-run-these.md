@@ -35,7 +35,7 @@ already knows it.
 | Answers | experts repeat, so you keep the frequent ones close — and it genuinely works |
 | Exits on | it's a price, not a wall. So what did "five percent active" actually get us? |
 | → next | **but** with 12,096 expert slots, nothing about "five percent active" tells you where the good setting is |
-| Target | ~14 beats · ~1:35 |
+| Target | ~16 beats · ~1:50 |
 
 ## What changed from v8
 
@@ -137,9 +137,9 @@ locate it**. That is a claim we can defend, and it still lands §13.
 > the honest answer is that nobody knows where the good setting is. And "five
 > percent active" was never going to tell you.
 
-### Act 6 — a price, not a wall (beat 15) · **S-14**
+### Act 6 — a price, not a wall (beat 16) · **S-14**
 
-> **15.** *(the slider settles mid-range; the machine runs, slowly, and keeps
+> **16.** *(the slider settles mid-range; the machine runs, slowly, and keeps
 > running)* So you **can** run it on less. It'll just be slow. That was never a
 > wall — it's a price.
 
@@ -164,7 +164,7 @@ locate it**. That is a claim we can defend, and it still lands §13.
 | 13 | the plan | — | a count assembles from them and lands on the box | `Counter` | **12,096** slots | S-09 |
 | 14 | the plan | — | the slider is dragged across its whole range; neither end ever shows both | slider sweeping | measured for 8, not for 12,096 | S-09 |
 | 15 | the plan | — | a question mark settles over the middle of the range, where a position would go | slider, `?` mid-range | nobody knows | S-09 |
-| 15 | the plan | — | the slider settles mid-range; the machine runs, slowly, and keeps running | machine, slow, working | a price, not a wall | S-14 |
+| 16 | the plan | — | the slider settles mid-range; the machine runs, slowly, and keeps running | machine, slow, working | a price, not a wall | S-14 |
 
 ### Board notes
 
@@ -203,7 +203,8 @@ locate it**. That is a claim we can defend, and it still lands §13.
 | 8 | **frame** — it all reduces to one dial |
 | 9 | **ask** — where is the good setting? |
 | 10–11 | **teach** — both ends fail, differently |
-| 12–14 | **the reversal** — 12,096 slots, and the box number can't locate the setting |
+| 12–15 | **the reversal** — 12,096 slots, and the box number can't locate the setting |
+| 16 | **the wall** — a price, not a wall; the machine is still running |
 | 15 | **the wall** — a price, not a wall |
 
 ## Truth notes — mandatory

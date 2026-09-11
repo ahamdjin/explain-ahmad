@@ -44,8 +44,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'never-on-its-own',
     title: 'We back off; every token’s row is there, in a line',
     relation: 'so',
-    secs: 7,
-    vo: 'Because a token never stays on its own. It’s sitting in a sentence.',
+    secs: 9,
+    vo: 'Because a token never sits on its own. It’s in a sentence — and so is everything else.',
     commands: [
       row.off(),
       /* Pull back. The reveal is that the row was one of eight all along, so the
@@ -62,7 +62,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Our row lifts slightly out of the line',
     relation: 'so',
     secs: 7,
-    vo: 'And before anything else happens, every token gets to look at the others.',
+    vo: 'And before anything else happens, every one of them gets to look at the others.',
     commands: [line.raise(FOLLOWED)],
   },
   {
@@ -71,7 +71,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Lines shoot from our row to every other row',
     relation: 'so',
     secs: 10,
-    vo: 'Here’s what looking means. Our token asks every other token one question: how much do you matter to me?',
+    vo: 'Here’s what looking means. Our word asks every other word one question. How much do you matter to me?',
     commands: [line.ask()],
     lateOverlays: {
       at: 3400,
@@ -95,8 +95,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'only-backwards',
     title: 'The lines running forward fade out and go',
     relation: 'wall',
-    secs: 9,
-    vo: 'And it can only look backwards — at the words already there. Not at what’s coming.',
+    secs: 11,
+    vo: 'And it can only look backwards — at the words already there. Never at what’s coming, because what’s coming hasn’t been decided yet.',
     commands: [line.mask()],
     clearSticky: true,
     overlays: [note('backwards only', 20, 20, { tone: 'relate', rotate: -3 })],
@@ -122,15 +122,22 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 9,
-    id: 'thats-attention',
-    title: 'The lines withdraw; a label lands',
+    id: 'all-of-them-at-once',
+    title: 'Every other row does the same thing at once, then settles',
     relation: 'so',
-    secs: 9,
-    vo: 'That’s attention. That’s the whole idea — every token adjusting itself based on the company it’s in.',
-    commands: [line.withdraw(), line.raise(-1), narrator.set({ pose: 'nod' })],
+    secs: 10,
+    /*
+     * The correction to the whole section's simplification. We have followed
+     * one word through attention, and a viewer could easily come away
+     * thinking the others sat still and were read from. They did the same
+     * thing to themselves, simultaneously. `line.changeAll()` drops the
+     * wiring first, or this reads as our word acting *on* them.
+     */
+    vo: 'And every word in the sentence is doing that, at the same time, to itself.',
+    commands: [line.changeAll(), line.raise(-1), narrator.set({ pose: 'count' })],
     lateOverlays: {
-      at: 2600,
-      overlays: [centred('attention', 50, 14, { size: 'lg', tone: 'relate', rotate: -2 })],
+      at: 3200,
+      overlays: [note('all of them.\nat once.', 20, 20, { size: 'md', tone: 'relate', rotate: -3 })],
     },
   },
   {
@@ -149,32 +156,81 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 11,
-    id: 'nothing-like-each-other',
-    title: 'Both `dog` rows lift out and align — clearly different',
-    relation: 'wall',
-    secs: 9,
-    vo: 'Same word both times. Started as the exact same row. Ended up nothing like each other.',
-    commands: [rowA.show({ x: 27, y: 58 }, 0.42), rowB.show({ x: 73, y: 58 }, 0.42)],
+    id: 'how-different',
+    title: 'Both `dog` rows lift out and align, still covered; nothing moves',
+    relation: 'and-yet',
+    secs: 14,
+    /*
+     * S-06, and the covers are the whole mechanism. The rows are on screen and
+     * unreadable while the question is asked: present enough to guess about,
+     * hidden enough that the guess is real. v9 showed the answer and the
+     * question in the same beat, which is not a question.
+     */
+    vo: 'Same word both times. Both of them started from the exact same row — the one we pulled out of the table. How different do you reckon they end up?',
+    commands: [
+      rowA.show({ x: 27, y: 58 }, 0.42, { covered: true }),
+      rowB.show({ x: 73, y: 58 }, 0.42, { covered: true }),
+      narrator.set({ pose: 'wonder' }),
+    ],
+    lateOverlays: {
+      at: 4000,
+      overlays: [centred('how different?', 50, 88, { size: 'lg', rotate: -2, sticky: true })],
+    },
   },
   {
     n: 12,
-    id: 'the-word-in-this-sentence',
+    id: 'nothing-like-each-other',
+    title: 'The covers come off; the two rows are obviously unalike',
+    relation: 'wall',
+    secs: 6,
+    /* Both at once. Uncovering one first answers half the question. */
+    vo: 'Nothing like each other.',
+    commands: [rowA.uncover(), rowB.uncover(), narrator.set({ pose: 'push' })],
+    clearSticky: true,
+  },
+  {
+    n: 13,
+    id: 'same-row-both-times',
     title: 'The row they started from ghosts in behind both, identical',
-    relation: 'therefore',
-    secs: 9,
-    vo: 'So the numbers don’t belong to the word any more. They belong to the word in this sentence.',
+    relation: 'so',
+    secs: 8,
     /* The carrying frame. Two different ends, one identical start, one image. */
+    vo: 'That’s what they both began as. Same row, both times.',
     commands: [ghost.show({ x: 50, y: 78 }, 0.42), narrator.set({ pose: 'aha' })],
     overlays: [centred('both started here', 50, 90, { rotate: -2 })],
   },
   {
-    n: 13,
-    id: 'could-not-have-known',
+    n: 14,
+    id: 'the-word-in-this-sentence',
     title: 'The ghost fades; the two rows hold apart',
+    relation: 'therefore',
+    secs: 11,
+    vo: 'So the numbers don’t belong to the word any more. They belong to the word in this sentence.',
+    commands: [ghost.off(), narrator.set({ pose: 'nod' })],
+  },
+  {
+    n: 15,
+    id: 'thats-attention',
+    title: 'A handwritten label lands between the two rows',
+    relation: 'so',
+    secs: 12,
+    /* S-12. The name arrives after the mechanism, never before it. */
+    vo: 'That has a name. It’s called attention. And that’s all attention is — every word adjusting itself based on the company it’s in.',
+    commands: [narrator.set({ pose: 'nod' })],
+    lateOverlays: {
+      at: 3400,
+      overlays: [centred('attention', 50, 44, { size: 'lg', tone: 'relate', rotate: -2, sticky: true })],
+    },
+  },
+  {
+    n: 16,
+    id: 'could-not-have-known',
+    title: 'The two rows hold apart; everything else recedes',
     relation: 'and-yet',
-    secs: 14,
-    vo: 'And that’s attention. That’s all attention is. The row has changed — and it changed because of this sentence. None of it could have been worked out ahead of time.',
-    commands: [ghost.off(), narrator.set({ pose: 'think' })],
+    secs: 13,
+    vo: 'And that’s attention, done. The row has changed — and it changed because of this sentence. None of it could have been worked out ahead of time.',
+    commands: [narrator.set({ pose: 'think' })],
+    clearSticky: true,
     /* Deposit one. Six of these, then §11 spends them. */
     lateOverlays: {
       at: 2600,

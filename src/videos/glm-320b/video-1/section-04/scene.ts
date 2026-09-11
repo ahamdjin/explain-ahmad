@@ -47,13 +47,15 @@ export type SceneState = {
     masked: boolean
     flow: boolean
     lines: boolean
+    /** Every row changing at once. Beat 9. */
+    changedAll: boolean
   }
   /** The two sentences, side by side. Beat 10. */
   barked: Placed
   hot: Placed
-  /** Their two `dog` rows, lifted out and aligned. Beats 11-13. */
-  rowA: Placed
-  rowB: Placed
+  /** Their two `dog` rows, lifted out and aligned. Beats 11-14. */
+  rowA: Placed & { covered: boolean }
+  rowB: Placed & { covered: boolean }
   /** The row they both started from. Identical, and behind both. */
   ghost: Placed
   narrator: NarratorActor
@@ -74,11 +76,12 @@ export const INITIAL: SceneState = {
     masked: false,
     flow: false,
     lines: false,
+    changedAll: false,
   },
   barked: { on: false, at: { x: 26, y: 34 }, scale: 0.66 },
   hot: { on: false, at: { x: 74, y: 34 }, scale: 0.66 },
-  rowA: { on: false, at: { x: 26, y: 62 }, scale: 0.44 },
-  rowB: { on: false, at: { x: 74, y: 62 }, scale: 0.44 },
+  rowA: { on: false, at: { x: 26, y: 62 }, scale: 0.44, covered: true },
+  rowB: { on: false, at: { x: 74, y: 62 }, scale: 0.44, covered: true },
   ghost: { on: false, at: { x: 50, y: 80 }, scale: 0.44 },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
@@ -95,8 +98,9 @@ const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 export const row = a('row')
 export const barked = a('barked')
 export const hot = a('hot')
-export const rowA = a('rowA')
-export const rowB = a('rowB')
+/** Both rows uncover together -- one at a time would answer half a question. */
+export const rowA = { ...a('rowA'), uncover: (): Patch => ({ rowA: { covered: false } }) }
+export const rowB = { ...a('rowB'), uncover: (): Patch => ({ rowB: { covered: false } }) }
 export const ghost = a('ghost')
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
@@ -118,6 +122,14 @@ export const line = {
   pull: (): Patch => ({ line: { flow: true } }),
   /** Its row changes. Same token, new numbers. */
   change: (index: number): Patch => ({ line: { changed: index, flow: false } }),
+  /**
+   * Beat 9. Every row changes at once.
+   *
+   * The lines come off first: with the wiring still drawn, "all of them, to
+   * themselves" reads as our word doing something to the others rather than
+   * each word doing it to itself.
+   */
+  changeAll: (): Patch => ({ line: { changedAll: true, lines: false, flow: false } }),
   withdraw: (): Patch => ({ line: { lines: false, flow: false } }),
 }
 

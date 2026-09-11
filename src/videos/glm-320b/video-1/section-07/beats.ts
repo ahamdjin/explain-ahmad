@@ -22,8 +22,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'forty-five',
     title: 'The room holds, bounded, with the row inside it',
     relation: 'wall',
-    secs: 8,
-    vo: 'That’s one step — look around, choose, work. Here’s how many steps there are. Forty-five.',
+    secs: 12,
+    vo: 'That’s one step — look around, choose, work. And that room we’ve been standing in this whole time is not the machine. It’s one part of it.',
     commands: [
       ground.at(GROUND_Y),
       room.show({ x: 50, y: 50 }, 1, { bounded: true }),
@@ -36,7 +36,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'We keep backing away until the room is one floor among others',
     relation: 'and-yet',
     secs: 8,
-    vo: 'That room we’ve been standing in this whole time is one floor.',
+    vo: 'It’s one floor.',
     /*
      * The pull-back. The room does not vanish and get replaced by a tower --
      * it shrinks, in place, until it is one band among forty-five. The

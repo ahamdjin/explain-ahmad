@@ -34,6 +34,7 @@ export function Sentence({
   rows = false,
   raise = -1,
   changed = -1,
+  changedAll = false,
   attention,
   dim = false,
   caption,
@@ -56,6 +57,16 @@ export function Sentence({
   raise?: number
   /** Whose row has just changed. Redraws its values and recolours them. */
   changed?: number
+  /**
+   * **Every** row has just changed, at once.
+   *
+   * §4 beat 9: *"every word in the sentence is doing that, at the same time,
+   * to itself."* Attention is not a thing that happens to the word we happen
+   * to be following -- it happens to all of them simultaneously, and if only
+   * the focused row ever changes the picture quietly teaches that the others
+   * are spectators. They are not.
+   */
+  changedAll?: boolean
   /**
    * §4. The lines from `focus` to the others, drawn **inside this svg** so
    * they use the same token positions as the cards they connect. A separate
@@ -210,7 +221,8 @@ export function Sentence({
                 >
                   {Array.from({ length: 7 }, (_, k) => {
                     /* A changed row is a different row: new seed, new colour. */
-                    const seed = i === changed ? i * 41 + k * 13 + 900 : i * 17 + k * 5
+                    const isChanged = changedAll || i === changed
+                    const seed = isChanged ? i * 41 + k * 13 + 900 : i * 17 + k * 5
                     const h = 6 + seeded(seed) * 26
                     return (
                       <motion.rect
@@ -218,9 +230,9 @@ export function Sentence({
                         x={loose[i] + PAD + k * (glyphs[i] / 7) + 1}
                         width={Math.max(4, glyphs[i] / 7 - 4)}
                         rx="1.6"
-                        fill={i === changed ? PALETTE.blue : isFocus ? PALETTE.blueWash : PALETTE.idleDeep}
-                        stroke={i === changed || isFocus ? PALETTE.blueInk : 'none'}
-                        strokeWidth={i === changed || isFocus ? 1.2 : 0}
+                        fill={isChanged ? PALETTE.blue : isFocus ? PALETTE.blueWash : PALETTE.idleDeep}
+                        stroke={isChanged || isFocus ? PALETTE.blueInk : 'none'}
+                        strokeWidth={isChanged || isFocus ? 1.2 : 0}
                         initial={false}
                         animate={{ y: CARD_Y + 122 - h, height: h }}
                         transition={{ type: 'spring', stiffness: 90, damping: 16 }}

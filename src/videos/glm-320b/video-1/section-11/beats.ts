@@ -11,6 +11,7 @@ import {
   ground,
   machine,
   narrator,
+  shelf,
   numbers,
   path,
   store,
@@ -194,11 +195,45 @@ export const BEATS: Beat<Patch>[] = [
     id: 'not-like-that',
     title: 'The bars hold; nothing else on screen',
     relation: 'therefore',
-    secs: 15,
-    /* "Not like that" is the hinge into §12 and is not optional. */
-    vo: 'So, no. You can’t just store the part it uses. Not like that. Although — if you’re sitting there thinking \'just keep the popular ones nearby\', hold that thought. You’re right. That’s next.',
-    /* "So, no." A refusal, not agreement. */
+    secs: 10,
+    /* "So, no." A refusal, not agreement, and it gets a frame with nothing
+     * else in it. This is the answer to the question §1 asked. */
+    vo: 'So, no. You can’t just store the part it uses. Not like that.',
     commands: [narrator.set({ pose: 'halt' })],
     overlays: [centred(`~${GB_PER_WORD} GB a word — not like that`, 50, 88, { size: 'md', rotate: 1 })],
+  },
+  {
+    n: 14,
+    id: 'just-keep-the-popular-ones',
+    title: 'A small cache shelf sketches itself in beside the bars',
+    relation: 'and-yet',
+    secs: 9,
+    /*
+     * S-08. The viewer's objection, said before they can finish forming it,
+     * and given a shape on screen. It must arrive as an *outline* -- a
+     * finished box would look like part of the plan we just refused.
+     */
+    vo: 'Although — if you’re sitting there thinking "just keep the popular ones nearby" —',
+    commands: [shelf.show({ x: 74, y: 56 }, 0.76, { outline: true }), narrator.set({ pose: 'confide' })],
+  },
+  {
+    n: 15,
+    id: 'hold-that-thought',
+    title: 'The shelf finishes drawing and stays, empty',
+    relation: 'and-yet',
+    secs: 8,
+    /*
+     * The endorsement, and the shelf stays **empty**. §12's reversal needs the
+     * viewer to arrive believing caching solves this, and S-09 requires that
+     * belief to be one this video taught them -- so it is planted in its own
+     * frame and agreed with out loud. §12 is what fills the shelf.
+     */
+    vo: 'Hold that thought. You’re right. That’s next.',
+    commands: [shelf.finish(), narrator.set({ pose: 'nod' })],
+    clearSticky: true,
+    lateOverlays: {
+      at: 2400,
+      overlays: [centred('you’re right — that’s next', 74, 84, { size: 'md', tone: 'word', rotate: -2 })],
+    },
   },
 ]

@@ -262,7 +262,24 @@ export function ExpertBlend({
  * thing first, so this is drawn with nothing said over it — the frame does the
  * work, and the next section spends it.
  */
-export function Room({ bounded, children }: { bounded: boolean; children?: React.ReactNode }) {
+export function Room({
+  bounded,
+  /**
+   * Faint edges above and below, hinting that this room is one of many.
+   *
+   * §6 beat 13 asks *"how many steps are there?"* and the answer has to be
+   * *suggested* here and revealed in §7 beat 2. Without the hint, §7's
+   * pull-back is a new scene; with it, the pull-back confirms something the
+   * viewer already suspected -- which is the difference between a reveal and
+   * a cut.
+   */
+  more = false,
+  children,
+}: {
+  bounded: boolean
+  more?: boolean
+  children?: React.ReactNode
+}) {
   return (
     <div className="s1-room">
       <svg viewBox="0 0 1240 660" aria-hidden="true">
@@ -279,6 +296,20 @@ export function Room({ bounded, children }: { bounded: boolean; children?: React
           <path d="M40 40 150 118h940l110-78" strokeWidth="2.4" opacity="0.55" />
           <path d="M40 620 150 548h940l110 72" strokeWidth="2.4" opacity="0.55" />
           <path d="M150 118v430M1090 118v430" strokeWidth="2.2" opacity="0.4" />
+        </motion.g>
+
+        {/* The neighbours: edges only, never whole rooms. A second complete
+            room here would answer the question the beat is asking. */}
+        <motion.g
+          fill="none"
+          stroke={INK}
+          strokeLinejoin="round"
+          initial={false}
+          animate={{ opacity: more ? 0.3 : 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <path d="M40 8h1160M40 -24h1160" strokeWidth="2.4" />
+          <path d="M40 652h1160M40 684h1160" strokeWidth="2.4" />
         </motion.g>
       </svg>
       {children}

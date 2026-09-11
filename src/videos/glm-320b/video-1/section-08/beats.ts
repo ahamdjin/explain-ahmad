@@ -88,9 +88,9 @@ export const BEATS: Beat<Patch>[] = [
     id: 'this-is-a-transformer',
     title: 'A plate slides onto the front of the tower',
     relation: 'therefore',
-    secs: 14,
-    vo: 'And this whole arrangement — the stack of floors, attention wiring them together, experts doing the work on each one — this is what the word transformer actually means.',
-    commands: [tower.name('transformer'), narrator.set({ pose: 'point' })],
+    secs: 16,
+    vo: 'And this whole arrangement — a stack of floors, attention wiring them together, a feed-forward block doing the work on each one — this is the transformer stack. That’s the word. It’s this shape.',
+    commands: [tower.name('transformer stack'), narrator.set({ pose: 'point' })],
   },
   {
     n: 7,
@@ -98,7 +98,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The plate settles; the climb continues behind it',
     relation: 'so',
     secs: 6,
-    vo: 'That’s it. It’s not a mysterious thing. It’s this shape.',
+    vo: 'That’s it. It isn’t a mysterious thing. It’s this shape.',
     commands: [tower.climbTo(38)],
   },
   {
@@ -112,22 +112,49 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 9,
-    id: 'eight-times-three-thirty-six',
-    title: 'All eight counters run at once and a total assembles beneath',
-    relation: 'so',
-    secs: 8,
+    id: 'how-many-is-that',
+    title: 'The counters hold; a blank total waits beneath them; nothing moves',
+    relation: 'and-yet',
+    secs: 9,
     /*
-     * Eight, measured from the real tokenizer on 2026-09-11 -- it used to say
-     * nine, off an invented split. The prompt is on screen and a viewer can
-     * count it, so the neater number is not available to us either way.
-     * 8 x 336 = 2,688. `research/glm/TOKENIZER.md`.
+     * S-06, and the arithmetic is the point: 8 x 336 is small enough that a
+     * viewer will actually attempt it, which is what makes them own the
+     * answer. The total must be *visibly missing* -- `count.ask()` draws the
+     * working with a gap where the figure goes. v9 handed the number over
+     * instead and cited S-06 on it, which is not a question.
      */
-    vo: 'Eight tokens in your sentence? That’s two thousand, six hundred and eighty-eight expert visits.',
-    commands: [count.run(TOTAL, 'expert visits — one pass')],
-    overlays: [note(`${TOKENS} × 336`, 84, 40, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
+    vo: 'Eight tokens. Three hundred and thirty-six each. How many is that?',
+    commands: [count.ask('expert visits — one pass'), narrator.set({ pose: 'wonder' })],
+    lateOverlays: {
+      at: 3000,
+      overlays: [note('8 × 336 = ?', 84, 30, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
+    },
   },
   {
     n: 10,
+    id: 'two-thousand-six-eighty-eight',
+    title: 'All eight counters run at once and the total assembles beneath them',
+    relation: 'so',
+    secs: 7,
+    /* All eight at once, not in sequence -- the tokens are processed in
+     * parallel and a staggered count would teach the opposite. */
+    vo: 'Two thousand, six hundred and eighty-eight.',
+    commands: [count.run(TOTAL, 'expert visits — one pass'), narrator.set({ pose: 'count' })],
+    clearSticky: true,
+  },
+  {
+    n: 11,
+    id: 'for-one-pass',
+    title: 'The total lands and holds',
+    relation: 'so',
+    secs: 6,
+    /* The units, alone. The number is big and meaningless without them, and
+     * "one pass, eight words" is what §10 will multiply. */
+    vo: 'Expert visits. For one pass, over eight words.',
+    commands: [count.hold()],
+  },
+  {
+    n: 12,
     id: 'decided-on-the-spot',
     title: 'The total lands and holds',
     relation: 'and-yet',
@@ -141,15 +168,30 @@ export const BEATS: Beat<Patch>[] = [
     },
   },
   {
-    n: 11,
-    id: 'and-what-comes-out',
-    title: 'The markers arrive at the top floor and stop dead',
+    n: 13,
+    id: 'every-token-pays-its-own',
+    title: 'The markers arrive at the top floor',
     relation: 'and-yet',
-    secs: 9,
-    vo: 'So every token pays its own three hundred and thirty-six. All of that happens. And what comes out?',
-    /* The dead stop is the setup for §9. Silence, then the question. */
+    secs: 7,
+    /* Banks the section in one clause, so beat 14 can be a question with
+     * nothing else in it. */
+    vo: 'So every token pays its own three hundred and thirty-six.',
     commands: [tower.climbTo(45), tower.each('')],
     clearSticky: true,
+  },
+  {
+    n: 14,
+    id: 'and-what-comes-out',
+    title: 'They stop dead, all eight together, and nothing happens next',
+    relation: 'and-yet',
+    secs: 9,
+    /*
+     * The dead stop is the setup for §9: everything halts, and then the
+     * question. It needs its own beat -- asked over a still-climbing tower it
+     * is a transition, and §9 opens on the stillness this leaves behind.
+     */
+    vo: 'All of that happens. And what comes out?',
+    commands: [narrator.set({ pose: 'wonder' })],
     lateOverlays: {
       at: 3000,
       overlays: [centred('and what comes out?', 50, 12, { size: 'md', rotate: -2 })],

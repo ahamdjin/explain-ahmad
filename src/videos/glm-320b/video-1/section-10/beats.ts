@@ -41,11 +41,22 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 3,
-    id: 'added-onto-the-end',
+    id: 'no-shortcut',
+    title: 'The card drops to the base and sits on floor one',
+    relation: 'so',
+    secs: 7,
+    vo: 'No. It starts at the bottom. Floor one, same as the first word did.',
+    commands: [out.moveTo({ x: 30, y: 92 }, 0.3), tower.set({ floor: 1 })],
+  },
+  {
+    n: 4,
+    id: 'joins-the-end',
     title: 'The sentence is now one token longer; a ninth marker appears',
     relation: 'so',
-    secs: 12,
-    vo: 'No. It starts at the bottom, floor one, same as the first word did. And the word it just made joins the end of your sentence.',
+    secs: 7,
+    /* `TOKENS + 1`, never a literal. The count changed once already when the
+     * tokenizer was measured, and two boards were still saying ten. */
+    vo: 'The word it just made joins the end of your sentence.',
     commands: [out.off(), line.grow([...PROMPT, REPLY[0]]), tower.set({ markers: TOKENS + 1, floor: 1, kept: 0 })],
     lateOverlays: {
       at: 2600,
@@ -53,7 +64,7 @@ export const BEATS: Beat<Patch>[] = [
     },
   },
   {
-    n: 4,
+    n: 5,
     id: 'what-is-kept',
     title: 'The eight earlier markers hold in place; none of them move',
     relation: 'so',
@@ -73,22 +84,41 @@ export const BEATS: Beat<Patch>[] = [
     commands: [tower.set({ kept: TOKENS }), loop.show({ x: 74, y: 50 }, 0.9), loop.start()],
   },
   {
-    n: 5,
-    id: 'forty-five-floors-again',
-    title: 'Only the new marker climbs, reading the kept work as it passes',
+    n: 6,
+    id: 'just-the-new-word',
+    title: 'Only the ninth marker enters the base and climbs alone',
     relation: 'so',
-    secs: 13,
-    vo: 'Just the new word goes up. All forty-five floors. Forty-two of them choose — eight experts each time. Three hundred and thirty-six expert visits, for this one word.',
-    /* The aside opens without stopping the loop behind it. */
-    commands: [aside.show({ x: 15, y: 18 }, 1), loop.faster(0.3)],
+    secs: 9,
+    /* The aside opens without stopping the climb behind it. */
+    vo: 'Just the new word goes up. All forty-five floors, reading the kept work as it passes.',
+    commands: [aside.show({ x: 15, y: 18 }, 1)],
     stages: [
-      { at: 900, commands: [tower.climbTo(18)] },
-      { at: 2400, commands: [tower.climbTo(33)] },
-      { at: 3800, commands: [tower.climbTo(45)] },
+      { at: 1200, commands: [tower.climbTo(18)] },
+      { at: 3000, commands: [tower.climbTo(33)] },
     ],
   },
   {
-    n: 6,
+    n: 7,
+    id: 'three-thirty-six-for-this-word',
+    title: '42 of the 45 floors light as it passes; a counter runs with it',
+    relation: 'so',
+    secs: 12,
+    /*
+     * 42 decisions, 8 experts each, 336 visits -- in that order, and it is the
+     * third time the viewer watches this number assemble (§7 beat 12, §8 beat
+     * 10, here). It must look like the same number arriving again, so the
+     * counter runs rather than appearing.
+     */
+    vo: 'Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one word.',
+    commands: [loop.show({ x: 74, y: 50 }, 0.9), loop.start(), loop.faster(0.3)],
+    stages: [{ at: 2600, commands: [tower.climbTo(45)] }],
+    lateOverlays: {
+      at: 5200,
+      overlays: [note('336 — for one word', 20, 30, { size: 'md', tone: 'measure', rotate: -2 })],
+    },
+  },
+  {
+    n: 8,
     id: 'another-word-comes-out',
     title: 'Another card drops out at the top',
     relation: 'so',
@@ -97,12 +127,12 @@ export const BEATS: Beat<Patch>[] = [
     commands: [loop.say(REPLY.slice(0, 2)), loop.count(visitsAfter(2))],
   },
   {
-    n: 7,
+    n: 9,
     id: 'then-again-and-again',
     title: 'The cycle repeats, accelerating each time',
     relation: 'so',
     secs: 9,
-    vo: 'Then again. And again. One word at a time, until it decides to stop.',
+    vo: 'Then again. And again. One word at a time.',
     commands: [loop.faster(0.62), aside.off()],
     stages: [
       { at: 1200, commands: [loop.say(REPLY.slice(0, 4)), loop.count(visitsAfter(4)), tower.climbTo(20)] },
@@ -110,17 +140,17 @@ export const BEATS: Beat<Patch>[] = [
     ],
   },
   {
-    n: 8,
+    n: 10,
     id: 'while-you-sit-there',
     title: 'The produced words accumulate as a line of text beside the tower',
     relation: 'so',
     secs: 8,
-    vo: 'That’s it. That’s what’s actually happening while you sit there watching a reply appear.',
+    vo: 'That’s it. That’s what’s actually happening while you sit there watching it type.',
     commands: [narrator.set({ pose: 'lean' })],
     overlays: [note('you have watched this happen', 74, 12, { rotate: -2 })],
   },
   {
-    n: 9,
+    n: 11,
     id: 'full-stack-fresh-choices',
     title: 'A counter beside each produced word ticks 336 per token',
     relation: 'so',
@@ -130,24 +160,42 @@ export const BEATS: Beat<Patch>[] = [
     overlays: [centred('2,688 once\n+336 a word', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
   },
   {
-    n: 10,
-    id: 'it-never-stops-choosing',
+    n: 12,
+    id: 'not-known-in-advance',
     title: 'The running total climbs and does not stop',
     relation: 'wall',
-    secs: 12,
-    vo: 'And it doesn’t know which experts the next word needs until the next word is halfway up. It never stops re-choosing.',
-    /* Deposit five, and the one that makes §11 inevitable. */
+    secs: 11,
+    /*
+     * Deposit five, and the one that makes §11 inevitable. The counter must
+     * have no ceiling and no final value: the moment it lands on a number it
+     * becomes a cost you could budget for, which is the belief §11 takes
+     * apart.
+     */
+    vo: 'And it doesn’t know which experts the next word needs until the next word is halfway up.',
     commands: [loop.faster(1), narrator.set({ pose: 'push' })],
   },
   {
-    n: 11,
-    id: 'the-question-we-started-with',
-    title: 'Everything halts at once; the tower and the finished reply hold',
-    relation: 'and-yet',
-    secs: 9,
-    vo: 'So it never stops re-choosing. Which means we can finally ask the question we started with, properly.',
-    /* Stop everything, then ask. The halt is what buys §11 its opening. */
-    commands: [loop.halt(), tower.set({ markers: 0 }), narrator.set({ pose: 'think' })],
+    n: 13,
+    id: 'it-never-stops-choosing',
+    title: 'Everything halts at once',
+    relation: 'wall',
+    secs: 6,
+    /*
+     * Everything, including the counter. The halt is what buys §11 its
+     * opening, and it needs its own beat -- said over a still-running loop it
+     * is a summary, and §11 opens on this stillness.
+     */
+    vo: 'It never stops re-choosing.',
+    commands: [loop.halt(), narrator.set({ pose: 'think' })],
     clearSticky: true,
+  },
+  {
+    n: 14,
+    id: 'the-question-we-started-with',
+    title: 'The tower and the finished reply hold together in frame',
+    relation: 'and-yet',
+    secs: 8,
+    vo: 'Which means we can finally ask the question we started with, properly.',
+    commands: [tower.set({ markers: 0, kept: 0 })],
   },
 ]

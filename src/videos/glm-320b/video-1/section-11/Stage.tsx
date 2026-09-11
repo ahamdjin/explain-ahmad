@@ -1,4 +1,4 @@
-import { BigNumber, Camera, Clock, CostBars, Ground, Slot, Tower } from '../../../../paper'
+import { BigNumber, Camera, Clock, CostBars, ExpertCache, Ground, Slot, Tower } from '../../../../paper'
 import { FetchPath, Store, Counter } from '../../../../paper/cast/Memory'
 import { Narrator } from '../../../../paper/cast/Narrator'
 import { FrontDesk, SmallMachine } from '../../../../paper/cast/Props'
@@ -54,6 +54,17 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
         <Slot on={scene.bars.on} at={scene.bars.at} scale={scene.bars.scale} z={5} feel={feel}>
           <CostBars show={scene.bars.show} ratio={scene.bars.ratio} inset={scene.bars.inset} />
+        </Slot>
+
+        {/*
+          Beats 14-15. Drawn, and deliberately empty -- `filled` and `hits` stay
+          at zero. The viewer's own idea, given a shape and endorsed, so that
+          §12 has a belief of its own making to take apart.
+        */}
+        <Slot on={scene.shelf.on} at={scene.shelf.at} scale={scene.shelf.scale} z={5} feel={feel}>
+          <div style={{ opacity: scene.shelf.outline ? 0.5 : 1, transition: 'opacity .7s' }}>
+            <ExpertCache kept={0.35} filled={0} hits={0} label="keep some close" />
+          </div>
         </Slot>
       </Camera>
 

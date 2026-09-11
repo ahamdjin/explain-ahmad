@@ -24,8 +24,11 @@ import {
  * is what lets beats 8-11 land — they are the carrying frames, and a restless
  * camera would take the comparison away from them.
  *
- * Beat 13 is the deposit: **three identical rows on one frame.** That is the
- * whole setup for §4, so it is a picture and not a line of voice-over.
+ * Beats 13-15 are the deposit: **three identical rows on one frame.** That is
+ * the whole setup for §4, so it is a picture and not a line of voice-over, and
+ * it gets three beats rather than one 23-second block -- the rows have to
+ * arrive one at a time or "identical, every time" is asserted instead of
+ * watched.
  */
 export const BEATS: Beat<Patch>[] = [
   {
@@ -97,16 +100,21 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 6,
-    id: 'called-an-embedding',
-    title: 'The row holds; a label lands on it',
-    relation: 'so',
+    id: 'what-for',
+    title: 'Everything stops; the row holds and the question sits under it',
+    relation: 'and-yet',
     secs: 10,
-    vo: 'This row is called an embedding. And it’s the first thing in the whole machine that actually means something.',
-    commands: [dog.set({ extend: false }), dog.moveTo({ x: 64, y: 32 }, 0.58), narrator.set({ pose: 'nod' })],
+    /*
+     * S-06. The still frame, and it must be genuinely still -- the row does
+     * not drift, the narrator does not gesture. A question asked over motion
+     * is decoration; the viewer has to have somewhere to put a guess.
+     */
+    vo: 'Which seems like a lot. What could one short word possibly need four thousand numbers for?',
+    commands: [dog.set({ extend: false }), dog.moveTo({ x: 64, y: 32 }, 0.58), narrator.set({ pose: 'wonder' })],
     clearSticky: true,
     lateOverlays: {
       at: 2600,
-      overlays: [note('embedding', 58, 20, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
+      overlays: [note('what for?', 58, 58, { size: 'lg', rotate: -2, sticky: true })],
     },
   },
   {
@@ -115,12 +123,13 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Two more rows slide out and stack under it',
     relation: 'so',
     secs: 8,
-    vo: 'Here’s why it means something. Let’s pull out "dog", and "cat".',
+    vo: 'Here’s what. Let’s pull out two more — "dog", and "cat".',
     commands: [
       dog.set({ label: 'dog' }),
       cat.show({ x: 64, y: 48 }, 0.58, { label: 'cat' }),
       narrator.set({ pose: 'point' }),
     ],
+    clearSticky: true,
   },
   {
     n: 8,
@@ -148,7 +157,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The three rows fold into three points, spaced by likeness',
     relation: 'so',
     secs: 11,
-    vo: 'Nobody sat down and made that happen. Training did it. Words that get used in similar ways ended up with similar rows.',
+    vo: 'Nobody sat down and arranged that. Training did it. Words that get used in similar ways ended up with similar rows.',
     commands: [dog.off(), cat.off(), tues.off(), space.fold()],
     /*
      * A representation change, folded rather than cut. And it shows relative
@@ -172,31 +181,59 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 12,
-    id: 'this-is-what-goes-in',
-    title: 'The points unfold back into the `dog` row, alone',
+    id: 'called-an-embedding',
+    title: 'The points unfold back into the `dog` row; a label lands on it',
     relation: 'therefore',
-    secs: 6,
-    vo: 'And that’s what goes into the model. Not "dog". This.',
-    commands: [space.unfold(), dog.show({ x: 60, y: 44 }, 0.72, { matches: false, label: 'dog' })],
+    secs: 12,
+    /*
+     * S-12, and the name arrives *after* the thing has been understood, not
+     * before. v9 named it at beat 6, where "embedding" was a label on a row
+     * nobody had a reason to care about yet.
+     */
+    vo: 'This row has a name. It’s called an embedding. And it’s the first thing in the whole machine that actually means something.',
+    commands: [space.unfold(), dog.show({ x: 60, y: 40 }, 0.72, { matches: false, label: 'dog' }), narrator.set({ pose: 'nod' })],
+    lateOverlays: {
+      at: 3200,
+      overlays: [note('embedding', 54, 20, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
+    },
   },
   {
     n: 13,
-    id: 'same-word-same-row',
-    title: 'The same row is pulled twice more; all three are identical',
+    id: 'this-is-what-goes-in',
+    title: 'The label settles; the row sits alone in frame',
+    relation: 'therefore',
+    secs: 9,
+    vo: 'And that’s the lookup, done. That’s what goes into the model. Not "dog". This.',
+    commands: [dog.moveTo({ x: 60, y: 44 }, 0.72), narrator.set({ pose: 'nod' })],
+    clearSticky: true,
+  },
+  {
+    n: 14,
+    id: 'stored-in-a-table',
+    title: 'The same row is pulled from the table a second time, beside the first',
     relation: 'and-yet',
-    secs: 23,
-    vo: 'And that’s the lookup, done — the word is four thousand and ninety-six numbers now. But here’s the thing to hold on to. This row is stored in a table. Which means it is exactly the same every single time the word "dog" turns up. Same word, same row, always.',
-    commands: [dog.moveTo({ x: 60, y: 30 }, 0.62), narrator.set({ pose: 'think' })],
-    /* Three identical rows on one frame. Not hedged, because it is true — the
-     * embedding table is a fixed lookup — and the paradox §4 resolves only
-     * works if this is stated flatly. */
-    stages: [
-      { at: 1400, commands: [again1.show({ x: 60, y: 48 }, 0.62)] },
-      { at: 2800, commands: [again2.show({ x: 60, y: 66 }, 0.62)] },
-    ],
+    secs: 10,
+    /* The turn. Said plainly, because the paradox §4 resolves only works if
+     * this is stated flatly rather than hedged. */
+    vo: 'But here’s the thing to hold on to. This row is stored in a table.',
+    commands: [dog.moveTo({ x: 60, y: 34 }, 0.62), again1.show({ x: 60, y: 52 }, 0.62), narrator.set({ pose: 'think' })],
+  },
+  {
+    n: 15,
+    id: 'same-word-same-row',
+    title: 'Pulled a third time; all three sit identical',
+    relation: 'wall',
+    secs: 12,
+    /*
+     * The deposit, and it is a picture: three identical rows, one frame. §4
+     * beat 1 collapses these three back into one, which only reads if the
+     * viewer has seen all three at once here.
+     */
+    vo: 'Which means it is exactly the same, every single time the word "dog" turns up. Same word, same row, always.',
+    commands: [again2.show({ x: 60, y: 70 }, 0.62)],
     lateOverlays: {
-      at: 3600,
-      overlays: [note('identical.\nevery time.', 14, 46, { size: 'md', tone: 'cost', rotate: -3 })],
+      at: 3200,
+      overlays: [note('identical.\nevery time.', 14, 50, { size: 'md', tone: 'cost', rotate: -3 })],
     },
   },
 ]

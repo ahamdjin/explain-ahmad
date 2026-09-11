@@ -64,7 +64,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 16,
     /* The true half, conceded with no hedge. */
-    vo: 'Per word, this thing does the thinking of a model about a twentieth of its size. That’s real. That’s why it’s quick, and why it’s cheap to run per word. That part is completely true.',
+    vo: 'Per word, this thing does the thinking of a model about a twentieth of its size. That’s real. That’s why it’s quick, and why it’s cheap to run per word. That part is true.',
     commands: [
       block.off(),
       share.show({ x: 50, y: 54 }, 0.86, { mode: 'bar', lit: 0.056, caption: 'the thinking it does per word' }),
@@ -91,22 +91,22 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 5,
-    id: 'a-compute-number',
-    title: 'A label lands between the bar and the block',
+    id: 'work-and-space',
+    title: 'The bar and the block separate into two labelled columns',
     relation: 'therefore',
     secs: 8,
-    vo: 'So: "active parameters" is a compute number. It was never a memory number.',
+    vo: 'One of those is a number about work. The other is a number about space.',
     commands: [],
     /* One of `claim` orange's three budgeted uses in the whole video. */
     overlays: [note('“efficient”', 18, 42, { size: 'lg', tone: 'claim', rotate: -4 })],
   },
   {
     n: 6,
-    id: 'compute-not-memory',
-    title: 'The bar and the block separate into two labelled halves',
+    id: 'one-shrinks-one-doesnt',
+    title: 'The work column shrinks to almost nothing; the space column stays full height',
     relation: 'therefore',
     secs: 8,
-    vo: 'Sparse routing buys you compute. It doesn’t buy you memory.',
+    vo: 'Sparse routing shrinks the first one. It does nothing at all to the second.',
     /* The thesis is a trade, so the figure holds two things at once. */
     commands: [
       share.moveTo({ x: 26, y: 66 }, 0.52),
@@ -124,7 +124,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'A second card slides in beside the first; chips stack under each',
     relation: 'and-yet',
     secs: 15,
-    vo: 'And here’s the part I didn’t expect. This model has a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs four.',
+    vo: 'And here’s the part I didn’t expect. This model has about a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs four.',
     /* Four chips, not a rack. A rack is an unquantified "lots"; four is the
      * promise the video opened on. */
     commands: [
@@ -161,7 +161,7 @@ export const BEATS: Beat<Patch>[] = [
      * footprint. It is not: 116.8B vs 321B and MXFP4 vs FP8 account for ~58
      * GiB against ~306 GiB almost entirely. See this section's truth notes.
      */
-    vo: 'Three things differ, and only one of them is interesting. It’s nearly three times the parameters. It ships at twice the precision per weight. And it’s chopped finer — more experts, smaller each.',
+    vo: 'Three things differ, and only one of them is exciting. It’s nearly three times the parameters. It ships at twice the precision per weight. And it’s chopped finer — more experts, smaller each.',
     commands: [],
     overlays: [
       note(`${OTHER_MODEL.experts} per floor`, 28, 82, { tone: 'measure', rotate: -2 }),
@@ -174,7 +174,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The first two chips grey out; the granularity chip stays lit',
     relation: 'and-yet',
     secs: 13,
-    vo: 'The first two are just size — that’s why the file is bigger. The third one is the interesting one, and it isn’t about the file at all.',
+    vo: 'The first two are why the file is bigger. They’re just size. This one is the interesting one — and it’s not about the file at all.',
     commands: [],
     overlays: [note('size · size · the interesting one', 50, 14, { size: 'md', tone: 'measure', rotate: -1 })],
   },
@@ -183,9 +183,9 @@ export const BEATS: Beat<Patch>[] = [
     id: 'better-and-harder',
     title: 'The fine-grained one’s chips grow while its pieces get smaller',
     relation: 'and-yet',
-    secs: 8,
+    secs: 18,
     /* The carrying frame. The trend, as a picture. */
-    vo: 'Which is exactly why it’s better — and exactly why it’s harder to hold.',
+    vo: 'Chopping finer is exactly why it’s better — better at specialising, better at spreading the load. It’s also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby.',
     commands: [cardB.moveTo({ x: 72, y: 48 }, 1.24)],
     overlays: [note('better · and harder to hold', 62, 12, { size: 'md', tone: 'cost', rotate: 2 })],
   },
@@ -196,16 +196,71 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 11,
     /* The sentence the viewer repeats to someone else. */
-    vo: 'So the better these models get at using less of themselves, the more of them you have to keep lying around.',
+    vo: 'So the better these models get at using less of themselves, the more of themselves you have to keep within reach.',
     commands: [cardA.off(), cardB.moveTo({ x: 50, y: 48 }, 1.3), narrator.set({ pose: 'lean' })],
   },
   {
     n: 13,
-    id: 'cheap-to-run-not-small',
-    title: 'Everything clears to one card',
+    id: 'a-compute-number',
+    title: 'Everything clears to a single line of handwriting',
     relation: 'therefore',
-    secs: 21,
-    vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs four. Now you know why. "Active parameters" is a compute number, not a memory number — and the finer you slice the experts, the wider that gap gets.',
-    commands: [cardB.off(), verdict.show({ x: 50, y: 48 }, 1), narrator.off()],
+    secs: 11,
+    /*
+     * S-11. The thesis, once, alone, at the end -- and it is the *only* place
+     * in the video it is stated. v9 said it at beat 5 as well, which is the
+     * one strategy this section cites and the one it broke: a sentence said
+     * twice is a sentence the viewer stops hearing.
+     */
+    vo: '"Active parameters" is a compute number. It was never a memory number.',
+    commands: [
+      cardA.off(),
+      cardB.off(),
+      share.off(),
+      block.off(),
+      big.off(),
+      narrator.off(),
+    ],
+    lateOverlays: {
+      at: 2400,
+      overlays: [
+        centred('“active parameters” is a compute number.\nit was never a memory number.', 50, 46, {
+          size: 'lg',
+          tone: 'cost',
+          rotate: -1,
+          sticky: true,
+        }),
+      ],
+    },
+  },
+  {
+    n: 14,
+    id: 'two-models-one-card-and-four',
+    title: '§1’s opening frame redraws itself exactly: two sheets, one chip and four',
+    relation: 'so',
+    secs: 12,
+    /*
+     * S-10. The ring closes, and it has to be the *same frame* -- same
+     * positions, same scales, same chip counts as §1. A near-miss reads as a
+     * similar picture; an exact match reads as a return, which is the only
+     * version that pays off seventeen beats of setup.
+     */
+    vo: 'Two models. Both about five percent active. One of them runs on a single card; the other one needs four.',
+    commands: [
+      cardA.show({ x: 28, y: 48 }, 1.18),
+      cardB.show({ x: 72, y: 48 }, 1.18),
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
+    ],
+    clearSticky: true,
+  },
+  {
+    n: 15,
+    id: 'now-you-know-why',
+    title: 'Nothing moves',
+    relation: 'and-yet',
+    secs: 7,
+    /* Four words, and then the video stops. Anything added here spends the
+     * ring's payoff on decoration. */
+    vo: 'Now you know why.',
+    commands: [narrator.set({ pose: 'nod' })],
   },
 ]

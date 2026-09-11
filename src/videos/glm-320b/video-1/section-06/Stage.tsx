@@ -14,7 +14,9 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {scene.ground.on ? <Ground y={scene.ground.y} /> : null}
 
       <Slot on={scene.room.on} at={{ x: 50, y: 50 }} z={0} feel={feel}>
-        <Room bounded={scene.room.bounded} />
+        <div style={{ transform: `scale(${scene.room.scale})`, transition: 'transform .9s cubic-bezier(.2,.7,.2,1)' }}>
+          <Room bounded={scene.room.bounded} more={scene.room.more} />
+        </div>
       </Slot>
 
       <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel}>

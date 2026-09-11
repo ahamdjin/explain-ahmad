@@ -1,7 +1,8 @@
-import { arrow, brace, centred, GROUND_Y, note, type Beat } from '../../../../paper'
+import { brace, GROUND_Y, note, type Beat } from '../../../../paper'
 import {
   CHOSEN,
   OTHER,
+  arcs,
   camera,
   count,
   desk,
@@ -9,6 +10,7 @@ import {
   hospital,
   narrator,
   open,
+  plates,
   row,
   row2,
   shared,
@@ -23,35 +25,44 @@ import {
  * **Two camera moves, both at the front**, and each earns a change of place: to
  * the desk, then out to the room. Beats 4-13 are still.
  *
- * Beat 11 is the section's whole argument in one image: the row, and lines from
- * it to the scores. The choice comes from those numbers — and those numbers did
- * not exist until attention finished making them one beat ago.
+ * Beats 13-15 are the section's whole argument: the row, lines from it to the
+ * scores, and §4's arcs ghosting in behind it. The choice comes from those
+ * numbers -- and those numbers did not exist until attention finished making
+ * them one beat ago. `research/COMPETITIVE_FIELD.md` shows nobody else makes
+ * this argument, so it gets three beats rather than a clause.
+ *
+ * Beat 10 is the other one that cannot be cut: the name-plates that fail to
+ * stick. Every viewer arrives believing the router picked the eight that know
+ * about dogs, and that belief is visual, so the correction has to be.
  */
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'this-is-what-arrives',
+    id: 'something-has-to-read-it',
     title: 'The changed row travels right and rests at the unlabelled desk',
     relation: 'want',
-    secs: 14,
-    vo: 'So the row is specific to this sentence now. Which means something can finally read it — as it is — and choose. This is what arrives here.',
+    secs: 15,
+    vo: 'So the row belongs to this sentence now, not just to the word. Which means there’s finally something worth reading — and something has to read it.',
     commands: [
       ground.at(GROUND_Y),
-      row.show({ x: 20, y: 40 }, 0.5),
+      row.show({ x: 22, y: 44 }, 0.44, { label: 'the row, as attention left it' }),
+      camera.to({ x: 54, y: 50 }, 1),
       desk.show({ x: 62, y: 62 }, 0.8),
-      /* Pan. The row travels and the frame goes with it, which is what makes
-       * the desk somewhere we arrived at rather than somewhere we cut to. */
-      camera.to({ x: 56, y: 52 }, 1.1),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'carry', flip: true }),
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
     ],
-    stages: [{ at: 1600, commands: [row.moveTo({ x: 40, y: 44 }, 0.44)] }],
+    stages: [{ at: 1800, commands: [row.moveTo({ x: 40, y: 44 }, 0.44)] }],
   },
   {
     n: 2,
     id: 'this-is-the-router',
     title: 'A small plaque lands on the desk',
     relation: 'so',
-    secs: 9,
+    secs: 10,
+    /*
+     * S-13, and the router is the *only* mechanism in this section that gets a
+     * name-plate. The experts must never get one -- see beat 10 and
+     * `GROUND_TRUTH.md`.
+     */
     vo: 'This is the router. It’s tiny compared to everything around it, and it has exactly one job.',
     commands: [desk.name(), desk.ring(), narrator.set({ pose: 'offer' })],
   },
@@ -60,146 +71,200 @@ export const BEATS: Beat<Patch>[] = [
     id: 'two-eighty-eight-in-front',
     title: 'We back off and the 288 fill the frame beyond the desk',
     relation: 'so',
-    secs: 6,
-    vo: 'In front of it: two hundred and eighty-eight experts.',
+    secs: 7,
+    vo: 'In front of it: two hundred and eighty-eight experts. It has to pick some.',
     commands: [
-      /* Pull back. The router is tiny compared to what it is choosing from, and
-       * that is only true if both are in one frame. */
-      camera.home(),
-      hospital.show({ x: 52, y: 42 }, 0.86, { staffed: true }),
-      desk.moveTo({ x: 16, y: 80 }, 0.5),
-      desk.ring(),
-      row.moveTo({ x: 16, y: 56 }, 0.3),
+      camera.to({ x: 50, y: 48 }, 0.86),
+      hospital.show({ x: 52, y: 44 }, 0.9, { staffed: true }),
+      desk.moveTo({ x: 62, y: 74 }, 0.66),
+      narrator.set({ pose: 'reach' }),
     ],
     lateOverlays: {
-      at: 3000,
-      overlays: [centred('288 experts', 52, 12, { size: 'md', rotate: -2, sticky: true })],
+      at: 3200,
+      overlays: [note('288 experts', 84, 70, { size: 'md', tone: 'measure', rotate: 2, sticky: true })],
     },
   },
   {
     n: 4,
-    id: 'what-an-expert-is',
-    title: 'One expert lifts out and opens: a row in, a different row out',
+    id: 'exactly-one-thing',
+    title: 'The row arrives at the desk and stops; the whole wall waits, unscored',
     relation: 'so',
-    secs: 15,
-    vo: 'And I should say what an expert actually is, because the name oversells it. It’s a block of numbers that takes a row in and puts a different row out. That’s all.',
-    commands: [open.show({ x: 50, y: 50 }, 1.05)],
-    clearSticky: true,
-    lateOverlays: {
-      at: 4200,
-      overlays: [centred('that’s the whole thing', 50, 74, { rotate: 2 })],
-    },
+    secs: 8,
+    /*
+     * The still frame before the mechanism. Nothing on the wall has happened
+     * yet -- no badges, no light -- so that beat 5's "all 288 at once" is a
+     * change the viewer watches rather than a state they arrived into.
+     */
+    vo: 'The row arrives. And the router does exactly one thing with it.',
+    commands: [row.moveTo({ x: 52, y: 74 }, 0.4), hospital.plain(), narrator.set({ pose: 'wonder' })],
   },
   {
     n: 5,
-    id: 'no-french-expert',
-    title: 'It drops back; no labels appear on any of them',
-    relation: 'wall',
-    secs: 14,
-    vo: 'Nobody assigned them subjects. There’s no French expert, no maths expert. They’re just two hundred and eighty-eight different blocks that came out of training different from each other.',
-    /*
-     * The most important frame in this section for not teaching a lie. The wall
-     * carries no labels at all, and the note says why rather than naming one.
-     */
-    /* Deadpan, not a shrug. A shrug says "I don't know"; here we do know --
-     * nobody assigned them subjects, and that is a flat statement of fact. */
-    commands: [open.off(), hospital.plain(), narrator.set({ pose: 'flat' })],
-    lateOverlays: {
-      at: 4800,
-      overlays: [centred('no names on any of them —\nnot one', 50, 86, { size: 'md', rotate: -1 })],
-    },
-  },
-  {
-    n: 6,
     id: 'every-single-one',
     title: 'An empty score badge appears on all 288 at once',
     relation: 'so',
-    secs: 7,
-    vo: 'The router gives every single one of them a score. All 288.',
-    commands: [hospital.ask()],
-    overlays: [note('all of them', 14, 30, { tone: 'measure', rotate: -3, sticky: true })],
+    secs: 9,
+    /* Empty badges first. The question exists before any answer does, and
+     * *every* expert is asked -- not just the ones that go on to win. */
+    vo: 'It gives every single expert a score. All two hundred and eighty-eight of them.',
+    commands: [hospital.ask(), narrator.set({ pose: 'count' })],
+  },
+  {
+    n: 6,
+    id: 'how-well-do-you-fit',
+    title: 'A sweep crosses the whole wall left to right, filling every badge',
+    relation: 'so',
+    secs: 10,
+    vo: 'And the question it’s scoring is always the same one. How well does this expert fit these numbers?',
+    commands: [hospital.score(), row.pulse()],
+    lateOverlays: {
+      at: 3600,
+      overlays: [note('every one of them —\nnot just the winners', 16, 22, { tone: 'measure', rotate: -3 })],
+    },
   },
   {
     n: 7,
-    id: 'how-well-do-you-fit',
-    title: 'A sweep crosses the whole wall, filling every badge as it passes',
-    relation: 'so',
-    secs: 8,
-    vo: 'And the question it’s scoring is: how well does this expert fit these numbers?',
-    commands: [hospital.score(), row.pulse()],
+    id: 'these-numbers-right-now',
+    title: 'The badges settle; the row stays lit beside them',
+    relation: 'and-yet',
+    secs: 9,
+    /*
+     * The line the whole section exists for. What is being matched against is
+     * *this row, as it is now* -- not the word, not the sentence. §11's answer
+     * is a consequence of this beat, so the row has to stay visibly lit while
+     * the scores sit next to it.
+     */
+    vo: 'Not this word. Not this sentence. These numbers, as they are right now.',
+    commands: [row.pulse(), narrator.set({ pose: 'point' })],
+    overlays: [note('the row — not the word', 16, 82, { size: 'md', tone: 'word', rotate: -2 })],
   },
   {
     n: 8,
     id: 'keeps-the-best-eight',
     title: 'The eight highest rise forward; the other 280 go flat',
     relation: 'therefore',
-    secs: 7,
+    secs: 8,
     vo: 'Then it keeps the best eight. That’s it. That’s the whole decision.',
     commands: [hospital.choose(CHOSEN)],
-    clearSticky: true,
   },
   {
     n: 9,
     id: 'eight-of-two-eighty-eight',
     title: 'A bracket draws around the eight and counts them against the wall',
     relation: 'and-yet',
-    secs: 9,
+    secs: 10,
+    /*
+     * 280 idle, not 281. `n_routed_experts` is 288 and `n_shared_experts` is 1
+     * *on top of it*, so the shared one is a 289th object -- which is beat 12's
+     * job, outside this wall. `GROUND_TRUTH.md`.
+     */
     vo: 'Eight, out of two hundred and eighty-eight. The other two hundred and eighty do nothing at all.',
     commands: [count.show({ x: 15, y: 40 }, 1, { value: 8, label: 'of 288 did anything' })],
-    overlays: [brace('288 — all of them scored', 24, 76, 56, { tone: 'measure', sticky: true })],
+    overlays: [brace('280 idle', 30, 62, 44, { tone: 'cost' })],
   },
   {
     n: 10,
-    id: 'one-always-on',
-    title: 'A ninth, dashed and unscored, slides in beside the eight',
-    relation: 'so',
-    secs: 11,
-    vo: 'Oh — and one extra that runs every time, no matter what the word is. So: eight chosen, plus one always on.',
-    commands: [shared.show({ x: 84, y: 34 }, 1.6)],
-    overlays: [note('always on —\nnever chosen', 80, 46, { rotate: 3 })],
+    id: 'no-dog-expert',
+    title: 'Name-plates try to land on the eight and slide off',
+    relation: 'wall',
+    secs: 15,
+    /*
+     * The intuition being corrected is visual, so the correction is too.
+     * `plates.land()` then `plates.slideOff()` in one beat: they have to be
+     * *on* the eight and plausible before they fail, or nothing is dislodged.
+     * These are the only labels the video ever puts on an expert.
+     */
+    vo: 'Now — it’s tempting to think it picked the eight that know about dogs. It didn’t. There is no dog expert. There’s no French expert, no maths expert.',
+    commands: [plates.land()],
+    stages: [{ at: 6000, commands: [plates.slideOff(), narrator.set({ pose: 'flat' })] }],
+    lateOverlays: {
+      at: 7200,
+      overlays: [note('no plate sticks', 78, 20, { size: 'md', tone: 'cost', rotate: 3 })],
+    },
   },
   {
     n: 11,
-    id: 'look-what-the-scores-came-from',
-    title: 'The row pulses; a line links it to the badges',
-    relation: 'wall',
-    secs: 13,
-    vo: 'But look at what those scores were made from. These numbers. The ones that only existed a moment ago, because attention had just finished making them.',
-    /* The section's whole argument in one image. */
-    commands: [row.moveTo({ x: 15, y: 62 }, 0.4), row.pulse(), narrator.set({ pose: 'point' })],
-    clearSticky: true,
-    overlays: [
-      arrow({ x: 330, y: 640 }, { x: 700, y: 400 }, { tone: 'measure', bow: 80, label: 'these numbers' }),
-    ],
+    id: 'what-an-expert-is',
+    title: 'One expert lifts out and opens: a row in, a different row out',
+    relation: 'so',
+    secs: 17,
+    vo: 'They’re two hundred and eighty-eight blocks of numbers that came out of training slightly different from each other. A row goes in, a different row comes out. That is the whole of what an expert is.',
+    commands: [plates.off(), open.show({ x: 50, y: 48 }, 1.05)],
   },
   {
     n: 12,
-    id: 'change-the-sentence',
-    title: 'The second sentence swaps in; the row changes; the eight change',
-    relation: 'therefore',
-    secs: 12,
-    vo: 'Change the sentence and the row changes. Change the row and the scores change. Change the scores and you get a different eight.',
-    commands: [row2.show({ x: 15, y: 66 }, 0.34), hospital.remember(CHOSEN)],
-    stages: [{ at: 2200, commands: [hospital.choose(OTHER)] }],
+    id: 'one-more-over-here',
+    title: 'A ninth slides in from outside the wall entirely, already lit',
+    relation: 'so',
+    secs: 16,
+    /*
+     * The shared expert, and it enters from **outside** the 288. It is a 289th
+     * object: `n_routed_experts: 288`, `n_shared_experts: 1`, additional. It
+     * is never scored and never chosen, so it must not be drawn inside the
+     * wall or among the eight. `GROUND_TRUTH.md`.
+     */
+    vo: 'And there’s one more, over here. It isn’t one of the two hundred and eighty-eight, and it never gets scored — it just runs, for every word, whatever the word is. So: eight picked, plus that one.',
+    commands: [open.off(), shared.show({ x: 86, y: 30 }, 1.6)],
+    lateOverlays: {
+      at: 5200,
+      overlays: [note('+1 — never scored,\nalways runs', 84, 54, { tone: 'relate', rotate: 3, sticky: true })],
+    },
   },
   {
     n: 13,
+    id: 'look-what-the-scores-came-from',
+    title: 'The row that produced the scores pulses; a line links it to the badges',
+    relation: 'wall',
+    secs: 8,
+    vo: 'But look at what those scores were made from. These numbers.',
+    commands: [row.moveTo({ x: 15, y: 62 }, 0.4), row.pulse(), narrator.set({ pose: 'point' })],
+    clearSticky: true,
+  },
+  {
+    n: 14,
+    id: 'only-just-finished-making-them',
+    title: 'Attention’s arcs ghost in behind the row, then fade',
+    relation: 'and-yet',
+    secs: 9,
+    /*
+     * §4's wiring, remembered rather than re-run -- faint, and behind the row.
+     * This is the beat that makes §11's answer inevitable: the thing the
+     * routing depends on did not exist until a moment ago.
+     */
+    vo: 'The ones that didn’t exist a moment ago. Attention had only just finished making them.',
+    commands: [arcs.show({ x: 15, y: 54 }, 0.6)],
+    stages: [{ at: 5200, commands: [arcs.off()] }],
+  },
+  {
+    n: 15,
+    id: 'change-the-sentence',
+    title: 'A second sentence swaps in; the row changes; most of the eight change',
+    relation: 'therefore',
+    secs: 16,
+    /*
+     * `remember(CHOSEN)` before `choose(OTHER)`, so the old positions stay
+     * marked and "mostly different" is legible. Two of the eight overlap on
+     * purpose -- a fresh decision is not a guaranteed different team, and §12's
+     * caching argument depends on that being true here.
+     * `research/glm/OFFLOADING_AND_LOCALITY.md` §5.
+     */
+    vo: 'Change the sentence, and the row changes. Change the row, and the scores change. Change the scores, and it picks again — a fresh decision, and mostly a different eight.',
+    commands: [row2.show({ x: 15, y: 66 }, 0.34), hospital.remember(CHOSEN)],
+    stages: [{ at: 4400, commands: [hospital.choose(OTHER)] }],
+  },
+  {
+    n: 16,
     id: 'could-not-have-been-earlier',
-    title: 'The new eight hold; the old eight’s places stay marked',
+    title: 'The new eight hold; the old eight’s empty places stay marked',
     relation: 'and-yet',
     secs: 16,
+    /* Deposit two, and the one §11 spends. */
     vo: 'And that’s the router, done. Eight picked out of two hundred and eighty-eight — and that choice could not have been made any earlier than this. It needed the row to exist first.',
-    /*
-     * The vacated seats stay marked, because a new eight lighting up does not
-     * read as *different* unless you can see where the old ones were. This is
-     * the seed §12 spends.
-     */
     commands: [narrator.set({ pose: 'think' })],
     lateOverlays: {
-      at: 2800,
+      at: 4000,
       overlays: [
-        note('red rings = where the\nlast eight sat', 62, 20, { tone: 'cost', rotate: 3 }),
-        centred('the choice needed the row\nto exist first', 50, 92, { size: 'md', tone: 'cost', rotate: -1 }),
+        note('it needed the row\nto exist first', 78, 78, { size: 'md', tone: 'cost', rotate: -2 }),
       ],
     },
   },

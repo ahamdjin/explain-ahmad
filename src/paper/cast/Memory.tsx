@@ -279,12 +279,23 @@ export function Counter({
   label,
   run = false,
   seconds = 1.4,
+  blank = false,
 }: {
   value: number
   label: string
   /** Count up to `value` instead of arriving at it. */
   run?: boolean
   seconds?: number
+  /**
+   * Show the sum unanswered -- the working, then a gap where the figure goes.
+   *
+   * §8 beat 9 asks *"eight tokens, three hundred and thirty-six each, how many
+   * is that?"* and the total has to be **visibly missing** while it asks. A
+   * counter already reading 2,688 turns the question into narration; an empty
+   * frame gives the viewer nothing to answer about. S-06 in
+   * `skills/STRATEGY_LEDGER.md`.
+   */
+  blank?: boolean
 }) {
   const [shown, setShown] = useState(run ? 0 : value)
 
@@ -304,8 +315,8 @@ export function Counter({
   }, [run, value, seconds])
 
   return (
-    <div className="s1-counter">
-      <strong>{shown.toLocaleString('en-US')}</strong>
+    <div className="s1-counter" data-blank={blank ? 'true' : undefined}>
+      <strong>{blank ? '?' : shown.toLocaleString('en-US')}</strong>
       <span>{label}</span>
     </div>
   )
