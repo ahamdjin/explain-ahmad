@@ -89,7 +89,7 @@ fit four — it needs **eight**. Table, working and sources:
 >
 > **5.** *(the two blocks hold, unequal)* Same five percent. Eight times the machine.
 >
-> **6.** *(the right-hand block and its eight cards slide away; one block left)* By
+> **6.** *(the left-hand block and its single chip slide away; the eight-chip one is left)* By
 > the end of this you’ll know exactly what that number buys you — and what it
 > doesn’t. We’re going to follow one word all the way through.
 
@@ -184,12 +184,12 @@ one thing now missing; §02 opens by banking exactly that. **S-14**.
 
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | the sheet | — | two model blocks arrive side by side, five percent live on each | two `Block`s, 5% lit | — | S-01 |
+| 1 | the sheet | — | two model sheets arrive side by side — **left coarse, right fine** — five percent live on each | two `Block`s, 5% lit, different grain | — | S-01 |
 | 2 | the sheet | — | one chip slides in under the left block | `MachineBox` ×1 | — | S-01 |
 | 3 | the sheet | — | seven more cards stack under the right block | `Rig` ×8 | — | S-01 |
 | 4 | the sheet | — | the quoted phrase writes itself across both blocks | handwritten note | **`only 5% active`** | S-02 |
 | 5 | the sheet | — | the blocks hold, visibly unequal underneath | both blocks, 1 vs 4 cards | — | S-02 |
-| 6 | the sheet | — | the right block and its eight cards slide out of frame | one `Block` left | — | S-03 |
+| 6 | the sheet | — | the left block and its single chip slide out of frame | the eight-chip `Block` left | — | S-03 |
 | 7 | the sheet | — | the block settles alone, whole | `Block` solid | — | S-04 |
 | 8 | the sheet | — | it breaks into a field of separate marks | `Block` scattered | **`320,000,000,000`** | S-04 |
 | 9 | the sheet | — | the marks resolve and about five percent go live | `Block`, 5% lit | — | S-04 |
@@ -215,7 +215,7 @@ total here.** A hand-typed total is how this script came to claim 1:24 and
   rather than *here is a new slide*.
 - **The two blocks are one comparison, not two subjects.** They arrive
   together, they get the same treatment, and the only thing that differs is
-  what is underneath them. If the right-hand block ever gets its own moment,
+  what is underneath them. If the left-hand block ever gets its own moment,
   the section has become about two models instead of about one number.
 - **Beat 4's phrase is sticky and beats 2–3's counts are sticky.** Found by
   rendering: without it, "one" left the screen as "eight" arrived and the

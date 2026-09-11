@@ -24,7 +24,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           See `scene.ts` on `block2` for why the distinction matters.
         */}
         <Slot on={scene.block2.on} at={scene.block2.at} scale={scene.block2.scale} z={1} feel={feel}>
-          <Block lit={scene.block2.lit} />
+          <Block lit={scene.block2.lit} grain={scene.block2.grain} />
         </Slot>
         <Slot on={scene.rigA.on} at={scene.rigA.at} scale={scene.rigA.scale} z={2} feel={feel}>
           <Rig count={scene.rigA.count} />

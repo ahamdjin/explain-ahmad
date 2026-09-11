@@ -29,11 +29,12 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           ghost={scene.block.ghost}
           lifted={scene.block.lifted}
           heavy={scene.block.heavy}
+          grain={scene.block.grain}
         />
       </Slot>
 
       <Slot on={scene.block2.on} at={scene.block2.at} scale={scene.block2.scale} z={1} feel={feel}>
-        <Block scatter={scene.block2.scatter} lit={scene.block2.lit} heavy={scene.block2.heavy} />
+        <Block scatter={scene.block2.scatter} lit={scene.block2.lit} heavy={scene.block2.heavy} grain={scene.block2.grain} />
       </Slot>
 
       <Slot on={scene.rigA.on} at={scene.rigA.at} scale={scene.rigA.scale} z={2} feel={feel}>

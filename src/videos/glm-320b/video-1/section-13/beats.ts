@@ -269,21 +269,26 @@ export const BEATS: Beat<Patch>[] = [
      * return. */
     vo: 'Two models. Both about five percent active. One of them runs on a single chip; the other one needs eight.',
     /*
-     * §1's coordinates, exactly: blocks at 30/42 and 72/42 scale 0.5, rigs at
-     * 30/73 and 72/73 with counts 1 and 4. If `section-01/scene.ts` moves,
-     * this moves with it -- the whole point of the beat is that the viewer
-     * recognises the frame, and a shifted copy is a different picture.
+     * §1's coordinates, exactly: **gpt-oss coarse on the left at 30/42 with
+     * one chip, ours fine on the right at 72/42 with eight**, both scale 0.5,
+     * rigs at 30/73 and 72/73. If `section-01/scene.ts` moves, this moves with
+     * it -- the whole point of the beat is that the viewer recognises the
+     * frame, and a shifted copy is a different picture.
      */
     commands: [
       /*
-       * `fine` on both, because §1's block state has no `grain` field at all
-       * and `Block` defaults to fine -- so §1's two sheets look identical in
-       * grain, and an exact return has to as well. The coarse/fine contrast
-       * belongs to beats 9-11, where it is the argument; here it would make
-       * the returning frame a *different* frame.
+       * **Coarse left, fine right -- the same as §1 beat 1.**
+       *
+       * This said `fine` on both, because §1's blocks had no `grain` field and
+       * both defaulted to fine. That made the opening frame two identical
+       * rectangles, which is a poor thing to spend the first six seconds on,
+       * and it meant granularity arrived here at minute 27 as a brand new
+       * idea. It is not new: it is what the viewer has been looking at since
+       * second zero. Drawn this way the close is a *return* rather than a
+       * rhyme, which is the whole of S-10.
        */
-      block.show({ x: 30, y: 42 }, 0.5, { grain: 'fine', lit: 'a', heavy: false }),
-      block2.show({ x: 72, y: 42 }, 0.5, { lit: 'b' }),
+      block.show({ x: 72, y: 42 }, 0.5, { grain: 'fine', lit: 'a', heavy: false }),
+      block2.show({ x: 30, y: 42 }, 0.5, { lit: 'b', grain: 'coarse' }),
       rigA.show({ x: 30, y: 73 }, 1, { count: 1 }),
       rigB.show({ x: 72, y: 73 }, 1, { count: 8 }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),

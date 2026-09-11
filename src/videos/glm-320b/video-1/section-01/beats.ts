@@ -55,10 +55,10 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Two AI models. Both use about five percent of themselves to answer you.',
     commands: [
       ground.at(GROUND_Y),
-      block.scatter({ x: 30, y: 42 }, 0.5),
+      block.scatter({ x: 72, y: 42 }, 0.5),
       block.pack(),
       block.light('a'),
-      block2.arrive({ x: 72, y: 42 }, 0.5),
+      block2.arrive({ x: 30, y: 42 }, 0.5),
       /* A *different* patch, deliberately: the two models are not active in the
        * same place, and the section's whole claim is that the share is the
        * same while everything else about it is not. */

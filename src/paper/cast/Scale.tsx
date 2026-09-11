@@ -127,8 +127,14 @@ export function Block({
           key={`${cx}-${cy}`}
           x={cx * CELL}
           y={cy * CELL}
-          width={CELL * step - 2}
-          height={CELL * step - 2}
+          /*
+           * Clamped to the sheet. `ROWS` is 22 and coarse `step` is 4, so the
+           * last row starts at 20 and a full-height cell overran the block's
+           * own outline by nearly two rows -- a chunk of the model hanging
+           * below the sheet it is part of.
+           */
+          width={Math.min(CELL * step, (COLS - cx) * CELL) - 2}
+          height={Math.min(CELL * step, (ROWS - cy) * CELL) - 2}
           rx={2}
           stroke={isGhost && !isLit ? PALETTE.red : 'none'}
           strokeWidth={isGhost && !isLit ? 2.4 : 0}

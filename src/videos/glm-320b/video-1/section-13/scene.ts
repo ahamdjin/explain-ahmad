@@ -83,7 +83,7 @@ export type SceneState = {
    * in step with it: block at 30/42 and 72/42 scale 0.5, rigs at 30/73 and
    * 72/73 scale 1, counts 1 and 4.
    */
-  block2: Placed & { lit?: 'a' | 'b' }
+  block2: Placed & { lit?: 'a' | 'b'; grain: 'fine' | 'coarse' }
   rigA: Placed & { count: number }
   rigB: Placed & { count: number }
   verdict: { on: boolean; at: At; scale: number; lines: [string, string] }
@@ -99,7 +99,7 @@ export const INITIAL: SceneState = {
   cardA: { on: false, at: { x: 30, y: 50 }, scale: 1, chips: 0, grain: 'coarse', litShare: false, note: '' },
   cardB: { on: false, at: { x: 70, y: 50 }, scale: 1, chips: 0, grain: 'fine', litShare: false, note: '' },
   diffs: { on: false, at: { x: 50, y: 18 }, scale: 0.52, lit: [0, 1, 2] },
-  block2: { on: false, at: { x: 72, y: 42 }, scale: 0.5, lit: 'b' },
+  block2: { on: false, at: { x: 30, y: 42 }, scale: 0.5, lit: 'b', grain: 'coarse' },
   rigA: { on: false, at: { x: 30, y: 73 }, scale: 1, count: 1 },
   rigB: { on: false, at: { x: 72, y: 73 }, scale: 1, count: 8 },
   verdict: {

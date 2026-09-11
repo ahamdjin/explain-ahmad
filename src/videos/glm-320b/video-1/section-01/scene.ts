@@ -38,6 +38,17 @@ export type SceneState = {
     ghost?: PatchName
     lifted: boolean
     heavy: boolean
+    /**
+     * Coarse or fine. **This is the opening frame's only visible difference.**
+     *
+     * §13 spends its ninth beat introducing granularity as a new idea at
+     * minute 27. It is not new -- it is the thing the viewer has been looking
+     * at since second zero, once the two sheets are drawn at different grain.
+     * That is what turns the close from a rhyme into a return (S-10), and it
+     * gives the first six seconds something to notice while the contradiction
+     * assembles underneath.
+     */
+    grain: 'fine' | 'coarse'
   }
   /**
    * Beats 1–6. The second model, and the machines under both.
@@ -48,7 +59,7 @@ export type SceneState = {
    * `block` because for six beats they are on screen together.
    * `research/COMPETITIVE_FIELD.md`: no other video in the field shows two.
    */
-  block2: { on: boolean; at: At; scale: number; scatter: boolean; lit?: PatchName; heavy: boolean }
+  block2: { on: boolean; at: At; scale: number; scatter: boolean; lit?: PatchName; heavy: boolean; grain: 'fine' | 'coarse' }
   /** The cards under a block. `count` is how many it takes to hold the model. */
   rigA: { on: boolean; at: At; scale: number; count: number }
   rigB: { on: boolean; at: At; scale: number; count: number }
@@ -92,8 +103,8 @@ export type SceneState = {
 
 export const INITIAL: SceneState = {
   big: { on: false, at: { x: 50, y: 44 }, scale: 1, value: '320,000,000,000', caption: '' },
-  block: { on: false, at: { x: 50, y: 47 }, scale: 1, scatter: true, lifted: false, heavy: false },
-  block2: { on: false, at: { x: 72, y: 42 }, scale: 0.5, scatter: false, heavy: false },
+  block: { on: false, at: { x: 50, y: 47 }, scale: 1, scatter: true, lifted: false, heavy: false, grain: 'fine' },
+  block2: { on: false, at: { x: 30, y: 42 }, scale: 0.5, scatter: false, heavy: false, grain: 'coarse' },
   rigA: { on: false, at: { x: 30, y: 73 }, scale: 1, count: 1 },
   rigB: { on: false, at: { x: 72, y: 73 }, scale: 1, count: 4 },
   word: { on: false, at: { x: 11, y: 47 }, scale: 0.9, label: 'dog' },
