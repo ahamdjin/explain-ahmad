@@ -35,6 +35,11 @@ if (!KEY) {
 
 const args = process.argv.slice(2)
 const LIST = args.includes('--list')
+/* Download count is a rough but real quality proxy: a foley clip with 40k
+ * downloads has been auditioned by thousands of editors, and a clipped or
+ * noisy one does not get there. `--top` sorts by it instead of by text score. */
+const SORT = args.includes('--top') ? 'downloads_desc' : 'score'
+const TAKE = Number((args.find((a) => a.startsWith('--take=')) || '--take=2').slice(7))
 const queries = args.filter((a) => !a.startsWith('--'))
 if (!queries.length) { console.error('Give at least one query.'); process.exit(1) }
 
@@ -71,8 +76,8 @@ for (const dir of [RAW, OUT]) {
 
 for (const q of queries) {
   const url = `https://freesound.org/apiv2/search/text/?query=${encodeURIComponent(q)}`
-    + `&filter=${encodeURIComponent(FILTER)}&sort=score&page_size=8`
-    + `&fields=id,name,duration,license,previews,username&token=${KEY}`
+    + `&filter=${encodeURIComponent(FILTER)}&sort=${SORT}&page_size=12`
+    + `&fields=id,name,duration,license,previews,username,num_downloads&token=${KEY}`
   const res = await fetch(url)
   if (!res.ok) { console.error(`  ${q}: HTTP ${res.status}`); continue }
   const { results = [] } = await res.json()
@@ -80,13 +85,13 @@ for (const q of queries) {
 
   if (LIST) {
     console.log(`\n${q}`)
-    for (const r of results) console.log(`   ${String(r.duration).padStart(5)}s  ${r.name}  (#${r.id} by ${r.username})`)
+    for (const r of results) console.log(`   ${String(r.duration.toFixed(2)).padStart(5)}s  ${String(r.num_downloads).padStart(6)}↓  ${r.name}  (#${r.id})`)
     continue
   }
 
   let took = 0
   for (const r of results) {
-    if (took >= 2) break                       // two candidates per query, not eight
+    if (took >= TAKE) break
     const mp3 = r.previews?.['preview-hq-mp3']
     if (!mp3) continue
     const buf = Buffer.from(await (await fetch(mp3)).arrayBuffer())
@@ -114,9 +119,9 @@ for (const q of queries) {
 
     await writeFile(LEDGER, JSON.stringify({
       file: wav, query: q, freesound_id: r.id, name: r.name,
-      author: r.username, license: r.license, duration: r.duration,
+      author: r.username, license: r.license, duration: r.duration, downloads: r.num_downloads,
     }) + '\n', { flag: 'a' })
-    console.log(`   ${wav}  ${r.duration}s  "${r.name}" by ${r.username}`)
+    console.log(`   ${path.basename(wav).padEnd(34)} ${r.duration.toFixed(2)}s ${String(r.num_downloads).padStart(6)}↓  by ${r.username}`)
     took += 1
   }
 }
