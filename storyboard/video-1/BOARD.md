@@ -11,7 +11,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 ## Section 01 — What "five percent active" actually costs
 
-`23` beats · `2:40` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
+`23` beats · `2:41` · script: `video-script/01-what-18-billion-active-means.md` · route: `/section-01`
 
 - **Exits on** — who picks the eight, and why is that the expensive question?
 
@@ -22,13 +22,13 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 3 | `behind-the-screen` | 5 | and-yet | The window turns edge-on and we pass behind it | Here is what happened behind that one word. |
 | 4 | `forty-five-floors` | 4 | so | A tower rises behind the glass | It went up forty-five floors. |
 | 5 | `a-room-of-two-eighty-eight` | 7 | so | Behind the tower, a room with 288 in it | On most of those floors, a room with two hundred and eighty-eight specialists in it. |
-| 6 | `three-thirty-six-for-one-word` | 6 | wall | A counter runs up to 336 under the whole thing | Three hundred and thirty-six of them got pulled in. For that one word. |
+| 6 | `three-thirty-six-for-one-word` | 14 | wall | The promise lands, then the counter runs to 336 | By the end, you’ll know why using only a small part can still mean a huge machine. Across that climb, those specialists got used three hundred and thirty-six times. For one token. |
 | 7 | `only-five-percent-runs` | 9 | and-yet | The machinery clears; two model sheets arrive, both five percent lit | And they tell you only about five percent of it ever runs. Here are two models. Both about five percent. |
 | 8 | `one-card` | 4 | so | One chip | This one runs on a single chip. |
 | 9 | `eight-cards` | 3 | wall | Eight of them | This one needs eight. |
-| 10 | `the-number-everybody-quotes` | 9 | and-yet | The number everybody quotes | Both of them have that number. Only one of them is actually cheap to own. |
+| 10 | `the-number-everybody-quotes` | 9 | and-yet | The number everybody quotes | Both of them have that number. Clearly, that number alone doesn’t tell you how much hardware you need. |
 | 11 | `unequal` | 4 | and-yet | Level above, unequal below | Same five percent. Eight times the machine. |
-| 12 | `the-promise` | 12 | therefore | The promise | By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through. |
+| 12 | `the-promise` | 5 | therefore | Follow one token | So now, let’s follow one token all the way through. |
 | 13 | `this-is-the-model` | 5 | so | The model, whole | This is the model. All of it. |
 | 14 | `what-a-parameter-is` | 13 | so | It breaks into marks | Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is. |
 | 15 | `five-percent-lights` | 7 | so | Five percent goes live | And when a token comes in, about five percent of them do something. |
@@ -179,7 +179,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 4 | `it-climbs` | 5 | so | A marker carrying the row starts climbing from floor one | The token doesn’t get processed once. It climbs. |
 | 5 | `the-same-two-things` | 13 | so | On each floor it passes, three quick flashes fire in order | And every floor does the same three things. Look around. Pick experts. Do the work. Well — nearly every floor. I’ll come back to that. |
 | 6 | `not-the-same-row` | 9 | so | The row at floor one and floor two — pick again, or keep? | So: same word, one floor up. Does it pick again — or does it keep the eight it’s got? |
-| 7 | `different-scores` | 12 | so | The two rows hold side by side | It picks again. Every floor runs its own router, from scratch — because the row arriving at floor two is not the row that arrived at floor one. |
+| 7 | `different-scores` | 12 | so | The two rows hold side by side | It picks again. Every sparse floor runs its own router from scratch — because the row arriving here isn’t the row that arrived at the floor below. |
 | 8 | `picks-again` | 11 | wall | Floor two’s eight light — mostly new positions, one or two held | Usually a different eight. Sometimes a couple come up again — it isn’t keeping them, it just scored them highest twice. |
 | 9 | `every-floor-picks-fresh` | 7 | so | The climb resumes; every floor runs its own router | Forty-two floors, forty-two decisions. Same token, same model, and it commits to nothing. |
 | 10 | `three-are-dense` | 15 | and-yet | The bottom three floors redraw plain, without expert walls | Now — three of the forty-five don’t have experts at all. They’re plain blocks that everything goes through. The other forty-two are the ones that choose. Those are called the sparse ones. |
@@ -327,8 +327,8 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 8 | `about-five-percent-both` | 7 | and-yet | Both cards light their active share; the two shares match | Both of them use about five percent of themselves to answer you. |
 | 9 | `three-things-differ` | 16 | so | Three chips land beside the second card: parameters, precision, grain | Three things differ, and only one of them is exciting. It’s nearly three times the parameters. It ships at twice the precision per weight. And it’s chopped finer — more experts, smaller each. |
 | 10 | `only-the-third-is-interesting` | 13 | and-yet | The first two chips grey out; the granularity chip stays lit | The first two are why the file is bigger. They’re just size. This one is the interesting one — and it’s not about the file at all. |
-| 11 | `better-and-harder` | 18 | and-yet | The fine-grained one’s chips grow while its pieces get smaller | Chopping finer is exactly why it’s better — better at specialising, better at spreading the load. It’s also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby. |
-| 12 | `the-trend` | 15 | therefore | The second card withdraws; ours holds with its eight chips | So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn’t move. |
+| 11 | `better-and-harder` | 18 | and-yet | The fine-grained model shows many more possible expert paths | Finer routing gives the model many more possible expert paths. That doesn’t make the file bigger — but it means the active share can be spread across many more places, instead of sitting in one corner you could simply keep nearby. |
+| 12 | `the-trend` | 15 | therefore | The second card withdraws; ours holds with its eight chips | So “five percent active” tells you how much work happens. By itself, it tells you almost nothing about how much of the model needs to stay within reach. |
 | 13 | `a-compute-number` | 11 | therefore | Everything clears to a single line of handwriting | "Active parameters" is a compute number. It was never a memory number. |
 | 14 | `two-models-one-card-and-eight` | 12 | so | §1’s opening frame redraws itself exactly: two sheets, one chip and eight | Two models. Both about five percent active. One of them runs on a single chip; the other one needs eight. |
 | 15 | `now-you-know-why` | 7 | and-yet | Nothing moves | Now you know why. |
@@ -339,7 +339,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 
 | § | Section | Beats | Runtime | Hands forward |
 | --- | --- | --- | --- | --- |
-| 01 | What "five percent active" actually costs | 23 | 2:40 | who picks the eight, and why is that the expensive question? |
+| 01 | What "five percent active" actually costs | 23 | 2:41 | who picks the eight, and why is that the expensive question? |
 | 02 | Your words become tokens | 13 | 2:01 | a row number has no meaning in it. So how does it know what anything means? |
 | 03 | From an ID to a meaning | 15 | 2:21 | that row is the same every single time. So how does the word ever mean two things? |
 | 04 | The word looks around | 16 | 2:29 | so the numbers depend on the sentence. Who reads them, and what do they decide? |
@@ -352,7 +352,7 @@ Chain check: `npm run check:chain` · Frames: `npm run frames:all`
 | 11 | So could you store only the 18 billion? | 15 | 2:11 | so you can't store only the active part. But people run big models on small machines. |
 | 12 | How people actually run these | 16 | 2:47 | it's a price, not a wall. So what did "five percent active" actually get us? |
 | 13 | What that number actually bought | 15 | 2:51 | (none — the thesis lands) |
-| | **whole piece** | **195** | **30:12** | |
+| | **whole piece** | **195** | **30:13** | |
 
 ⚑ the section's event · ❄ a frame that must read as a still
 

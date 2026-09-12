@@ -123,7 +123,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'three-thirty-six-for-one-word',
     title: 'The promise lands, then the counter runs to 336',
     relation: 'wall',
-    secs: 13,
+    secs: 14,
     /*
      * 336 is **visits/uses**, not 336 distinct experts. The old "336 of them"
      * wording taught the wrong object. The counter is staged after the promise
