@@ -1,5 +1,10 @@
 # SFX — what these are, and what was rejected
 
+> **These thirteen are a starting set, not the library.** They came from a
+> route that matches loosely on text and states no licence. For a real palette
+> use `npm run sfx` — Freesound, filtered to CC0, which fixes both problems at
+> once. See "A bigger library" at the bottom.
+
 Thirteen sounds for nine roles. Eleven sourced through the `media-use` skill
 (`resolve --type sfx`, provider `heygen.audio.sounds`); two are the skill's own
 bundled `typing` and `key-press`. Raw fetches and the full ledger: `.media/`.
@@ -85,3 +90,30 @@ a commercial-use grant.
 in `THIRD_PARTY.md`. If it does not clear, `docs/SOUND.md` still stands — the
 cue sheet is a design, not these files — and freesound.org CC0 fills it in an
 afternoon.
+
+
+## A bigger library — `npm run sfx`
+
+Thirteen files is thin, and the reason is the source: HeyGen's audio library
+returns one result per query and matched four different paper intents to the
+same file. It is also the half of this palette whose licence is unresolved.
+
+**Freesound fixes both.** ~600k sounds, and `license:"Creative Commons 0"` is a
+real filter — everything that comes back is commercially safe with no
+attribution required, which removes the upload blocker entirely.
+
+    # two minutes: https://freesound.org/apiv2/apply/
+    export FREESOUND_KEY=your_key
+
+    npm run sfx -- --list "rubber stamp"        # see candidates first
+    npm run sfx -- "rubber stamp" "page turn" "pencil on paper"
+
+Every fetch is filtered to **under 3 seconds**, deduped **by content hash**
+(the check that caught the four-way duplicate), high-passed at 250 Hz and
+peak-normalised to −12 dBFS — the same spec as the thirteen above. Provenance,
+author and licence land in `assets/sfx/freesound.jsonl`, which is what
+`THIRD_PARTY.md` should cite once the palette settles.
+
+Worth pulling: stamp · page turn · book close · drawer · pencil · pen scratch ·
+paper slide · card deal · switch click · typewriter key · ratchet · dial click ·
+wood knock · box close · paper crumple · file drawer · stapler.

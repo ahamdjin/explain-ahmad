@@ -24,3 +24,6 @@ output/smoke/
 # Raw media fetches. The processed, project-ready sounds live in assets/sfx/
 # with their provenance; this is the unedited pool and the fetch ledger.
 .media/
+
+# auditioning copies of assets/sfx
+public/sfx/
