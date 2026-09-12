@@ -19,6 +19,12 @@ import path from 'node:path'
 
 const ROOT = 'src/videos/glm-320b/video-1'
 const OUT = 'output/sfx'
+/*
+ * The app plays these too. Cues are anchored to beat ids, so the sound you
+ * hear while scrubbing is the same data the offline track is built from --
+ * one source, two consumers, and nothing hand-placed on a timeline.
+ */
+const WEB = 'public/sfx'
 
 /**
  * Masters are peak-normalised to -12 dBFS. -8 dB here lands the ordinary cues
@@ -178,3 +184,15 @@ await writeFile(path.join(OUT, 'cues.csv'), rows.map((row) => row.map(csvEscape)
 
 console.log(`${resolved.length} SFX events → ${OUT}/cues.csv + cues.json`)
 console.log('Beat ids are the anchor. Re-run after VO timing/restamp before sound editing.')
+
+/* -- and the copy the running app reads ----------------------------------- */
+{
+  const { cp, mkdir: mk, writeFile: wf } = await import('node:fs/promises')
+  await mk(WEB, { recursive: true })
+  await cp('assets/sfx', WEB, {
+    recursive: true,
+    filter: (src) => !src.includes('pool') && (src.endsWith('.wav') || !src.includes('.')),
+  })
+  await wf(path.join(WEB, 'cues.json'), JSON.stringify(resolved), "utf8")
+  console.log(`${resolved.length} cues + ${13} sounds → ${WEB}/  (the app reads these)`)
+}

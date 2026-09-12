@@ -21,6 +21,7 @@ export default function Section04({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={4}
       label="The word looks around"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

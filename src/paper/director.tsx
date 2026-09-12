@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { fireBeat } from './sfx'
 import { PaperDefs } from './ink'
 import { FEEL, HOLD, type Feel, type Relation } from './motion'
 import { Overlays, type Overlay } from './overlays'
@@ -88,6 +89,7 @@ export function SectionRunner<S, P>({
   onFinish,
   autoplay = false,
   audioSrc,
+  section,
   children,
 }: {
   beats: Beat<P>[]
@@ -104,6 +106,12 @@ export function SectionRunner<S, P>({
    * sync with the sentence it belongs to. Without it, `secs` drives.
    */
   audioSrc?: string
+  /**
+   * Which section this is, for sound. Cues are keyed by `section/beat-id`
+   * because beat ids are only unique inside a section. Omit it and the section
+   * is silent -- sound is never a reason a page fails to render.
+   */
+  section?: number
   children: (scene: S, feel: Feel) => ReactNode
 }) {
   const [index, setIndex] = useState(() => initialIndex(beats.length))
@@ -121,6 +129,19 @@ export function SectionRunner<S, P>({
   useEffect(() => {
     indexRef.current = index
   }, [index])
+
+  /*
+   * Sound, fired by the beat that causes it rather than by a timecode.
+   * `elapsed` is deliberately NOT a dependency: it ticks continuously, and
+   * re-running this on every tick would retrigger the whole beat's cues many
+   * times a second. It is read once, at the moment the beat becomes current,
+   * so scrubbing into the middle of a beat skips cues already past.
+   */
+  useEffect(() => {
+    if (section === undefined || !beat) return
+    return fireBeat(section, beat.id, Number.isFinite(elapsed) ? elapsed / 1000 : 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [section, beat?.id])
 
   /** How far into the current beat we are, so staged reveals fire in order. */
   const [elapsed, setElapsed] = useState(Number.POSITIVE_INFINITY)

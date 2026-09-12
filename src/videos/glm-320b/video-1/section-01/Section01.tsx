@@ -27,6 +27,7 @@ export default function Section01({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={1}
       label="What does 18 billion active actually mean?"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

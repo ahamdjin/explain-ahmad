@@ -51,6 +51,34 @@ The build already says what a beat is through its `relation`. In general,
 explicit cue plan below is the final authority where that rule has deliberate
 exceptions.
 
+## The cues are not placed by hand
+
+A timecode on a timeline works exactly once. Every `secs` in this build will
+change when the real voice is recorded, and when one does, every cue after it is
+wrong -- silently -- and re-placing forty-one of them is an afternoon.
+
+So cues anchor to **beat ids**, which never move, and one file drives
+everything:
+
+    npm run sfx:build      # cues.json → the app, and one SFX track per section
+
+- **In the app.** The beat fires, the sound fires. Click or scrub anywhere and
+  you hear that beat's cues, at the right offsets, immediately. Scrubbing into
+  the middle of a beat skips cues already past rather than firing them late.
+- **In the render.** The same `cues.json` builds `output/sfx/section-NN.wav`,
+  and where a voice take exists it is mixed to `public/mix/NN.wav` -- so
+  `npm run render:final` needs no editor pass at all.
+
+What you hear while scrubbing is what lands in the file, because it is the same
+data. Re-run after any restamp; nothing needs re-placing.
+
+A hand mix always wins: anything already in `public/mix/` is left alone.
+
+**Automation is silent.** Playwright captures no audio and the track is built
+offline, so `navigator.webdriver` disables playback entirely -- otherwise
+`npm run smoke` navigates away mid-fetch and every aborted request reads as a
+failure.
+
 ## Craft rules
 
 | | |

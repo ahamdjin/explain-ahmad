@@ -21,6 +21,7 @@ export default function Section03({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={3}
       label="From an ID to a meaning"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

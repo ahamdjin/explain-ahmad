@@ -21,6 +21,7 @@ export default function Section11({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={11}
       label="So could you store only the 18 billion?"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

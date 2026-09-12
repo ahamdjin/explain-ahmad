@@ -21,6 +21,7 @@ export default function Section13({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={13}
       label="What that number actually bought"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

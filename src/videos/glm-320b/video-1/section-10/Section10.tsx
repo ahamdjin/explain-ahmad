@@ -21,6 +21,7 @@ export default function Section10({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={10}
       label="And then it does the whole thing again"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

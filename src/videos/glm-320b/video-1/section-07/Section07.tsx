@@ -21,6 +21,7 @@ export default function Section07({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={7}
       label="That was one layer. There are 45."
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

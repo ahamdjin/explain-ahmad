@@ -21,6 +21,7 @@ export default function Section09({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={9}
       label="Where the answer comes out"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

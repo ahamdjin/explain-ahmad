@@ -21,6 +21,7 @@ export default function Section02({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={2}
       label="Your words become tokens"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

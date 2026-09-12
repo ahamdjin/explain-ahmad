@@ -45,7 +45,9 @@
     "render:join": "node scripts/render.mjs --join",
     "render:final": "node scripts/render.mjs --join --require-mix",
     "sfx": "node scripts/sfx-fetch.mjs",
-    "sfx:cues": "node scripts/sfx-cues.mjs"
+    "sfx:cues": "node scripts/sfx-cues.mjs",
+    "sfx:track": "node scripts/sfx-track.mjs",
+    "sfx:build": "npm run sfx:cues && npm run sfx:track"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

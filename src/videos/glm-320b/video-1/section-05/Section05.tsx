@@ -21,6 +21,7 @@ export default function Section05({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={5}
       label="The router picks the eight"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

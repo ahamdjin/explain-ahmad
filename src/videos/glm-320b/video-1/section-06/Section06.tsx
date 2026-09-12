@@ -21,6 +21,7 @@ export default function Section06({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={6}
       label="The experts do the work"
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}

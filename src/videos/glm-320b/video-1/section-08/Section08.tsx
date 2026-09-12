@@ -21,6 +21,7 @@ export default function Section08({
       onFinish={onFinish}
       autoplay={autoplay}
       audioSrc={VO}
+      section={8}
       label="That was one token. Here’s the sentence."
     >
       {(scene, feel) => <Stage scene={scene} feel={feel} />}
