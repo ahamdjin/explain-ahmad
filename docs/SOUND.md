@@ -29,41 +29,69 @@ instinct to score is strongest and most wrong.
 | **Layering** | One cue per landing. Never two. |
 | **Repeats** | Vary pitch ±2% or alternate takes when the same cue returns, or the ear tags it as a loop. |
 
-## The cue sheet
+## The palette — thirteen sounds, nine roles
 
-Five sounds, nineteen landings, twelve seams. Files and provenance:
-`assets/sfx/MANIFEST.md` — **audition them first**, four of nine fetches came
-back as something other than what was asked for.
+Files, measurements and provenance: `assets/sfx/MANIFEST.md`.
+**Audition before cutting** — six of seventeen fetches came back as something
+other than what was asked for.
 
-Timecodes are from `npm run timing` and **will move** once the voice is
+| role | file | s | uses |
+| --- | --- | --- | --- |
+| **the fact landing** | `stamp` | 0.23 | **3 only.** A character, not an effect. Spending it a fourth time spends it entirely. |
+| a small placement | `click` | 0.18 | the common landing |
+| a smaller one | `tick` | 0.24 | second in a series, or a connection |
+| a decision, cut off | `snap` | 0.28 | something settling for good |
+| a hard stop | `knock` | 0.20 | a limit being met |
+| something closing | `clack` | 0.42 | a drawer, an answer |
+| weight | `thud` | 0.79 | cost, slowness |
+| the biggest number | `impact` | 1.10 | **1 use.** 12,096. |
+| counting | `ratchet` | 0.98 | under a count-up. **5 in the film, no others.** |
+| a chapter ending | `page-turn` | 0.98 | the 12 seams |
+| destruction | `tear` | 2.00 | **1 use.** §2 b5. |
+| diegetic | `typing` / `key-press` | 1.05 / 0.33 | **§1 beat 1 only** — the question being typed. Not a cue: the sound of the world, which is why the hook works. |
+
+## The count-ups — `ratchet` ×5
+
+A number assembling on screen is the one *process* that earns a sustained
+sound, because the assembling is the event. There are five, and no other beat
+gets one.
+
+| at | beat | cue |
+| --- | --- | --- |
+| `0:25` | §01 b6 `three-thirty-six-for-one-word` | (see the landing table) |
+| `16:08` | §07 b12 `three-hundred-and-thirty-six` | `ratchet`, ending on `click` |
+| `18:03` | §08 b10 `two-thousand-six-eighty-eight` | `ratchet`, ending on `snap` |
+| `23:16` | §11 b7 `how-much-did-we-carry` | `ratchet`, ending on `click` |
+| `26:36` | §12 b13 `twelve-thousand-and-ninety-six` | (see the landing table) |
+
+## The landings — nineteen
+
+Timecodes are from `npm run timing` and **will move** when the voice is
 recorded. Re-derive them; the beat ids will not move.
 
 | at | beat | cue | why |
 | --- | --- | --- | --- |
-| `0:25` | §01 b6 `three-thirty-six-for-one-word` | `stamp` | The hook, and the first of the stamp's three appearances. Allowed a dB or two over the others — it is the thesis landing in the ear. |
-| `0:44` | §01 b9 `eight-cards` | `click` ×2 | One chip, then the stack. Two gestures, not eight hits: the second click covers all seven. |
-| `3:05` | §02 b5 `it-gets-cut-up` | `tear` | The only tear in the film. Do not reuse it anywhere. |
-| `5:52` | §03 b9 `now-tuesday` | `click` | A third point placed in space. Quiet. |
-| `6:50` | §03 b15 `same-word-same-row` | `click` ×3, evenly spaced | Three identical rows. Identical sound, identical spacing — the repetition **is** the argument, so do not vary these three. |
+| `0:25` | §01 b6 `three-thirty-six-for-one-word` | `ratchet` → `stamp` | The hook. Ratchet under the count-up, stamp when it lands. The one cue allowed a dB over the rest. |
+| `0:44` | §01 b9 `eight-cards` | `click`, then `snap` | One chip, then the stack. Two gestures, never eight hits. |
+| `3:05` | §02 b5 `it-gets-cut-up` | `tear` | The only tear in the film. |
+| `5:52` | §03 b9 `now-tuesday` | `click` | A third point placed in space. |
+| `6:50` | §03 b15 `same-word-same-row` | `click` ×3, evenly spaced | Three identical rows. Same sample, same spacing — the repetition is the argument, so do not vary them. |
 | `7:44` | §04 b6 `only-backwards` | `knock` | A limit: it can only look backwards. |
-| `8:41` | §04 b12 `nothing-like-each-other` | `click`, quiet | Two things nothing like each other, sitting still. |
-| `10:57` | §05 b10 `no-dog-expert` | `click` ×3, the third cut short | Name-plates land and slide off. The third must sound **wrong** — clip it early. This is the correction; it must not sound successful. |
-| `11:45` | §05 b13 `look-what-the-scores-came-from` | `click` | A line drawn back to where the scores came from. A connection, not an impact. |
+| `8:41` | §04 b12 `nothing-like-each-other` | `tick`, quiet | Two things nothing like each other, sitting still. |
+| `10:57` | §05 b10 `no-dog-expert` | `click` ×3, the third clipped | Plates land and slide off. The third must sound **wrong**. The correction cannot sound successful. |
+| `11:45` | §05 b13 `look-what-the-scores-came-from` | `tick` | A line drawn back to the scores. A connection, not an impact. |
 | `14:26` | §07 b1 `forty-five` | `knock` | Forty-five. Answered flat, in one word. |
-| `15:30` | §07 b8 `picks-again` | `stamp` | It picks again. **Same sample as 0:25** — this is deliberately the same fact returning. |
+| `15:30` | §07 b8 `picks-again` | `stamp` | It picks again. **Same sample as 0:25** — the same fact returning. |
 | `22:09` | §10 b13 `it-never-stops-choosing` | `stamp` | It never stops re-choosing. Third and final stamp. |
-| `23:08` | §11 b6 `forty-two-times` | — none — | Forty-two times. §10's repeating cue is still carrying this; a landing on top is one thing too many. |
-| `23:38` | §11 b10 `a-second-and-a-half` | `knock` | The better part of two seconds. Heavy and slow — pitch it down ~15% for weight. |
-| `24:34` | §12 b1 `people-do-run-these` | `page-turn` (the seam cue) | The reversal opens, and it is a seam anyway. Let the seam do it. |
-| `26:18` | §12 b11 `keep-less-and-it-crawls` | — none — | It crawls. Sound here would be mercy; the frame should be uncomfortable alone. |
-| `26:36` | §12 b13 `twelve-thousand-and-ninety-six` | `stamp`? **no** — `knock` | The film's largest number. The stamp is spent; a knock lands it without breaking the three-use rule. Hold silence after it for the whole beat. |
-| `26:59` | §12 b15 `nobody-knows-where` | — silence, deliberately — | Nobody knows where. The strongest cue available is the one the viewer expects and does not get. It only works because the other eighteen were consistent. |
-| `27:50` | §13 b4 `all-of-it-in-reach` | `knock`, pitched down | All of it in reach. Pairs with 23:38 — same sound, the answer instead of the problem. |
+| `23:08` | §11 b6 `forty-two-times` | — none — | §10's repeating tick is still carrying this. A landing on top is one thing too many. |
+| `23:38` | §11 b10 `a-second-and-a-half` | `thud` | The better part of two seconds. Weight, not sharpness. |
+| `24:34` | §12 b1 `people-do-run-these` | `page-turn` (seam) | The reversal opens on a seam. Let the seam do it. |
+| `26:18` | §12 b11 `keep-less-and-it-crawls` | — none — | It crawls. Sound here would be mercy. |
+| `26:36` | §12 b13 `twelve-thousand-and-ninety-six` | `ratchet` → `impact` | The largest number in the film. `impact`, not a fourth stamp — the stamp is spent. Hold silence after it for the whole beat. |
+| `26:59` | §12 b15 `nobody-knows-where` | — silence — | Nobody knows where. The strongest cue is the one expected and withheld. Only works because the other eighteen were consistent. |
+| `27:50` | §13 b4 `all-of-it-in-reach` | `clack` | All of it in reach. Something closing — pairs with 23:38, the answer where that was the problem. |
 
 ## The seams — `page-turn` ×12
-
-The chapter structure made audible. Twelve in thirty minutes will not tire,
-and paper is the right material for this film.
 
 | at | into |
 | --- | --- |
