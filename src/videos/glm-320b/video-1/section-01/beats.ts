@@ -26,16 +26,8 @@ import {
  * Checked by `npm run check:board` and `npm run timing -- --scripts`.
  *
  * **Script v10.** Every beat cites a strategy from `skills/STRATEGY_LEDGER.md`
- * -- see the Storyboard table in the script. The opening is a *comparison*,
- * not a number: two models with the same headline figure and eight times the
- * hardware between them, which `research/COMPETITIVE_FIELD.md` shows is the
- * one opening nobody else in the field is using. Two of the three competing
- * videos open the way v8 did.
- *
- * The section happens in one place for nine beats. The only camera move is the
- * push-in at beat 10, and the stillness before it is what makes it mean
- * something. Beat 12 is a held beat with nothing happening at all -- it is the
- * bet, and it needs the air.
+ * -- see the Storyboard table in the script. The opening starts on a familiar
+ * chat, goes behind it, then turns the mechanism into a hardware contradiction.
  */
 
 /* Layout anchors. Reflow the whole section from here. */
@@ -47,33 +39,9 @@ const BLOCK_W = 52
 
 export const BEATS: Beat<Patch>[] = [
   /* ═══ ACT 1 · THE SCREEN, AND WHAT IS BEHIND IT ═════════════════════════
-   *
-   * Six beats, about twenty-eight seconds, and the whole job is to make the
-   * viewer want the next twenty-nine minutes.
-   *
-   * **Why it starts on a chat window.** The section used to open on two
-   * abstract sheets and a statistic, and Ahmad kept returning to it: *"it's
-   * not something I'd say I want to watch the whole video for."* His own
-   * diagnosis is the one that stuck -- *"it's like I'm flying the airplane in
-   * the ocean and nobody knows what's happening, they're seeing the ocean and
-   * don't understand."* The frame had no coastline. A tower and a wall of 288
-   * mean nothing at second zero, because nothing has told the viewer what they
-   * are or where they live.
-   *
-   * A chat window needs no explaining. Everyone watching has typed into one
-   * and waited. So the video stands on that, and then goes **behind** it --
-   * which is a story rather than a diagram: familiar world, something odd
-   * about it, go and look, and what you find is absurd.
-   *
-   * The absurdity is the hook, and it is a **disproportion**, not a number:
-   * one small word on a screen against forty-five floors, two hundred and
-   * eighty-eight specialists and three hundred and thirty-six trips. The
-   * viewer feels it before a single term is defined -- and then beat 7 tells
-   * them that everybody calls this thing efficient, which now reads as an
-   * accusation rather than a statistic.
-   *
-   * Nothing here is explained. Beats 13-23 explain all of it. Show, then name.
-   */
+   * Six beats. Familiar world first, then the disproportion behind one token.
+   * The promise now starts on beat 6 instead of waiting until the hardware
+   * comparison has finished. */
   {
     n: 1,
     id: 'you-ask-it-something',
@@ -153,33 +121,27 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 6,
     id: 'three-thirty-six-for-one-word',
-    title: 'A counter runs up to 336 under the whole thing',
+    title: 'The promise lands while the counter runs to 336',
     relation: 'wall',
-    secs: 6,
+    secs: 13,
     /*
-     * The hook, and it is a **disproportion** rather than a figure: the word
-     * is still on the glass at the left of frame while the count runs. 336 is
-     * 8 routed experts x 42 sparse layers, measured -- `GROUND_TRUTH.md`.
+     * 336 is **visits/uses**, not 336 distinct experts. The old "336 of them"
+     * wording taught the wrong object. The value promise starts here, while
+     * the viewer is still inside the first thirty-ish seconds of the opening.
      */
-    vo: 'Three hundred and thirty-six of them got pulled in. For that one word.',
-    commands: [count.run(336, 'experts — for one word'), narrator.pose('slump')],
+    vo: 'By the end, you’ll know why using only a small part can still mean a huge machine. Across that climb, those specialists got used three hundred and thirty-six times. For one token.',
+    commands: [count.run(336, 'uses — one token'), narrator.pose('slump')],
   },
 
   /* ═══ ACT 2 · THE CLAIM (S-01) ══════════════════════════════════════════
-   * Now the statistic lands, and it lands as an accusation: the viewer has
-   * just watched the disproportion themselves, so "only five percent runs"
-   * arrives as something to be angry about rather than something to learn. */
+   * Now the statistic lands after the disproportion, so the hardware
+   * comparison has something concrete to contradict. */
   {
     n: 7,
     id: 'only-five-percent-runs',
     title: 'The machinery clears; two model sheets arrive, both five percent lit',
     relation: 'and-yet',
     secs: 9,
-    /*
-     * The statistic, *after* the disproportion rather than instead of it. The
-     * viewer has just watched 336 trips buy one word, so "only five percent
-     * runs" is something to be angry about, not something to be taught.
-     */
     vo: 'And they tell you only about five percent of it ever runs. Here are two models. Both about five percent.',
     commands: [
       chat.off(),
@@ -214,9 +176,6 @@ export const BEATS: Beat<Patch>[] = [
      */
     vo: 'This one runs on a single chip.',
     commands: [rigA.show(1), narrator.pose('offer')],
-    /* Sticky, because beat 3 is the comparison and a comparison needs both
-     * halves on screen at once. Non-sticky, "one" vanished as "eight" arrived
-     * and the contradiction never existed in a single frame. */
     overlays: [note('one', 27, 80, { tone: 'measure', sticky: true })],
   },
   {
@@ -225,34 +184,21 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Eight of them',
     relation: 'wall',
     secs: 3,
-    /* The contradiction is complete here, at about 0:13. Checkable:
-     * gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card. GLM-5.3-Flash
-     * is ~306 GiB = 328.6 GB at FP8, so it does *not* fit four cards' 320 GB,
-     * and tensor-parallel size has to divide the 64 attention heads -- five is
-     * enough arithmetically and impossible in practice. Eight.
-     *
-     * This said "four" for a long time, directly above a comment saying
-     * ~306 GiB does not fit four. Nobody did the division.
-     * `research/glm/GROUND_TRUTH.md` §"How many GPUs". */
+    /* Checkable: gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card.
+     * GLM-5.3-Flash is ~306 GiB = 328.6 GB at FP8, so four 80 GB cards are
+     * insufficient; tensor-parallel size must divide the 64 attention heads,
+     * making eight the smallest workable size. `GROUND_TRUTH.md`. */
     vo: 'This one needs eight.',
     commands: [rigB.show(8), narrator.pose('count')],
     overlays: [note('eight', 69, 80, { tone: 'cost', sticky: true })],
   },
-
-  /* ═══ ACT 2 · THE INVERSION AND THE PROMISE (S-02, S-03) ════════════════
-   * Trust's third move: the fact was the setup, the payload is that it
-   * implicates you. STORY_SPINE.md §3 -- this audience already believes it
-   * understands MoE, so name the belief back to them. */
   {
     n: 10,
     id: 'the-number-everybody-quotes',
     title: 'The number everybody quotes',
     relation: 'and-yet',
     secs: 9,
-    /* S-02, the inversion: the fact was the setup, the payload is that it
-     * implicates you. Beat 7 now carries "everyone quotes that number", so
-     * this beat keeps only the turn. */
-    vo: 'Both of them have that number. Only one of them is actually cheap to own.',
+    vo: 'Both of them have that number. Clearly, that number alone doesn’t tell you how much hardware you need.',
     commands: [narrator.pose('confide')],
     overlays: [centred('“only 5% active”', 51, 20, { size: 'md', rotate: -2, sticky: true })],
   },
@@ -264,20 +210,17 @@ export const BEATS: Beat<Patch>[] = [
     secs: 4,
     vo: 'Same five percent. Eight times the machine.',
     commands: [narrator.pose('weigh')],
-    /* The brace spans both blocks: left block starts at ~17%, right ends at
-     * ~85%. `brace`'s x is the LEFT EDGE, not the centre. */
     overlays: [brace('same share', 17, 63, 68, { tone: 'measure' })],
   },
   {
     n: 12,
     id: 'the-promise',
-    title: 'The promise',
+    title: 'Follow one token',
     relation: 'therefore',
-    secs: 12,
-    /* S-03. Sanderson's SoME criterion, verbatim: "It should be clear to the
-     * reader/viewer within the first 30 seconds why they should care." This
-     * lands at about 0:26. Withhold the mechanism, never the promise. */
-    vo: 'By the end of this you’ll know exactly what that number buys you — and what it doesn’t. We’re going to follow one word all the way through.',
+    secs: 5,
+    /* The value promise already landed at beat 6. This beat only turns the
+     * hardware contradiction into the journey that will prove it. */
+    vo: 'So now, let’s follow one token all the way through.',
     commands: [
       block2.off(),
       rigA.off(),
@@ -288,10 +231,7 @@ export const BEATS: Beat<Patch>[] = [
     clearSticky: true,
   },
 
-  /* ═══ ACT 3 · NOW THE WORDS (S-04) ══════════════════════════════════════
-   * Sanderson, Concrete before Abstract: let examples precede generality.
-   * "Parameter" arrives at 0:40, after the block has been watched behaving
-   * twice. v8 defined three terms inside twenty seconds. */
+  /* ═══ ACT 3 · NOW THE WORDS (S-04) ══════════════════════════════════════ */
   {
     n: 13,
     id: 'this-is-the-model',
@@ -329,7 +269,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The camera pushes into the block',
     relation: 'so',
     secs: 3,
-    /* The only camera move in the section. skills/SPATIAL_CONTINUITY.md. */
     vo: 'Let’s get closer.',
     commands: [word.off(), block.moveTo({ x: 52, y: 46 }, 2.6), narrator.off()],
   },
@@ -339,15 +278,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The surface resolves into the room from beat 5',
     relation: 'so',
     secs: 9,
-    /*
-     * "In each part of the model" was too broad: it is 288 per *sparse* layer,
-     * and 3 of the 45 layers have no experts at all. §1 may not say "layer",
-     * so the true form is to claim only what is on screen -- **this** part has
-     * 288 in it -- and let §7 establish how many such parts there are.
-     */
-    /* A **return**, not an introduction: beat 5 already put this room behind
-     * the screen. Saying it twice as news wasted eight seconds and taught the
-     * viewer that the opening had not counted. */
     vo: 'That room again. Two hundred and eighty-eight separate pieces — and this is one small part of the model.',
     commands: [block.off(), hospital.rise({ x: 52, y: 46 }, 0.86), hospital.staff(), ground.at(GROUND_Y)],
     lateOverlays: {
@@ -355,12 +285,6 @@ export const BEATS: Beat<Patch>[] = [
       overlays: [centred('288', 50, 12, { size: 'md', rotate: -2, sticky: true })],
     },
   },
-
-  /* ═══ ACT 4 · THE BET (S-05) ════════════════════════════════════════════
-   * One of only two hard bets in the whole video; the other is §7. Spent here
-   * because eight of 288 is 2.8% and nobody guesses that low. Richland,
-   * Kornell & Kao (2009): the wrong guess still helps. The guess and the
-   * answer occupy the same space -- the 288 do not move between 12 and 13. */
   {
     n: 18,
     id: 'how-many-run',
@@ -386,21 +310,8 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The other 280 do nothing',
     relation: 'so',
     secs: 9,
-    /*
-     * **280 is correct, and the detour that got here is worth recording.**
-     *
-     * A review said this beat omitted the always-on shared expert, which was
-     * true. My first fix said "279 idle, one always on" -- and that was a new
-     * and worse error, because `n_routed_experts` is 288 and
-     * `n_shared_experts` is 1 *on top of it*. The shared expert is not one of
-     * the 288. Of the 288 routed, 8 run and **280** do not.
-     *
-     * The shared expert is therefore a 289th object this section has no frame
-     * for, and a floating "always on" label pointing at nothing was worse than
-     * silence -- the render made that obvious. It is introduced properly in §5
-     * beat 10, which has a picture of it. §1 must simply not imply the 288 are
-     * everything, which the next beat now handles.
-     */
+    /* Of the 288 routed experts, 8 run and 280 do not. The shared expert is a
+     * 289th additional object and is introduced properly in §5. */
     vo: 'Eight get picked. The other two hundred and eighty do nothing at all.',
     commands: [hospital.idle('280 idle')],
   },
@@ -410,20 +321,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Eight of 288 is not the five percent',
     relation: 'and-yet',
     secs: 11,
-    /*
-     * **The fix that matters most in this section.**
-     *
-     * v10 said "there's your five percent, that's where it comes from" over a
-     * frame of eight lit experts. That is the one error `GROUND_TRUTH.md`
-     * warns is disqualifying: 8 / 288 is 2.8% of the routed weight in *one*
-     * sparse layer; 18 / 321 is 5.6% of the *model*. Neither causes the other,
-     * and the routed experts are under half the active path -- attention, the
-     * embeddings, the dense layers and the shared expert are on regardless.
-     *
-     * So the beat now does the opposite job: it *refuses* the easy sum. That
-     * is stronger anyway, because the question it leaves -- then where does the
-     * five percent come from? -- is what §7 answers with 336 and §11 prices.
-     */
     vo: 'You might think that’s the five percent. It isn’t. This is one small part, and plenty more runs every time regardless. Hold onto that.',
     commands: [],
     overlays: [
@@ -431,17 +328,12 @@ export const BEATS: Beat<Patch>[] = [
       note('not 5% of the model', 50, 86, { tone: 'cost', rotate: 2 }),
     ],
   },
-
-  /* ═══ ACT 5 · THE NAME AND THE WALL (S-12, S-14) ════════════════════════ */
   {
     n: 22,
     id: 'mixture-of-experts',
     title: 'It takes its name',
     relation: 'so',
     secs: 9,
-    /* S-12, tier C -- named at the close, after it has been watched working.
-     * The one inferred strategy in this section, and the ledger says so. It is
-     * also the first time the whole video says "Mixture of Experts" out loud. */
     vo: 'And this has a name. It’s called a Mixture of Experts. Those pieces are the experts.',
     commands: [hospital.label('Mixture of Experts', 'the experts')],
   },
@@ -451,7 +343,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The chapter wall',
     relation: 'and-yet',
     secs: 9,
-    /* The handoff. §2 opens by banking exactly this. STORY_SPINE.md §5. */
     vo: 'So — who picks the eight? And why does that turn out to be the expensive question?',
     commands: [
       hospital.moveTo({ x: 58, y: 46 }, 0.72),
