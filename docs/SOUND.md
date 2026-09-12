@@ -30,9 +30,12 @@ beat **id** is the stable anchor; the absolute timecode is not.
 3. Run `npm run sfx:cues`.
 4. Import the cue CSV/JSON and the thirteen masters into the editor.
 5. Place/nudge cues by eye and ear against the actual visual landings.
-6. Export the full VO+SFX audio for each section as `public/mix/01.wav` …
-   `public/mix/13.wav`.
+6. Export the full VO+SFX audio for each section as **48 kHz**
+   `public/mix/01.wav` … `public/mix/13.wav`.
 7. Run `npm run render:final`.
+
+`render.mjs` normalises every audio input to 48 kHz stereo AAC before joining,
+so a stray mono or 44.1 kHz export cannot make the section concat fail.
 
 **Do not copy timecodes out of this document.** This file specifies *which beat*
 earns a sound. The generated cue sheet specifies *when that beat currently is*.
@@ -88,13 +91,14 @@ stamp from a stapler reliably enough for final taste.
 
 `npm run sfx:cues` contains the machine-readable mapping and verifies that each
 named beat still exists. If a beat is renamed or removed, cue generation fails
-instead of silently placing a sound on the wrong moment.
+instead of silently placing a sound on the wrong moment. It also rejects a cue
+offset that falls outside the beat it names.
 
 ### Diegetic opening
 
 | beat | cue | why |
 | --- | --- | --- |
-| §01 `you-ask-it-something` | `typing` + `key-press` | the only diegetic sound in the film; gives the opening a familiar physical world |
+| §01 `you-ask-it-something` | `typing` + `key-press` | the only diegetic sound in the film; the prompt now genuinely reveals character-by-character |
 
 ### Count-ups
 
@@ -106,14 +110,15 @@ instead of silently placing a sound on the wrong moment.
 | §11 `how-much-did-we-carry` | `ratchet` → `click` |
 | §12 `twelve-thousand-and-ninety-six` | `ratchet` → `impact` |
 
-The ratchet follows the visual count. It is not permission to score every
-number in the video.
+The ratchet follows the actual visual count. The §1 count starts after its
+promise phrase, when the VO reaches *"Across that climb…"*. Count landings use
+the `Counter` component's real ~1.4-second animation rather than a guessed one.
 
 ### Discrete landings
 
 | beat | cue | why |
 | --- | --- | --- |
-| §01 `eight-cards` | `click` → `snap` | one-chip gesture, then eight-chip landing; never eight separate hits |
+| §01 `eight-cards` | `click` → `snap` | hardware comparison lands in two gestures; never eight separate hits |
 | §02 `it-gets-cut-up` | `tear` | only tear in the film |
 | §03 `now-tuesday` | `click` | third point placed |
 | §03 `same-word-same-row` | `click` ×3 | sameness is the argument; same sample, even spacing |
@@ -121,11 +126,13 @@ number in the video.
 | §04 `nothing-like-each-other` | quiet `tick` | contrast reveal without weight |
 | §05 `no-dog-expert` | `click` ×3 | plates land; third is clipped short so correction sounds wrong |
 | §05 `look-what-the-scores-came-from` | `tick` | connection back to scores |
-| §07 `forty-five` | `knock` | flat answer |
 | §07 `picks-again` | `stamp` | same fact returning |
 | §10 `it-never-stops-choosing` | `stamp` | third and final stamp |
 | §11 `a-second-and-a-half` | `thud` | weight of the fetch delay |
 | §13 `all-of-it-in-reach` | `clack` | the memory requirement closes into place |
+
+§7's first beat deliberately has **no knock**. The page-turn seam already lands
+there; adding a knock 120 ms later was two cues fighting for one transition.
 
 ### Section seams
 
