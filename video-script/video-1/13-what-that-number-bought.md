@@ -48,7 +48,7 @@ at the end* — and v8 stated the thesis at **beat 5**: *"'active parameters' is
 a compute number. It was never a memory number."* Then beat 11, the beat
 actually carrying the S-11 citation, said something else. So the thesis went
 early, in the middle, and the strategy label sat on a different line. It now
-lands **once**, at beat 12, and beats 5–6 *show* work against space without
+lands **once**, at beat 13, and beats 5–6 *show* work against space without
 naming the conclusion.
 
 **2. The board still opened on `18B`.** Beat 1's own line asks what *"five
@@ -56,13 +56,13 @@ percent active"* bought. The frames have to open on the thing §1 opened on —
 which is now two models and their chips, not a number.
 
 **3. The close did not close the ring.** S-10 is *reuse the opening's nouns*,
-and the narration did — *two models, one card, eight* — while the board showed a
-verdict card with a slogan on it. The last frames are now literally §1's beats
-1–3, redrawn, which is the whole point: the same picture, and this time the
-viewer can read it.
+and the narration did — *two models, one chip, eight* — while the board showed a
+verdict card with a slogan on it. The last frames are now literally §1's
+hardware comparison, redrawn, which is the whole point: the same picture, and
+this time the viewer can read it.
 
 **4. Beat 9 blamed the footprint on fine-graining.** It said *"the difference
-is that this one is chopped finer"* directly after the one-card/eight-card
+is that this one is chopped finer"* directly after the one-chip/eight-chip
 frame, over an animation that divided the blocks — so the picture made smaller
 experts look like the cause of more GPUs. Three things differ between
 `gpt-oss-120b` and this model: **parameter count** (116.8B vs 321B), **shipped
@@ -71,10 +71,11 @@ against ~306 GiB almost entirely. Granularity explains essentially none of it.
 
 This was the most dangerous claim in the payoff, because it is the one a
 knowledgeable viewer disproves with two numbers — in the final minute, on the
-thesis beat. Beats 9–10 now name all three differences, grey out the two that
-are merely size, and give granularity its real consequence: not a bigger file,
-but an active share **smeared across the whole sheet** instead of sitting in
-one corner you could keep nearby. Beat 11 carries the better/harder line.
+thesis beat. Beats 9–10 now name all three differences and keep file size
+separate from routing granularity. Beats 11–12 make only the narrower claim the
+research supports: finer routing creates more possible expert paths, so the
+active share can be distributed across more places; the active-parameter number
+alone cannot tell you which weights need to be close.
 
 ## The script
 
@@ -121,18 +122,17 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 > are why the file is bigger. They're just size. This one is the interesting
 > one — and it's not about the file at all.
 >
-> **11.** *(the pieces shrink and multiply; the lit patch scatters across the
-> whole sheet)* Chopping finer is exactly **why it's better** — better at
-> specialising, better at spreading the load. It's also why the five percent
-> it uses is smeared across all of it, instead of sitting in one corner you
-> could keep nearby.
+> **11.** *(the pieces shrink and multiply; possible active paths spread across
+> the sheet)* Finer routing gives the model many more possible expert paths.
+> That doesn't make the file bigger — but it means the active share can be
+> spread across many more places, instead of sitting in one corner you could
+> simply keep nearby.
 
-### Act 4 — the corollary nobody makes (beat 12) · **S-15**
+### Act 4 — what the percentage cannot tell you (beat 12) · **S-15**
 
-> **12.** *(the second sheet withdraws; a trend continues past the frame)* So
-> the better these models get at using less of themselves at any one moment,
-> the more of themselves has to be sitting there anyway. And the number on the
-> box doesn't move.
+> **12.** *(the second sheet withdraws; the active share stays distributed)* So
+> "five percent active" tells you how much work happens. By itself, it tells
+> you almost nothing about how much of the model needs to stay within reach.
 
 ### Act 5 — the thesis, once (beat 13) · **S-11**
 
@@ -141,7 +141,7 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 
 ### Act 6 — back to the two models (beats 14–15) · **S-10**
 
-> **14.** *(§1's opening frame, redrawn exactly — two sheets, one chip and eight)*
+> **14.** *(§1's hardware comparison, redrawn exactly — two sheets, one chip and eight)*
 > Two models. Both about five percent active. One of them runs on a single chip;
 > the other one needs eight.
 >
@@ -154,32 +154,32 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | the plan | — | the plan dissolves; the two sheets from §1 ghost back in behind it | two `Block`s, faint | the pair returning | S-14 |
-| 2 | the sheet | **pan** | we slide back to what §1 opened on | `Block`, lit share | ~5% of it live | S-04 |
+| 2 | the sheet | **pan** | we slide back to the opening comparison | `Block`, lit share | ~5% of it live | S-04 |
 | 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking | S-04 |
 | 4 | the sheet | — | the block returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable | S-04 |
 | 5 | the sheet | — | the bar and the block separate into two labelled columns | two columns | **work / space** | S-04 |
 | 6 | the sheet | — | the work column shrinks to almost nothing; the space column stays full height | two columns, unequal | one shrinks, one doesn't | S-04 |
-| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `Block`s, 1 chip vs 4 | ~117B → 1 · 321B → 4 | S-04 |
+| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `Block`s, 1 chip vs 8 | ~117B → 1 · 321B → 8 | S-04 |
 | 8 | the sheet | — | both sheets light their active share; the two shares visibly match | two lit patches | ~5% both | S-04 |
 | 9 | the sheet | — | three chips land beside the second sheet: parameter count, precision, granularity | 3 labelled chips | three differences | S-04 |
 | 10 | the sheet | — | the first two chips grey out; the granularity chip stays lit | 1 lit of 3 | only one is interesting | S-09 |
-| 11 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones; the fine one's lit share scatters across the whole sheet | two `Block`s, different grain; scattered lit cells | 128 vs 288 · smeared | S-04 |
-| 12 | the sheet | — | the second sheet withdraws; a trend line continues past the edge of frame | one sheet, trend | the direction of travel | S-15 |
+| 11 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones; possible active paths can land across many more places in the fine one | two `Block`s, different grain | 128 vs 288 · more paths | S-04 |
+| 12 | the sheet | — | the second sheet withdraws; the active share remains distributed across the model | one sheet, distributed share | the percentage cannot locate it | S-15 |
 | 13 | the sheet | — | everything clears to a single line of handwriting | one line, alone | **compute, not memory** | S-11 |
-| 14 | the sheet | — | §1's opening frame redraws itself exactly: two sheets, one chip and eight | two `Block`s + `Rig` ×1, ×8 | the ring closes | S-10 |
+| 14 | the sheet | — | §1's hardware comparison redraws itself exactly: two sheets, one chip and eight | two `Block`s + `Rig` ×1, ×8 | the ring closes | S-10 |
 | 15 | the sheet | — | nothing moves | the same frame, held | now you know why | S-10 |
 
 ### Board notes
 
-- **One camera move**, at beat 2, back to the sheet §1 opened on. Beats 3–14
+- **One camera move**, at beat 2, back to the comparison from §1. Beats 3–14
   are still, and the stillness matters: the last third of this section is the
   same frame twice, and the second time is the payoff.
-- **Beats 13–14 are §1 beats 1–3, redrawn.** Same two blocks, same chip counts,
-  same positions. Not a callback *about* the opening — the opening itself,
-  returned to. `NCASE_EVOLUTION_OF_TRUST.md` §6: Trust's outro reuses its own
-  first nouns, *trenches* and *No Man's Land*, and that is what makes the ring
-  close rather than merely rhyme.
-- **Beat 12 is the only frame in the video with nothing on it but one line.**
+- **Beats 13–14 return to §1's hardware comparison.** Same two blocks, same chip
+  counts, same positions. Not a callback *about* the opening — the opening
+  comparison itself, returned to. `NCASE_EVOLUTION_OF_TRUST.md` §6: Trust's
+  outro reuses its own first nouns, *trenches* and *No Man's Land*, and that is
+  what makes the ring close rather than merely rhyme.
+- **Beat 13 is the only frame in the video with nothing on it but one line.**
   The thesis is said once, and nothing competes with it. v8 said it at beat 5
   as well, which is why it needed protecting here.
 - **Beat 6's two columns must be wildly unequal.** If they are comparable
@@ -201,11 +201,11 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 | 4 | **but** — all of it still has to be reachable |
 | 5–6 | **teach** — work and space are two different numbers |
 | 7–8 | **the surprise** — two models, same share, different machines |
-| 9–10 | **separate** — three differences, and which one actually matters |
-| 11 | **teach** — fine-graining is why it is better, and why the share is smeared |
-| 12 | **the corollary** — nobody else in the field says this |
+| 9–10 | **separate** — file-size causes from routing granularity |
+| 11 | **teach** — finer routing creates more possible expert paths; the active share can be distributed more widely |
+| 12 | **the corollary** — the active percentage cannot locate the weights you need close |
 | 13 | **the thesis** — once, alone, at the end |
-| 14–15 | **the ring** — §1's frame, now readable |
+| 14–15 | **the ring** — §1's comparison, now readable |
 
 ## Truth notes
 
@@ -215,7 +215,7 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 | Active | 5.1B (**4.4%**) | 18B (**5.6%**) |
 | Experts per sparse layer | 128 | **288** |
 | Footprint | ~58 GiB (MXFP4) | ~306 GiB (FP8) |
-| Fits on | **one** 80 GB chip | **four** |
+| Fits on | **one** 80 GB chip | **eight** |
 
 - Say **"about five percent"** of both. Putting 4.4 and 5.6 on screen invites a
   comparison the beat does not need.
@@ -225,30 +225,23 @@ one corner you could keep nearby. Beat 11 carries the better/harder line.
 - **The scope of the granularity argument, stated once.** §12 concedes that no
   expert-locality figure has been published at 288 experts and top-8 — every
   one we cite is from eight-expert, top-2 models. So this section may say:
-  granularity spreads the active weight across the whole checkpoint rather than
-  leaving it in one place (geometry, not measurement), and the active-parameter
-  figure cannot tell you what machine you need (the thesis). It may **not** say
-  that fine-graining defeats caching, or present "harder to hold" as a measured
-  law. Beat 12 said the latter until 2026-09-11. If this note and the spoken
-  line ever disagree again, **the narrower one is right.**
+  granularity creates more possible expert paths and can distribute the active
+  weight across more places (geometry, not a measured cache hit rate), and the
+  active-parameter figure cannot tell you what machine you need. It may **not**
+  say that fine-graining defeats caching, or present "harder to hold" as a
+  measured law.
 - **Never let fine-graining explain the footprint.** ~58 GiB against ~306 GiB
   is total parameters (116.8B vs 321B) and shipped precision (MXFP4 vs FP8).
-  Granularity contributes essentially nothing to file size. v9's beat 9 said
-  *"the difference is that this one is chopped finer"* directly after the
-  one-card/four-card frame, over a picture that divided the blocks — so the
-  image made smaller experts look like the cause of more GPUs. It is the most
-  dangerous claim in the payoff, because it is the one a knowledgeable viewer
-  can disprove with two numbers. Granularity's real consequence is where the
-  active weight *sits*, which is beat 10's job.
-- Honest at 4-bit too: ~58 GiB against ~153 GiB. One against two. The direction
-  never reverses, which is why beat 11 is safe to say.
+  Granularity contributes essentially nothing to file size.
+- Honest at 4-bit too: ~58 GiB against ~153 GiB. One against four. The direction
+  never reverses.
 
 ## Assets
 
 | Need | Status |
 | --- | --- |
 | the three differences, two dimmable | **have** — `Differences`, added 2026-09-11, verified by rendering |
-| §1's exact opening frame | **have** — `Rig` moved from §1 into `paper/cast/Props` so both sections draw the same object |
+| §1's exact comparison frame | **have** — `Rig` moved from §1 into `paper/cast/Props` so both sections draw the same object |
 | `CostBars` | have |
 | the model, whole and heavy | have |
 | two model cards with chip counts and grain | **built** — `ModelCard`, two of them |
