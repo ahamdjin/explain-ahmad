@@ -28,29 +28,30 @@ const OUT = 'output/sfx'
 const HIT_DB = -8
 
 /**
- * Offsets are relative to the start of the named beat. They are deliberately
- * small: the final editor should nudge the hit one or two frames before the
- * visual settles. The stable information here is the beat id and sound role.
+ * Offsets are relative to the start of the named beat. The stable information
+ * is the beat id and sound role; the editor may nudge a landing one or two
+ * frames against the final animation after VO timing is locked.
  */
 const CUES = [
-  // Diegetic opening. The question appears 700 ms into §1 beat 1.
-  { section: 1, beat: 'you-ask-it-something', sound: 'typing.wav', offset: 0.70, gainDb: -10, kind: 'diegetic', note: 'under the prompt appearance; stop before send' },
-  { section: 1, beat: 'you-ask-it-something', sound: 'key-press.wav', offset: 1.70, gainDb: -9, kind: 'diegetic', note: 'last character / send punctuation' },
+  // Diegetic opening. Chat.tsx reveals the prompt over ~1.0s from this stage.
+  { section: 1, beat: 'you-ask-it-something', sound: 'typing.wav', offset: 0.70, gainDb: -10, kind: 'diegetic', note: 'under the real character-by-character prompt reveal' },
+  { section: 1, beat: 'you-ask-it-something', sound: 'key-press.wav', offset: 1.68, gainDb: -9, kind: 'diegetic', note: 'last character / end of the typed prompt' },
 
   // Count-ups: ratchet under the number, then a distinct landing.
-  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up' },
-  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'stamp.wav', offset: 1.02, gainDb: -7, kind: 'landing', note: '336 lands; first of three stamps' },
+  // §1 is staged 5s into its beat because the value promise is spoken first.
+  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'ratchet.wav', offset: 5.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up starts when VO reaches “Across that climb…”' },
+  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'stamp.wav', offset: 6.36, gainDb: -7, kind: 'landing', note: '336 lands; first of three stamps' },
   { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up' },
-  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'click.wav', offset: 1.02, gainDb: HIT_DB, kind: 'landing', note: '336 lands' },
+  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'click.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: '336 lands after the 1.4s counter' },
   { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '2,688 count-up' },
-  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'snap.wav', offset: 1.02, gainDb: HIT_DB, kind: 'landing', note: '2,688 lands' },
+  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'snap.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: '2,688 lands after the 1.4s counter' },
   { section: 11, beat: 'how-much-did-we-carry', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 counter lands before arithmetic' },
-  { section: 11, beat: 'how-much-did-we-carry', sound: 'click.wav', offset: 1.02, gainDb: HIT_DB, kind: 'landing', note: 'counter lands' },
+  { section: 11, beat: 'how-much-did-we-carry', sound: 'click.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: 'counter lands after the 1.4s counter' },
   { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '12,096 count-up' },
-  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'impact.wav', offset: 1.02, gainDb: HIT_DB, kind: 'landing', note: 'largest number in the film; silence after' },
+  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'impact.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: 'largest number in the film; silence after' },
 
   // Discrete landings.
-  { section: 1, beat: 'eight-cards', sound: 'click.wav', offset: 0.00, gainDb: HIT_DB, kind: 'landing', note: 'first hardware gesture' },
+  { section: 1, beat: 'eight-cards', sound: 'click.wav', offset: 0.00, gainDb: HIT_DB, kind: 'landing', note: 'hardware comparison begins' },
   { section: 1, beat: 'eight-cards', sound: 'snap.wav', offset: 0.62, gainDb: HIT_DB, kind: 'landing', note: 'eight-chip stack settles; never eight separate hits' },
   { section: 2, beat: 'it-gets-cut-up', sound: 'tear.wav', offset: 0.12, gainDb: -10, kind: 'landing', note: 'only tear in the film' },
   { section: 3, beat: 'now-tuesday', sound: 'click.wav', offset: 0.12, gainDb: HIT_DB, kind: 'landing', note: 'third point placed' },
@@ -123,6 +124,9 @@ const resolved = [...CUES, ...seamCues].map((cue) => {
   if (!section) throw new Error(`SFX cue points to missing section ${cue.section}`)
   const beat = section.byId.get(cue.beat)
   if (!beat) throw new Error(`SFX cue points to missing beat §${cue.section} ${cue.beat}`)
+  if (cue.offset < 0 || cue.offset >= beat.secs) {
+    throw new Error(`SFX cue offset is outside beat §${cue.section} ${cue.beat}: ${cue.offset}s >= ${beat.secs}s`)
+  }
   const sectionTime = beat.localStart + cue.offset
   const absoluteTime = beat.absoluteStart + cue.offset
   return {
