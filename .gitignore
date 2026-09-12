@@ -12,11 +12,17 @@ frames/
 .playwright-cli/
 output/playwright/
 
-# voice-over tracks are large and not source
+# voice-over tracks and final audio mixes are large and not source
 public/vo/*.mp3
 public/vo/*.wav
 public/vo/*.m4a
+public/mix/*.mp3
+public/mix/*.wav
+public/mix/*.m4a
 output/recordings/
+
+# generated SFX timing sheets
+output/sfx/
 
 # smoke-test screenshots
 output/smoke/
