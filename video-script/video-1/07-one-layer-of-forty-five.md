@@ -70,8 +70,8 @@ it picks again, and beat 8 shows one or two experts recurring without being
 > **6.** *(the row changing on each floor)* So: same word, one floor up. Does
 > it pick again — or does it keep the eight it's got?
 >
-> **7.** It picks again. Every floor runs its own router, from scratch — because
-> the row arriving at floor two is not the row that arrived at floor one.
+> **7.** It picks again. Every sparse floor runs its own router from scratch — because
+> the row arriving here isn't the row that arrived at the floor below.
 >
 ### Act 4 — it re-chooses on every floor (beats 8–12) · **S-04**
 
@@ -111,7 +111,7 @@ it picks again, and beat 8 shows one or two experts recurring without being
 | 6 | the tower | — | everything stops; the question holds on screen | floor 1 row, still | **`pick again, or keep?`** | S-05 |
 | 7 | the tower | — | the floor-two row appears beside it, visibly different | two `NumberRow`s | floor 1 vs floor 2 | S-05 |
 | 8 | the tower | — | floor two's eight light: six in new positions, two in the same slots as floor one | two floors, partial overlap | mostly different | S-04 |
-| 9 | the tower | — | the climb resumes; every floor runs its own router and lights its own eight | `Tower` climbing | 42 decisions | S-04 |
+| 9 | the tower | — | the climb resumes; every sparse floor runs its own router and lights its own eight | `Tower` climbing | 42 decisions | S-04 |
 | 10 | the tower | — | the bottom three floors redraw themselves plain, without expert walls | `Tower`, 3 dense marked | 3 dense · 42 sparse | S-04 |
 | 11 | the tower | — | 42 and 8 slide together and a multiplication draws itself | `Counter`, `8 × 42` | 8 × 42 | S-04 |
 | 12 | the tower | — | the counter runs up floor by floor, adding 8 per sparse floor, and stops | `Counter` running | 42 × 8 = **336** | S-04 |
