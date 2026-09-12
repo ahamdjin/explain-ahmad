@@ -186,13 +186,13 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 11,
     id: 'better-and-harder',
-    title: 'The fine-grained one’s chips grow while its pieces get smaller',
+    title: 'The fine-grained model shows many more possible expert paths',
     relation: 'and-yet',
     secs: 18,
-    /* The carrying frame. The trend, as a picture. */
-    vo: 'Chopping finer is exactly why it’s better — better at specialising, better at spreading the load. It’s also why the five percent it uses is smeared across all of it, instead of sitting in one corner you could keep nearby.',
+    /* The carrying frame. Keep this geometric, not a measured cache claim. */
+    vo: 'Finer routing gives the model many more possible expert paths. That doesn’t make the file bigger — but it means the active share can be spread across many more places, instead of sitting in one corner you could simply keep nearby.',
     commands: [cardB.moveTo({ x: 72, y: 50 }, 1.1)],
-    overlays: [note('better · and harder to hold', 62, 12, { size: 'md', tone: 'cost', rotate: 2 })],
+    overlays: [note('more possible paths', 62, 12, { size: 'md', tone: 'measure', rotate: 2 })],
   },
   {
     n: 12,
@@ -201,16 +201,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 15,
     /* The sentence the viewer repeats to someone else. */
-    /*
-     * **The corollary, and it must stay arithmetic.** A lower active share
-     * against a larger total means more inactive weight that still has to be
-     * reachable -- that is division, not a claim about caching. §12 has just
-     * conceded that nobody has measured expert locality at 288/top-8, so this
-     * beat may not turn round and present "harder to cache" as a proven law.
-     * It said "the more of themselves you have to keep within reach", which
-     * reads as exactly that law. `research/glm/OFFLOADING_AND_LOCALITY.md` §5.
-     */
-    vo: 'So the better these models get at using less of themselves at any one moment, the more of themselves has to be sitting there anyway. And the number on the box doesn’t move.',
+    vo: 'So “five percent active” tells you how much work happens. By itself, it tells you almost nothing about how much of the model needs to stay within reach.',
     /* 1.15, not 1.3. `ModelCard`'s viewBox grew from 400 to 470 tall so eight
      * chips could wrap to two rows, and the card is width-constrained by CSS --
      * so the same scale now reaches 17% further up and down. At 1.3 its title
