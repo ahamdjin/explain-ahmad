@@ -43,7 +43,9 @@
     "check:overlap": "node scripts/check-overlap.mjs",
     "render": "node scripts/render.mjs",
     "render:join": "node scripts/render.mjs --join",
-    "sfx": "node scripts/sfx-fetch.mjs"
+    "render:final": "node scripts/render.mjs --join --require-mix",
+    "sfx": "node scripts/sfx-fetch.mjs",
+    "sfx:cues": "node scripts/sfx-cues.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",
