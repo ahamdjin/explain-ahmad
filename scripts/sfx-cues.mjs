@@ -31,6 +31,10 @@ const HIT_DB = -8
  * Offsets are relative to the start of the named beat. The stable information
  * is the beat id and sound role; the editor may nudge a landing one or two
  * frames against the final animation after VO timing is locked.
+ *
+ * Count landing offsets below are intentionally section-specific because the
+ * Counter component is authored at different speeds: §1 1.4s, §7 2.2s,
+ * §§8/12 1.8s, §11 1.6s. Each landing is placed about 40ms before settle.
  */
 const CUES = [
   // Diegetic opening. Chat.tsx reveals the prompt over ~1.0s from this stage.
@@ -40,15 +44,15 @@ const CUES = [
   // Count-ups: ratchet under the number, then a distinct landing.
   // §1 is staged 5s into its beat because the value promise is spoken first.
   { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'ratchet.wav', offset: 5.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up starts when VO reaches “Across that climb…”' },
-  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'stamp.wav', offset: 6.36, gainDb: -7, kind: 'landing', note: '336 lands; first of three stamps' },
-  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up' },
-  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'click.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: '336 lands after the 1.4s counter' },
-  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '2,688 count-up' },
-  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'snap.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: '2,688 lands after the 1.4s counter' },
-  { section: 11, beat: 'how-much-did-we-carry', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 counter lands before arithmetic' },
-  { section: 11, beat: 'how-much-did-we-carry', sound: 'click.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: 'counter lands after the 1.4s counter' },
-  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '12,096 count-up' },
-  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'impact.wav', offset: 1.36, gainDb: HIT_DB, kind: 'landing', note: 'largest number in the film; silence after' },
+  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'stamp.wav', offset: 6.36, gainDb: -7, kind: 'landing', note: '336 lands; 1.4s counter; first of three stamps' },
+  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up; 2.2s counter' },
+  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'click.wav', offset: 2.16, gainDb: HIT_DB, kind: 'landing', note: '336 lands just before the 2.2s counter settles' },
+  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '2,688 count-up; 1.8s counter' },
+  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'snap.wav', offset: 1.76, gainDb: HIT_DB, kind: 'landing', note: '2,688 lands just before the 1.8s counter settles' },
+  { section: 11, beat: 'how-much-did-we-carry', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 counter before arithmetic; 1.6s counter' },
+  { section: 11, beat: 'how-much-did-we-carry', sound: 'click.wav', offset: 1.56, gainDb: HIT_DB, kind: 'landing', note: 'counter lands just before the 1.6s counter settles' },
+  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '12,096 count-up; 1.8s counter' },
+  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'impact.wav', offset: 1.76, gainDb: HIT_DB, kind: 'landing', note: 'largest number in the film; just before 1.8s settle; silence after' },
 
   // Discrete landings.
   { section: 1, beat: 'eight-cards', sound: 'click.wav', offset: 0.00, gainDb: HIT_DB, kind: 'landing', note: 'hardware comparison begins' },
