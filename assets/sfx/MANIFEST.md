@@ -43,5 +43,7 @@ Shape, not character. A stamp that sounds like a stapler measures identically.
 ## Processing
 
 Leading silence trimmed · single-impact sounds cut to their first transient ·
-high-passed at 220 Hz · peak-normalised to −12 dBFS · 16-bit 44.1 kHz. Target in
-the cut is −20 dBFS against voice at −14.
+high-passed at **250 Hz** · peak-normalised to **−12 dBFS** · 16-bit 44.1 kHz.
+The −12 dBFS files are **edit masters, not final mix level**. In the cut they
+are attenuated roughly another 8 dB to target **−20 dBFS** against voice at
+−14 dBFS. `scripts/sfx-fetch.mjs` is the processing authority.
