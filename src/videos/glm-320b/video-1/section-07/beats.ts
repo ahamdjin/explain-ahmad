@@ -112,7 +112,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The two rows hold side by side',
     relation: 'so',
     secs: 12,
-    vo: 'It picks again. Every floor runs its own router, from scratch — because the row arriving at floor two is not the row that arrived at floor one.',
+    vo: 'It picks again. Every sparse floor runs its own router from scratch — because the row arriving here isn’t the row that arrived at the floor below.',
     commands: [],
     overlays: [note('different row →\ndifferent scores', 18, 68, { tone: 'measure', rotate: -2 })],
   },
