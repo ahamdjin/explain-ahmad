@@ -34,25 +34,27 @@ const HIT_DB = -8
  *
  * Count landing offsets below are intentionally section-specific because the
  * Counter component is authored at different speeds: §1 1.4s, §7 2.2s,
- * §§8/12 1.8s, §11 1.6s. Each landing is placed about 40ms before settle.
+ * §§8/12 1.8s, §11 1.6s. `duration` on the ratchet event is the visual count
+ * duration; stretch/loop the ~1s master to that duration rather than letting it
+ * stop halfway through a long count.
  */
 const CUES = [
   // Diegetic opening. Chat.tsx reveals the prompt over ~1.0s from this stage.
-  { section: 1, beat: 'you-ask-it-something', sound: 'typing.wav', offset: 0.70, gainDb: -10, kind: 'diegetic', note: 'under the real character-by-character prompt reveal' },
+  { section: 1, beat: 'you-ask-it-something', sound: 'typing.wav', offset: 0.70, duration: 1.0, gainDb: -10, kind: 'diegetic', note: 'under the real character-by-character prompt reveal' },
   { section: 1, beat: 'you-ask-it-something', sound: 'key-press.wav', offset: 1.68, gainDb: -9, kind: 'diegetic', note: 'last character / end of the typed prompt' },
 
-  // Count-ups: ratchet under the number, then a distinct landing.
+  // Count-ups: ratchet fills the count duration, then a distinct landing.
   // §1 is staged 5s into its beat because the value promise is spoken first.
-  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'ratchet.wav', offset: 5.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up starts when VO reaches “Across that climb…”' },
-  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'stamp.wav', offset: 6.36, gainDb: -7, kind: 'landing', note: '336 lands; 1.4s counter; first of three stamps' },
-  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 count-up; 2.2s counter' },
-  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'click.wav', offset: 2.16, gainDb: HIT_DB, kind: 'landing', note: '336 lands just before the 2.2s counter settles' },
-  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '2,688 count-up; 1.8s counter' },
-  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'snap.wav', offset: 1.76, gainDb: HIT_DB, kind: 'landing', note: '2,688 lands just before the 1.8s counter settles' },
-  { section: 11, beat: 'how-much-did-we-carry', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '336 counter before arithmetic; 1.6s counter' },
-  { section: 11, beat: 'how-much-did-we-carry', sound: 'click.wav', offset: 1.56, gainDb: HIT_DB, kind: 'landing', note: 'counter lands just before the 1.6s counter settles' },
-  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'ratchet.wav', offset: 0.00, gainDb: HIT_DB, kind: 'count', note: '12,096 count-up; 1.8s counter' },
-  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'impact.wav', offset: 1.76, gainDb: HIT_DB, kind: 'landing', note: 'largest number in the film; just before 1.8s settle; silence after' },
+  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'ratchet.wav', offset: 5.00, duration: 1.4, gainDb: HIT_DB, kind: 'count', note: '336 count-up starts when VO reaches “Across that climb…”' },
+  { section: 1, beat: 'three-thirty-six-for-one-word', sound: 'stamp.wav', offset: 6.36, gainDb: -7, kind: 'landing', note: '336 lands; first of three stamps' },
+  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'ratchet.wav', offset: 0.00, duration: 2.2, gainDb: HIT_DB, kind: 'count', note: '336 count-up' },
+  { section: 7, beat: 'three-hundred-and-thirty-six', sound: 'click.wav', offset: 2.16, gainDb: HIT_DB, kind: 'landing', note: '336 lands just before settle' },
+  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'ratchet.wav', offset: 0.00, duration: 1.8, gainDb: HIT_DB, kind: 'count', note: '2,688 count-up' },
+  { section: 8, beat: 'two-thousand-six-eighty-eight', sound: 'snap.wav', offset: 1.76, gainDb: HIT_DB, kind: 'landing', note: '2,688 lands just before settle' },
+  { section: 11, beat: 'how-much-did-we-carry', sound: 'ratchet.wav', offset: 0.00, duration: 1.6, gainDb: HIT_DB, kind: 'count', note: '336 counter before arithmetic' },
+  { section: 11, beat: 'how-much-did-we-carry', sound: 'click.wav', offset: 1.56, gainDb: HIT_DB, kind: 'landing', note: 'counter lands just before settle' },
+  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'ratchet.wav', offset: 0.00, duration: 1.8, gainDb: HIT_DB, kind: 'count', note: '12,096 count-up' },
+  { section: 12, beat: 'twelve-thousand-and-ninety-six', sound: 'impact.wav', offset: 1.76, gainDb: HIT_DB, kind: 'landing', note: 'largest number in the film; silence after' },
 
   // Discrete landings.
   { section: 1, beat: 'eight-cards', sound: 'click.wav', offset: 0.00, gainDb: HIT_DB, kind: 'landing', note: 'hardware comparison begins' },
@@ -133,10 +135,14 @@ const resolved = [...CUES, ...seamCues].map((cue) => {
   if (cue.offset < 0 || cue.offset >= beat.secs) {
     throw new Error(`SFX cue offset is outside beat §${cue.section} ${cue.beat}: ${cue.offset}s >= ${beat.secs}s`)
   }
+  if (cue.duration && cue.offset + cue.duration > beat.secs) {
+    throw new Error(`SFX cue duration runs past beat §${cue.section} ${cue.beat}: ${cue.offset}s + ${cue.duration}s > ${beat.secs}s`)
+  }
   const sectionTime = beat.localStart + cue.offset
   const absoluteTime = beat.absoluteStart + cue.offset
   return {
     ...cue,
+    duration: cue.duration ?? null,
     beatNumber: beat.n,
     sectionTime: Number(sectionTime.toFixed(3)),
     absoluteTime: Number(absoluteTime.toFixed(3)),
@@ -152,12 +158,13 @@ const clock = (seconds) => {
 await mkdir(OUT, { recursive: true })
 await writeFile(path.join(OUT, 'cues.json'), JSON.stringify(resolved, null, 2) + '\n', 'utf8')
 
-const csvEscape = (value) => `"${String(value).replaceAll('"', '""')}"`
+const csvEscape = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`
 const rows = [
-  ['absolute', 'section_time', 'section', 'beat', 'beat_id', 'sound', 'gain_db', 'kind', 'note'],
+  ['absolute', 'section_time', 'duration_s', 'section', 'beat', 'beat_id', 'sound', 'gain_db', 'kind', 'note'],
   ...resolved.map((cue) => [
     clock(cue.absoluteTime),
     clock(cue.sectionTime),
+    cue.duration,
     String(cue.section).padStart(2, '0'),
     cue.beatNumber,
     cue.beat,
