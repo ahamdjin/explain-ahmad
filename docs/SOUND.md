@@ -16,6 +16,20 @@ argument stops here. **Put nothing on a `so` beat** — no exceptions, and
 especially not where something visibly moves, because that is exactly where the
 instinct to score is strongest and most wrong.
 
+## How many, in total
+
+| | cues | rate |
+| --- | --- | --- |
+| discrete hits | **24** | one every 74s |
+| section seams (`page-turn`) | 12 | one every 2.5 min |
+| count-ups (`ratchet`, sustained) | 5 | — |
+| **total** | **41** | one every 43s |
+
+The number that matters is **24 discrete hits**. Seams are structure, not
+punctuation, and a ratchet is a process under a number assembling rather than a
+hit. Twenty-four in half an hour is a motif; the 189-per-film version would have
+been a tic.
+
 ## Craft rules
 
 | | |
@@ -49,6 +63,12 @@ other than what was asked for.
 | a chapter ending | `page-turn` | 0.98 | the 12 seams |
 | destruction | `tear` | 2.00 | **1 use.** §2 b5. |
 | diegetic | `typing` / `key-press` | 1.05 / 0.33 | **§1 beat 1 only** — the question being typed. Not a cue: the sound of the world, which is why the hook works. |
+
+## Diegetic — `typing` / `key-press`, §1 beat 1 only
+
+| at | beat | cue | why |
+| --- | --- | --- | --- |
+| `0:00` | §01 b1 `you-ask-it-something` | `typing` under the prompt, `key-press` on the last character | **Not a cue — the sound of the world.** It is the only place in the film where sound is diegetic, and it is doing the same job the chat window does: giving the viewer somewhere they already stand. Stop it dead when the prompt is sent. |
 
 ## The count-ups — `ratchet` ×5
 

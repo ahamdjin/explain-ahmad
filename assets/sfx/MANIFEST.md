@@ -36,6 +36,24 @@ cut.
 | `typing.wav` | skill bundle | §1 b1, diegetic |
 | `key-press.wav` | skill bundle | §1 b1, diegetic |
 
+## Verified without listening
+
+Every file was checked for **transient count and attack time** — the one thing
+measurable that catches a mislabelled sound. It found three:
+
+| file | was | fixed |
+| --- | --- | --- |
+| `knock` | three knocks | trimmed to the first |
+| `click` | two clicks 128 ms apart | trimmed to the first |
+| `tick` | peaked 194 ms in — the quiet part was in front | trimmed to the transient |
+
+All single-impact sounds now measure **one** transient with attack under 25 ms.
+`ratchet` (7), `typing` (4), `tear` (3) and `page-turn` (2) are multi-transient
+by nature and correct.
+
+This does not replace listening. It catches wrong *shape*, never wrong
+*character*.
+
 ## Rejected — the useful half of the record
 
 | id | asked for | came back as | verdict |
@@ -52,10 +70,16 @@ settle, card slide, book closing. The resolver matches loosely on text, so
 asking for four kinds of paper gets the same paper four times. It happened
 again with the knock. **Check hashes, never filenames.**
 
-## Licence — unresolved, and it blocks upload
+## Licence — split, and one half blocks upload
 
-The ledger records provider and track id but **no licence field**. These came
-over an authenticated account, which is not a commercial-use grant.
+**`typing` and `key-press` are clear.** They come from the skill's bundled
+library, which is Pixabay Content License — commercial use, no attribution
+required (`~/.claude/skills/media-use/audio/assets/sfx/CREDITS.md`).
+
+**The other eleven are not.** They were retrieved from HeyGen's audio library
+(`/v3/audio/sounds`) over an authenticated account, and neither the ledger nor
+the skill's own reference states a licence for that route. Account access is not
+a commercial-use grant.
 
 **Confirm the licence covers monetised YouTube before publishing** and record it
 in `THIRD_PARTY.md`. If it does not clear, `docs/SOUND.md` still stands — the
