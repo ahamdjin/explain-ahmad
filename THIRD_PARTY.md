@@ -17,3 +17,14 @@ This project intentionally uses open-source modules as opt-in capabilities.
 - react-kino — MIT — optional scrollytelling helpers.
 
 Nicky Case CC0 source provenance remains documented separately in `NCASE_CREDITS.md`.
+
+## Sound effects — **licence unresolved**
+
+`assets/sfx/*.wav` were sourced through the `media-use` skill from
+`heygen.audio.sounds` over an authenticated account. The fetch ledger
+(`.media/manifest.jsonl`) records provider and track id but **no licence
+field**, and account access is not a commercial-use grant.
+
+**Confirm the licence covers monetised YouTube before publishing, and record it
+here.** If it does not, `docs/SOUND.md` still stands — the cue sheet is a
+design, not those five files — and freesound.org CC0 fills it in an afternoon.
