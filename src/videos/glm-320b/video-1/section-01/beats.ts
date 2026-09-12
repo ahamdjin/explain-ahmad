@@ -121,16 +121,18 @@ export const BEATS: Beat<Patch>[] = [
   {
     n: 6,
     id: 'three-thirty-six-for-one-word',
-    title: 'The promise lands while the counter runs to 336',
+    title: 'The promise lands, then the counter runs to 336',
     relation: 'wall',
     secs: 13,
     /*
      * 336 is **visits/uses**, not 336 distinct experts. The old "336 of them"
-     * wording taught the wrong object. The value promise starts here, while
-     * the viewer is still inside the first thirty-ish seconds of the opening.
+     * wording taught the wrong object. The counter is staged after the promise
+     * phrase so the visual and its ratchet do not finish before the VO reaches
+     * "Across that climb...".
      */
     vo: 'By the end, you’ll know why using only a small part can still mean a huge machine. Across that climb, those specialists got used three hundred and thirty-six times. For one token.',
-    commands: [count.run(336, 'uses — one token'), narrator.pose('slump')],
+    commands: [narrator.pose('slump')],
+    stages: [{ at: 5000, commands: [count.run(336, 'uses — one token')] }],
   },
 
   /* ═══ ACT 2 · THE CLAIM (S-01) ══════════════════════════════════════════
