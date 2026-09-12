@@ -64,7 +64,9 @@ const CUES = [
   { section: 5, beat: 'no-dog-expert', sound: 'click.wav', offset: 0.62, gainDb: HIT_DB, kind: 'landing', note: 'plate 2/3' },
   { section: 5, beat: 'no-dog-expert', sound: 'click.wav', offset: 1.12, gainDb: -12, kind: 'landing', note: 'plate 3/3; clip short in editor so it sounds wrong' },
   { section: 5, beat: 'look-what-the-scores-came-from', sound: 'tick.wav', offset: 0.12, gainDb: HIT_DB, kind: 'landing', note: 'connection back to scores' },
-  { section: 7, beat: 'forty-five', sound: 'knock.wav', offset: 0.12, gainDb: HIT_DB, kind: 'landing', note: 'flat answer: forty-five' },
+  /* §7 beat 1 deliberately gets no knock: the page-turn seam already lands
+     there. Two cues 120ms apart made the section entrance sound cluttered, and
+     the old "Forty-five" rationale no longer matched the current VO anyway. */
   { section: 7, beat: 'picks-again', sound: 'stamp.wav', offset: 0.12, gainDb: HIT_DB, kind: 'landing', note: 'second of three stamps' },
   { section: 10, beat: 'it-never-stops-choosing', sound: 'stamp.wav', offset: 0.12, gainDb: HIT_DB, kind: 'landing', note: 'third and final stamp' },
   { section: 11, beat: 'a-second-and-a-half', sound: 'thud.wav', offset: 0.12, gainDb: -10, kind: 'landing', note: 'weight of the fetch delay' },
