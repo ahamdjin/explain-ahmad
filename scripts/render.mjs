@@ -90,13 +90,14 @@ for (const n of takes) {
 
   /*
    * `-shortest` prevents a timing mismatch from creating a frozen tail or an
-   * audio-only tail. If picture and audio differ materially, fix the beat
-   * timing rather than hiding it here; see docs/VOICE_OVER.md.
+   * audio-only tail. Every audio input is also normalised to the same 48 kHz
+   * stereo AAC format, so the final concat is stream-compatible even if one
+   * editor export arrived mono or at 44.1 kHz.
    */
   const argv = audio
     ? ['-y', '-i', video, '-i', audio, '-map', '0:v:0', '-map', '1:a:0',
        '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-preset', 'slow',
-       '-c:a', 'aac', '-b:a', '192k', '-shortest', out]
+       '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2', '-shortest', out]
     : ['-y', '-i', video, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-preset', 'slow', out]
 
   const state = mix
@@ -120,8 +121,9 @@ if (voiceOnly.length) {
 }
 
 if (args.has('join')) {
-  /* All parts are encoded here with the same codec/pixel format, so concat can
-   * stream-copy them without another generation of video loss. */
+  /* All parts are encoded here with the same video codec/pixel format and the
+   * same AAC sample rate/channel layout, so concat can stream-copy them without
+   * another generation of quality loss. */
   const list = path.join(OUT, 'parts.txt')
   await writeFile(list, done.map((d) => `file '${d.out}'`).join('\n') + '\n', 'utf8')
   const whole = path.join(OUT, 'video-1.mp4')
