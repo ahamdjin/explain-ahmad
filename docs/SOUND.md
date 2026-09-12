@@ -1,153 +1,161 @@
 # Sound
 
-There is **no SFX system in the build, and there should not be one.** Sound is
-decided against a real voice track in an editor, not authored blind into beats.
-This file is the cue sheet and the rules; the files live wherever your library
-lives.
+Sound is **post-production, not a React feature**. The browser build stays
+silent and deterministic; sound is cut against the real voice track after the
+beat timings are locked.
+
+That separation is deliberate. Browser audio creates autoplay/capture problems,
+and provisional `secs` drift the moment the real VO is recorded. The visual
+beat **id** is the stable anchor; the absolute timecode is not.
+
+## Production status
+
+- Thirteen selected masters live in `assets/sfx/`.
+- Every selected master is **CC0**; provenance is in `assets/sfx/MANIFEST.md`
+  and `THIRD_PARTY.md`.
+- Human audition page: **`/sfx/index.html`** on the dev server.
+- `npm run sfx:cues` resolves the cue plan below against the **current built
+  beat timings** and writes `output/sfx/cues.csv` + `cues.json`.
+- The editor exports each completed **VO + SFX** section mix to
+  `public/mix/NN.wav` (mp3/m4a also accepted).
+- `npm run render` may make a VO-only review cut.
+- **`npm run render:final` refuses to make the release video if any section is
+  missing its final mix.** A polished MP4 can no longer silently ship without
+  the sound-design pass.
+
+### Final sound workflow
+
+1. Record VO.
+2. Restamp beats from the real VO timing.
+3. Run `npm run sfx:cues`.
+4. Import the cue CSV/JSON and the thirteen masters into the editor.
+5. Place/nudge cues by eye and ear against the actual visual landings.
+6. Export the full VO+SFX audio for each section as `public/mix/01.wav` …
+   `public/mix/13.wav`.
+7. Run `npm run render:final`.
+
+**Do not copy timecodes out of this document.** This file specifies *which beat*
+earns a sound. The generated cue sheet specifies *when that beat currently is*.
 
 ## The one decision
 
-**Sound marks a change of state, never a motion.** 189 beats over 30 minutes is
-a cue every 9.5 seconds — a tic, and the ear stops hearing it by minute four.
-Nineteen cues is one every 1.6 minutes, which is a motif.
+**Sound marks a change of state, never ordinary motion.** A thirty-minute film
+with sound on every animation becomes a UI demo. Sparse repeated motifs are the
+point.
 
-The build already knows which beats are landings. `relation: 'wall'` means the
-argument stops here. **Put nothing on a `so` beat** — no exceptions, and
-especially not where something visibly moves, because that is exactly where the
-instinct to score is strongest and most wrong.
-
-## How many, in total
-
-| | cues | rate |
-| --- | --- | --- |
-| discrete hits | **24** | one every 74s |
-| section seams (`page-turn`) | 12 | one every 2.5 min |
-| count-ups (`ratchet`, sustained) | 5 | — |
-| **total** | **41** | one every 43s |
-
-The number that matters is **24 discrete hits**. Seams are structure, not
-punctuation, and a ratchet is a process under a number assembling rather than a
-hit. Twenty-four in half an hour is a motif; the 189-per-film version would have
-been a tic.
+The build already says what a beat is through its `relation`. In general,
+`wall`/decisive landings can earn a cue; ordinary `so` motion does not. The
+explicit cue plan below is the final authority where that rule has deliberate
+exceptions.
 
 ## Craft rules
 
 | | |
 | --- | --- |
-| **Length** | Under 250 ms. Anything with a tail competes with the voice. |
-| **Pitch** | None. No whooshes, risers or pads — pitched material implies a key, and a spoken voice is not in one. Paper, wood, rubber, mechanism. |
-| **Level** | Peak **−20 dBFS** against voice at −14. If you notice yourself raising it, it is already too loud. |
-| **Frequency** | High-pass everything at **250 Hz**. The voice owns its fundamentals down there; a cue that lives in the same band forces you to duck, and ducking on an explainer always sounds like ducking. |
-| **Ducking** | None. If you need it, the cue is wrong — fix level or EQ instead. |
-| **Placement** | On the **visual** landing, one or two frames *before* the object settles. The eye leads the ear; land it late and it reads as a separate event rather than as the cause. |
-| **Layering** | One cue per landing. Never two. |
-| **Repeats** | Vary pitch ±2% or alternate takes when the same cue returns, or the ear tags it as a loop. |
+| **Length** | Short and dry. Anything with a tail must earn it. |
+| **Pitch** | No musical whooshes, risers or pads. Paper, wood, rubber, mechanism. |
+| **Master level** | Selected WAVs are source masters at about **−12 dBFS peak**. |
+| **Final cue level** | Start around **−20 dBFS peak** against VO around −14 dBFS; ordinary masters therefore begin about **−8 dB** down in the edit. Adjust by ear. |
+| **Frequency** | Masters are high-passed at **250 Hz** by `scripts/sfx-fetch.mjs`. Do not blindly high-pass them a second time. |
+| **Ducking** | None. If a cue needs voice ducking, it is too loud or the wrong cue. |
+| **Placement** | On the visual landing, normally one or two frames before the object fully settles. |
+| **Layering** | One functional cue per landing. Count-up + landing is the deliberate exception. |
+| **Repeats** | Vary tiny incidental repeats when useful; do **not** vary repeats whose sameness is itself the argument. |
 
-## The palette — thirteen sounds, nine roles
+## The palette — thirteen sounds
 
 Files, measurements and provenance: `assets/sfx/MANIFEST.md`.
-**Audition before cutting** — six of seventeen fetches came back as something
-other than what was asked for.
+**Audition before cutting.** Measurement can reject bad shape; it cannot tell a
+stamp from a stapler reliably enough for final taste.
 
-| role | file | s | uses |
-| --- | --- | --- | --- |
-| **the fact landing** | `stamp` | 0.23 | **3 only.** A character, not an effect. Spending it a fourth time spends it entirely. |
-| a small placement | `click` | 0.18 | the common landing |
-| a smaller one | `tick` | 0.24 | second in a series, or a connection |
-| a decision, cut off | `snap` | 0.28 | something settling for good |
-| a hard stop | `knock` | 0.20 | a limit being met |
-| something closing | `clack` | 0.42 | a drawer, an answer |
-| weight | `thud` | 0.79 | cost, slowness |
-| the biggest number | `impact` | 1.10 | **1 use.** 12,096. |
-| counting | `ratchet` | 0.98 | under a count-up. **5 in the film, no others.** |
-| a chapter ending | `page-turn` | 0.98 | the 12 seams |
-| destruction | `tear` | 2.00 | **1 use.** §2 b5. |
-| diegetic | `typing` / `key-press` | 1.05 / 0.33 | **§1 beat 1 only** — the question being typed. Not a cue: the sound of the world, which is why the hook works. |
-
-## Diegetic — `typing` / `key-press`, §1 beat 1 only
-
-| at | beat | cue | why |
-| --- | --- | --- | --- |
-| `0:00` | §01 b1 `you-ask-it-something` | `typing` under the prompt, `key-press` on the last character | **Not a cue — the sound of the world.** It is the only place in the film where sound is diegetic, and it is doing the same job the chat window does: giving the viewer somewhere they already stand. Stop it dead when the prompt is sent. |
-
-## The count-ups — `ratchet` ×5
-
-A number assembling on screen is the one *process* that earns a sustained
-sound, because the assembling is the event. There are five, and no other beat
-gets one.
-
-| at | beat | cue |
+| role | file | use |
 | --- | --- | --- |
-| `0:25` | §01 b6 `three-thirty-six-for-one-word` | (see the landing table) |
-| `16:08` | §07 b12 `three-hundred-and-thirty-six` | `ratchet`, ending on `click` |
-| `18:03` | §08 b10 `two-thousand-six-eighty-eight` | `ratchet`, ending on `snap` |
-| `23:16` | §11 b7 `how-much-did-we-carry` | `ratchet`, ending on `click` |
-| `26:36` | §12 b13 `twelve-thousand-and-ninety-six` | (see the landing table) |
+| the fact landing | `stamp.wav` | **3 uses only** — one recurring character |
+| small placement | `click.wav` | common precise landing |
+| smaller connection | `tick.wav` | quiet connection / second-order landing |
+| decision | `snap.wav` | something settling for good |
+| hard stop | `knock.wav` | a limit being met |
+| closing | `clack.wav` | something shutting/locking into place |
+| weight | `thud.wav` | cost/slowness |
+| largest number | `impact.wav` | **one use** — 12,096 |
+| counting | `ratchet.wav` | under the five authored count-ups |
+| chapter seam | `page-turn.wav` | §§2–13 |
+| destruction | `tear.wav` | **one use** — §2 token split |
+| diegetic | `typing.wav` | §1 chat opening only |
+| final key | `key-press.wav` | §1 chat opening only |
 
-## The landings — nineteen
+## Cue plan — use beat ids, not typed timecodes
 
-Timecodes are from `npm run timing` and **will move** when the voice is
-recorded. Re-derive them; the beat ids will not move.
+`npm run sfx:cues` contains the machine-readable mapping and verifies that each
+named beat still exists. If a beat is renamed or removed, cue generation fails
+instead of silently placing a sound on the wrong moment.
 
-| at | beat | cue | why |
-| --- | --- | --- | --- |
-| `0:25` | §01 b6 `three-thirty-six-for-one-word` | `ratchet` → `stamp` | The hook. Ratchet under the count-up, stamp when it lands. The one cue allowed a dB over the rest. |
-| `0:44` | §01 b9 `eight-cards` | `click`, then `snap` | One chip, then the stack. Two gestures, never eight hits. |
-| `3:05` | §02 b5 `it-gets-cut-up` | `tear` | The only tear in the film. |
-| `5:52` | §03 b9 `now-tuesday` | `click` | A third point placed in space. |
-| `6:50` | §03 b15 `same-word-same-row` | `click` ×3, evenly spaced | Three identical rows. Same sample, same spacing — the repetition is the argument, so do not vary them. |
-| `7:44` | §04 b6 `only-backwards` | `knock` | A limit: it can only look backwards. |
-| `8:41` | §04 b12 `nothing-like-each-other` | `tick`, quiet | Two things nothing like each other, sitting still. |
-| `10:57` | §05 b10 `no-dog-expert` | `click` ×3, the third clipped | Plates land and slide off. The third must sound **wrong**. The correction cannot sound successful. |
-| `11:45` | §05 b13 `look-what-the-scores-came-from` | `tick` | A line drawn back to the scores. A connection, not an impact. |
-| `14:26` | §07 b1 `forty-five` | `knock` | Forty-five. Answered flat, in one word. |
-| `15:30` | §07 b8 `picks-again` | `stamp` | It picks again. **Same sample as 0:25** — the same fact returning. |
-| `22:09` | §10 b13 `it-never-stops-choosing` | `stamp` | It never stops re-choosing. Third and final stamp. |
-| `23:08` | §11 b6 `forty-two-times` | — none — | §10's repeating tick is still carrying this. A landing on top is one thing too many. |
-| `23:38` | §11 b10 `a-second-and-a-half` | `thud` | The better part of two seconds. Weight, not sharpness. |
-| `24:34` | §12 b1 `people-do-run-these` | `page-turn` (seam) | The reversal opens on a seam. Let the seam do it. |
-| `26:18` | §12 b11 `keep-less-and-it-crawls` | — none — | It crawls. Sound here would be mercy. |
-| `26:36` | §12 b13 `twelve-thousand-and-ninety-six` | `ratchet` → `impact` | The largest number in the film. `impact`, not a fourth stamp — the stamp is spent. Hold silence after it for the whole beat. |
-| `26:59` | §12 b15 `nobody-knows-where` | — silence — | Nobody knows where. The strongest cue is the one expected and withheld. Only works because the other eighteen were consistent. |
-| `27:50` | §13 b4 `all-of-it-in-reach` | `clack` | All of it in reach. Something closing — pairs with 23:38, the answer where that was the problem. |
+### Diegetic opening
 
-## The seams — `page-turn` ×12
+| beat | cue | why |
+| --- | --- | --- |
+| §01 `you-ask-it-something` | `typing` + `key-press` | the only diegetic sound in the film; gives the opening a familiar physical world |
 
-| at | into |
+### Count-ups
+
+| beat | cue |
 | --- | --- |
-| `2:40` | §02 — Your words become tokens |
-| `4:41` | §03 — From an ID to a meaning |
-| `7:02` | §04 — The word looks around |
-| `9:31` | §05 — The router picks the eight |
-| `12:34` | §06 — The experts do the work |
-| `14:26` | §07 — That was one layer. There are 45. |
-| `16:33` | §08 — That was one token. Here's the sentence. |
-| `18:41` | §09 — Where the answer comes out |
-| `20:20` | §10 — And then it does the whole thing again |
-| `22:23` | §11 — So could you store only the 18 billion? |
-| `24:34` | §12 — How people actually run these |
-| `27:21` | §13 — What that number actually bought |
+| §01 `three-thirty-six-for-one-word` | `ratchet` → `stamp` |
+| §07 `three-hundred-and-thirty-six` | `ratchet` → `click` |
+| §08 `two-thousand-six-eighty-eight` | `ratchet` → `snap` |
+| §11 `how-much-did-we-carry` | `ratchet` → `click` |
+| §12 `twelve-thousand-and-ninety-six` | `ratchet` → `impact` |
 
-## Three deliberate exceptions
+The ratchet follows the visual count. It is not permission to score every
+number in the video.
 
-**§10, the treadmill.** Beats 3–11 are *and again, and again, one word at a
-time*. This is the one place a **repeating** sound is the argument rather than a
-tic — the same short cue per climb, unvaried, allowed to become slightly
-annoying. Monotony is the point. It is also why §11 b6 takes no landing cue:
-the repetition is still carrying it.
+### Discrete landings
 
-**§12 b15, `nobody-knows-where`.** Silence. The strongest cue available is the
-one the viewer expects and does not get, and it only exists because the other
-eighteen were consistent.
+| beat | cue | why |
+| --- | --- | --- |
+| §01 `eight-cards` | `click` → `snap` | one-chip gesture, then eight-chip landing; never eight separate hits |
+| §02 `it-gets-cut-up` | `tear` | only tear in the film |
+| §03 `now-tuesday` | `click` | third point placed |
+| §03 `same-word-same-row` | `click` ×3 | sameness is the argument; same sample, even spacing |
+| §04 `only-backwards` | `knock` | a hard causal limit |
+| §04 `nothing-like-each-other` | quiet `tick` | contrast reveal without weight |
+| §05 `no-dog-expert` | `click` ×3 | plates land; third is clipped short so correction sounds wrong |
+| §05 `look-what-the-scores-came-from` | `tick` | connection back to scores |
+| §07 `forty-five` | `knock` | flat answer |
+| §07 `picks-again` | `stamp` | same fact returning |
+| §10 `it-never-stops-choosing` | `stamp` | third and final stamp |
+| §11 `a-second-and-a-half` | `thud` | weight of the fetch delay |
+| §13 `all-of-it-in-reach` | `clack` | the memory requirement closes into place |
 
-**The stamp is a character.** It appears three times — 0:25, 15:30, 22:09 — and
-nowhere else. Same sample each time. It is the sound of the film's one fact
-landing, and spending it anywhere else spends it entirely.
+### Section seams
 
-## Order of work
+`page-turn.wav` lands at the first frame of §§2–13. These are generated from
+section starts automatically; do not maintain twelve absolute timecodes by
+hand.
 
-1. Cut §1 and §2 with voice and **no sound at all**. Watch it.
-2. Add only the cues in those sections. If it is better, roll out. If it reads
-   as decoration, you have lost an afternoon rather than a week.
-3. Sound goes on last, after `secs` have been re-timed to the real voice.
-   Placing cues against provisional timings means placing them twice.
+## Deliberate silence / exceptions
+
+**§10 treadmill.** The repeated generation cycle may use one repeating dry tick
+matched to each climb if it genuinely improves the cut. This is the only place
+where monotony can be the message. Decide it against the real VO; it is not
+hard-coded into the cue exporter because the number and spacing of repetitions
+are editorial, not structural.
+
+**§11 `forty-two-times`.** No extra landing. The surrounding repeated mechanism
+already carries it.
+
+**§12 `keep-less-and-it-crawls`.** No mercy cue. Let the machine crawl.
+
+**§12 `nobody-knows-where`.** Silence. A missing expected cue is stronger here
+than another impact.
+
+**The stamp is a character.** Exactly three authored uses: §1 336, §7 picks
+again, §10 never stops choosing. Same sample each time.
+
+## Audition gate
+
+The assets have been checked mechanically for licence, format, duration,
+transients and preprocessing. That is **not the same as hearing artistic
+character**. Before calling the mix final, listen to all thirteen at
+`/sfx/index.html`, then listen again at their real final levels under the VO.
+A sound can be technically perfect and still be the wrong sound.
