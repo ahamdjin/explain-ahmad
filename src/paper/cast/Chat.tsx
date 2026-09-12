@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { useEffect, useState } from 'react'
 import { INK } from '../ink'
 import { PALETTE } from '../palette'
 
@@ -26,13 +27,13 @@ import { PALETTE } from '../palette'
  * would be the spec-sheet open this section exists to avoid.
  */
 export function Chat({
-  /** What the person typed. Appears character by character when `typing`. */
+  /** What the person typed. Reveals character by character while `typing`. */
   ask,
   /** The reply so far. One word in the opening, and it stops there. */
   said = '',
   /** The caret blinks while nothing else is happening. */
   caret = true,
-  /** The prompt types itself in rather than arriving whole. */
+  /** The prompt genuinely types itself in rather than arriving whole. */
   typing = false,
   /**
    * The window turns edge-on so the camera can pass through it.
@@ -51,6 +52,38 @@ export function Chat({
   turned?: boolean
   model?: string
 }) {
+  const [shownAsk, setShownAsk] = useState(typing ? '' : ask)
+
+  useEffect(() => {
+    if (!typing) {
+      setShownAsk(ask)
+      return
+    }
+    if (!ask) {
+      setShownAsk('')
+      return
+    }
+
+    /*
+     * Keep this deliberately close to `typing.wav` (~1.05 s). The cue starts
+     * when `chat.type()` lands, and the final key sound lands as the last
+     * characters appear. This is visual timing only; audio still belongs in
+     * the editor, never in React.
+     */
+    const duration = 1000
+    const started = performance.now()
+    setShownAsk('')
+    let frame = 0
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - started) / duration)
+      const chars = Math.min(ask.length, Math.ceil(t * ask.length))
+      setShownAsk(ask.slice(0, chars))
+      if (t < 1) frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [ask, typing])
+
   return (
     <motion.div
       className="s1-chat"
@@ -94,7 +127,7 @@ export function Chat({
             animate={{ opacity: ask ? 1 : 0 }}
           />
           <text x="272" y="136" className="s1-chat-ask" fill={INK}>
-            {ask}
+            {typing ? shownAsk : ask}
             {typing ? <tspan className="s1-chat-caret">▌</tspan> : null}
           </text>
         </g>
