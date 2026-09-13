@@ -1,199 +1,182 @@
-# Section 01 — What "five percent active" actually costs
+# Section 01 — The five-percent problem
 
-Status: **SCRIPT v10.** Every beat cites a strategy from
-`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
+Status: **REWRITE v1.** This replaces the old 23-beat opening. It deliberately
+removes the tower, 45 floors, 288 experts, 336 visits, router desk and MoE naming
+from the opening. Those facts matter later, after the viewer knows what they
+count.
 
-Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
-Strategies: `skills/STRATEGY_LEDGER.md` ·
-Teacher for the shape: `skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §1
+Spine: `storyboard/video-1/STORY_SPINE.md` · Numbers: `research/glm/GROUND_TRUTH.md`
+Teaching: `skills/STORY_STRUCTURE.md`, `skills/SPATIAL_CONTINUITY.md`,
+`skills/BEAT_GRANULARITY.md`, `skills/DIAGRAM_GRAMMAR.md`,
+`skills/ncase/NCASE_LEARNING_AND_EXPLANATION_NOTES.md`
 
 ## Contract
 
 | | |
 | --- | --- |
-| Teaches | parameter, expert, active, Mixture of Experts |
-| Answers | **"five percent active" does not predict what hardware you need** |
-| Exits on | who picks the eight, and why is *that* the expensive question? |
-| Built | 23 beats · 2:40 planned · `npm run timing` is the authority |
-| Never says | `layer`, `attention`, `bandwidth`, `VRAM`, `router` |
-| **Must not say** | why you cannot store only the active part. **That is §11.** |
-| Hard-bet budget | **uses 1 of 2** (beat 18). The other is reserved for §07. |
+| Answers | **about five percent active does not predict how much hardware a model needs** |
+| Exits on | **what is the first thing the model actually receives when you hit send?** |
+| → next | the prompt has to become something the model can work with |
+| Built | **17 beats** · ~1:45 placeholder timing · `npm run timing` is the authority |
+| Teaches | only enough meaning for **parameter** and **active** to understand the opening claim |
+| Plants | the tempting plan: **if the active part were fixed, keep only that part ready** |
+| Does not teach yet | token, token ID, embedding, attention, router, expert, layer, MoE, 288, 336 |
 
-## Why this opening exists
+## Story event
 
-The opening now starts on the one object that needs no explanation: a chat
-window. It then turns through that screen and shows the disproportion behind
-one generated piece of text — forty-five floors, a room of 288 specialists,
-and 336 specialist uses — before asking the hardware question.
+The viewer gets enough information to make one fair prediction:
 
-The value promise starts on beat 6, while that disproportion is still on
-screen. This protects the first-thirty-seconds job without answering the
-mechanism early: the viewer is told **what question the film will settle**, not
-how it will settle it.
+> Two models both use about five percent of themselves at a time, so their
+> hardware needs should be roughly similar.
 
-The 1-chip / 8-chip comparison is derived in `research/glm/GROUND_TRUTH.md`.
-The comparison is intentionally about hardware footprint, not about whether
-sparse compute itself is cheap.
+Then the prediction fails: **one 80 GB accelerator versus eight** under the
+native fully-resident comparison.
+
+That failure earns the video's real mystery:
+
+> If GLM says 18 billion parameters are active, **which 18 billion?**
+
+We do not answer it here. We turn the rest of the video into an experiment:
+follow one real prompt through the model and watch what actually gets used.
 
 ---
 
 ## The script
 
-**This block mirrors `section-01/beats.ts`.** `npm run drift` is what keeps the
-spoken lines identical; the build is the authority for beat timing.
+This block mirrors `src/videos/glm-320b/video-1/section-01/beats.ts`.
 
-### Act 1 — the screen, what is behind it, and the promise (beats 1–6) · **S-01**, **S-03**
+### Act 1 — make the obvious model (beats 1–2)
 
-> **1.** *(A chat window. A question types itself in.)* Let’s say you type something into an LLM.
+> **1.** *(GLM arrives as one block; a small region lights.)* Three hundred and twenty billion parameters. Only eighteen billion active. Sounds like most of the model isn't doing anything, right?
 >
-> **2.** *(It answers. One word, and it stops there.)* And it starts answering. One word.
->
-> **3.** *(The window turns edge-on and we pass behind it.)* One word. That sounds like one step. It wasn’t.
->
-> **4.** *(The counter runs to 336 before anything is named.)* Answering with that one word took three hundred and thirty-six separate pieces of this model.
->
-> **5.** *(A tower rises behind the glass.)* They’re stacked. Forty-five floors of them.
->
-> **6.** *(Behind the tower, a room with 288 in it.)* And on most of those floors, a room with two hundred and eighty-eight specialists in it. By the end, you’ll know why using only a small part can still mean a huge machine.
->
-> **7.** *(The machinery clears; two model sheets arrive, both five percent lit.)* And they tell you only about five percent of it ever runs. Here are two models. Both about five percent.
->
-> **8.** *(One chip.)* This one runs on a single chip.
->
-> **9.** *(Eight of them.)* This one needs eight.
->
-> **10.** *(The number everybody quotes.)* Both of them have that number. Clearly, that number alone doesn’t tell you how much hardware you need.
->
-> **11.** *(Level above, unequal below.)* Same five percent. Eight times the machine.
->
-> **12.** *(The comparison clears to one model.)* So now, let’s follow one token all the way through.
+> **2.** *(The active region lifts out of the block as a hypothetical plan.)* So here's the obvious guess: if only a small part is working, you should only need that small part close by.
 
-### Act 3 — concrete before abstract (beats 13–17) · **S-04**
+### Act 2 — test the guess (beats 3–8)
 
-> **13.** *(The model, whole.)* This is the model. All of it.
+> **3.** *(A second model arrives beside GLM; both show about five percent active.)* Let's test that. These two models both use about five percent of themselves for each token.
 >
-> **14.** *(It breaks into marks.)* Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is.
+> **4.** *(Everything holds; the viewer gets a fair choice.)* Same percentage. So make a guess: roughly similar hardware, or wildly different?
 >
-> **15.** *(Five percent goes live.)* And when a token comes in, about five percent of them do something.
+> **5.** *(One accelerator lands under the left model.)* This one fits on a single eighty-gigabyte accelerator.
 >
-> **16.** *(The camera pushes into the block.)* Let’s get closer.
+> **6.** *(Eight arrive under GLM, one countable card at a time.)* To keep GLM fully loaded at the precision it ships in, you need eight.
 >
-> **17.** *(The surface resolves into the room from beat 5.)* That room again. Two hundred and eighty-eight separate pieces — and this is one small part of the model.
+> **7.** *(The comparison holds: about five percent above, one versus eight below.)* Same basic idea: most of the model stays inactive. But the hardware is nowhere close. So "five percent active" clearly isn't telling us the whole story.
+>
+> **8.** *(One tiny mark in GLM gets a short definition note.)* And if "parameter" is a fuzzy word, don't worry. For now, just think of it as one learned number inside the model.
 
-### Act 4 — the bet (beats 18–21) · **S-05**
+### Act 3 — turn the contradiction into the real mystery (beats 9–13)
 
-> **18.** *(Nothing happens. The viewer bets.)* Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run?
+> **9.** *(The comparison model leaves; GLM returns to the centre.)* So here's the question I actually care about.
 >
-> **19.** *(Eight.)* Eight.
+> **10.** *(One real active patch and one dashed possible patch are visible.)* When GLM says eighteen billion are active... which eighteen billion?
 >
-> **20.** *(The other 280 do nothing.)* Eight get picked. The other two hundred and eighty do nothing at all.
+> **11.** *(The dashed possibility moves elsewhere while the real patch stays fixed.)* Maybe they're always the same ones. Or maybe the useful part can be somewhere else. We don't know yet.
 >
-> **21.** *(Eight of 288 is not the five percent.)* You might think that’s the five percent. It isn’t. This is one small part, and plenty more runs every time regardless. Hold onto that.
+> **12.** *(The real active patch lifts into a temporary "keep ready?" tray.)* Because if they are fixed, our idea works: keep that part ready, and leave the rest alone.
+>
+> **13.** *(The patch returns; the model becomes whole again.)* So rather than guessing, we're going to follow one real prompt through this model and watch exactly what gets used, when, and why.
 
-### Act 5 — the name and the wall (beats 22–23) · **S-12**, **S-14**
+### Act 4 — begin the experiment (beats 14–17)
 
-> **22.** *(It takes its name.)* And this has a name. It’s called a Mixture of Experts. Those pieces are the experts.
+> **14.** *(GLM slides right; a chat window enters from the left.)* And we'll do it with one example all the way through.
 >
-> **23.** *(The chapter wall.)* So — who picks the eight? And why does that turn out to be the expensive question?
+> **15.** *(The running prompt types into the chat.)* Let's use: "The dog dropped the ball, and it".
+>
+> **16.** *(The completed prompt holds; nothing has been tokenized yet.)* Once it breaks apart, we'll pick one piece and keep following that same piece through the machine.
+>
+> **17.** *(Send is committed; a dashed path starts toward GLM and stops halfway.)* I hit send. What is the first thing the model actually receives?
+
+---
 
 ## Storyboard
 
+`where` is intentionally the same for all 17 beats. This section has **no camera
+teleports and no new full page**. It is one paper stage; objects enter, move,
+change state and leave on that same surface.
+
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | a screen | — | a chat window; a question types itself in | `Chat`, model name small on chrome | **`GLM-5.3-Flash`** | S-01 |
-| 2 | a screen | — | it answers and stops on one word | `Chat` reply, caret holding | **`Because`** | S-01 |
-| 3 | behind the screen | **turn through** | the window goes edge-on; we pass behind it and it holds at the left edge | `Chat` turned, small | — | S-01 |
-| 4 | behind the screen | — | a counter runs to 336 before anything is named | `Counter` → 336 | **`uses — one token`** | S-01 |
-| 5 | behind the screen | — | a tower rises behind the glass | `Tower`, 45 floors | — | S-04 |
-| 6 | behind the screen | — | a room of 288 appears beside the tower; the promise lands | `Hospital` staffed | — | S-03 |
-| 7 | the sheet | **back out** | machinery clears; two model sheets arrive side by side, left coarse and right fine, five percent live on each | two `Block`s, 5% lit | — | S-01 |
-| 8 | the sheet | — | one chip slides in under the left block | `Rig` ×1 | — | S-01 |
-| 9 | the sheet | — | seven more chips stack under the right block | `Rig` ×8 | — | S-01 |
-| 10 | the sheet | — | the quoted phrase writes itself across both blocks | handwritten note | **`only 5% active`** | S-02 |
-| 11 | the sheet | — | the blocks hold, visibly unequal underneath | both blocks, **1 vs 8** chips | — | S-02 |
-| 12 | the sheet | — | the left block and its single chip leave; the eight-chip model remains | one `Block` left | — | S-03 |
-| 13 | the sheet | — | the block settles alone, whole | `Block` solid | — | S-04 |
-| 14 | the sheet | — | it breaks into a field of separate marks | `Block` scattered | **`320,000,000,000`** | S-04 |
-| 15 | the sheet | — | the marks resolve and about five percent go live | `Block`, 5% lit | — | S-04 |
-| 16 | inside | **push in** | the camera moves in on the lit region | block filling frame | — | S-04 |
-| 17 | inside | — | the room from beat 5 returns at full scale | `Hospital` staffed | 288 | S-04 |
-| 18 | inside | — | everything stops; the question holds | the 288, still | **`how many run?`** | S-05 |
-| 19 | inside | — | eight light up in place | `Hospital` lit ×8 | — | S-05 |
-| 20 | inside | — | the other 280 stay flat and grey | `Hospital` idle | **`280 idle`** | S-05 |
-| 21 | inside | — | the frame explicitly refuses to equate 8/288 with 5% of the model | lit 8 + note | **`not 5% of the model`** | S-14 |
-| 22 | inside | — | the arrangement takes its name | plaque | **`Mixture of Experts`** | S-12 |
-| 23 | inside, one part | **push in** | everything recedes but the chosen area and the unlabelled desk | `Hospital` focus + desk | — | S-14 |
+| 1 | the paper stage | — | GLM slides into the centre as one model block; one ~5% region lights | `Block` + `320B total` + `18B active` | GLM-5.3-Flash | S-04 |
+| 2 | the paper stage | — | the lit region physically lifts clear, leaving holes behind; a small `keep this part?` note appears | same GLM block, lifted patch | hypothesis only | S-14 |
+| 3 | the paper stage | — | the patch settles; GLM moves right while a second model slides in from the left; both show ~5% active | two `Block`s side by side | gpt-oss-120b vs GLM-5.3-Flash | S-04 |
+| 4 | the paper stage | — | nothing in the models changes; two temporary prediction choices appear below them | two models + `roughly similar` / `wildly different` | fair prediction | S-05 |
+| 5 | the paper stage | — | prediction choices leave; one 80 GB accelerator card slides under the left model | left `Rig` ×1 | 1 × 80 GB | S-04 |
+| 6 | the paper stage | — | accelerator cards arrive under GLM in countable stages until there are eight | right `Rig` → 1 → 2 → 4 → 8 | 8 × 80 GB | S-04 |
+| 7 | the paper stage | — | both models hold; the top measurement says ~5% while the bottom makes 1 vs 8 unavoidable | two blocks + both rigs | same active share, different footprint | S-14 |
+| 8 | the paper stage | — | a tiny note points into GLM: `one mark = one learned number`; no architecture is introduced | comparison still present | parameter intuition | S-04 |
+| 9 | the paper stage | — | the left model and its rig slide away; GLM moves back to centre with its eight-card context | centred GLM | — | S-14 |
+| 10 | the paper stage | — | the real active patch stays lit while a dashed alternate patch appears elsewhere | `Block` lit A + ghost B | `which 18B?` | S-08 |
+| 11 | the paper stage | — | only the dashed hypothetical patch changes location; the real active patch does not | lit A + ghost B→C | possibilities, not an answer | S-04 |
+| 12 | the paper stage | — | the ghost disappears; the real active patch lifts out again under a `KEEP READY?` hypothesis | lifted active patch | tempting plan | S-14 |
+| 13 | the paper stage | — | the patch returns exactly to its holes; the hardware context clears so the whole model is the hero again | whole GLM block | follow one real prompt | S-03 |
+| 14 | the paper stage | — | GLM slides to the right; a chat window slides in from the left; both remain visible | `Chat` + same GLM `Block` | GLM-5.3-Flash | S-04 |
+| 15 | the paper stage | — | the real running prompt types character by character inside the chat | `Chat` + GLM | `The dog dropped the ball, and it` | S-04 |
+| 16 | the paper stage | — | typing stops and the intact sentence holds; **no word card and no token appears yet** | intact human text | same prompt | S-04 |
+| 17 | the paper stage | — | the prompt is committed; a dashed causal path begins at the chat and stops halfway to GLM | chat left, GLM right, half-path between | `what reaches the model first?` | S-08 |
 
-Beat seconds are placeholders until the real recording. `npm run timing` is the
-authority; after VO, restamp from measured audio.
+## Component lifecycle
 
-### Board notes
+| actor | appears | changes | leaves |
+| --- | --- | --- | --- |
+| GLM `Block` | beat 1 | lifts active patch, moves right/centre/right, shows hypothetical ghost regions | **never** in §1 |
+| second `Block` | beat 3 | holds comparison | beat 9 |
+| left `Rig` | beat 5 | none | beat 9 |
+| right `Rig` | beat 6 | counts to eight; moves under centred GLM | beat 13 |
+| prediction choices | beat 4 | none | beat 5 |
+| parameter clarification | beat 8 | none | beat 9 |
+| ghost active-region hypothesis | beat 10 | moves once in beat 11 | beat 12 |
+| `KEEP READY?` hypothesis | beat 12 | none | beat 13 |
+| `Chat` | beat 14 | types prompt, then commits it | persists to the section end |
+| causal path | beat 17 | begins but does not reach GLM yet | handed to §2 conceptually |
 
-- **The opening has a coastline.** Chat is familiar; the camera then literally
-  goes behind it. Forty-five, 288 and 336 therefore belong to the thing the
-  viewer just used rather than arriving as free-floating diagrams.
-- **336 is a count of uses/visits, not 336 distinct specialists.** The old line
-  *"336 of them got pulled in"* was wrong because it followed a wall of 288 and
-  naturally read as 336 different experts.
-- **Beat 6 carries the promise.** The promise begins immediately on that beat;
-  the viewer does not wait until the 1-vs-8 comparison has finished to learn
-  why the film is worth staying for.
-- **The hardware comparison keeps both halves visible at once.** Beats 8–11
-  must show one and eight simultaneously; otherwise the contradiction becomes
-  two unrelated facts.
-- **Beat 12 clears the comparison.** From there onward the film follows one
-  model and one token.
-- **The 288 do not move between beats 18 and 19.** The guess and the answer
-  occupy the same space; eight light up in place.
-- **All 288 are drawn.** Not a representative sample. The later 12,096 argument
-  depends on the scale being felt honestly here.
+## Carrying frames
 
-## Line jobs
+### Frame A — beat 6
 
-| Beat | Job |
-| --- | --- |
-| 1–3 | familiar world → go behind it |
-| 4–5 | **disproportion** — 45 floors, 288 specialists |
-| 6 | behind the screen | — | a room of 288 appears beside the tower; the promise lands | `Hospital` staffed | — | S-03 |
-| 7–11 | **contradiction** — about 5% active, one chip vs eight |
-| 12 | **turn** — follow one token through |
-| 13–17 | **teach** — model, parameter, active share, return to the 288 room |
-| 18 | **hard bet** — how many run? |
-| 19–21 | **reveal and correction** — eight, 280 idle, and 8/288 is not the model's 5% |
-| 22 | **name** — Mixture of Experts, after the viewer has seen it |
-| 23 | **wall** — who picks the eight, and why is that expensive? |
+Two models, both about five percent active. **One accelerator versus eight.**
+This frame must make sense muted.
+
+### Frame B — beat 10
+
+One huge GLM block, one small real active region, one dashed possible region.
+The picture itself asks: **which 18B?**
+
+### Frame C — beat 17
+
+Chat on the left, GLM on the right, the intact prompt still human-readable,
+and a path that has started but not arrived. The viewer knows exactly what the
+next section owes them.
 
 ## Truth notes
 
-- **321B, said as "three hundred and twenty billion."** The round number is
-  what the field quotes; `GROUND_TRUTH.md` carries the exact figure.
-- **"About five percent" is doing real work.** gpt-oss-120b is 4.4% active and
-  GLM-5.3-Flash is 5.6%.
-- **One chip versus eight is derived and checkable.** ~58 GiB at MXFP4 fits one
-  80 GB accelerator. ~306 GiB at FP8 is 328.6 GB and does not fit four cards'
-  320 GB; tensor-parallel size must divide the 64 attention heads, so the
-  smallest workable count is eight. `research/glm/GROUND_TRUTH.md`.
-- **Nothing here says why you cannot store only the active part.** That is §11.
-- **Eight of 288 is not the five percent.** 8 ÷ 288 is 2.8% of routed weight in
-  one sparse layer; 18 ÷ 321 is 5.6% of the whole model. They are different
-  claims and neither causes the other.
-- **280 idle is correct.** The shared expert is a 289th additional expert, not
-  one of the 288 routed experts; it is introduced later where it has a frame.
+- GLM-5.3-Flash is 321B exact / marketed about 320B, with 18B active per token.
+- `gpt-oss-120b` is about 4.4% active; GLM is about 5.6%. The narration says
+  **about five percent** because the comparison is about the misleadingly
+  similar headline share, not the decimal difference.
+- The hardware comparison is deliberately scoped. `gpt-oss-120b` is ~58 GiB at
+  its shipped MXFP4 format and fits one 80 GB accelerator. GLM is ~306 GiB at
+  shipped FP8. Four 80 GB accelerators provide 320 GB decimal, less than the
+  328.6 GB equivalent of 306 GiB; with the current tensor-parallel divisibility
+  constraint, eight is the smallest workable fully-resident count used by this
+  comparison. This is **not** a claim that GLM cannot run with offloading or
+  quantization.
+- A parameter is introduced only as **one learned number**. That is enough for
+  this section and avoids dragging matrices/training into the hook.
+- The lifted/ghost patches are explicitly hypotheses. They do **not** claim the
+  real 18B is one contiguous region or that the same subset is used every time.
+  The `Block` visualization uses a scattered authored patch for that reason.
+- The prompt shown here is exactly the measured tokenizer prompt:
+  `The dog dropped the ball, and it` — **no ellipsis is added on screen**, because
+  punctuation would change the tokenizer input.
 
-## Frames
+## Sound-compatible actions
 
-- Beats 1–6: the chat stays visibly connected to the machinery behind it.
-- Beats 8–11: the chips must remain countable as **one versus eight**.
-- Beat 18: nothing on screen but the 288 and the question.
-- Beat 21: the correction `not 5% of the model` must be legible before moving on.
+- beat 3: paper slide as the second model arrives
+- beat 5: one firm accelerator-card click
+- beat 6: short countable card ticks, last one slightly heavier
+- beat 12: paper lift
+- beat 15: typing
+- beat 17: one send/key press
 
-## Assets
-
-| Need | Status |
-| --- | --- |
-| chat window and turned state | **have** — `Chat` |
-| 45-floor tower | **have** — `Tower` |
-| counter to 336 | **have** — `Counter` |
-| second `Block`, independently lit | **built** — `block2` |
-| 1-vs-8 accelerator rig | **built** — `Rig` |
-| `Hospital` at 288 with eight lit | **have** |
+Sound never carries information the frame needs in order to work.
