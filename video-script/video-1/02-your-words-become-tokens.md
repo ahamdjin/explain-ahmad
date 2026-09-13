@@ -61,7 +61,7 @@ Numbers: `research/glm/GROUND_TRUTH.md` · Tokenizer measurements:
 
 | beat | where | camera | what happens | on screen | example | strategy |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | at the model entrance | — | the intact prompt from §01 arrives and stops | `Sentence`, narrator | **`The dog dropped the ball, and it`** | S-14 |
+| 1 | the paper stage | — | the intact prompt from §01 arrives and stops beside the model entrance | `Sentence`, narrator | **`The dog dropped the ball, and it`** | S-14 |
 | 2 | at the doorway | **push in** | the same prompt moves inward and the camera goes with it | same `Sentence` | same prompt | S-04 |
 | 3 | the first surface | **follow** | the camera crosses inside with the same card; the outside world drops away behind the move | same `Sentence` travelling | same prompt | S-04 |
 | 4 | the first surface | — | the prompt lands and settles | `Sentence` at rest | same prompt | S-04 |
@@ -79,8 +79,8 @@ Numbers: `research/glm/GROUND_TRUTH.md` · Tokenizer measurements:
 
 §01 ends with the intact human sentence leaving chat and a causal path pointing
 toward GLM. §02 does **not** redraw the 288-expert room, router desk, or any
-other later mechanism. Its first visible object is that same sentence. This is
-conceptual continuation rather than a new topic.
+other later mechanism. Its first visible object is that same sentence on the
+same paper stage. Beat 2 is the camera move that actually takes us inward.
 
 ## Truth notes
 
