@@ -53,7 +53,7 @@ export const BEATS: Beat<Patch>[] = [
      * small and grey on the window chrome where a product label really goes --
      * findable, never announced. `paper/cast/Chat.tsx`.
      */
-    vo: 'You type something into one of these.',
+    vo: 'Let’s say you type something into an LLM.',
     commands: [chat.open({ x: 50, y: 46 }, 1, 'GLM-5.3-Flash')],
     stages: [{ at: 700, commands: [chat.type('why is the sky blue?')] }],
   },
@@ -72,17 +72,21 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 3,
-    id: 'behind-the-screen',
+    id: 'one-word-one-step',
     title: 'The window turns edge-on and we pass behind it',
     relation: 'and-yet',
-    secs: 5,
+    secs: 6,
     /*
-     * The section's one real move, and it is a *turn*, not a cut. A cut would
-     * make what follows a new subject; going behind the screen keeps it the
-     * same one -- the word stays on the glass at the left edge for the next
-     * three beats, so everything that appears is visibly the cost *of that*.
+     * S-01 wants the contradiction in the opening sentence, not at 0:39.
+     * "That sounds like one step. It wasn't." is the whole hook, and it needs
+     * no vocabulary the viewer does not already have -- a word, a step.
+     *
+     * The move is a *turn*, not a cut. A cut would make what follows a new
+     * subject; going behind the screen keeps it the same one -- the word stays
+     * on the glass at the left edge for the next three beats, so everything
+     * that appears is visibly the cost *of that*.
      */
-    vo: 'Here is what happened behind that one word.',
+    vo: 'One word. That sounds like one step. It wasn’t.',
     commands: [
       chat.turn(),
       chat.moveTo({ x: 13, y: 46 }, 0.46),
@@ -91,48 +95,52 @@ export const BEATS: Beat<Patch>[] = [
   },
   {
     n: 4,
-    id: 'forty-five-floors',
-    title: 'A tower rises behind the glass',
-    relation: 'so',
-    secs: 4,
-    /* Unexplained, and large. §7 is where forty-five becomes an argument;
-     * here it is only a size. */
-    vo: 'It went up forty-five floors.',
-    commands: [tower.rise({ x: 52, y: 48 }, 0.6), narrator.pose('reach')],
+    id: 'three-thirty-six-for-one-word',
+    title: 'The counter runs to 336 before anything is named',
+    relation: 'wall',
+    secs: 9,
+    /*
+     * 336 is **visits/uses**, not 336 distinct experts -- but "separate
+     * pieces of this model" is true of a visit and needs no setup, and the
+     * tower and the room are about to show what a piece is. Naming the object
+     * before showing it is what made the old beat 4 unreadable.
+     */
+    vo: 'Answering with that one word took three hundred and thirty-six separate pieces of this model.',
+    commands: [narrator.pose('slump')],
+    stages: [{ at: 3200, commands: [count.run(336, 'uses — one token')] }],
   },
   {
     n: 5,
-    id: 'a-room-of-two-eighty-eight',
-    title: 'Behind the tower, a room with 288 in it',
+    id: 'forty-five-floors',
+    title: 'A tower rises behind the glass',
     relation: 'so',
-    secs: 7,
+    secs: 5,
+    /* The tower now arrives as the answer to a number the viewer is already
+     * carrying, so "forty-five floors" is where 336 came from rather than an
+     * unexplained building. §7 is where forty-five becomes an argument; here
+     * it is still only a size. */
+    vo: 'They’re stacked. Forty-five floors of them.',
+    commands: [tower.rise({ x: 52, y: 48 }, 0.6), narrator.pose('reach')],
+  },
+  {
+    n: 6,
+    id: 'a-room-of-two-eighty-eight',
+    title: 'Behind the tower, a room with 288 in it; the promise lands',
+    relation: 'so',
+    secs: 14,
     /*
      * "Most of those floors" -- 42 of 45, and the section may not say "layer"
-     * yet. Claim only what is on screen and let §7 do the arithmetic.
+     * yet. Claim only what is on screen and let §7 do the arithmetic. The
+     * S-03 promise rides the tail of this beat, after the contradiction has
+     * already been paid rather than before it.
      */
-    vo: 'On most of those floors, a room with two hundred and eighty-eight specialists in it.',
+    vo: 'And on most of those floors, a room with two hundred and eighty-eight specialists in it. By the end, you’ll know why using only a small part can still mean a huge machine.',
     commands: [
       tower.moveTo({ x: 30, y: 48 }, 0.48),
       hospital.rise({ x: 66, y: 46 }, 0.58),
       hospital.staff(),
       narrator.pose('count'),
     ],
-  },
-  {
-    n: 6,
-    id: 'three-thirty-six-for-one-word',
-    title: 'The promise lands, then the counter runs to 336',
-    relation: 'wall',
-    secs: 14,
-    /*
-     * 336 is **visits/uses**, not 336 distinct experts. The old "336 of them"
-     * wording taught the wrong object. The counter is staged after the promise
-     * phrase so the visual and its ratchet do not finish before the VO reaches
-     * "Across that climb...".
-     */
-    vo: 'By the end, you’ll know why using only a small part can still mean a huge machine. Across that climb, those specialists got used three hundred and thirty-six times. For one token.',
-    commands: [narrator.pose('slump')],
-    stages: [{ at: 5000, commands: [count.run(336, 'uses — one token')] }],
   },
 
   /* ═══ ACT 2 · THE CLAIM (S-01) ══════════════════════════════════════════

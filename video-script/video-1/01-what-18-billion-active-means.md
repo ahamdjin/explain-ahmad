@@ -44,20 +44,18 @@ spoken lines identical; the build is the authority for beat timing.
 
 ### Act 1 — the screen, what is behind it, and the promise (beats 1–6) · **S-01**, **S-03**
 
-> **1.** *(A chat window. A question types itself in.)* You type something into one of these.
+> **1.** *(A chat window. A question types itself in.)* Let’s say you type something into an LLM.
 >
 > **2.** *(It answers. One word, and it stops there.)* And it starts answering. One word.
 >
-> **3.** *(The window turns edge-on and we pass behind it.)* Here is what happened behind that one word.
+> **3.** *(The window turns edge-on and we pass behind it.)* One word. That sounds like one step. It wasn’t.
 >
-> **4.** *(A tower rises behind the glass.)* It went up forty-five floors.
+> **4.** *(The counter runs to 336 before anything is named.)* Answering with that one word took three hundred and thirty-six separate pieces of this model.
 >
-> **5.** *(Behind the tower, a room with 288 in it.)* On most of those floors, a room with two hundred and eighty-eight specialists in it.
+> **5.** *(A tower rises behind the glass.)* They’re stacked. Forty-five floors of them.
 >
-> **6.** *(The counter runs to 336 while the value promise lands.)* By the end, you’ll know why using only a small part can still mean a huge machine. Across that climb, those specialists got used three hundred and thirty-six times. For one token.
-
-### Act 2 — the claim and the hardware contradiction (beats 7–12) · **S-01**, **S-02**, **S-03**
-
+> **6.** *(Behind the tower, a room with 288 in it.)* And on most of those floors, a room with two hundred and eighty-eight specialists in it. By the end, you’ll know why using only a small part can still mean a huge machine.
+>
 > **7.** *(The machinery clears; two model sheets arrive, both five percent lit.)* And they tell you only about five percent of it ever runs. Here are two models. Both about five percent.
 >
 > **8.** *(One chip.)* This one runs on a single chip.
@@ -105,9 +103,9 @@ spoken lines identical; the build is the authority for beat timing.
 | 1 | a screen | — | a chat window; a question types itself in | `Chat`, model name small on chrome | **`GLM-5.3-Flash`** | S-01 |
 | 2 | a screen | — | it answers and stops on one word | `Chat` reply, caret holding | **`Because`** | S-01 |
 | 3 | behind the screen | **turn through** | the window goes edge-on; we pass behind it and it holds at the left edge | `Chat` turned, small | — | S-01 |
-| 4 | behind the screen | — | a tower rises behind the glass | `Tower`, 45 floors | — | S-01 |
-| 5 | behind the screen | — | a room of 288 appears beside the tower | `Hospital` staffed | — | S-01 |
-| 6 | behind the screen | — | the promise lands while a counter runs to 336 | `Counter` → 336 | **`uses — one token`** | S-03 |
+| 4 | behind the screen | — | a counter runs to 336 before anything is named | `Counter` → 336 | **`uses — one token`** | S-01 |
+| 5 | behind the screen | — | a tower rises behind the glass | `Tower`, 45 floors | — | S-04 |
+| 6 | behind the screen | — | a room of 288 appears beside the tower; the promise lands | `Hospital` staffed | — | S-03 |
 | 7 | the sheet | **back out** | machinery clears; two model sheets arrive side by side, left coarse and right fine, five percent live on each | two `Block`s, 5% lit | — | S-01 |
 | 8 | the sheet | — | one chip slides in under the left block | `Rig` ×1 | — | S-01 |
 | 9 | the sheet | — | seven more chips stack under the right block | `Rig` ×8 | — | S-01 |
@@ -156,7 +154,7 @@ authority; after VO, restamp from measured audio.
 | --- | --- |
 | 1–3 | familiar world → go behind it |
 | 4–5 | **disproportion** — 45 floors, 288 specialists |
-| 6 | **promise + hook number** — why so little work can still need so much machine; 336 uses/token |
+| 6 | behind the screen | — | a room of 288 appears beside the tower; the promise lands | `Hospital` staffed | — | S-03 |
 | 7–11 | **contradiction** — about 5% active, one chip vs eight |
 | 12 | **turn** — follow one token through |
 | 13–17 | **teach** — model, parameter, active share, return to the 288 room |
