@@ -20,7 +20,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'GLM arrives as one model; a small region lights',
     relation: 'want',
     secs: 7,
-    vo: "Three hundred and twenty billion parameters. Only eighteen billion active. Sounds like most of the model isn't doing anything, right?",
+    vo: 'Three hundred and twenty billion parameters. Only eighteen billion active. Sounds like most of the model isn’t doing anything, right?',
     commands: [
       ground.at(GROUND_Y),
       block.scatter({ x: 50, y: 47 }, 0.78),
@@ -39,7 +39,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The active region lifts out as the tempting plan',
     relation: 'therefore',
     secs: 6,
-    vo: "So here's the obvious guess: if only a small part is working, you should only need that small part close by.",
+    vo: 'So here’s the obvious guess: if only a small part is working, you should only need that small part close by.',
     commands: [block.lift()],
     overlays: [note('keep this part?', 65, 20, { size: 'md', rotate: -3 })],
   },
@@ -131,7 +131,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The comparison leaves; the same GLM block returns to centre',
     relation: 'therefore',
     secs: 4,
-    vo: "So here's the question I actually care about.",
+    vo: 'So here’s the question I actually care about.',
     commands: [
       block2.off(),
       rigA.off(),
@@ -160,7 +160,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Only the hypothetical outline moves',
     relation: 'so',
     secs: 6,
-    vo: "Maybe they're always the same ones. Or maybe the useful part can be somewhere else. We don't know yet.",
+    vo: 'Maybe they’re always the same ones. Or maybe the useful part can be somewhere else. We don’t know yet.',
     commands: [],
     stages: [
       { at: 1700, commands: [block.ghost('c')] },
