@@ -1,364 +1,237 @@
-import { brace, centred, GROUND_Y, note, type Beat } from '../../../../paper'
-import {
-  CHOSEN,
-  big,
-  block,
-  chat,
-  count,
-  tower,
-  block2,
-  rigA,
-  rigB,
-  desk,
-  ground,
-  hospital,
-  narrator,
-  word,
-  word2,
-  word3,
-  type Patch,
-} from './scene'
+import { arrow, brace, centred, GROUND_Y, note, type Beat } from '../../../../paper'
+import { block, block2, chat, ground, rigA, rigB, type Patch } from './scene'
 
 /**
- * Section 01 — What "18 billion active" means.
+ * Section 01 — The five-percent problem.
  *
- * Script and board: `video-script/video-1/01-what-18-billion-active-means.md`
- * Checked by `npm run check:board` and `npm run timing -- --scripts`.
+ * Rewrite v1: the opening does one job. It lets the viewer form the tempting
+ * model "~5% active should mean ~5% of the hardware", breaks that prediction
+ * with the 1-vs-8 comparison, then turns the failure into the question the
+ * rest of the video will answer: which 18B are active, and when is that known?
  *
- * **Script v10.** Every beat cites a strategy from `skills/STRATEGY_LEDGER.md`
- * -- see the Storyboard table in the script. The opening starts on a familiar
- * chat, goes behind it, then turns the mechanism into a hardware contradiction.
+ * No tower, 45 floors, 288 experts, 336 visits, router, or MoE language here.
+ * Those numbers are useful only after the viewer knows what they count.
  */
 
-/* Layout anchors. Reflow the whole section from here. */
-const BLOCK = { x: 52, y: 46 }
-const BLOCK_S = 1
-/** The block's left edge and width as stage percentages, for braces under it. */
-const BLOCK_LEFT = 26
-const BLOCK_W = 52
-
 export const BEATS: Beat<Patch>[] = [
-  /* ═══ ACT 1 · THE SCREEN, AND WHAT IS BEHIND IT ═════════════════════════
-   * Six beats. Familiar world first, then the disproportion behind one token.
-   * The promise now starts on beat 6 instead of waiting until the hardware
-   * comparison has finished. */
   {
     n: 1,
-    id: 'you-ask-it-something',
-    title: 'A chat window. A question types itself in.',
+    id: 'three-twenty-eighteen-active',
+    title: 'GLM arrives as one model; a small region lights',
     relation: 'want',
-    secs: 5,
-    /*
-     * No title card, no "today we're talking about". The model's name sits
-     * small and grey on the window chrome where a product label really goes --
-     * findable, never announced. `paper/cast/Chat.tsx`.
-     */
-    vo: 'Let’s say you type something into an LLM.',
-    commands: [chat.open({ x: 50, y: 46 }, 1, 'GLM-5.3-Flash')],
-    stages: [{ at: 700, commands: [chat.type('why is the sky blue?')] }],
+    secs: 7,
+    vo: "Three hundred and twenty billion parameters. Only eighteen billion active. Sounds like most of the model isn't doing anything, right?",
+    commands: [
+      ground.at(GROUND_Y),
+      block.scatter({ x: 50, y: 47 }, 0.78),
+      block.pack(),
+      block.light('a'),
+    ],
+    overlays: [
+      centred('GLM-5.3-Flash', 50, 14, { size: 'sm', sticky: true }),
+      note('320B total', 29, 72, { tone: 'measure', sticky: true }),
+      note('18B active', 61, 28, { tone: 'claim', sticky: true }),
+    ],
   },
   {
     n: 2,
-    id: 'one-word-comes-back',
-    title: 'It answers. One word, and it stops there.',
-    relation: 'so',
-    secs: 4,
-    /* It stops on one word on purpose. The whole opening is the cost of
-     * *that* word, and a full sentence would make it the cost of a paragraph
-     * -- which is a different, larger, less checkable claim. */
-    vo: 'And it starts answering. One word.',
-    commands: [chat.sent()],
-    stages: [{ at: 1400, commands: [chat.reply('Because')] }],
+    id: 'keep-the-small-part',
+    title: 'The active region lifts out as the tempting plan',
+    relation: 'therefore',
+    secs: 6,
+    vo: "So here's the obvious guess: if only a small part is working, you should only need that small part close by.",
+    commands: [block.lift()],
+    overlays: [note('keep this part?', 65, 20, { size: 'md', rotate: -3 })],
   },
   {
     n: 3,
-    id: 'one-word-one-step',
-    title: 'The window turns edge-on and we pass behind it',
-    relation: 'and-yet',
-    secs: 6,
-    /*
-     * S-01 wants the contradiction in the opening sentence, not at 0:39.
-     * "That sounds like one step. It wasn't." is the whole hook, and it needs
-     * no vocabulary the viewer does not already have -- a word, a step.
-     *
-     * The move is a *turn*, not a cut. A cut would make what follows a new
-     * subject; going behind the screen keeps it the same one -- the word stays
-     * on the glass at the left edge for the next three beats, so everything
-     * that appears is visibly the cost *of that*.
-     */
-    vo: 'One word. That sounds like one step. It wasn’t.',
+    id: 'two-models-same-share',
+    title: 'A second model arrives; both show about five percent active',
+    relation: 'therefore',
+    secs: 7,
+    vo: 'Let’s test that. These two models both use about five percent of themselves for each token.',
     commands: [
-      chat.turn(),
-      chat.moveTo({ x: 13, y: 46 }, 0.46),
-      narrator.at({ x: 91, y: 70 }, 'point', 1, true),
+      block.drop(),
+      block.moveTo({ x: 70, y: 42 }, 0.58),
+      block2.arrive({ x: 30, y: 42 }, 0.58),
+      block2.light('b'),
+      { block2: { grain: 'fine' } },
+    ],
+    clearSticky: true,
+    overlays: [
+      centred('gpt-oss-120b', 30, 15, { size: 'sm', sticky: true }),
+      centred('GLM-5.3-Flash', 70, 15, { size: 'sm', sticky: true }),
+      centred('about 5% active', 50, 60, { size: 'sm', tone: 'claim', sticky: true }),
     ],
   },
   {
     n: 4,
-    id: 'three-thirty-six-for-one-word',
-    title: 'The counter runs to 336 before anything is named',
-    relation: 'wall',
-    secs: 9,
-    /*
-     * 336 is **visits/uses**, not 336 distinct experts -- but "separate
-     * pieces of this model" is true of a visit and needs no setup, and the
-     * tower and the room are about to show what a piece is. Naming the object
-     * before showing it is what made the old beat 4 unreadable.
-     */
-    vo: 'Answering with that one word took three hundred and thirty-six separate pieces of this model.',
-    commands: [narrator.pose('slump')],
-    stages: [{ at: 3200, commands: [count.run(336, 'uses — one token')] }],
+    id: 'make-a-fair-guess',
+    title: 'The viewer commits only to similar or very different hardware',
+    relation: 'want',
+    secs: 6,
+    vo: 'Same percentage. So make a guess: roughly similar hardware, or wildly different?',
+    commands: [],
+    overlays: [
+      note('ROUGHLY SIMILAR', 22, 77, { size: 'md', backed: true, rotate: -1 }),
+      note('WILDLY DIFFERENT', 58, 77, { size: 'md', backed: true, rotate: 1 }),
+    ],
   },
   {
     n: 5,
-    id: 'forty-five-floors',
-    title: 'A tower rises behind the glass',
+    id: 'one-accelerator',
+    title: 'One accelerator lands under the left model',
     relation: 'so',
-    secs: 5,
-    /* The tower now arrives as the answer to a number the viewer is already
-     * carrying, so "forty-five floors" is where 336 came from rather than an
-     * unexplained building. §7 is where forty-five becomes an argument; here
-     * it is still only a size. */
-    vo: 'They’re stacked. Forty-five floors of them.',
-    commands: [tower.rise({ x: 52, y: 48 }, 0.6), narrator.pose('reach')],
+    secs: 4,
+    vo: 'This one fits on a single eighty-gigabyte accelerator.',
+    commands: [rigA.show(1, { x: 30, y: 74 }, 0.82)],
+    overlays: [note('1 × 80 GB', 23, 86, { tone: 'measure', sticky: true })],
   },
   {
     n: 6,
-    id: 'a-room-of-two-eighty-eight',
-    title: 'Behind the tower, a room with 288 in it; the promise lands',
-    relation: 'so',
-    secs: 14,
-    /*
-     * "Most of those floors" -- 42 of 45, and the section may not say "layer"
-     * yet. Claim only what is on screen and let §7 do the arithmetic. The
-     * S-03 promise rides the tail of this beat, after the contradiction has
-     * already been paid rather than before it.
-     */
-    vo: 'And on most of those floors, a room with two hundred and eighty-eight specialists in it. By the end, you’ll know why using only a small part can still mean a huge machine.',
-    commands: [
-      tower.moveTo({ x: 30, y: 48 }, 0.48),
-      hospital.rise({ x: 66, y: 46 }, 0.58),
-      hospital.staff(),
-      narrator.pose('count'),
+    id: 'eight-accelerators',
+    title: 'GLM counts up to eight accelerators',
+    relation: 'and-yet',
+    secs: 6,
+    vo: 'To keep GLM fully loaded at the precision it ships in, you need eight.',
+    commands: [rigB.show(1, { x: 70, y: 74 }, 0.82)],
+    stages: [
+      { at: 700, commands: [rigB.show(2)] },
+      { at: 1500, commands: [rigB.show(4)] },
+      { at: 2500, commands: [rigB.show(8)] },
+    ],
+    overlays: [
+      note('8 × 80 GB', 64, 86, { tone: 'cost', sticky: true }),
+      centred('native shipped precision · weights resident', 70, 93, { size: 'sm' }),
     ],
   },
-
-  /* ═══ ACT 2 · THE CLAIM (S-01) ══════════════════════════════════════════
-   * Now the statistic lands after the disproportion, so the hardware
-   * comparison has something concrete to contradict. */
   {
     n: 7,
-    id: 'only-five-percent-runs',
-    title: 'The machinery clears; two model sheets arrive, both five percent lit',
+    id: 'same-share-different-machine',
+    title: 'The contradiction is allowed to sit',
     relation: 'and-yet',
-    secs: 9,
-    vo: 'And they tell you only about five percent of it ever runs. Here are two models. Both about five percent.',
-    commands: [
-      chat.off(),
-      tower.off(),
-      hospital.off(),
-      count.off(),
-      ground.at(GROUND_Y),
-      block.scatter({ x: 72, y: 42 }, 0.5),
-      block.pack(),
-      block.light('a'),
-      block2.arrive({ x: 30, y: 42 }, 0.5),
-      /* A *different* patch, deliberately: the two models are not active in the
-       * same place, and the section's whole claim is that the share is the
-       * same while everything else about it is not. */
-      block2.light('b'),
-      narrator.at({ x: 91, y: 70 }, 'point', 1, true),
-    ],
-    overlays: [centred('about 5% active', 51, 56, { size: 'sm', rotate: -1 })],
+    secs: 7,
+    vo: 'Same basic idea: most of the model stays inactive. But the hardware is nowhere close. So "five percent active" clearly isn’t telling us the whole story.',
+    commands: [],
+    overlays: [brace('same headline share', 18, 63, 64, { tone: 'claim', side: 'top' })],
   },
   {
     n: 8,
-    id: 'one-card',
-    title: 'One chip',
+    id: 'parameter-in-one-line',
+    title: 'One small note gives parameter just enough meaning',
     relation: 'so',
-    secs: 4,
-    /*
-     * **"Chip", not "graphics card."** An 80 GB accelerator is not a gaming
-     * GPU, and §13's truth notes say so in as many words. It matters more here
-     * than as a wording nit: S-10 closes the video by redrawing this exact
-     * frame and reusing its nouns, and §13 beat 7 says "fits on one chip". A
-     * ring that opens on one noun and closes on another is not a ring.
-     */
-    vo: 'This one runs on a single chip.',
-    commands: [rigA.show(1), narrator.pose('offer')],
-    overlays: [note('one', 27, 80, { tone: 'measure', sticky: true })],
+    secs: 7,
+    vo: 'And if "parameter" is a fuzzy word, don’t worry. For now, just think of it as one learned number inside the model.',
+    commands: [],
+    overlays: [note('one mark = one learned number', 58, 29, { size: 'sm', tone: 'measure', backed: true })],
   },
   {
     n: 9,
-    id: 'eight-cards',
-    title: 'Eight of them',
-    relation: 'wall',
-    secs: 3,
-    /* Checkable: gpt-oss-120b is ~58 GiB at MXFP4 and fits one 80 GB card.
-     * GLM-5.3-Flash is ~306 GiB = 328.6 GB at FP8, so four 80 GB cards are
-     * insufficient; tensor-parallel size must divide the 64 attention heads,
-     * making eight the smallest workable size. `GROUND_TRUTH.md`. */
-    vo: 'This one needs eight.',
-    commands: [rigB.show(8), narrator.pose('count')],
-    overlays: [note('eight', 69, 80, { tone: 'cost', sticky: true })],
-  },
-  {
-    n: 10,
-    id: 'the-number-everybody-quotes',
-    title: 'The number everybody quotes',
-    relation: 'and-yet',
-    secs: 9,
-    vo: 'Both of them have that number. Clearly, that number alone doesn’t tell you how much hardware you need.',
-    commands: [narrator.pose('confide')],
-    overlays: [centred('“only 5% active”', 51, 20, { size: 'md', rotate: -2, sticky: true })],
-  },
-  {
-    n: 11,
-    id: 'unequal',
-    title: 'Level above, unequal below',
-    relation: 'and-yet',
-    secs: 4,
-    vo: 'Same five percent. Eight times the machine.',
-    commands: [narrator.pose('weigh')],
-    overlays: [brace('same share', 17, 63, 68, { tone: 'measure' })],
-  },
-  {
-    n: 12,
-    id: 'the-promise',
-    title: 'Follow one token',
+    id: 'back-to-glm',
+    title: 'The comparison leaves; the same GLM block returns to centre',
     relation: 'therefore',
-    secs: 5,
-    /* The value promise already landed at beat 6. This beat only turns the
-     * hardware contradiction into the journey that will prove it. */
-    vo: 'So now, let’s follow one token all the way through.',
+    secs: 4,
+    vo: "So here's the question I actually care about.",
     commands: [
       block2.off(),
       rigA.off(),
-      rigB.off(),
-      block.moveTo({ x: 52, y: 46 }, 1),
-      narrator.pose('reach'),
+      block.moveTo({ x: 50, y: 45 }, 0.84),
+      rigB.show(8, { x: 50, y: 79 }, 0.62),
     ],
     clearSticky: true,
+    overlays: [centred('GLM-5.3-Flash', 50, 12, { size: 'sm', sticky: true })],
   },
-
-  /* ═══ ACT 3 · NOW THE WORDS (S-04) ══════════════════════════════════════ */
+  {
+    n: 10,
+    id: 'which-eighteen',
+    title: 'A second possible patch appears without changing the real active patch',
+    relation: 'want',
+    secs: 7,
+    vo: 'When GLM says eighteen billion are active... which eighteen billion?',
+    commands: [block.ghost('b')],
+    overlays: [
+      note('18B active', 63, 27, { tone: 'claim' }),
+      note('?', 74, 39, { size: 'lg', rotate: 8 }),
+    ],
+  },
+  {
+    n: 11,
+    id: 'could-be-somewhere-else',
+    title: 'Only the hypothetical outline moves',
+    relation: 'so',
+    secs: 6,
+    vo: "Maybe they're always the same ones. Or maybe the useful part can be somewhere else. We don't know yet.",
+    commands: [],
+    stages: [
+      { at: 1700, commands: [block.ghost('c')] },
+      { at: 3500, commands: [block.ghost('b')] },
+    ],
+  },
+  {
+    n: 12,
+    id: 'the-tempting-plan',
+    title: 'If the subset were fixed, take it out and keep it ready',
+    relation: 'therefore',
+    secs: 7,
+    vo: 'Because if they are fixed, our idea works: keep that part ready, and leave the rest alone.',
+    commands: [block.ghost(undefined), block.lift()],
+    overlays: [centred('KEEP READY?', 68, 19, { size: 'md', rotate: -2 })],
+  },
   {
     n: 13,
-    id: 'this-is-the-model',
-    title: 'The model, whole',
-    relation: 'so',
-    secs: 5,
-    vo: 'This is the model. All of it.',
-    commands: [block.light(undefined), narrator.pose('point')],
+    id: 'turn-it-into-an-experiment',
+    title: 'The patch returns; the whole model becomes the experiment',
+    relation: 'therefore',
+    secs: 7,
+    vo: 'So rather than guessing, we’re going to follow one real prompt through this model and watch exactly what gets used, when, and why.',
+    commands: [block.drop(), rigB.off()],
+    clearSticky: true,
   },
   {
     n: 14,
-    id: 'what-a-parameter-is',
-    title: 'It breaks into marks',
+    id: 'chat-enters-beside-model',
+    title: 'The model moves right and a chat window enters on the same stage',
     relation: 'so',
-    secs: 13,
-    vo: 'Three hundred and twenty billion numbers — that’s what there is to store. Each one is something it learned while it was being trained. That’s what a parameter is.',
-    commands: [block.scatter({ x: 52, y: 46 }, 1), narrator.pose('count')],
-    lateOverlays: {
-      at: 3600,
-      overlays: [centred('320,000,000,000', 50, 14, { size: 'md', rotate: -1 })],
-    },
+    secs: 6,
+    vo: 'And we’ll do it with one example all the way through.',
+    commands: [
+      block.moveTo({ x: 76, y: 46 }, 0.48),
+      chat.open({ x: 33, y: 46 }, 0.82, 'GLM-5.3-Flash'),
+    ],
   },
   {
     n: 15,
-    id: 'five-percent-lights',
-    title: 'Five percent goes live',
+    id: 'type-the-running-prompt',
+    title: 'The measured running prompt types into the chat',
     relation: 'so',
     secs: 7,
-    vo: 'And when a token comes in, about five percent of them do something.',
-    commands: [block.pack(), block.light('a'), word.arrive({ x: 13, y: 47 }, 0.9, 'dog')],
+    vo: 'Let’s use: "The dog dropped the ball, and it".',
+    commands: [chat.type('The dog dropped the ball, and it')],
   },
   {
     n: 16,
-    id: 'push-in',
-    title: 'The camera pushes into the block',
+    id: 'one-piece-next',
+    title: 'The intact human sentence holds; no token exists on screen yet',
     relation: 'so',
-    secs: 3,
-    vo: 'Let’s get closer.',
-    commands: [word.off(), block.moveTo({ x: 52, y: 46 }, 2.6), narrator.off()],
+    secs: 5,
+    vo: 'Once it breaks apart, we’ll pick one piece and keep following that same piece through the machine.',
+    commands: [chat.sent()],
+    overlays: [centred('still the text you typed', 33, 69, { size: 'sm', tone: 'word' })],
   },
   {
     n: 17,
-    id: 'two-eighty-eight',
-    title: 'The surface resolves into the room from beat 5',
-    relation: 'so',
-    secs: 9,
-    vo: 'That room again. Two hundred and eighty-eight separate pieces — and this is one small part of the model.',
-    commands: [block.off(), hospital.rise({ x: 52, y: 46 }, 0.86), hospital.staff(), ground.at(GROUND_Y)],
-    lateOverlays: {
-      at: 3400,
-      overlays: [centred('288', 50, 12, { size: 'md', rotate: -2, sticky: true })],
-    },
-  },
-  {
-    n: 18,
-    id: 'how-many-run',
-    title: 'Nothing happens. The viewer bets.',
-    relation: 'want',
-    secs: 9,
-    vo: 'Two hundred and eighty-eight of them. One word comes in. How many do you reckon actually run?',
-    commands: [],
-    overlays: [centred('how many run?', 50, 78, { size: 'md', rotate: 1 })],
-  },
-  {
-    n: 19,
-    id: 'eight',
-    title: 'Eight',
-    relation: 'and-yet',
-    secs: 4,
-    vo: 'Eight.',
-    commands: [hospital.choose(CHOSEN)],
-  },
-  {
-    n: 20,
-    id: 'the-other-280',
-    title: 'The other 280 do nothing',
-    relation: 'so',
-    secs: 9,
-    /* Of the 288 routed experts, 8 run and 280 do not. The shared expert is a
-     * 289th additional object and is introduced properly in §5. */
-    vo: 'Eight get picked. The other two hundred and eighty do nothing at all.',
-    commands: [hospital.idle('280 idle')],
-  },
-  {
-    n: 21,
-    id: 'not-the-whole-five-percent',
-    title: 'Eight of 288 is not the five percent',
-    relation: 'and-yet',
-    secs: 11,
-    vo: 'You might think that’s the five percent. It isn’t. This is one small part, and plenty more runs every time regardless. Hold onto that.',
+    id: 'what-arrives-first',
+    title: 'A causal path starts from chat toward GLM and stops halfway',
+    relation: 'wall',
+    secs: 7,
+    vo: 'I hit send. What is the first thing the model actually receives?',
     commands: [],
     overlays: [
-      centred('8 of 288 — here', 50, 76, { size: 'md', rotate: -1 }),
-      note('not 5% of the model', 50, 86, { tone: 'cost', rotate: 2 }),
+      arrow(
+        { x: 760, y: 520 },
+        { x: 1090, y: 520 },
+        { tone: 'word', dashed: true, label: '?' },
+      ),
     ],
-  },
-  {
-    n: 22,
-    id: 'mixture-of-experts',
-    title: 'It takes its name',
-    relation: 'so',
-    secs: 9,
-    vo: 'And this has a name. It’s called a Mixture of Experts. Those pieces are the experts.',
-    commands: [hospital.label('Mixture of Experts', 'the experts')],
-  },
-  {
-    n: 23,
-    id: 'who-picks-the-eight',
-    title: 'The chapter wall',
-    relation: 'and-yet',
-    secs: 9,
-    vo: 'So — who picks the eight? And why does that turn out to be the expensive question?',
-    commands: [
-      hospital.moveTo({ x: 58, y: 46 }, 0.72),
-      desk.arrive({ x: 17, y: 74 }, 0.8),
-      narrator.at({ x: 91, y: 70 }, 'wonder', 1, true),
-    ],
-    clearSticky: true,
   },
 ]
