@@ -1,120 +1,67 @@
 import { centred, FOLLOWED, GROUND_Y, note, PROMPT, UNEVEN, type Beat } from '../../../../paper'
-import {
-  camera,
-  chip,
-  desk,
-  extra,
-  ground,
-  hospital,
-  narrator,
-  sentence,
-  vocab,
-  type Patch,
-} from './scene'
+import { camera, chip, extra, ground, narrator, sentence, vocab, type Patch } from './scene'
 
 /**
  * Section 02 — Your words become tokens.
  *
- * Board: the `## Storyboard` table in
- * `video-script/video-1/02-your-words-become-tokens.md`. `npm run check:board`.
- *
- * **Beats 2-4 are three physical events** — it arrives, it goes in, it lands —
- * where the old script had one floating assertion. The camera earns the change
- * of place at beat 3, so a viewer can point at beat 2 and say *"we went in
- * there"*. Nothing moves from beat 4 onward: the rest of the section is one
- * continuous place, and every event happens in it.
+ * The first four beats were rewritten with §1 so the seam no longer jumps back
+ * to the old 288-expert room. §1 ends with the intact prompt travelling toward
+ * GLM; §2 picks up that same prompt, follows it inward, lets it land, and only
+ * then performs the first transformation.
  */
 
-/** The surface everything from here to §4 happens on. */
 const SURFACE = { x: 46, y: 50 }
 
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'that-thing-does',
-    title: 'The desk holds; the 288 dim behind it',
+    id: 'the-prompt-arrives',
+    title: 'The exact prompt from §1 arrives at the model entrance',
     relation: 'want',
-    secs: 12,
-    vo: 'So — eight out of two hundred and eighty-eight, and something in there does the picking. To see how, we have to follow something in.',
+    secs: 6,
+    vo: 'You hit send. This exact sentence is what goes in.',
     commands: [
       ground.at(GROUND_Y),
-      hospital.show({ x: 52, y: 46 }, 0.86, { staffed: true, dim: true }),
-      desk.show({ x: 14, y: 78 }, 0.66),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
+      sentence.show({ x: 38, y: 58 }, 0.5),
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' }),
     ],
+    overlays: [note('your prompt', 34, 62, { tone: 'word', rotate: -4 })],
   },
   {
     n: 2,
-    id: 'this-is-what-you-typed',
-    title: 'A prompt card slides in and stops at the entrance',
+    id: 'in-it-goes',
+    title: 'The sentence starts travelling inward; the camera goes with it',
     relation: 'so',
     secs: 4,
-    vo: 'This is what you typed.',
-    /*
-     * Placed for the zoom, not for the wide frame. `camera.to(50/60, 1.3)`
-     * maps a stage x to 50 + (x-50) x 1.3, so the card at 26 landed centred on
-     * 19 with its left half off the edge, and §1's desk at 14 was cut in half.
-     * Anything placed in a beat that also moves the camera has to be placed in
-     * the frame the camera ends on.
-     */
+    vo: 'And in it goes.',
     commands: [
-      sentence.show({ x: 38, y: 58 }, 0.5),
-      desk.moveTo({ x: 27, y: 78 }, 0.66),
-      hospital.open(),
-      /* Pan to the entrance. The doorway is what we are about to use, so the
-       * frame has to admit it exists before we go through it. */
+      sentence.moveTo({ x: 50, y: 62 }, 0.46),
       camera.to({ x: 50, y: 60 }, 1.3),
       narrator.set({ pose: 'wonder' }),
     ],
-    lateOverlays: {
-      at: 2400,
-      overlays: [note('your prompt', 34, 62, { tone: 'word', rotate: -4 })],
-    },
   },
   {
     n: 3,
-    id: 'in-it-goes',
-    title: 'It passes through the doorway; the camera travels with it',
+    id: 'follow-it-inside',
+    title: 'We cross inside with the same prompt card',
     relation: 'so',
     secs: 4,
-    vo: 'In it goes.',
-    commands: [
-      sentence.moveTo({ x: 50, y: 62 }, 0.44),
-      /* Push in on the door. */
-      camera.to({ x: 50, y: 62 }, 2.5),
-      narrator.off(),
-    ],
-    /*
-     * The world changes behind the move, mid-beat. A doorway crossed over two
-     * beats reads as two shots of a door; crossed inside one beat, it reads as
-     * going in.
-     */
-    /*
-     * Beat 3 ends *just inside*, still small and still travelling. Beat 4 is
-     * where it lands. The first version landed it here, which left beats 3 and
-     * 4 showing the same frame -- two beats spending one picture.
-     */
+    vo: 'We follow it in.',
+    commands: [camera.to({ x: 50, y: 62 }, 2.5), narrator.off()],
     stages: [
       {
         at: 1700,
-        commands: [
-          hospital.off(),
-          desk.off(),
-          camera.home(),
-          ground.at(GROUND_Y),
-          sentence.moveTo({ x: 62, y: 40 }, 0.58),
-        ],
+        commands: [camera.home(), ground.at(GROUND_Y), sentence.moveTo({ x: 62, y: 40 }, 0.58)],
       },
     ],
   },
   {
     n: 4,
     id: 'the-first-thing',
-    title: 'The card lands and settles',
+    title: 'The prompt lands on the first surface',
     relation: 'so',
-    secs: 5,
-    vo: 'And this is the first thing that happens to it.',
-    /* It lands, at full size, and the narrator comes back to it. */
+    secs: 6,
+    vo: 'And before the model can do anything useful with it, this is the first thing that happens.',
     commands: [sentence.moveTo(SURFACE, 1), narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' })],
   },
   {
@@ -123,17 +70,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The sentence fractures into pieces, in place',
     relation: 'wall',
     secs: 9,
-    /*
-     * **"Mostly", not "every".** The measured split is
-     * `The | dog | dropped | the | ball | , | and | it` -- and the comma is a
-     * token that is not a word, so "every piece happens to be a whole word"
-     * was false by one piece. A reviewer caught it. Saying *mostly along word
-     * boundaries* is true, and it leaves beat 7 the job of breaking the
-     * expectation it sets up.
-     *
-     * The old `…half a word` note is gone with it: it pointed at the invented
-     * `dropp` + `ed` split, and there is nothing in this frame for it to name.
-     */
     vo: 'It gets cut up. Into pieces — and this sentence happens to break mostly along the words.',
     commands: [sentence.fracture()],
     lateOverlays: {
@@ -147,15 +83,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The pieces settle into a row',
     relation: 'so',
     secs: 12,
-    /*
-     * The last clause is what licenses the rest of the video's arithmetic.
-     * Every count -- 336, 2,688, ~8.5 GB, five percent -- is **per token**,
-     * and `GROUND_TRUTH.md` says so explicitly. The scripts used to say "per
-     * word" for those, three sections after teaching that a token is not a
-     * word. Saying the unit out loud once here is cheaper than hedging every
-     * figure later, and it lets the narration keep saying "word" about *this*
-     * sentence, where every token happens to be one.
-     */
     vo: 'These are called tokens. That’s all a token is. A chunk of text. And from here on, whenever I count something, I’m counting tokens.',
     commands: [sentence.settle(), narrator.set({ pose: 'nod' })],
     overlays: [centred('8 tokens', 46, 66, { tone: 'measure', rotate: -2, sticky: true })],
@@ -168,13 +95,6 @@ export const BEATS: Beat<Patch>[] = [
     secs: 12,
     vo: 'Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have.',
     commands: [extra.show({ x: 46, y: 22 }, 0.6)],
-    /*
-     * It does **not** leave inside this beat. It used to go at 3,600 ms of a
-     * 12-second beat, which left eight seconds of narration about a word that
-     * was no longer on screen -- and made the beat impossible to photograph
-     * for review, because the contact sheet settles after the last stage. It
-     * leaves on beat 8, when the list arrives and needs the room.
-     */
     stages: [{ at: 1500, commands: [extra.set({ split: true, words: [...UNEVEN] })] }],
   },
   {
@@ -184,25 +104,12 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 10,
     vo: 'And every token it knows about lives in one big list. How long do you reckon that list is?',
-    /*
-     * The list is tall, so the frame has to be *made* for it rather than the
-     * list squeezed into what was left. At 84/46 scale 1.5 it ran off the right
-     * edge (to 100%), printed itself over the last two word-cards, and swallowed
-     * the narrator whole. The sentence gives up the right half and steps up;
-     * the narrator comes down to the left and points across at the new thing.
-     */
     commands: [
       extra.off(),
       sentence.moveTo({ x: 34, y: 34 }, 0.72),
       vocab.show({ x: 80, y: 48 }, 1.15),
       narrator.show({ x: 30, y: 76 }, 1, { pose: 'point', flip: false }),
     ],
-    /*
-     * "8 tokens" was pinned at 46/66 to label a sentence that has just moved to
-     * 34/34, so it was left floating in open paper across the narrator. A
-     * sticky label survives its subject moving, which is the whole hazard of
-     * sticky: it has to be re-placed, not merely allowed to persist.
-     */
     clearSticky: true,
     overlays: [centred('8 tokens', 34, 45, { tone: 'measure', rotate: -2, sticky: true })],
   },
@@ -216,8 +123,6 @@ export const BEATS: Beat<Patch>[] = [
     commands: [vocab.scroll()],
     lateOverlays: {
       at: 2600,
-      /* Above the list, not below it: `Vocabulary` draws its own caption along
-       * the bottom edge, and two labels were landing in the same place. */
       overlays: [note('154,880\nentries', 80, 11, { tone: 'measure', rotate: 3, sticky: true })],
     },
   },
@@ -227,18 +132,9 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The `dog` piece flies to the list and returns with a number',
     relation: 'so',
     secs: 12,
-    /*
-     * The hedge is gone because the number is measured. 5562 is ` dog` with
-     * its leading space in GLM-5.3-Flash's real tokenizer; bare `dog` is
-     * 18427, which is a different token. `research/glm/TOKENIZER.md`.
-     */
     vo: 'So each piece gets swapped for where it sits in that list. A row number. This one is five thousand, five hundred and sixty-two.',
     commands: [
       sentence.follow(FOLLOWED),
-      /* The round trip. Go, touch, come back changed — three moves on one
-       * object, which is what makes a lookup feel like a lookup. */
-      /* It leaves *from the card*. The sentence moved up and left at beat 8,
-       * so a chip starting at 30/50 departed from open paper. */
       chip.show({ x: 17, y: 34 }, 0.55, { label: PROMPT[FOLLOWED] }),
     ],
     stages: [
@@ -262,18 +158,8 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The list withdraws; the number is alone in frame',
     relation: 'so',
     secs: 9,
-    /* S-12. The mechanism is named only now, after it has been watched. */
     vo: 'And that’s the cutting up done — your sentence is numbers now. That’s all a tokeniser is.',
-    /*
-     * Nothing else may be on screen. The absence is the argument, and it is
-     * the setup for §3 — so the sentence, the list and the narrator all go.
-     */
-    commands: [
-      vocab.off(),
-      sentence.off(),
-      narrator.off(),
-      chip.moveTo({ x: 46, y: 46 }, 1),
-    ],
+    commands: [vocab.off(), sentence.off(), narrator.off(), chip.moveTo({ x: 46, y: 46 }, 1)],
     clearSticky: true,
   },
   {
@@ -282,11 +168,6 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The number holds, and turns out to say nothing',
     relation: 'and-yet',
     secs: 16,
-    /*
-     * Split out of beat 12, which carried 58 words in 25 seconds -- a
-     * monologue, not a beat. The naming and the *but* are two different jobs
-     * and each wants its own hold.
-     */
     vo: 'But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all.',
     commands: [],
     lateOverlays: {
