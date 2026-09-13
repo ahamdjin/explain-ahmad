@@ -85,9 +85,10 @@ const ROWS = 22
  * The whole model as one object, with regions that can light.
  *
  * `lit` is which patch is in use now. `ghost` outlines a patch that is *not*
- * in use, so beat 13 can show the set we packed earlier failing to line up
- * with the set we now need — a misfit, drawn as a mismatch rather than as a
- * prohibition. Nothing in this video is crossed out.
+ * in use. The semantic tones are explicit because the same geometry can mean
+ * two different things: the established video uses teal/red for a tracked
+ * region and a mismatch, while the rewritten opening uses orange/yellow for
+ * active/question as required by the GLM art direction.
  */
 export function Block({
   lit,
@@ -96,26 +97,28 @@ export function Block({
   heavy = false,
   grain = 'fine',
   scatter = false,
+  litTone = 'word',
+  ghostTone = 'failure',
 }: {
   lit?: PatchName
   ghost?: PatchName
-  /**
-   * The lit patch floats clear of the block, leaving a hole.
-   *
-   * It has to travel far enough to break the block's own outline. At -46 it
-   * still sat inside the edge and read as a nudge rather than as something
-   * taken out.
-   */
+  /** The lit patch floats clear of the block, leaving a hole. */
   lifted?: boolean
   heavy?: boolean
   /** §13: the same block, divided coarsely or finely. */
   grain?: 'fine' | 'coarse'
   /** The marks, loose. The state the number shatters into before it packs. */
   scatter?: boolean
+  /** Orange for an active model region; teal for the legacy tracked-piece use. */
+  litTone?: 'active' | 'word'
+  /** Yellow means a possibility/question; red remains reserved for failure. */
+  ghostTone?: 'question' | 'failure'
 }) {
   const step = grain === 'coarse' ? 4 : 1
   const inPatch = (name: PatchName | undefined, cx: number, cy: number) =>
     !!name && PATCHES[name].some((r) => cx >= r.x && cx < r.x + r.w && cy >= r.y && cy < r.y + r.h)
+  const litFill = litTone === 'active' ? PALETTE.orange : PALETTE.teal2
+  const ghostStroke = ghostTone === 'question' ? PALETTE.yellow : PALETTE.red
 
   const cells: React.ReactNode[] = []
   for (let cy = 0; cy < ROWS; cy += step) {
@@ -127,29 +130,16 @@ export function Block({
           key={`${cx}-${cy}`}
           x={cx * CELL}
           y={cy * CELL}
-          /*
-           * Clamped to the sheet. `ROWS` is 22 and coarse `step` is 4, so the
-           * last row starts at 20 and a full-height cell overran the block's
-           * own outline by nearly two rows -- a chunk of the model hanging
-           * below the sheet it is part of.
-           */
           width={Math.min(CELL * step, (COLS - cx) * CELL) - 2}
           height={Math.min(CELL * step, (ROWS - cy) * CELL) - 2}
           rx={2}
-          stroke={isGhost && !isLit ? PALETTE.red : 'none'}
+          stroke={isGhost && !isLit ? ghostStroke : 'none'}
           strokeWidth={isGhost && !isLit ? 2.4 : 0}
           strokeDasharray={isGhost && !isLit ? '4 4' : undefined}
           initial={false}
           animate={{
-            /*
-             * Loose, they are ink: individual numbers on paper. Packed, they
-             * are the material of an object, so they take a paper tone. The
-             * first version kept the paper tone while scattered and the field
-             * was invisible against the page.
-             */
-            fill: scatter ? INK : isLit ? PALETTE.teal2 : PALETTE.idleDeep,
+            fill: scatter ? INK : isLit ? litFill : PALETTE.idleDeep,
             opacity: scatter ? 0.7 : isLit ? 1 : lit ? 0.5 : 0.78,
-            /* Loose: jittered outward off the lattice, and smaller. */
             x: scatter ? (seeded(cx * 97 + cy) - 0.5) * 260 : 0,
             y: (scatter ? (seeded(cx * 31 + cy + 500) - 0.5) * 190 : 0) + (isLit && lifted && !scatter ? -132 : 0),
             scale: scatter ? 0.28 : 1,
@@ -158,7 +148,6 @@ export function Block({
             type: 'spring',
             stiffness: 70,
             damping: 19,
-            /* Staggered so packing reads as a gathering rather than a snap. */
             delay: scatter ? 0 : seeded(cx * 13 + cy) * 0.45,
           }}
         />,
@@ -174,10 +163,6 @@ export function Block({
       style={{ transformOrigin: 'bottom center' }}
     >
       <svg viewBox={`-8 -168 ${COLS * CELL + 16} ${ROWS * CELL + 184}`} aria-hidden="true">
-        {/*
-          Where the lifted patch came from. Paper against the block's own fill
-          is almost no contrast, so the hole is drawn rather than left.
-        */}
         {lifted && lit && !scatter
           ? PATCHES[lit].map((r, i) => (
               <rect
@@ -195,7 +180,6 @@ export function Block({
               />
             ))
           : null}
-        {/* The edge only exists once the marks are one object. */}
         <motion.rect
           x="-4"
           y="-4"
