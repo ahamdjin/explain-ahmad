@@ -1,15 +1,12 @@
 import { centred, GROUND_Y, note, PROMPT, REPLY, TOKENS, type Beat } from '../../../../paper'
-import {aside, ground, line, loop, narrator, out, tower, visitsAfter, type Patch} from './scene'
+import { aside, ground, line, loop, narrator, out, tower, visitsAfter, type Patch } from './scene'
 
 /**
- * Section 10 — And then it does the whole thing again.
+ * Section 10 — And then it does it again.
  *
- * Board: `video-script/video-1/10-and-then-it-does-it-again.md`. `npm run check:board`.
- *
- * Beat 8 connects the loop to something the viewer has literally watched happen
- * — a reply appearing a word at a time — and the text must build **at the pace
- * of the loop**, not smoothly. That is the whole reason `GenerateLoop` derives
- * its stagger from `pace` rather than using a fixed delay.
+ * This section makes the prefill/decode distinction explicit. The earlier
+ * tokens do not all climb the stack again; the model keeps the state it needs
+ * from them and pushes only the new token through the layers.
  */
 export const BEATS: Beat<Patch>[] = [
   {
@@ -17,8 +14,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'one-word-out-of-a-machine',
     title: 'The tower and the single word card hold, apart',
     relation: 'want',
-    secs: 9,
-    vo: 'One word. So how do you get a paragraph out of a machine that produces one word?',
+    secs: 8,
+    vo: 'That explains one output token. But a reply needs another one after that.',
     commands: [
       ground.at(GROUND_Y),
       tower.show({ x: 28, y: 48 }, 0.82),
@@ -33,10 +30,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The card hovers near the base; nothing else moves',
     relation: 'and-yet',
     secs: 10,
-    /* A question, not the answer -- S-06 needs a wrong intuition on offer, and
-     * "it can skip ahead, the model just did all that" is a real one. v9 put
-     * the answer here and cited S-06 on it, which is not a question. */
-    vo: 'The model has just done all of that work. So to make the next word — does this one get a shortcut?',
+    vo: 'So what happens now? Does the whole prompt climb all forty-five layers again?',
     commands: [out.moveTo({ x: 30, y: 88 }, 0.3)],
   },
   {
@@ -45,15 +39,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The card drops to the base and sits on floor one',
     relation: 'so',
     secs: 7,
-    vo: 'No. It starts at the bottom. Floor one, same as the first word did.',
-    /*
-     * To the tower's base, which is what the board asks for and what the line
-     * says: *"It starts at the bottom. Floor one."* At 30/92 it dropped onto
-     * the sentence strip instead and covered two of its words, so the frame
-     * showed the new token replacing "the ball," rather than starting a climb.
-     * It joins the end of the sentence on the **next** beat, which is the beat
-     * whose line says so.
-     */
+    vo: 'No. The earlier tokens do not climb again.',
     commands: [out.moveTo({ x: 31, y: 78 }, 0.3), tower.set({ floor: 1 })],
   },
   {
@@ -62,12 +48,10 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The sentence is now one token longer; a ninth marker appears',
     relation: 'so',
     secs: 7,
-    /* `TOKENS + 1`, never a literal. The count changed once already when the
-     * tokenizer was measured, and two boards were still saying ten. */
-    vo: 'The word it just made joins the end of your sentence.',
+    vo: 'The new token is appended to the sequence.',
     commands: [out.off(), line.grow([...PROMPT, REPLY[0]]), tower.set({ markers: TOKENS + 1, floor: 1, kept: 0 })],
     lateOverlays: {
-      at: 2600,
+      at: 2400,
       overlays: [note('9 tokens now', 28, 86, { tone: 'measure', rotate: -3 })],
     },
   },
@@ -75,24 +59,9 @@ export const BEATS: Beat<Patch>[] = [
     n: 5,
     id: 'what-is-kept',
     title: 'The eight earlier markers hold in place; none of them move',
-    /* "But the eight before it don't climb again." This is the beat that
-     * separates decode from prefill -- the single correction v10 was written
-     * for -- and it was tagged `so`, which is the relation for the thing it
-     * is contradicting. */
     relation: 'and-yet',
     secs: 12,
-    /*
-     * This is decode, not prefill. v9 marched all nine markers back to the
-     * base and replayed the climb for every one of them, and filed the KV
-     * cache as an *aside* -- which cannot work, because the main picture was
-     * teaching the thing the aside was there to correct. GROUND_TRUTH is
-     * explicit: only the new token is pushed through the 45 layers.
-     *
-     * `Tower`'s `kept` prop holds the eight at the top, dimmed and still, and
-     * sends only the ninth up from the base in beat 5. Checked by rendering:
-     * `node scripts/capture-frames.mjs --section=section-10`.
-     */
-    vo: 'But the eight before it don’t climb again. The state it needs from those earlier tokens is kept. That’s the bit it doesn’t have to redo.',
+    vo: 'The model keeps the state it needs from those earlier positions, so their work does not have to be repeated.',
     commands: [tower.set({ kept: TOKENS }), loop.show({ x: 74, y: 50 }, 0.9), loop.start()],
   },
   {
@@ -100,9 +69,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'just-the-new-word',
     title: 'Only the ninth marker enters the base and climbs alone',
     relation: 'so',
-    secs: 9,
-    /* The aside opens without stopping the climb behind it. */
-    vo: 'Just the new word goes up. All forty-five floors, reading the kept work as it passes.',
+    secs: 10,
+    vo: 'Only the new token moves through the forty-five layers, reading the kept state as it goes.',
     commands: [aside.show({ x: 15, y: 18 }, 1)],
     stages: [
       { at: 1200, commands: [tower.climbTo(18)] },
@@ -115,18 +83,12 @@ export const BEATS: Beat<Patch>[] = [
     title: '42 of the 45 floors light as it passes; a counter runs with it',
     relation: 'so',
     secs: 12,
-    /*
-     * 42 decisions, 8 experts each, 336 visits -- in that order, and it is the
-     * third time the viewer watches this number assemble (§7 beat 12, §8 beat
-     * 10, here). It must look like the same number arriving again, so the
-     * counter runs rather than appearing.
-     */
-    vo: 'Forty-two of those floors choose. Eight experts each time. Three hundred and thirty-six expert visits — for this one token.',
+    vo: 'On the forty-two sparse layers it still routes to eight experts: another three hundred and thirty-six routed expert visits for this new token.',
     commands: [loop.show({ x: 74, y: 50 }, 0.9), loop.start(), loop.faster(0.3)],
     stages: [{ at: 2600, commands: [tower.climbTo(45)] }],
     lateOverlays: {
-      at: 5200,
-      overlays: [note('336 — for one token', 58, 18, { size: 'md', tone: 'measure', rotate: -2 })],
+      at: 5000,
+      overlays: [note('336 — for this new token', 58, 18, { size: 'md', tone: 'measure', rotate: -2 })],
     },
   },
   {
@@ -135,7 +97,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Another card drops out at the top',
     relation: 'so',
     secs: 4,
-    vo: 'And another word comes out.',
+    vo: 'Then another token comes out.',
     commands: [loop.say(REPLY.slice(0, 2)), loop.count(visitsAfter(2))],
   },
   {
@@ -144,7 +106,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The cycle repeats, accelerating each time',
     relation: 'so',
     secs: 9,
-    vo: 'Then again. And again. One word at a time.',
+    vo: 'Append it. Run the new token. Pick another. Repeat.',
     commands: [loop.faster(0.62), aside.off()],
     stages: [
       { at: 1200, commands: [loop.say(REPLY.slice(0, 4)), loop.count(visitsAfter(4)), tower.climbTo(20)] },
@@ -156,36 +118,28 @@ export const BEATS: Beat<Patch>[] = [
     id: 'while-you-sit-there',
     title: 'The produced words accumulate as a line of text beside the tower',
     relation: 'so',
-    secs: 8,
-    vo: 'That’s it. That’s what’s actually happening while you sit there watching it type.',
+    secs: 9,
+    vo: 'That loop is what you are watching when the answer appears one piece at a time.',
     commands: [narrator.set({ pose: 'lean' })],
-    overlays: [note('you have watched this happen', 74, 12, { rotate: -2 })],
+    overlays: [note('this is the typing loop', 74, 12, { rotate: -2 })],
   },
   {
     n: 11,
     id: 'full-stack-fresh-choices',
     title: 'A counter beside each produced word ticks 336 per token',
     relation: 'so',
-    secs: 11,
-    vo: 'Your eight tokens cost two thousand, six hundred and eighty-eight visits, once. Every token it writes back costs another three hundred and thirty-six.',
+    secs: 13,
+    vo: 'For our eight-token prompt, the prompt pass cost two thousand, six hundred and eighty-eight routed expert visits. After that, every generated token adds another three hundred and thirty-six.',
     commands: [],
-    overlays: [centred('2,688 once\n+336 a token', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
+    overlays: [centred('2,688 once\n+336 per generated token', 52, 34, { tone: 'measure', rotate: 3, sticky: true })],
   },
   {
     n: 12,
     id: 'not-known-in-advance',
     title: 'The running total climbs and does not stop',
-    /* `and-yet`, not `wall`. This is the complication that *earns* the wall on
-     * beat 13; two walls in a row is two landings, which is none. */
     relation: 'and-yet',
-    secs: 11,
-    /*
-     * Deposit five, and the one that makes §11 inevitable. The counter must
-     * have no ceiling and no final value: the moment it lands on a number it
-     * becomes a cost you could budget for, which is the belief §11 takes
-     * apart.
-     */
-    vo: 'And it doesn’t know which experts the next word needs until the next word is halfway up.',
+    secs: 10,
+    vo: 'And each new token can take a different expert path, because the representations it creates are new.',
     commands: [loop.faster(1), narrator.set({ pose: 'push' })],
   },
   {
@@ -193,13 +147,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'it-never-stops-choosing',
     title: 'Everything halts at once',
     relation: 'wall',
-    secs: 6,
-    /*
-     * Everything, including the counter. The halt is what buys §11 its
-     * opening, and it needs its own beat -- said over a still-running loop it
-     * is a summary, and §11 opens on this stillness.
-     */
-    vo: 'It never stops re-choosing.',
+    secs: 7,
+    vo: 'So the model keeps routing, token after token.',
     commands: [loop.halt(), narrator.set({ pose: 'think' })],
     clearSticky: true,
   },
@@ -208,8 +157,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-question-we-started-with',
     title: 'The tower and the finished reply hold together in frame',
     relation: 'and-yet',
-    secs: 8,
-    vo: 'Which means we can finally ask the question we started with, properly.',
+    secs: 10,
+    vo: 'Now we finally have enough to answer the opening question: why not keep only the part that is active?',
     commands: [tower.set({ markers: 0, kept: 0 })],
   },
 ]

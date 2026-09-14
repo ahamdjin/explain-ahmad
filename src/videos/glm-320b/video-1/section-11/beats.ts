@@ -21,18 +21,13 @@ import {
 } from './scene'
 
 /**
- * Section 11 — So could you store only the 18 billion?
+ * Section 11 — Why not keep only the active part?
  *
- * Board: `video-script/video-1/11-could-you-store-only-the-18.md`. `npm run check:board`.
- *
- * **One camera move**, beat 2, and it takes us to a place the viewer already
- * knows — the plan from §1. It is drawn identically, or the callback does no
- * work at all.
- *
- * Note what this section may **not** claim. Never that all 320B must sit in GPU
- * VRAM: real systems shard, cache, quantize and offload. The honest claim is
- * that efficient serving needs *fast access* to whichever experts routing
- * picks, and beat 13's "not like that" is what keeps it honest.
+ * This section does NOT claim the full model must live in GPU memory. It tests
+ * one simple plan: leave routed experts on slower storage and fetch each
+ * selected expert just in time. The arithmetic is intentionally a worst-case
+ * "nothing useful is already resident" illustration; §12 then shows the real
+ * improvement: cache/offload systems keep useful experts nearby.
  */
 export const BEATS: Beat<Patch>[] = [
   {
@@ -40,8 +35,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'back-to-where-we-started',
     title: '`18` and `320` return and settle over the tower',
     relation: 'want',
-    secs: 13,
-    vo: 'It re-chooses — every floor, every word, and it never stops. So: back to where we started. Could you just store the part it actually uses?',
+    secs: 11,
+    vo: 'Now we can ask it properly. If each token only uses a small subset, why not keep only that subset in fast memory?',
     commands: [
       ground.at(GROUND_Y),
       tower.show({ x: 26, y: 48 }, 0.82),
@@ -54,9 +49,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'heres-the-plan',
     title: 'We slide across to the plan, assembling itself piece by piece',
     relation: 'so',
-    secs: 14,
-    vo: 'And here’s the plan, stated honestly: keep the whole model on a drive. When the router picks its eight, go and get those eight. Do the work. Move on.',
-    /* Pan, to a place the viewer already knows. Drawn identically to §1. */
+    secs: 15,
+    vo: 'Try the simplest version. Keep the full checkpoint on slower storage. When a sparse layer picks eight experts, fetch those eight into fast memory, run them, then move on.',
     commands: [
       tower.off(),
       numbers.off(),
@@ -75,12 +69,11 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Eight blocks fly across; the work completes; a tick lands',
     relation: 'hope',
     secs: 8,
-    vo: 'First token, first floor. Eight experts fetched. It works.',
-    /* It has to visibly succeed. A plan that never worked cannot break. */
+    vo: 'For one sparse layer, that works. Fetch eight, run them.',
     commands: [path.fetch(8), machine.set({ filled: true }), narrator.set({ pose: 'hopeful' })],
     lateOverlays: {
-      at: 3000,
-      overlays: [tick(82, 22, { tone: 'measure' }), note('floor 1 — fine', 82, 30, { rotate: -3 })],
+      at: 2800,
+      overlays: [tick(82, 22, { tone: 'measure' }), note('one layer — fine', 82, 30, { rotate: -3 })],
     },
   },
   {
@@ -88,10 +81,10 @@ export const BEATS: Beat<Patch>[] = [
     id: 'second-floor',
     title: 'Eight *different* blocks fly across',
     relation: 'so',
-    secs: 6,
-    vo: 'Second floor. New row, new eight. Fetch those as well.',
+    secs: 7,
+    vo: 'Next sparse layer: the row changed, so you may need a different eight.',
     commands: [path.fetch(8)],
-    overlays: [centred('floor 2 — a different eight', 50, 24, { tone: 'measure', rotate: 2 })],
+    overlays: [centred('next layer — another selection', 50, 24, { tone: 'measure', rotate: 2 })],
   },
   {
     n: 5,
@@ -99,7 +92,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Eight more',
     relation: 'so',
     secs: 4,
-    vo: 'Third floor. Again.',
+    vo: 'Then the next one.',
     commands: [path.fetch(10)],
   },
   {
@@ -108,8 +101,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The flights speed up until the path is continuously full',
     relation: 'wall',
     secs: 8,
-    vo: 'And again, and again — forty-two times, for one token.',
-    /* Traffic, not a barrier. The path is full and things are queuing. */
+    vo: 'Across forty-two sparse layers, the naive version keeps doing this over and over.',
     commands: [path.congest(), narrator.set({ pose: 'slump' })],
   },
   {
@@ -117,17 +109,17 @@ export const BEATS: Beat<Patch>[] = [
     id: 'how-much-did-we-carry',
     title: 'The flights stop; a counter lands',
     relation: 'so',
-    secs: 5,
-    vo: 'So how much did we actually carry in?',
-    commands: [path.clear(), count.run(VISITS, 'experts carried in — one token')],
+    secs: 8,
+    vo: 'So how much data moves for one token if none of those routed experts are already nearby?',
+    commands: [path.clear(), count.run(VISITS, 'expert visits — one token')],
   },
   {
     n: 8,
     id: 'three-thirty-six-times-twenty-six',
     title: '336 and 25 MB slide together; a total assembles',
     relation: 'so',
-    secs: 12,
-    vo: 'One expert is about twenty-five megabytes, at the precision this thing ships in. Three hundred and thirty-six of them is about eight and a half gigabytes.',
+    secs: 13,
+    vo: 'One routed expert here is about twenty-five megabytes in FP8. Three hundred and thirty-six expert visits times twenty-five megabytes is about eight and a half gigabytes of routed weights.',
     commands: [count.hold()],
     overlays: [
       centred(`${VISITS} × ${MB_PER_EXPERT} MB`, 50, 60, { size: 'lg', tone: 'measure', rotate: -2, sticky: true }),
@@ -138,8 +130,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'for-one-word',
     title: 'The total lands and a label drops under it',
     relation: 'and-yet',
-    secs: 5,
-    vo: 'For one token.',
+    secs: 9,
+    vo: 'For one token, in the worst-case version where none of those routed weights were already resident.',
     commands: [
       count.off(),
       store.off(),
@@ -154,31 +146,24 @@ export const BEATS: Beat<Patch>[] = [
     id: 'a-second-and-a-half',
     title: 'A clock draws itself beside the 8 GB and runs',
     relation: 'wall',
-    secs: 10,
-    vo: 'Off a fast drive — call it five gigabytes a second — that’s the better part of two seconds. For one token.',
+    secs: 11,
+    vo: 'At five gigabytes a second, moving eight and a half gigabytes takes about one point seven seconds.',
     commands: [machine.off(), clock.show({ x: 74, y: 40 }, 1), clock.start()],
-    overlays: [note('off a fast drive —\nroughly', 74, 62, { tone: 'cost', rotate: 3 })],
+    overlays: [note('5 GB/s → ~1.7 s', 74, 62, { tone: 'cost', rotate: 3 })],
   },
   {
     n: 11,
     id: 'and-the-work',
     title: 'A second bar appears beside the first, almost invisible',
     relation: 'and-yet',
-    secs: 8,
-    vo: 'And the expert computation itself? Milliseconds.',
+    secs: 9,
+    vo: 'The expert computation we were trying to feed is millisecond-scale by comparison.',
     commands: [
       total.off(),
       clock.off(),
-      /*
-       * The path leaves *here*, with the traffic it carried. `path.clear()` at
-       * beat 7 emptied it but left the route drawn, so the flight path stayed
-       * printed across the cost bars for the rest of the section -- including
-       * beat 13, whose own board note reads "nothing else on screen".
-       */
       path.off(),
       bars.fetch(),
-      bars.both('about 50× more'),
-      /* Two things held against each other -- the frame is a comparison. */
+      bars.both('roughly 50× in this comparison'),
       narrator.set({ pose: 'weigh' }),
     ],
   },
@@ -187,14 +172,12 @@ export const BEATS: Beat<Patch>[] = [
     id: 'fetching-costs-more',
     title: 'Both bars redraw to true scale, with the small one magnified',
     relation: 'therefore',
-    secs: 11,
-    vo: 'There it is. The fetching costs more than the thinking. Not a bit more — about fifty times more.',
-    /* The most important frame in the video. To scale, and the enlargement of
-     * the small bar is labelled on the frame. */
+    secs: 12,
+    vo: 'So this naive plan is dominated by data movement. In this rough comparison, fetching can cost around fifty times more time than the expert compute.',
     commands: [bars.toScale()],
     lateOverlays: {
-      at: 3400,
-      overlays: [centred('the fetching costs more\nthan the thinking', 50, 18, { size: 'md', tone: 'cost', rotate: -1 })],
+      at: 3200,
+      overlays: [centred('the transfer dominates\nthis naive plan', 50, 18, { size: 'md', tone: 'cost', rotate: -1 })],
     },
   },
   {
@@ -202,25 +185,18 @@ export const BEATS: Beat<Patch>[] = [
     id: 'not-like-that',
     title: 'The bars hold; nothing else on screen',
     relation: 'therefore',
-    secs: 10,
-    /* "So, no." A refusal, not agreement, and it gets a frame with nothing
-     * else in it. This is the answer to the question §1 asked. */
-    vo: 'So, no. You can’t just store the part it uses. Not like that.',
+    secs: 12,
+    vo: 'So “store everything slow and fetch every selected expert just in time” is not a good serving strategy. Not like this.',
     commands: [narrator.set({ pose: 'halt' })],
-    overlays: [centred(`~${GB_PER_TOKEN} GB a token — not like that`, 50, 88, { size: 'md', rotate: 1 })],
+    overlays: [centred(`~${GB_PER_TOKEN} GB per token — worst-case routed fetch`, 50, 88, { size: 'md', rotate: 1 })],
   },
   {
     n: 14,
     id: 'just-keep-the-popular-ones',
     title: 'A small cache shelf sketches itself in beside the bars',
     relation: 'and-yet',
-    secs: 9,
-    /*
-     * S-08. The viewer's objection, said before they can finish forming it,
-     * and given a shape on screen. It must arrive as an *outline* -- a
-     * finished box would look like part of the plan we just refused.
-     */
-    vo: 'Although — if you’re sitting there thinking "just keep the popular ones nearby" —',
+    secs: 8,
+    vo: 'But there is an obvious improvement. What if some experts come back?',
     commands: [shelf.show({ x: 24, y: 80 }, 0.58, { outline: true }), narrator.set({ pose: 'confide' })],
   },
   {
@@ -228,19 +204,13 @@ export const BEATS: Beat<Patch>[] = [
     id: 'hold-that-thought',
     title: 'The shelf finishes drawing and stays, empty',
     relation: 'and-yet',
-    secs: 8,
-    /*
-     * The endorsement, and the shelf stays **empty**. §12's reversal needs the
-     * viewer to arrive believing caching solves this, and S-09 requires that
-     * belief to be one this video taught them -- so it is planted in its own
-     * frame and agreed with out loud. §12 is what fills the shelf.
-     */
-    vo: 'Hold that thought. You’re right. That’s next.',
+    secs: 11,
+    vo: 'Keep useful experts in fast memory, and only fetch the misses. Exactly. That is caching — and it is how real expert offloading becomes practical.',
     commands: [shelf.finish(), narrator.set({ pose: 'nod' })],
     clearSticky: true,
     lateOverlays: {
-      at: 2400,
-      overlays: [centred('you’re right — that’s next', 48, 88, { size: 'md', tone: 'word', rotate: -2 })],
+      at: 3000,
+      overlays: [centred('keep hits nearby · fetch misses', 48, 88, { size: 'md', tone: 'word', rotate: -2 })],
     },
   },
 ]

@@ -122,6 +122,39 @@ Signals a script will not hold:
 - a section's material could be reordered freely without anything breaking —
   which means there is no causality in it
 
+## 5A. Narration lock — approved words outrank the implementation
+
+Once Ahmad approves the spoken narration, mark the section **APPROVED NARRATION — LOCKED**.
+From that point on, **the narration is the source of truth**.
+
+A storyboard or implementation pass may:
+
+- split one approved paragraph across more beats
+- merge visual beats where the same frame carries multiple approved lines
+- change beat count, duration, camera, composition, components, animation or SFX
+- build or extend a component because the approved line needs a visual that does not exist yet
+
+It may **not**:
+
+- paraphrase or shorten approved VO to fit an existing beat
+- add explanatory VO because a component is hard to understand
+- remove a human line, joke, question, pause, example or promise because it is awkward to board
+- substitute a strategy-ledger line for wording the author already approved
+- change the followed example or object just because the existing implementation follows something else
+
+If the approved narration and the current visuals disagree, **change the visuals**.
+If the approved narration needs 18 beats instead of 17, **use 18 beats**.
+If it needs a new component, **build the component**.
+
+The only exception is a factual or safety correction. Even then, do not silently
+rewrite the line: flag the problem, propose the smallest correction, and get the
+author's approval before changing the locked narration.
+
+This rule exists because the opposite workflow already failed on Section 01:
+an approved human script was shortened and rephrased during storyboarding. The
+result passed implementation logic while losing the story that had actually
+been approved. **Never repeat that failure.**
+
 ## 6. When stuck, go and read
 
 Do not invent structure from first principles. Study how the best explainers do
