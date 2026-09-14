@@ -1,13 +1,11 @@
 # video-script/
 
-What Ahmad plans to **say**. This is the top of the authority order — when a
-script and the code disagree, the script wins. See `PROJECT_STRUCTURE.md`.
+The spoken story is the highest authority for the film.
 
 | folder | what it is |
 | --- | --- |
-| **`video-1/`** | **The film.** Thirteen numbered sections plus `READ_ALOUD.md`. |
-| `video-2-gpt/` | An alternate narration written by ChatGPT. A proposal, not scheduled. |
+| **`video-1/`** | **The 18 Billion Mystery** — the only active script. |
 
-Only `video-1/` is read by the tooling. `npm run board`, `check:chain`,
-`check:board`, `check:strategy`, `timing` and `readthrough` all read
-`video-script/video-1/` and ignore everything else in here.
+When a locked script and the code disagree, the script wins.
+
+Rejected alternate scripts are not kept in the working branch. Git history is the archive.

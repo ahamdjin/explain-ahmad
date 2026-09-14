@@ -1,30 +1,29 @@
-# glm-320b
+# The 18 Billion Mystery
+
+**YouTube title:** **320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?**
 
 | folder | route | what it is |
 | --- | --- | --- |
-| **`video-1/`** | `/watch`, `/video-1` | **The film.** Thirteen sections, one folder each. |
-| `video-2-gpt/` | `/video-2` | ChatGPT's alternate 120-beat cut. A proposal, built on the superseded v9 engine. |
-| `superseded/` | `/old/section-NN`, `/why-320b-uses-18b`, `/gpt-section-01` | Earlier builds, kept routed so they can be compared. |
+| **`video-1/`** | `/watch`, `/video-1` | **The film.** Thirteen sections, one continuous `it` journey. |
 
-`src/videos/registry.tsx` is the authority for what is live. `npm run smoke`
-reads its route list from there, so a new section is covered the moment it is
-registered.
+`src/videos/registry.tsx` is the authority for live review routes.
 
 ## A section, inside `video-1/`
 
 ```text
 section-NN/
   scene.ts       the persistent scene: what exists, and its initial state
-  beats.ts       the beats: id, title, vo, secs, relation, patches
-  Stage.tsx      how a scene state is drawn
-  SectionNN.tsx  wires the two together through SectionRunner
+  beats.ts       implementation beats and timing
+  Stage.tsx      how the scene is drawn
+  SectionNN.tsx  wires the section together
 ```
 
-Actors are mounted once and never rebuilt. A beat issues **partial patches**
-that merge cumulatively, so persistence is the default. Never wrap a scene in
-`AnimatePresence` keyed on the beat or the world — that destroys and remounts,
-and every chapter boundary becomes a hard cut. `video-2-gpt/` does exactly that
-and is the worked example of why not; see `storyboard/video-2-gpt/GPT_REVIEW.md`.
+Story and approved narration outrank implementation:
 
-Story and script outrank this folder: `storyboard/video-1/STORY_SPINE.md`, then
-`video-script/video-1/`.
+1. `video-script/video-1/`
+2. `storyboard/video-1/STORY_SPINE.md`
+3. `src/videos/glm-320b/video-1/`
+
+If code and locked narration disagree, change the code. Do not rewrite locked narration to fit an existing beat count or component.
+
+Rejected alternate builds are not kept in this working branch. Git history is the archive.
