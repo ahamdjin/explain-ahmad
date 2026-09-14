@@ -2,23 +2,19 @@ import { lazy, Suspense, useCallback, useEffect, useState, type ComponentType } 
 import { ChapterDots } from '../paper/rail'
 import './watch.css'
 
+const VIDEO_TITLE = '320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?'
+
 /**
  * The whole piece, one section after another.
  *
- * Individual section routes exist for review, but no section makes sense on
- * its own -- the chain is the product. Section 1 plants an event that section 7
- * spends its whole runtime paying off, and a viewer who never sees both has not
- * seen the video.
- *
- * All thirteen are built. The `component` field is kept optional anyway, so
- * that a section taken out for rework shows as a plate rather than silently
- * vanishing from the chain.
+ * Individual section routes exist for review, but the chain is the product.
+ * Section 1 creates the 1-vs-8 contradiction and Section 13 returns to that
+ * exact frame after the viewer has followed `it` through the machine.
  */
-
 type Chapter = {
   n: number
   title: string
-  /** The question the viewer arrives holding. Must match the previous exit. */
+  /** The question the viewer arrives holding. */
   enters: string
   component?: ComponentType<{ onFinish?: () => void; autoplay?: boolean }>
 }
@@ -37,27 +33,20 @@ const Section11 = lazy(() => import('../videos/glm-320b/video-1/section-11/Secti
 const Section12 = lazy(() => import('../videos/glm-320b/video-1/section-12/Section12'))
 const Section13 = lazy(() => import('../videos/glm-320b/video-1/section-13/Section13'))
 
-/**
- * The thirteen-section chain from `storyboard/video-1/STORY_SPINE.md` v4.
- *
- * `enters` is the question the viewer arrives holding, and it must match what
- * the previous section left them with — `npm run check:chain` asserts exactly
- * that against the scripts' contract tables.
- */
 const CHAPTERS: Chapter[] = [
-  { n: 1, title: 'What "18 billion active" means', enters: '', component: Section01 },
-  { n: 2, title: 'Your words become tokens', enters: 'What is the first thing the model actually receives when you hit send?', component: Section02 },
-  { n: 3, title: 'From an ID to a meaning', enters: 'A row number has no meaning in it. So how does it know what anything means?', component: Section03 },
-  { n: 4, title: 'The word looks around', enters: 'That row is the same every single time. So how does the word ever mean two things?', component: Section04 },
-  { n: 5, title: 'The router picks the eight', enters: 'So the numbers depend on the sentence. Who reads them, and what do they decide?', component: Section05 },
+  { n: 1, title: 'The five-percent problem', enters: '', component: Section01 },
+  { n: 2, title: 'What the model actually receives', enters: 'When you type the sentence into the model, what does it actually receive?', component: Section02 },
+  { n: 3, title: 'From 432 to a useful representation', enters: '432 is only an address. Where does a useful representation come from?', component: Section03 },
+  { n: 4, title: '“it” gets context', enters: 'The embedding is fixed. Where does the sentence change what “it” means?', component: Section04 },
+  { n: 5, title: 'The router picks the eight', enters: 'Now “it” has a sentence-specific row. Which model parts should work on it?', component: Section05 },
   { n: 6, title: 'The experts do the work', enters: 'Eight experts are picked. What do they actually do?', component: Section06 },
-  { n: 7, title: 'That was one layer. There are 45.', enters: 'How many steps are there?', component: Section07 },
-  { n: 8, title: 'That was one token. Here’s the sentence.', enters: '336 expert visits for one token. But a sentence isn’t one token.', component: Section08 },
-  { n: 9, title: 'Where the answer comes out', enters: 'All of that happens. What comes out?', component: Section09 },
-  { n: 10, title: 'And then it does the whole thing again', enters: 'All that machinery, and one token comes out?', component: Section10 },
-  { n: 11, title: 'So could you store only the 18 billion?', enters: 'It never stops choosing. So could you store only the part it uses?', component: Section11 },
-  { n: 12, title: 'How people actually run these', enters: 'So you can’t store only the active part. But people run big models on small machines.', component: Section12 },
-  { n: 13, title: 'What that number actually bought', enters: 'It’s a price, not a wall. So what did “five percent active” actually get us?', component: Section13 },
+  { n: 7, title: 'One layer becomes forty-five', enters: 'That was one routed layer. How many times does this happen?', component: Section07 },
+  { n: 8, title: 'That was one token', enters: '336 routed expert visits for one token. What about the other seven prompt tokens?', component: Section08 },
+  { n: 9, title: 'Where the next token comes from', enters: 'The prompt has crossed the stack. How does one next token come out?', component: Section09 },
+  { n: 10, title: 'And then it does it again', enters: 'One token came out. How does the model make the next one?', component: Section10 },
+  { n: 11, title: 'So which 18B are active?', enters: 'Routing keeps changing. So which 18B are actually active?', component: Section11 },
+  { n: 12, title: 'How people actually run these', enters: 'Naive no-cache fetching is too expensive. So how does real offload work?', component: Section12 },
+  { n: 13, title: 'What 18B active actually buys', enters: 'If offloading is a memory-speed trade, what did sparsity actually buy?', component: Section13 },
 ]
 
 function startAt() {
@@ -73,8 +62,11 @@ export default function WatchPage() {
   const params = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search)
   const chrome = params?.get('chrome') !== '0'
   const autoplay = params?.get('play') === '1'
-  /** A breath between chapters, so §7 does not cut straight into §8. */
   const [turning, setTurning] = useState(false)
+
+  useEffect(() => {
+    document.title = VIDEO_TITLE
+  }, [])
 
   const next = useCallback(() => {
     setTurning(true)
@@ -84,13 +76,6 @@ export default function WatchPage() {
     }, 420)
   }, [])
 
-  /**
-   * Straight to a chapter, through the same page turn.
-   *
-   * The turn is kept rather than skipped: without it the swap is a hard cut
-   * and the new section's first beat has already started animating before the
-   * old one has gone.
-   */
   const goTo = useCallback(
     (wanted: number) => {
       if (wanted === index) return
@@ -103,8 +88,6 @@ export default function WatchPage() {
     [index],
   )
 
-  /* A placeholder has no section to take the keypress, and none to run a
-   * timeline either, so the page does both. */
   useEffect(() => {
     if (chapter.component) return
     if (autoplay) {
@@ -138,16 +121,10 @@ export default function WatchPage() {
           <p className="w-todo-n">Section {chapter.n}</p>
           <h2>{chapter.title}</h2>
           <p className="w-todo-q">{chapter.enters}</p>
-          <span className="w-todo-tag">not built yet — script is written</span>
+          <span className="w-todo-tag">visual implementation pending</span>
         </div>
       )}
 
-      {/*
-        No chapter plate. It sat in the top corner naming the section and
-        counting it out of thirteen, which is production scaffolding printed
-        over the film -- the dots already say where you are, and a viewer does
-        not need to be told they are five thirteenths of the way through.
-      */}
       {chrome ? (
         <ChapterDots
           count={CHAPTERS.length}
