@@ -1,390 +1,118 @@
-# Story spine — v5
+# Story spine — v6 · narration-first `it` journey
 
-Status: **v5 — the intro asks, §11 answers, and every section is a chapter with
-a wall at each end.** All thirteen sections built; §01 rewritten to v9 script,
-§§02–13 need their open/close lines set (§5 below).
+Status: **current source of truth for the rewrite branch.**
 
-v4's note is kept below because the decision it records was reversed by the
-person watching it. v4 chose to **tell the viewer the answer in the first
-ninety seconds** and spend the rest proving it. Ahmad watched the built thing
-and reported: *"The whole story feels disconnected on what, when, how it is
-happening. I dont know when was the intro. When we jumped to Token and Token ID
-and Embedding and then attention."* Two separate faults, and v4 caused one of
-them and failed to prevent the other:
+This replaces the old v5 opening/chain logic.
 
-1. **The answer arrived before the machine did.** §01 beat 13 said *"That's the
-   answer. That's the whole thing."* at 1:20, and §11 re-asked the same question
-   fifteen minutes later. Nothing was at stake in between. **v5: the intro
-   asks, §11 answers.**
-2. **No section ever names itself.** "Attention" is spoken ten times, always in
-   passing, never as *"this part is called attention, and it starts now."*
-   Sections chain their *questions* but never bank their *answers*, so nothing
-   accumulates and 30 minutes reads as one run-on. **v5: §5 below.**
+## Non-negotiable production rule
 
-v4's other decision — teach the whole machine rather than theorise about it —
-was right and stands.
+The spoken story comes first.
 
----
+If narration is marked **APPROVED NARRATION — LOCKED**, implementation is not allowed to shorten, paraphrase, reorder, or “improve” it. Beat count, timing, components, camera moves and storyboard structure must change around the approved narration.
 
-**(v4's note, superseded on the two points above)**
+Section 1 and Section 2 are currently locked. Sections 3–13 are the current narration-first story pass and should be reviewed before receiving the same lock.
 
-Status: **v4 — the whole machine, taught, then the payoff. All thirteen
-sections built.** 164 beats, 21:36, 76% talking. `npm run board` for every
-beat, `/watch` to see it in order, `npm run timing` for the pacing.
+## The one story
 
-The `secs` in the build come from a 145-words-per-minute estimate and are
-placeholders. **Record against `video-script/video-1/READ_ALOUD.md` and set them from
-the real audio** — `docs/VOICE_OVER.md`. Until then the runtime is an estimate
-and the autoplay preview only approximates the cut.
+A model advertises roughly:
 
-v3 got the voice right and was still missing most of the machine. Ahmad's
-brief: token → token ID → embedding *with an example* → attention, so the model
-associates → the router chooses **based on what attention produced** → the
-experts do the work and produce an output → *"but that was one word?"* → and
-how does it combine into something that understands us — **that is where
-transformers come in.** Longer is fine as long as all of it makes sense.
+**320B total · 18B active**
 
-That is correct, and it reverses a decision I defended twice. The memory answer
-is only worth anything to someone who has seen the machine. So v4 teaches the
-full pipeline and uses the memory question as the **payoff**, not as a mystery
-running underneath.
+That sounds like only a small part of the model should need to be kept around.
 
-Runtime lands around **30 minutes** as built (21.7 of it speaking, at 145 wpm
-across 189 beats and 3,145 words). This said 21 minutes until 2026-09-11, when
-`npm run timing` was read against the finished build rather than the 165-beat
-draft it was written for -- a nine-minute error in the one document the voice
-over is planned from. **Run `npm run timing`; do not trust a number typed in
-prose.** Ahmad's position above stands: longer is fine as long as all of it
-makes sense. The risk of that shape is a payoff at
-minute twenty-two -- §11 is where the question from minute one gets answered,
-and `npm run timing` is where that number comes from, not this sentence. The
-answer to the risk is in §4 below: every mechanism section
-must add one *reason you could not have known in advance*. The teaching is the
-answer being assembled, not a detour before it.
+We test that intuition with two models that both activate roughly five percent of their parameters per token, but have radically different shipped fully-resident footprints: one 80 GB accelerator versus eight in the project's scoped comparison.
 
-v2 was a mystery: it opened a question and held it for eight minutes. Ahmad
-read it and said it was not simple, was not making sense, and *"eventually
-answers the same thing it did above"* — which is exactly right. §1 asked why
-the machine needs all of it, answered a smaller different question (why the
-rest is not waste), and exited by re-asking the first one. That is the
-circularity bug from v1 in a new costume.
+The viewer's mystery becomes:
 
-v3 fixes it by **telling the viewer the answer in the first ninety seconds**
-and spending the rest of the video showing that it is true. Nothing is
-withheld. Every section answers the question it raises, and the answer is what
-raises the next one — therefore, but, therefore. No unsolved puzzle at any
-point.
+> **When they say 18B are active — which 18B?**
 
-It also **teaches the mechanism** rather than theorising about it:
-tokenization, numbers, attention, the router, the layers. Ahmad asked for that
-twice and was right both times — the journey is what makes the answer
-believable, and a viewer who has seen the machinery does not have to take the
-verdict on trust.
+We answer it by following one real token — **`it`** from:
 
-Supersedes `archive/STORY_SPINE-claim-on-trial-v1.md` (the claim-on-trial
-version, 8 sections, built and shipped as 96 beats / 8:04). What forced the
-rewrite is in `research/glm/OFFLOADING_AND_LOCALITY.md`: v1's Section 07 was
-about to claim you cannot run this on less memory, and people run large MoE
-models on small cards every day. v1 also opened on a product name and reached
-its hook at 0:19, against research saying 30–40% of viewers are gone by 0:30
-(`research/RETENTION_AND_ANGLE.md`).
+> `The dog dropped the ball, and it`
 
----
+through the entire causal chain.
 
-## 1. The promise
+## Teaching method
 
-Made in the first fifteen seconds, and it is the whole video:
+Use three modes deliberately:
 
-> **Two models. Both use about five percent of themselves to answer you. One
-> runs on a single graphics card. The other needs eight.**
->
-> So the number everybody quotes — *"only 18 billion active"* — is not telling
-> you what you think it is.
+1. **Tell facts the viewer cannot infer.** Example: GLM has 288 routed experts and selects eight.
+2. **Ask when the viewer can reason.** Example: should routing use token ID 432 or the sentence-specific hidden row?
+3. **Let visuals prove transformations.** Same actor moves and changes: `it` → 432 → embedding → contextual row → routed expert work → next-token distribution.
 
-| | gpt-oss-120b | GLM-5.3-Flash |
-| --- | --- | --- |
-| Total | 116.8B | 321B |
-| Active per word | 5.1B | 18B |
-| **Share active** | **4.4%** | **5.6%** |
-| Experts per sparse layer | 128 | **288** |
-| Routing | top-4 | **top-8** |
-| Footprint as shipped | ~58 GiB (MXFP4, 4.25 bit) | ~306 GiB (FP8) |
-| **Fits on** | **one 80 GB GPU** | **eight** |
-| Squeezed to 4-bit | ~58 GiB | ~153 GiB — still four |
+Never turn unknown architecture constants into fake quizzes.
 
-Sources: [gpt-oss model card](https://arxiv.org/pdf/2508.10925) ·
-[gpt-oss repo](https://github.com/openai/gpt-oss) · `research/glm/GROUND_TRUTH.md`
+## The chain — 13 sections
 
-**The card counts are derived, not published, and this table had them wrong.**
-It said *"four"* while §1's own board note said ~306 GiB *"does not fit four"* —
-and the note was right: 306 GiB is 328.6 GB against four cards' 320 GB. Five
-would be enough arithmetically but tensor-parallel size has to divide the 64
-attention heads, so the smallest workable size is **eight**. At 4-bit, 153 GiB
-is 164.3 GB, so *"still two"* was wrong too; it is **four**. The full working,
-and the rule never to restate a card count without dividing, is in
-`research/glm/GROUND_TRUTH.md`.
-
-The contradiction is honest at either precision, which is what makes it safe to
-open on. Say "about five percent" — 4.4 and 5.6 are the same claim.
-
-## 2. The spine
-
-| | |
-| --- | --- |
-| **The want** | Everybody quotes *"320 billion parameters, only 18 billion active."* I want to know what that number actually buys — because two models with the same number need wildly different machines. |
-| **The wall** | Which experts are needed is decided from the word's *current* numbers, and those numbers change at every one of the 42 sparse layers. So the set is unknowable in advance and changes 42 times per word. And the trick that rescues this on other models — cache the ones that keep coming back — is measured only where there are **eight** experts per layer, never where there are **288 per layer and 12,096 slots**. |
-| **The thesis** | **"Active parameters" is a compute number, not a memory number.** Sparse routing buys compute, not memory — and the finer you slice the experts, the more true that gets. |
-
-### Why the thesis is worth eight minutes
-
-*(Eight is the argument's weight, not a runtime. The build spends ~20 minutes
-reaching it. `npm run timing`.)*
-
-Fine-graining is not a mistake. More experts, smaller each, is *why* modern MoE
-models are good — better specialisation, better load balance. It also spreads
-the active weight across the whole checkpoint instead of leaving it in a corner
-you could keep nearby — which is the regime the caching trick that lets people
-run Mixtral on a laptop has never been measured in.
-
-**Scope, and it is narrow.** Every locality figure in
-`research/glm/OFFLOADING_AND_LOCALITY.md` comes from **eight**-expert, top-2
-models. There is no published measurement at 288 experts and top-8. So the
-spine may say that the trick is *unmeasured here* and that the box number
-cannot locate the operating point. It may **not** say that fine-graining
-"defeats" caching, that 12,096 slots leave it "almost nothing to grip", or that
-the difficulty is a proven law — this section said all three until 2026-09-11,
-while §12 had already been corrected to admit the opposite. **If this file and
-§12 disagree, §12 is right.**
-
-**Corrected 2026-09-11** — this used to end "Nobody has made that video."
-`research/COMPETITIVE_FIELD.md` checked the field properly, and that is only
-half true:
-
-- *"Sparse routing buys compute, not memory"* **has** been made. It is the
-  entire description of *The AI Trick Eating the World's Memory* (10:35,
-  2026-06-30), which also covers SSD offloading and expert paging with the same
-  citations we use. We are **second to that thesis**, and its frame is
-  macro-economic — why DRAM got expensive — where ours is personal.
-- **The fine-graining argument is still nobody's.** No video in the field
-  connects more-and-smaller-experts to *caching stops working*. That, and the
-  336 arithmetic, and following one word through the whole machine, are what
-  we actually own.
-
-## 3. What the viewer thinks they already know
-
-This decides everything, because the audience for an MoE video believes it
-understands MoE:
-
-> *"Only a few parts run, so you only need to load a few parts. That's the
-> whole point. It's cheaper."*
-
-They are **right about the compute and wrong about the memory**, and they will
-not be moved by being told. They have to watch the reasonable version of their
-own idea get built, work, and then fail for a reason they can see. That is what
-Sections 6 and 7 are for.
-
-This used to claim they get **27% of the runtime**. They get **13%** -- 3:59 of
-29:45. Either the claim was written against a different chain or it was never
-checked; `npm run timing` is the authority, and if 13% is too little for the
-only two sections that build the viewer's own idea and then break it, that is a
-real question this file should be asking rather than a number it should be
-asserting.
-
-## 4. The chain — 13 sections
-
-Every section answers its own question, and the answer raises the next. The
-last column is the load-bearing one: each mechanism section pays a little of
-the final answer, so the payoff is assembled in front of the viewer rather than
-withheld from them.
-
-| # | Section | Teaches | Answers | → next | Adds to the answer |
-| --- | --- | --- | --- | --- | --- |
-| 1 | **What "five percent active" actually costs** | parameter, expert, active, Mixture of Experts | **about five percent runs — and that number does not predict the hardware** | **therefore** go and watch it choose | the contradiction: two models, same share, four times the machine |
-| 2 | **Your words become tokens** | token, token ID, vocabulary | your text is cut into pieces; each piece has a row number in a list of 154,880 | **but** a row number is a name, not a meaning | — |
-| 3 | **From an ID to a meaning** | embedding | the number is looked up in a huge table and comes back as a row of 4096 values | **but** that row is identical every time the word appears | the row is *fixed per token* — the first half of the paradox |
-| 4 | **The word looks around** | attention, context | each token reads the others and pulls in what matters, and its row **changes** | **therefore** the same word has different numbers in different sentences | **the numbers depend on the whole sentence** |
-| 5 | **The router picks the eight** | router, top-8, shared expert | it scores all 288 against the row *as it is now* and keeps the best 8 | **therefore** the choice is made from numbers that only just existed | **the choice depends on those numbers** |
-| 6 | **The experts do the work** | expert output, weighting | each of the 8 transforms the row; the outputs are blended back into one | **therefore** the token leaves changed | — |
-| 7 | **That was one layer. There are 45.** | layer, sparse vs dense | 3 dense, 42 sparse; the token climbs, and every floor does attention and routing again | **therefore** 42 × 8 = **336 expert visits for one token** | **336 choices, not one** |
-| 8 | **That was one token. Here's the sentence.** | **transformer**, parallel processing | the whole prompt goes through together; attention is the wiring between them; this stack is what "transformer" names | **therefore** it reads your sentence as a whole, not word by word | **every token pays its own 336** |
-| 9 | **Where the answer comes out** | logits, next-token prediction | the top of the stack turns the last position into a score for all 154,880 tokens, and one is chosen | **therefore** one word comes out | — |
-| 10 | **And then it does the whole thing again** | autoregression | the new word is added to the end and the entire stack runs again | **therefore** every word of the reply pays 336 all over again | **it never stops re-choosing** |
-| 11 | **So could you store only the 18 billion?** | memory vs storage | you would fetch ~8 GB per word — about a second and a half, against milliseconds of thinking | **therefore** the fetching costs more than the work | the arithmetic |
-| 12 | **How people actually run these** | caching, the trade | experts do repeat, so keep the frequent ones close; it genuinely works | **but** with 12,096 slots there is no setting that is both small and fast | the honest limit |
-| 13 | **What that number actually bought** | — | **compute, not memory** — and the finer the experts, the wider the gap | *(the end)* | the verdict |
-
-### Read as one sentence
-
-> A model uses a different 18 billion for every word, **therefore** we watch it
-> choose. Your words become tokens with ID numbers, **but** an ID is a name and
-> not a meaning, **therefore** each one is looked up as a row of 4096 values.
-> That row is the same every time, **but** each token then reads the others and
-> its row changes, **therefore** the same word carries different numbers in
-> different sentences. The router scores the 288 experts against that row,
-> **therefore** the choice depends on numbers that only just existed. The eight
-> do their work and hand back a changed row, **therefore** the token leaves
-> different from how it arrived — and that is one floor of forty-five, **so**
-> one token costs 336 expert choices. The whole sentence climbs together, which
-> is what a transformer is, **therefore** every token pays its own 336. The top
-> turns the last position into one word, **and then** — no. **Therefore** the
-> word is appended and the entire thing runs again. **Therefore** storing only
-> the active part means fetching eight gigabytes per word. People do it anyway
-> with caching, **but** the exchange rate is brutal. **Therefore** "active
-> parameters" bought you compute, and never bought you memory.
-
-The one "and then" is deliberate and is immediately refused. It marks the exact
-place a lesser video would coast.
-
-### The running thread
-
-The memory question is asked at 1:20 and answered at the end, which is a long
-way. It survives because **§3, §4, §5, §7, §8 and §10 each add one piece of the
-answer** — see the last column. Each of those sections carries one short line
-that banks it, e.g.:
-
-> *"And notice — nothing about that could have been worked out ahead of time."*
-
-Six deposits, then §11 spends them -- at **21:56**, not the minute nine this
-once said. That is the shape's biggest open question and it is stated here
-plainly rather than buried: a viewer has to hold six deposits for twenty
-minutes before any of them is spent.
-
-## 5. The chapter wall — how a section announces and closes itself
-
-This is v5's whole addition, and it exists because Ahmad could not tell where
-one part ended and the next began.
-
-Ahmad's call was **handoff only, no title cards** — the narration carries the
-structure, nothing is added to the frame. That is also what *The Evolution of
-Trust* does: it has no chapter titles either, but **every time its mechanic
-changes, the narration says so in a sentence**
-(`skills/ncase/NCASE_EVOLUTION_OF_TRUST.md` §6). We removed the corner chrome
-and never wrote the sentences. These are the sentences.
-
-Every section gets exactly two load-bearing beats:
-
-| | |
-| --- | --- |
-| **The opening beat** | **Banks** the previous section's answer as *settled and owned* — "so we now know X" — then adds the **but** that makes this section necessary. Never opens on fresh material. |
-| **The closing beat** | **Declares this mechanism finished by name** — "that's attention, done" — states what the viewer now has, and names the one thing still missing. |
-
-The failure v4 had is that openings carried the *question* forward
-(*"So — who picks the eight"*) without ever banking the *answer*. A viewer who
-never gets to keep anything never accumulates anything, and 30 minutes of open
-questions feels like drift. **Bank first, then complicate.**
-
-Two rules that keep this from becoming recap:
-
-- **Bank in one clause, not a summary.** "So the row is now specific to this
-  sentence —" is banking. "Let's review what we've learned about attention" is
-  a recap, and recaps are where retention dies.
-- **Name the mechanism at the close, not the open.** Saying "this next part is
-  called attention" before it happens spends the word on nothing. Saying
-  "that's attention — that's all attention is" after the viewer has watched it
-  work attaches the word to a memory. This is the Trust rule about withholding
-  the naming word, at section scale.
-
-### The thirteen walls
-
-`Opens` must bank the previous row's `Closes`. `npm run check:chain` verifies
-the pairing; it cannot verify that the sentences are any good.
-
-| # | Chapter | Opens by banking… | …then the **but** | Closes on |
+| § | Section | Main event | Viewer leaves knowing | Handoff |
 | --- | --- | --- | --- | --- |
-| 1 | the question | *(nothing — this is the top)* | you type, and 5% runs | **who picks the eight, and why is that the expensive question?** |
-| 2 | tokens | something picks the eight; to see how, follow a word in | it doesn't get words | your text is numbers now — but a row number is a **name**, not a meaning |
-| 3 | meaning | each piece has a row number, which is only a name | a name has to become a meaning | that's the lookup done — the word is 4,096 numbers, but **the same 4,096 every time** |
-| 4 | attention | the row is fixed per word | so every "dog" starts identical, which can't be right | **that's attention, done** — the row has changed, and it changed because of *this sentence* |
-| 5 | the router | the row is now specific to this sentence | something has to read it and choose | **that's the router, done** — eight picked, and they could not have been picked any earlier |
-| 6 | the experts | eight are chosen | what do they actually *do*? | **that's one full step, done** — attention, choose, work. So how many steps are there? |
-| 7 | the stack | one step changes the word | there are forty-five of them | **336 choices for one word** — every one needing the floor below it first |
-| 8 | the sentence | 336 for one word | I've been following one word, and I owe you a correction | **every word pays its own 336** — so what comes out? |
-| 9 | the output | all of it happens, for every word | and it produces… one word | **one word, out of all that** |
-| 10 | the loop | one word comes out | so how do you get a paragraph? | **it never stops re-choosing** — now we can finally ask the opening question properly |
-| 11 | **the answer** | it re-chooses, every word, every floor | so could you store just the 5%? | **no — ~8 GB fetched per word against milliseconds of work** |
-| 12 | the honest limit | you can't store only the active part | except people run these on small machines every day | it works — but with 12,096 slots there's **no setting that is both small and fast** |
-| 13 | the verdict | small *or* fast, not both | so what did "five percent active" actually buy? | **compute, not memory** — and the finer the experts, the wider the gap |
+| 1 | **The five-percent problem** | viewer predicts similar hardware; 1 vs 8 breaks the prediction | active percentage alone does not predict resident hardware | **which 18B? follow `it`** |
+| 2 | **What the model actually receives** | sentence splits into real tokenizer pieces; `it` becomes **432** | token IDs are addresses, not meanings | **where does meaning/useful representation come from?** |
+| 3 | **From 432 to a useful representation** | row 432 pulls out **4,096 values** | embedding is a fixed learned starting representation | **same `it` always starts identical — where does context enter?** |
+| 4 | **`it` gets context** | earlier prompt positions change the `it` row | same ID, new sentence-specific hidden representation | **which model parts should work on this row?** |
+| 5 | **The router picks the eight** | router scores 288 and selects top-8; +1 shared expert | routing depends on the current row, not token ID | **what do experts do?** |
+| 6 | **The experts do the work** | same row enters eight experts; weighted outputs merge | selected experts transform the row and return one same-shaped row | **how many times does this happen?** |
+| 7 | **One layer becomes forty-five** | room becomes tower; sparse layers reroute | **42 routing decisions × 8 = 336 routed expert visits** for one token | **what about the other seven prompt tokens?** |
+| 8 | **That was one token** | all eight prompt positions move layer-by-layer | prompt prefill handles all positions; simplified routed count = **2,688 visits** | **how does one next token come out?** |
+| 9 | **Where the next token comes from** | final `it` row becomes vocabulary scores | one vocabulary token is selected from the next-token distribution | **how do we get token two?** |
+| 10 | **And then it does it again** | generated token is appended; only new position traverses stack using reusable prior state | autoregressive decode repeats fresh routing for each new token | **now which 18B are active?** |
+| 11 | **So which 18B are active?** | fixed always-on pieces separate from dynamically routed expert pieces; naive fetch plan is tested | there is no one permanent 18B block; naive no-cache fetching is bandwidth-expensive | **how does real offload work?** |
+| 12 | **How people actually run these** | cache turns some long fetches into hits; slider exposes memory↔speed trade | offload/cache/quantize/shard can reduce fast-memory need, with tradeoffs; active % does not set the working set | **what did sparsity actually buy?** |
+| 13 | **What 18B active actually buys** | exact §1 comparison returns | total params answer “how much model exists”; active params answer roughly “how much participates per token” | **end** |
 
-Row 11 is where v4's answer moved to, and it is now the first time the video
-says it.
+## The protagonist rule
 
-Row 4 and row 5 are the two Ahmad named as the place he got lost. Both now
-open by banking and close by naming.
+The tracked piece is **`it`**, token index 7, token ID **432**.
 
-## 6. Style — plain, and out loud
+Main-story sections may use side examples, but they must return to the same `it` actor. Do not silently switch the protagonist to `dog` because older visuals were built around ID 5562.
 
-The reference is Nate Herk: plain conversational delivery, no drama, say what
-you are about to do and then do it, explain each step as it happens, never hold
-back an answer to build suspense.
+Shared source: `src/paper/prompt.ts` → `FOLLOWED = 7`.
 
-| Do | Don't |
-| --- | --- |
-| "Here's the answer, straight up." | "But there's a problem…" (mystery) |
-| "A parameter is just a number the model learned." | "parameters encode learned representations" |
-| short sentences, one idea each | one sentence carrying two ideas |
-| "Let's follow one word through it." | "Let us now consider the forward pass." |
-| name the thing, then use the name plainly | avoid the name to seem clever |
-| numbers said out loud: "three hundred and twenty billion" | "320B" as spoken text |
+## The opening mystery — exact answer
 
-If a line would not survive being said to a friend at a table, it is rewritten.
+The viewer asks whether the active 18B are one fixed block.
 
-## 7. What changed from v1, and why
+The answer is deliberately nuanced:
 
-| | v1 | v2 |
-| --- | --- | --- |
-| Open | *"This is GLM-5.3-Flash."* Hook at 0:19 | the number, the surprise, **and the answer** — all inside 90 seconds |
-| Want | the word "efficient" on trial | the number everyone quotes, and what it buys |
-| §1 event | "a **completely** different eight" | a different eight, **with the overlap shown** — true, and it seeds §7 |
-| Old §2 | 46 s, answered nothing, sat at the most fragile point in the video | **folded into §2** — its event survives, the corridor does not |
-| The answer | withheld until §7 | **given in §1**, then proved for seven sections |
-| Tokenization | cut as "a different video" | **taught in §2** — Ahmad asked twice; the journey is what makes the answer believable |
-| Thesis | compute not memory | compute not memory, **and it worsens with granularity** |
-| Honesty | implied you cannot offload | concedes offloading works, then shows where it runs out |
+- some model weights are always used;
+- the routed-expert portion is dynamic;
+- each sparse layer chooses its top-8 based on the hidden representation arriving at that layer;
+- that representation changes as the token moves through the network;
+- future tokens can therefore route differently.
 
-The old §2's reveal — *the router never looks at the word* — was too good to
-lose and too thin to carry 46 seconds. It now opens §2 and buys its keep in ten.
+So **“18B active” is not the address of one permanent 18B subset you can simply cut out of the checkpoint.**
 
-## 8. Two things we may not claim
+## The memory/offload claim — scoped
 
-**We may not put a number on expert overlap for this model.** The 44.2%
-consecutive-token figure and the LRU hit rates are measured on Mixtral 8×7B —
-8 experts, top-2. Nobody has published the equivalent for 288 experts at top-8.
-So §1 says *"some of them keep coming back"* and shows a couple staying. It
-never says how many, and no on-screen number claims a fraction.
+Never say:
 
-**We may not say the fetch is impossible.** It is a trade with a bad exchange
-rate, and §7 must be built as a trade. Anything stronger is contradicted by a
-`llama.cpp` flag — see `research/glm/OFFLOADING_AND_LOCALITY.md`.
+> “You need all 320B in GPU VRAM.”
 
-Both restrictions make the video better. A trade the viewer can operate is more
-convincing than a wall they have to accept.
+That is false as a general claim. Models can be quantized, sharded, cached and offloaded.
 
-## 9. Foundation files
+The safe argument is:
 
-| File | Holds |
-| --- | --- |
-| `skills/STORY_STRUCTURE.md` | the five gates, run before any art |
-| `skills/PRODUCTION_ORDER.md` | script → frames → animation, and line jobs |
-| `research/RETENTION_AND_ANGLE.md` | why anyone stays; the competitive field |
-| `research/glm/OFFLOADING_AND_LOCALITY.md` | **the correction that produced v2** |
-| `research/glm/GROUND_TRUTH.md` | every on-screen number about this model |
-| `storyboard/video-1/VOCABULARY_LEDGER.md` | what the viewer owns per section |
-| `storyboard/video-1/SECTION_MAP.md` | per-section detail |
-| `storyboard/video-1/BOARD.md` | **generated** — every beat of every section, from the code |
-| `skills/SPATIAL_CONTINUITY.md` | where the viewer is, and what may move them |
+1. A completely naive no-cache scheme that fetches every selected routed expert from slow storage would move about **8.5 GB of routed expert weights per token** in this architecture-level thought experiment.
+2. Real systems reduce that cost with caching, memory tiers, overlapping transfers and/or prefetching.
+3. Project research does **not** contain a published GLM-5.3-Flash expert-locality measurement for 288 routed experts / top-8, so do not invent an optimal cache size or hit rate.
+4. Therefore “5.6% active” alone does not tell the viewer how much fast memory is required for a chosen performance target.
 
-## 10. Two corrections made during the build
+## Finale thesis
 
-**§13 does not return to a spec sheet.** The board asked beat 2 to pan "back to
-the opening sheet, exactly as it was — `ModelSheet`, 320 / 18". §1 as built has
-no `ModelSheet`, deliberately: *no spec read* is the first rule of that opening.
-So §13 beat 2 returns to what §1 actually opened with — the number, and the
-block behind it. A callback to a frame that does not exist is worse than none.
+Prefer this wording:
 
-**§8 is eight tokens, and §2's ID is 5562.** Both measured from GLM-5.3-Flash's
-own tokenizer on 2026-09-11 — `research/glm/TOKENIZER.md`, reproducible with
-`scripts/tokenize-glm.py`. Both used to be invented: the prompt was said to
-split as `dropp` + `ed` into nine pieces, and the ID was hedged as *"let's
-say 4021"*. The pieces are on screen while the arithmetic happens, so the
-count is checkable: 8 × 336 = **2,688**. The hedge on the ID is gone because
-the number is now real.
+> **Active parameters is primarily a per-token compute/participation number, not a promise about minimum memory.**
+
+Do not use an unqualified “active parameters is not a memory number” as if active working-set behavior has zero relationship to memory systems.
+
+The final visual is the exact §1 comparison again:
+
+**roughly similar active share · one 80 GB accelerator vs eight in the scoped native/shipped fully-resident comparison.**
+
+The viewer now knows why the percentages never predicted the footprint.
+
+## No extra ending
+
+Section 13 is the end. Once the opening frame returns and the distinction between **total model** and **per-token participation** is clear, stop.
+
+No second thesis. No new benchmark. No teaser. No architecture appendix in the spoken ending.
