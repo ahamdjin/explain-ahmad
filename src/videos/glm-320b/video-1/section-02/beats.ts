@@ -22,7 +22,11 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Because it doesn’t start with words. The first thing the model does is break your text into smaller pieces.',
     commands: [
       ground.at(GROUND_Y),
-      sentence.show({ x: 38, y: 58 }, 0.5),
+      /* Bigger and nearer the middle. §1 hands this sentence over as the one
+       * object still on screen; arriving at half scale in the bottom-left
+       * corner reads as a new small thing rather than as the thing we have
+       * just been following. */
+      sentence.show({ x: 44, y: 48 }, 0.62),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' }),
     ],
   },
@@ -154,7 +158,14 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'and-yet',
     secs: 16,
     vo: 'But think about what 432 actually tells us. Does 432 tell you that `it` might refer to the ball? Does it tell you that `it` is a pronoun? Does it tell you anything about what `it` means? No.',
-    commands: [vocab.off(), sentence.off(), chip.moveTo({ x: 46, y: 46 }, 1), narrator.set({ pose: 'think' })],
+    /*
+     * The list **stays**. This beat and the next one both argue that 432 is an
+     * address, and beat 13 says in as many words "it's just where that token
+     * lives in the list" -- which had nothing on screen to point at, because
+     * the list was dismissed here. The ID moves to the left of it instead, so
+     * the number and the thing it indexes are in frame together.
+     */
+    commands: [sentence.off(), chip.moveTo({ x: 30, y: 46 }, 1), narrator.set({ pose: 'think' })],
     clearSticky: true,
   },
   {
@@ -165,7 +176,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 7,
     vo: 'It’s just where that token lives in the list. Basically an address.',
     commands: [narrator.off()],
-    overlays: [centred('address, not meaning', 46, 63, { size: 'md', tone: 'cost', rotate: -2 })],
+    overlays: [centred('address, not meaning', 30, 63, { size: 'md', tone: 'cost', rotate: -2 })],
   },
   {
     n: 14,
@@ -174,7 +185,10 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'wall',
     secs: 10,
     vo: 'And that creates our next problem. The model now has a number… but where does the meaning come from?',
-    commands: [],
+    /* Now the list goes, and 432 is left alone in the middle. The emptying is
+     * the beat: everything that could have carried meaning has left, and the
+     * number is all §3 is given to work with. */
+    commands: [vocab.off(), chip.moveTo({ x: 46, y: 44 }, 1)],
     lateOverlays: {
       at: 2600,
       overlays: [centred('where does the meaning come from?', 46, 73, { size: 'md', rotate: -2 })],
