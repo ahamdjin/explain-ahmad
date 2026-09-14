@@ -1,8 +1,8 @@
-# Story spine — v6 · narration-first `it` journey
+# The 18 Billion Mystery — Story Spine
 
-Status: **current source of truth for the rewrite branch.**
+**YouTube title:** **320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?**
 
-This replaces the old v5 opening/chain logic.
+Status: **current source of truth for the active video.**
 
 ## Non-negotiable production rule
 
@@ -64,7 +64,7 @@ Never turn unknown architecture constants into fake quizzes.
 
 The tracked piece is **`it`**, token index 7, token ID **432**.
 
-Main-story sections may use side examples, but they must return to the same `it` actor. Do not silently switch the protagonist to `dog` because older visuals were built around ID 5562.
+Main-story sections may use side examples, but they must return to the same `it` actor.
 
 Shared source: `src/paper/prompt.ts` → `FOLLOWED = 7`.
 
