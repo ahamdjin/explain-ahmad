@@ -16,7 +16,7 @@ Spine: `storyboard/video-1/STORY_SPINE.md` · Numbers: `research/glm/GROUND_TRUT
 | Story event | two models have similar active shares, but one fits one 80 GB accelerator while the other needs eight in the fully-resident shipped-precision comparison |
 | Main mystery | **when 18B are active, which 18B?** |
 | Answers | **an active share does not predict how much hardware a model needs** |
-| Exits on | **what is the first thing the model actually receives when you hit send?** |
+| Exits on | **Because it doesn’t start with words.** |
 | → next | show what the sentence becomes first |
 | Built | **18 beats** · timing is provisional until recorded VO |
 | Running example | `The dog dropped the ball, and it` |

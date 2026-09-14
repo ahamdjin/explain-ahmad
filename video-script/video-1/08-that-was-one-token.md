@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** The section corrects our deliberate 
 | Enters on | **our prompt had eight tokens; what were the other seven doing?** |
 | Teaches | prompt prefill, parallel positions, causal masking, transformer stack intuition |
 | Answers | all eight prompt positions move through the stack layer-by-layer; each gets its own contextual representation and routing |
-| Exits on | **after the whole prompt reaches the top, how does one next token come out?** |
+| Exits on | **the prompt is processed; how do numbers become the next token?** |
 
 ## Narration
 

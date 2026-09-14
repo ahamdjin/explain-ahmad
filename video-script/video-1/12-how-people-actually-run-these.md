@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** This section is the correction to §
 | Enters on | **if fetching every selected expert from slow storage is terrible, how can offloading work at all?** |
 | Teaches | expert caching, hits/misses, offloading, prefetch intuition, memory↔speed trade |
 | Answers | keep some expert weights close, fetch misses, optionally prefetch; less resident memory is possible at a latency/bandwidth cost |
-| Exits on | **so what did “18B active” actually buy us?** |
+| Exits on | **if active parameters are not a direct memory promise, what did sparsity buy us?** |
 
 ## Narration
 

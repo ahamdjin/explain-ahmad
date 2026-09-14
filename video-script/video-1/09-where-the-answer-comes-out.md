@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** No new architecture is introduced he
 | Enters on | **the prompt is processed; how do numbers become the next token?** |
 | Teaches | final-position representation, vocabulary scores / logits, token selection |
 | Answers | the final prompt position is projected to one score per vocabulary token; one token is selected according to the decoding rule |
-| Exits on | **if the model produced only one token, how does it write a whole answer?** |
+| Exits on | **one token came out; how does the model produce the next one?** |
 
 ## Narration
 

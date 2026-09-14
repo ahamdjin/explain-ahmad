@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** This is the direct payoff to the que
 | Enters on | **which 18B are active?** |
 | Teaches | fixed vs dynamically routed active parameters; naive expert fetch cost |
 | Answers | active parameters are not one permanent 18B block; always-on parts repeat while routed expert weights are selected dynamically layer-by-layer |
-| Exits on | **if fetching every chosen expert is too slow, how do real offloaded systems make this work?** |
+| Exits on | **if fetching every selected expert from slow storage is terrible, how can offloading work at all?** |
 
 ## Narration
 

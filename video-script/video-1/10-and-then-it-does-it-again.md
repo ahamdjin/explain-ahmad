@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** This section distinguishes prompt pr
 | Enters on | **one token came out; how does the model produce the next one?** |
 | Teaches | autoregressive generation, reusable cached state, one new token through the stack |
 | Answers | append the generated token, process the new position through the layers while reusing stored state from prior positions, then predict again |
-| Exits on | **now that we have watched repeated dynamic routing, can we finally answer which 18B are active?** |
+| Exits on | **which 18B are active?** |
 
 ## Narration
 

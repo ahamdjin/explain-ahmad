@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** This section pays off the tower only
 | Enters on | **we just processed `it` through one sparse layer; how many times does this happen?** |
 | Teaches | 45 layers, 42 sparse MoE layers, 3 dense FFN layers, rerouting, 336 routed expert visits |
 | Answers | the representation moves through 45 layers; 42 make fresh top-8 routing decisions |
-| Exits on | **we followed one token, but what happened to the other seven?** |
+| Exits on | **our prompt had eight tokens; what were the other seven doing?** |
 
 ## Narration
 

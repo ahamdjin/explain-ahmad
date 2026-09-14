@@ -35,18 +35,18 @@ const Section13 = lazy(() => import('../videos/glm-320b/video-1/section-13/Secti
 
 const CHAPTERS: Chapter[] = [
   { n: 1, title: 'The five-percent problem', enters: '', component: Section01 },
-  { n: 2, title: 'What the model actually receives', enters: 'When you type the sentence into the model, what does it actually receive?', component: Section02 },
-  { n: 3, title: 'From 432 to a useful representation', enters: '432 is only an address. Where does a useful representation come from?', component: Section03 },
-  { n: 4, title: '“it” gets context', enters: 'The embedding is fixed. Where does the sentence change what “it” means?', component: Section04 },
-  { n: 5, title: 'The router picks the eight', enters: 'Now “it” has a sentence-specific row. Which model parts should work on it?', component: Section05 },
-  { n: 6, title: 'The experts do the work', enters: 'Eight experts are picked. What do they actually do?', component: Section06 },
-  { n: 7, title: 'One layer becomes forty-five', enters: 'That was one routed layer. How many times does this happen?', component: Section07 },
-  { n: 8, title: 'That was one token', enters: '336 routed expert visits for one token. What about the other seven prompt tokens?', component: Section08 },
-  { n: 9, title: 'Where the next token comes from', enters: 'The prompt has crossed the stack. How does one next token come out?', component: Section09 },
-  { n: 10, title: 'And then it does it again', enters: 'One token came out. How does the model make the next one?', component: Section10 },
-  { n: 11, title: 'So which 18B are active?', enters: 'Routing keeps changing. So which 18B are actually active?', component: Section11 },
-  { n: 12, title: 'How people actually run these', enters: 'Naive no-cache fetching is too expensive. So how does real offload work?', component: Section12 },
-  { n: 13, title: 'What 18B active actually buys', enters: 'If offloading is a memory-speed trade, what did sparsity actually buy?', component: Section13 },
+  { n: 2, title: 'What the model actually receives', enters: 'Because it doesn’t start with words.', component: Section02 },
+  { n: 3, title: 'From 432 to a useful representation', enters: '432 is only an address. Where does anything useful come from?', component: Section03 },
+  { n: 4, title: '“it” gets context', enters: 'every `it` starts with the same embedding; how does this one become sentence-specific?', component: Section04 },
+  { n: 5, title: 'The router picks the eight', enters: 'we now have `it` in this sentence; which parts of the model should work on it?', component: Section05 },
+  { n: 6, title: 'The experts do the work', enters: 'the router picked eight; what do they actually do?', component: Section06 },
+  { n: 7, title: 'One layer becomes forty-five', enters: 'we just processed `it` through one sparse layer; how many times does this happen?', component: Section07 },
+  { n: 8, title: 'That was one token', enters: 'our prompt had eight tokens; what were the other seven doing?', component: Section08 },
+  { n: 9, title: 'Where the next token comes from', enters: 'the prompt is processed; how do numbers become the next token?', component: Section09 },
+  { n: 10, title: 'And then it does it again', enters: 'one token came out; how does the model produce the next one?', component: Section10 },
+  { n: 11, title: 'So which 18B are active?', enters: 'which 18B are active?', component: Section11 },
+  { n: 12, title: 'How people actually run these', enters: 'if fetching every selected expert from slow storage is terrible, how can offloading work at all?', component: Section12 },
+  { n: 13, title: 'What 18B active actually buys', enters: 'if active parameters are not a direct memory promise, what did sparsity buy us?', component: Section13 },
 ]
 
 function startAt() {

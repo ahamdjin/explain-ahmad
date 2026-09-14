@@ -11,7 +11,7 @@ Numbers: `research/glm/TOKENIZER.md`, `research/glm/GROUND_TRUTH.md` · Shared p
 | Enters on | **Because it doesn’t start with words.** |
 | Teaches | token, token ID, vocabulary |
 | Answers | the text becomes tokens, then IDs; `it` becomes **432** |
-| Exits on | **the model has a number, but where does the meaning come from?** |
+| Exits on | **432 is only an address. Where does anything useful come from?** |
 | Protagonist | `it` — never switch to `dog` |
 | Forbidden | embedding, attention, router, expert |
 

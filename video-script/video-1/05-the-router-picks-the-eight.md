@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** This is where the opening's “which
 | Enters on | **we now have `it` in this sentence; which parts of the model should work on it?** |
 | Teaches | router, 288 routed experts, top-8, +1 shared expert, MoE |
 | Answers | a router scores all 288 against the current hidden row and selects eight; one shared expert always runs |
-| Exits on | **what do those selected experts actually do to our row?** |
+| Exits on | **the router picked eight; what do they actually do?** |
 | Protagonist | contextual `it` row |
 
 ## Narration

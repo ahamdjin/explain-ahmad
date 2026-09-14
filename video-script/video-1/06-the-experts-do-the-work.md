@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** Same `it` row, same selected eight f
 | Enters on | **the router picked eight; what do they actually do?** |
 | Teaches | expert transformation, weighted combination, shared expert contribution |
 | Answers | each selected expert transforms the same row; their outputs are weighted and combined into one new row |
-| Exits on | **if that was one sparse layer, how many times does this happen?** |
+| Exits on | **we just processed `it` through one sparse layer; how many times does this happen?** |
 
 ## Narration
 

@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** The hero remains the exact `it` from
 | Enters on | **every `it` starts with the same embedding; how does this one become sentence-specific?** |
 | Teaches | causal context mixing / attention intuition |
 | Answers | the token representation is changed using information from allowed earlier tokens |
-| Exits on | **now that `it` has a sentence-specific row, what part of the model should work on it?** |
+| Exits on | **we now have `it` in this sentence; which parts of the model should work on it?** |
 | Protagonist | our original `it` |
 
 ## Narration

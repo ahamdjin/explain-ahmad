@@ -9,7 +9,7 @@ Status: **STORY PASS — narration-first.** Section 2 is locked; this section is
 | Enters on | **432 is only an address. Where does anything useful come from?** |
 | Teaches | embedding lookup, 4096-number starting representation |
 | Answers | ID 432 selects one learned row; that row is the token's fixed starting representation |
-| Exits on | **if every `it` starts identical, how can context change what this `it` means?** |
+| Exits on | **every `it` starts with the same embedding; how does this one become sentence-specific?** |
 | Protagonist | `it` / ID 432 |
 
 ## Narration
