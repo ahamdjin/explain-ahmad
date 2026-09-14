@@ -47,7 +47,7 @@ export type SceneState = {
    *  real tokenizer's split -- `un` / `belie` / `vable`. `prompt.ts`. */
   extra: Placed & { split: boolean; words: readonly string[] }
   /** Every token the model knows. The same object returns in §9. */
-  vocab: Placed & { hit?: number; scrolling: boolean }
+  vocab: Placed & { hit?: number; hitLabel?: string; scrolling: boolean }
   /**
    * The piece that makes the round trip to the list and comes back carrying a
    * number. Going, touching and coming back changed is what makes a lookup
@@ -64,7 +64,7 @@ export const INITIAL: SceneState = {
   desk: { on: false, at: { x: 14, y: 78 }, scale: 0.66 },
   sentence: { on: false, at: { x: 50, y: 46 }, scale: 1, split: false, jumble: false, focus: -1 },
   extra: { on: false, at: { x: 50, y: 22 }, scale: 0.6, split: false, words: ['unbelievable'] },
-  vocab: { on: false, at: { x: 84, y: 48 }, scale: 1, hit: undefined, scrolling: false },
+  vocab: { on: false, at: { x: 84, y: 48 }, scale: 1, hit: undefined, hitLabel: undefined, scrolling: false },
   chip: { on: false, at: { x: 50, y: 46 }, scale: 0.55, label: 'dog', id: '5562', becomes: false },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
@@ -84,7 +84,8 @@ export const vocab = {
   ...a('vocab'),
   /** Long enough to feel long, and it stops on a real entry. */
   scroll: (): Patch => ({ vocab: { scrolling: true } }),
-  land: (hit: number): Patch => ({ vocab: { scrolling: false, hit } }),
+  /** The row, **and the token that is really on it**. */
+  land: (hit: number, hitLabel: string): Patch => ({ vocab: { scrolling: false, hit, hitLabel } }),
 }
 export const chip = {
   ...a('chip'),

@@ -58,6 +58,8 @@ export const PALETTE = {
   teal: '#74A297',
   tealSoft: '#9FC4BA',
   yellow: '#E3C45B',
+  /** A possibility, not a failure. Fills the dashed hypothesis regions in §1. */
+  yellowWash: '#F6EAC2',
   pink: '#E39BA8',
   purple: '#B49AD1',
   lilac: '#7FA8D4',

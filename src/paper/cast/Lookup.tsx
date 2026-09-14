@@ -24,6 +24,15 @@ const ENTRIES = [
 export function Vocabulary({
   /** Row number of the entry that matters, for the highlight. */
   hit,
+  /**
+   * The token that actually lives at `hit`.
+   *
+   * Without it the highlighted row draws whatever `ENTRIES` happens to hold at
+   * that index -- §2 beat 10 was highlighting row 5562 and labelling it
+   * `door` while the narration said ` dog` is 5562. The row numbers around a
+   * hit are real, so the hit's own word has to be real too.
+   */
+  hitLabel,
   scrolling = false,
   /** §9: a score against every entry, with a few standing out. */
   scores,
@@ -39,6 +48,7 @@ export function Vocabulary({
   label,
 }: {
   hit?: number
+  hitLabel?: string
   scrolling?: boolean
   scores?: boolean
   candidates?: readonly string[]
@@ -49,8 +59,24 @@ export function Vocabulary({
   return (
     <div className="s1-vocab">
       <svg viewBox="0 0 380 520" aria-hidden="true">
+        {/*
+          * The scroll runs the rows up to 260 units, which is far past the top
+          * of the panel -- without a clip they leave the frame entirely and sit
+          * on the bare page above it, reading as a broken render rather than as
+          * a long list. The two fade bars below still do the "runs past both
+          * ends" job; this only stops rows escaping the object.
+          *
+          * The clip goes on a **static wrapper**, not on the moving group.
+          * `clip-path` resolves in the element's own user space, so a clip on
+          * the translated group travels with it and does nothing at all --
+          * which is what the first attempt did.
+          */}
+        <clipPath id="s1-vocab-window">
+          <rect x="9" y="9" width="362" height="502" rx="4" />
+        </clipPath>
         <rect x="8" y="8" width="364" height="504" rx="4" fill={PALETTE.paperLight} stroke={INK} strokeWidth="3" />
 
+        <g clipPath="url(#s1-vocab-window)">
         <motion.g
           initial={false}
           animate={{ y: scrolling ? [0, -260, -130] : 0 }}
@@ -100,7 +126,10 @@ export function Vocabulary({
                     the object that teaches it.
                   */}
                   {(() => {
-                    const entry = candidates?.[i] ?? ENTRIES[i % ENTRIES.length]
+                    const entry =
+                      isHit && hitLabel !== undefined
+                        ? hitLabel
+                        : (candidates?.[i] ?? ENTRIES[i % ENTRIES.length])
                     return entry.startsWith(' ') ? (
                       <>
                         <tspan fill={PALETTE.stone} opacity="0.55">
@@ -129,6 +158,7 @@ export function Vocabulary({
             )
           })}
         </motion.g>
+        </g>
 
         {/* the list runs past both ends of its own frame */}
         <g fill={PALETTE.paperLight}>

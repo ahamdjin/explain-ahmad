@@ -17,7 +17,7 @@ Teaching: `skills/STORY_STRUCTURE.md`, `skills/SPATIAL_CONTINUITY.md`,
 | Answers | **about five percent active does not predict how much hardware a model needs** |
 | Exits on | **what is the first thing the model actually receives when you hit send?** |
 | → next | the prompt has to become something the model can work with |
-| Built | **17 beats** · ~1:45 placeholder timing · `npm run timing` is the authority |
+| Built | **17 beats** · 2:23 · `npm run timing` is the authority |
 | Teaches | only enough meaning for **parameter** and **active** to understand the opening claim |
 | Plants | the tempting plan: **if the active part were fixed, keep only that part ready** |
 | Does not teach yet | token, token ID, embedding, attention, router, expert, layer, MoE, 288, 336 |
@@ -100,11 +100,11 @@ change state and leave on that same surface.
 | 1 | the paper stage | — | GLM slides into the centre as one model block; one ~5% region lights | `Block` + `320B total` + `18B active` | GLM-5.3-Flash | S-04 |
 | 2 | the paper stage | — | the lit region physically lifts clear, leaving holes behind; a small `keep this part?` note appears | same GLM block, lifted patch | hypothesis only | S-14 |
 | 3 | the paper stage | — | the patch settles; GLM moves right while a second model slides in from the left; both show ~5% active | two `Block`s side by side | gpt-oss-120b vs GLM-5.3-Flash | S-04 |
-| 4 | the paper stage | — | nothing in the models changes; two temporary prediction choices appear below them | two models + `roughly similar` / `wildly different` | fair prediction | S-05 |
+| 4 | the paper stage | — | nothing in the models changes; two separate prediction cards appear in the space the accelerators are about to fill | two models + `roughly similar` / `wildly different` | fair prediction | S-05 |
 | 5 | the paper stage | — | prediction choices leave; one 80 GB accelerator card slides under the left model | left `Rig` ×1 | 1 × 80 GB | S-04 |
 | 6 | the paper stage | — | accelerator cards arrive under GLM in countable stages until there are eight | right `Rig` → 1 → 2 → 4 → 8 | 8 × 80 GB | S-04 |
 | 7 | the paper stage | — | both models hold; the top measurement says ~5% while the bottom makes 1 vs 8 unavoidable | two blocks + both rigs | same active share, different footprint | S-14 |
-| 8 | the paper stage | — | a tiny note points into GLM: `one mark = one learned number`; no architecture is introduced | comparison still present | parameter intuition | S-04 |
+| 8 | the paper stage | — | a note in the gutter leads into an **idle** mark in GLM: `one mark = one learned number`; no architecture is introduced | comparison still present | parameter intuition | S-04 |
 | 9 | the paper stage | — | the left model and its rig slide away; GLM moves back to centre with its eight-card context | centred GLM | — | S-14 |
 | 10 | the paper stage | — | the real active patch stays lit while a dashed alternate patch appears elsewhere | `Block` lit A + ghost B | `which 18B?` | S-08 |
 | 11 | the paper stage | — | only the dashed hypothetical patch changes location; the real active patch does not | lit A + ghost B→C | possibilities, not an answer | S-04 |
@@ -148,6 +148,26 @@ Chat on the left, GLM on the right, the intact prompt still human-readable,
 and a path that has started but not arrived. The viewer knows exactly what the
 next section owes them.
 
+## Visual language
+
+Decided while building the frames, and each one is load-bearing for a beat.
+
+- **The idle field never dims.** A share can only look small against something
+  that looks vast, so the unlit 95% holds its weight and the active patch
+  separates by hue alone. `paper/cast/Scale.tsx`.
+- **An accelerator is a fin stack**, not a slab. §1's argument is carried by
+  *counting* these; a viewer deciding what the object is has stopped counting.
+  `paper/props/Machines.tsx`, `AcceleratorCard`.
+- **One card and eight cards share a baseline.** `.s1-rig` reserves two rows of
+  height whether or not the second row is occupied, so beat 7's comparison is
+  seen rather than measured.
+- **The hypothesis is a region, not dashed cells.** Per-cell dashes read as
+  damage to the block; one washed outline per region reads as a proposal about
+  it, which is all beats 10-11 are asking.
+- **The lift is a short diagonal.** A patch is scattered down the block's whole
+  height, so a long rise takes the top regions out of frame while the lower
+  ones are still inside the block. The dashed holes carry the meaning.
+
 ## Truth notes
 
 - GLM-5.3-Flash is 321B exact / marketed about 320B, with 18B active per token.
@@ -166,6 +186,13 @@ next section owes them.
 - The lifted/ghost patches are explicitly hypotheses. They do **not** claim the
   real 18B is one contiguous region or that the same subset is used every time.
   The `Block` visualization uses a scattered authored patch for that reason.
+- **Both blocks are drawn the same size, and GLM is 2.7x the parameters.** The
+  frame is comparing *active share*, which is the claim under test, and equal
+  boxes are what make "same headline share" visible. The footprint difference
+  is carried entirely by the accelerators underneath. This is a deliberate
+  scoping choice and the one place in §1 where the picture is narrower than the
+  fact; if it ever reads as "bigger model, more cards, obviously", the fix is to
+  say the sizes out loud, not to redraw the boxes.
 - The prompt shown here is exactly the measured tokenizer prompt:
   `The dog dropped the ball, and it` — **no ellipsis is added on screen**, because
   punctuation would change the tokenizer input.

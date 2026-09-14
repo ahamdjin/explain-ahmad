@@ -52,7 +52,12 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </Slot>
 
         <Slot on={scene.vocab.on} at={scene.vocab.at} scale={scene.vocab.scale} z={2} feel={feel}>
-          <Vocabulary hit={scene.vocab.hit} scrolling={scene.vocab.scrolling} label="every token it knows" />
+          <Vocabulary
+            hit={scene.vocab.hit}
+            hitLabel={scene.vocab.hitLabel}
+            scrolling={scene.vocab.scrolling}
+            label="every token it knows"
+          />
         </Slot>
 
         <Slot on={scene.sentence.on} at={scene.sentence.at} scale={scene.sentence.scale} z={4} feel={feel}>

@@ -1461,6 +1461,12 @@
   align-items: flex-end;
   justify-content: center;
   max-width: 26cqw;
+  /* Two rows of height whether or not the second row is occupied, so one card
+   * and eight cards rest on the *same* baseline. Without this the single-card
+   * rig floats half a card higher than the eight it is being compared with,
+   * and the one comparison §1 exists to make has to be measured rather than
+   * seen. §1 beats 5-7. */
+  min-height: calc(92px + 0.9cqw);
 }
 
 

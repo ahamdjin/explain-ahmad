@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { INK } from '../ink'
 import { expertColor } from '../palette'
 import { PALETTE } from '../palette'
-import { MachineBox } from '../props/Machines'
+import { AcceleratorCard } from '../props/Machines'
 
 /**
  * The word entering the model.
@@ -230,7 +230,7 @@ export function Rig({ count }: { count: number }) {
   return (
     <div className="s1-rig">
       {Array.from({ length: count }, (_, i) => (
-        <MachineBox key={i} size={92} shape="mini" />
+        <AcceleratorCard key={i} size={92} />
       ))}
     </div>
   )

@@ -58,7 +58,7 @@ const PATCHES: Record<PatchName, { x: number; y: number; w: number; h: number }[
     { x: 3, y: 2, w: 3, h: 4 },
     { x: 14, y: 7, w: 4, h: 3 },
     { x: 26, y: 3, w: 3, h: 3 },
-    { x: 33, y: 12, w: 4, h: 4 },
+    { x: 31, y: 12, w: 4, h: 4 },
     { x: 8, y: 17, w: 3, h: 3 },
   ],
   b: [
@@ -71,7 +71,7 @@ const PATCHES: Record<PatchName, { x: number; y: number; w: number; h: number }[
   c: [
     { x: 10, y: 4, w: 3, h: 3 },
     { x: 24, y: 10, w: 4, h: 4 },
-    { x: 36, y: 2, w: 3, h: 4 },
+    { x: 32, y: 2, w: 3, h: 4 },
     { x: 2, y: 13, w: 4, h: 3 },
     { x: 21, y: 21, w: 3, h: 3 },
   ],
@@ -124,7 +124,6 @@ export function Block({
   for (let cy = 0; cy < ROWS; cy += step) {
     for (let cx = 0; cx < COLS; cx += step) {
       const isLit = inPatch(lit, cx, cy)
-      const isGhost = inPatch(ghost, cx, cy)
       cells.push(
         <motion.rect
           key={`${cx}-${cy}`}
@@ -133,15 +132,34 @@ export function Block({
           width={Math.min(CELL * step, (COLS - cx) * CELL) - 2}
           height={Math.min(CELL * step, (ROWS - cy) * CELL) - 2}
           rx={2}
-          stroke={isGhost && !isLit ? ghostStroke : 'none'}
-          strokeWidth={isGhost && !isLit ? 2.4 : 0}
-          strokeDasharray={isGhost && !isLit ? '4 4' : undefined}
           initial={false}
           animate={{
             fill: scatter ? INK : isLit ? litFill : PALETTE.idleDeep,
-            opacity: scatter ? 0.7 : isLit ? 1 : lit ? 0.5 : 0.78,
-            x: scatter ? (seeded(cx * 97 + cy) - 0.5) * 260 : 0,
-            y: (scatter ? (seeded(cx * 31 + cy + 500) - 0.5) * 190 : 0) + (isLit && lifted && !scatter ? -132 : 0),
+            /*
+             * The idle field does **not** dim when a patch lights.
+             *
+             * It used to drop to 0.5, which made "320 billion parameters" read
+             * as an almost-empty box with a few orange squares in it -- and
+             * the one thing the opening frame has to carry is that the lit
+             * part is small *against something vast*. You cannot see a small
+             * share of nothing. The lit patch separates by hue, which is the
+             * only channel that should be carrying it.
+             */
+            opacity: scatter ? 0.7 : isLit ? 1 : 0.92,
+            /*
+             * The lift is a **short diagonal**, not a long rise.
+             *
+             * It used to translate the lit cells up by 132 units. A patch is
+             * scattered down the whole height of the block, so that lifted the
+             * top regions clear out of the frame and over the section title
+             * while the lower ones were still sitting inside the block on top
+             * of other cells -- one action reading as two different things.
+             * A small offset away from the sheet, with the dashed holes left
+             * behind underneath, says "picked up" without any region having to
+             * leave the object it was picked up from.
+             */
+            x: scatter ? (seeded(cx * 97 + cy) - 0.5) * 260 : isLit && lifted ? 30 : 0,
+            y: (scatter ? (seeded(cx * 31 + cy + 500) - 0.5) * 190 : 0) + (isLit && lifted && !scatter ? -30 : 0),
             scale: scatter ? 0.28 : 1,
           }}
           transition={{
@@ -172,11 +190,11 @@ export function Block({
                 width={r.w * CELL - 2}
                 height={r.h * CELL - 2}
                 rx="2"
-                fill={PALETTE.paper}
+                fill={PALETTE.paperShade}
                 stroke={INK}
-                strokeWidth="1.6"
-                strokeDasharray="4 4"
-                opacity="0.5"
+                strokeWidth="2"
+                strokeDasharray="5 5"
+                opacity="0.85"
               />
             ))
           : null}
@@ -194,6 +212,33 @@ export function Block({
           transition={{ duration: 0.5, delay: scatter ? 0 : 0.45 }}
         />
         {cells}
+        {/*
+          * The hypothesis, drawn as **regions** rather than as dashed cells.
+          *
+          * Per-cell dashes turn a possible 18B into visual static: at playback
+          * size it reads as damage to the block, not as a proposal about it.
+          * One outline per region, washed, reads as "this could be the part
+          * instead" -- which is the only thing beats 10-11 are asking.
+          */}
+        {ghost && !scatter
+          ? PATCHES[ghost].map((r, i) => (
+              <motion.rect
+                key={`ghost-${i}`}
+                x={r.x * CELL - 3}
+                y={r.y * CELL - 3}
+                width={r.w * CELL + 4}
+                height={r.h * CELL + 4}
+                rx="4"
+                fill={ghostTone === 'question' ? PALETTE.yellowWash : PALETTE.paperShade}
+                stroke={ghostStroke}
+                strokeWidth="3"
+                strokeDasharray="9 7"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.92 }}
+                transition={{ duration: 0.45, delay: i * 0.06 }}
+              />
+            ))
+          : null}
         {heavy ? (
           <g stroke={PALETTE.stone} strokeLinecap="round">
             <path d={`M-4 ${ROWS * CELL + 12}h${COLS * CELL + 8}`} strokeWidth="11" opacity="0.42" />

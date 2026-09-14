@@ -22,10 +22,14 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'You hit send. This exact sentence is what goes in.',
     commands: [
       ground.at(GROUND_Y),
-      sentence.show({ x: 38, y: 58 }, 0.5),
+      /* Bigger and closer to centre than it used to be. §1 hands this over as
+       * the one object still on screen, and it arrived here at half scale in
+       * the bottom-left corner -- which reads as a new small thing rather than
+       * as the sentence we have just been following. */
+      sentence.show({ x: 44, y: 48 }, 0.62),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' }),
     ],
-    overlays: [note('your prompt', 34, 62, { tone: 'word', rotate: -4 })],
+    overlays: [centred('your prompt', 44, 55, { tone: 'word', rotate: -4 })],
   },
   {
     n: 2,
@@ -35,7 +39,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 4,
     vo: 'And in it goes.',
     commands: [
-      sentence.moveTo({ x: 50, y: 62 }, 0.46),
+      sentence.moveTo({ x: 50, y: 56 }, 0.54),
       camera.to({ x: 50, y: 60 }, 1.3),
       narrator.set({ pose: 'wonder' }),
     ],
@@ -94,8 +98,16 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'and-yet',
     secs: 12,
     vo: 'Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have.',
-    commands: [extra.show({ x: 46, y: 22 }, 0.6)],
+    /*
+     * 0.42, not 0.6. `Sentence` fills its width, so three pieces at 0.6 drew
+     * cards half again as big as the eight-token row underneath -- the aside
+     * out-shouting the thing it is an aside about. Matching the row's card
+     * size is what makes this read as "and here is another sentence", which is
+     * the only claim the beat makes.
+     */
+    commands: [extra.show({ x: 46, y: 24 }, 0.42)],
     stages: [{ at: 1500, commands: [extra.set({ split: true, words: [...UNEVEN] })] }],
+    overlays: [centred('“unbelievable”', 46, 15, { size: 'sm', tone: 'word', rotate: -2 })],
   },
   {
     n: 8,
@@ -108,7 +120,7 @@ export const BEATS: Beat<Patch>[] = [
       extra.off(),
       sentence.moveTo({ x: 34, y: 34 }, 0.72),
       vocab.show({ x: 80, y: 48 }, 1.15),
-      narrator.show({ x: 30, y: 76 }, 1, { pose: 'point', flip: false }),
+      narrator.show({ x: 14, y: 72 }, 1, { pose: 'point', flip: false }),
     ],
     clearSticky: true,
     overlays: [centred('8 tokens', 34, 45, { tone: 'measure', rotate: -2, sticky: true })],
@@ -138,7 +150,7 @@ export const BEATS: Beat<Patch>[] = [
       chip.show({ x: 17, y: 34 }, 0.55, { label: PROMPT[FOLLOWED] }),
     ],
     stages: [
-      { at: 900, commands: [chip.moveTo({ x: 80, y: 46 }, 0.5), vocab.land(5562)] },
+      { at: 900, commands: [chip.moveTo({ x: 80, y: 46 }, 0.5), vocab.land(5562, PROMPT[FOLLOWED])] },
       { at: 2600, commands: [chip.moveTo({ x: 46, y: 74 }, 0.7)] },
     ],
   },

@@ -336,3 +336,43 @@ export function DriveRack({ size = 180, rows = 5 }: { size?: number | string; ro
     </Prop>
   )
 }
+
+/**
+ * One 80 GB accelerator, drawn side-on.
+ *
+ * The silhouette cue is the **fin stack** -- a dense run of vertical ribs
+ * behind a bracket tab. That is the one thing that reads as server hardware at
+ * playback size; a plain slab (which this used to be) reads as a blank card,
+ * and §1's whole argument is carried by *counting* these. If the viewer has to
+ * decide what the object is, they are not counting it.
+ *
+ * `lit` is the power dot only. These are never drawn "running" -- §1 is about
+ * what has to be *resident*, which is true whether or not the thing is busy.
+ */
+export function AcceleratorCard({ size = 150, lit = false }: { size?: number | string; lit?: boolean }) {
+  const fins: React.ReactNode[] = []
+  for (let i = 0; i < 15; i += 1) fins.push(<path key={i} d={`M${58 + i * 8.6} 26v42`} />)
+
+  /* The contact edge. Short ticks, not a filled bar: a solid gold strip at
+   * this size turns into a shadow and the card reads as sitting in mud. */
+  const fingers: React.ReactNode[] = []
+  for (let i = 0; i < 12; i += 1) fingers.push(<path key={i} d={`M${64 + i * 9.4} 78v8`} />)
+
+  return (
+    <Prop size={size} name="accelerator" viewBox="0 0 200 100">
+      <g stroke={INK} strokeLinejoin="round" strokeLinecap="round">
+        {/* body */}
+        <path d="M32 16h150a6 6 0 0 1 6 6v56a6 6 0 0 1-6 6H32Z" fill={PALETTE.paperWhite} strokeWidth="3.2" />
+        {/* the fin stack, which is the whole recognition */}
+        <g strokeWidth="1.9" opacity="0.5">{fins}</g>
+        {/* bracket: the tab and the notched plate at the near end */}
+        <path d="M20 8h12v84H20a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4Z" fill={PALETTE.paperSheet} strokeWidth="3" />
+        <path d="M22 30h6M22 42h6M22 54h6" strokeWidth="1.8" opacity="0.45" />
+        {/* the contact edge */}
+        <g strokeWidth="2.1" opacity="0.42">{fingers}</g>
+        {/* power */}
+        <circle cx="46" cy="70" r="4.2" fill={lit ? PALETTE.glow : PALETTE.paperShade} strokeWidth="2.2" />
+      </g>
+    </Prop>
+  )
+}
