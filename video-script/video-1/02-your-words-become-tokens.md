@@ -1,104 +1,131 @@
-# Section 02 — Your words become tokens
+# Section 02 — What the model actually receives
 
-Status: **SCRIPT v10 — opening seam rewritten with §01.** The tokenizer lesson
-from beats 5–13 is unchanged in substance; beats 1–4 now continue the prompt
-from the new five-percent opening instead of jumping back to the old expert room.
+Status: **APPROVED NARRATION — LOCKED.** The spoken script below is exactly the version approved in chat. Beats and visuals adapt around it. Do not paraphrase the VO during implementation.
 
-Numbers: `research/glm/GROUND_TRUTH.md` · Tokenizer measurements:
-`research/glm/TOKENIZER.md` · Strategies: `skills/STRATEGY_LEDGER.md`
+Numbers: `research/glm/TOKENIZER.md`, `research/glm/GROUND_TRUTH.md` · Shared protagonist: `PROMPT[7] = ' it'`, token ID **432**.
 
 ## Contract
 
 | | |
 | --- | --- |
-| Enters on | **what is the first thing the model actually receives when you hit send?** |
-| Teaches | **token**, **token ID**, vocabulary |
-| Answers | your text is cut into pieces, and every possible piece has a number |
-| Exits on | a row number has no meaning in it. So how does it know what anything means? |
-| → next | **but** a number like that is a name, not a meaning |
-| Built | 13 beats · placeholder timing · `npm run timing` is the authority |
-| Still forbidden | `embedding`, `attention`, `layer`, `router` |
+| Enters on | **Because it doesn’t start with words.** |
+| Teaches | token, token ID, vocabulary |
+| Answers | the text becomes tokens, then IDs; `it` becomes **432** |
+| Exits on | **the model has a number, but where does the meaning come from?** |
+| Protagonist | `it` — never switch to `dog` |
+| Forbidden | embedding, attention, router, expert |
 
-## The script
+## Approved narration — locked
 
-### Act 1 — continue the send from §01 (beats 1–4)
+Because it doesn’t start with words.
 
-> **1.** *(The exact prompt from §01 arrives at the model entrance.)* You hit send. This exact sentence is what goes in.
->
-> **2.** *(The sentence starts travelling inward; the camera goes with it.)* And in it goes.
->
-> **3.** *(We cross inside with the same prompt card.)* We follow it in.
->
-> **4.** *(The prompt lands on the first surface.)* And before the model can do anything useful with it, this is the first thing that happens.
+The first thing the model does is break your text into smaller pieces.
 
-### Act 2 — it gets cut up (beats 5–7)
+So our sentence:
 
-> **5.** *(The sentence fractures into pieces, in place.)* It gets cut up. Into pieces — and this sentence happens to break mostly along the words.
->
-> **6.** *(The pieces settle into a row.)* These are called tokens. That’s all a token is. A chunk of text. And from here on, whenever I count something, I’m counting tokens.
->
-> **7.** *(`unbelievable` drops in and shatters into three.)* Don’t get comfortable, though. Feed it "unbelievable" and you get this. Un. Belie. Vable. Not syllables, not prefixes — just the pieces it happens to have.
+**“The dog dropped the ball, and it…”**
 
-### Act 3 — the list and the number (beats 8–11)
+becomes:
 
-> **8.** *(A tall list rises beside the row.)* And every token it knows about lives in one big list. How long do you reckon that list is?
->
-> **9.** *(The list scrolls hard and stops.)* A hundred and fifty-four thousand, eight hundred and eighty.
->
-> **10.** *(The ` dog` piece makes a round trip to its row and comes back.)* So each piece gets swapped for where it sits in that list. A row number. This one is five thousand, five hundred and sixty-two.
->
-> **11.** *(The letters fade off the card; only the digits stay.)* That number is called a token ID. And it’s the only thing that carries on.
+**The | dog | dropped | the | ball | , | and | it**
 
-### Act 4 — the wall (beats 12–13)
+Eight pieces.
 
-> **12.** *(Everything else leaves; the number is alone.)* And that’s the cutting up done — your sentence is numbers now. That’s all a tokeniser is.
->
-> **13.** *(5562 holds alone.)* But think about what that number actually is. It’s a row number. It doesn’t mean dog — it means the five thousand, five hundred and sixty-second thing on a list. There’s no meaning in it at all.
+And these pieces are called **tokens**.
 
----
+Now, in this sentence, they look suspiciously like words.
 
-## Storyboard
+But tokens are **not** just words.
 
-| beat | where | camera | what happens | on screen | example | strategy |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | the paper stage | — | the intact prompt from §01 arrives and stops beside the model entrance | `Sentence`, narrator | **`The dog dropped the ball, and it`** | S-14 |
-| 2 | at the doorway | **push in** | the same prompt moves inward and the camera goes with it | same `Sentence` | same prompt | S-04 |
-| 3 | the first surface | **follow** | the camera crosses inside with the same card; the outside world drops away behind the move | same `Sentence` travelling | same prompt | S-04 |
-| 4 | the first surface | — | the prompt lands and settles | `Sentence` at rest | same prompt | S-04 |
-| 5 | the first surface | — | the sentence fractures into its real measured pieces **in place** | `Sentence` split state | `The` ` dog` ` dropped` ` the` ` ball` `,` ` and` ` it` | S-04 |
-| 6 | the first surface | — | the pieces settle into a readable row | split `Sentence` | **8 tokens** | S-04 |
-| 7 | the first surface | — | `unbelievable` arrives and splits into three real tokenizer pieces | extra `Sentence` | **`un` `belie` `vable`** | S-04 |
-| 8 | the first surface | — | a vocabulary list rises beside the row; it is too long to see at once | `Vocabulary` + tokens | `how long?` | S-06 |
-| 9 | the first surface | — | the list scrolls hard, decelerates and lands | `Vocabulary` | **154,880** | S-06 |
-| 10 | the first surface | — | the ` dog` token makes a round trip to its real vocabulary row and returns | `WordCard` + `Vocabulary` | **` dog` → `5562`** | S-04 |
-| 11 | the first surface | — | letters fade from the same card while `5562` remains | `WordCard` becomes state | **token ID 5562** | S-04 |
-| 12 | the first surface | — | the vocabulary, sentence and narrator leave; the ID moves to centre | `5562` only | `5562` | S-12 |
-| 13 | the first surface | — | the ID holds; a short note makes the missing meaning explicit | `5562` + note | **a name, not a meaning** | S-14 |
+For example, give the same tokenizer:
 
-## Seam rule from §01
+**“unbelievable”**
 
-§01 ends with the intact human sentence leaving chat and a causal path pointing
-toward GLM. §02 does **not** redraw the 288-expert room, router desk, or any
-other later mechanism. Its first visible object is that same sentence on the
-same paper stage. Beat 2 is the camera move that actually takes us inward.
+and it breaks it into:
 
-## Truth notes
+**un | belie | vable**
 
-- The exact prompt is `The dog dropped the ball, and it` with **no ellipsis**.
-- GLM-5.3-Flash's measured tokenizer produces exactly eight pieces:
-  `The | dog | dropped | the | ball | , | and | it`.
-- ` dog` with its leading space is token ID **5562**. Bare `dog` is a different
-  token and must not be substituted in the lookup frame.
-- `unbelievable` measures as `un | belie | vable`; it is the honest example that
-  breaks the naive `token = word` assumption.
-- Vocabulary size is **154,880** from the model config.
-- Beat 10 is deliberately a round trip on the same object. The card travels to
-  the list, touches a row, and comes back changed; it is not replaced by a new
-  number card.
+One word.
 
-## Carrying frames
+Three tokens.
 
-- Beat 1: the intact prompt has clearly continued from §01.
-- Beat 5: the human sentence has physically become eight countable pieces.
-- Beat 10: ` dog` visibly travels to the list and comes back as `5562`.
-- Beat 13: only `5562` remains, making the lack of meaning the problem §03 must solve.
+So the model isn’t really reading words the way we do.
+
+It has its own set of pieces it knows how to work with.
+
+And GLM has a list of **154,880** of them.
+
+Every token in that list has a number.
+
+So let’s go back to the one we said we’d follow:
+
+**“it.”**
+
+Where do you think `it` is in that list?
+
+There’s no way you could know.
+
+It happens to be:
+
+**432.**
+
+That number is called its **token ID**.
+
+So from the model’s point of view, our little `it` has now gone from:
+
+**“it”**
+
+to:
+
+**432.**
+
+And that sounds like progress.
+
+But think about what 432 actually tells us.
+
+Does **432** tell you that `it` might refer to the ball?
+
+Does it tell you that `it` is a pronoun?
+
+Does it tell you anything about what `it` means?
+
+No.
+
+It’s just where that token lives in the list.
+
+Basically an address.
+
+And that creates our next problem.
+
+The model now has a number…
+
+but **where does the meaning come from?**
+
+## Storyboard — 14 beats
+
+One continuous paper stage. Section 1 leaves Chat on the left and GLM on the right. We do not cut to a fresh page; the prompt continues inward.
+
+| beat | continuity / screen action | add / keep / remove |
+| --- | --- |
+| 1 | Pick up the half-drawn path from §1. The intact sentence travels from Chat toward GLM while VO lands **“it doesn’t start with words.”** | **keep** Chat + GLM; **move** prompt; no new diagram |
+| 2 | Once inside, the sentence lands on one clean paper surface. As “break your text” is said, hairline cut marks appear between the real tokenizer pieces. | **keep** same sentence; **add** cut marks |
+| 3 | The sentence physically separates into the eight measured pieces. A small count builds `1…8`. | **state change** same sentence → eight token cards |
+| 4 | `tokens` label lands only after the viewer has watched the split. The eight remain countable. | **add** label `tokens`; nothing leaves |
+| 5 | The eight slide slightly upward. `unbelievable` enters below as one ordinary word. | **add** temporary example; **keep** main prompt visible |
+| 6 | `unbelievable` fractures into `un | belie | vable`. Hold the contrast: one human word, three model pieces. | **state change** temporary example; then let it leave |
+| 7 | A very tall vocabulary/book index rises beside the eight tokens. It runs past the frame. `154,880` is attached to the object, not floating as a title. | **add** vocabulary list |
+| 8 | All prompt tokens dim except `it`. `it` lifts but stays visibly connected to its place in the original row. | **focus** `it`; **keep** full prompt as context |
+| 9 | Fair non-quiz: show the list and ask where `it` sits. Do not provide choices; VO explicitly says the viewer cannot know. | **hold**; no motion during the thought |
+| 10 | `it` travels to the list; the list snaps/scrolls to row **432**. The card touches that row and comes back carrying `432`. | **move same actor**; no replacement card |
+| 11 | The letters `it` fade from the travelling card while **432** remains. Handwritten `token ID` lands beside it. | **state change** `it` → `432` |
+| 12 | The huge list recedes. Bring back a faint ghost of `ball` and `dog` while VO asks whether 432 tells us anything about them or pronouns. Nothing connects. | **remove** vocabulary; **add** faint question context |
+| 13 | Everything except `432` clears. A tiny address-tab shape appears under it: `address, not meaning`. | **remove** ghosts; **keep** 432 alone |
+| 14 | The bottom edge of a giant lookup table/book begins rising into frame behind `432` but is not explained yet. End on the question **“where does the meaning come from?”** | **add only an edge** of next mechanism; handoff to §3 |
+
+## Truth / implementation notes
+
+- On screen, the measured tokenizer input remains `The dog dropped the ball, and it` with no ellipsis; the spoken quote can carry the trailing pause.
+- The eight real pieces are `The | dog | dropped | the | ball | , | and | it` with leading-space behavior handled by the tokenizer component rather than shown as ugly visible spaces.
+- `it` is token ID **432**. This is now the repo-wide `FOLLOWED` token.
+- `unbelievable → un | belie | vable` is measured, not invented.
+- **Do not call 432 meaning.** It is an index/address into learned tables.
