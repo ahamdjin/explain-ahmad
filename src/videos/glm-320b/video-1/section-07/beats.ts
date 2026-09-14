@@ -2,19 +2,12 @@ import { GROUND_Y, note, type Beat } from '../../../../paper'
 import { VISITS, camera, count, ground, narrator, room, rowA, rowB, tower, type Patch } from './scene'
 
 /**
- * Section 07 — That was one layer. There are 45.
+ * Section 07 — One layer becomes forty-five.
  *
- * Board: `video-script/video-1/07-one-layer-of-forty-five.md`. `npm run check:board`.
- *
- * Beat 1 answers §6's question in one word, immediately. Nothing is left
- * hanging for a second — that is the house style, and it is what stops this
- * from becoming the mystery structure the earlier drafts died of.
- *
- * **Beats 6-8 are the carrying frames**: two floors, two rows, two routing
- * decisions, on one frame. Beat 8 shows *partial* overlap on purpose -- a
- * fresh decision usually lands on a different eight, but not always, and
- * section 12's caching argument needs that to be true here.
- * `research/glm/OFFLOADING_AND_LOCALITY.md` section 5.
+ * The viewer already understands one sparse layer. The only new job here is to
+ * scale that mechanism honestly: rerouting happens independently on each sparse
+ * layer, there are 42 sparse layers and 3 dense ones, and 42 × 8 produces 336
+ * routed expert visits — not 336 routing decisions.
  */
 export const BEATS: Beat<Patch>[] = [
   {
@@ -22,8 +15,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'forty-five',
     title: 'The room holds, bounded, with the row inside it',
     relation: 'wall',
-    secs: 12,
-    vo: 'That’s one step — look around, choose, work. And that room we’ve been standing in this whole time is not the machine. It’s one part of it.',
+    secs: 8,
+    vo: 'That room we just finished is only one layer.',
     commands: [
       ground.at(GROUND_Y),
       room.show({ x: 50, y: 50 }, 1, { bounded: true }),
@@ -35,13 +28,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'one-floor',
     title: 'We keep backing away until the room is one floor among others',
     relation: 'and-yet',
-    secs: 8,
-    vo: 'It’s one floor.',
-    /*
-     * The pull-back. The room does not vanish and get replaced by a tower --
-     * it shrinks, in place, until it is one band among forty-five. The
-     * continuity is the whole effect.
-     */
+    secs: 7,
+    vo: 'Pull back, and it becomes one floor in a much taller stack.',
     commands: [
       room.shrink(0.16),
       room.moveTo({ x: 52, y: 47 }),
@@ -49,12 +37,6 @@ export const BEATS: Beat<Patch>[] = [
       tower.show({ x: 52, y: 50 }, 1, { floor: 24 }),
       narrator.off(),
     ],
-    /*
-     * The room is *not* turned off here. It stays, shrunk, sitting inside the
-     * floor it has become -- which is the whole read of the beat, and the first
-     * version threw it away before the frame settled, leaving a tower with no
-     * trace of where we had been standing. It leaves at beat 3.
-     */
   },
   {
     n: 3,
@@ -62,11 +44,11 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Floors stack upward until the count draws itself',
     relation: 'so',
     secs: 5,
-    vo: 'There are forty-five of them.',
+    vo: 'GLM has forty-five layers in total.',
     commands: [room.off(), tower.set({ floor: 0 })],
     lateOverlays: {
-      at: 2600,
-      overlays: [note('45 floors', 78, 16, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
+      at: 2200,
+      overlays: [note('45 layers', 78, 16, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
     },
   },
   {
@@ -74,8 +56,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'it-climbs',
     title: 'A marker carrying the row starts climbing from floor one',
     relation: 'so',
-    secs: 5,
-    vo: 'The token doesn’t get processed once. It climbs.',
+    secs: 6,
+    vo: 'Our token has to move through them in order.',
     commands: [tower.climbTo(1), narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true })],
   },
   {
@@ -83,17 +65,16 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-same-two-things',
     title: 'On each floor it passes, three quick flashes fire in order',
     relation: 'so',
-    secs: 13,
-    vo: 'And every floor does the same three things. Look around. Pick experts. Do the work. Well — nearly every floor. I’ll come back to that.',
+    secs: 12,
+    vo: 'On most layers, the pattern repeats: update with context, route to experts, transform the row.',
     commands: [tower.climbTo(3), tower.flash('look')],
-    /* In order, because the order is the argument. */
     stages: [
       { at: 1400, commands: [tower.flash('pick')] },
       { at: 2800, commands: [tower.flash('work')] },
     ],
     lateOverlays: {
-      at: 3600,
-      overlays: [note('look · pick · work\n— in that order', 20, 40, { tone: 'relate', rotate: -3 })],
+      at: 3400,
+      overlays: [note('context · route · transform', 20, 40, { tone: 'relate', rotate: -3 })],
     },
   },
   {
@@ -102,7 +83,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The row at floor one and floor two — pick again, or keep?',
     relation: 'so',
     secs: 9,
-    vo: 'So: same word, one floor up. Does it pick again — or does it keep the eight it’s got?',
+    vo: 'Now make a prediction. On the next sparse layer, does it keep the same eight experts, or route again?',
     commands: [tower.flash(undefined), tower.climbTo(2), rowA.show({ x: 18, y: 32 }, 0.32)],
     stages: [{ at: 1600, commands: [rowB.show({ x: 18, y: 52 }, 0.32)] }],
   },
@@ -112,27 +93,27 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The two rows hold side by side',
     relation: 'so',
     secs: 12,
-    vo: 'It picks again. Every sparse floor runs its own router from scratch — because the row arriving here isn’t the row that arrived at the floor below.',
+    vo: 'It routes again. The representation has changed, so this layer scores experts from the new row.',
     commands: [],
-    overlays: [note('different row →\ndifferent scores', 18, 68, { tone: 'measure', rotate: -2 })],
+    overlays: [note('new row →\nnew scores', 18, 68, { tone: 'measure', rotate: -2 })],
   },
   {
     n: 8,
     id: 'picks-again',
     title: 'Floor two’s eight light — mostly new positions, one or two held',
     relation: 'wall',
-    secs: 11,
-    vo: 'Usually a different eight. Sometimes a couple come up again — it isn’t keeping them, it just scored them highest twice.',
+    secs: 12,
+    vo: 'That can produce a different top eight. Some overlap is possible; nothing says the whole team has to be new.',
     commands: [tower.showTeams()],
-    overlays: [note('two floors,\ntwo teams', 84, 44, { tone: 'cost', rotate: 3 })],
+    overlays: [note('rerouted here', 84, 44, { tone: 'cost', rotate: 3 })],
   },
   {
     n: 9,
     id: 'every-floor-picks-fresh',
     title: 'The climb resumes; every floor runs its own router',
     relation: 'so',
-    secs: 7,
-    vo: 'Forty-two floors, forty-two decisions. Same token, same model, and it commits to nothing.',
+    secs: 8,
+    vo: 'And the sparse layers make that routing decision independently, one layer after another.',
     commands: [rowA.off(), rowB.off()],
     stages: [
       { at: 700, commands: [tower.climbTo(14)] },
@@ -145,14 +126,13 @@ export const BEATS: Beat<Patch>[] = [
     id: 'three-are-dense',
     title: 'The bottom three floors redraw plain, without expert walls',
     relation: 'and-yet',
-    secs: 15,
-    /* Before beat 11, or the arithmetic is 8 x 45. */
-    vo: 'Now — three of the forty-five don’t have experts at all. They’re plain blocks that everything goes through. The other forty-two are the ones that choose. Those are called the sparse ones.',
+    secs: 14,
+    vo: 'There is one detail: three of the forty-five use dense feed-forward blocks instead of routed experts. The other forty-two are sparse layers that route.',
     commands: [tower.climbTo(2), tower.showTeams()],
     clearSticky: true,
     lateOverlays: {
-      at: 4800,
-      overlays: [note('3 plain · 42 that choose', 20, 84, { size: 'md', rotate: -1 })],
+      at: 4400,
+      overlays: [note('3 dense · 42 sparse', 20, 84, { size: 'md', rotate: -1 })],
     },
   },
   {
@@ -160,9 +140,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'forty-two-times-eight',
     title: '42 and 8 slide together and a multiplication draws itself',
     relation: 'so',
-    secs: 5,
-    vo: 'Forty-two floors. Eight experts each.',
-    /* Counting it out, because the next beat multiplies it. */
+    secs: 7,
+    vo: 'So for one token: forty-two routing decisions, with eight routed experts selected each time.',
     commands: [tower.climbTo(6), narrator.set({ pose: 'count' })],
     overlays: [note('42 × 8', 84, 34, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
   },
@@ -171,13 +150,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'three-hundred-and-thirty-six',
     title: 'The counter runs up the tower floor by floor and stops',
     relation: 'therefore',
-    secs: 9,
-    vo: 'Which means this isn’t eight expert visits for this token. It’s three hundred and thirty-six.',
-    /*
-     * The counter climbs *with* the marker, so 336 is watched being built
-     * rather than announced. A number the viewer saw assembled is a number
-     * they trust.
-     */
+    secs: 8,
+    vo: 'Forty-two times eight equals three hundred and thirty-six routed expert visits for one token.',
     commands: [count.run(VISITS, 'expert visits — one token'), tower.climbTo(45)],
   },
   {
@@ -185,14 +159,13 @@ export const BEATS: Beat<Patch>[] = [
     id: 'every-one-needed-the-one-below',
     title: '336 holds while a line traces the whole climb, bottom to top',
     relation: 'and-yet',
-    secs: 16,
-    vo: 'Three hundred and thirty-six expert visits, for one token — and every single one of them needed the floor below to finish before it could be made. Nobody quotes that number. It’s the one that matters.',
+    secs: 15,
+    vo: 'And those visits are spread across a sequence of layers. A later layer cannot route from a row the layer below has not produced yet. The full path is not known at the start.',
     commands: [count.hold(), tower.trace(), narrator.set({ pose: 'think' })],
     clearSticky: true,
-    /* Deposit three, and the strongest one. */
     lateOverlays: {
       at: 3000,
-      overlays: [note('every one needed the\nfloor below to finish first', 20, 62, { size: 'md', tone: 'cost', rotate: -2 })],
+      overlays: [note('the path is built\nlayer by layer', 20, 62, { size: 'md', tone: 'cost', rotate: -2 })],
     },
   },
 ]
