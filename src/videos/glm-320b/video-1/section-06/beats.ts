@@ -4,20 +4,9 @@ import { CHOSEN, blend, ground, hospital, narrator, room, row, type Patch } from
 /**
  * Section 06 — The experts do the work.
  *
- * Board: `video-script/video-1/06-the-experts-do-the-work.md`. `npm run check:board`.
- *
- * **Beats 9-10 are the carrying frames**: the input row and the output row,
- * same length, obviously different values. If they look alike, the section
- * taught nothing and no amount of motion work fixes that.
- *
- * Beats 4-5 are the question and its answer, and the answer is the surprising
- * one. Every viewer expects a winner -- top-k routing is usually explained as
- * a selection -- and there isn't one. All eight outputs survive, weighted. If
- * beat 4 is not genuinely still, beat 5 corrects nothing.
- *
- * Residual connections and normalisation are deliberately not here. They change
- * nothing the viewer needs and they cost two beats. If a viewer asks, that is
- * an aside.
+ * The fair prediction here is whether one expert wins. The viewer has enough
+ * information to make that guess, and the answer matters: all eight outputs
+ * contribute, weighted by the router scores.
  */
 export const BEATS: Beat<Patch>[] = [
   {
@@ -25,16 +14,10 @@ export const BEATS: Beat<Patch>[] = [
     id: 'what-do-they-do',
     title: 'The eight lift forward; the 280 recede',
     relation: 'want',
-    secs: 9,
-    vo: 'Right — eight picked, out of two hundred and eighty-eight. What do they actually do with it?',
+    secs: 8,
+    vo: 'Okay. The router picked eight experts. What do those eight actually do?',
     commands: [
       ground.at(GROUND_Y),
-      /*
-       * The wall we came from, held well clear of the mechanism. At 0.62 behind
-       * the blend its 288 figures collided with the eight blocks and the output
-       * rows, and the frame became mush -- a background has to be behind
-       * something, not on top of it.
-       */
       hospital.show({ x: 50, y: 12 }, 0.3, { lit: CHOSEN }),
       hospital.recede(),
       blend.show({ x: 50, y: 52 }, 0.94),
@@ -46,8 +29,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'each-takes-the-row',
     title: 'The row copies eight times, one copy into each',
     relation: 'so',
-    secs: 7,
-    vo: 'The row goes into all eight of them. The same row, eight times.',
+    secs: 6,
+    vo: 'The same input row is sent to all eight.',
     commands: [blend.copy(), narrator.set({ pose: 'point' })],
   },
   {
@@ -56,9 +39,8 @@ export const BEATS: Beat<Patch>[] = [
     title: 'Eight visibly different rows emerge on the far side',
     relation: 'so',
     secs: 8,
-    vo: 'And eight different rows come out. Same numbers going in. Eight different answers coming out.',
+    vo: 'Each expert transforms it differently, so eight different output rows come back.',
     commands: [blend.out()],
-
     overlays: [note('same row in, eight\ndifferent rows out', 12, 22, { tone: 'measure', rotate: -3 })],
   },
   {
@@ -67,17 +49,11 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The eight outputs hold side by side; nothing moves',
     relation: 'and-yet',
     secs: 8,
-    /*
-     * S-06, and the wrong intuition here is unusually strong: top-k routing is
-     * almost always explained as a *selection*, so "which one wins?" feels
-     * like the obvious next question. The frame must be completely still --
-     * no drift, no narrator gesture -- or the viewer has nowhere to put a guess.
-     */
-    vo: 'So — eight answers. Which one wins?',
+    vo: 'Now make a guess: does the model choose one winner, or use all eight?',
     commands: [narrator.set({ pose: 'wonder' })],
     lateOverlays: {
-      at: 2600,
-      overlays: [centred('which one wins?', 50, 88, { size: 'lg', rotate: -2, sticky: true })],
+      at: 2400,
+      overlays: [centred('one winner — or all eight?', 50, 88, { size: 'lg', rotate: -2, sticky: true })],
     },
   },
   {
@@ -86,30 +62,22 @@ export const BEATS: Beat<Patch>[] = [
     title: 'All eight stay; none dims, none leaves',
     relation: 'so',
     secs: 6,
-    /*
-     * The correction, and it is a *non-event*: nothing dims and nothing
-     * leaves. Anything moving here would read as a choice being made, which
-     * is the belief the beat is taking apart.
-     */
-    vo: 'None of them. They all count.',
+    vo: 'All eight. None wins outright.',
     commands: [narrator.set({ pose: 'flat' })],
     clearSticky: true,
-    overlays: [note('all eight survive', 12, 80, { size: 'md', tone: 'word', rotate: -3 })],
+    overlays: [note('all eight contribute', 12, 80, { size: 'md', tone: 'word', rotate: -3 })],
   },
   {
     n: 6,
     id: 'not-an-equal-say',
     title: 'Each output takes the size of its expert’s score',
-    /* The spoken line opens "But not equally" -- a contradiction, so it gets
-     * the hanging `and-yet` spring rather than the quick `so`. A beat whose
-     * words turn and whose motion continues reads as a list item. */
     relation: 'and-yet',
-    secs: 11,
-    vo: 'But not equally. The router already scored them, so the ones that scored higher count for more.',
+    secs: 10,
+    vo: 'But not equally. The router scores become weights: a higher score means a bigger contribution.',
     commands: [blend.weigh()],
     lateOverlays: {
-      at: 3000,
-      overlays: [note('bigger = scored higher', 88, 22, { tone: 'measure', rotate: 3, sticky: true })],
+      at: 2800,
+      overlays: [note('higher score =\nbigger contribution', 88, 22, { tone: 'measure', rotate: 3, sticky: true })],
     },
   },
   {
@@ -118,7 +86,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The eight converge and merge, larger ones dominating',
     relation: 'so',
     secs: 6,
-    vo: 'They get blended together, in proportion to those scores.',
+    vo: 'Those eight outputs are blended into one row.',
     commands: [blend.merge()],
   },
   {
@@ -127,9 +95,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The dashed shared expert’s output joins the merge',
     relation: 'so',
     secs: 7,
-    /* From outside the wall, where §5 beat 12 put it -- it is a 289th expert,
-     * not one of the eight, and the merge must not absorb that distinction. */
-    vo: 'And the one that’s always on gets blended in too.',
+    vo: 'And the shared expert’s output joins the blend too.',
     commands: [blend.plusOne()],
   },
   {
@@ -138,7 +104,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'One row settles, the same length as the one that went in',
     relation: 'therefore',
     secs: 9,
-    vo: 'Out comes a single row. Same length as the one that went in. Completely different numbers.',
+    vo: 'So we are back to one row. Same length as before, but with different numbers.',
     commands: [blend.done()],
     clearSticky: true,
   },
@@ -147,8 +113,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'before-and-after',
     title: 'The row that arrived ghosts in beside it',
     relation: 'and-yet',
-    secs: 5,
-    vo: 'That’s the token, thought about. Once.',
+    secs: 7,
+    vo: 'That is one sparse feed-forward step: before, and after.',
     commands: [blend.compare()],
   },
   {
@@ -156,13 +122,8 @@ export const BEATS: Beat<Patch>[] = [
     id: 'same-shape-it-was',
     title: 'The ghost fades; everything else clears; the row is alone',
     relation: 'so',
-    secs: 15,
-    /*
-     * "The same shape it was" is the load-bearing clause. It is why the stack
-     * can be 45 layers deep at all -- each step hands the next one an object
-     * of the same kind -- and §7 beat 4's climb is unexplainable without it.
-     */
-    vo: 'It arrived as the word in this sentence. It leaves changed by eight blocks of the model — and it’s the same shape it was, so whatever comes next can’t tell the difference.',
+    secs: 13,
+    vo: 'The important part is the shape stayed the same: four thousand and ninety-six numbers went in, and four thousand and ninety-six came out. So the next layer can take over.',
     commands: [
       blend.off(),
       hospital.off(),
@@ -176,11 +137,7 @@ export const BEATS: Beat<Patch>[] = [
     title: 'The room’s walls, floor and ceiling draw themselves in around the row',
     relation: 'therefore',
     secs: 11,
-    /*
-     * S-12. The room becomes a bounded thing so that §7 can take it away and
-     * make it one floor. The bound has to exist before it can be relativised.
-     */
-    vo: 'Look around. Choose. Work. That’s one full step of this machine, and it’s done.',
+    vo: 'So one layer can be pictured as a simple cycle: use context, choose experts, transform the row.',
     commands: [room.draw(), ground.at(GROUND_Y), narrator.off()],
   },
   {
@@ -188,17 +145,12 @@ export const BEATS: Beat<Patch>[] = [
     id: 'how-many-steps',
     title: 'The room shrinks in frame; edges above and below hint at more of them',
     relation: 'and-yet',
-    secs: 10,
-    /*
-     * The hint, not the answer. Edges only -- a second complete room here
-     * would answer the question this beat exists to ask, and §7 beat 2 would
-     * have nothing left to reveal.
-     */
-    vo: 'Which raises the obvious question. How many steps are there?',
+    secs: 9,
+    vo: 'And now the obvious question: how many layers does this token have to go through?',
     commands: [room.hintAtMore(0.82)],
     lateOverlays: {
-      at: 2800,
-      overlays: [centred('how many steps\nare there?', 50, 90, { size: 'md', rotate: -2 })],
+      at: 2600,
+      overlays: [centred('how many layers?', 50, 90, { size: 'md', rotate: -2 })],
     },
   },
 ]
