@@ -1,29 +1,26 @@
-# Video 1 — the script
+# The 18 Billion Mystery
 
-Route `/watch` (or `/video-1`). Code: `src/videos/glm-320b/video-1/`.
+**YouTube title:** **320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?**
+
+Route: `/watch` (or `/video-1`). Code: `src/videos/glm-320b/video-1/`.
 Storyboard and spine: `storyboard/video-1/`.
 
-One file per section, in order. Each opens with a **Contract** table — what it
-teaches, what it answers, what question it exits on — and closes with a
-**Storyboard** table of one row per beat. Both tables are machine-read:
+## Current canon
 
-| gate | reads | checks |
-| --- | --- | --- |
-| `npm run check:chain` | the Contract tables | each section's *Enters on* equals the previous *Exits on* |
-| `npm run check:board` | the Storyboard tables | every beat has a place and an event, and the built beats match |
-| `npm run check:strategy` | the Storyboard `Strategy` column | every beat cites a technique that exists in `skills/STRATEGY_LEDGER.md` with a named teacher |
-| `npm run timing` | the spoken lines | words against seconds, at 145 wpm |
+This folder contains the only active script for this video.
 
-## Status
+- §1 and §2 are **APPROVED NARRATION — LOCKED**.
+- §3–§13 are the current narration-first story pass and remain editable until approved.
+- The tracked protagonist is **`it`**, token ID **432**.
+- `READ_ALOUD.md` is the current full-video read-through.
+- Rejected alternate scripts are not kept in the working branch. Git history is the archive.
 
-**`01-…` is at script v10** and cites a strategy per beat. **`02-…` through
-`13-…` are at v8** — they predate `STORY_SPINE.md` v5, so they have no Strategy
-column and their opening/closing lines do not yet bank-and-hand-off the way §5
-of the spine requires. `check:strategy` lists them as uncovered.
+## Production rule
 
-## Generated — do not edit
+Once narration is marked **APPROVED NARRATION — LOCKED**, the wording is immutable unless Ahmad explicitly reopens it. Beats, timing, components, camera moves and animation must adapt around the narration—not rewrite it.
 
-`READ_ALOUD.md` is written by `npm run readthrough` from the built beats, not
-from these files. It is the recording script: the whole video, start to finish,
-with timings. If it disagrees with a numbered file, the numbered file is being
-edited and the build has not caught up.
+Each numbered section contains its narration and storyboard. The story structure is defined in `storyboard/video-1/STORY_SPINE.md`.
+
+## Implementation status
+
+§1 and §2 have executable beats aligned to the new narration. §§3–13 have the accepted/current storyboards, but their visual implementation still needs to be rebuilt around those boards before the preview is considered final.
