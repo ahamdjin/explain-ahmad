@@ -1,248 +1,144 @@
-# Section 13 — What that number actually bought
+# Section 13 — What “18 billion active” actually buys
 
-Status: **SCRIPT v10.** Written to spine v5. Corrected against a technical
-review, 2026-09-11 — see "What changed" below. Every beat cites a strategy from
-`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
-
-v8's interiors survive — they were built for spatial continuity and that work
-stands. What v8 did not have was a **chapter wall** at either end, a named
-teacher for anything it was doing, or an `Exits on` that had to equal the next
-section's `Enters on` word for word. All three are now in place:
-
-- **Beat 1 banks** the previous section's answer in one clause, then adds the
-  *but* that makes this section necessary. It does not carry the previous
-  question forward — that was the fault behind *"the whole story feels
-  disconnected"*. `STORY_SPINE.md` §5.
-- **The closing beat names the mechanism as finished** and says what is now
-  missing, so the viewer gets to put something down before picking the next
-  thing up.
-- **Act headings carry strategy IDs**, derived from the storyboard's own
-  strategy column rather than asserted separately.
-
-Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
-Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 13`
+Status: **FINAL STORY PASS.** This is where the video should end. No new mechanism is introduced; every image is a callback to something already earned.
 
 ## Contract
 
 | | |
 | --- | --- |
-| Enters on | it's a price, not a wall. So what did "five percent active" actually get us? |
-| Answers | **compute, not memory** — and the number on the box cannot tell you which machine you need |
-| Exits on | *(none — the thesis lands)* |
-| Built | 15 beats · 2:51 · `npm run timing` is the authority |
+| Enters on | **if active parameters are not a direct memory promise, what did sparsity buy us?** |
+| Answers | it decouples much of per-token compute from total model size: a large pool of learned weights exists, while only a subset participates for each token |
+| Ends on | the exact opening contradiction, now understood |
 
-## The job
+## Narration
 
-Not a recap. A viewer who wanted a recap stopped at §11. This section **spends
-the six deposits** the mechanism sections made, and answers the question from
-minute one in a way that is now unarguable, because they watched every step.
+Here is the payoff.
 
-The answer is split, and the split is the whole video:
+When you read:
 
-> **True about compute. Never true about memory.**
+**320 billion parameters**
 
-## What changed from v8
+and
 
-**1. It broke the one strategy it cites.** S-11 is *thesis once, one sentence,
-at the end* — and v8 stated the thesis at **beat 5**: *"'active parameters' is
-a compute number. It was never a memory number."* Then beat 11, the beat
-actually carrying the S-11 citation, said something else. So the thesis went
-early, in the middle, and the strategy label sat on a different line. It now
-lands **once**, at beat 13, and beats 5–6 *show* work against space without
-naming the conclusion.
+**18 billion active**
 
-**2. The board still opened on `18B`.** Beat 1's own line asks what *"five
-percent active"* bought. The frames have to open on the thing §1 opened on —
-which is now two models and their chips, not a number.
+those two numbers are answering **different questions**.
 
-**3. The close did not close the ring.** S-10 is *reuse the opening's nouns*,
-and the narration did — *two models, one chip, eight* — while the board showed a
-verdict card with a slogan on it. The last frames are now literally §1's
-hardware comparison, redrawn, which is the whole point: the same picture, and
-this time the viewer can read it.
+The **320 billion** tells you how many learned parameters exist in the model.
 
-**4. Beat 9 blamed the footprint on fine-graining.** It said *"the difference
-is that this one is chopped finer"* directly after the one-chip/eight-chip
-frame, over an animation that divided the blocks — so the picture made smaller
-experts look like the cause of more GPUs. Three things differ between
-`gpt-oss-120b` and this model: **parameter count** (116.8B vs 321B), **shipped
-precision** (MXFP4 vs FP8), and **granularity**. The first two explain ~58 GiB
-against ~306 GiB almost entirely. Granularity explains essentially none of it.
+The **18 billion active** tells you roughly how much of that parameter set participates in the computation for a token.
 
-This was the most dangerous claim in the payoff, because it is the one a
-knowledgeable viewer disproves with two numbers — in the final minute, on the
-thesis beat. Beats 9–10 now name all three differences and keep file size
-separate from routing granularity. Beats 11–12 make only the narrower claim the
-research supports: finer routing creates more possible expert paths, so the
-active share can be distributed across more places; the active-parameter number
-alone cannot tell you which weights need to be close.
+And that is the trick Mixture of Experts is buying you.
 
-## The script
+The model can have a huge pool of learned expert weights...
 
-### Act 1 — banking the price (beat 1) · **S-14**
+without running every expert for every token.
 
-> **1.** *(the plan dissolves; the two sheets from §1 ghost back in)* Small, or
-> fast. Not both. So — what did "five percent active" actually buy?
+For our `it`, the router only selected eight routed experts on each sparse layer.
 
-### Act 2 — what it bought, and what it didn't (beats 2–6) · **S-04**
+Another token can use a different route.
 
-> **2.** *(we slide back to what §1 opened on)* Here's what that number is
-> actually telling you.
->
-> **3.** *(a small work bar draws itself)* Per token, this thing does the
-> thinking of a model about a twentieth of its size. That's real. That's why
-> it's quick, and why it's cheap to run per token. **That part is true.**
->
-> **4.** *(the whole model returns behind it, whole, and settles heavily)* But
-> all of it still has to be within reach. Because it never knows which part it
-> wants until the moment it wants it.
->
-> **5.** *(the bar and the block separate into two labelled columns)* One of
-> those is a number about **work**. The other is a number about **space**.
->
-> **6.** *(the work column tiny, the space column full height)* Sparse routing
-> shrinks the first one. It does nothing at all to the second.
+Another sentence can use a different route.
 
-### Act 3 — the part I didn't expect (beats 7–10) · **S-04**
+So the model gets access to far more total learned capacity than it has to compute through on every single token.
 
-> **7.** *(a second sheet slides in; chips stack under each)* And here's the part
-> I didn't expect. This model has about a hundred and twenty billion parameters,
-> and it fits on one chip. This one has three hundred and twenty, and needs
-> eight.
->
-> **8.** *(both sheets light their active share; the two shares match)* Both of
-> them use about five percent of themselves to answer you.
->
-> **9.** *(three chips stack up beside the second sheet, labelled as they land)*
-> Three things differ, and only one of them is exciting. It's nearly three
-> times the parameters. It ships at twice the precision per weight. And it's
-> chopped finer — more experts, smaller each.
->
-> **10.** *(the first two chips grey out; the third stays lit)* The first two
-> are why the file is bigger. They're just size. This one is the interesting
-> one — and it's not about the file at all.
->
-> **11.** *(the pieces shrink and multiply; possible active paths spread across
-> the sheet)* Finer routing gives the model many more possible expert paths.
-> That doesn't make the file bigger — but it means the active share can be
-> spread across many more places, instead of sitting in one corner you could
-> simply keep nearby.
+**That is the win.**
 
-### Act 4 — what the percentage cannot tell you (beat 12) · **S-15**
+But notice what it does **not** magically do.
 
-> **12.** *(the second sheet withdraws; the active share stays distributed)* So
-> "five percent active" tells you how much work happens. By itself, it tells
-> you almost nothing about how much of the model needs to stay within reach.
+It does not turn a 320-billion-parameter checkpoint into an 18-billion-parameter file.
 
-### Act 5 — the thesis, once (beat 13) · **S-11**
+The experts that are inactive for this token still exist.
 
-> **13.** *(everything clears to one line of handwriting)* "Active parameters" is
-> a compute number. It was never a memory number.
+Another token may need them later.
 
-### Act 6 — back to the two models (beats 14–15) · **S-10**
+So if you want the whole model fully resident in fast memory, total stored weights and their precision still matter enormously.
 
-> **14.** *(§1's hardware comparison, redrawn exactly — two sheets, one chip and eight)*
-> Two models. Both about five percent active. One of them runs on a single chip;
-> the other one needs eight.
->
-> **15.** *(nothing moves)* Now you know why.
+And now our opening comparison stops being weird.
 
-## Storyboard
+This model:
 
-`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+**gpt-oss-120b**
 
-| beat | where | camera | what happens | on screen | example | strategy |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | the plan | — | the plan dissolves; the two sheets from §1 ghost back in behind it | two `Block`s, faint | the pair returning | S-14 |
-| 2 | the sheet | **pan** | we slide back to the opening comparison | `Block`, lit share | ~5% of it live | S-04 |
-| 3 | the sheet | — | a small work bar draws itself beside the sheet | `CostBars`, work only | 1/20th the thinking | S-04 |
-| 4 | the sheet | — | the block returns behind it, whole, and settles heavily | `Block`, whole | all of it, reachable | S-04 |
-| 5 | the sheet | — | the bar and the block separate into two labelled columns | two columns | **work / space** | S-04 |
-| 6 | the sheet | — | the work column shrinks to almost nothing; the space column stays full height | two columns, unequal | one shrinks, one doesn't | S-04 |
-| 7 | the sheet | — | a second sheet slides in beside the first; chips stack under each | two `Block`s, 1 chip vs 8 | ~117B → 1 · 321B → 8 | S-04 |
-| 8 | the sheet | — | both sheets light their active share; the two shares visibly match | two lit patches | ~5% both | S-04 |
-| 9 | the sheet | — | three chips land beside the second sheet: parameter count, precision, granularity | 3 labelled chips | three differences | S-04 |
-| 10 | the sheet | — | the first two chips grey out; the granularity chip stays lit | 1 lit of 3 | only one is interesting | S-09 |
-| 11 | the sheet | — | each sheet's block divides — one into coarse pieces, one into many fine ones; possible active paths can land across many more places in the fine one | two `Block`s, different grain | 128 vs 288 · more paths | S-04 |
-| 12 | the sheet | — | the second sheet withdraws; the active share remains distributed across the model | one sheet, distributed share | the percentage cannot locate it | S-15 |
-| 13 | the sheet | — | everything clears to a single line of handwriting | one line, alone | **compute, not memory** | S-11 |
-| 14 | the sheet | — | §1's hardware comparison redraws itself exactly: two sheets, one chip and eight | two `Block`s + `Rig` ×1, ×8 | the ring closes | S-10 |
-| 15 | the sheet | — | nothing moves | the same frame, held | now you know why | S-10 |
+uses roughly **4.4%** of its parameters per token and ships at roughly **58 GiB** in its compact MXFP4 format.
 
-### Board notes
+This model:
 
-- **One camera move**, at beat 2, back to the comparison from §1. Beats 3–14
-  are still, and the stillness matters: the last third of this section is the
-  same frame twice, and the second time is the payoff.
-- **Beats 13–14 return to §1's hardware comparison.** Same two blocks, same chip
-  counts, same positions. Not a callback *about* the opening — the opening
-  comparison itself, returned to. `NCASE_EVOLUTION_OF_TRUST.md` §6: Trust's
-  outro reuses its own first nouns, *trenches* and *No Man's Land*, and that is
-  what makes the ring close rather than merely rhyme.
-- **Beat 13 is the only frame in the video with nothing on it but one line.**
-  The thesis is said once, and nothing competes with it. v8 said it at beat 5
-  as well, which is why it needed protecting here.
-- **Beat 6's two columns must be wildly unequal.** If they are comparable
-  heights the viewer reads a trade-off; the claim is that one of them does not
-  move at all.
-- **Beat 9's two grains must be visibly different sizes**, not different
-  colours. The argument is about how finely the same mass is divided, and a
-  colour difference says "different kind" instead of "same thing, cut smaller".
-- No question anywhere in this section, deliberately. It is the verdict.
+**GLM-5.3-Flash**
 
----
+uses roughly **5.6%** per token, but its shipped FP8 checkpoint is roughly **306 GiB** before runtime memory.
 
-## Line jobs
+Similar active percentages.
 
-| Beat | Job |
-| --- | --- |
-| 1 | **bank** — small or fast, not both. So what did it buy? |
-| 2–3 | **concede** — the compute saving is real, and say so plainly |
-| 4 | **but** — all of it still has to be reachable |
-| 5–6 | **teach** — work and space are two different numbers |
-| 7–8 | **the surprise** — two models, same share, different machines |
-| 9–10 | **separate** — file-size causes from routing granularity |
-| 11 | **teach** — finer routing creates more possible expert paths; the active share can be distributed more widely |
-| 12 | **the corollary** — the active percentage cannot locate the weights you need close |
-| 13 | **the thesis** — once, alone, at the end |
-| 14–15 | **the ring** — §1's comparison, now readable |
+Completely different total footprints.
 
-## Truth notes
+That difference is not some mysterious failure of MoE.
 
-| | gpt-oss-120b | this model |
+They are different-sized models stored at different precisions.
+
+And “percent active” was never the number that told us the checkpoint size.
+
+So when you see a model advertised as:
+
+**320B total — 18B active**
+
+read it like this:
+
+**320B total:** how much learned model exists.
+
+**18B active:** roughly how much participates for each token.
+
+And if someone turns that second number into:
+
+“so you only need 18 billion parameters in memory”...
+
+now you know exactly what question to ask:
+
+**which 18 billion — and when does the model know?**
+
+Because we followed one tiny `it` all the way through.
+
+And the answer was:
+
+**it decides as it goes.**
+
+That is why two models can both say “about five percent active”...
+
+while one fits on a single 80-gigabyte accelerator...
+
+and keeping the other fully resident at its shipped precision takes eight.
+
+Same headline percentage.
+
+Different question.
+
+Now the number actually means something.
+
+## Storyboard — 12 beats
+
+§12 leaves the `18B active` card alone after all memory machinery recedes. The finale builds only from callbacks.
+
+| beat | continuity / screen action | add / keep / remove |
 | --- | --- | --- |
-| Total | 116.8B | 321B |
-| Active | 5.1B (**4.4%**) | 18B (**5.6%**) |
-| Experts per sparse layer | 128 | **288** |
-| Footprint | ~58 GiB (MXFP4) | ~306 GiB (FP8) |
-| Fits on | **one** 80 GB chip | **eight** |
+| 1 | `18B active` holds centre. `320B total` returns above it. Draw two separate question brackets: `how much exists?` / `how much works per token?` | **keep** 18B; **add** 320B + two meanings |
+| 2 | Show full GLM block as a large field of weights. Small orange routed/active paths light across it rather than one contiguous patch. | **add** whole model; **state** distributed activity |
+| 3 | Replay our tiny `it` path rapidly through 42 sparse floors: different eight highlighted per floor. | **callback** routing journey |
+| 4 | Pull back so the inactive expert pool remains visible around the route. Label `available later`, not `waste`. | **keep** unused weights present |
+| 5 | Split screen into `TOTAL MODEL` and `PER-TOKEN WORK`. Shrink only the work side to ~5.6%; the total-model side remains full. | **carrying frame** compute vs stored model |
+| 6 | Return the exact two model cards from §1: gpt-oss left, GLM right. No new art style. | **callback** opening frame |
+| 7 | Light active share on each: ~4.4% and ~5.6%. Hold them visually similar. | **add** active percentages |
+| 8 | Under them, bring back shipped checkpoint footprints: `~58 GiB MXFP4` vs `~306 GiB FP8`, then the fully-resident comparison `1 × 80 GB` vs `8 × 80 GB`. | **add** scoped storage/hardware facts |
+| 9 | Put three quiet cause cards between them: `total parameters`, `storage precision`, `architecture/routing`. Do not blame footprint primarily on expert granularity. | **add** explanation cues |
+| 10 | Collapse back to one GLM card: `320B TOTAL` over `18B ACTIVE`. Underneath write `exists` / `participates per token`. | **consolidate** meaning |
+| 11 | Re-show the opening question **“which 18B?”**. Instead of a question mark, animate the `it` route choosing experts layer-by-layer behind it. | **pay off** mystery visually |
+| 12 | Exact opening composition returns: two models, similar active share, **1 vs 8**. Nothing moves on the final line **“Now the number actually means something.”** | **final carrying frame**; stop video |
 
-- Say **"about five percent"** of both. Putting 4.4 and 5.6 on screen invites a
-  comparison the beat does not need.
-- **"One chip", not "one graphics card."** An 80 GB accelerator is not a gaming
-  GPU, and the consumer figure exists only with offloading — which is §12's
-  material.
-- **The scope of the granularity argument, stated once.** §12 concedes that no
-  expert-locality figure has been published at 288 experts and top-8 — every
-  one we cite is from eight-expert, top-2 models. So this section may say:
-  granularity creates more possible expert paths and can distribute the active
-  weight across more places (geometry, not a measured cache hit rate), and the
-  active-parameter figure cannot tell you what machine you need. It may **not**
-  say that fine-graining defeats caching, or present "harder to hold" as a
-  measured law.
-- **Never let fine-graining explain the footprint.** ~58 GiB against ~306 GiB
-  is total parameters (116.8B vs 321B) and shipped precision (MXFP4 vs FP8).
-  Granularity contributes essentially nothing to file size.
-- Honest at 4-bit too: ~58 GiB against ~153 GiB. One against four. The direction
-  never reverses.
+## Truth / implementation notes
 
-## Assets
-
-| Need | Status |
-| --- | --- |
-| the three differences, two dimmable | **have** — `Differences`, added 2026-09-11, verified by rendering |
-| §1's exact comparison frame | **have** — `Rig` moved from §1 into `paper/cast/Props` so both sections draw the same object |
-| `CostBars` | have |
-| the model, whole and heavy | have |
-| two model cards with chip counts and grain | **built** — `ModelCard`, two of them |
-| `VerdictCard` | have |
+- Prefer the closing formulation: **“active parameters is primarily a per-token compute/participation number, not a promise about minimum memory.”** This is more accurate than an unqualified “active parameters is not a memory number.”
+- GLM exact total is ~321B / marketed 320B; active ~18B/token.
+- Shipped GLM FP8 checkpoint is about **306 GiB weights** before runtime/KV/state memory.
+- gpt-oss-120b shipped footprint is about **58 GiB MXFP4** and its active share is about **4.4%** versus GLM about **5.6%**.
+- The one-vs-eight hardware frame is specifically the project's **native/shipped, fully-resident 80 GB accelerator comparison**. Quantization, sharding strategy, offloading and runtime requirements can change practical hardware choices.
+- Do not imply fine-grained routing is the main reason GLM's checkpoint is larger than gpt-oss. Total parameter count and shipped precision explain most of that storage difference.
+- This is the end. Do not add a second thesis, extra architecture facts, or another teaser after the opening frame returns.
