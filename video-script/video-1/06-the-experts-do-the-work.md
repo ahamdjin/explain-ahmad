@@ -1,194 +1,107 @@
 # Section 06 — The experts do the work
 
-Status: **SCRIPT v9.** Written to spine v5. Every beat cites a strategy from
-`skills/STRATEGY_LEDGER.md`, and no beat uses a technique that is not in it.
-
-v8's interiors survive — they were built for spatial continuity and that work
-stands. What v8 did not have was a **chapter wall** at either end, a named
-teacher for anything it was doing, or an `Exits on` that had to equal the next
-section's `Enters on` word for word. All three are now in place:
-
-- **Beat 1 banks** the previous section's answer in one clause, then adds the
-  *but* that makes this section necessary. It does not carry the previous
-  question forward — that was the fault behind *"the whole story feels
-  disconnected"*. `STORY_SPINE.md` §5.
-- **The closing beat names the mechanism as finished** and says what is now
-  missing, so the viewer gets to put something down before picking the next
-  thing up.
-- **Act headings carry strategy IDs**, derived from the storyboard's own
-  strategy column rather than asserted separately.
-
-Spine: `storyboard/video-1/STORY_SPINE.md` v5 · Numbers: `research/glm/GROUND_TRUTH.md`
-Strategies: `skills/STRATEGY_LEDGER.md` · Runtime: `npm run restamp 06`
+Status: **STORY PASS — narration-first.** Same `it` row, same selected eight from §5.
 
 ## Contract
 
 | | |
 | --- | --- |
-| Enters on | eight experts are picked. What do they actually do? |
-| Teaches | expert output, weighted blending |
-| Answers | each takes the row and returns a different one; the eight get blended into a single row |
-| Exits on | how many steps are there? |
-| → next | **therefore** the token leaves changed — and that was one step |
-| Built | 13 beats · 1:52 · `npm run timing` is the authority |
+| Enters on | **the router picked eight; what do they actually do?** |
+| Teaches | expert transformation, weighted combination, shared expert contribution |
+| Answers | each selected expert transforms the same row; their outputs are weighted and combined into one new row |
+| Exits on | **if that was one sparse layer, how many times does this happen?** |
 
-## What changed from v8
+## Narration
 
-**1. The blend was told, not questioned — and it is the misconception.** A
-viewer who knows anything about routing expects a *winner*: the top expert runs
-and the rest lose. That is what top-1 routing would do, and it is not what
-happens here. v8 simply asserted the blend. Beat 4 now asks *"which one wins?"*
-and beat 5 answers *"none of them"*, which is the one genuinely counterintuitive
-turn in this section. S-06, soft — the hard-bet budget is spent on §1 and §7.
+The router has picked eight.
 
-**2. Two beats said the same thing.** v8's beat 10 — *"and that is one step.
-Done. Finished."* — and beat 11 — *"and that's one full step, done"* — were the
-same sentence twice. The wall is now one beat, and naming the step is another.
+Now the actual work happens.
 
-**3. The shared expert was five words.** *"Plus the one that always runs."* §5
-now gives it a beat and a place outside the wall, so §6 can show it arriving
-into the blend from that same outside position rather than mentioning it.
+Our `it` row is copied into **all eight selected experts**.
 
-**4. Beat 9 was a mouthful, not a frame.** *"having had eight blocks of the
-model applied to it"* is not something anyone says. It is now a before-and-after
-pair on screen and a short line over it.
+Same input.
 
-## The script
+Eight different blocks.
 
-### Act 1 — banking the eight (beat 1) · **S-14**
+And each expert transforms that row in its own learned way.
 
-> **1.** *(the eight lift forward out of the wall; the 280 recede)* Right —
-> eight picked, out of two hundred and eighty-eight. What do they actually do
-> with it?
+So one row goes in...
 
-### Act 2 — eight copies, eight answers (beats 2–3) · **S-04**
+and eight different rows come out.
 
-> **2.** *(the row copies eight times, one into each)* The row goes into all
-> eight of them. The same row, eight times.
->
-> **3.** *(eight visibly different rows emerge on the far side)* And eight
-> different rows come out. Same numbers going in. Eight different answers coming
-> out.
+At this point you might reasonably think:
 
-### Act 3 — the question (beat 4) · **S-06**
+**okay — which expert wins?**
 
-> **4.** *(the eight outputs hold, side by side, nothing moving)* So — eight
-> answers. Which one wins?
+None of them.
 
-### Act 4 — none of them (beats 5–9) · **S-04**
+The router’s scores still matter.
 
-> **5.** *(all eight stay put)* None of them. They all count.
->
-> **6.** *(each output takes on the size of its expert's score)* But not
-> equally. The router already scored them, so the ones that scored higher count
-> for more.
->
-> **7.** *(the eight converge and merge, the larger ones dominating)* They get
-> blended together, in proportion to those scores.
->
-> **8.** *(the shared expert's output joins the merge from outside the wall)*
-> And the one that's always on gets blended in too.
->
-> **9.** *(one row settles, the same length as the one that went in)* Out comes
-> a single row. Same length as the one that went in. Completely different
-> numbers.
+The experts that scored higher get more influence.
 
-### Act 5 — what just happened (beats 10–11) · **S-04**
+The ones that scored lower get less.
 
-> **10.** *(the row that arrived ghosts in beside it)* That's the token, thought
-> about. Once.
->
-> **11.** *(the ghost fades; everything else clears)* It arrived as the word in
-> this sentence. It leaves changed by eight blocks of the model — and it's the
-> same shape it was, so whatever comes next can't tell the difference.
+So those eight outputs are **weighted and blended back together**.
 
-### Act 6 — the step, named and done (beats 12–13) · **S-12**, **S-14**
+And remember the shared expert from the side?
 
-> **12.** *(the room's walls, floor and ceiling draw themselves in around the
-> row)* Look around. Choose. Work. That's one full step of this machine, and
-> it's done.
->
-> **13.** *(the room shrinks in frame; something suggests more of them above and
-> below)* Which raises the obvious question. How many steps are there?
+Its output joins too.
 
-## Storyboard
+After all of that...
 
-`npm run check:board`. Rules in `skills/SPATIAL_CONTINUITY.md`.
+we are back to **one row**.
 
-| beat | where | camera | what happens | on screen | example | strategy |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | the room | — | the eight lift forward out of the wall; the 280 recede into the background | 8 `Specialist`s forward | 8 | S-14 |
-| 2 | the room | — | the row copies eight times, one copy travelling into each | 8 identical rows | same input | S-04 |
-| 3 | the room | — | eight visibly different rows emerge on the far side | 8 different `NumberRow`s | 8 different outputs | S-04 |
-| 4 | the room | — | the eight outputs hold side by side; nothing moves | 8 rows, still | **`which one wins?`** | S-06 |
-| 5 | the room | — | all eight stay; none dims, none leaves | 8 rows, all live | none of them | S-04 |
-| 6 | the room | — | each output takes on the size of its expert's score | 8 rows, weighted | bigger = higher score | S-04 |
-| 7 | the room | — | the eight converge and merge into a single row, larger ones dominating | 8 → 1 `NumberRow` | the blend | S-04 |
-| 8 | the room | — | the shared expert's output joins the merge **from outside the wall**, where §5 put it | +1 joining, from off-grid | always on | S-04 |
-| 9 | the room | — | one row settles, the same length as the one that went in | one `NumberRow` | one row out | S-04 |
-| 10 | the room | — | the row that arrived ghosts in beside it for comparison | before + after | same length, new values | S-04 |
-| 11 | the room | — | the ghost fades; everything else clears; the row is alone | one row, empty room | — | S-04 |
-| 12 | the room | — | the room's walls, floor and ceiling draw themselves in around the row | the room, bounded | one step, done | S-12 |
-| 13 | the room | — | the room shrinks in frame; edges above and below hint at more of them | the room, small | how many? | S-14 |
+Still 4,096 numbers long.
 
-### Board notes
+Still our same `it`.
 
-- **No camera moves at all.** §5 brought us into the room and §7 leaves it.
-  This section is thirteen beats in one place, and that stillness is what makes
-  the room drawing itself at beat 12 mean *this was one box all along*.
-- **Beat 4 is the only still frame**, and the eight outputs must be visibly
-  *different sizes already withheld* — no weighting yet, no leader. If one is
-  bigger at beat 4 the viewer reads the answer off the picture and the question
-  is decoration.
-- **Beat 5 has to be a non-event, and that is hard.** Nothing dims, nothing
-  leaves, nothing wins. The temptation is to animate something; resist it. The
-  frame's job is that the expected elimination *does not happen*.
-- **Beat 8's shared expert enters from outside the grid**, which only reads if
-  §5 beat 12 put it there. If it arrives from among the 288 the two sections
-  contradict each other, and §5's *"the other two hundred and eighty"* becomes
-  wrong by one.
-- **Beat 10's ghost must be the same width as the survivor.** The whole point of
-  beat 11 is that the shape is unchanged — that is why a stack of these can be
-  stacked at all, which is §7's entire premise.
-- Beat 13 hints at more rooms **without showing a number**. §7 opens on
-  forty-five and it should land as an answer, not as a confirmation.
+But the values have changed again.
 
----
+So the token has not turned into a word yet.
 
-## Line jobs
+It has not produced an answer.
 
-| Beat | Job |
-| --- | --- |
-| 1 | **bank** — eight are picked; what do they do? |
-| 2–3 | **teach** — same row in, eight different rows out |
-| 4 | **ask** — which one wins? (the top-1 misconception) |
-| 5 | **correct** — none. They all count |
-| 6–8 | **teach** — weighted by score, blended, plus the always-on one |
-| 9 | **teach** — one row out, same shape |
-| 10–11 | **teach** — before and after, and why the shape matters |
-| 12 | **name** — that was one full step |
-| 13 | **the wall** — how many steps are there? |
+It has simply been **processed one step deeper**.
 
-## Truth notes
+And that is useful, because the next part of the model expects the same kind of object:
 
-- The blend is a weighted sum using the routing weights, usually renormalised
-  over the chosen eight. "In proportion to their scores" is honest and enough.
-- The shared expert's output is added alongside. It is one clause, beat 6.
-- Residual connections and normalisation are **deliberately not** in this
-  section. They change nothing the viewer needs and they cost two beats. If a
-  viewer asks, that is an aside.
-- No `layer` yet. Beat 10 says "one step". The word arrives in §7.
+another row of 4,096 numbers.
 
-## Frames
+So it can hand this new row forward.
 
-- Beat 5 is the frame worth building well: eight rows converging into one, with
-  visible weight — thicker or more opaque for higher-scoring experts.
-- Beat 7's output row must be **visibly different** from beat 2's input row, or
-  the whole section reads as decoration.
+Context changed the row.
 
-## Assets
+The router chose who should work on it.
 
-| Need | Status |
-| --- | --- |
-| row → eight rows → weighted merge | **build** — `ExpertBlend` |
-| `NumberRow` before/after states | have |
+The experts changed it again.
+
+That is one sparse layer’s basic story.
+
+And our `it` is nowhere near finished.
+
+Because GLM has **45 layers**.
+
+## Storyboard — 11 beats
+
+§5 ends with eight selected experts and the shared expert opening toward the same `it` row. No scene reset.
+
+| beat | continuity / screen action | add / keep / remove |
+| --- | --- | --- |
+| 1 | The contextual `it` row reaches the fork feeding the eight selected experts. The 280 idle experts recede to background. | **keep** row + selected eight + shared; **quiet** 280 |
+| 2 | The same row visibly duplicates into eight copies and enters all eight expert blocks simultaneously. | **state change** one input → 8 copies |
+| 3 | Each expert box animates a different internal transformation; eight output rows emerge, visibly different patterns. | **add** 8 output rows |
+| 4 | Everything freezes on eight outputs. Ask **“which expert wins?”** | **hold** for prediction; no motion |
+| 5 | Nothing disappears. Put `none` / `all eight count` beside the group. | **answer by non-removal** |
+| 6 | Router score markers return beside each output. Outputs scale/thicken according to their weights. | **add** score influence cue |
+| 7 | The eight outputs converge into a central merge. Higher-weight outputs visually contribute more. | **merge** eight → one |
+| 8 | The shared expert’s output enters from its separate path and joins the merge. | **add** shared contribution |
+| 9 | One 4096-value row settles. Ghost the input row beside it for a clear before/after comparison. | **carrying frame** input vs output |
+| 10 | All machinery recedes; only the changed output row remains. A small `same shape: 4096 values` brace stays. | **remove/quiet** experts; **keep** row |
+| 11 | Walls/floor draw around this mechanism and then begin shrinking as if it is only one room in a taller structure. Reveal edge of tower. VO lands **“GLM has 45 layers.”** | **transform place** into one layer; seed §7 |
+
+## Truth / implementation notes
+
+- Each routed expert is a learned feed-forward subnetwork; selected outputs are combined using routing weights.
+- The shared expert is separate from the top-8 routed selection and also contributes.
+- Residual connections / normalisation are intentionally omitted from the main narration; they are not needed for the causal story being taught.
+- Preserve dimensional continuity: the object leaving the layer is still a hidden representation of size **4096**, so it can feed the next layer.
