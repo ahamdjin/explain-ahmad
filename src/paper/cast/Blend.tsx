@@ -280,8 +280,12 @@ export function Room({
   more?: boolean
   children?: React.ReactNode
 }) {
+  /*
+   * `data-surface`: the room is a backdrop, not ink. Everything a beat puts in
+   * it is *meant* to be on top of it, so check:overlap does not measure it.
+   */
   return (
-    <div className="s1-room">
+    <div className="s1-room" data-surface="">
       <svg viewBox="0 0 1240 660" aria-hidden="true">
         <motion.g
           fill="none"

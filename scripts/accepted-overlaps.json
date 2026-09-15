@@ -17,14 +17,8 @@
     {
       "section": "03",
       "beat": 3,
-      "pair": "s1-slot “5540554155425543554455455546” × s1-slot ““dog”5562”",
-      "why": "The ID travels **up the table** to its own row. An overlap here is the event -- 'the ID is just which row to go and fetch'."
-    },
-    {
-      "section": "03",
-      "beat": 5,
-      "pair": "s1-slot “5540554155425543554455455546” × s1-slot “-0.77-0.680.07-0.89-0.420.20”",
-      "why": "The board asks for the row to run 'past both edges of frame', so it crosses the table, which has withdrawn to the edge for exactly this beat."
+      "pair": "s1-slot “4104114124134144154164174184” × s1-slot ““it”432”",
+      "why": "`432` rides the index like a bookmark and opens its own page. The card being **on** the book is the event of the beat -- an address that stayed clear of the thing it indexes would be teaching the opposite."
     },
     {
       "section": "05",
@@ -37,6 +31,18 @@
       "beat": 11,
       "pair": "s1-slot “280 idle” × s1-slot “a row ina different row out”",
       "why": "One expert lifted out of the wall and opened. It is drawn over the wall it came from."
+    },
+    {
+      "section": "05",
+      "beat": 11,
+      "pair": "s1-slot “288 routed experts280 idle” × s1-slot “dogFrenchmaths”",
+      "why": "The plates are pressed **onto** the selected experts and slide off. Landing on the wall is the event of the beat -- plates that never touched an expert would be correcting a belief the viewer was never shown holding."
+    },
+    {
+      "section": "05",
+      "beat": 12,
+      "pair": "s1-slot “288 routed experts280 idle” × s1-slot “a row ina different row out”",
+      "why": "An explanatory cutaway of one expert, drawn over the wall it was taken from. Moving it clear would make it a separate diagram, and the point is that this box *is* one of the 288."
     },
     {
       "section": "06",
@@ -55,6 +61,12 @@
       "beat": 2,
       "pair": "s1-slot “floor 2442 sparse3 dense” × s1-slot",
       "why": "The room is one floor **of** the tower. That is the whole figure: 'one floor'."
+    },
+    {
+      "section": "09",
+      "beat": 8,
+      "pair": "s1-slot “4011bounced4012·rolled4013·w” × s1-slot ““bounced””",
+      "why": "The chosen token lifts **out of** the list. Touching the row it came from is the event -- a card that appeared clear of the list would not say where the answer was found."
     },
     {
       "section": "10",
@@ -112,36 +124,6 @@
     },
     {
       "section": "12",
-      "beat": 12,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 13,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 14,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 15,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 16,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
       "beat": 11,
       "pair": "s1-slot “backing up” × s1-slot “kept closemeasured on a mode”",
       "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
@@ -149,24 +131,18 @@
     {
       "section": "12",
       "beat": 12,
-      "pair": "s1-slot × s1-slot",
-      "why": "The 288-wall and the 42-tower are ghosted in **behind** the cache box, dwarfing it. Being behind it is the argument."
+      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
+      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
     },
     {
       "section": "12",
-      "beat": 13,
+      "beat": 12,
       "pair": "s1-slot × s1-slot",
       "why": "The 288-wall and the 42-tower are ghosted in **behind** the cache box, dwarfing it. Being behind it is the argument."
     },
     {
       "section": "12",
       "beat": 12,
-      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedcrawling”",
-      "why": "The tower stands above the machine; their boxes share a column but their ink is separated vertically. Verified by eye."
-    },
-    {
-      "section": "12",
-      "beat": 13,
       "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedcrawling”",
       "why": "The tower stands above the machine; their boxes share a column but their ink is separated vertically. Verified by eye."
     },
@@ -175,6 +151,24 @@
       "beat": 12,
       "pair": "s1-slot × s1-slot “42 sparse3 dense”",
       "why": "The ghosted wall's roof slope runs behind the tower. Both are deliberately faint and behind the box."
+    },
+    {
+      "section": "12",
+      "beat": 13,
+      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
+      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+    },
+    {
+      "section": "12",
+      "beat": 13,
+      "pair": "s1-slot × s1-slot",
+      "why": "The 288-wall and the 42-tower are ghosted in **behind** the cache box, dwarfing it. Being behind it is the argument."
+    },
+    {
+      "section": "12",
+      "beat": 13,
+      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedcrawling”",
+      "why": "The tower stands above the machine; their boxes share a column but their ink is separated vertically. Verified by eye."
     },
     {
       "section": "12",
@@ -193,6 +187,24 @@
       "beat": 13,
       "pair": "s1-slot × s1-note “288 × 42”",
       "why": "The 288-wall is ghosted in **behind** the count -- the scene's own note says it is there to dwarf the cache box. The figure and its working read cleanly over it; verified by eye at 1920x1080."
+    },
+    {
+      "section": "12",
+      "beat": 14,
+      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
+      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+    },
+    {
+      "section": "12",
+      "beat": 15,
+      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
+      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+    },
+    {
+      "section": "12",
+      "beat": 16,
+      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
+      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
     }
   ]
 }

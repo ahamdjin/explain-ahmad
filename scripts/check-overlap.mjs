@@ -20,6 +20,18 @@
  * actually paint something. Two leaves from different actors that overlap by
  * more than `--threshold` of the smaller one is a collision.
  *
+ * ## Surfaces
+ *
+ * Some actors are a **backdrop**: the room in §6-§7 is a paper sheet with walls,
+ * drawn precisely so that other actors can stand on it. Everything inside it
+ * overlaps it by construction, and that is the composition working rather than
+ * a fault -- so it is reported once per beat per occupant and drowns out real
+ * collisions. Nor is trimming it to its strokes enough: a wall is a long thin
+ * path whose *bounding rect* still spans the room.
+ *
+ * An actor marked `data-surface` is therefore not measured at all. Use it only
+ * for something whose job is to have other things on top of it.
+ *
  * ## The allowlist
  *
  * Overlap is not always a fault. A label belongs *on* the thing it labels, and
@@ -123,8 +135,13 @@ function collect({ threshold, minSide }) {
   }
 
   const roots = [...document.querySelectorAll(ROOTS)].filter(shown)
-  /* Drop roots nested inside another root: the outer one owns that ink. */
-  const tops = roots.filter((el) => !roots.some((other) => other !== el && other.contains(el)))
+  /* Drop roots nested inside another root: the outer one owns that ink. And
+     drop backdrops entirely -- see "Surfaces" above. */
+  const tops = roots.filter(
+    (el) =>
+      !roots.some((other) => other !== el && other.contains(el)) &&
+      !(el.matches('[data-surface]') || el.querySelector('[data-surface]')),
+  )
 
   const actors = tops.map((el, index) => {
     const leaves = []
