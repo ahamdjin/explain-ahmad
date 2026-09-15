@@ -17,6 +17,7 @@ const demos: Record<string, DemoComponent> = {
   sequence: lazy(() => import('../examples/sequence-style/SequenceExample')),
   drag: lazy(() => import('../examples/drag-style/DragGridExample')),
   focus: lazy(() => import('../examples/focus-style/FocusExample')),
+  'paper-proof': lazy(() => import('../examples/paper-proof/PaperProofExample')),
 }
 
 const fallbackDemo = demos.trust

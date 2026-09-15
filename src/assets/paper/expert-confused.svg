@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 145" role="img" aria-label="Confused paper expert">
+  <g stroke="#2c2925" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 31c1-9 9-16 19-16h29c11 0 18 8 18 18l-2 54c0 10-8 17-18 17H42c-11 0-19-7-19-18z" fill="#d5d7d5"/>
+    <path d="M42 104l-5 15M72 104l5 15M22 55l-12 8M89 54l12 8" fill="none"/>
+    <path d="M51 15l3-10 5 10" fill="none"/>
+  </g>
+  <circle cx="44" cy="55" r="3.4" fill="#2c2925"/><circle cx="69" cy="52" r="3.4" fill="#2c2925"/>
+  <path d="M48 75c5-5 12-5 18 0" fill="none" stroke="#2c2925" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="56" cy="6" r="4" fill="#e9a171" stroke="#2c2925" stroke-width="2"/>
+  <path d="M82 12c2-10 15-10 17-2 2 7-8 8-8 15M91 33h.1" fill="none" stroke="#2c2925" stroke-width="3" stroke-linecap="round"/>
+</svg>
