@@ -21,6 +21,18 @@
       "why": "`432` rides the index like a bookmark and stops at its own page. The card being **on** the book is the event of the beat -- an address that stayed clear of the thing it indexes would teach the opposite."
     },
     {
+      "section": "03",
+      "beat": 4,
+      "pair": "s1-slot “4104114124134144154164174184” × s1-slot “0.980.10-0.80-0.180.19-0.44-”",
+      "why": "The row is sliding **out of** page 432 at the height of that page. Touching the book it came from is the causality the beat exists to show; a row that started clear of the book would have arrived from nowhere."
+    },
+    {
+      "section": "03",
+      "beat": 4,
+      "pair": "s1-slot “4104114124134144154164174184” × s1-slot ““it”432”",
+      "why": "432 stays on the page it opened, as the bookmark. Same reason as beat 3."
+    },
+    {
       "section": "05",
       "beat": 10,
       "pair": "s1-slot “288 routed experts280 idle” × s1-note “+1 shared, never scored”",
@@ -63,6 +75,12 @@
       "why": "The room is one floor **of** the tower. That is the whole figure: 'one floor'."
     },
     {
+      "section": "08",
+      "beat": 2,
+      "pair": "s1-slot “floor 4542 sparse3 dense” × s1-note “?”",
+      "why": "The `?` marks the one token climbing alone -- it is placed on the tower because the tower is what the question is about."
+    },
+    {
       "section": "09",
       "beat": 8,
       "pair": "s1-slot “4011bounced4012·rolled4013·w” × s1-slot ““bounced””",
@@ -70,9 +88,21 @@
     },
     {
       "section": "10",
+      "beat": 2,
+      "pair": "s1-slot “floor 142 sparse3 dense” × s1-note “9 × 45 layers ?”",
+      "why": "A label on the object it names. The tower is the subject of this beat, and a count about the tower placed clear of the tower is a caption next to nothing."
+    },
+    {
+      "section": "10",
       "beat": 3,
       "pair": "s1-slot “floor 142 sparse3 dense” × s1-slot ““bounced””",
       "why": "The new token sits on floor one of the tower. 'It starts at the bottom. Floor one.'"
+    },
+    {
+      "section": "10",
+      "beat": 4,
+      "pair": "s1-slot “floor 142 sparse3 dense” × s1-note “1 of 9 moving”",
+      "why": "A label on the object it names. The tower is the subject of this beat, and a count about the tower placed clear of the tower is a caption next to nothing."
     },
     {
       "section": "11",
@@ -136,6 +166,12 @@
     },
     {
       "section": "12",
+      "beat": 6,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
       "beat": 7,
       "pair": "s1-slot × s1-slot “kept close”",
       "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
@@ -157,6 +193,18 @@
       "beat": 10,
       "pair": "s1-slot × s1-slot “kept close”",
       "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot “12,096layer-specific expert ”",
+      "why": "The total is printed over the ghosted geometry it counts -- 288 x 42 is a fact about that wall and that tower, and a figure placed clear of them would be a number with nothing behind it."
     },
     {
       "section": "12",
@@ -187,6 +235,24 @@
       "beat": 12,
       "pair": "s1-slot × s1-note “8 of 288 · per sparse layer”",
       "why": "Same: the count names the wall it is drawn on."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “12,096layer-specific expert ”",
+      "why": "As beat 11: the total is drawn over the geometry it counts."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “42 sparse3 dense”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
     },
     {
       "section": "12",

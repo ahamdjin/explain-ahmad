@@ -117,7 +117,7 @@ export const BEATS: Beat<Patch>[] = [
       /* The count per position, which the voice gives only for the two ends.
        * The zero is the half that makes the triangle a triangle. */
       at: 6000,
-      overlays: [note('`The`: 0 back\n`it`: 7 back', 8, 24, { size: 'md', tone: 'measure', rotate: -2 })],
+      overlays: [note('`The`: 0 back\n`it`: 7 back', 36, 30, { size: 'md', tone: 'measure', rotate: -2 })],
     },
   },
   {
@@ -129,7 +129,6 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Then each position keeps moving upward through the layers.',
     commands: [line.causal(false), line.set({ changed: true }), tower.climbTo(4)],
     stages: [{ at: 2600, commands: [line.causal(true)] }],
-    overlays: [note('floor 4', 12, 62, { tone: 'relate', rotate: 3 })],
   },
   {
     n: 8,

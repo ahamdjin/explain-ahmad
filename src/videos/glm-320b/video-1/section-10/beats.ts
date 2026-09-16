@@ -130,7 +130,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [tower.climbTo(4), tower.runRouter('pick')],
     lateOverlays: {
       at: 3400,
-      overlays: [note('8 of 288', 40, 30, { tone: 'measure', rotate: 3 })],
+      overlays: [note('8 of 288', 30, 30, { tone: 'measure', rotate: 3 })],
     },
   },
   {
