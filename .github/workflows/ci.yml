@@ -1,22 +1,27 @@
-name: CI
+name: Production verify
 
 on:
   push:
-    branches: [main, "build/**"]
   pull_request:
-    branches: [main]
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install
-      - name: Build
+          cache: npm
+      - run: npm ci
+      - name: Story, narration and static gates
+        run: npm run check
+      - name: Production build
         run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Open every production route
+        run: npm run smoke
+      - name: Visual overlap gate
+        run: npm run check:overlap

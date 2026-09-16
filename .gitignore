@@ -2,35 +2,23 @@ node_modules/
 dist/
 *.tsbuildinfo
 
-# visual QA output
+# Generated review/render output is reproducible and never source.
 frames/
+output/
 
 .DS_Store
 *.local
 
-# Local browser review artifacts
-.playwright-cli/
-output/playwright/
-
-# voice-over tracks and final audio mixes are large and not source
+# Voice-over tracks and final audio mixes are large and local.
 public/vo/*.mp3
 public/vo/*.wav
 public/vo/*.m4a
 public/mix/*.mp3
 public/mix/*.wav
 public/mix/*.m4a
-output/recordings/
 
-# generated SFX timing sheets
-output/sfx/
-
-# smoke-test screenshots
-output/smoke/
-
-# Raw media fetches. The processed, project-ready sounds live in assets/sfx/
-# with their provenance; this is the unedited pool and the fetch ledger.
+# Raw media fetches/candidate pools. Keep only chosen production sounds + provenance.
 .media/
-
-# auditioning copies of assets/sfx
-public/sfx/
+assets/sfx/raw/
 assets/sfx/pool/
+public/sfx/

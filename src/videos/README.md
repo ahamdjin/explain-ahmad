@@ -1,31 +1,24 @@
-# Video implementations
+# Videos
 
-One folder per topic. Inside it, one folder per **cut** of that video.
+There is one active film in this working tree.
 
-## glm-320b
+## The 18 Billion Mystery
 
-| | route | folder |
-| --- | --- | --- |
-| **Video 1 — the film** | `/watch`, `/video-1` | `glm-320b/video-1/` |
-| Video 2 — a proposal | `/video-2` | `glm-320b/video-2-gpt/` |
-| superseded, kept routed | `/why-320b-uses-18b`, `/old/section-NN`, `/gpt-section-01` | `glm-320b/superseded/` |
+**YouTube title:** **320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?**
 
-`registry.tsx` is the authority for what is live, and `npm run smoke` reads its
-route list from there.
+Executable source:
 
-This file used to say the current video was `v9`. It was, on `main`, and had
-not been true since the thirteen sections landed — which is how a reader ends
-up building the wrong film. If you change what is live, change this table.
+```text
+src/videos/glm-320b/video-1/
+  section-01/
+  ...
+  section-13/
+```
 
-## Rule for versions
+Production URL:
 
-- **Do not infer the current story from implementation files.** The story
-  authority is `storyboard/video-1/STORY_SPINE.md`, then
-  `video-script/video-1/`. Code is fifth in the authority order; see
-  `PROJECT_STRUCTURE.md`.
-- New production work goes inside the active cut's folder. No loose
-  root-level `V*.tsx`.
-- A cut that is retired moves to `superseded/` and stays routed, so the old and
-  new can be watched side by side.
+`/320b-parameters-only-18b-active-why-does-it-need-8-gpus`
 
-Capability demos belong in `/lab`, not here.
+Direct `/section-NN` routes exist only for QA, frame capture and rendering.
+
+Narration authority lives in `video-script/video-1/`. Rejected alternate cuts are not kept beside the current film; Git history is the archive.

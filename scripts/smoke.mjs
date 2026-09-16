@@ -1,15 +1,9 @@
 /**
- * Visits every route, screenshots it, and fails on any console or page error.
+ * Opens every production entry and every direct section route and fails on any
+ * console error, page error or failed request.
  *
- * This exists because a route can be completely broken and still typecheck --
- * a missing stylesheet, a null in a lazy chunk, an SVG with a NaN in a path.
- * The only reliable way to know is to open all of them.
- *
- *   npm run smoke                 # every route, fail on error
- *   npm run smoke -- --out=shots  # keep the screenshots
- *
- * Video routes are read out of the registry rather than duplicated here, so a
- * new section is covered the moment it is registered.
+ *   npm run smoke
+ *   npm run smoke -- --out=shots
  */
 import { spawn } from 'node:child_process'
 import { mkdir, readFile, rm } from 'node:fs/promises'
@@ -29,8 +23,17 @@ const OUT = path.resolve(args.get('out') ?? 'output/smoke')
 
 async function routes() {
   const registry = await readFile('src/videos/registry.tsx', 'utf8')
-  const slugs = [...registry.matchAll(/slug: '([^']+)'/g)].map((m) => `/${m[1]}`)
-  return ['/', '/watch', '/paper', '/styles', '/lab/trust', '/lab/navigation', '/lab/flow', '/lab/drag', '/lab/reveal', ...slugs]
+  const titleSlug = registry.match(/VIDEO_SLUG = '([^']+)'/)?.[1]
+  if (!titleSlug) throw new Error('VIDEO_SLUG is missing from src/videos/registry.tsx')
+  const sectionSlugs = [...registry.matchAll(/slug: 'section-(\d+)'/g)].map((m) => `/section-${m[1]}`)
+  return [
+    '/',
+    `/${titleSlug}`,
+    `/${titleSlug}?section=13`,
+    '/watch',
+    '/video-1',
+    ...sectionSlugs,
+  ]
 }
 
 async function startServer() {
