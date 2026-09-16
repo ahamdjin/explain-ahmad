@@ -82,26 +82,78 @@ For the first time, we can point to some parameters in this giant model and say:
 
 So what do the eight actually do?
 
-## Storyboard — 14 beats
+---
 
-§4 leaves the contextual `it` row in centre with an expert wall beginning to appear ahead. Continue the same row into that wall.
+## The script
 
-| beat | continuity / screen action | add / keep / remove |
-| --- | --- | --- |
-| 1 | The expert wall finishes drawing behind the unchanged hero row. Count clusters until the frame establishes **288 routed experts**. | **keep** `it` row; **complete** wall |
-| 2 | Hold the wall. VO explicitly tells viewer the number is a fact, not a quiz. | **hold**; attach `288 routed experts` to wall |
-| 3 | A small desk/router object draws itself between row and wall. Name `router` lands immediately because its job is about to be shown. | **add** router |
-| 4 | Put `432` as a faint old card beside the bright contextual row. Ask: ID or current row? | **add** old-ID comparison; fair prediction |
-| 5 | 432 dims; the contextual row slides into the router. This visually answers the question. | **quiet** 432; **move** current row |
-| 6 | One score badge appears on **every** expert slot, initially blank. | **add** 288 score slots |
-| 7 | A sweep fills all scores. Avoid semantic labels on experts. | **state change** all 288 scored |
-| 8 | The top eight rise/lift forward while the other 280 flatten. Count `8 selected / 280 idle`. | **focus** 8; **quiet** 280 |
-| 9 | Try to stick playful plates `dog`, `grammar`, `French` onto selected experts; they visibly slide off. | **temporary add**, then **remove** semantic plates |
-| 10 | Open one selected expert like a machine box: row in, transformed row out. Do not yet run all eight. | **add** explanatory cutaway |
-| 11 | A ninth, visually separate block enters from outside the 288 wall labelled `shared — always on`. | **add** shared expert outside competition |
-| 12 | Recompose cleanly: wall of 288, 8 orange selected, +1 shared, contextual row at router. | **consolidate** carrying frame |
-| 13 | Handwritten `Mixture of Experts (MoE)` lands on the whole arrangement, not on one expert. | **add** architecture name |
-| 14 | Selected eight and shared expert open their input doors toward the same `it` row. End on **“what do the eight actually do?”** | **seed** §6; no outputs yet |
+These are **cuts of the narration above**, not rewritten versions of it.
+Concatenate them in order and the narration is what is spoken.
+
+### Act 1 — the wall and the thing that chooses (beats 1–5)
+
+> **1.** *(The wall finishes drawing behind the unchanged hero row.)* Now we reach the part that explains the word active. In one of GLM’s sparse layers, our `it` arrives in front of 288 experts.
+>
+> **2.** *(The wall holds; the number is attached to the object, not floated as a title.)* And no — you were not supposed to know that number. GLM simply has 288 routed experts available here.
+>
+> **3.** *(A small desk draws itself between the row and the wall and is named at once.)* But it does not run all 288. Something has to choose. That something is the router.
+>
+> **4.** *(`432` returns as a faint old card beside the bright contextual row.)* And here’s a question you actually can answer now. Should the router choose based on the original token ID — 432... or based on the row we just changed using the sentence?
+>
+> **5.** *(`432` dims out; the contextual row slides into the router.)* It has to use the changed row. Because 432 is the same every time. But this row describes `it` right now, in this context.
+
+### Act 2 — scoring all of them, keeping eight (beats 6–8)
+
+> **6.** *(A blank score badge appears on every slot in the wall.)* So the router takes that row and gives all 288 experts a score.
+>
+> **7.** *(A sweep fills all of them. No semantic labels anywhere.)* Not eight of them. All 288.
+>
+> **8.** *(Eight lift forward; the rest flatten.)* Then it keeps the top eight. The other 280 routed experts do nothing for this token, in this layer.
+
+### Act 3 — the ninth block, and what an expert is not (beats 9–12)
+
+> **9.** *(A visually separate block enters from outside the wall entirely.)* And there’s one more detail. GLM also has one shared expert that runs every time. It isn’t part of the 288-way competition.
+>
+> **10.** *(The arrangement recomposes into one readable count.)* So visually: 288 are scored. 8 are selected. +1 shared expert always runs.
+>
+> **11.** *(Playful name plates are pressed onto the selected eight and slide straight off.)* And one thing I want to kill before it becomes confusing: an expert is not “the dog expert” or “the grammar expert.”
+>
+> **12.** *(One selected expert opens like a machine box: row in, transformed row out.)* It is just a learned neural-network block that transforms the row. The router learned which blocks tend to be useful for which hidden states.
+
+### Act 4 — name it, then hand it forward (beats 13–14)
+
+> **13.** *(The name lands on the whole arrangement, never on one expert.)* That whole setup — many possible expert blocks, only a few routed ones used at a time — is why this is called a Mixture of Experts, or MoE.
+>
+> **14.** *(The selected eight and the shared block open their doors toward the same row. Nothing comes out yet.)* And notice what just happened. For the first time, we can point to some parameters in this giant model and say: these ones are active for our `it`, right now. So what do the eight actually do?
+
+---
+
+## Storyboard
+
+There is **one paper stage for all 14 beats**. §4 leaves the contextual `it` row
+in centre with the wall already beginning; that wall completes rather than cuts.
+
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the paper stage | — | the wall finishes drawing behind the unchanged hero row | expert wall + `it` row | 288 routed experts | S-14 |
+| 2 | the paper stage | — | the wall holds and the count is attached to the object | wall + `288 routed experts` | not a quiz | S-04 |
+| 3 | the paper stage | — | a small desk draws itself between the row and the wall | router | something has to choose | S-13 |
+| 4 | the paper stage | — | `432` returns as a faint old card beside the bright row | old ID vs current row | which one decides? | S-06 |
+| 5 | the paper stage | — | `432` dims out and the contextual row slides into the router | row entering the router | 432 never changes | S-14 |
+| 6 | the paper stage | — | a blank score badge appears on every slot in the wall | 288 blank scores | all of them, not eight | S-04 |
+| 7 | the paper stage | — | a sweep fills all of the scores, with no semantic labels | 288 scored | all 288 scored | S-04 |
+| 8 | the paper stage | — | eight lift forward while the rest flatten | 8 selected / 280 idle | 280 do nothing here | S-01 |
+| 9 | the paper stage | — | a separate block enters from outside the wall entirely | shared expert | `shared — always on` | S-04 |
+| 10 | the paper stage | — | the arrangement recomposes into one readable count | 288 / 8 / +1 | carrying frame | S-14 |
+| 11 | the paper stage | — | name plates are pressed onto the selected eight and slide off | plates falling | not `the dog expert` | S-09 |
+| 12 | the paper stage | — | one selected expert opens: row in, transformed row out | expert cutaway | a learned block | S-04 |
+| 13 | the paper stage | — | the name lands on the whole arrangement, never on one expert | name over the wall | Mixture of Experts (MoE) | S-12 |
+| 14 | the paper stage | — | the eight and the shared block open their doors toward the row | doors open, no output | these are active, right now | S-14 |
+
+## Carrying frames
+
+- **Beat 8:** all 288 scored, **eight** lifted, **280** flat.
+- **Beat 10:** 288 scored · 8 selected · +1 shared — the count §6 and §7 both build on.
+- **Beat 14:** the first frame in the video where *active* can be pointed at.
 
 ## Truth / implementation notes
 
@@ -110,3 +162,12 @@ So what do the eight actually do?
 - Expert ≠ human-readable topic specialist. Treat each as a learned feed-forward transformation block.
 - “280 do nothing” is scoped to the **routed experts for this token in this sparse layer**; the shared expert still runs.
 - This is the first visual payoff of “active”: a small selected subset of a much larger available set.
+
+## Sound-compatible actions
+
+- beat 1: the wall settling
+- beat 3: one desk set down
+- beat 7: the scoring sweep
+- beat 8: eight lifts, the last one heavier
+- beat 11: plates failing to stick
+- beat 14: doors opening

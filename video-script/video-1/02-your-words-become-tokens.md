@@ -101,26 +101,78 @@ The model now has a number…
 
 but **where does the meaning come from?**
 
-## Storyboard — 14 beats
+---
 
-One continuous paper stage. Section 1 leaves Chat on the left and GLM on the right. We do not cut to a fresh page; the prompt continues inward.
+## The script
 
-| beat | continuity / screen action | add / keep / remove |
-| --- | --- |
-| 1 | Pick up the half-drawn path from §1. The intact sentence travels from Chat toward GLM while VO lands **“it doesn’t start with words.”** | **keep** Chat + GLM; **move** prompt; no new diagram |
-| 2 | Once inside, the sentence lands on one clean paper surface. As “break your text” is said, hairline cut marks appear between the real tokenizer pieces. | **keep** same sentence; **add** cut marks |
-| 3 | The sentence physically separates into the eight measured pieces. A small count builds `1…8`. | **state change** same sentence → eight token cards |
-| 4 | `tokens` label lands only after the viewer has watched the split. The eight remain countable. | **add** label `tokens`; nothing leaves |
-| 5 | The eight slide slightly upward. `unbelievable` enters below as one ordinary word. | **add** temporary example; **keep** main prompt visible |
-| 6 | `unbelievable` fractures into `un | belie | vable`. Hold the contrast: one human word, three model pieces. | **state change** temporary example; then let it leave |
-| 7 | A very tall vocabulary/book index rises beside the eight tokens. It runs past the frame. `154,880` is attached to the object, not floating as a title. | **add** vocabulary list |
-| 8 | All prompt tokens dim except `it`. `it` lifts but stays visibly connected to its place in the original row. | **focus** `it`; **keep** full prompt as context |
-| 9 | Fair non-quiz: show the list and ask where `it` sits. Do not provide choices; VO explicitly says the viewer cannot know. | **hold**; no motion during the thought |
-| 10 | `it` travels to the list; the list snaps/scrolls to row **432**. The card touches that row and comes back carrying `432`. | **move same actor**; no replacement card |
-| 11 | The letters `it` fade from the travelling card while **432** remains. Handwritten `token ID` lands beside it. | **state change** `it` → `432` |
-| 12 | The huge list recedes. Bring back a faint ghost of `ball` and `dog` while VO asks whether 432 tells us anything about them or pronouns. Nothing connects. | **remove** vocabulary; **add** faint question context |
-| 13 | Everything except `432` clears. A tiny address-tab shape appears under it: `address, not meaning`. | **remove** ghosts; **keep** 432 alone |
-| 14 | The bottom edge of a giant lookup table/book begins rising into frame behind `432` but is not explained yet. End on the question **“where does the meaning come from?”** | **add only an edge** of next mechanism; handoff to §3 |
+These are **cuts of the narration above**, not rewritten versions of it.
+Concatenate them in order and the narration is what is spoken.
+
+### Act 1 — the sentence comes apart (beats 1–4)
+
+> **1.** *(The half-drawn path from §1 completes; the intact sentence travels inward.)* Because it doesn’t start with words. The first thing the model does is break your text into smaller pieces.
+>
+> **2.** *(The sentence lands on one clean surface and hairline cut marks appear.)* So our sentence: “The dog dropped the ball, and it…” becomes:
+>
+> **3.** *(It separates into the eight measured pieces and a small count builds.)* The | dog | dropped | the | ball | , | and | it. Eight pieces.
+>
+> **4.** *(The name lands only after the split has been watched. The eight stay countable.)* And these pieces are called tokens.
+
+### Act 2 — tokens are not words (beats 5–7)
+
+> **5.** *(Nothing moves. The eight sit there looking exactly like words.)* Now, in this sentence, they look suspiciously like words. But tokens are not just words.
+>
+> **6.** *(One ordinary word enters below and fractures into three.)* For example, give the same tokenizer: “unbelievable” and it breaks it into: un | belie | vable. One word. Three tokens.
+>
+> **7.** *(A very tall list rises beside the prompt and runs past the frame.)* So the model isn’t really reading words the way we do. It has its own set of pieces it knows how to work with. And GLM has a list of 154,880 of them. Every token in that list has a number.
+
+### Act 3 — our piece gets a number (beats 8–11)
+
+> **8.** *(Every prompt token dims except the tracked one, which stays in its place in the row.)* So let’s go back to the one we said we’d follow: “it.”
+>
+> **9.** *(The list and `it` hold. No choices are offered.)* Where do you think `it` is in that list? There’s no way you could know.
+>
+> **10.** *(`it` travels to the list, touches its real row, and comes back carrying the number.)* It happens to be: 432. That number is called its token ID.
+>
+> **11.** *(The letters fade from the same travelling card; the number stays.)* So from the model’s point of view, our little `it` has now gone from: “it” to: 432. And that sounds like progress.
+
+### Act 4 — an address is not a meaning (beats 12–14)
+
+> **12.** *(The list stays. The number moves beside the thing it indexes.)* But think about what 432 actually tells us. Does 432 tell you that `it` might refer to the ball? Does it tell you that `it` is a pronoun? Does it tell you anything about what `it` means? No.
+>
+> **13.** *(432 is left alone and reframed.)* It’s just where that token lives in the list. Basically an address.
+>
+> **14.** *(The list goes; the number is all that is left in the middle.)* And that creates our next problem. The model now has a number… but where does the meaning come from?
+
+---
+
+## Storyboard
+
+There is **one paper stage for all 14 beats**. §1 leaves Chat on the left and GLM
+on the right with a half-drawn path between them; the prompt continues inward.
+
+| beat | where | camera | what happens | on screen | example | strategy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | the paper stage | — | the half-drawn path from §1 completes and the sentence travels inward | Chat + GLM + prompt | it doesn’t start with words | S-14 |
+| 2 | the paper stage | — | the sentence lands on one surface and hairline cut marks appear | sentence + cut marks | about to be broken | S-04 |
+| 3 | the paper stage | — | it separates into the eight measured pieces and a count builds | eight token cards | `8 pieces` | S-04 |
+| 4 | the paper stage | — | the name lands only after the split has been watched | eight + `tokens` | called tokens | S-12 |
+| 5 | the paper stage | — | nothing moves; the eight sit there looking exactly like words | the same eight | they look like words | S-08 |
+| 6 | the paper stage | — | one ordinary word enters below and fractures into three | `un / belie / vable` | 1 word → 3 tokens | S-01 |
+| 7 | the paper stage | — | a very tall list rises beside the prompt and runs past the frame | vocabulary list | 154,880 entries | S-04 |
+| 8 | the paper stage | — | every prompt token dims except the tracked one | `it` lit in place | the one we follow | S-04 |
+| 9 | the paper stage | — | the list and `it` hold, and no choices are offered | list + `where?` | no way you could know | S-08 |
+| 10 | the paper stage | — | `it` travels to its real row and comes back carrying the number | card at row 432 | `token ID` | S-04 |
+| 11 | the paper stage | — | the letters fade from the same card and the number stays | `432` | it → 432 | S-14 |
+| 12 | the paper stage | — | the list stays while the number moves beside the thing it indexes | 432 + the list | does it tell you anything? | S-02 |
+| 13 | the paper stage | — | 432 is left alone and reframed | `address, not meaning` | just where it lives | S-04 |
+| 14 | the paper stage | — | the list goes and the number is all that is left in the middle | 432 alone | where does meaning come from? | S-08 |
+
+## Carrying frames
+
+- **Beat 6:** one human word, three model pieces — the frame that kills token = word.
+- **Beat 11:** the same card the viewer watched travel, now reading `432`.
+- **Beat 14:** a number alone on an empty stage. That emptiness is what §3 is given.
 
 ## Truth / implementation notes
 
@@ -129,3 +181,11 @@ One continuous paper stage. Section 1 leaves Chat on the left and GLM on the rig
 - `it` is token ID **432**. This is now the repo-wide `FOLLOWED` token.
 - `unbelievable → un | belie | vable` is measured, not invented.
 - **Do not call 432 meaning.** It is an index/address into learned tables.
+
+## Sound-compatible actions
+
+- beat 2: the cuts
+- beat 3: eight pieces separating
+- beat 6: one word breaking
+- beat 7: the list running up past the frame
+- beat 10: the card touching its row
