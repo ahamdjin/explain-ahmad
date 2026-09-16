@@ -41,12 +41,17 @@ async function productionRoutes() {
 
 async function waitForServer(child) {
   let stderr = ''
+  let spawnError = null
   child.stderr?.on('data', (chunk) => {
     stderr += chunk.toString()
+  })
+  child.once('error', (error) => {
+    spawnError = error
   })
 
   const deadline = Date.now() + 30_000
   while (Date.now() < deadline) {
+    if (spawnError) throw spawnError
     if (child.exitCode !== null) {
       throw new Error(`vite exited early with code ${child.exitCode}${stderr ? `\n${stderr}` : ''}`)
     }
@@ -62,17 +67,33 @@ async function waitForServer(child) {
 }
 
 async function startServer() {
-  const child = spawn('npx', ['vite', '--host', HOST, '--port', String(PORT), '--strictPort'], {
+  const viteBin = path.resolve('node_modules/vite/bin/vite.js')
+  const child = spawn(process.execPath, [viteBin, '--host', HOST, '--port', String(PORT), '--strictPort'], {
     stdio: ['ignore', 'ignore', 'pipe'],
     env: { ...process.env, NO_COLOR: '1' },
   })
+  const exited = new Promise((resolve) => child.once('exit', resolve))
+
+  async function stop() {
+    if (child.exitCode !== null || child.signalCode !== null) return
+    child.kill('SIGTERM')
+    const stopped = await Promise.race([
+      exited.then(() => true),
+      new Promise((resolve) => setTimeout(() => resolve(false), 3_000)),
+    ])
+    if (!stopped && child.exitCode === null && child.signalCode === null) {
+      child.kill('SIGKILL')
+      await exited
+    }
+  }
+
   try {
     await waitForServer(child)
   } catch (error) {
-    child.kill('SIGTERM')
+    await stop()
     throw error
   }
-  return { url: BASE, stop: () => void child.kill('SIGTERM') }
+  return { url: BASE, stop }
 }
 
 const { titleSlug, routes } = await productionRoutes()
@@ -130,7 +151,7 @@ try {
   console.log('  ok  guided navigation → title route → chapter 13')
 } finally {
   await browser.close()
-  server.stop()
+  await server.stop()
 }
 
 console.log(`\n${routes.length} routes + guided navigation checked${OUT ? ` → ${OUT}` : ''}.`)
