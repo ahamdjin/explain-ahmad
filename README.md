@@ -1,56 +1,59 @@
-# Explain Ahmad
+# The 18 Billion Mystery
 
-Interactive explainer project. The current video is about **why GLM-5.3-Flash can have 320B total parameters while using about 18B active parameters per token**.
+**YouTube title:** **320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?**
 
-## Start here — current sources
+This repository is the production source for one film. Rejected cuts and historical drafts belong in Git history, not beside the current build.
 
-Use these files in this order:
+## Open the film
 
-1. `video-script/01-opening-narration.md` — **current spoken script**. Only the opening is written here so far.
-2. `storyboard/SECTION_MAP.md` — **authoritative current story / section structure**.
-3. `research/glm/GLM_V7_ATTENTION_MOE_RESEARCH.md` — **current GLM technical reference**.
-4. `research/ncase/NCASE_STUDY_INDEX.md` — entry point for teaching / Nicky Case research.
-5. `art-direction/GLM_PAPER_WORLD.md` — current visual language.
-6. `src/videos/registry.tsx` — tells you which production implementation is actually active.
+Production route:
 
-**Important:** implementation is not the source of truth for story or technical claims. Script, storyboard and research come first.
+`/320b-parameters-only-18b-active-why-does-it-need-8-gpus`
 
-## Current production
+The root `/` is a small guided landing page with **Open video**, **Play through**, and direct links to all 13 chapters. Inside the film, the compact **Chapters** button can jump anywhere without adding a permanent navigation bar to the artwork.
 
-The active route is:
+For clean recording/rendering, append `?chrome=0`. For automatic chapter-to-chapter playback, append `?play=1`. `?section=7` deep-links into a chapter.
 
-`src/videos/glm-320b/v9/Glm320bProductionV9.tsx`
+The direct `/section-01` … `/section-13` routes are production tooling for frame capture and QA, not alternate versions of the film.
 
-Earlier loose V1–V8 GLM implementations and stylesheets have been removed from the working tree. Git history preserves them if needed.
+## Source of truth
 
-## Repository map
+1. Approved/locked narration: `video-script/video-1/`
+2. Story promise and section chain: `storyboard/video-1/STORY_SPINE.md`
+3. Generated current board/read-through: `storyboard/video-1/BOARD.md`, `video-script/video-1/READ_ALOUD.md`
+4. Executable scenes: `src/videos/glm-320b/video-1/`
 
-- `video-script/` — words Ahmad currently plans to say.
-- `storyboard/` — current story structure and visual beats.
-- `research/glm/` — factual / architecture research.
-- `research/ncase/` — teaching and explainer research.
-- `art-direction/` — current visual rules.
-- `skills/` — reusable explainer rules, not video-specific facts.
-- `src/` — implementation and reusable visual code.
-- `archive/` — superseded material kept only for history/reference.
+If implementation disagrees with approved narration, implementation changes.
 
-See `PROJECT_STRUCTURE.md` for the authority rules.
+## Production structure
 
-## Core rule
+- `src/videos/glm-320b/video-1/` — the 13 executable sections
+- `src/paper/` — shared paper-world actors, motion and visual grammar
+- `video-script/video-1/` — narration and per-section visual contracts
+- `storyboard/video-1/` — current story spine, generated board and vocabulary ledger
+- `art-direction/` — visual language, cast and palette
+- `research/` — factual grounding
+- `skills/` — production/story/continuity rules
+- `scripts/` — verification, frame capture, render and sound tooling
+- `assets/sfx/` — chosen production SFX plus provenance
+- `docs/` — VO and sound workflow
 
-When files disagree, use this priority:
+Reusable labs/examples remain in `src/` as internal visual tooling, but they are not public production routes.
 
-**current script → current storyboard → current research → art direction → implementation → archive**
-
-Archive material may contain useful ideas, but it is never authoritative unless deliberately brought back into the current files.
-
-## Run
+## Verify before production
 
 ```bash
-npm install
-npm run dev
+npm ci
+npx playwright install chromium
+npm run verify
 ```
 
-## Credits
+`npm run verify` checks TypeScript, board/story chain, narration lock, strategy/flow/timing drift, the production build, every public/direct section route, and the visual-overlap allowlist.
 
-See `NCASE_CREDITS.md` and `THIRD_PARTY.md`.
+CI runs the same class of checks on every push and pull request.
+
+## Production order
+
+Record VO → sync real timings → full render → final motion/visual QA → SFX/music → final export.
+
+Generated screenshots, renders and raw candidate media are ignored. Only source, chosen production assets and provenance stay in Git.

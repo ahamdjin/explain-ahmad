@@ -1,21 +1,24 @@
-# Video implementations
+# Videos
 
-This folder contains real explainer implementations.
+There is one active film in this working tree.
 
-## Current GLM video
+## The 18 Billion Mystery
 
-`registry.tsx` is the authority for which implementation is live.
+**YouTube title:** **320B Parameters, Only 18B Active — Why Does It Need 8 GPUs?**
 
-Current route:
+Executable source:
 
-`why-320b-uses-18b` → `glm-320b/v9/Glm320bProductionV9.tsx`
+```text
+src/videos/glm-320b/video-1/
+  section-01/
+  ...
+  section-13/
+```
 
-Do not infer the current story from old implementation files. The story authority lives in `video-script/` and `storyboard/`.
+Production URL:
 
-## Rule for versions
+`/320b-parameters-only-18b-active-why-does-it-need-8-gpus`
 
-- Active version: whatever `registry.tsx` imports.
-- Older versioned implementations: legacy experiments/reference.
-- New production work should live inside the active version folder rather than creating another loose root-level `V*` file.
+Direct `/section-NN` routes exist only for QA, frame capture and rendering.
 
-Capability demos belong in `/lab`, not here.
+Narration authority lives in `video-script/video-1/`. Rejected alternate cuts are not kept beside the current film; Git history is the archive.

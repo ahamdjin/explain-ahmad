@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explain Ahmad — SFX audition</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; background: #f2ead9; color: #272521; }
+    body { max-width: 920px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { margin-bottom: 6px; }
+    .sub { max-width: 70ch; opacity: .72; margin: 0 0 28px; }
+    .grid { display: grid; gap: 10px; }
+    .row { display: grid; grid-template-columns: 120px 1fr minmax(220px, 320px); gap: 16px; align-items: center; padding: 12px 14px; border: 1px solid #8f8779; background: #fffaf0; border-radius: 8px; }
+    .role { font-weight: 700; }
+    .file { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; opacity: .7; }
+    audio { width: 100%; height: 34px; }
+    .warning { margin-top: 28px; padding: 14px; border-left: 4px solid #9b4a38; background: #fff7ed; }
+    @media (max-width: 680px) { .row { grid-template-columns: 1fr; gap: 6px; } }
+  </style>
+</head>
+<body>
+  <h1>SFX audition</h1>
+  <p class="sub">These are the thirteen CC0 edit masters in <code>assets/sfx/</code>. Listen for character, not just loudness. They are normalised to roughly −12 dBFS as source masters; the final cut targets roughly −20 dBFS against the voice.</p>
+
+  <div class="grid">
+    <div class="row"><span class="role">fact landing</span><span class="file">stamp.wav</span><audio controls preload="none" src="../assets/sfx/stamp.wav"></audio></div>
+    <div class="row"><span class="role">small placement</span><span class="file">click.wav</span><audio controls preload="none" src="../assets/sfx/click.wav"></audio></div>
+    <div class="row"><span class="role">small connection</span><span class="file">tick.wav</span><audio controls preload="none" src="../assets/sfx/tick.wav"></audio></div>
+    <div class="row"><span class="role">decision</span><span class="file">snap.wav</span><audio controls preload="none" src="../assets/sfx/snap.wav"></audio></div>
+    <div class="row"><span class="role">hard stop</span><span class="file">knock.wav</span><audio controls preload="none" src="../assets/sfx/knock.wav"></audio></div>
+    <div class="row"><span class="role">closing</span><span class="file">clack.wav</span><audio controls preload="none" src="../assets/sfx/clack.wav"></audio></div>
+    <div class="row"><span class="role">weight</span><span class="file">thud.wav</span><audio controls preload="none" src="../assets/sfx/thud.wav"></audio></div>
+    <div class="row"><span class="role">largest number</span><span class="file">impact.wav</span><audio controls preload="none" src="../assets/sfx/impact.wav"></audio></div>
+    <div class="row"><span class="role">counting</span><span class="file">ratchet.wav</span><audio controls preload="none" src="../assets/sfx/ratchet.wav"></audio></div>
+    <div class="row"><span class="role">chapter seam</span><span class="file">page-turn.wav</span><audio controls preload="none" src="../assets/sfx/page-turn.wav"></audio></div>
+    <div class="row"><span class="role">destruction</span><span class="file">tear.wav</span><audio controls preload="none" src="../assets/sfx/tear.wav"></audio></div>
+    <div class="row"><span class="role">diegetic typing</span><span class="file">typing.wav</span><audio controls preload="none" src="../assets/sfx/typing.wav"></audio></div>
+    <div class="row"><span class="role">final key</span><span class="file">key-press.wav</span><audio controls preload="none" src="../assets/sfx/key-press.wav"></audio></div>
+  </div>
+
+  <div class="warning"><strong>Do not judge these at full master level.</strong> The files are intentionally hotter than their final placement. The edit should attenuate ordinary cues by roughly 8 dB, then adjust by ear against the real VO. See <code>docs/SOUND.md</code>.</div>
+</body>
+</html>

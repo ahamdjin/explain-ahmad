@@ -1,0 +1,24 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Generated review/render output is reproducible and never source.
+frames/
+output/
+
+.DS_Store
+*.local
+
+# Voice-over tracks and final audio mixes are large and local.
+public/vo/*.mp3
+public/vo/*.wav
+public/vo/*.m4a
+public/mix/*.mp3
+public/mix/*.wav
+public/mix/*.m4a
+
+# Raw media fetches/candidate pools. Keep only chosen production sounds + provenance.
+.media/
+assets/sfx/raw/
+assets/sfx/pool/
+public/sfx/

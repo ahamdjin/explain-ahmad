@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { ScrollController, type ScrollStep } from '../engine/ScrollController'
+import '../scrolly.css'
 
 type ScrollyStoryProps = {
   title: string

@@ -1,4 +1,7 @@
 import type { ReactNode } from 'react'
+/* Styles .scene-frame[data-art='paper'] -- an attribute selector, so it
+ * belongs to this component rather than to a global sheet. */
+import '../paper-refinement.css'
 
 export type ArtDirection = 'paper' | 'clean' | 'editorial' | 'technical'
 

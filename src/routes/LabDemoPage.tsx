@@ -1,6 +1,19 @@
 import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from 'react'
 import { useParams } from 'react-router'
 import { LabCommandMenu } from '../lab/LabCommandMenu'
+/*
+ * Stylesheet order matters here, and it is not alphabetical.
+ *
+ * premium-patterns.css and design-system.css both define `.snap-story` with
+ * different heights (min(72vh,720px) vs full bleed) at the same specificity,
+ * so whichever loads last wins. These used to be global imports in main.tsx
+ * in exactly this order; keep it.
+ */
+import '../premium-scroll.css'
+import '../premium-patterns.css'
+import '../design-system.css'
+import '../explanation-system.css'
+import '../lab-shell.css'
 
 type DemoComponent = LazyExoticComponent<ComponentType>
 

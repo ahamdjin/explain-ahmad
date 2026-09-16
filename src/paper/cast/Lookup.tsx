@@ -1,0 +1,418 @@
+import { motion } from 'motion/react'
+import { INK } from '../ink'
+import { PALETTE, ROLE } from '../palette'
+import { seeded } from '../props/frame'
+import { FOLLOWED, PROMPT_IDS } from '../prompt'
+
+/**
+ * The two tables the video looks things up in.
+ *
+ * `Vocabulary` is the list of every token the model knows — §2 turns a word
+ * into a row number in it, and §9 turns the top of the stack back into a
+ * choice from it. Same object, both times, which is the only reason the §9
+ * callback works.
+ *
+ * `EmbeddingTable` is the other table: one row of 4096 values per token.
+ */
+
+/** Plausible entries. Real enough to read, not claimed as measured. */
+const ENTRIES = [
+  'dogs', ' dog', 'dog', 'doge', ' dogg', 'doing', ' doll', 'dome', ' done', 'dont',
+  ' door', 'dose', ' dot', ' double', ' down', 'draft', ' drag', ' drank', ' draw', ' dream',
+]
+
+export function Vocabulary({
+  /** Row number of the entry that matters, for the highlight. */
+  hit,
+  /**
+   * The token that actually lives at `hit`.
+   *
+   * Without it the highlighted row draws whatever `ENTRIES` happens to hold at
+   * that index -- §2 beat 10 was highlighting row 5562 and labelling it
+   * `door` while the narration said ` dog` is 5562. The row numbers around a
+   * hit are real, so the hit's own word has to be real too.
+   */
+  hitLabel,
+  scrolling = false,
+  /** §9: a score against every entry, with a few standing out. */
+  scores,
+  /**
+   * §9 beat 7. The list reorders and a handful of plausible continuations rise
+   * to the top. They must be plausible continuations of the **real** prompt --
+   * an attentive viewer checks, and `The dog dropped the ball, and it` really
+   * does want `bounced`.
+   */
+  candidates,
+  /** §9 beat 8. One entry lifted out of the list. */
+  picked = false,
+  label,
+}: {
+  hit?: number
+  hitLabel?: string
+  scrolling?: boolean
+  scores?: boolean
+  candidates?: readonly string[]
+  picked?: boolean
+  label?: string
+}) {
+  const rows = 20
+  return (
+    <div className="s1-vocab">
+      <svg viewBox="0 0 380 520" aria-hidden="true">
+        {/*
+          * The scroll runs the rows up to 260 units, which is far past the top
+          * of the panel -- without a clip they leave the frame entirely and sit
+          * on the bare page above it, reading as a broken render rather than as
+          * a long list. The two fade bars below still do the "runs past both
+          * ends" job; this only stops rows escaping the object.
+          *
+          * The clip goes on a **static wrapper**, not on the moving group.
+          * `clip-path` resolves in the element's own user space, so a clip on
+          * the translated group travels with it and does nothing at all --
+          * which is what the first attempt did.
+          */}
+        <clipPath id="s1-vocab-window">
+          <rect x="9" y="9" width="362" height="502" rx="4" />
+        </clipPath>
+        <rect x="8" y="8" width="364" height="504" rx="4" fill={PALETTE.paperLight} stroke={INK} strokeWidth="3" />
+
+        <g clipPath="url(#s1-vocab-window)">
+        <motion.g
+          initial={false}
+          animate={{ y: scrolling ? [0, -260, -130] : 0 }}
+          transition={scrolling ? { duration: 1.6, ease: [0.2, 0, 0.1, 1] } : { duration: 0.4 }}
+        >
+          {Array.from({ length: rows }, (_, i) => {
+            const y = 26 + i * 24
+            const isHit = hit !== undefined && i === 10
+            /* Scores fall off fast: a few plausible, most hopeless. */
+            const score = scores
+              ? candidates
+                ? Math.max(0.03, 1 - i * 0.17) ** 1.6
+                : Math.max(0.04, seeded(i * 3 + 1) ** 3)
+              : 0
+            return (
+              <g key={i}>
+                {isHit ? (
+                  <rect x="12" y={y - 15} width="356" height="22" rx="3" fill={PALETTE.tealWash} />
+                ) : null}
+                <text x="26" y={y} className="s1-vocab-n" fill={PALETTE.blueInk} opacity={isHit ? 1 : 0.55}>
+                  {/*
+                    With `hit`, the numbers are real: the list is scrolled to
+                    that token's ID and the rows around it follow. Without it
+                    (§9, where the list is being scored for the *next* word and
+                    no single row is claimed) they are arbitrary row numbers,
+                    and deliberately so -- the beat is about every entry
+                    getting a score, not about which IDs the candidates have.
+                    Do not "fix" these to the prompt's IDs: that would assert
+                    the candidates live next to ` dog`, which is not true.
+                  */}
+                  {hit !== undefined ? String(hit - 10 + i) : String(4011 + i)}
+                </text>
+                <text
+                  x="96"
+                  y={y}
+                  className="s1-vocab-t"
+                  fill={candidates && i < candidates.length ? PALETTE.tealInk : INK}
+                  opacity={isHit ? 1 : candidates ? (i < candidates.length ? 1 : 0.4) : 0.72}
+                >
+                  {/*
+                    A leading space is a *different token* -- that is §2's
+                    whole point, and why ` dog` is 5562 while bare `dog` is
+                    18427. But a space renders as nothing, so the list showed
+                    what looked like `dog` twice and read as a bug. The space
+                    is drawn as a faint middot, the way a tokenizer viewer
+                    does it, so the distinction the video teaches is visible in
+                    the object that teaches it.
+                  */}
+                  {(() => {
+                    const entry =
+                      isHit && hitLabel !== undefined
+                        ? hitLabel
+                        : (candidates?.[i] ?? ENTRIES[i % ENTRIES.length])
+                    return entry.startsWith(' ') ? (
+                      <>
+                        <tspan fill={PALETTE.stone} opacity="0.55">
+                          ·
+                        </tspan>
+                        {entry.slice(1)}
+                      </>
+                    ) : (
+                      entry
+                    )
+                  })()}
+                </text>
+                {scores ? (
+                  <motion.rect
+                    x="238"
+                    y={y - 11}
+                    height="14"
+                    rx="2"
+                    fill={PALETTE.blue}
+                    initial={{ width: 0 }}
+                    animate={{ width: 8 + score * 118 }}
+                    transition={{ duration: 0.5, delay: i * 0.018 }}
+                  />
+                ) : null}
+              </g>
+            )
+          })}
+        </motion.g>
+        </g>
+
+        {/* the list runs past both ends of its own frame */}
+        <g fill={PALETTE.paperLight}>
+          <rect x="8" y="8" width="364" height="18" />
+          <rect x="8" y="494" width="364" height="18" />
+        </g>
+        <g stroke={INK} strokeWidth="1.6" opacity="0.35">
+          <path d="M20 20h348M20 500h348" strokeDasharray="3 5" />
+        </g>
+
+        {/*
+          The pick, lifted clear of the list. Drawn over the masking bands, so
+          it is genuinely out of the box rather than highlighted inside it.
+        */}
+        {picked && candidates?.length ? (
+          <motion.g
+            initial={{ opacity: 0, x: 0, y: 0 }}
+            animate={{ opacity: 1, x: 58, y: -46 }}
+            transition={{ type: 'spring', stiffness: 110, damping: 15 }}
+          >
+            <rect x="70" y="8" width="250" height="40" rx="4" fill={PALETTE.paperWhite} stroke={PALETTE.tealInk} strokeWidth="3" />
+            <text x="195" y="36" textAnchor="middle" className="s1-vocab-pick" fill={PALETTE.tealInk}>
+              {candidates[0]}
+            </text>
+          </motion.g>
+        ) : null}
+
+
+        {label ? (
+          <text x="190" y="546" textAnchor="middle" className="s1-vocab-cap" fill={INK}>
+            {label}
+          </text>
+        ) : null}
+      </svg>
+    </div>
+  )
+}
+
+/**
+ * One row per token, 154,880 of them, running past the top of the frame.
+ *
+ * The height is the whole point of the object, so the rows do not stop at the
+ * edge — they are clipped by it, and the fade says "this continues".
+ */
+export function EmbeddingTable({
+  /** The row that has been pulled out, if any. */
+  pulled = false,
+  seeking = false,
+  /**
+   * The token ID whose row is pulled -- the row numbers are centred on it.
+   *
+   * This used to be hardcoded: `String(3999 + i)` with the hit row at index
+   * 22, which put the highlighted row at **4021**. That was ` dog`'s ID before
+   * the tokenizer was actually run; the measured ID is **5562**. The whole
+   * frame therefore contradicted §2's own on-screen number, and no gate could
+   * see it because the wrong figure was computed inside a component rather
+   * than written in a script. It was found by looking at a rendered frame.
+   *
+   * Defaults to the measured ID so it cannot drift again.
+   * `research/glm/TOKENIZER.md`, `src/paper/prompt.ts`.
+   */
+  id = PROMPT_IDS[FOLLOWED],
+  label,
+}: {
+  pulled?: boolean
+  seeking?: boolean
+  id?: number
+  label?: string
+}) {
+  const rows = 46
+  const hitRow = 22
+  /* So the highlighted row reads `id`, whatever `id` is. */
+  const firstRow = id - hitRow
+  return (
+    <div className="s1-etable">
+      <svg viewBox="0 0 460 1080" aria-hidden="true">
+        <rect x="20" y="0" width="380" height="1060" fill={PALETTE.paperSheet} stroke={INK} strokeWidth="3" />
+
+        {Array.from({ length: rows }, (_, i) => {
+          const y = 18 + i * 22
+          const isHit = i === hitRow
+          return (
+            <g key={i}>
+              <path d={`M20 ${y + 8}h380`} stroke={INK} strokeWidth="1.2" opacity="0.22" />
+              <text x="34" y={y + 4} className="s1-etable-n" fill={PALETTE.blueInk} opacity={isHit ? 1 : 0.4}>
+                {String(firstRow + i)}
+              </text>
+              {/* the row's values, as marks rather than digits */}
+              <motion.g
+                initial={false}
+                animate={{ x: isHit && pulled ? 84 : 0, opacity: isHit ? 1 : 0.5 }}
+                transition={{ type: 'spring', stiffness: 100, damping: 18 }}
+              >
+                {Array.from({ length: 16 }, (_, k) => (
+                  <rect
+                    key={k}
+                    x={92 + k * 18}
+                    y={y - 6 + (1 - seeded(i * 31 + k)) * 6}
+                    width="11"
+                    height={4 + seeded(i * 31 + k) * 9}
+                    rx="1.4"
+                    fill={isHit ? PALETTE.blue : PALETTE.blueWash}
+                  />
+                ))}
+              </motion.g>
+            </g>
+          )
+        })}
+
+        {seeking ? (
+          <motion.rect
+            x="20"
+            width="380"
+            height="22"
+            fill={ROLE.word}
+            opacity="0.18"
+            initial={{ y: 18 }}
+            animate={{ y: 18 + hitRow * 22 - 8 }}
+            transition={{ duration: 0.9, ease: [0.3, 0, 0.2, 1] }}
+          />
+        ) : null}
+
+        {/* it continues past both ends */}
+        <rect x="20" y="0" width="380" height="26" fill={PALETTE.paperSheet} opacity="0.92" />
+        <path d="M20 12h380" stroke={INK} strokeWidth="1.4" strokeDasharray="3 5" opacity="0.4" />
+        <rect x="20" y="1034" width="380" height="26" fill={PALETTE.paperSheet} opacity="0.92" />
+        <path d="M20 1048h380" stroke={INK} strokeWidth="1.4" strokeDasharray="3 5" opacity="0.4" />
+
+        {label ? (
+          <text x="210" y="1076" textAnchor="middle" className="s1-vocab-cap" fill={INK}>
+            {label}
+          </text>
+        ) : null}
+      </svg>
+    </div>
+  )
+}
+
+/**
+ * Three rows, placed by how alike they are.
+ *
+ * A deliberate analogy: these rows live in 4096 dimensions and cannot be
+ * drawn. So this shows **relative distance only** — no axes, no grid, no
+ * coordinates. If a viewer could read a position off it, the frame would be
+ * lying. See video-script/03 truth notes.
+ */
+export function Space({
+  show,
+  /**
+   * Draw the two distances as measures, labelled.
+   *
+   * **These live in here, not as page overlays.** §3 beat 11 used two
+   * `brace()` overlays positioned by hand-tuned stage percentages, while the
+   * points live in this SVG's own coordinates behind a `Slot` at 58/52 scale
+   * 1.4. There is no percentage that tracks that, so the "close" measure drew
+   * itself to the *left* of `dog` and the "nothing like it" label landed on top
+   * of `Tuesday`.
+   *
+   * It is the same lesson `Attention` already carries: a measure of the gap
+   * between two objects has to be drawn by whatever draws the objects, or it
+   * drifts the moment either one moves. `skills/SPATIAL_CONTINUITY.md`.
+   */
+  measures = false,
+}: {
+  show: boolean
+  measures?: boolean
+}) {
+  /* One source for the positions. Everything else here is derived from it. */
+  const points = [
+    { label: 'dog', x: 34, y: 44 },
+    { label: 'cat', x: 44, y: 36 },
+    { label: 'Tuesday', x: 82, y: 74 },
+  ]
+  const at = (p: (typeof points)[number]) => ({ x: p.x * 4.6, y: p.y * 3 })
+  const [dog, cat, tuesday] = points.map(at)
+
+  /** A span with end ticks, drawn under the pair it measures. */
+  const Measure = ({
+    a,
+    b,
+    label,
+    colour,
+    drop,
+  }: {
+    a: { x: number; y: number }
+    b: { x: number; y: number }
+    label: string
+    colour: string
+    drop: number
+  }) => {
+    const y = Math.max(a.y, b.y) + drop
+    return (
+      <g stroke={colour} strokeWidth="2.4" fill="none">
+        <path d={`M${a.x} ${y}h${b.x - a.x}`} />
+        <path d={`M${a.x} ${y - 6}v12M${b.x} ${y - 6}v12`} />
+        <text
+          x={(a.x + b.x) / 2}
+          y={y + 30}
+          textAnchor="middle"
+          className="s1-space-m"
+          fill={colour}
+          stroke="none"
+        >
+          {label}
+        </text>
+      </g>
+    )
+  }
+
+  return (
+    <div className="s1-space">
+      <svg viewBox="0 0 460 340" aria-hidden="true">
+        {/* The links, derived from the same points rather than written twice. */}
+        <g stroke={PALETTE.relateInk} strokeWidth="2.2" strokeDasharray="5 5" opacity={show ? 0.8 : 0}>
+          <path d={`M${dog.x} ${dog.y} ${cat.x} ${cat.y}`} />
+          <path d={`M${cat.x} ${cat.y} ${tuesday.x} ${tuesday.y}`} />
+        </g>
+
+        {points.map((p, i) => {
+          const c = at(p)
+          return (
+            <motion.g
+              key={p.label}
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: show ? 1 : 0, scale: show ? 1 : 0.7 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 16, delay: i * 0.12 }}
+            >
+              <circle cx={c.x} cy={c.y} r="11" fill={PALETTE.tealWash} stroke={ROLE.word} strokeWidth="2.8" />
+              <text x={c.x} y={c.y + 34} textAnchor="middle" className="s1-space-t" fill={INK}>
+                {p.label}
+              </text>
+            </motion.g>
+          )
+        })}
+
+        {/*
+          Different drops, so the two measures and the three point labels never
+          share a line. `nothing like it` used to be drawn straight through the
+          word `Tuesday`.
+        */}
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: measures && show ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/*
+            The two measures span exactly the two pairs the dashed links join
+            -- dog→cat and cat→Tuesday. Measuring dog→Tuesday while the link
+            drew cat→Tuesday pointed at two different gaps in one frame.
+          */}
+          <Measure a={dog} b={cat} label="close" colour={ROLE.word} drop={56} />
+          <Measure a={cat} b={tuesday} label="nothing like it" colour={ROLE.cost} drop={58} />
+        </motion.g>
+      </svg>
+    </div>
+  )
+}

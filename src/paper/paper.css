@@ -1,0 +1,1504 @@
+/*
+ * Section 01 — paper world.
+ * One stylesheet. Fixes belong here, not in an override file stacked on top.
+ */
+
+.s1-page {
+  --paper: #F2ECDF;
+  --paper-light: #FBF8F1;
+  --paper-2: #EDE5D8;
+  --ink: #2B2926;
+  --graphite: #807A72;
+  --stone: #8A7F6E;
+  --orange: #E79A63;
+  --orange-ink: #C87B45;
+  --blue: #5E83B8;
+  --blue-ink: #4E74A8;
+  --teal: #74A297;
+  --yellow: #E3C45B;
+  --red: #C86658;
+  --teal-ink: #43786A;
+  --relate: #A98BC9;
+  --relate-ink: #7C5DA6;
+  --line: rgba(43, 41, 38, 0.2);
+
+  --hand: 'Patrick Hand', 'Bradley Hand', 'Noteworthy', cursive;
+  --scrawl: 'Caveat', 'Bradley Hand', cursive;
+  --mono: ui-monospace, sfmono-regular, menlo, monaco, consolas, monospace;
+
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+
+.s1-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Locked 16:9 stage so authored coordinates hold at any window size. */
+.s1-viewport {
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+}
+
+.s1-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+  background:
+    radial-gradient(120% 90% at 15% 10%, rgba(255, 255, 255, 0.5), transparent 60%),
+    var(--paper);
+}
+
+.s1-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /*
+   * The paper, in three layers.
+   *
+   * A flat fill reads as a beige screen. What makes paper read as paper is
+   * fibre you can almost see, a faint tooth to the surface, and the fact that
+   * it is never evenly lit. All three are cheap and none of them animate, so
+   * they cost nothing per frame.
+   */
+  opacity: 0.85;
+  background-image:
+    /* 1. fibre -- fine, directionless grain */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.2'/%3E%3C/svg%3E"),
+    /* 2. tooth -- a coarser, softer mottle underneath the fibre */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23m)' opacity='0.14'/%3E%3C/svg%3E"),
+    /* 3. light -- warm from the top left, cooling into the corners */
+    radial-gradient(120% 100% at 18% 8%, rgba(255, 253, 248, 0.55), transparent 58%),
+    radial-gradient(90% 80% at 92% 96%, rgba(43, 41, 38, 0.055), transparent 62%);
+  background-size: 180px 180px, 420px 420px, 100% 100%, 100% 100%;
+  mix-blend-mode: multiply;
+}
+
+/* A sheet has edges. This is the shadow the stage casts on the desk. */
+.s1-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: inset 0 0 7cqw rgba(43, 41, 38, 0.045);
+}
+
+.s1-stage {
+  position: absolute;
+  inset: 0;
+}
+
+/* Actor placement -------------------------------------------------------
+ * Every actor lives in a persistent slot. Beats animate left/top/scale;
+ * slots are never unmounted, so objects move instead of being rebuilt. */
+
+.s1-slot {
+  position: absolute;
+  transform-origin: center;
+}
+
+/* Characters ------------------------------------------------------------ */
+/* Characters ------------------------------------------------------------ */
+
+.s1-narrator {
+  width: calc(11cqw * var(--scale, 1));
+  transform: scaleX(var(--flip, 1));
+}
+
+.s1-narrator svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* One routed expert, drawn as a person. Identity is a number, never a job. */
+.s1-spec {
+  width: var(--size, 64px);
+  flex: 0 0 auto;
+}
+
+.s1-spec svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-spec-id {
+  font: 400 11px/1 var(--mono);
+}
+
+/* M1 — the model sheet -------------------------------------------------- */
+
+.s1-sheet {
+  position: relative;
+  width: 39cqw;
+}
+
+.s1-sheet > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.s1-sheet-body {
+  position: absolute;
+  inset: 0;
+  padding: 3.1cqh 3.4cqw 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.s1-sheet-body h2 {
+  margin: 0 0 1.7cqh;
+  text-align: center;
+  font: 400 clamp(18px, 2.5cqw, 48px) / 1.1 var(--hand);
+  letter-spacing: -0.01em;
+}
+
+.s1-sheet-body dl {
+  margin: 0;
+  display: grid;
+  gap: 1.15cqh;
+}
+
+.s1-sheet-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1cqw;
+}
+
+.s1-sheet-row dt {
+  font: 400 clamp(11px, 1.32cqw, 25px) / 1.2 var(--hand);
+  color: var(--graphite);
+}
+
+.s1-sheet-row dd {
+  margin: 0;
+  font: 400 clamp(11px, 1.36cqw, 26px) / 1.2 var(--hand);
+  text-align: right;
+}
+
+/* Only the two numbers that matter ever get emphasis. */
+.s1-sheet-pill {
+  display: inline-block;
+  padding: 0.35cqh 0.85cqw;
+  border-radius: 999px;
+  font: 400 clamp(12px, 1.6cqw, 31px) / 1.15 var(--hand);
+}
+
+.s1-sheet-pill[data-tone='total'] {
+  background: #f6d9c0;
+  box-shadow: inset 0 0 0 2px rgba(200, 123, 69, 0.5);
+}
+
+.s1-sheet-pill[data-tone='active'] {
+  background: #cfdcee;
+  box-shadow: inset 0 0 0 2px rgba(78, 116, 168, 0.5);
+}
+
+/* M1/M2 — the share bar ------------------------------------------------- */
+
+.s1-bar {
+  width: 66cqw;
+}
+
+.s1-bar svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-bar-big {
+  font: 400 66px/1 var(--hand);
+}
+
+.s1-bar-sub {
+  font: 400 27px/1 var(--hand);
+}
+
+.s1-bar-label {
+  font: 400 30px/1 var(--hand);
+}
+
+.s1-bar-cap {
+  font: 400 26px/1 var(--scrawl);
+}
+
+/* M3 — the hospital ----------------------------------------------------- */
+
+.s1-hospital {
+  width: 62cqw;
+  transition: opacity 0.45s ease, filter 0.45s ease;
+}
+
+.s1-hospital svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Recedes to a prop while something else holds the frame. Never removed. */
+/* Recedes, but must stay legible: at 0.62 the dimmed staff went to a 0.25
+ * effective opacity and the building read as empty seats rather than people. */
+.s1-hospital[data-quiet='true'] {
+  opacity: 0.82;
+  filter: saturate(0.72);
+}
+
+.s1-hosp-sign {
+  font: 400 40px/1 var(--hand);
+}
+
+.s1-hosp-plaque {
+  font: 400 27px/1 var(--hand);
+}
+
+/* A figure the model produced, so it wears the mono face -- the same rule
+   the brace labels follow. `marks.tsx`, `Brace`'s `voice` prop. */
+.s1-hosp-idle {
+  font: 400 26px/1 var(--mono);
+  letter-spacing: 0.02em;
+}
+
+.s1-hosp-z {
+  font: 400 30px/1 var(--scrawl);
+}
+
+/* The eight, lifted out of the building ---------------------------------- */
+
+.s1-team {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1.1cqh;
+  padding: 1.5cqh 1.4cqw;
+  border-radius: 10px;
+}
+
+/* Beat 21 draws the box: "why not keep just this?" */
+.s1-team[data-boxed='true'] {
+  box-shadow: inset 0 0 0 3px rgba(78, 116, 168, 0.75);
+  background: rgba(207, 220, 238, 0.22);
+}
+
+.s1-team[data-boxed='true']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 3px dashed rgba(78, 116, 168, 0.55);
+  margin: -0.7cqh -0.6cqw;
+}
+
+.s1-team-row {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 0.9cqh 0.7cqw;
+}
+
+.s1-team-one {
+  width: 4.4cqw;
+}
+
+.s1-team-one svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-team-cap {
+  font: 400 clamp(10px, 1.15cqw, 22px) / 1.2 var(--scrawl);
+  color: var(--graphite);
+}
+
+/* The word, and the desk that chooses for it ----------------------------- */
+
+.s1-word {
+  position: relative;
+  width: 25cqw;
+}
+
+.s1-word svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.s1-word-text {
+  color: var(--teal-ink);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 400 clamp(13px, 2.1cqw, 40px) / 1 var(--hand);
+}
+
+.s1-desk {
+  position: relative;
+  width: 22cqw;
+}
+
+.s1-desk svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-desk-tag {
+  position: absolute;
+  left: 50%;
+  bottom: -1.2cqh;
+  transform: translateX(-50%);
+  padding: 0.3cqh 0.8cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.4px var(--ink);
+  border-radius: 4px;
+  white-space: nowrap;
+  font: 400 clamp(11px, 1.5cqw, 29px) / 1.1 var(--hand);
+  letter-spacing: 0.04em;
+}
+
+/* M6 — the plan, and the small machine ----------------------------------- */
+
+.s1-plan {
+  width: 76cqw;
+}
+
+.s1-plan svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-plan-step {
+  font: 400 30px/1 var(--hand);
+}
+
+.s1-plan-z {
+  font: 400 34px/1 var(--scrawl);
+}
+
+.s1-machine {
+  width: 16cqw;
+}
+
+.s1-machine svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* M7 — the architecture sheet -------------------------------------------- */
+
+.s1-arch {
+  width: 27cqw;
+  filter: drop-shadow(0 8px 18px rgba(43, 41, 38, 0.16));
+}
+
+.s1-arch svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.s1-arch-title {
+  font: 400 34px/1 var(--hand);
+}
+
+.s1-note {
+  position: absolute;
+  z-index: 9;
+  margin: 0;
+  max-width: 22cqw;
+  /* No transform here: Motion owns it. See marks.tsx. */
+  font-family: var(--hand);
+  line-height: 1.24;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.s1-note[data-size='sm'] {
+  font-size: clamp(13px, 1.35cqw, 26px);
+}
+
+.s1-note[data-size='md'] {
+  font-size: clamp(15px, 1.65cqw, 32px);
+}
+
+.s1-note[data-size='lg'] {
+  font-size: clamp(18px, 2.15cqw, 42px);
+}
+
+/*
+ * A wide note is the closing question. It is centred on its anchor in BOTH
+ * axes and must escape the 22cqw cap, or it wraps to three lines and the last
+ * one falls off the bottom of the frame -- on the single most important beat
+ * in the section.
+ */
+.s1-note[data-wide='true'] {
+  max-width: none;
+}
+
+.s1-note[data-backed='true'] {
+  padding: 0.5cqh 0.8cqw;
+  background: rgba(244, 239, 228, 0.94);
+  border-radius: 8px;
+}
+
+.s1-note[data-tone='claim'] {
+  color: var(--orange-ink);
+}
+
+.s1-note[data-tone='measure'] {
+  color: var(--blue-ink);
+}
+
+.s1-note[data-tone='word'] {
+  color: var(--teal-ink);
+}
+
+.s1-note[data-tone='relate'] {
+  color: var(--relate-ink);
+}
+
+.s1-note[data-tone='cost'] {
+  color: var(--red);
+}
+
+.s1-note em {
+  display: block;
+  font-style: normal;
+  font-size: 0.58em;
+  color: var(--graphite);
+  letter-spacing: 0.02em;
+}
+
+.s1-bubble {
+  position: absolute;
+  width: var(--w, 260px);
+  padding: 1.1cqh 1.3cqw;
+  background: var(--paper-light);
+  border: 2.2px solid var(--ink);
+  border-radius: 14px;
+  font: 400 clamp(13px, 1.4cqw, 27px) / 1.3 var(--hand);
+  box-shadow: 2px 3px 0 rgba(43, 41, 38, 0.1);
+  pointer-events: none;
+}
+
+.s1-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -13px;
+  width: 0;
+  height: 0;
+  border: 13px solid transparent;
+  border-top-color: var(--ink);
+  border-bottom: 0;
+}
+
+.s1-bubble[data-tail='bottom-left']::after {
+  left: 34px;
+}
+
+.s1-bubble[data-tail='bottom-center']::after {
+  left: 50%;
+  translate: -50% 0;
+}
+
+.s1-bubble[data-tail='left']::after {
+  left: -13px;
+  bottom: auto;
+  top: 26px;
+  border: 13px solid transparent;
+  border-right-color: var(--ink);
+  border-left: 0;
+}
+
+.s1-brace {
+  position: absolute;
+  width: var(--w);
+  pointer-events: none;
+}
+
+.s1-brace svg {
+  display: block;
+  width: 100%;
+  height: 14px;
+  overflow: visible;
+}
+
+/* Mono is reserved for values the model produced, so a brace quoting a figure
+ * opts in and everything else stays in the narrator's hand. §3 beat 11's
+ * "close" used to render in monospace next to handwritten point labels. */
+.s1-brace-label[data-voice='figure'] {
+  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
+  letter-spacing: 0.07em;
+}
+
+.s1-brace-label {
+  display: block;
+  margin-top: 4px;
+  text-align: center;
+  font: 400 clamp(12px, 1.3cqw, 25px) / 1.2 var(--scrawl);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.s1-brace[data-tone='claim'] .s1-brace-label {
+  color: var(--orange-ink);
+}
+
+.s1-brace[data-side='top'] .s1-brace-label {
+  margin-top: 0;
+  margin-bottom: 9px;
+}
+
+.s1-brace[data-side='top'] {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.s1-brace-label em {
+  display: block;
+  font-style: normal;
+  font-family: var(--hand);
+  font-size: 0.95em;
+  letter-spacing: 0;
+  color: var(--graphite);
+}
+
+/*
+ * Handwriting sits above the world it annotates.
+ *
+ * Without a z-index the arrow's own label rendered *behind* an actor -- §5's
+ * "the scores came from here" was sliced off where the building started, on
+ * the one frame that carries the section's whole argument. Actors are z 0-7,
+ * so the marks live above that.
+ */
+.s1-arrow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.s1-arrow-label {
+  font: 400 26px/1 var(--hand);
+}
+
+.s1-sparks,
+.s1-tick,
+.s1-cross {
+  position: absolute;
+  z-index: 9;
+  width: 4cqw;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.s1-cross {
+  width: 4.6cqw;
+  z-index: 4;
+}
+
+/* Panels and groups ---------------------------------------------------- */
+
+.s1-panel {
+  position: relative;
+  padding: 2.4cqh 1.6cqw 1.6cqh;
+  background: rgba(251, 248, 241, 0.72);
+  border: 2.2px solid var(--line);
+  border-radius: 12px;
+}
+
+.s1-panel[data-dashed='true'] {
+  border-style: dashed;
+}
+
+.s1-panel[data-tone='orange'] {
+  border-color: rgba(200, 123, 69, 0.75);
+  background: rgba(251, 243, 232, 0.8);
+}
+
+/* Left-anchored, not centred: a centred title on a panel near the stage edge
+   overflows the frame and gets clipped. */
+.s1-panel-title {
+  position: absolute;
+  top: -0.2cqh;
+  left: 1.4cqw;
+  translate: 0 -50%;
+  padding: 0 0.7cqw;
+  background: var(--paper);
+  font: 400 clamp(11px, 1.15cqw, 22px) / 1.2 var(--mono);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.s1-panel[data-tone='orange'] .s1-panel-title {
+  color: var(--orange-ink);
+}
+
+/* Team, selection, routing controls ------------------------------------ */
+
+
+/* The closing question needs a paper halo to sit over the plan. */
+.s1-note[data-size='xl'] {
+  font-size: clamp(22px, 3.3cqw, 63px);
+  line-height: 1.3;
+}
+
+
+
+.s1-debug {
+  position: absolute;
+  left: 1.2cqw;
+  bottom: 1.4cqh;
+  display: grid;
+  gap: 2px;
+  max-width: 46cqw;
+  padding: 0.9cqh 1cqw;
+  background: rgba(43, 41, 38, 0.86);
+  color: #f7f3ea;
+  border-radius: 6px;
+  font: 400 clamp(9px, 0.95cqw, 17px) / 1.35 var(--mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s1-page * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The opening image: the machine doing its job ------------------------- */
+
+.s1-loop {
+  width: 62cqw;
+}
+
+.s1-loop svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-loop-word {
+  font: 400 58px/1 var(--hand);
+}
+
+/* A horizon, so objects stand somewhere instead of floating on a slide. */
+/*
+ * A horizon, so the frame is a place rather than a slide.
+ *
+ * It has to run **off both edges**. As a 2px rule inset 4% from each side it
+ * read as an underline with nothing above it -- a stray mark somebody would
+ * reasonably ask about -- rather than as ground. Full-bleed, thinner, and faded
+ * at the ends, it reads as a surface receding, which is the only job it has.
+ */
+.s1-ground {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(43, 41, 38, 0.18) 12%,
+    rgba(43, 41, 38, 0.18) 88%,
+    transparent
+  );
+}
+
+/* Tilt and shadow live here rather than in the SVG, so the tape rotates
+ * with the sheet as one physical object. */
+.s1-sheet {
+  filter: drop-shadow(0 10px 16px rgba(43, 41, 38, 0.13));
+  transform: rotate(-1.1deg);
+}
+
+/* Storage, fast memory, the road between, and the verdict ---------------- */
+
+.s1-store { width: 30cqw; }
+.s1-fastmem { width: 20cqw; }
+.s1-fetch { width: 32cqw; }
+.s1-bars { width: 62cqw; }
+
+.s1-store svg,
+.s1-fastmem svg,
+.s1-fetch svg,
+.s1-bars svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-plate { font: 400 25px/1 var(--hand); }
+.s1-fetch-tag { font: 400 27px/1 var(--scrawl); }
+.s1-bar-name { font: 400 34px/1 var(--hand); }
+.s1-bar-fig { font: 400 40px/1 var(--hand); }
+.s1-bar-ratio { font: 400 46px/1 var(--hand); }
+
+.s1-fastmem[data-strained='true'] { filter: drop-shadow(0 0 10px rgba(200, 102, 88, 0.4)); }
+
+.s1-counter {
+  display: grid;
+  justify-items: center;
+  gap: 0.3cqh;
+}
+
+.s1-counter strong {
+  font: 400 clamp(28px, 5.6cqw, 108px) / 1 var(--hand);
+  font-variant-numeric: tabular-nums;
+  /* A count is a measurement, not an alarm. */
+  color: var(--blue-ink);
+}
+
+.s1-counter span {
+  font: 400 clamp(11px, 1.5cqw, 29px) / 1.2 var(--scrawl);
+  color: var(--graphite);
+}
+
+/* Camera ----------------------------------------------------------------- */
+
+.s1-camera {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+}
+
+/* A word, as the model actually holds it ---------------------------------- */
+
+.s1-numrow { width: 56cqw; }
+.s1-numrow[data-extend='true'] { width: 118cqw; }
+
+.s1-numrow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-numrow-v {
+  font: 400 30px/1 var(--mono);
+  letter-spacing: -0.02em;
+}
+
+/* Rows are drawn small and their labels are what identify them, so the label
+ * is sized to survive the scale the beat places the row at. */
+.s1-numrow-label {
+  font: 400 46px/1 var(--scrawl);
+}
+
+/* Name-plates that try to land on the experts and slide off ------------- */
+
+/* Handwritten, not set type: these are labels a person is trying to apply,
+ * and they have to look applied-by-hand so that failing to stick reads as the
+ * idea being wrong rather than the machine being unlabelled. §5 beat 10. */
+.s1-plate-label {
+  font: 400 40px/1 var(--scrawl);
+}
+
+/* A sentence, and what the focus word pays attention to ------------------ */
+
+.s1-sentence { width: 74cqw; }
+.s1-sentence[data-dim='true'] { opacity: 0.5; filter: saturate(0.4); }
+
+.s1-sentence svg,
+.s1-tower svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-sentence-w { font: 400 46px/1 var(--hand); }
+.s1-sentence-cap { font: 400 30px/1 var(--scrawl); }
+
+/* The model as 45 floors -------------------------------------------------- */
+
+/*
+ * The tower is tall and thin, so a width-based size makes it small: at 26cqw
+ * its own labels rendered at about 13 real pixels and could not be read on the
+ * frame at all. Sized by what the *labels* need to be legible.
+ */
+.s1-tower { width: 30cqw; }
+.s1-tower-tag { font: 400 26px/1 var(--hand); }
+.s1-tower-here { font: 400 22px/1 var(--hand); }
+.s1-tower-label { font: 400 24px/1 var(--scrawl); }
+
+/* An expandable aside, and the one interactive choice --------------------- */
+
+.s1-aside { position: relative; }
+
+.s1-aside > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5cqw;
+  padding: 0.55cqh 1cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.2px rgba(94, 131, 184, 0.75);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font: 400 clamp(11px, 1.35cqw, 26px) / 1 var(--hand);
+  color: #4e74a8;
+}
+
+.s1-aside > button i {
+  display: grid;
+  place-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: rgba(94, 131, 184, 0.16);
+  font-style: normal;
+}
+
+/* Opens above the chip when the chip is low, or the panel falls off frame. */
+.s1-aside[data-up='true'] .s1-aside-panel {
+  top: auto;
+  bottom: calc(100% + 1cqh);
+}
+
+.s1-aside-panel {
+  position: absolute;
+  top: calc(100% + 1cqh);
+  left: 0;
+  z-index: 30;
+  width: 30cqw;
+  padding: 1.6cqh 1.5cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.4px var(--ink), 0 10px 26px rgba(43, 41, 38, 0.14);
+  border-radius: 8px;
+}
+
+.s1-aside-panel h4 {
+  margin: 0 0 0.7cqh;
+  font: 400 clamp(13px, 1.6cqw, 31px) / 1.2 var(--hand);
+}
+
+.s1-aside-panel p {
+  margin: 0 0 0.6cqh;
+  font: 400 clamp(11px, 1.3cqw, 25px) / 1.45 var(--hand);
+  color: #4a463f;
+}
+
+.s1-aside-panel p:last-child { margin-bottom: 0; }
+
+.s1-choice {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+}
+
+.s1-choice button {
+  padding: 0.9cqh 1.4cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 2.6px var(--ink);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font: 400 clamp(12px, 1.7cqw, 33px) / 1 var(--hand);
+  color: var(--ink);
+}
+
+.s1-choice button[data-picked='true'] {
+  background: var(--teal-2);
+  box-shadow: inset 0 0 0 3.2px var(--teal-ink);
+}
+
+.s1-choice span {
+  font: 400 clamp(11px, 1.35cqw, 26px) / 1.2 var(--scrawl);
+  color: var(--graphite);
+}
+
+/* The verdict ------------------------------------------------------------- */
+
+.s1-verdict {
+  width: 56cqw;
+  padding: 2.4cqh 2.4cqw;
+  background: #fbf8f1;
+  box-shadow: inset 0 0 0 3.4px var(--ink);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.s1-verdict p {
+  margin: 0;
+  font: 400 clamp(15px, 2.5cqw, 48px) / 1.3 var(--hand);
+}
+
+.s1-verdict p + p {
+  margin-top: 1.1cqh;
+  font-size: clamp(12px, 1.7cqw, 33px);
+  color: #4a463f;
+}
+
+.s1-verdict b { font-weight: 400; color: var(--ink); }
+
+/* Autoplay ---------------------------------------------------------------- */
+
+.s1-paused {
+  position: absolute;
+  left: 50%;
+  bottom: 4cqh;
+  transform: translateX(-50%);
+  padding: 0.6cqh 1.4cqw;
+  border-radius: 999px;
+  background: rgba(251, 248, 241, 0.9);
+  box-shadow: inset 0 0 0 2px var(--ink);
+  pointer-events: none;
+  font: 400 clamp(11px, 1.4cqw, 27px) / 1 var(--hand);
+}
+
+/* The object library ----------------------------------------------------- */
+/* Everything in src/paper/props. `size` sets the width; height follows the
+   viewBox, so an object never needs a hard-coded height. */
+
+.s1-prop {
+  width: var(--size, 120px);
+  flex: 0 0 auto;
+}
+
+.s1-prop svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-prop-label {
+  font-family: 'Patrick Hand', ui-sans-serif, system-ui, sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.04em;
+}
+
+/* Scale — the number, the field, the block ------------------------------- */
+
+.s1-bignum {
+  display: grid;
+  justify-items: center;
+  gap: 1.4cqh;
+}
+
+.s1-bignum-value {
+  font: 400 clamp(40px, 9cqw, 190px) / 0.92 var(--hand);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.s1-bignum-cap {
+  font: 400 clamp(12px, 1.6cqw, 30px) / 1.2 var(--hand);
+  color: var(--graphite);
+}
+
+.s1-field {
+  width: 76cqw;
+}
+
+.s1-field svg,
+.s1-block svg,
+.s1-vocab svg,
+.s1-etable svg,
+.s1-space svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-block {
+  width: 52cqw;
+}
+
+/* Lookup — the vocabulary list and the embedding table -------------------- */
+
+.s1-vocab {
+  width: 21cqw;
+}
+
+/*
+ * The height is the whole point of this object -- "the table must feel absurdly
+ * tall" -- so it is sized to run past the top and bottom of the frame rather
+ * than to fit inside it. At 27cqw it read as a modest box on a shelf.
+ */
+.s1-etable {
+  width: 26cqw;
+}
+
+.s1-space {
+  width: 34cqw;
+}
+
+.s1-vocab-n,
+.s1-etable-n {
+  font: 400 13px/1 var(--mono);
+}
+
+.s1-vocab-t {
+  font: 400 15px/1 var(--hand);
+}
+
+.s1-vocab-cap,
+.s1-space-t {
+  font: 400 17px/1 var(--hand);
+}
+
+/* The distance measures in §3 beat 11. Handwriting, not the mono the number
+ * rows use: "close" and "nothing like it" are relations the narrator is
+ * pointing at, not figures the machine produced. Mono in this video means a
+ * value that came out of the model. */
+.s1-space-m {
+  font: 400 16px/1 var(--scrawl);
+}
+
+/* Attention — the wiring between tokens ---------------------------------- */
+
+.s1-attn { width: 76cqw; }
+
+.s1-attn svg,
+.s1-blend svg,
+.s1-room svg,
+.s1-cache svg,
+.s1-run svg,
+.s1-loop2 svg,
+.s1-mcard svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-attn-ask {
+  display: grid;
+  place-items: center;
+  padding: 0.9cqh 1.6cqw;
+  background: var(--paper-light);
+  box-shadow: inset 0 0 0 2.6px var(--relate-ink);
+  border-radius: 4px;
+}
+
+.s1-attn-ask span {
+  font: 400 clamp(14px, 2.1cqw, 40px) / 1.2 var(--hand);
+  color: var(--relate-ink);
+}
+
+/* The eight doing the work ------------------------------------------------ */
+
+.s1-blend { width: 72cqw; }
+.s1-blend-tag { font: 400 22px/1 var(--scrawl); }
+
+/* The room, once it has edges -------------------------------------------- */
+
+.s1-room { width: 64cqw; }
+
+/* The tower, and everything that climbs it ------------------------------- */
+
+.s1-tower[data-ghost='true'] { opacity: 0.22; filter: saturate(0.3); }
+.s1-tower-count { font: 400 15px/1 var(--mono); }
+.s1-tower-plaque { font: 400 34px/1 var(--hand); letter-spacing: 0.02em; }
+
+/* The generation loop ---------------------------------------------------- */
+
+.s1-loop2 { width: 30cqw; }
+.s1-loop2-tag { font: 400 15px/1 var(--scrawl); }
+.s1-loop2-word { font: 400 36px/1 var(--hand); }
+.s1-loop2-cost { font: 400 26px/1 var(--mono); }
+.s1-loop2-total { font: 400 52px/1 var(--hand); font-variant-numeric: tabular-nums; }
+.s1-loop2-label { font: 400 24px/1 var(--scrawl); }
+
+/* The cache, the slider, the machine ------------------------------------- */
+
+.s1-cache { width: 20cqw; }
+.s1-cache-tag { font: 400 15px/1 var(--scrawl); }
+.s1-run { width: 34cqw; }
+.s1-run-word { font: 400 26px/1 var(--hand); }
+
+/*
+ * The slider is the one thing in this video the viewer operates, so it is real
+ * DOM rather than SVG: a pointer target with a hit area, a handle that can be
+ * grabbed anywhere along the track, and read-outs that update as it moves.
+ */
+.s1-trade {
+  display: grid;
+  gap: 1cqh;
+  padding: 1.4cqh 1.6cqw;
+  background: var(--paper-light);
+  box-shadow: inset 0 0 0 2.8px rgba(43, 41, 38, 0.55);
+  border-radius: 5px;
+  width: 26cqw;
+  touch-action: none;
+}
+
+.s1-trade-head {
+  font: 400 clamp(13px, 1.9cqw, 36px) / 1.15 var(--hand);
+  color: var(--ink);
+}
+
+.s1-trade-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.6cqw;
+  align-items: stretch;
+}
+
+.s1-trade-track {
+  position: relative;
+  width: 3.4cqw;
+  height: 17cqh;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 2.4px rgba(43, 41, 38, 0.5);
+  border-radius: 999px;
+  cursor: grab;
+}
+
+.s1-trade-fill {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: var(--blue);
+  border-radius: 999px;
+  opacity: 0.5;
+}
+
+.s1-trade-handle {
+  position: absolute;
+  left: 50%;
+  width: 4.6cqw;
+  height: 26px;
+  translate: -50% 0;
+  background: var(--paper-white, #fffdf8);
+  box-shadow: inset 0 0 0 3px var(--ink);
+  border-radius: 4px;
+}
+
+.s1-trade-end {
+  position: absolute;
+  left: calc(100% + 0.6cqw);
+  font: 400 clamp(9px, 1.2cqw, 22px) / 1 var(--scrawl);
+  color: var(--graphite);
+  white-space: nowrap;
+}
+
+.s1-trade-end[data-end='top'] { top: -2px; }
+.s1-trade-end[data-end='bottom'] { bottom: -2px; }
+
+.s1-trade-read {
+  display: grid;
+  align-content: center;
+  gap: 1.2cqh;
+  margin: 0;
+  padding-left: 5.5cqw;
+}
+
+.s1-trade-read dt {
+  font: 400 clamp(10px, 1.3cqw, 24px) / 1 var(--scrawl);
+  color: var(--graphite);
+}
+
+.s1-trade-read dd {
+  margin: 0;
+  font: 400 clamp(16px, 2.5cqw, 48px) / 1 var(--hand);
+  font-variant-numeric: tabular-nums;
+  color: var(--blue-ink);
+}
+
+/* Both ends have to be visibly bad with the sound off. */
+.s1-trade-read dd[data-bad='true'] { color: var(--red); }
+
+.s1-trade-ask {
+  margin: 0;
+  font: 400 clamp(12px, 1.7cqw, 32px) / 1.25 var(--scrawl);
+  color: var(--relate-ink);
+}
+
+/* The two models, side by side ------------------------------------------- */
+
+.s1-mcard { width: 19cqw; }
+.s1-mcard-name { font: 400 26px/1 var(--hand); }
+.s1-mcard-k { font: 400 15px/1 var(--scrawl); }
+.s1-mcard-note { font: 400 20px/1 var(--hand); }
+
+/* A word that turns into its row number ---------------------------------- */
+
+.s1-word-id {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 400 clamp(20px, 3.4cqw, 66px) / 1 var(--mono);
+  color: var(--blue-ink);
+}
+
+.s1-vocab-pick { font: 400 26px/1 var(--hand); }
+
+.s1-numrow[data-dim='true'] { opacity: 0.42; }
+
+.s1-eopen { width: 50cqw; }
+
+.s1-eopen svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-bar-inset { font: 400 24px/1 var(--scrawl); }
+
+.s1-clock { width: 12cqw; }
+
+.s1-clock svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.s1-clock-fig { font: 400 40px/1 var(--hand); }
+
+/* §11's verdict, still hanging over §12's working machine. Both true at once. */
+.s12-hangover {
+  padding: 0.8cqh 1.4cqw;
+  background: var(--paper-light);
+  box-shadow: inset 0 0 0 2.6px var(--red);
+  border-radius: 4px;
+  font: 400 clamp(13px, 2cqw, 38px) / 1.15 var(--hand);
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.s1-run-tag { font: 400 24px/1 var(--scrawl); }
+
+/* Getting to a beat, and getting to a section ---------------------------
+ *
+ * Scaffolding for whoever is making the video, not part of it. Both rails sit
+ * quiet until the pointer is near them, and `?chrome=0` removes them entirely.
+ *
+ * **No role colours here.** Teal means "the word we follow", blue means "a
+ * measurement" -- and chrome tinted with either would read as *being* one of
+ * those things. The first version used teal for "already watched", which is a
+ * second job for a hue that is supposed to identify exactly one thing, and on
+ * paper at low opacity it also vanished: five of the thirteen dots could not
+ * be seen at all. So these are ink at three weights, and weight alone carries
+ * where you are and where you have been.
+ */
+
+.s1-rail {
+  position: absolute;
+  left: 4cqw;
+  right: 4cqw;
+  bottom: 1.2cqh;
+  z-index: 20;
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 2.4cqh;
+  opacity: 0.3;
+  transition: opacity 0.22s ease;
+}
+
+.s1-rail:hover,
+.s1-rail:focus-within {
+  opacity: 1;
+}
+
+.s1-rail-tick {
+  /* The beat's own length, so the rail is a timeline and not a row of boxes. */
+  flex: var(--w, 5) 1 0;
+  position: relative;
+  height: 4px;
+  min-width: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: rgba(43, 41, 38, 0.3);
+  cursor: pointer;
+  transition:
+    height 0.16s ease,
+    background 0.16s ease;
+}
+
+.s1-rail:hover .s1-rail-tick {
+  height: 9px;
+}
+
+.s1-rail-tick:hover,
+.s1-rail-tick[data-now='true'] {
+  height: 15px;
+  background: var(--ink);
+}
+
+/* The beat number, only on the one under the pointer and the one you are on --
+ * eighteen numbers at once is a ruler, not a hint. */
+.s1-rail-tick span {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  translate: -50% 0;
+  font: 400 clamp(9px, 1cqw, 18px) / 1 var(--mono);
+  color: var(--graphite);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+
+.s1-rail-tick:hover span,
+.s1-rail-tick[data-now='true'] span {
+  opacity: 1;
+}
+
+/* Sections at the top, beats at the bottom: the two rails are different
+ * scales of the same journey, and separating them means neither is mistaken
+ * for the other. */
+.s1-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1.8cqh;
+  z-index: 21;
+  display: flex;
+  gap: 0.7cqw;
+  justify-content: center;
+  align-items: center;
+  height: 2.6cqh;
+  /* Higher than the beat rail's: these are the only way to reach a section,
+   * so they have to be findable without hunting for them. */
+  opacity: 0.55;
+  transition: opacity 0.22s ease;
+}
+
+.s1-dots:hover,
+.s1-dots:focus-within {
+  opacity: 1;
+}
+
+.s1-dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.8cqh;
+  height: 1.8cqh;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.s1-dot i {
+  width: 0.95cqh;
+  height: 0.95cqh;
+  border-radius: 50%;
+  background: rgba(43, 41, 38, 0.28);
+  transition:
+    width 0.18s ease,
+    height 0.18s ease,
+    background 0.18s ease;
+}
+
+/* Where you have been, by weight. The dots read as progress, not as a menu. */
+.s1-dot[data-seen='true'] i {
+  background: rgba(43, 41, 38, 0.6);
+}
+
+.s1-dot[data-now='true'] i,
+.s1-dot:hover i {
+  width: 1.4cqh;
+  height: 1.4cqh;
+  background: var(--ink);
+}
+
+/* A ring on the one you are in. Size alone does not read at 55% opacity. */
+.s1-dot[data-now='true']::after {
+  content: '';
+  position: absolute;
+  width: 2.5cqh;
+  height: 2.5cqh;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.6px var(--ink);
+  opacity: 0.5;
+}
+
+
+/* §1's machine row: the cards a model has to fit on. Laid out here rather than
+   inline so the gap is one number, and so the row centres on its Slot anchor
+   the way every other actor does. */
+/* A row of accelerators. Wraps at four, because eight in a line runs off the
+ * side of the frame and under the narrator -- and the count has to stay
+ * *countable at a glance*, which a clipped row is not. Two rows of four read
+ * as eight instantly; a line of eight reads as "lots". §1 beats 2-3, §13
+ * beat 14. */
+.s1-rig {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9cqw;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 26cqw;
+  /* Two rows of height whether or not the second row is occupied, so one card
+   * and eight cards rest on the *same* baseline. Without this the single-card
+   * rig floats half a card higher than the eight it is being compared with,
+   * and the one comparison §1 exists to make has to be measured rather than
+   * seen. §1 beats 5-7. */
+  min-height: calc(92px + 0.9cqw);
+}
+
+
+/* A sum the viewer is being asked to do, not told ------------------------- */
+
+/* §8 beat 9. The working is on screen and the figure is a gap. Rendered in
+ * the same size and weight as the answer will be, so beat 10 fills the space
+ * rather than replacing the object -- the total has to look like it arrived
+ * where the question was. */
+.s1-counter[data-blank='true'] strong {
+  color: var(--stone);
+  opacity: 0.7;
+}
+
+
+/* Three named differences, two of which are only size -------------------- */
+
+/* §13 beats 9-10. The label is set type and the detail is handwritten: the
+ * label is a category, the detail is the measurement behind it. */
+.s1-diff-label {
+  font: 400 42px/1 var(--hand);
+}
+
+.s1-diff-detail {
+  font: 400 32px/1 var(--scrawl);
+}
+
+/* The chat window. `paper/cast/Chat.tsx` -- the one familiar object in the
+   cast, and the only thing on screen for the first five seconds. */
+.s1-chat { width: 40cqw; }
+.s1-chat svg { width: 100%; height: auto; overflow: visible; }
+.s1-chat-model { font: 400 19px/1 var(--scrawl); letter-spacing: 0.02em; }
+.s1-chat-ask { font: 400 30px/1 var(--hand); }
+.s1-chat-said { font: 400 34px/1 var(--hand); }
+.s1-chat-caret { font: 400 30px/1 var(--mono); }

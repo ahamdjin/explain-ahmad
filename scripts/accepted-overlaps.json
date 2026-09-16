@@ -1,0 +1,348 @@
+{
+  "_why": "Overlap is not always a fault. A label belongs on the thing it labels, and some beats are *about* one object landing on another. Every entry needs a reason, because an entry without an argument behind it is a collision someone silenced rather than fixed. `npm run check:overlap`.",
+  "_brittle_on_purpose": "A pair is keyed by the text the two actors carry, so changing a label breaks the entry and the collision is reported again. That is intended: a changed label is a changed frame, and it should be looked at.",
+  "accepted": [
+    {
+      "section": "01",
+      "beat": 14,
+      "pair": "s1-slot × s1-note “320,000,000,000”",
+      "why": "Bounding-box artefact. The block at this beat is a scatter of separate marks and its box spans 26-78/8-84, but there is no ink under the label -- verified by eye. The label sits in clear paper above the cloud."
+    },
+    {
+      "section": "02",
+      "beat": 2,
+      "pair": "s1-slot × s1-slot “The dog dropped the ball, an”",
+      "why": "The prompt card stops at the building's entrance, which is inside the building's bounding box and is the whole point of the beat: 'a prompt card slides in and stops at the entrance'."
+    },
+    {
+      "section": "03",
+      "beat": 3,
+      "pair": "s1-slot “4104114124134144154164174184” × s1-slot ““it”432”",
+      "why": "`432` rides the index like a bookmark and stops at its own page. The card being **on** the book is the event of the beat -- an address that stayed clear of the thing it indexes would teach the opposite."
+    },
+    {
+      "section": "03",
+      "beat": 4,
+      "pair": "s1-slot “4104114124134144154164174184” × s1-slot “0.980.10-0.80-0.180.19-0.44-”",
+      "why": "The row is sliding **out of** page 432 at the height of that page. Touching the book it came from is the causality the beat exists to show; a row that started clear of the book would have arrived from nowhere."
+    },
+    {
+      "section": "03",
+      "beat": 4,
+      "pair": "s1-slot “4104114124134144154164174184” × s1-slot ““it”432”",
+      "why": "432 stays on the page it opened, as the bookmark. Same reason as beat 3."
+    },
+    {
+      "section": "05",
+      "beat": 1,
+      "pair": "s1-slot × s1-slot “0.23-0.110.480.390.030.65-0.”",
+      "why": "Same roofline bounding-box artefact as beats 2-4, keyed separately because the building carries no sign yet at beat 1. The row stands in clear paper left of the entrance."
+    },
+    {
+      "section": "05",
+      "beat": 2,
+      "pair": "s1-slot “288 routed experts” × s1-slot “0.23-0.110.480.390.030.65-0.”",
+      "why": "Bounding-box artefact. The building's box is set by its roofline, which runs wider than the wall of experts under it; the row stands at 24/60 in clear paper to the left of the entrance, abutting the box and touching no ink. Verified on the rendered frame. The row moved out from 18 because at that x its left cells were falling off the paper."
+    },
+    {
+      "section": "05",
+      "beat": 3,
+      "pair": "s1-slot “288 routed experts” × s1-slot “ROUTER”",
+      "why": "The router desk stands at the building's entrance, which is inside the building's bounding box and is the geography every later beat depends on -- the same case as §02 beat 2's prompt card. This beat enlarges the desk and ghosts the wall to 0.3 precisely so the desk, not the wall, is the hero of 'something has to choose'."
+    },
+    {
+      "section": "05",
+      "beat": 3,
+      "pair": "s1-slot “288 routed experts” × s1-slot “0.23-0.110.480.390.030.65-0.”",
+      "why": "Same roofline bounding-box artefact as beat 2. The row has not moved."
+    },
+    {
+      "section": "05",
+      "beat": 4,
+      "pair": "s1-slot “288 routed experts” × s1-slot “ROUTER”",
+      "why": "The desk has not moved since beat 3 and neither has the argument: it stands at the entrance."
+    },
+    {
+      "section": "05",
+      "beat": 4,
+      "pair": "s1-slot “288 routed experts” × s1-slot “0.23-0.110.480.390.030.65-0.”",
+      "why": "Same roofline bounding-box artefact as beat 2. The row has not moved."
+    },
+    {
+      "section": "05",
+      "beat": 10,
+      "pair": "s1-slot “288 routed experts280 idle” × s1-note “+1 shared, never scored”",
+      "why": "The shared expert sits outside the wall at the top right, and the wall itself spans 28-84% of the frame -- so every position near the block this label describes is over the crowd, and every position clear of the crowd is orphaned from the block. Dark ink on the pale faces stays legible; verified on the rendered frame."
+    },
+    {
+      "section": "05",
+      "beat": 11,
+      "pair": "s1-slot “280 idle” × s1-slot “a row ina different row out”",
+      "why": "One expert lifted out of the wall and opened. It is drawn over the wall it came from."
+    },
+    {
+      "section": "05",
+      "beat": 11,
+      "pair": "s1-slot “288 routed experts280 idle” × s1-slot “dogFrenchmaths”",
+      "why": "The plates are pressed **onto** the selected experts and slide off. Landing on the wall is the event of the beat -- plates that never touched an expert would be correcting a belief the viewer was never shown holding."
+    },
+    {
+      "section": "05",
+      "beat": 12,
+      "pair": "s1-slot “288 routed experts280 idle” × s1-slot “a row ina different row out”",
+      "why": "An explanatory cutaway of one expert, drawn over the wall it was taken from. Moving it clear would make it a separate diagram, and the point is that this box *is* one of the 288."
+    },
+    {
+      "section": "06",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “-0.45-0.70-0.730.390.030.570”",
+      "why": "The row is inside the room. 'The room gets edges' is the beat; the row is what the room contains."
+    },
+    {
+      "section": "06",
+      "beat": 13,
+      "pair": "s1-slot × s1-slot “-0.45-0.70-0.730.390.030.570”",
+      "why": "The row is inside the room. 'The room gets edges' is the beat; the row is what the room contains."
+    },
+    {
+      "section": "07",
+      "beat": 2,
+      "pair": "s1-slot “floor 2442 sparse3 dense” × s1-slot",
+      "why": "The room is one floor **of** the tower. That is the whole figure: 'one floor'."
+    },
+    {
+      "section": "08",
+      "beat": 1,
+      "pair": "s1-slot “42 sparse3 dense” × s1-slot “The dog dropped the ball, an”",
+      "why": "By design, and the point of the beat. 'It was never alone -- our prompt became eight tokens' is about the sentence, so the sentence is the hero: opaque white cards at 0.62, crossing a stack ghosted to 0.28. The eight tokens lying across the building they are about to enter is the frame's sentence. §07 hands us that stack and cutting it would make this a new scene."
+    },
+    {
+      "section": "08",
+      "beat": 2,
+      "pair": "s1-slot “floor 4542 sparse3 dense” × s1-note “?”",
+      "why": "The `?` marks the one token climbing alone -- it is placed on the tower because the tower is what the question is about."
+    },
+    {
+      "section": "09",
+      "beat": 8,
+      "pair": "s1-slot “4011bounced4012·rolled4013·w” × s1-slot ““bounced””",
+      "why": "The chosen token lifts **out of** the list. Touching the row it came from is the event -- a card that appeared clear of the list would not say where the answer was found."
+    },
+    {
+      "section": "10",
+      "beat": 2,
+      "pair": "s1-slot “floor 142 sparse3 dense” × s1-note “9 × 45 layers ?”",
+      "why": "A label on the object it names. The tower is the subject of this beat, and a count about the tower placed clear of the tower is a caption next to nothing."
+    },
+    {
+      "section": "10",
+      "beat": 3,
+      "pair": "s1-slot “floor 142 sparse3 dense” × s1-slot ““bounced””",
+      "why": "The new token sits on floor one of the tower. 'It starts at the bottom. Floor one.'"
+    },
+    {
+      "section": "10",
+      "beat": 4,
+      "pair": "s1-slot “floor 142 sparse3 dense” × s1-note “1 of 9 moving”",
+      "why": "A label on the object it names. The tower is the subject of this beat, and a count about the tower placed clear of the tower is a caption next to nothing."
+    },
+    {
+      "section": "11",
+      "beat": 5,
+      "pair": "s1-slot “floor 942 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "The router desk stands at the foot of the tower, which is where §5 established it and where it has been in every frame since. It is drawn above the tower and stays legible."
+    },
+    {
+      "section": "11",
+      "beat": 6,
+      "pair": "s1-slot “floor 942 sparse3 dense” × s1-slot",
+      "why": "The fetch route passes the tower on its way from the store to the compute side. The route is drawn behind it."
+    },
+    {
+      "section": "11",
+      "beat": 6,
+      "pair": "s1-slot “floor 942 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "11",
+      "beat": 7,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-note “a different 8”",
+      "why": "A label on the thing it names. The tower is the model, and this note is about the model's own routing; placed clear of the tower it would be a caption floating next to nothing."
+    },
+    {
+      "section": "11",
+      "beat": 7,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot",
+      "why": "As beat 6: the fetch route passes behind the tower."
+    },
+    {
+      "section": "11",
+      "beat": 7,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "11",
+      "beat": 8,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-brace “~25 MB · 4096 × 2048 × 3”",
+      "why": "Beat 8 pushes in to measure **one block inside the tower**. The brace measures that block, so it is drawn on it -- `skills/SPATIAL_CONTINUITY.md`: a measure of a thing belongs to the thing."
+    },
+    {
+      "section": "11",
+      "beat": 8,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "11",
+      "beat": 9,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "12",
+      "beat": 1,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and beat 1 is the beat that fills §11's empty shelf, so the fetch route crossing it is the composition working. Same argument as beats 2-13; this beat was missing only because beat 1 draws the box before any traffic has moved through it."
+    },
+    {
+      "section": "12",
+      "beat": 2,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 3,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 4,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 5,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 6,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 7,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 8,
+      "pair": "s1-slot “backing up” × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 9,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 10,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot “12,096layer-specific expert ”",
+      "why": "The total is printed over the ghosted geometry it counts -- 288 x 42 is a fact about that wall and that tower, and a figure placed clear of them would be a number with nothing behind it."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot “42 sparse3 dense”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot “kept closemeasured on smalle”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedofftheworking”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-note “5.6% active”",
+      "why": "The share is a property of the ghosted geometry it is printed over, and beat 12's whole argument is that the headline percentage has to be read *against* that geometry rather than beside it."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-note “8 of 288 · per sparse layer”",
+      "why": "Same: the count names the wall it is drawn on."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “12,096layer-specific expert ”",
+      "why": "As beat 11: the total is drawn over the geometry it counts."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “42 sparse3 dense”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “kept closemeasured on smalle”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot “42 sparse3 dense” × s1-note “8 of 288 · per sparse layer”",
+      "why": "Same: the count names the geometry it is drawn on."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedofftheworking”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
+    },
+    {
+      "section": "12",
+      "beat": 13,
+      "pair": "s1-slot × s1-slot “kept closemeasured on smalle”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    }
+  ]
+}

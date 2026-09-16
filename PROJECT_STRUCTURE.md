@@ -1,62 +1,60 @@
-# Project Structure
+# Project structure — production
 
-Each top-level folder has one job. The goal is to make it obvious what is **current**, what is **reference**, and what is **historical**.
+There is one current film: **The 18 Billion Mystery**.
 
-## Authority order
+## Film sources
 
-When files disagree, use this order:
+```text
+video-script/video-1/
+  01-...md → 13-...md     approved/current narration + visual contracts
+  READ_ALOUD.md            generated whole-film read-through
+  TITLE.md                 canonical name/title
 
-1. `video-script/` — current spoken script
-2. `storyboard/` — current story / visual structure
-3. `research/` — factual and teaching reference
-4. `art-direction/` — visual language
-5. `src/` — implementation
-6. `archive/` — historical only
+storyboard/video-1/
+  STORY_SPINE.md            whole-film promise and section chain
+  BOARD.md                  generated beat-by-beat board
+  VOCABULARY_LEDGER.md      terminology discipline
 
-Implementation must follow the story and research; it does not redefine them.
+src/videos/glm-320b/video-1/
+  section-01/ ... section-13/
+    SectionNN.tsx           section director
+    beats.ts                executable beat/VO sequence
+    scene.ts                scene state + verbs
+    Stage.tsx               rendered composition
+```
 
-## `video-script/`
+## Shared production systems
 
-What Ahmad currently plans to say.
+```text
+src/paper/              paper-world actors, motion, overlays, prompt constants
+art-direction/          cast, props, palette, paper-world rules
+research/               factual grounding; GLM truth/tokenizer/offloading notes
+skills/                 story, teaching, continuity, composition and QA rules
+scripts/                checks, frames, render, VO timing and SFX tooling
+assets/sfx/             chosen production sounds + provenance
+public/vo/              local VO drop location; audio files are ignored
+```
 
-Current state: only `01-opening-narration.md` is a current spoken-script draft. Do not assume implementation copy is the final script.
+## Public routes
 
-## `storyboard/`
+- `/` — guided film landing page
+- `/320b-parameters-only-18b-active-why-does-it-need-8-gpus` — the film
+- `?section=N` — jump to a chapter
+- `?play=1` — play through chapters automatically
+- `?chrome=0` — clean render/recording view
+- `/section-01` … `/section-13` — direct QA/render routes
 
-Pre-production story structure.
+`/watch` and `/video-1` only redirect to the title route for old bookmarks.
 
-`storyboard/SECTION_MAP.md` is the **authoritative current high-level story** for the GLM explainer.
+## Internal visual toolkit
 
-## `research/`
+`src/components/`, `src/engine/`, `src/examples/`, `src/lab/`, `src/visuals/` and `src/vendor/` are reusable/reference tooling. They are deliberately not exposed by the production router.
 
-Reference material, not narration.
+## What is intentionally not in the working tree
 
-- `research/glm/GLM_V7_ATTENTION_MOE_RESEARCH.md` — current GLM technical reference
-- `research/ncase/NCASE_STUDY_INDEX.md` — entry point for teaching / Nicky Case studies
-- `research/RESEARCH_NOTES.md` — general notes
+- rejected scripts/cuts
+- obsolete storyboard frame exports
+- rendered MP4s and smoke screenshots
+- raw SFX candidate downloads
 
-Older version-specific research belongs in `archive/`.
-
-## `art-direction/`
-
-Visual rules only.
-
-`art-direction/GLM_PAPER_WORLD.md` is the current GLM visual-language reference.
-
-## `skills/`
-
-Reusable explanation, continuity, interaction and visual rules. These are not GLM-specific facts or current narration.
-
-## `src/`
-
-React/Vite implementation.
-
-For the GLM video, check `src/videos/registry.tsx` to identify the active implementation. Currently it points to `src/videos/glm-320b/v9/Glm320bProductionV9.tsx`.
-
-Earlier loose V1–V8 GLM implementations have been removed from the working tree; Git history preserves them.
-
-## `archive/`
-
-Superseded scripts, audits, experiments, old research and rollback material.
-
-Nothing here is authoritative. Useful ideas can be recovered from archive, but only become current after being deliberately moved into the current script/storyboard/research.
+Git history is the archive. The working tree should describe the film we are actually producing.

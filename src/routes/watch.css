@@ -1,0 +1,154 @@
+.w-page {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #f7f1e6;
+}
+
+.w-page[data-turning='true'] {
+  opacity: 0.92;
+  transition: opacity 180ms ease;
+}
+
+.w-blank {
+  position: absolute;
+  inset: 0;
+  background: #f7f1e6;
+}
+
+.w-guide-button {
+  position: fixed;
+  z-index: 100;
+  top: 14px;
+  right: 14px;
+  min-height: 34px;
+  padding: 5px 10px;
+  border: 1px solid rgba(41, 38, 31, 0.3);
+  border-radius: 8px 10px 7px 9px;
+  background: rgba(247, 241, 230, 0.82);
+  color: rgba(41, 38, 31, 0.78);
+  font: 16px/1 'Patrick Hand', ui-rounded, system-ui, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  opacity: 0.72;
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.w-guide-button:hover,
+.w-guide-button:focus-visible,
+.w-guide-button[aria-expanded='true'] {
+  opacity: 1;
+  transform: translateY(1px);
+}
+
+.w-guide-backdrop {
+  position: fixed;
+  z-index: 105;
+  inset: 0;
+  border: 0;
+  background: rgba(41, 38, 31, 0.16);
+  cursor: default;
+}
+
+.w-chapter-panel {
+  position: fixed;
+  z-index: 110;
+  top: 12px;
+  right: 12px;
+  width: min(390px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid rgba(41, 38, 31, 0.28);
+  border-radius: 13px 9px 14px 10px;
+  background: rgba(255, 250, 240, 0.97);
+  box-shadow: 0 18px 60px rgba(41, 38, 31, 0.16);
+  font-family: 'Patrick Hand', ui-rounded, system-ui, sans-serif;
+  transform: translateX(calc(100% + 24px));
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.w-chapter-panel[data-open='true'] {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.w-chapter-panel-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 4px 4px 12px;
+  border-bottom: 1px solid rgba(41, 38, 31, 0.13);
+}
+
+.w-chapter-panel-head span {
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.w-chapter-panel-head button {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: 24px/1 inherit;
+  cursor: pointer;
+}
+
+.w-chapter-panel ol {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.w-chapter-panel li button {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #29261f;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.w-chapter-panel li button:hover,
+.w-chapter-panel li button:focus-visible {
+  background: rgba(41, 38, 31, 0.06);
+}
+
+.w-chapter-panel li button[data-active='true'] {
+  background: rgba(231, 134, 66, 0.12);
+}
+
+.w-chapter-panel li button span {
+  color: rgba(41, 38, 31, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+
+.w-chapter-panel li button strong {
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .w-guide-button {
+    top: 8px;
+    right: 8px;
+  }
+
+  .w-chapter-panel {
+    top: 8px;
+    right: 8px;
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 16px);
+  }
+}

@@ -3,6 +3,18 @@ import { SnapStory } from '../engine/SnapStory'
 import { SketchAnnotation } from '../visuals/SketchAnnotation'
 import { SketchArrow } from '../visuals/SketchShape'
 import { VisualIcon } from '../visuals/VisualIcon'
+/*
+ * Stylesheet order matters here, and it is not alphabetical.
+ *
+ * premium-patterns.css and design-system.css both define `.snap-story` with
+ * different heights (min(72vh,720px) vs full bleed) at the same specificity,
+ * so whichever loads last wins. These used to be global imports in main.tsx
+ * in exactly this order; keep it.
+ */
+import '../premium-patterns.css'
+import '../design-system.css'
+import '../explanation-system.css'
+import '../lab-shell.css'
 
 const styles: Array<{ art: ArtDirection; name: string; note: string }> = [
   { art: 'paper', name: 'Paper / Sketch', note: 'Warm surface, imperfect geometry, Ncase-like charm.' },
