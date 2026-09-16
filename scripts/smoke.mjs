@@ -18,40 +18,54 @@ for (const raw of process.argv.slice(2)) {
 
 const WIDTH = Number(args.get('width') ?? 1440)
 const HEIGHT = Number(args.get('height') ?? 900)
-const SETTLE = Number(args.get('settle') ?? 2000)
+const SETTLE = Number(args.get('settle') ?? 1200)
 const OUT = path.resolve(args.get('out') ?? 'output/smoke')
+const HOST = '127.0.0.1'
+const PORT = Number(args.get('port') ?? 4173)
+const BASE = `http://${HOST}:${PORT}`
 
 async function routes() {
   const registry = await readFile('src/videos/registry.tsx', 'utf8')
   const titleSlug = registry.match(/VIDEO_SLUG = '([^']+)'/)?.[1]
   if (!titleSlug) throw new Error('VIDEO_SLUG is missing from src/videos/registry.tsx')
   const sectionSlugs = [...registry.matchAll(/slug: 'section-(\d+)'/g)].map((m) => `/section-${m[1]}`)
-  return [
-    '/',
-    `/${titleSlug}`,
-    `/${titleSlug}?section=13`,
-    '/watch',
-    '/video-1',
-    ...sectionSlugs,
-  ]
+  return ['/', `/${titleSlug}`, `/${titleSlug}?section=13`, '/watch', '/video-1', ...sectionSlugs]
+}
+
+async function waitForServer(child) {
+  let stderr = ''
+  child.stderr?.on('data', (chunk) => {
+    stderr += chunk.toString()
+  })
+
+  const deadline = Date.now() + 30_000
+  while (Date.now() < deadline) {
+    if (child.exitCode !== null) {
+      throw new Error(`vite exited early with code ${child.exitCode}${stderr ? `\n${stderr}` : ''}`)
+    }
+    try {
+      const response = await fetch(BASE, { redirect: 'manual' })
+      if (response.status >= 200 && response.status < 500) return
+    } catch {
+      // Server is not listening yet.
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200))
+  }
+  throw new Error(`vite did not answer ${BASE} within 30s${stderr ? `\n${stderr}` : ''}`)
 }
 
 async function startServer() {
-  const child = spawn('npx', ['vite', '--port', '0'], { stdio: ['ignore', 'pipe', 'inherit'], env: process.env })
-  const url = await new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('vite did not report a URL within 60s')), 60_000)
-    let buffer = ''
-    child.stdout.on('data', (chunk) => {
-      buffer += chunk.toString()
-      const match = buffer.match(/http:\/\/localhost:(\d+)/)
-      if (match) {
-        clearTimeout(timer)
-        resolve(match[0])
-      }
-    })
-    child.on('exit', (code) => reject(new Error(`vite exited early with code ${code}`)))
+  const child = spawn('npx', ['vite', '--host', HOST, '--port', String(PORT), '--strictPort'], {
+    stdio: ['ignore', 'ignore', 'pipe'],
+    env: { ...process.env, NO_COLOR: '1' },
   })
-  return { url, stop: () => void child.kill('SIGTERM') }
+  try {
+    await waitForServer(child)
+  } catch (error) {
+    child.kill('SIGTERM')
+    throw error
+  }
+  return { url: BASE, stop: () => void child.kill('SIGTERM') }
 }
 
 const list = await routes()
@@ -75,7 +89,10 @@ page.on('requestfailed', (request) => {
 try {
   for (const route of list) {
     current = route
-    await page.goto(server.url + route, { waitUntil: 'networkidle' })
+    const response = await page.goto(server.url + route, { waitUntil: 'networkidle' })
+    if (!response || !response.ok()) {
+      failures.push(`${current}  HTTP ${response?.status() ?? 'no response'}`)
+    }
     await page.waitForTimeout(SETTLE)
     await page.evaluate(() => document.fonts.ready)
     const file = `${route.replace(/^\/$/, 'home').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '')}.png`
