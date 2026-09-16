@@ -4,29 +4,9 @@
  * A section that asks the same question at the end that it asked at the
  * beginning has no story, and a chain whose links do not actually meet is a
  * list wearing a chain's clothes. Both are invisible to every other check in
- * this repo, and both were shipped five times before anyone noticed.
+ * this repo.
  *
  *   npm run check:chain
- *
- * It reads the contract table at the top of each `video-script/NN-*.md` and
- * asserts three things:
- *
- *   1. every section **answers** something                    (no dead beats)
- *   2. what it exits on is not what it entered on             (no circularity)
- *   3. what it enters on is what the previous one exited on   (the link is real)
- *
- * ## Two things this file has been wrong about
- *
- * It held a **hard-coded list of eight filenames**, and went on reporting a
- * passing chain for the superseded build after the video was rewritten to
- * thirteen. A gate that describes a build nobody is making is worse than no
- * gate, because it is trusted. The list now comes off the filesystem.
- *
- * It also looked for spine-v3 field names -- `Exits on`, `Event` -- which v4's
- * contract tables do not use. So it reported 26 missing fields on 13 correct
- * scripts. The exit is now whichever of `→ next` / `Therefore` / `Exits on` a
- * section declares, because those are the three words the spine uses for the
- * same idea, and `Answers` replaced `Event` as the thing every section owes.
  */
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -34,7 +14,7 @@ import path from 'node:path'
 const DIR = 'video-script/video-1'
 const CHAIN = (await readdir(DIR)).filter((file) => /^\d\d-.+\.md$/.test(file)).sort()
 
-/** Compare on meaning, not on punctuation: quotes and dashes drift. */
+/** Compare on meaning, not punctuation: quotes and dashes drift. */
 function normalise(value) {
   return value
     .toLowerCase()
@@ -46,13 +26,11 @@ function normalise(value) {
 }
 
 function field(source, name) {
-  /* The field names include `→`, so the name is escaped rather than trusted. */
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const row = source.match(new RegExp(`^\\|\\s*\\*{0,2}${escaped}\\*{0,2}\\s*\\|(.+?)\\|\\s*$`, 'mi'))
   return row ? row[1].replace(/\*+/g, '').trim() : null
 }
 
-/** The three words the spine uses for "and this is what it hands forward". */
 const EXIT_NAMES = ['→ next', 'Therefore', 'Exits on']
 const exitOf = (source) => {
   for (const name of EXIT_NAMES) {
@@ -62,7 +40,6 @@ const exitOf = (source) => {
   return null
 }
 
-/** A section that ends the video declares no exit, and says so. */
 const isTerminal = (value) => !value || /^\(?none/i.test(value.replace(/[*_]/g, '').trim())
 
 const rows = []
@@ -85,33 +62,15 @@ rows.forEach((row, index) => {
   const last = index === rows.length - 1
 
   if (!row.answers) problems.push(`${where}: no "Answers" in the contract table`)
-  /* The opening section enters on nothing -- it opens the video. */
   if (!first && !row.enters) problems.push(`${where}: no "Enters on" in the contract table`)
   if (!last && isTerminal(row.exits)) {
     problems.push(`${where}: nothing handed forward. Declare "→ next", or this link is dead`)
   }
 
-  // The section must not end where it started.
   if (row.enters && row.exits && normalise(row.enters) === normalise(row.exits)) {
     problems.push(`${where}: exits on the same question it entered on. That is a circle, not a story`)
   }
 
-  /*
-   * **The handoff itself**, which this script has claimed to check since it was
-   * written and did not.
-   *
-   * `Exits on` is the sentence the viewer is holding when a section ends;
-   * `Enters on` is the sentence the next section says they are holding. They
-   * are the same sentence or the seam is visible. Nothing enforced it, so §7
-   * exited on "336 expert **visits** for one token" while §8 entered on "336
-   * **choices** for one token" — a word this video had just spent a whole
-   * section correcting — and the gate printed "nothing circles back on itself"
-   * over the top of it.
-   *
-   * `row.exits` is whichever of `→ next` / `Therefore` / `Exits on` came first,
-   * so it is usually the *reason* rather than the sentence. The comparison has
-   * to read `Exits on` specifically.
-   */
   const next = rows[index + 1]
   if (next && row.exitsOn && !isTerminal(row.exitsOn) && next.enters) {
     if (normalise(row.exitsOn) !== normalise(next.enters)) {
@@ -125,19 +84,20 @@ rows.forEach((row, index) => {
 /*
  * The build and the plan, checked against each other.
  *
- * `/watch` carries an `enters` line per chapter -- the question the viewer
- * arrives holding -- and it is the one place a section can quietly stop
- * matching its own script. This is exactly comparable, so it is checked.
+ * Chapter metadata now has one owner: `src/videos/registry.tsx`. The home page
+ * and player both consume that registry, so checking WatchPage would only test
+ * implementation details and would break whenever the player is reorganised.
  */
-const watch = await readFile('src/routes/WatchPage.tsx', 'utf8')
-const chapters = [...watch.matchAll(/\{ n: (\d+), title: '[^']*', enters: '([^']*)'/g)].map((m) => ({
+const registry = await readFile('src/videos/registry.tsx', 'utf8')
+const chapterBlock = registry.split('export const videoChapters')[1] ?? ''
+const chapters = [...chapterBlock.matchAll(/\bn:\s*(\d+),[\s\S]*?\benters:\s*'([^']*)'/g)].map((m) => ({
   n: Number(m[1]),
   enters: m[2],
 }))
 
 if (chapters.length !== rows.length) {
   problems.push(
-    `src/routes/WatchPage.tsx: ${chapters.length} chapters against ${rows.length} scripts. The chain and the player disagree about how long the video is`,
+    `src/videos/registry.tsx: ${chapters.length} chapters against ${rows.length} scripts. The chain and the production registry disagree about how long the video is`,
   )
 }
 for (const chapter of chapters) {
@@ -146,7 +106,7 @@ for (const chapter of chapters) {
   const script = row.enters ?? ''
   if (normalise(chapter.enters) !== normalise(script)) {
     problems.push(
-      `src/routes/WatchPage.tsx §${chapter.n}: enters on "${chapter.enters}" but ${row.file} says "${script}"`,
+      `src/videos/registry.tsx §${chapter.n}: enters on "${chapter.enters}" but ${row.file} says "${script}"`,
     )
   }
 }
@@ -169,4 +129,4 @@ if (problems.length) {
 }
 console.log('Every section answers something and hands something forward, every section enters')
 console.log('on the sentence the one before it exits on, nothing circles back on itself, and')
-console.log('/watch agrees with the scripts. Read the pairs above to judge the links.\n')
+console.log('the production chapter registry agrees with the scripts. Read the pairs above to judge the links.\n')
