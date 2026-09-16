@@ -120,7 +120,7 @@ try {
   await page.getByRole('link', { name: 'Open video' }).click()
   await page.waitForURL((url) => url.pathname === `/${titleSlug}`, { timeout: 10_000 })
 
-  await page.getByRole('button', { name: /chapters/i }).click()
+  await page.getByRole('button', { name: '§1/13 · Chapters', exact: true }).click()
   const chapter13 = page.getByRole('button', { name: /13.*what 18b active actually buys/i })
   await chapter13.waitFor({ state: 'visible', timeout: 5_000 })
   await chapter13.click()
