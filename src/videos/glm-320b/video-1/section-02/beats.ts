@@ -126,7 +126,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 8,
     vo: 'Where do you think `it` is in that list? There’s no way you could know.',
     commands: [narrator.set({ pose: 'wonder' })],
-    overlays: [note('where?', 72, 72, { size: 'md', rotate: -3 })],
+    overlays: [note('where?', 60, 48, { size: 'md', rotate: -3 })],
   },
   {
     n: 10,

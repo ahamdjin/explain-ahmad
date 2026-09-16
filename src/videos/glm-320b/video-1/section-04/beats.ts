@@ -53,7 +53,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [line.ask(), line.mask(), narrator.set({ pose: 'think' })],
     lateOverlays: {
       at: 9500,
-      overlays: [note('all seven behind it', 77, 32, { tone: 'relate', rotate: -3 })],
+      overlays: [note('all seven behind it', 77, 24, { tone: 'relate', rotate: -3 })],
     },
   },
   {

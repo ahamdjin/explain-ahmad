@@ -202,6 +202,12 @@
     },
     {
       "section": "12",
+      "beat": 1,
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and beat 1 is the beat that fills §11's empty shelf, so the fetch route crossing it is the composition working. Same argument as beats 2-13; this beat was missing only because beat 1 draws the box before any traffic has moved through it."
+    },
+    {
+      "section": "12",
       "beat": 2,
       "pair": "s1-slot × s1-slot “kept close”",
       "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."

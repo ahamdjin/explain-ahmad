@@ -112,7 +112,7 @@ export const BEATS: Beat<Patch>[] = [
     /* Both halves on one frame, because the whole thesis is that one of them
      * shrank and the other did not. */
     commands: [
-      block.moveTo({ x: 72, y: 42 }, 0.62),
+      block.moveTo({ x: 67, y: 42 }, 0.62),
       share.show({ x: 26, y: 58 }, 0.5, { mode: 'bar', lit: 0.056, caption: '' }),
       narrator.set({ pose: 'weigh' }),
     ],
