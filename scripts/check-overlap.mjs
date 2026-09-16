@@ -106,18 +106,37 @@ async function beatsOf(section) {
 
 async function startServer() {
   if (args.has('url')) return { url: args.get('url').replace(/\/$/, ''), stop: async () => {} }
-  const child = spawn('npx', ['vite', '--port', '0'], { stdio: ['ignore', 'pipe', 'inherit'], env: process.env })
-  const url = await new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('vite did not report a URL within 60s')), 60_000)
-    let buffer = ''
-    child.stdout.on('data', (chunk) => {
-      buffer += chunk.toString()
-      const match = buffer.match(/http:\/\/localhost:(\d+)/)
-      if (match) { clearTimeout(timer); resolve(`http://localhost:${match[1]}`) }
-    })
-    child.on('exit', (code) => reject(new Error(`vite exited early with code ${code}`)))
+
+  const host = '127.0.0.1'
+  const port = Number(args.get('port') ?? 4174)
+  const url = `http://${host}:${port}`
+  const child = spawn('npx', ['vite', '--host', host, '--port', String(port), '--strictPort'], {
+    stdio: ['ignore', 'ignore', 'pipe'],
+    env: { ...process.env, NO_COLOR: '1' },
   })
-  return { url, stop: async () => void child.kill('SIGTERM') }
+  let stderr = ''
+  child.stderr?.on('data', (chunk) => {
+    stderr += chunk.toString()
+  })
+
+  const deadline = Date.now() + 30_000
+  while (Date.now() < deadline) {
+    if (child.exitCode !== null) {
+      throw new Error(`vite exited early with code ${child.exitCode}${stderr ? `\n${stderr}` : ''}`)
+    }
+    try {
+      const response = await fetch(url, { redirect: 'manual' })
+      if (response.status >= 200 && response.status < 500) {
+        return { url, stop: async () => void child.kill('SIGTERM') }
+      }
+    } catch {
+      // Server is not listening yet.
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200))
+  }
+
+  child.kill('SIGTERM')
+  throw new Error(`vite did not answer ${url} within 30s${stderr ? `\n${stderr}` : ''}`)
 }
 
 /** Runs in the page. Returns collisions between leaf ink of different actors. */
