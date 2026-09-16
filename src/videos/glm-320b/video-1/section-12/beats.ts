@@ -169,9 +169,9 @@ export const BEATS: Beat<Patch>[] = [
     /* Three labels around an unmarked control. `locality` is the one the voice
      * never gives a name to, and it is the one the next beat is about. */
     overlays: [
-      note('hardware', 24, 60, { tone: 'ink', rotate: -2 }),
-      note('workload', 24, 70, { tone: 'ink', rotate: 1 }),
-      note('locality', 24, 80, { tone: 'word', rotate: -1 }),
+      note('hardware', 36, 62, { tone: 'ink', rotate: -2 }),
+      note('workload', 36, 70, { tone: 'ink', rotate: 1 }),
+      note('locality', 36, 78, { tone: 'word', rotate: -1 }),
     ],
   },
   {

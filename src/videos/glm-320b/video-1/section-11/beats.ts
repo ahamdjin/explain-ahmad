@@ -187,7 +187,7 @@ export const BEATS: Beat<Patch>[] = [
     lateOverlays: {
       at: 9600,
       overlays: [
-        centred(`${VISITS} × ${MB_PER_EXPERT} MB`, 40, 34, { size: 'lg', tone: 'measure', rotate: -2, sticky: true }),
+        centred(`${VISITS} × ${MB_PER_EXPERT} MB`, 18, 30, { size: 'lg', tone: 'measure', rotate: -2, sticky: true }),
       ],
     },
   },

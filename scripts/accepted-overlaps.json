@@ -75,136 +75,142 @@
       "why": "The new token sits on floor one of the tower. 'It starts at the bottom. Floor one.'"
     },
     {
-      "section": "12",
-      "beat": 3,
-      "pair": "s1-slot × s1-slot “kept close”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 4,
-      "pair": "s1-slot × s1-slot “kept close”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
+      "section": "11",
       "beat": 5,
-      "pair": "s1-slot × s1-slot “kept close”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "pair": "s1-slot “floor 942 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "The router desk stands at the foot of the tower, which is where §5 established it and where it has been in every frame since. It is drawn above the tower and stays legible."
+    },
+    {
+      "section": "11",
+      "beat": 6,
+      "pair": "s1-slot “floor 942 sparse3 dense” × s1-slot",
+      "why": "The fetch route passes the tower on its way from the store to the compute side. The route is drawn behind it."
+    },
+    {
+      "section": "11",
+      "beat": 6,
+      "pair": "s1-slot “floor 942 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "11",
+      "beat": 7,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-note “a different 8”",
+      "why": "A label on the thing it names. The tower is the model, and this note is about the model's own routing; placed clear of the tower it would be a caption floating next to nothing."
+    },
+    {
+      "section": "11",
+      "beat": 7,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot",
+      "why": "As beat 6: the fetch route passes behind the tower."
+    },
+    {
+      "section": "11",
+      "beat": 7,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "11",
+      "beat": 8,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-brace “~25 MB · 4096 × 2048 × 3”",
+      "why": "Beat 8 pushes in to measure **one block inside the tower**. The brace measures that block, so it is drawn on it -- `skills/SPATIAL_CONTINUITY.md`: a measure of a thing belongs to the thing."
+    },
+    {
+      "section": "11",
+      "beat": 8,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
+    },
+    {
+      "section": "11",
+      "beat": 9,
+      "pair": "s1-slot “floor 1042 sparse3 dense” × s1-slot “ROUTER”",
+      "why": "As beat 5: the router desk belongs at the tower's foot."
     },
     {
       "section": "12",
-      "beat": 6,
+      "beat": 2,
       "pair": "s1-slot × s1-slot “kept close”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
     },
     {
       "section": "12",
       "beat": 7,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
     },
     {
       "section": "12",
       "beat": 8,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "pair": "s1-slot “backing up” × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
     },
     {
       "section": "12",
       "beat": 9,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
     },
     {
       "section": "12",
       "beat": 10,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "pair": "s1-slot × s1-slot “kept close”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
     },
     {
       "section": "12",
       "beat": 11,
-      "pair": "s1-slot “backing up” × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 12,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 12,
-      "pair": "s1-slot × s1-slot",
-      "why": "The 288-wall and the 42-tower are ghosted in **behind** the cache box, dwarfing it. Being behind it is the argument."
-    },
-    {
-      "section": "12",
-      "beat": 12,
-      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedcrawling”",
-      "why": "The tower stands above the machine; their boxes share a column but their ink is separated vertically. Verified by eye."
-    },
-    {
-      "section": "12",
-      "beat": 12,
       "pair": "s1-slot × s1-slot “42 sparse3 dense”",
-      "why": "The ghosted wall's roof slope runs behind the tower. Both are deliberately faint and behind the box."
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot × s1-slot “kept closemeasured on smalle”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 11,
+      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedofftheworking”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-note “5.6% active”",
+      "why": "The share is a property of the ghosted geometry it is printed over, and beat 12's whole argument is that the headline percentage has to be read *against* that geometry rather than beside it."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-note “8 of 288 · per sparse layer”",
+      "why": "Same: the count names the wall it is drawn on."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot × s1-slot “kept closemeasured on smalle”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot “42 sparse3 dense” × s1-note “8 of 288 · per sparse layer”",
+      "why": "Same: the count names the geometry it is drawn on."
+    },
+    {
+      "section": "12",
+      "beat": 12,
+      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedofftheworking”",
+      "why": "The 288-wide wall and the 42-floor tower are ghosted in *behind* the cache box on purpose -- `section-12/scene.ts`: \"the 288 and the 42, ghosted in behind the box, dwarfing it\". The overlap is the scale comparison."
     },
     {
       "section": "12",
       "beat": 13,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 13,
-      "pair": "s1-slot × s1-slot",
-      "why": "The 288-wall and the 42-tower are ghosted in **behind** the cache box, dwarfing it. Being behind it is the argument."
-    },
-    {
-      "section": "12",
-      "beat": 13,
-      "pair": "s1-slot “42 sparse3 dense” × s1-slot “bouncedcrawling”",
-      "why": "The tower stands above the machine; their boxes share a column but their ink is separated vertically. Verified by eye."
-    },
-    {
-      "section": "12",
-      "beat": 13,
-      "pair": "s1-slot × s1-slot “42 sparse3 dense”",
-      "why": "The ghosted wall's roof slope runs behind the tower. Both are deliberately faint and behind the box."
-    },
-    {
-      "section": "12",
-      "beat": 13,
-      "pair": "s1-slot × s1-slot “12,096places an expert could”",
-      "why": "The 288-wall is ghosted in **behind** the count -- the scene's own note says it is there to dwarf the cache box. The figure and its working read cleanly over it; verified by eye at 1920x1080."
-    },
-    {
-      "section": "12",
-      "beat": 13,
-      "pair": "s1-slot × s1-note “288 × 42”",
-      "why": "The 288-wall is ghosted in **behind** the count -- the scene's own note says it is there to dwarf the cache box. The figure and its working read cleanly over it; verified by eye at 1920x1080."
-    },
-    {
-      "section": "12",
-      "beat": 14,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 15,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
-    },
-    {
-      "section": "12",
-      "beat": 16,
-      "pair": "s1-slot × s1-slot “kept closemeasured on a mode”",
-      "why": "The fetch path ends at the cache box it points at. An arrow that stops short of its target is a worse frame than one that touches it -- and `Attention` follows the same rule for its lines."
+      "pair": "s1-slot × s1-slot “kept closemeasured on smalle”",
+      "why": "The cache **is** the box in the path -- `section-12/scene.ts` defines it that way, and the whole section is about what happens to traffic that has to go through it. A cache drawn clear of the route it sits on would be a diagram of a different idea."
     }
   ]
 }

@@ -86,13 +86,19 @@ async function beatsOf(section) {
       /* Same rule as capture-frames: the beat's last staged reveal plus settle.
        * Shooting earlier photographs a frame the beat never rests on. */
       /*
-       * +1900, not +1200. `Counter` counts up over 1.4s, so a frame shot
-       * 1200ms after the stage that starts it was photographed mid-count --
-       * §12 beat 11 captured as `12,094` against a true 288 x 42 = 12,096.
+       * +2600, not +1200. `Counter` counts up, and a frame shot 1200ms after
+       * the stage that starts it was photographed mid-count -- §12 beat 11
+       * captured as `12,094` against a true 288 x 42 = 12,096.
+       *
+       * 2600 and not 1900 because the default 1.4s is not the longest: §12
+       * passes `seconds={1.8}`, which left 1900 with 100ms of slack and still
+       * caught the count in motion. A mid-count frame is also unstable *text*,
+       * so `accepted-overlaps.json` could never key a pair against it.
+       *
        * The margin has to clear the longest settling animation, not the
-       * shortest.
+       * shortest, with enough slack to survive render jitter.
        */
-      settle: Math.max(3400, (offsets.length ? Math.max(...offsets) : 0) + 1900),
+      settle: Math.max(3400, (offsets.length ? Math.max(...offsets) : 0) + 2600),
     })
   }
   return beats
