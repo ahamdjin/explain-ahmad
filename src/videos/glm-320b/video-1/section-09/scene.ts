@@ -61,7 +61,18 @@ export type SceneState = {
    * The prompt as a plain line, under the rows. This is where *next* attaches,
    * so it has to be a readable sentence rather than a stack of rows.
    */
-  strip: Placed & { focus: number }
+  strip: Placed & {
+    focus: number
+    /**
+     * Quieter than the rows above it.
+     *
+     * The prompt and the output-so-far are the same eight words in the same
+     * chips, and the only thing separating them was a sparkline too small to
+     * see. Two identical sentences read as a duplication bug, and the viewer
+     * spends the beat resolving that instead of watching the vocabulary.
+     */
+    fade: number
+  }
   /**
    * The empty position after the last token.
    *
@@ -81,7 +92,7 @@ export const INITIAL: SceneState = {
   rows: { on: false, at: { x: 46, y: 52 }, scale: 0.5, focus: -1 },
   last: { on: false, at: { x: 26, y: 34 }, scale: 0.4, label: '“it” — the last position' },
   vocab: { on: false, at: { x: 72, y: 48 }, scale: 1.15, scores: false, candidates: false, picked: false },
-  strip: { on: false, at: { x: 44, y: 80 }, scale: 0.5, focus: -1 },
+  strip: { on: false, at: { x: 44, y: 80 }, scale: 0.5, focus: -1, fade: 0.55 },
   slot: { on: false, at: { x: 73, y: 80 }, scale: 0.34 },
   out: { on: false, at: { x: 82, y: 64 }, scale: 0.6, label: 'bounced' },
   narrator: { ...INITIAL_NARRATOR },

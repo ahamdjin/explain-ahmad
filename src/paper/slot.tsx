@@ -10,11 +10,21 @@ export function Slot({
   feel,
   children,
   className = '',
+  /**
+   * Still on stage, but no longer the subject.
+   *
+   * An actor whose teaching job has finished is not the same as one that has
+   * left: §10's stored-state column and §5's 288-wall both have to stay put so
+   * the geography holds, while getting out of the way of whatever the
+   * narration has moved on to. `off()` loses the place; `fade` keeps it.
+   */
+  fade = 1,
 }: {
   on: boolean
   at: { x: number; y: number }
   scale?: number
   z?: number
+  fade?: number
   feel: Feel
   children: ReactNode
   className?: string
@@ -29,7 +39,7 @@ export function Slot({
        * anchored every actor by its top-left corner and pushed the wide ones
        * off frame.
        */
-      animate={{ left: `${at.x}%`, top: `${at.y}%`, x: '-50%', y: '-50%', scale, opacity: on ? 1 : 0 }}
+      animate={{ left: `${at.x}%`, top: `${at.y}%`, x: '-50%', y: '-50%', scale, opacity: on ? fade : 0 }}
       /*
        * Opacity gets its own fast transition. On the underdamped `and-yet`
        * spring it never actually reached 0, so hidden actors stayed faintly on

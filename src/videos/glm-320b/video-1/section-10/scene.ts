@@ -60,7 +60,18 @@ export type SceneState = {
    * the honest main-language claim is *state kept from earlier positions*. The
    * aside is where the word `cache` is allowed to appear.
    */
-  stored: Placed & { lit: boolean }
+  stored: Placed & {
+    lit: boolean
+    /**
+     * How loud the column is allowed to be.
+     *
+     * A full-height saturated bar beside a pale tower wins every frame it is
+     * in, and this one is the subject of exactly three beats out of twelve.
+     * It has to stay on stage -- the state *is* still being kept -- without
+     * taking the eye off the floors and the loop.
+     */
+    fade: number
+  }
   /** §1's two numbers, returning over the same tower. Beat 12. */
   numbers: { on: boolean; at: At; scale: number; value: string; caption: string }
   /** The prompt, growing by one token every time round. */
@@ -83,7 +94,7 @@ export type SceneState = {
 
 export const INITIAL: SceneState = {
   tower: { on: false, at: { x: 26, y: 48 }, scale: 0.82, floor: 0, markers: 0, kept: 0, teams: false },
-  stored: { on: false, at: { x: 44, y: 48 }, scale: 0.82, lit: false },
+  stored: { on: false, at: { x: 44, y: 48 }, scale: 0.82, lit: false, fade: 1 },
   numbers: { on: false, at: { x: 66, y: 34 }, scale: 1, value: '18 of 320', caption: 'billion — which 18?' },
   line: { on: false, at: { x: 26, y: 93 }, scale: 0.32, words: PROMPT },
   out: { on: false, at: { x: 62, y: 22 }, scale: 0.62, label: REPLY[0] },
@@ -111,6 +122,10 @@ export const stored = {
   ...a('stored'),
   /** The new position reading from it. Beat 5. */
   read: (): Patch => ({ stored: { lit: true } }),
+  /** Still kept, no longer the subject. Beats 6 onward. */
+  ghost: (fade = 0.3): Patch => ({ stored: { fade } }),
+  /** The subject again. */
+  loud: (): Patch => ({ stored: { fade: 1 } }),
 }
 export const numbers = a('numbers')
 export const out = a('out')

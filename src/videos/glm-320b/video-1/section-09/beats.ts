@@ -49,6 +49,9 @@ export const BEATS: Beat<Patch>[] = [
     /* The empty card lands before anything can fill it. A slot the viewer has
      * already seen is a question; a word that simply appears is an assertion. */
     commands: [strip.show({ x: 40, y: 80 }, 0.62), strip.follow(LAST), slot.show({ x: 76, y: 80 }, 0.42)],
+    /* Says which of the two sentences this is. Sticky, because both stay on
+     * screen together until beat 10. */
+    overlays: [note('output so far', 40, 88, { tone: 'word', rotate: -1, sticky: true })],
   },
   {
     n: 4,
@@ -102,6 +105,9 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'The important part is: one next token gets selected. Suppose the model chooses something corresponding to: “bounced”',
     commands: [vocab.pick(), out.show({ x: 74, y: 72 }, 0.7), narrator.set({ pose: 'point' })],
     clearSticky: true,
+    /* Re-stuck after the clear: the prompt and the output-so-far are both
+     * still on screen through beat 9, and still the same eight words. */
+    overlays: [note('output so far', 40, 88, { tone: 'word', rotate: -1, sticky: true })],
   },
   {
     n: 9,
@@ -131,6 +137,8 @@ export const BEATS: Beat<Patch>[] = [
       out.moveTo({ x: 74, y: 50 }, 0.9),
       narrator.set({ pose: 'wonder' }),
     ],
+    /* The strip goes; so does the label that named it. */
+    clearSticky: true,
     lateOverlays: {
       at: 5000,
       overlays: [centred('45 layers · 336 expert visits · one token', 60, 62, { size: 'md', tone: 'cost', rotate: -2 })],

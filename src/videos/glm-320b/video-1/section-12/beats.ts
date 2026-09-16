@@ -166,12 +166,14 @@ export const BEATS: Beat<Patch>[] = [
     secs: 10,
     vo: 'It depends on the hardware. It depends on the workload. And it depends on how predictable and repetitive the expert choices actually are.',
     commands: [],
-    /* Three labels around an unmarked control. `locality` is the one the voice
-     * never gives a name to, and it is the one the next beat is about. */
+    /* Three labels stacked against the right edge of the slider card, so they
+     * read as its three answers rather than as three loose words floating in
+     * open paper. `locality` is the one the voice never gives a name to, and
+     * it is the one the next beat is about. */
     overlays: [
-      note('hardware', 38, 74, { tone: 'ink', rotate: -2 }),
-      note('workload', 50, 74, { tone: 'ink', rotate: 1 }),
-      note('locality', 62, 74, { tone: 'word', rotate: -1 }),
+      note('hardware', 28, 72, { tone: 'ink', rotate: -2 }),
+      note('workload', 28, 79, { tone: 'ink', rotate: 1 }),
+      note('locality', 28, 86, { tone: 'word', rotate: -1 }),
     ],
   },
   {
@@ -183,15 +185,25 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'For smaller MoE architectures, expert locality and caching have been measured and exploited. But for the specific 288-expert, top-8 routing regime we are using here, I do not have a published GLM-specific locality measurement that lets me tell you: “keep exactly this many experts and you’ll get exactly this hit rate.” That number would be made up. What we can say is that GLM has: 288 routed experts × 42 sparse layers = 12,096 layer-specific expert slots.',
     /* The tag says which regime the reassuring literature is from. It is the
      * qualifier that keeps this beat honest, so it rides on the box itself. */
+    /* The zoom-out has to be physical or it is just a second diagram drawn on
+     * the first. The whole working chain shrinks and drops into the lower
+     * third — keeping its left-to-right order, so the geography survives —
+     * and the routing geometry takes the cleared upper half. Beat 13 brings
+     * the chain back to the exact placement beat 1 gave it. */
     commands: [
       cache.cite('measured on smaller-expert-count MoE models'),
-      wall.show({ x: 43, y: 36 }, 0.62),
-      tower.show({ x: 66, y: 42 }, 0.5),
+      store.moveTo({ x: 10, y: 74 }, 0.34),
+      path.moveTo({ x: 26, y: 70 }, 0.38),
+      cache.moveTo({ x: 36, y: 74 }, 0.52),
+      machine.moveTo({ x: 60, y: 76 }, 0.52),
+      slider.moveTo({ x: 78, y: 76 }, 0.52),
+      wall.show({ x: 40, y: 32 }, 0.86),
+      tower.show({ x: 76, y: 34 }, 0.74),
       path.fetch(0),
       narrator.set({ pose: 'think' }),
     ],
     stages: [{ at: 26000, commands: [count.run(SLOTS, 'layer-specific expert slots')] }],
-    overlays: [note('288 × 42', 24, 13, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
+    overlays: [note('288 × 42', 10, 60, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
   },
   {
     n: 12,
@@ -204,8 +216,8 @@ export const BEATS: Beat<Patch>[] = [
      * losing its memory claim. Both numbers, neither of them invented. */
     commands: [count.hold(), path.fetch(8), cache.hit(3), narrator.set({ pose: 'point' })],
     overlays: [
-      note('5.6% active', 22, 30, { size: 'md', tone: 'measure', rotate: -2 }),
-      note('8 of 288 · per sparse layer', 54, 30, { tone: 'word', rotate: 2 }),
+      note('5.6% active', 19, 32, { size: 'md', tone: 'measure', rotate: -2 }),
+      note('8 of 288 · per sparse layer', 40, 48, { tone: 'word', rotate: 2 }),
     ],
   },
   {
@@ -219,6 +231,12 @@ export const BEATS: Beat<Patch>[] = [
       wall.off(),
       tower.off(),
       count.off(),
+      /* Back to where beat 1 put it. The zoom-out was temporary. */
+      store.moveTo({ x: 12, y: 50 }, 0.56),
+      path.moveTo({ x: 34, y: 44 }, 0.62),
+      cache.moveTo(CACHE, 1),
+      machine.moveTo({ x: 74, y: 54 }, 1),
+      slider.moveTo({ x: 17, y: 78 }, 1),
       slider.drive(0.35),
       path.fetch(6),
       cache.fill(6),

@@ -41,7 +41,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           />
         </Slot>
 
-        <Slot on={scene.strip.on} at={scene.strip.at} scale={scene.strip.scale} z={4} feel={feel}>
+        <Slot on={scene.strip.on} at={scene.strip.at} scale={scene.strip.scale} z={4} feel={feel} fade={scene.strip.fade}>
           <Sentence words={PROMPT} split focus={scene.strip.focus} />
         </Slot>
 

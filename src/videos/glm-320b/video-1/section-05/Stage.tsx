@@ -14,7 +14,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {scene.ground.on ? <Ground y={scene.ground.y} /> : null}
 
       <Camera at={scene.camera} feel={feel}>
-        <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel}>
+        <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel} fade={scene.hospital.fade}>
           <Hospital
             sign={scene.hospital.sign}
             plaque=""

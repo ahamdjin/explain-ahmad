@@ -75,6 +75,16 @@ export type SceneState = {
     sign: string
     /** Beat 14. The selected doors stand open toward the row. Nothing exits. */
     doors: boolean
+    /**
+     * How loud the wall is allowed to be.
+     *
+     * 288 identical faces is the loudest object this video draws, and it is
+     * the subject of only four of the fourteen beats. On the others it has to
+     * stay exactly where it is -- the scale is the point -- while ceding the
+     * eye to the router, the row or the opened block. Hence a dimmer rather
+     * than `off()`.
+     */
+    fade: number
   }
   /**
    * `dog` / `French` / `maths`, trying to land on the eight and sliding off.
@@ -112,6 +122,7 @@ export const INITIAL: SceneState = {
     idle: '',
     sign: '',
     doors: false,
+    fade: 1,
   },
   plates: { on: false, at: { x: 51, y: 44 }, scale: 1.5, landing: false, falling: false },
   arcs: { on: false, at: { x: 15, y: 54 }, scale: 0.6 },
@@ -185,6 +196,10 @@ export const hospital = {
   label: (sign: string): Patch => ({ hospital: { sign } }),
   /** Beat 14. Open, and pointed at the row -- but nothing has come out yet. */
   openDoors: (): Patch => ({ hospital: { doors: true } }),
+  /** Back of the frame, while something else is being explained in front of it. */
+  ghost: (fade = 0.3): Patch => ({ hospital: { fade } }),
+  /** The subject again. */
+  loud: (): Patch => ({ hospital: { fade: 1 } }),
   plain: (): Patch => ({ hospital: { badges: 'none', focus: false, lit: [], idle: '' } }),
 }
 

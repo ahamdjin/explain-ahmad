@@ -28,7 +28,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         />
       </Slot>
 
-      <Slot on={scene.stored.on} at={scene.stored.at} scale={scene.stored.scale} z={2} feel={feel}>
+      <Slot on={scene.stored.on} at={scene.stored.at} scale={scene.stored.scale} z={2} feel={feel} fade={scene.stored.fade}>
         <StoredState lit={scene.stored.lit} />
       </Slot>
 

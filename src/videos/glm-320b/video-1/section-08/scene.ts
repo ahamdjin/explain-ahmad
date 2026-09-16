@@ -31,6 +31,8 @@ export const TOTAL = TOKENS * 336
 
 export type SceneState = {
   tower: Placed & {
+    /** How loud the stack is allowed to be while something else is explained. */
+    fade: number
     floor: number
     markers: number
     wiring: boolean
@@ -66,6 +68,8 @@ export type SceneState = {
 
 export const INITIAL: SceneState = {
   tower: {
+    /** Present for §7's sake, quiet while the prompt is the subject. Beat 1. */
+    fade: 1,
     on: false,
     at: { x: 50, y: 48 },
     scale: 1,
@@ -119,6 +123,10 @@ export const tower = {
    * section takes apart. `-1` puts everybody back on the same floor.
    */
   alone: (index: number): Patch => ({ tower: { alone: index } }),
+  /** On stage for §7's sake, but not the subject. Beat 1. */
+  ghost: (fade = 0.28): Patch => ({ tower: { fade } }),
+  /** The subject again. */
+  loud: (): Patch => ({ tower: { fade: 1 } }),
   /** Eight routers firing on one floor, slightly out of phase. */
   flash: (flash?: TowerFlash): Patch => ({ tower: { flash } }),
 }

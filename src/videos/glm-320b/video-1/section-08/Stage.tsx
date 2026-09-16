@@ -22,7 +22,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
     <>
       {scene.ground.on ? <Ground y={scene.ground.y} /> : null}
 
-      <Slot on={scene.tower.on} at={scene.tower.at} scale={scene.tower.scale} z={1} feel={feel}>
+      <Slot on={scene.tower.on} at={scene.tower.at} scale={scene.tower.scale} z={1} feel={feel} fade={scene.tower.fade}>
         <Tower
           floor={scene.tower.floor}
           markers={scene.tower.markers}

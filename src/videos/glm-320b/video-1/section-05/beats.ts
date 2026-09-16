@@ -58,7 +58,7 @@ export const BEATS: Beat<Patch>[] = [
     /* The row steps aside as the wall rises behind it. */
     stages: [
       { at: 3200, commands: [hospital.moveTo({ x: 58, y: 40 }, 0.86), hospital.set({ staffed: true })] },
-      { at: 5200, commands: [row.moveTo({ x: 18, y: 60 }, 0.68)] },
+      { at: 5200, commands: [row.moveTo({ x: 24, y: 60 }, 0.68)] },
     ],
   },
   {
@@ -82,7 +82,16 @@ export const BEATS: Beat<Patch>[] = [
     /* Named on arrival, unlike §2: by now the viewer has watched this desk work
      * unlabelled for two sections, so the name is a payoff rather than a
      * definition to memorise. */
-    commands: [desk.show({ x: 62, y: 74 }, 0.68), desk.name(), desk.ring(), narrator.set({ pose: 'point' })],
+    /* The wall drops back for two beats. "Something has to choose" is about
+     * the desk, and a full-ink 288 beside a 0.68-scale desk makes the smallest
+     * object on screen the one being introduced. */
+    commands: [
+      hospital.ghost(),
+      desk.show({ x: 58, y: 66 }, 1.05),
+      desk.name(),
+      desk.ring(),
+      narrator.set({ pose: 'point' }),
+    ],
   },
   {
     n: 4,
@@ -106,7 +115,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 12,
     vo: 'It has to use the changed row. Because 432 is the same every time. But this row describes `it` right now, in this context.',
-    commands: [chip.off(), row.moveTo(AT_DESK, 0.6), narrator.set({ pose: 'nod' })],
+    commands: [chip.off(), row.moveTo(AT_DESK, 0.6), desk.moveTo({ x: 62, y: 74 }, 0.68), narrator.set({ pose: 'nod' })],
     clearSticky: true,
     overlays: [
       /* The figure the voice does not give: 432 is constant across every
@@ -123,7 +132,7 @@ export const BEATS: Beat<Patch>[] = [
     /* Blank before filled: the question is asked of all 288 before any answer
      * exists, and that ordering is the only way the count reads as the count. */
     vo: 'So the router takes that row and gives all 288 experts a score.',
-    commands: [hospital.ask(), narrator.set({ pose: 'count' })],
+    commands: [hospital.loud(), hospital.ask(), narrator.set({ pose: 'count' })],
   },
   {
     n: 7,
@@ -198,12 +207,21 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 11,
     vo: 'It is just a learned neural-network block that transforms the row. The router learned which blocks tend to be useful for which hidden states.',
-    commands: [plates.off(), open.show({ x: 50, y: 48 }, 1.05), narrator.set({ pose: 'point' })],
+    /* Drawn over the wall, `a different row out` was rendered across expert
+     * icons and could not be read at all. The wall has finished its job by
+     * now -- this beat is about what one block *is* -- so it drops back and
+     * the box takes the empty left half on its own. */
+    commands: [
+      plates.off(),
+      hospital.ghost(0.25),
+      open.show({ x: 30, y: 46 }, 1.05),
+      narrator.set({ pose: 'point' }),
+    ],
     lateOverlays: {
       at: 5600,
       /* Names the two objects at the two ends of the box. The voice says what
        * the box is; the note says what goes through it. */
-      overlays: [note('row in → row out', 74, 78, { size: 'md', tone: 'measure', rotate: -2 })],
+      overlays: [note('row in → row out', 13, 60, { size: 'md', tone: 'measure', rotate: -2 })],
     },
   },
   {
@@ -213,7 +231,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 14,
     vo: 'That whole setup — many possible expert blocks, only a few routed ones used at a time — is why this is called a Mixture of Experts, or MoE.',
-    commands: [open.off(), camera.to({ x: 50, y: 46 }, 0.8), narrator.set({ pose: 'offer' })],
+    commands: [open.off(), hospital.loud(), camera.to({ x: 50, y: 46 }, 0.8), narrator.set({ pose: 'offer' })],
     lateOverlays: {
       at: 6000,
       /* Centred over the wall as a whole. Placed on any one block it would

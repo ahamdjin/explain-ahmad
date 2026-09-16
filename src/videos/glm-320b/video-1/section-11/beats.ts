@@ -153,12 +153,22 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 9,
     vo: 'One routed expert in GLM is roughly 25 megabytes at FP8-sized weight storage.',
-    /* The only camera move in the section, and it is a measurement: we go in
-     * close on a single block so the figure attaches to an object. */
-    commands: [path.fetch(1), camera.to({ x: 50, y: 42 }, 1.6)],
+    /*
+     * The measurement enlarges the block, not the scene.
+     *
+     * A camera zoom scaled the tower up with it until its base and the router
+     * were cut off by the bottom of the frame -- and because a `brace` is a
+     * *page* overlay it does not follow the camera, so the figure drifted off
+     * the block and came to rest across the tower's stripes, unreadable. The
+     * block grows in place instead: the tower keeps beat 7's exact placement,
+     * and the brace sits directly under the enlarged block, in the clear band
+     * left of the tower -- spanned at 33/54 it was drawn *behind* the stack
+     * and the figure came out as "~25 ... 8 x 3".
+     */
+    commands: [path.fetch(1), path.moveTo({ x: 48, y: 44 }, 1.5)],
     lateOverlays: {
       at: 3200,
-      overlays: [brace(`~${MB_PER_EXPERT} MB · 4096 × 2048 × 3`, 32, 56, 36, { tone: 'measure', voice: 'figure' })],
+      overlays: [brace(`~${MB_PER_EXPERT} MB · 4096 × 2048 × 3`, 22, 53, 18, { tone: 'measure', voice: 'figure' })],
     },
   },
   {
@@ -168,7 +178,12 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 10,
     vo: 'Our token visits: 8 experts × 42 sparse layers = 336 routed expert blocks.',
-    commands: [camera.home(), path.clear(), count.run(VISITS, 'routed expert blocks — one token')],
+    commands: [
+      camera.home(),
+      path.moveTo({ x: 50, y: 40 }, 0.9),
+      path.clear(),
+      count.run(VISITS, 'routed expert blocks — one token'),
+    ],
   },
   {
     n: 10,

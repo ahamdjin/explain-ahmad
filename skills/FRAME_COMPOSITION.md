@@ -100,3 +100,37 @@ npm run check:overlap --section=NN      # the mechanical half
 `npm run sheet` exists so that looking at thirteen frames costs one glance.
 Use it. A section is not finished because it typechecks and the gates are
 green; it is finished when the contact sheet is right.
+
+## Quiet, not gone: `fade`
+
+The commonest fault found in the final design pass was not collision. It was an
+actor that had *finished teaching* and was still the loudest ink on the frame:
+§10's stored-state column shouting through seven beats it was not the subject
+of, §5's 288-wall winning every one of the fourteen beats it stands in, §8's
+`2,688` beating the eight representations it was supposed to be handing to §9.
+
+`off()` is the wrong tool for this. Losing the actor loses the geography, and
+the next beat that needs it back reads as a cut to a new scene.
+
+`Slot` takes a `fade` (default `1`). Give the actor a `fade` field in its scene
+state, pass it through `Stage.tsx`, and add the pair of verbs:
+
+```ts
+ghost: (fade = 0.3): Patch => ({ wall: { fade } }),
+loud:  (): Patch => ({ wall: { fade: 1 } }),
+```
+
+Then the actor stays exactly where it is, at exactly its size -- the scale
+comparison the frame depends on survives -- while ceding the eye to whatever
+the narration has moved on to. `0.25`-`0.3` is enough; the object stays
+legible as context and stops competing.
+
+Ask it of every beat: **what is on this frame at full ink whose teaching job
+finished two beats ago?**
+
+A corollary for overlays: `brace` and `note` are placed in *page* percentages
+and do not follow a `camera.to()`. Zooming the scene to measure something
+therefore separates the figure from the object it measures -- §11 beat 8 lost
+`~25 MB · 4096 × 2048 × 3` behind the tower that way. Enlarge the *actor*
+(`moveTo(at, scale)`) rather than the camera when a page overlay has to land on
+it.

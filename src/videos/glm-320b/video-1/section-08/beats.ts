@@ -20,7 +20,14 @@ import { TOTAL, count, ground, line, narrator, tower, type Patch } from './scene
  */
 
 /** Where the prompt sits when it is the base of the tower. */
-const BASE = { x: 50, y: 87 }
+/*
+ * Where the prompt waits when it is not the subject.
+ *
+ * It was at y 87 -- below the ground line, at 0.44 scale, reading as a footer
+ * rather than as the object the whole section is about. The prompt is on
+ * screen in every beat here; it gets a home on the paper.
+ */
+const BASE = { x: 50, y: 80 }
 /** And where it sits when it *is* the floor we are looking at. */
 const FLOOR = { x: 66, y: 54 }
 
@@ -32,17 +39,26 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'want',
     secs: 17,
     vo: 'We followed `it` because following eight things at once would be a terrible explanation. But `it` was never alone. Our prompt became eight tokens: The | dog | dropped | the | ball | , | and | it',
+    /*
+     * "`it` was never alone. Our prompt became eight tokens" is about the
+     * sentence, so the sentence is what the frame is. §7 hands us the stack
+     * and we keep it -- cutting it would make this a new scene -- but it
+     * drops back and the eight markers on floor 1 wait for beat 3, which is
+     * the beat that earns them.
+     */
     commands: [
       ground.at(GROUND_Y),
-      tower.show({ x: 50, y: 41 }, 0.86, { markers: TOKENS, floor: 1 }),
-      line.show(BASE, 0.44, { focus: FOLLOWED }),
+      tower.show({ x: 50, y: 41 }, 0.86, { floor: 0 }),
+      tower.ghost(),
+      line.show({ x: 50, y: 50 }, 0.62, { focus: FOLLOWED }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'confide', flip: true }),
     ],
     lateOverlays: {
       /* The id, which the voice never says here, is what marks *which* of the
-       * eight we have been carrying since §2. */
+       * eight we have been carrying since §2. Under the `it` chip at the right
+       * end of the sentence, not a thousand pixels away at the left margin. */
       at: 9000,
-      overlays: [note('tracked: `it` = 432', 8, 80, { tone: 'word', rotate: -3 })],
+      overlays: [note('tracked: `it` = 432', 64, 58, { tone: 'word', rotate: -3 })],
     },
   },
   {
@@ -54,7 +70,13 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'Not one token all the way to the top... then the next one... then the next one.',
     /* Drawn wrong on purpose. This is the picture most viewers already have,
      * and beat 3 cannot correct something that was never shown. */
-    commands: [tower.alone(FOLLOWED), narrator.set({ pose: 'wonder' })],
+    commands: [
+      tower.loud(),
+      tower.set({ markers: TOKENS, floor: 1 }),
+      line.moveTo(BASE, 0.44),
+      tower.alone(FOLLOWED),
+      narrator.set({ pose: 'wonder' }),
+    ],
     stages: [
       { at: 1200, commands: [tower.climbTo(16)] },
       { at: 3600, commands: [tower.climbTo(33)] },
@@ -207,10 +229,14 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'wall',
     secs: 15,
     vo: 'But none of this has produced an answer yet. We have eight finished representations at the top. So how does the model turn those numbers into the next token?',
+    /* 2,688 finished teaching two beats ago and was still the loudest ink on
+     * the frame that hands §9 the eight finished rows. It steps down to a
+     * standing total so the rows at the top win the eye. */
     commands: [
       tower.name(''),
-      tower.moveTo({ x: 24, y: 62 }, 0.56),
-      line.moveTo({ x: 52, y: 22 }, 0.5),
+      tower.moveTo({ x: 24, y: 58 }, 0.56),
+      count.moveTo({ x: 74, y: 54 }, 0.6),
+      line.moveTo({ x: 52, y: 26 }, 0.56),
       line.set({ rows: true, changed: true, focus: FOLLOWED }),
       narrator.set({ pose: 'wonder' }),
     ],

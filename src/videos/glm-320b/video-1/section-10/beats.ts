@@ -72,7 +72,7 @@ export const BEATS: Beat<Patch>[] = [
     /* Drawn wrong on purpose. This is the mental model the phrase "does it
      * again" plants, and it has to be on screen before it can be removed. */
     commands: [tower.set({ kept: 0, floor: 1 }), narrator.set({ pose: 'think' })],
-    overlays: [note('9 × 45 layers ?', 26, 14, { size: 'md', tone: 'cost', rotate: 3 })],
+    overlays: [note('9 × 45 layers ?', 10, 20, { size: 'md', tone: 'cost', rotate: 3 })],
   },
   {
     n: 3,
@@ -86,7 +86,7 @@ export const BEATS: Beat<Patch>[] = [
      * honest claim is state kept from earlier positions, because GLM's
      * attention is hybrid and a KV-cache caption would overstate it. */
     stages: [
-      { at: 3600, commands: [stored.show({ x: 46, y: 48 }, 0.82)] },
+      { at: 3600, commands: [stored.show({ x: 46, y: 48 }, 0.68)] },
       { at: 9000, commands: [aside.show({ x: 15, y: 18 }, 1)] },
     ],
     lateOverlays: {
@@ -107,7 +107,7 @@ export const BEATS: Beat<Patch>[] = [
       narrator.set({ pose: 'point' }),
     ],
     clearSticky: true,
-    overlays: [note('1 of 9 moving', 26, 14, { tone: 'measure', rotate: -2 })],
+    overlays: [note('1 of 9 moving', 10, 20, { tone: 'measure', rotate: -2 })],
   },
   {
     n: 5,
@@ -116,7 +116,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 7,
     vo: 'It reads the earlier context through that stored state. Its representation changes.',
-    commands: [stored.read(), tower.climbTo(2), tower.runRouter('look')],
+    commands: [stored.loud(), stored.read(), tower.climbTo(2), tower.runRouter('look')],
   },
   {
     n: 6,
@@ -127,10 +127,13 @@ export const BEATS: Beat<Patch>[] = [
     vo: 'On a sparse layer, the router looks at that new representation and picks eight experts.',
     /* Same mechanism, same drawing. A second router drawn differently here
      * would teach a second mechanism rather than a repetition. */
-    commands: [tower.climbTo(4), tower.runRouter('pick')],
+    /* The column's teaching job ended with beat 5's read. It stays exactly
+     * where it is for the rest of the section -- the state really is still
+     * being kept -- but it stops out-shouting the floor it sits beside. */
+    commands: [stored.ghost(), tower.climbTo(4), tower.runRouter('pick')],
     lateOverlays: {
       at: 3400,
-      overlays: [note('8 of 288', 30, 30, { tone: 'measure', rotate: 3 })],
+      overlays: [note('8 of 288', 10, 62, { tone: 'measure', rotate: 3 })],
     },
   },
   {
