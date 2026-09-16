@@ -1,143 +1,157 @@
-import { GROUND_Y, note, TOKENS, type Beat } from '../../../../paper'
-import { LAST, camera, ground, last, narrator, out, rows, tower, vocab, type Patch } from './scene'
+import { centred, GROUND_Y, note, type Beat } from '../../../../paper'
+import { ground, last, LAST, narrator, out, rows, slot, strip, tower, vocab, type Patch } from './scene'
 
 /**
- * Section 09 — Where the next token comes from.
+ * Section 09 — Where the answer comes out.
  *
- * Nothing new is hidden here. The viewer already owns the final rows; this
- * section shows how the last position becomes one score per vocabulary token
- * and then one next token.
+ * Script and board: `video-script/video-1/09-where-the-answer-comes-out.md`.
+ * The VO below is that script split across visual beats. Do not paraphrase it
+ * to fit components; change the components or the beat count instead.
+ *
+ * §8 leaves eight finished rows at the top of the tower with the last position
+ * already bright. Beat 1 holds that frame rather than rebuilding it.
  */
+
+/** The tower stays small until beat 10, whose whole event is its size. */
+const TOWER_ASIDE = { x: 12, y: 54 }
+
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'a-row-for-every-token',
-    title: 'We rise to the top and arrive alongside the waiting markers',
+    id: 'eight-in-eight-out',
+    title: 'All eight final rows hold, one per input position',
     relation: 'want',
-    secs: 11,
-    vo: 'At the top, we have one final row for each of the eight prompt tokens.',
+    secs: 12,
+    vo: 'At the top of the stack, we now have a finished row for every position in the prompt. Eight tokens in. Eight final representations out.',
     commands: [
       ground.at(GROUND_Y),
-      tower.show({ x: 50, y: 48 }, 1, { floor: 45, markers: TOKENS }),
-      camera.to({ x: 50, y: 22 }, 1.5),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
+      tower.show(TOWER_ASIDE, 0.46),
+      rows.show({ x: 48, y: 26 }, 0.78),
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' }),
     ],
   },
   {
     n: 2,
-    id: 'eight-finished-rows',
-    title: 'Each marker unfolds into its finished row, eight in a line',
+    id: 'the-last-position',
+    title: 'The first seven dim and the last-position row comes forward',
     relation: 'so',
-    secs: 6,
-    vo: 'Eight finished representations.',
-    commands: [tower.off(), camera.home(), rows.show({ x: 46, y: 48 }, 0.52)],
+    secs: 10,
+    vo: 'But to predict what comes next, there is one position we care about most: the last one. Our `it`.',
+    commands: [rows.only(LAST), last.show({ x: 42, y: 52 }, 0.72)],
   },
   {
     n: 3,
-    id: 'only-one-matters',
-    title: 'The first seven dim; only the last stays lit',
-    relation: 'and-yet',
-    secs: 8,
-    vo: 'For generating the next token, the important one is the last position.',
-    commands: [rows.only(LAST)],
+    id: 'next-attaches-here',
+    title: 'The sentence returns beneath with an empty slot right after `it`',
+    relation: 'so',
+    secs: 5,
+    vo: 'Because the next token has to come after `it`.',
+    /* The empty card lands before anything can fill it. A slot the viewer has
+     * already seen is a question; a word that simply appears is an assertion. */
+    commands: [strip.show({ x: 40, y: 80 }, 0.62), strip.follow(LAST), slot.show({ x: 76, y: 80 }, 0.42)],
   },
   {
     n: 4,
-    id: 'next-attaches-to-the-end',
-    title: 'The last row lifts clear of the others',
+    id: 'a-score-for-everything',
+    title: 'The final row enters a scoring strip',
     relation: 'so',
-    secs: 11,
-    vo: 'Because that is the position we are extending: “The dog dropped the ball, and it…” What comes next attaches here.',
-    commands: [last.show({ x: 26, y: 30 }, 0.38), rows.moveTo({ x: 42, y: 62 }, 0.44)],
-    overlays: [note('extend this position', 74, 26, { tone: 'word', rotate: 3 })],
+    secs: 9,
+    vo: 'So the model takes that final row... and turns it into a score for every token in the vocabulary.',
+    commands: [last.moveTo({ x: 40, y: 50 }, 0.72), narrator.set({ pose: 'nod' })],
   },
   {
     n: 5,
-    id: 'the-list-returns',
-    title: '§2’s list rises again beside it',
+    id: 'all-of-them-scored',
+    title: '§2’s list returns and score marks populate all of it',
     relation: 'so',
-    secs: 12,
-    vo: 'That final row is turned into a score for every token in the vocabulary — all one hundred and fifty-four thousand, eight hundred and eighty.',
-    commands: [vocab.show({ x: 72, y: 48 }, 1.15)],
+    secs: 13,
+    vo: 'All 154,880 possible token entries get a score. You can think of each score as: how plausible would this token be next, given everything we have processed so far?',
+    commands: [vocab.show({ x: 78, y: 46 }, 1.15), vocab.score()],
     lateOverlays: {
-      at: 2600,
-      overlays: [note('the same vocabulary\n154,880 entries', 28, 18, { size: 'md', tone: 'measure', rotate: 2, sticky: true })],
+      at: 4200,
+      overlays: [note('154,880 scores', 62, 14, { tone: 'measure', rotate: 3, sticky: true })],
     },
   },
   {
     n: 6,
-    id: 'every-one-gets-a-score',
-    title: 'A value spreads down the entire list, every entry getting one',
+    id: 'a-few-are-plausible',
+    title: 'The list reorders; most entries recede and a few stay plausible',
     relation: 'so',
-    secs: 9,
-    vo: 'Each vocabulary token gets a score for how plausible it is as the next token.',
-    commands: [vocab.score()],
+    secs: 8,
+    vo: 'Most of them will be terrible choices. Some will be plausible. A few may be very plausible.',
+    commands: [vocab.rank(), narrator.set({ pose: 'think' })],
   },
   {
     n: 7,
-    id: 'most-are-hopeless',
-    title: 'The list reorders; a handful rise to the top',
-    relation: 'so',
-    secs: 7,
-    vo: 'Most end up very unlikely. A few become plausible candidates.',
-    commands: [vocab.rank()],
-    clearSticky: true,
+    id: 'not-that-rabbit-hole',
+    title: 'A small aside sits at the frame edge and is deliberately not opened',
+    relation: 'and-yet',
+    secs: 16,
+    vo: 'Then the decoding settings decide how that distribution becomes an actual choice. Maybe the highest-scoring token is taken. Maybe sampling adds some randomness. We do not need that rabbit hole for this video.',
+    commands: [],
+    /* Named and left closed on purpose. Refusing a detour in as many words is
+     * cheaper than a viewer wondering all section whether we skipped it. */
+    overlays: [note('greedy · sampling · temperature', 4, 12, { size: 'sm', rotate: -3 })],
   },
   {
     n: 8,
-    id: 'one-gets-picked',
-    title: 'One entry is lifted out of the list',
+    id: 'one-token-selected',
+    title: 'One entry lifts out of the list',
     relation: 'therefore',
-    secs: 5,
-    vo: 'Then the decoding rule picks one.',
-    commands: [vocab.pick()],
+    secs: 8,
+    vo: 'The important part is: one next token gets selected. Suppose the model chooses something corresponding to: “bounced”',
+    commands: [vocab.pick(), out.show({ x: 78, y: 70 }, 0.7), narrator.set({ pose: 'point' })],
+    clearSticky: true,
   },
   {
     n: 9,
-    id: 'thats-your-next-word',
-    title: 'It becomes a word card and drops clear of the tower',
+    id: 'it-bounced',
+    title: 'That same lifted actor travels down and fills the empty slot',
     relation: 'so',
-    secs: 6,
-    vo: 'That chosen token is the next output.',
-    commands: [out.show({ x: 30, y: 80 }, 0.8), narrator.set({ pose: 'nod' })],
+    secs: 9,
+    vo: 'So our prompt: “The dog dropped the ball, and it…” becomes: “The dog dropped the ball, and it bounced…”',
+    /* The card that was lifted out of the list is the card that lands in the
+     * slot. A second, identical card appearing in the sentence would break the
+     * one promise this section makes about where the answer came from. */
+    commands: [slot.off(), out.moveTo({ x: 76, y: 80 }, 0.42)],
   },
   {
     n: 10,
-    id: 'all-of-that',
-    title: 'We fall away until the whole tower and one small card share the frame',
+    id: 'all-that-for-one-token',
+    title: 'The whole tower and the one small token hold in the same frame',
     relation: 'and-yet',
-    secs: 5,
-    vo: 'All that machinery…',
+    secs: 10,
+    vo: 'And after this entire journey — tokenizing, embeddings, context, routing, experts, 45 layers — what came out? One token. Just one.',
     commands: [
-      rows.off(),
-      last.off(),
       vocab.off(),
-      tower.show({ x: 30, y: 50 }, 1.02, { floor: 0, markers: 0 }),
-      out.moveTo({ x: 74, y: 52 }, 0.32),
-      narrator.off(),
+      last.off(),
+      rows.off(),
+      strip.off(),
+      tower.moveTo({ x: 30, y: 50 }, 1),
+      out.moveTo({ x: 74, y: 50 }, 0.9),
+      narrator.set({ pose: 'wonder' }),
     ],
-    stages: [{ at: 2000, commands: [camera.to({ x: 50, y: 50 }, 0.94)] }],
+    lateOverlays: {
+      at: 5000,
+      overlays: [centred('45 layers · 336 expert visits · one token', 60, 62, { size: 'md', tone: 'cost', rotate: -2 })],
+    },
   },
   {
     n: 11,
-    id: 'forty-five-floors',
-    title: 'The tower fills the frame; the card stays the size it was',
-    relation: 'and-yet',
+    id: 'how-do-we-get-the-second',
+    title: 'A second empty slot opens after `bounced`',
+    relation: 'wall',
     secs: 10,
-    vo: 'Forty-five layers, routing, experts, and every token in the prompt moving through the stack…',
-    commands: [narrator.show({ x: 91, y: 70 }, 1, { pose: 'think', flip: true })],
-  },
-  {
-    n: 12,
-    id: 'one-word',
-    title: 'Nothing moves; the card sits there, alone against it',
-    relation: 'and-yet',
-    secs: 7,
-    vo: '…to choose one next token.',
-    commands: [],
-    lateOverlays: {
-      at: 2200,
-      overlays: [note('one next token.', 74, 66, { size: 'md', tone: 'cost', rotate: -3 })],
-    },
+    vo: 'Which creates a pretty obvious problem. ChatGPT-style models do not answer you with one token. So how do we get the second one?',
+    /* The sentence comes back low and the tower steps aside for it: the blank
+     * has to be readable as the *next* position, not as tower furniture. */
+    commands: [
+      tower.moveTo({ x: 18, y: 48 }, 0.78),
+      strip.show({ x: 44, y: 80 }, 0.56),
+      strip.follow(LAST),
+      out.moveTo({ x: 78, y: 80 }, 0.38),
+      slot.show({ x: 88, y: 80 }, 0.38),
+      narrator.off(),
+    ],
   },
 ]

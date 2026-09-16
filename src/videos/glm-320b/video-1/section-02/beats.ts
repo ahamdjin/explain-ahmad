@@ -70,7 +70,10 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'and-yet',
     secs: 8,
     vo: 'Now, in this sentence, they look suspiciously like words. But tokens are not just words.',
-    commands: [],
+    /* Nothing moves here on purpose -- the eight are meant to keep looking like
+     * words. So the beat's event is the question being put *on* them. */
+    commands: [narrator.set({ pose: 'think' })],
+    overlays: [centred('token = word?', 46, 24, { size: 'md', rotate: -2 })],
   },
   {
     n: 6,
@@ -91,7 +94,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'the-big-list',
     title: 'The vocabulary list rises beside the main prompt',
     relation: 'so',
-    secs: 17,
+    secs: 19,
     vo: 'So the model isn’t really reading words the way we do. It has its own set of pieces it knows how to work with. And GLM has a list of 154,880 of them. Every token in that list has a number.',
     commands: [
       extra.off(),
@@ -156,7 +159,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'what-does-432-tell-us',
     title: '432 holds while the meaning questions arrive',
     relation: 'and-yet',
-    secs: 16,
+    secs: 18,
     vo: 'But think about what 432 actually tells us. Does 432 tell you that `it` might refer to the ball? Does it tell you that `it` is a pronoun? Does it tell you anything about what `it` means? No.',
     /*
      * The list **stays**. This beat and the next one both argue that 432 is an

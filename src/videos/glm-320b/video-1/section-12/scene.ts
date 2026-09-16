@@ -6,20 +6,14 @@
  * **The honesty section.** Without it the video is contradicted by a
  * `llama.cpp` flag, and the audience most likely to comment is the audience
  * that already knows it. So we raise the objection ourselves, before the
- * comments do, and we concede it **generously**: the machine visibly works,
- * at a real pace, before any qualification arrives.
+ * comments do, and we concede it **generously**: hits, misses and prefetch all
+ * work on screen before any qualification arrives.
  *
- * Two figures may not be misused here.
- *
- * **Cite the regime.** The reassuring cache numbers — 44.2% consecutive-token
- * sharing, LRU-128 around 81% — are measured on **Mixtral 8×7B: 8 experts,
- * top-2**, where chance alone is 12.5%. The authors' own summary is that
- * locality *"does exist, but it is not strong"*. So beat 7 says "on a model
- * with eight experts on each floor", and that qualifier is load-bearing.
- *
- * **No number on this model's overlap.** Nobody has published it for 288
- * experts at top-8. Beat 5 says "quite often" and shows a couple staying. No
- * on-screen number claims a fraction. `research/glm/OFFLOADING_AND_LOCALITY.md`.
+ * **No number on this model's locality.** Expert caching has been measured on
+ * smaller MoE architectures; nobody has published it for 288 routed experts at
+ * top-8. So no overlay in this section carries a hit rate or an optimal cache
+ * size, and beat 9 leaves the slider with no correct position marked on it.
+ * `research/glm/OFFLOADING_AND_LOCALITY.md`.
  */
 import {
   actorVerbs,
@@ -57,6 +51,13 @@ export type SceneState = {
   wall: Placed
   tower: Placed
   count: { on: boolean; at: At; scale: number; value: number; label: string; run: boolean }
+  /**
+   * The video's opening headline, floating back at the end.
+   *
+   * The last beat hands §13 the card §1 opened on, so the finale starts on an
+   * object the viewer has already met rather than on a fresh title.
+   */
+  card: { on: boolean; at: At; scale: number; value: string; caption: string }
   narrator: NarratorActor
   ground: GroundActor
 }
@@ -71,6 +72,7 @@ export const INITIAL: SceneState = {
   wall: { on: false, at: { x: 44, y: 40 }, scale: 0.72 },
   tower: { on: false, at: { x: 62, y: 44 }, scale: 0.6 },
   count: { on: false, at: { x: 43, y: 20 }, scale: 1, value: SLOTS, label: '', run: false },
+  card: { on: false, at: { x: 50, y: 42 }, scale: 1, value: '18 billion', caption: 'active' },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
 }
@@ -87,6 +89,7 @@ export const hangover = a('hangover')
 export const store = a('store')
 export const wall = a('wall')
 export const tower = a('tower')
+export const card = a('card')
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
 

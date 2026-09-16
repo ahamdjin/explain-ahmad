@@ -1,12 +1,12 @@
 /**
- * Section 04 — "The word looks around"
+ * Section 04 — "`it` gets context"
  *
  * Script and board: `video-script/video-1/04-the-word-looks-around.md`
  *
- * **Beats 11-12 are the carrying frames**: two different rows, with the
- * identical starting row ghosted behind them. That single image is the answer
- * to §3's paradox, and everything else in the section is arranging the stage so
- * it can exist.
+ * **Beats 8–9 are the carrying frames**: one token ID against two different
+ * rows. That single image is the answer to §3's paradox and the thing §5's
+ * routing argument stands on — if the row never changed, the router would have
+ * nothing new to read.
  *
  * Attention is drawn *inside* the sentence rather than as a separate actor, so
  * the lines cannot drift out of alignment with the cards they connect. See the
@@ -26,19 +26,21 @@ import {
   type Placed,
 } from '../../../../paper'
 
-export const DOG_SEED = 5562
-
 /**
- * The video's one comparison example, and the load-bearing one.
- *
- * It is chosen because the viewer already knows the answer — so the section
- * teaches *where the machine does it*, not *that language is contextual*.
+ * The embedding row for `it`, carried in from §3 and generated from the same
+ * seed there. Beat 8's claim — *same ID, different numbers* — is only honest
+ * if the before-row here is literally §3's row.
  */
+export const ROW_SEED = 432
 
 export type SceneState = {
-  /** The three identical rows from §3, collapsing back into one. */
-  row: Placed & { dim: boolean }
-  /** The prompt, with a row under every token. */
+  /**
+   * The tracked row itself. `changed` is what beat 7 does to it: it keeps
+   * `ROW_SEED` as its basis and drifts away from it, so the after-row is
+   * visibly a *changed version of the same row* rather than an unrelated one.
+   */
+  row: Placed & { dim: boolean; changed: boolean }
+  /** The prompt, with a row under every token, and the wiring drawn inside it. */
   line: Placed & {
     raise: number
     changed: number
@@ -47,24 +49,20 @@ export type SceneState = {
     masked: boolean
     flow: boolean
     lines: boolean
-    /** Every row changing at once. Beat 9. */
-    changedAll: boolean
   }
-  /** The two sentences, side by side. Beat 10. */
-  barked: Placed
-  hot: Placed
-  /** Their two `dog` rows, lifted out and aligned. Beats 11-14. */
-  rowA: Placed & { covered: boolean }
-  rowB: Placed & { covered: boolean }
-  /** The row they both started from. Identical, and behind both. */
+  /** What `it` started as. Stays behind the changed row from beat 7 on. */
   ghost: Placed
+  /** `432`, brought back in beat 8 to sit against both rows at once. */
+  chip: Placed & { label: string; id: string; becomes: boolean }
+  /** Beat 13. Closed, unexplained, and completed by §5. */
+  wall: Placed
   narrator: NarratorActor
   ground: GroundActor
   camera: CameraActor
 }
 
 export const INITIAL: SceneState = {
-  row: { on: false, at: { x: 50, y: 44 }, scale: 0.7, dim: false },
+  row: { on: false, at: { x: 50, y: 52 }, scale: 0.7, dim: false, changed: false },
   line: {
     on: false,
     at: { x: 50, y: 50 },
@@ -76,13 +74,10 @@ export const INITIAL: SceneState = {
     masked: false,
     flow: false,
     lines: false,
-    changedAll: false,
   },
-  barked: { on: false, at: { x: 26, y: 34 }, scale: 0.66 },
-  hot: { on: false, at: { x: 74, y: 34 }, scale: 0.66 },
-  rowA: { on: false, at: { x: 26, y: 62 }, scale: 0.44, covered: true },
-  rowB: { on: false, at: { x: 74, y: 62 }, scale: 0.44, covered: true },
-  ghost: { on: false, at: { x: 50, y: 80 }, scale: 0.44 },
+  ghost: { on: false, at: { x: 50, y: 70 }, scale: 0.5 },
+  chip: { on: false, at: { x: 16, y: 62 }, scale: 0.5, label: 'it', id: '432', becomes: true },
+  wall: { on: false, at: { x: 50, y: 104 }, scale: 0.8 },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
   camera: { ...INITIAL_CAMERA },
@@ -95,13 +90,10 @@ export const applyPatches = (base: SceneState, patches: Patch[]) => mergePatches
 
 const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
-export const row = a('row')
-export const barked = a('barked')
-export const hot = a('hot')
-/** Both rows uncover together -- one at a time would answer half a question. */
-export const rowA = { ...a('rowA'), uncover: (): Patch => ({ rowA: { covered: false } }) }
-export const rowB = { ...a('rowB'), uncover: (): Patch => ({ rowB: { covered: false } }) }
+export const row = { ...a('row'), rewrite: (): Patch => ({ row: { changed: true } }) }
 export const ghost = a('ghost')
+export const chip = a('chip')
+export const wall = a('wall')
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
 
@@ -109,27 +101,22 @@ export const line = {
   ...a('line'),
   /** One token lifts slightly out of the line, before anything happens to it. */
   raise: (index: number): Patch => ({ line: { raise: index } }),
-  /** Even lines to everything. The question, before the answers. */
+  /**
+   * Lines to everything it is allowed to see, all the same weight. The
+   * question, before any answer — which is why beat 4 can honestly hold on it.
+   */
   ask: (): Patch => ({ line: { lines: true, flat: true } }),
-  /** Thickness becomes weight. Some matter a lot; most barely matter. */
-  weigh: (): Patch => ({ line: { flat: false, weighted: true } }),
   /**
    * Causal masking, without the words. The forward lines **leave** — they are
    * not crossed out. Nothing in this video is crossed out.
    */
   mask: (): Patch => ({ line: { masked: true } }),
+  /** Thickness becomes weight. Illustrative only: no number is ever drawn. */
+  weigh: (): Patch => ({ line: { flat: false, weighted: true } }),
   /** Material travelling along the surviving lines into the looker. */
   pull: (): Patch => ({ line: { flow: true } }),
   /** Its row changes. Same token, new numbers. */
   change: (index: number): Patch => ({ line: { changed: index, flow: false } }),
-  /**
-   * Beat 9. Every row changes at once.
-   *
-   * The lines come off first: with the wiring still drawn, "all of them, to
-   * themselves" reads as our word doing something to the others rather than
-   * each word doing it to itself.
-   */
-  changeAll: (): Patch => ({ line: { changedAll: true, lines: false, flow: false } }),
   withdraw: (): Patch => ({ line: { lines: false, flow: false } }),
 }
 

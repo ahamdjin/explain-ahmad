@@ -61,7 +61,14 @@ async function loadFrameMeta() {
       title: title?.[2] ?? '',
       vo: vo?.[2] ?? '',
       secs: secs ? Number(secs[1]) : 0,
-      settle: Math.max(SETTLE, (offsets.length ? Math.max(...offsets) : 0) + 1200),
+      /*
+       * +1900, not +1200. `Counter` counts up over 1.4s, so a frame shot
+       * 1200ms after the stage that starts it was photographed mid-count --
+       * §12 beat 11 captured as `12,094` against a true 288 x 42 = 12,096.
+       * The margin has to clear the longest settling animation, not the
+       * shortest.
+       */
+      settle: Math.max(SETTLE, (offsets.length ? Math.max(...offsets) : 0) + 1900),
     })
   }
 

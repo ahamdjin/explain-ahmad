@@ -1,7 +1,8 @@
-import { centred, GROUND_Y, note, type Beat } from '../../../../paper'
+import { brace, centred, GROUND_Y, note, type Beat } from '../../../../paper'
 import {
   SLOTS,
   cache,
+  card,
   count,
   ground,
   hangover,
@@ -18,196 +19,242 @@ import {
 /**
  * Section 12 — How people actually run these with less fast memory.
  *
- * This is the correction to §11's deliberately naive plan. Expert offloading
- * and caching are real. What we do not have is published locality data for
- * GLM's 288-routed-expert, top-8 regime that lets us name an optimal cache size
- * or hit rate. The section therefore teaches the trade, not a fake verdict.
+ * Script and board: `video-script/video-1/12-how-people-actually-run-these.md`.
+ * The VO below is that script split across visual beats. Do not paraphrase it
+ * to fit components; change the components or the beat count instead.
+ *
+ * §11 leaves an empty cache shelf outlined between the store and the compute
+ * path. Beat 1 fills that exact shelf rather than drawing a new one.
+ *
+ * Nothing on screen here may carry a hit rate, an optimal cache size, or a
+ * slowdown figure: no such measurement exists for 288 routed experts at top-8,
+ * and beat 11 says so out loud. The only numbers allowed are 288, 42, 12,096
+ * and 5.6%.
  */
+
+/** The box in the path. Everything in act 1 is measured against this point. */
+const CACHE = { x: 43, y: 50 }
+
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'people-do-run-these',
-    title: 'The bars clear; a small machine slides in and runs, steadily',
-    relation: 'wall',
-    secs: 12,
-    vo: 'And this is the important correction: people really do run large mixture-of-experts models with expert offloading and much less fast memory.',
+    id: 'not-offloading',
+    title: '§11’s empty shelf fills; store left, compute right',
+    relation: 'and-yet',
+    secs: 20,
+    vo: 'The mistake in our last plan was not offloading. It was pretending we had to fetch every selected expert from the slowest place, every single time. Real systems can be smarter than that. The simplest improvement is a cache. Keep some expert weights in fast memory.',
     commands: [
       ground.at(GROUND_Y),
-      machine.show({ x: 72, y: 54 }, 1),
+      store.show({ x: 12, y: 50 }, 0.56),
+      path.fetch(4),
+      cache.show(CACHE, 1, { filled: 0, hits: 0 }),
+      machine.show({ x: 74, y: 54 }, 1),
       machine.say(['bounced', 'off', 'the']),
+      /* §11's bill, still hanging, while the fix is being drawn under it. Both
+       * frames are true at once, which is the whole correction. */
+      hangover.show({ x: 74, y: 16 }, 1),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'confide', flip: true }),
     ],
+    stages: [{ at: 11000, commands: [cache.fill(4)] }],
+    lateOverlays: {
+      at: 13000,
+      /* Names the three zones, because the voice names only the middle one. */
+      overlays: [note('storage → cache → compute', 8, 22, { size: 'md', tone: 'word', rotate: -2 })],
+    },
   },
   {
     n: 2,
-    id: 'what-are-they-doing',
-    title: 'The machine keeps running while §11’s numbers hang over it',
-    relation: 'and-yet',
-    secs: 8,
-    vo: 'So how do they avoid the eight-and-a-half-gigabyte fetch we just drew?',
-    commands: [hangover.show({ x: 72, y: 14 }, 1)],
+    id: 'a-hit',
+    title: 'A requested block is already on the shelf and makes a short hop',
+    relation: 'so',
+    secs: 10,
+    vo: 'When the router asks for an expert that is already there... that is a hit. No long trip needed.',
+    commands: [path.fetch(1), cache.fill(4), cache.hit(2)],
+    overlays: [note('HIT', 46, 30, { size: 'md', tone: 'word', rotate: -2 })],
   },
   {
     n: 3,
-    id: 'caching',
-    title: 'A box appears in the path between the drive and the machine',
+    id: 'a-miss',
+    title: 'The next request is absent, travels the long way, and lands in the box',
     relation: 'so',
-    secs: 6,
-    vo: 'They cache experts.',
-    commands: [
-      store.show({ x: 12, y: 50 }, 0.52),
-      path.fetch(4),
-      cache.show({ x: 43, y: 50 }, 1, { filled: 0 }),
+    secs: 12,
+    vo: 'If the expert is not there... that is a miss. Then you fetch it from slower memory or storage, use it, and decide what should stay close.',
+    commands: [path.fetch(6), cache.hit(1)],
+    stages: [{ at: 6000, commands: [cache.fill(6)] }],
+    /* One short trip and one long trip in the same frame — the carrying frame
+     * for the beat. The brace measures the distance the voice never gives. */
+    overlays: [
+      note('MISS', 20, 28, { size: 'md', tone: 'cost', rotate: 2 }),
+      brace('the long way', 14, 62, 26, { tone: 'cost', side: 'bottom' }),
     ],
-    overlays: [note('cache', 43, 30, { size: 'md', rotate: -2 })],
   },
   {
     n: 4,
-    id: 'experts-repeat',
-    title: 'Two words run through; a couple of the same blocks used both times',
+    id: 'smarter-still',
+    title: 'Several requests run quickly — some short, some long',
     relation: 'so',
-    secs: 10,
-    vo: 'If an expert gets used again, leave it in fast memory instead of throwing it out immediately.',
-    commands: [path.fetch(8)],
-    stages: [{ at: 2200, commands: [cache.fill(3)] }],
+    secs: 9,
+    vo: 'And systems can get smarter still. They can move experts between levels of memory. They can overlap transfers with computation.',
+    /* Mixed traffic and no figures anywhere. A fraction on this frame would be
+     * an invented locality measurement. */
+    commands: [path.fetch(4), cache.fill(8), cache.hit(5), machine.say(['bounced', 'off', 'the', 'wall'])],
   },
   {
     n: 5,
-    id: 'quite-often-the-same',
-    title: 'The repeating blocks stay in the box instead of returning',
-    relation: 'so',
-    secs: 9,
-    vo: 'Then a later token can hit the cache instead of going back to storage for that expert.',
-    commands: [cache.fill(5), cache.hit(2)],
-    overlays: [note('reuse → cache hit', 43, 28, { tone: 'word', rotate: 3 })],
+    id: 'predict-or-prefetch',
+    title: 'A faint second path starts a block moving before it is asked for',
+    relation: 'therefore',
+    secs: 14,
+    vo: 'And some approaches try to predict or prefetch experts before the router fully needs them. So yes: you can run a large MoE model without keeping every weight in the fastest memory.',
+    /* The bill from §11 goes here, and only here: this is the line that says
+     * the naive cost was never the only option. */
+    commands: [hangover.off(), path.fetch(3), cache.fill(10), cache.hit(6), narrator.set({ pose: 'nod' })],
+    overlays: [note('prefetch?', 30, 66, { tone: 'word', rotate: -3 })],
   },
   {
     n: 6,
-    id: 'only-fetch-the-misses',
-    title: 'The next word’s fetches split: most from the box, a few from the drive',
-    relation: 'so',
-    secs: 10,
-    vo: 'You fetch only the experts that are missing. Hits take the short path; misses take the long one.',
-    commands: [cache.fill(7), cache.hit(5), path.fetch(3)],
-    overlays: [note('short hop = hit\nlong hop = miss', 22, 30, { tone: 'measure', rotate: -3 })],
+    id: 'now-a-trade',
+    title: 'A slider rises between the store and the compute side, sitting in the middle',
+    relation: 'and-yet',
+    secs: 3,
+    vo: 'But now we have a trade.',
+    commands: [slider.show({ x: 17, y: 78 }, 1), slider.drive(0.5), narrator.set({ pose: 'weigh' })],
   },
   {
     n: 7,
-    id: 'and-it-works',
-    title: 'The machine speeds up; a model tag appears on the box',
-    relation: 'hope',
-    secs: 13,
-    vo: 'And this is real. On smaller-expert-count mixture-of-experts models, published systems show that expert caching and offloading can work well.',
-    commands: [
-      cache.cite('locality measured on smaller-expert-count MoE models'),
-      machine.say(['bounced', 'off', 'the', 'wall']),
-      narrator.set({ pose: 'cheer' }),
+    id: 'keep-more-close',
+    title: 'Dragged one way: the shelf grows, long trips thin out, the footprint grows',
+    relation: 'so',
+    secs: 8,
+    vo: 'Keep more experts close... and you need more fast memory, but you fetch less.',
+    commands: [slider.drive(0.92), cache.fill(22), cache.hit(18), path.fetch(1)],
+    overlays: [
+      note('memory ↑', 30, 22, { tone: 'cost', rotate: -2 }),
+      note('fetches ↓', 30, 68, { tone: 'measure', rotate: 2 }),
     ],
   },
   {
     n: 8,
-    id: 'how-much-do-you-keep',
-    title: 'A slider rises out of the floor under the box',
-    relation: 'so',
-    secs: 9,
-    vo: 'Now the real question becomes: how much fast memory do you give the cache?',
-    commands: [slider.show({ x: 17, y: 78 }, 1)],
+    id: 'keep-fewer-close',
+    title: 'Dragged the other way: the shelf shrinks, long trips multiply, the machine slows',
+    relation: 'and-yet',
+    secs: 11,
+    vo: 'Keep fewer experts close... and the machine can fit into less fast memory, but you risk more misses and more waiting.',
+    commands: [slider.drive(0.08), cache.fill(2), cache.hit(0), path.pileUp()],
+    overlays: [
+      note('memory ↓', 30, 22, { tone: 'measure', rotate: 2 }),
+      note('waiting ↑', 30, 68, { tone: 'cost', rotate: -2 }),
+    ],
   },
   {
     n: 9,
-    id: 'wheres-the-good-setting',
-    title: 'The slider holds untouched at neither end; nothing moves',
-    relation: 'and-yet',
-    secs: 11,
-    vo: 'You already know the trade: more cache is faster but bigger; less cache is smaller but slower. Where would you put the slider?',
-    commands: [slider.ask('where would you put it?'), narrator.set({ pose: 'wonder' })],
+    id: 'where-is-the-setting',
+    title: 'The slider returns to the middle and stops; nothing resolves it',
+    relation: 'wall',
+    secs: 7,
+    vo: 'So where is the perfect setting? This is where I do not want to fake certainty.',
+    commands: [slider.drive(0.5), path.fetch(4), cache.fill(9), cache.hit(4)],
+    /* `ask` hands the handle back and leaves the track unmarked. There is no
+     * correct position to draw, so the frame draws none. */
+    stages: [{ at: 3000, commands: [slider.ask('?'), narrator.set({ pose: 'shrug' })] }],
   },
   {
     n: 10,
-    id: 'keep-more-and-its-big',
-    title: 'Dragged up: the box swells, the machine races, its frame grows huge',
-    relation: 'and-yet',
+    id: 'it-depends-on',
+    title: 'What the answer depends on appears around the slider instead of a value on it',
+    relation: 'so',
     secs: 10,
-    vo: 'Push it high and misses drop — but you are back to needing lots of fast memory.',
-    commands: [slider.drive(0.95), path.fetch(1), cache.fill(24), cache.hit(20)],
-    overlays: [note('fast · bigger cache', 72, 88, { tone: 'cost', rotate: 2 })],
+    vo: 'It depends on the hardware. It depends on the workload. And it depends on how predictable and repetitive the expert choices actually are.',
+    commands: [],
+    /* Three labels around an unmarked control. `locality` is the one the voice
+     * never gives a name to, and it is the one the next beat is about. */
+    overlays: [
+      note('hardware', 24, 60, { tone: 'ink', rotate: -2 }),
+      note('workload', 24, 70, { tone: 'ink', rotate: 1 }),
+      note('locality', 24, 80, { tone: 'word', rotate: -1 }),
+    ],
   },
   {
     n: 11,
-    id: 'keep-less-and-it-crawls',
-    title: 'Dragged down: the box shrinks, long hops multiply, it crawls',
-    relation: 'wall',
-    secs: 10,
-    vo: 'Push it low and the machine gets small — but misses pile up and transfers slow you down.',
-    commands: [slider.drive(0.06), cache.fill(2), cache.hit(0), path.pileUp()],
-    overlays: [note('small · more misses', 72, 88, { tone: 'cost', rotate: -2 })],
-  },
-  {
-    n: 12,
-    id: 'remember-what-were-choosing-from',
-    title: 'The 288 wall and the 42 floors ghost in behind the box, dwarfing it',
+    id: 'twelve-thousand-and-ninety-six',
+    title: 'The routing geometry ghosts in behind: 288 slots on each of 42 sparse floors',
     relation: 'and-yet',
-    secs: 10,
-    vo: 'GLM makes that tuning problem large: two hundred and eighty-eight routed experts on each of forty-two sparse layers.',
+    secs: 36,
+    vo: 'For smaller MoE architectures, expert locality and caching have been measured and exploited. But for the specific 288-expert, top-8 routing regime we are using here, I do not have a published GLM-specific locality measurement that lets me tell you: “keep exactly this many experts and you’ll get exactly this hit rate.” That number would be made up. What we can say is that GLM has: 288 routed experts × 42 sparse layers = 12,096 layer-specific expert slots.',
+    /* The tag says which regime the reassuring literature is from. It is the
+     * qualifier that keeps this beat honest, so it rides on the box itself. */
     commands: [
+      cache.cite('measured on smaller-expert-count MoE models'),
       wall.show({ x: 43, y: 36 }, 0.62),
       tower.show({ x: 66, y: 42 }, 0.5),
       path.fetch(0),
+      narrator.set({ pose: 'think' }),
+    ],
+    stages: [{ at: 26000, commands: [count.run(SLOTS, 'layer-specific expert slots')] }],
+    overlays: [note('288 × 42', 24, 13, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
+  },
+  {
+    n: 12,
+    id: 'not-the-headline-alone',
+    title: 'The headline percentage is set against that geometry',
+    relation: 'therefore',
+    secs: 19,
+    vo: 'Only eight routed experts are selected in each sparse layer for a token... but which eight matters for what has to be nearby next. So the amount of fast memory you need is not determined by the 5.6% active headline alone.',
+    /* The carrying frame: `5.6% active` against `12,096 slots`, the headline
+     * losing its memory claim. Both numbers, neither of them invented. */
+    commands: [count.hold(), path.fetch(8), cache.hit(3), narrator.set({ pose: 'point' })],
+    overlays: [
+      note('5.6% active', 22, 30, { size: 'md', tone: 'measure', rotate: -2 }),
+      note('8 of 288 · per sparse layer', 54, 30, { tone: 'word', rotate: 2 }),
     ],
   },
   {
     n: 13,
-    id: 'twelve-thousand-and-ninety-six',
-    title: 'A count assembles from them and lands on the box',
-    relation: 'wall',
-    secs: 8,
-    vo: 'That is twelve thousand and ninety-six routed expert slots across the sparse layers.',
-    commands: [count.run(SLOTS, 'routed expert slots across sparse layers')],
-    overlays: [note('288 × 42', 28, 17, { size: 'md', tone: 'measure', rotate: -2, sticky: true })],
+    id: 'every-choice-trades',
+    title: 'The machine keeps running at a reduced setting while the options are labelled around it',
+    relation: 'so',
+    secs: 14,
+    vo: 'You can use less fast memory. You can offload. You can cache. You can quantize. You can shard the model across devices. But every one of those choices changes the performance trade.',
+    commands: [
+      wall.off(),
+      tower.off(),
+      count.off(),
+      slider.drive(0.35),
+      path.fetch(6),
+      cache.fill(6),
+      cache.hit(3),
+      machine.say(['bounced', 'off', 'the', 'wall', 'and']),
+      narrator.set({ pose: 'offer' }),
+    ],
+    clearSticky: true,
+    overlays: [
+      note('offload', 44, 12, { tone: 'ink', rotate: -2 }),
+      note('cache', 56, 12, { tone: 'ink', rotate: 1 }),
+      note('quantize', 66, 12, { tone: 'ink', rotate: -1 }),
+      note('shard', 80, 12, { tone: 'ink', rotate: 2 }),
+    ],
   },
   {
     n: 14,
-    id: 'no-setting-where-its-both',
-    title: 'The slider is dragged across its whole range; neither end shows both',
+    id: 'back-to-the-number',
+    title: 'The memory machinery recedes and the opening card floats back to centre',
     relation: 'therefore',
-    secs: 17,
-    vo: 'And here is the line we cannot cross: we do not have published locality measurements for GLM’s two-hundred-and-eighty-eight-expert, top-eight routing that tell us the ideal cache point.',
-    commands: [count.hold(), wall.off(), tower.off(), slider.drive(0.92)],
-    clearSticky: true,
-    stages: [
-      { at: 2200, commands: [slider.drive(0.08), cache.fill(2), cache.hit(0)] },
-      { at: 4400, commands: [slider.drive(0.5), cache.fill(9), cache.hit(4)] },
-    ],
-  },
-  {
-    n: 15,
-    id: 'nobody-knows-where',
-    title: 'A question mark settles over the middle of the range, where a position would go',
-    relation: 'wall',
     secs: 13,
-    vo: 'So I cannot honestly give you a magic cache size or hit rate. And “five percent active” does not tell you either one.',
-    commands: [slider.drive(0.5), narrator.set({ pose: 'flat' })],
-    lateOverlays: {
-      at: 3200,
-      overlays: [centred('no measured GLM cache optimum', 17, 92, { size: 'md', tone: 'cost', rotate: -2 })],
-    },
-  },
-  {
-    n: 16,
-    id: 'a-price-not-a-wall',
-    title: 'The slider settles mid-range; the machine runs, slowly, and keeps running',
-    relation: 'and-yet',
-    secs: 12,
-    vo: 'But less fast memory is possible. You pay for it with more transfers and less speed. It is a trade, not a hard wall.',
+    vo: 'Which brings us back to the number that started this whole video. If “18 billion active” was never a direct promise about memory... what did it actually buy us?',
+    /* Everything leaves and §1's headline is the only object left standing, so
+     * §13 opens on a frame the viewer already owns. */
     commands: [
-      slider.release(),
-      path.fetch(5),
-      machine.say(['bounced', 'off', 'the', 'wall', 'and']),
-      narrator.set({ pose: 'nod' }),
+      store.off(),
+      path.off(),
+      cache.off(),
+      slider.off(),
+      machine.off(),
+      card.show({ x: 50, y: 42 }, 1),
+      narrator.off(),
     ],
     lateOverlays: {
-      at: 3000,
-      overlays: [centred('a trade, not a hard wall', 50, 92, { size: 'md', rotate: -1 })],
+      at: 8000,
+      overlays: [centred('?', 50, 64, { size: 'lg', rotate: -2 })],
     },
   },
 ]

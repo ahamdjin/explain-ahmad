@@ -27,13 +27,25 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           floor={scene.tower.floor}
           markers={scene.tower.markers}
           wiring={scene.tower.wiring}
+          alone={scene.tower.alone >= 0 ? scene.tower.alone : undefined}
+          flash={scene.tower.flash}
           plaque={scene.tower.plaque || undefined}
           counters={scene.tower.counters || undefined}
         />
       </Slot>
 
       <Slot on={scene.line.on} at={scene.line.at} scale={scene.line.scale} z={3} feel={feel}>
-        <Sentence words={PROMPT} split />
+        {/* The causal triangle is drawn inside the sentence's own svg, so the
+            links land on the cards they connect. `masked` is what makes it a
+            triangle: a position may reach backward and never forward. */}
+        <Sentence
+          words={PROMPT}
+          split
+          focus={scene.line.focus}
+          rows={scene.line.rows}
+          changedAll={scene.line.changed}
+          attention={scene.line.causal ? { masked: true } : undefined}
+        />
       </Slot>
 
       <Slot on={scene.count.on} at={scene.count.at} scale={scene.count.scale} z={5} feel={feel}>

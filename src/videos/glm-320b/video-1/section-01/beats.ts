@@ -257,7 +257,7 @@ export const BEATS: Beat<Patch>[] = [
     id: 'follow-one-piece-instead',
     title: 'The patch returns; GLM moves right and the familiar chat enters',
     relation: 'and-yet',
-    secs: 13,
+    secs: 15,
     vo: 'But that’s not what happens. And the easiest way to understand why is not with a giant architecture diagram. We’re going to follow one tiny piece of text through the entire model.',
     commands: [
       block.drop(),

@@ -1,5 +1,5 @@
 /**
- * Section 11 — "So could you store only the 18 billion?"
+ * Section 11 — "So which 18 billion are active?"
  *
  * Script and board: `video-script/video-1/11-could-you-store-only-the-18.md`
  *
@@ -8,15 +8,16 @@
  *
  * Three things are load-bearing and none may be cut.
  *
- * **Beat 3 has to visibly succeed**, with a tick. A plan that never worked
+ * **Beat 4's box has to fail visibly.** "Which 18 billion?" is answered by
+ * watching a container labelled `THE 18B` be unable to hold the answer, not by
+ * being told there isn't one.
+ *
+ * **Beat 6 has to visibly succeed**, with a tick. A plan that never worked
  * cannot break, and the failure has to be a discovery rather than a lecture.
  *
- * **Beat 12's bars are to true scale**, and the small one is enlarged with the
- * enlargement labelled. A dishonest bar chart here would undo the whole video.
- *
- * **Beat 13's "not like that"** is the hinge into §12 and is not optional. It
- * is what stops this section being the overclaim the earlier drafts made — see
- * `research/glm/OFFLOADING_AND_LOCALITY.md`.
+ * **Beat 13's "I did not say offloading is impossible"** is the hinge into §12
+ * and is not optional. It is what stops this section being the overclaim the
+ * earlier drafts made — see `research/glm/OFFLOADING_AND_LOCALITY.md`.
  */
 import {
   actorVerbs,
@@ -30,6 +31,7 @@ import {
   type NarratorActor,
   type PatchOf,
   type Placed,
+  type TowerFlash,
 } from '../../../../paper'
 
 /**
@@ -55,8 +57,21 @@ export const MB_PER_EXPERT = 25
 export const GB_PER_TOKEN = 8.5
 
 export type SceneState = {
-  /** The tower, still there, with the two numbers settling over it. */
-  tower: Placed & { floor: number }
+  /**
+   * The tower, still there, with the two numbers settling over it.
+   *
+   * `teams` is what answers the section's question without a word: two floors
+   * lit at once, their eights in *different* slots. That picture is the whole
+   * of "not one fixed chunk", and no caption can substitute for it.
+   */
+  tower: Placed & { floor: number; teams: boolean; flash?: TowerFlash }
+  /**
+   * The container labelled `THE 18B`, and the pieces that will not stay in it.
+   *
+   * Beat 4 only. `leaking` is the next layer selecting outside the boundary —
+   * the failure has to be the box's, not a narrator's assertion.
+   */
+  box: Placed & { label: string; leaking: boolean }
   numbers: { on: boolean; at: At; scale: number; value: string; caption: string }
   /** The plan, drawn identically to §1's. The callback needs the same object. */
   store: Placed & { label: string }
@@ -78,8 +93,7 @@ export type SceneState = {
   clock: Placed & { seconds: number; running: boolean; label: string }
   bars: Placed & { show: 'fetch' | 'both'; ratio: string; inset: boolean }
   /**
-   * The cache shelf, sketched in at the very end and left **empty**. Beats
-   * 14-15.
+   * The cache shelf, sketched in at the very end and left **empty**. Beat 13.
    *
    * §12's reversal only works if the viewer arrives there already believing
    * that caching solves this -- S-09 needs a belief *this video taught them*,
@@ -94,7 +108,8 @@ export type SceneState = {
 }
 
 export const INITIAL: SceneState = {
-  tower: { on: false, at: { x: 26, y: 48 }, scale: 0.82, floor: 0 },
+  tower: { on: false, at: { x: 26, y: 48 }, scale: 0.82, floor: 0, teams: false },
+  box: { on: false, at: { x: 62, y: 44 }, scale: 1, label: 'THE 18B', leaking: false },
   numbers: { on: false, at: { x: 66, y: 34 }, scale: 1, value: '18 of 320', caption: 'billion — the bit it uses' },
   store: { on: false, at: { x: 16, y: 44 }, scale: 0.72, label: 'the whole model, on a drive' },
   desk: { on: false, at: { x: 44, y: 66 }, scale: 0.5, named: true },
@@ -123,13 +138,25 @@ export const applyPatches = (base: SceneState, patches: Patch[]) => mergePatches
 
 const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
-export const tower = a('tower')
+export const tower = {
+  ...a('tower'),
+  /** One floor choosing, with the floor below still showing its own eight. */
+  choose: (floor: number, flash: TowerFlash = 'pick'): Patch => ({
+    tower: { on: true, floor, teams: true, flash },
+  }),
+  settle: (): Patch => ({ tower: { teams: false, flash: undefined } }),
+}
+/** Beat 4: it gathers, and then the next layer selects outside it. */
+export const box = {
+  ...a('box'),
+  leak: (): Patch => ({ box: { leaking: true } }),
+}
 export const numbers = a('numbers')
 export const store = a('store')
 export const desk = a('desk')
 export const machine = a('machine')
 export const total = a('total')
-/** Beat 14 sketches it; beat 15 lets it finish and stay, still empty. */
+/** Beat 13 sketches it and lets it finish, still empty. §12 is what fills it. */
 export const shelf = {
   ...a('shelf'),
   finish: (): Patch => ({ shelf: { outline: false } }),
@@ -161,6 +188,14 @@ export const clock = {
   start: (): Patch => ({ clock: { on: true, running: true } }),
 }
 
+/**
+ * Kept, and not in the current cut.
+ *
+ * The rewritten script ends on a stamp and a shelf rather than a bar chart,
+ * because "the transfer dominates" is already carried by the clock in beat 11
+ * and a second comparison after it made the section end twice. The verbs stay
+ * because the arithmetic behind them is unchanged and §12 may want them.
+ */
 export const bars = {
   ...a('bars'),
   /** The cost of carrying them in. One bar, alone, so it has no rival yet. */

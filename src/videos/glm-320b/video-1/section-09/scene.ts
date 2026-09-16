@@ -57,6 +57,18 @@ export type SceneState = {
   last: Placed & { label: string }
   /** §2's list, returning. Same object, same drawing. */
   vocab: Placed & { scores: boolean; candidates: boolean; picked: boolean }
+  /**
+   * The prompt as a plain line, under the rows. This is where *next* attaches,
+   * so it has to be a readable sentence rather than a stack of rows.
+   */
+  strip: Placed & { focus: number }
+  /**
+   * The empty position after the last token.
+   *
+   * It exists before anything fills it on purpose: a slot the viewer can see
+   * is a question, and a token that simply appears at the end is an assertion.
+   */
+  slot: Placed
   /** The one word that comes out. */
   out: Placed & { label: string }
   narrator: NarratorActor
@@ -69,7 +81,9 @@ export const INITIAL: SceneState = {
   rows: { on: false, at: { x: 46, y: 52 }, scale: 0.5, focus: -1 },
   last: { on: false, at: { x: 26, y: 34 }, scale: 0.4, label: '“it” — the last position' },
   vocab: { on: false, at: { x: 72, y: 48 }, scale: 1.15, scores: false, candidates: false, picked: false },
-  out: { on: false, at: { x: 30, y: 74 }, scale: 0.8, label: 'bounced' },
+  strip: { on: false, at: { x: 44, y: 80 }, scale: 0.5, focus: -1 },
+  slot: { on: false, at: { x: 73, y: 80 }, scale: 0.34 },
+  out: { on: false, at: { x: 82, y: 64 }, scale: 0.6, label: 'bounced' },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
   camera: { ...INITIAL_CAMERA },
@@ -86,6 +100,8 @@ export const tower = a('tower')
 export const rows = { ...a('rows'), only: (index: number): Patch => ({ rows: { focus: index } }) }
 export const last = a('last')
 export const out = a('out')
+export const slot = a('slot')
+export const strip = { ...a('strip'), follow: (index: number): Patch => ({ strip: { focus: index } }) }
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
 

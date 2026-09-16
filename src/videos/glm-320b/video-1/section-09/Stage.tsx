@@ -41,6 +41,16 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           />
         </Slot>
 
+        <Slot on={scene.strip.on} at={scene.strip.at} scale={scene.strip.scale} z={4} feel={feel}>
+          <Sentence words={PROMPT} split focus={scene.strip.focus} />
+        </Slot>
+
+        {/* An empty card. The blank is the point, so it is an object on the
+            stage rather than a gap between two others. */}
+        <Slot on={scene.slot.on} at={scene.slot.at} scale={scene.slot.scale} z={5} feel={feel}>
+          <WordCard label="" />
+        </Slot>
+
         <Slot on={scene.out.on} at={scene.out.at} scale={scene.out.scale} z={6} feel={feel}>
           <WordCard label={scene.out.label} />
         </Slot>

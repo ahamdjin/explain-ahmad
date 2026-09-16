@@ -1,307 +1,299 @@
-import { centred, GROUND_Y, note, type Beat } from '../../../../paper'
+import { brace, centred, GROUND_Y, note, type Beat } from '../../../../paper'
 import {
-  OTHER_MODEL,
-  THIS_MODEL,
-  big,
   block,
+  block2,
   cardA,
   cardB,
-  block2,
   diffs,
   ground,
   narrator,
   rigA,
   rigB,
   share,
-  verdict,
   type Patch,
 } from './scene'
 
 /**
  * Section 13 — What that number actually bought.
  *
- * Board: `video-script/video-1/13-what-that-number-bought.md`. `npm run check:board`.
+ * Script and board: `video-script/video-1/13-what-that-number-bought.md`.
+ * The VO below is that script split across visual beats. Do not paraphrase it
+ * to fit components; change the components or the beat count instead.
  *
- * **Beat 3 concedes first.** The true half gets a frame of its own before any
- * qualification arrives. A verdict that only convicts reads as a debunk, and a
- * debunk is a worse video than an explanation.
+ * §12 leaves `18 billion active` alone at centre. Beat 1 puts the other number
+ * back above it and measures both — every image from here is a callback, and
+ * no new mechanism appears anywhere in this section.
  *
- * **Beats 9-10 are the carrying frames** and the *oh-now-I-see*: two blocks,
- * one coarse and one fine, with the fine one carrying eight chips. The trend, as
- * a picture, with no line of voice-over needed to explain it.
- *
- * No new mechanism appears anywhere in this section. Anything that needed
- * explaining belonged earlier.
+ * **The video stops on beat 13.** Nothing may be added after it.
  */
+
+/**
+ * §1's opening frame, by the constants that draw it in `section-01/beats.ts`.
+ *
+ * `CMP_LEFT` / `CMP_RIGHT` / `CMP_Y` / `CMP_SCALE`, and the accelerator rows on
+ * y 70. These are copied rather than imported because §1 does not export them,
+ * so they are the one thing in this file that has to be checked by hand: an
+ * approximate return reads as a new picture, and a new picture at minute
+ * twenty-nine spends the whole video's setup on nothing.
+ */
+const CMP_LEFT = 27
+const CMP_RIGHT = 73
+const CMP_Y = 32
+const CMP_SCALE = 0.52
+const CMP_HALF = (51.4 * CMP_SCALE) / 2
+const RIG_Y = 70
+
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'eighteen-billion-active',
-    title: 'The plan dissolves; `18` rises and holds alone',
+    id: 'two-numbers-two-questions',
+    title: '`320 billion` returns above `18 billion active`, and both are bracketed',
     relation: 'want',
-    secs: 8,
-    vo: 'Small, or fast. Not both. So — what did "five percent active" actually buy?',
+    secs: 26,
+    vo: 'Here is the payoff. When you read: 320 billion parameters and 18 billion active — those two numbers are answering different questions. The 320 billion tells you how many learned parameters exist in the model. The 18 billion active tells you roughly how much of that parameter set participates in the computation for a token.',
+    /* `pair` mode is the two numbers side by side with their own captions,
+     * which is the beat: one object holding two answers. */
     commands: [
       ground.at(GROUND_Y),
-      big.show({ x: 50, y: 42 }, 1, { value: '18 billion', caption: 'active' }),
+      share.show({ x: 50, y: 44 }, 0.92, { mode: 'pair' }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
     ],
-  },
-  {
-    n: 2,
-    id: 'what-that-number-tells-you',
-    title: 'We slide back to the opening: the number, and the block behind it',
-    relation: 'so',
-    secs: 5,
-    vo: 'Here’s what that number is actually telling you.',
-    /* Back to what §1 actually opened with. See the note in scene.ts about
-     * why this is not the spec sheet the board asked for. */
-    commands: [
-      big.moveTo({ x: 50, y: 20 }, 0.7),
-      block.show({ x: 50, y: 52 }, 0.72, { grain: 'fine' }),
-    ],
-  },
-  {
-    n: 3,
-    id: 'that-part-is-true',
-    title: 'A small work bar draws itself beside it',
-    relation: 'so',
-    secs: 16,
-    /* The true half, conceded with no hedge. */
-    vo: 'Per token, this thing does the thinking of a model about a twentieth of its size. That’s real. That’s why it’s quick, and why it’s cheap to run per token. That part is true.',
-    commands: [
-      block.off(),
-      share.show({ x: 50, y: 54 }, 0.86, { mode: 'bar', lit: 0.056, caption: 'the thinking it does per token' }),
-      narrator.set({ pose: 'nod' }),
-    ],
+    /* Two braces, each naming the *question* rather than repeating the answer
+     * under the number. The voice says exists and participates; the braces say
+     * what you would go and measure. */
     lateOverlays: {
-      at: 4600,
-      overlays: [note('completely true', 18, 72, { tone: 'measure', rotate: -3 })],
+      at: 12000,
+      overlays: [
+        brace('what is stored', 16, 54, 26, { tone: 'measure', side: 'bottom' }),
+        brace('what runs, per token', 56, 54, 28, { tone: 'word', side: 'bottom' }),
+      ],
     },
   },
   {
-    n: 4,
-    id: 'all-of-it-in-reach',
-    title: 'The block returns behind it, whole, and settles heavily',
-    relation: 'wall',
-    secs: 12,
-    vo: 'But all of it still has to be within reach. Because it never knows which part it wants until the moment it wants it.',
+    n: 2,
+    id: 'a-huge-pool',
+    title: 'The whole model draws as one field with small active paths lit across it',
+    relation: 'so',
+    secs: 13,
+    vo: 'And that is the trick Mixture of Experts is buying you. The model can have a huge pool of learned expert weights... without running every expert for every token.',
+    /* Scattered, never one patch. Routing picks by score and not by locality,
+     * and every frame in this video that says otherwise is a lie the viewer
+     * has already been taught to catch. */
     commands: [
-      share.moveTo({ x: 50, y: 82 }, 0.6),
-      block.show({ x: 50, y: 42 }, 0.7, { grain: 'fine' }),
-      block.whole(),
-      narrator.set({ pose: 'carry' }),
-    ],
-  },
-  {
-    n: 5,
-    id: 'work-and-space',
-    title: 'The bar and the block separate into two labelled columns',
-    relation: 'therefore',
-    secs: 8,
-    vo: 'One of those is a number about work. The other is a number about space.',
-    commands: [],
-    /* One of `claim` orange's three budgeted uses in the whole video. */
-    overlays: [note('“efficient”', 18, 42, { size: 'lg', tone: 'claim', rotate: -4 })],
-  },
-  {
-    n: 6,
-    id: 'one-shrinks-one-doesnt',
-    title: 'The work column shrinks to almost nothing; the space column stays full height',
-    relation: 'therefore',
-    secs: 8,
-    vo: 'Sparse routing shrinks the first one. It does nothing at all to the second.',
-    /* The thesis is a trade, so the figure holds two things at once. */
-    commands: [
-      share.moveTo({ x: 26, y: 66 }, 0.52),
-      block.moveTo({ x: 74, y: 46 }, 0.5),
-      narrator.set({ pose: 'weigh' }),
-    ],
-    overlays: [
-      note('compute — bought', 26, 84, { size: 'md', tone: 'measure', rotate: -2 }),
-      note('memory — not bought', 74, 84, { size: 'md', tone: 'cost', rotate: 2 }),
-    ],
-  },
-  {
-    n: 7,
-    id: 'one-chip-or-eight',
-    title: 'A second card slides in beside the first; chips stack under each',
-    relation: 'and-yet',
-    secs: 15,
-    vo: 'And here’s the part I didn’t expect. This model has about a hundred and twenty billion parameters, and it fits on one chip. This one has three hundred and twenty, and needs eight.',
-    /* Eight chips, not a rack. A rack is an unquantified "lots"; eight is the
-     * promise the video opened on. */
-    commands: [
-      share.off(),
-      block.off(),
-      /* The number has done its job by now. Left on screen it competed with
-       * the two cards it was supposed to have set up. */
-      big.off(),
-      cardA.show({ x: 28, y: 50 }, 1.1, { chips: OTHER_MODEL.chips, grain: 'coarse', note: 'fits on one chip' }),
-      cardB.show({ x: 72, y: 50 }, 1.1, { chips: THIS_MODEL.chips, grain: 'fine', note: 'needs eight' }),
+      share.moveTo({ x: 50, y: 20 }, 0.5),
+      block.show({ x: 50, y: 44 }, 0.78, { grain: 'fine', heavy: false }),
+      block.route('a'),
       narrator.set({ pose: 'wonder' }),
     ],
   },
   {
-    n: 8,
-    id: 'about-five-percent-both',
-    title: 'Both cards light their active share; the two shares match',
-    relation: 'and-yet',
-    secs: 7,
-    vo: 'Both of them use about five percent of themselves to answer you.',
-    commands: [cardA.set({ litShare: true }), cardB.set({ litShare: true })],
-    overlays: [centred('about 5% — both of them', 50, 16, { size: 'md', tone: 'measure', rotate: -1 })],
+    n: 3,
+    id: 'another-token-another-route',
+    title: 'Our own `it` route replays, a different eight each time',
+    relation: 'so',
+    secs: 12,
+    vo: 'For our `it`, the router only selected eight routed experts on each sparse layer. Another token can use a different route. Another sentence can use a different route.',
+    commands: [narrator.set({ pose: 'count' })],
+    /* The same block, relit. A second object here would say "another model"
+     * when the line says "another token". */
+    stages: [
+      { at: 5000, commands: [block.route('b')] },
+      { at: 8500, commands: [block.route('c')] },
+    ],
+    overlays: [note('8 per sparse layer · 42 layers', 62, 20, { tone: 'measure', rotate: 2 })],
   },
   {
-    n: 9,
-    id: 'three-things-differ',
-    title: 'Three chips land beside the second card: parameters, precision, grain',
-    relation: 'so',
-    secs: 16,
-    /*
-     * The three differences, separated before any of them is blamed. v9 said
-     * "the difference is that this one is chopped finer" over a frame that
-     * divided the blocks, which made granularity look like the cause of the
-     * footprint. It is not: 116.8B vs 321B and MXFP4 vs FP8 account for ~58
-     * GiB against ~306 GiB almost entirely. See this section's truth notes.
-     */
-    vo: 'Three things differ, and only one of them is exciting. It’s nearly three times the parameters. It ships at twice the precision per weight. And it’s chopped finer — more experts, smaller each.',
-    commands: [diffs.all()],
+    n: 4,
+    id: 'that-is-the-win',
+    title: 'The frame splits: the total stays full while only the work side shrinks',
+    relation: 'therefore',
+    secs: 11,
+    vo: 'So the model gets access to far more total learned capacity than it has to compute through on every single token. That is the win.',
+    /* Both halves on one frame, because the whole thesis is that one of them
+     * shrank and the other did not. */
+    commands: [
+      block.moveTo({ x: 72, y: 42 }, 0.62),
+      share.show({ x: 26, y: 58 }, 0.5, { mode: 'bar', lit: 0.056, caption: '' }),
+      narrator.set({ pose: 'weigh' }),
+    ],
     overlays: [
-      note(`${OTHER_MODEL.experts} per floor`, 28, 82, { tone: 'measure', rotate: -2 }),
-      note(`${THIS_MODEL.experts} per floor`, 72, 82, { tone: 'measure', rotate: 2 }),
+      note('PER-TOKEN WORK', 14, 74, { tone: 'word', rotate: -2 }),
+      note('TOTAL', 66, 74, { tone: 'measure', rotate: 2 }),
     ],
   },
   {
-    n: 10,
-    id: 'only-the-third-is-interesting',
-    title: 'The first two chips grey out; the granularity chip stays lit',
-    relation: 'and-yet',
-    secs: 13,
-    vo: 'The first two are why the file is bigger. They’re just size. This one is the interesting one — and it’s not about the file at all.',
-    /* Dimming, not removing. The two size differences stay on screen and stay
-     * true -- they are just not the thing the rest of the section is about. */
-    commands: [diffs.onlyGranularity()],
-  },
-  {
-    n: 11,
-    id: 'better-and-harder',
-    title: 'The fine-grained model shows many more possible expert paths',
+    n: 5,
+    id: 'the-inactive-still-exist',
+    title: 'The unused pool stays visibly present around the route',
     relation: 'and-yet',
     secs: 18,
-    /* The carrying frame. Keep this geometric, not a measured cache claim. */
-    vo: 'Finer routing gives the model many more possible expert paths. That doesn’t make the file bigger — but it means the active share can be spread across many more places, instead of sitting in one corner you could simply keep nearby.',
-    commands: [cardB.moveTo({ x: 72, y: 50 }, 1.1)],
-    overlays: [note('more possible paths', 62, 12, { size: 'md', tone: 'measure', rotate: 2 })],
+    vo: 'But notice what it does not magically do. It does not turn a 320-billion-parameter checkpoint into an 18-billion-parameter file. The experts that are inactive for this token still exist. Another token may need them later.',
+    /* Heavy, and still lit: available, not wasted, and not gone. */
+    commands: [
+      share.off(),
+      block.moveTo({ x: 50, y: 42 }, 0.8),
+      block.set({ heavy: true }),
+      narrator.set({ pose: 'carry' }),
+    ],
+    overlays: [note('321B stored · 18B run', 20, 20, { size: 'md', tone: 'measure', rotate: -2 })],
   },
   {
-    n: 12,
-    id: 'the-trend',
-    title: 'The second card withdraws; ours holds with its eight chips',
-    relation: 'therefore',
-    secs: 15,
-    /* The sentence the viewer repeats to someone else. */
-    vo: 'So “five percent active” tells you how much work happens. By itself, it tells you almost nothing about how much of the model needs to stay within reach.',
-    /* 1.15, not 1.3. `ModelCard`'s viewBox grew from 400 to 470 tall so eight
-     * chips could wrap to two rows, and the card is width-constrained by CSS --
-     * so the same scale now reaches 17% further up and down. At 1.3 its title
-     * printed through the three difference plates above it. */
-    commands: [cardA.off(), cardB.moveTo({ x: 50, y: 50 }, 1.15), narrator.set({ pose: 'lean' })],
-  },
-  {
-    n: 13,
-    id: 'a-compute-number',
-    title: 'Everything clears to a single line of handwriting',
+    n: 6,
+    id: 'weights-and-precision',
+    title: 'Stored weight and precision return as the thing that sets the footprint',
     relation: 'therefore',
     secs: 11,
-    /*
-     * S-11. The thesis, once, alone, at the end -- and it is the *only* place
-     * in the video it is stated. v9 said it at beat 5 as well, which is the
-     * one strategy this section cites and the one it broke: a sentence said
-     * twice is a sentence the viewer stops hearing.
-     */
-    vo: '"Active parameters" is a compute number. It was never a memory number.',
+    vo: 'So if you want the whole model fully resident in fast memory, total stored weights and their precision still matter enormously.',
+    commands: [narrator.set({ pose: 'point' })],
+    /* The arithmetic of a checkpoint, which the voice never spells out. It is
+     * also the sum beats 7-8 are about to do twice. */
+    overlays: [
+      brace('weights × precision = the file', 50 - 20, 76, 40, { tone: 'measure', side: 'bottom' }),
+    ],
+  },
+  {
+    n: 7,
+    id: 'the-left-card-measured',
+    title: 'The two model cards from §1 return and the left one is measured',
+    relation: 'so',
+    secs: 18,
+    vo: 'And now our opening comparison stops being weird. This model: gpt-oss-120b uses roughly 4.4% of its parameters per token and ships at roughly 58 GiB in its compact MXFP4 format.',
+    commands: [
+      block.off(),
+      cardA.show({ x: 28, y: 48 }, 1.05, {
+        chips: 0,
+        grain: 'coarse',
+        litShare: true,
+        note: '~58 GiB · MXFP4',
+      }),
+      narrator.set({ pose: 'offer' }),
+    ],
+    overlays: [centred('≈4.4% active', 28, 14, { size: 'md', tone: 'measure', rotate: -1 })],
+  },
+  {
+    n: 8,
+    id: 'the-right-card-measured',
+    title: 'The right one is measured the same way',
+    relation: 'so',
+    secs: 15,
+    vo: 'This model: GLM-5.3-Flash uses roughly 5.6% per token, but its shipped FP8 checkpoint is roughly 306 GiB before runtime memory.',
+    commands: [
+      cardB.show({ x: 72, y: 48 }, 1.05, {
+        chips: 0,
+        grain: 'fine',
+        litShare: true,
+        note: '~306 GiB · FP8',
+      }),
+    ],
+    overlays: [
+      centred('≈4.4% active', 28, 14, { size: 'md', tone: 'measure', rotate: -1 }),
+      centred('≈5.6% active', 72, 14, { size: 'md', tone: 'measure', rotate: 1 }),
+    ],
+  },
+  {
+    n: 9,
+    id: 'not-a-failure-of-moe',
+    title: 'Three quiet cause cards land between them; grain dims',
+    relation: 'and-yet',
+    secs: 16,
+    vo: 'Similar active percentages. Completely different total footprints. That difference is not some mysterious failure of MoE. They are different-sized models stored at different precisions. And “percent active” was never the number that told us the checkpoint size.',
+    commands: [
+      cardA.moveTo({ x: 24, y: 56 }, 0.92),
+      cardB.moveTo({ x: 76, y: 56 }, 0.92),
+      diffs.all(),
+      narrator.set({ pose: 'think' }),
+    ],
+    /* Granularity is real and stays on screen, but it goes dim: total size and
+     * shipped precision are what turn ~58 GiB into ~306 GiB, and a lit grain
+     * plate beside that brace would name the wrong cause. */
+    stages: [{ at: 8000, commands: [diffs.onlySize()] }],
+    /* The carrying frame: two similar shares, two footprints five times apart,
+     * measured across the pair rather than asserted. */
+    overlays: [brace('~58 GiB → ~306 GiB', 24, 84, 52, { tone: 'cost', side: 'bottom' })],
+  },
+  {
+    n: 10,
+    id: 'read-it-like-this',
+    title: 'Everything collapses back to one card with a meaning under each number',
+    relation: 'therefore',
+    secs: 18,
+    vo: 'So when you see a model advertised as: 320B total — 18B active — read it like this: 320B total: how much learned model exists. 18B active: roughly how much participates for each token.',
     commands: [
       cardA.off(),
       cardB.off(),
       diffs.off(),
-      share.off(),
-      block.off(),
-      big.off(),
-      narrator.off(),
+      share.show({ x: 50, y: 44 }, 0.92, { mode: 'pair' }),
+      narrator.set({ pose: 'nod' }),
     ],
+  },
+  {
+    n: 11,
+    id: 'which-eighteen-billion',
+    title: 'The opening question returns, put to the viewer rather than to the screen',
+    relation: 'and-yet',
+    secs: 16,
+    vo: 'And if someone turns that second number into: “so you only need 18 billion parameters in memory”... now you know exactly what question to ask: which 18 billion — and when does the model know?',
+    commands: [share.moveTo({ x: 50, y: 22 }, 0.56), narrator.set({ pose: 'offer' })],
+    /* §1 beat 10's mark, returned. The question is the frame; the answer is
+     * the next beat, and it is a picture rather than a sentence. */
     lateOverlays: {
-      at: 2400,
-      overlays: [
-        centred('“active parameters” is a compute number.\nit was never a memory number.', 50, 46, {
-          size: 'lg',
-          tone: 'cost',
-          rotate: -1,
-          sticky: true,
-        }),
-      ],
+      at: 9000,
+      overlays: [centred('?', 50, 50, { size: 'lg', tone: 'claim', sticky: true })],
     },
   },
   {
-    n: 14,
-    id: 'two-models-one-card-and-eight',
-    title: '§1’s opening frame redraws itself exactly: two sheets, one chip and eight',
-    relation: 'so',
-    secs: 12,
+    n: 12,
+    id: 'it-decides-as-it-goes',
+    title: 'Behind the question, the route chooses its experts layer by layer',
+    relation: 'therefore',
+    secs: 10,
+    vo: 'Because we followed one tiny `it` all the way through. And the answer was: it decides as it goes.',
+    /* The question mark is replaced by the thing that answers it. A `?` left
+     * over a working route would say we never found out. */
+    commands: [block.show({ x: 50, y: 48 }, 0.7, { grain: 'fine', heavy: false }), block.route('b')],
+    clearSticky: true,
+    stages: [
+      { at: 2600, commands: [block.route('c')] },
+      { at: 5200, commands: [block.route('a')] },
+    ],
+  },
+  {
+    n: 13,
+    id: 'the-opening-frame-returns',
+    title: '§1’s opening composition returns exactly, and nothing moves',
+    relation: 'wall',
+    secs: 20,
+    vo: 'That is why two models can both say “about five percent active”... while one fits on a single 80-gigabyte accelerator... and keeping the other fully resident at its shipped precision takes eight. Same headline percentage. Different question. Now the number actually means something.',
     /*
-     * S-10. The ring closes, and it has to be the *same frame* -- same
-     * positions, same scales, same chip counts as §1. A near-miss reads as a
-     * similar picture; an exact match reads as a return, which is the only
-     * version that pays off seventeen beats of setup.
-     */
-    /* S-10 pays out here, and it pays out in **nouns**: this line is §1 beat 2
-     * said back. §1 says "a single chip", so this says a single chip. It said
-     * "card" until 2026-09-11, which made the closing ring rhyme rather than
-     * return. */
-    vo: 'Two models. Both about five percent active. One of them runs on a single chip; the other one needs eight.',
-    /*
-     * §1's coordinates, exactly: **gpt-oss coarse on the left at 30/42 with
-     * one chip, ours fine on the right at 72/42 with eight**, both scale 0.5,
-     * rigs at 30/73 and 72/73. If `section-01/scene.ts` moves, this moves with
-     * it -- the whole point of the beat is that the viewer recognises the
-     * frame, and a shifted copy is a different picture.
+     * §1 beats 4, 6, 7 and 8, redrawn: same objects, same coordinates, same
+     * scales, same chip counts, same labels, both blocks `fine`. The narrator
+     * goes because §1 has no narrator — she was never in this frame.
+     *
+     * Nothing is staged and nothing arrives late. The line is spoken over a
+     * still picture, and then the video is over.
      */
     commands: [
-      /*
-       * **Coarse left, fine right -- the same as §1 beat 1.**
-       *
-       * This said `fine` on both, because §1's blocks had no `grain` field and
-       * both defaulted to fine. That made the opening frame two identical
-       * rectangles, which is a poor thing to spend the first six seconds on,
-       * and it meant granularity arrived here at minute 27 as a brand new
-       * idea. It is not new: it is what the viewer has been looking at since
-       * second zero. Drawn this way the close is a *return* rather than a
-       * rhyme, which is the whole of S-10.
-       */
-      block.show({ x: 72, y: 42 }, 0.5, { grain: 'fine', lit: 'a', heavy: false }),
-      block2.show({ x: 30, y: 42 }, 0.5, { lit: 'b', grain: 'coarse' }),
-      rigA.show({ x: 30, y: 73 }, 1, { count: 1 }),
-      rigB.show({ x: 72, y: 73 }, 1, { count: 8 }),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'lean', flip: true }),
+      share.off(),
+      block.show({ x: CMP_RIGHT, y: CMP_Y }, CMP_SCALE, { grain: 'fine', heavy: false }),
+      block.route('a'),
+      block2.show({ x: CMP_LEFT, y: CMP_Y }, CMP_SCALE, { lit: 'b', grain: 'fine' }),
+      rigA.show({ x: CMP_LEFT, y: RIG_Y }, 1, { count: 1 }),
+      rigB.show({ x: CMP_RIGHT, y: RIG_Y }, 1, { count: 8 }),
+      narrator.off(),
     ],
     clearSticky: true,
-    lateOverlays: {
-      at: 3600,
-      overlays: [
-        note('one', 27, 82, { tone: 'measure', sticky: true }),
-        note('eight', 69, 82, { tone: 'cost', sticky: true }),
-      ],
-    },
-  },
-  {
-    n: 15,
-    id: 'now-you-know-why',
-    title: 'Nothing moves',
-    relation: 'and-yet',
-    secs: 7,
-    /* Four words, and then the video stops. Anything added here spends the
-     * ring's payoff on decoration. */
-    vo: 'Now you know why.',
-    commands: [narrator.set({ pose: 'nod' })],
+    overlays: [
+      centred('gpt-oss-120b', CMP_LEFT, 15, { size: 'sm' }),
+      centred('GLM-5.3-Flash', CMP_RIGHT, 15, { size: 'sm' }),
+      centred('≈4% active', CMP_LEFT, 56, { size: 'sm', tone: 'claim' }),
+      centred('≈6% active', CMP_RIGHT, 56, { size: 'sm', tone: 'claim' }),
+      brace('almost the same active share', CMP_LEFT - CMP_HALF, 59, CMP_RIGHT - CMP_LEFT + CMP_HALF * 2, {
+        tone: 'claim',
+        side: 'bottom',
+      }),
+      centred('1 × 80 GB', CMP_LEFT, 79, { tone: 'measure' }),
+      centred('8 × 80 GB', CMP_RIGHT, 79, { tone: 'cost' }),
+      centred('native shipped precision · weights resident', CMP_RIGHT, 87, { size: 'sm' }),
+    ],
   },
 ]

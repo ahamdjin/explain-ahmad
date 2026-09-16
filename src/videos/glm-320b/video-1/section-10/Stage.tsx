@@ -1,4 +1,4 @@
-import { GenerateLoop, Ground, Slot, Tower } from '../../../../paper'
+import { BigNumber, GenerateLoop, Ground, INK, PALETTE, Slot, Tower } from '../../../../paper'
 import { Aside } from '../../../../paper/cast/Aside'
 import { Narrator } from '../../../../paper/cast/Narrator'
 import { WordCard } from '../../../../paper/cast/Props'
@@ -18,8 +18,22 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {scene.ground.on ? <Ground y={scene.ground.y} /> : null}
 
       <Slot on={scene.tower.on} at={scene.tower.at} scale={scene.tower.scale} z={1} feel={feel}>
-        <Tower floor={scene.tower.floor} markers={scene.tower.markers}
-          kept={scene.tower.kept} />
+        <Tower
+          floor={scene.tower.floor}
+          markers={scene.tower.markers}
+          kept={scene.tower.kept}
+          alone={scene.tower.alone}
+          teams={scene.tower.teams}
+          flash={scene.tower.flash}
+        />
+      </Slot>
+
+      <Slot on={scene.stored.on} at={scene.stored.at} scale={scene.stored.scale} z={2} feel={feel}>
+        <StoredState lit={scene.stored.lit} />
+      </Slot>
+
+      <Slot on={scene.numbers.on} at={scene.numbers.at} scale={scene.numbers.scale} z={6} feel={feel}>
+        <BigNumber value={scene.numbers.value} caption={scene.numbers.caption} />
       </Slot>
 
       <Slot on={scene.line.on} at={scene.line.at} scale={scene.line.scale} z={3} feel={feel}>
@@ -65,5 +79,44 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         />
       </Slot>
     </>
+  )
+}
+
+/**
+ * One short stored-state tab per layer, down the side of the tower.
+ *
+ * It has to be a *column* the same height as the building, because the claim
+ * beat 3 makes is that this exists at **every** layer. A single box beside the
+ * tower would read as one cache somewhere, which is the thing that then makes
+ * "only the new position travels" look like a trick.
+ *
+ * Lives here rather than in `paper/` because nothing else in the video shows
+ * it: §12 is about what fills a cache, not about where state sits.
+ */
+function StoredState({ lit }: { lit: boolean }) {
+  const layers = 45
+  const step = 17
+  const top = 30
+
+  return (
+    <div style={{ width: '17cqw' }}>
+      <svg viewBox={`0 0 120 ${layers * step + top * 2 + 26}`} aria-hidden="true">
+        {Array.from({ length: layers }, (_, i) => (
+          <rect
+            key={i}
+            x={10}
+            y={top + i * step + 3}
+            width={lit ? 66 : 44}
+            height={step - 6}
+            rx="3"
+            fill={lit ? PALETTE.relate : PALETTE.paperShade}
+            stroke={INK}
+            strokeWidth="1.4"
+            opacity={lit ? 0.9 : 0.55}
+            style={{ transition: 'all .6s' }}
+          />
+        ))}
+      </svg>
+    </div>
   )
 }

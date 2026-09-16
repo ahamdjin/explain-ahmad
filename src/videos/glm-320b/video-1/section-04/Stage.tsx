@@ -1,26 +1,21 @@
-import {
-  BARKED,
-  Camera,
-  FOLLOWED,
-  Ground,
-  HOT,
-  NumberRow,
-  PROMPT,
-  Slot,
-  WEIGHTS,
-} from '../../../../paper'
+import { Camera, FOLLOWED, Ground, NumberRow, PROMPT, Slot, WEIGHTS } from '../../../../paper'
+import { Hospital } from '../../../../paper/cast/Hospital'
 import { Narrator } from '../../../../paper/cast/Narrator'
+import { WordCard } from '../../../../paper/cast/Props'
 import { Sentence } from '../../../../paper/cast/Sentence'
 import { type Feel } from '../../../../paper/motion'
-import {DOG_SEED, type SceneState} from './scene'
+import { ROW_SEED, type SceneState } from './scene'
 
 /**
- * The two `dog` rows are generated the honest way.
+ * The before-row and the after-row are drawn the honest way.
  *
- * Both start from `DOG_SEED` — genuinely the same row, which is §3's fact — and
- * each drifts a different distance and direction from it. So "started
- * identical, ended nothing alike" is true of the numbers actually on screen,
- * not just of the voice-over saying so.
+ * `ghost` is generated from `ROW_SEED` with no drift — literally §3's row — and
+ * the changed row is the sentence's own `it` row after `line.change`. So beat
+ * 8's claim, *same ID and different numbers*, is true of the pixels rather than
+ * only of the voice-over.
+ *
+ * The wall is mounted here rather than in §5 because §4 beat 13 has to show its
+ * edge arriving. §5 completes the same object; it never cuts to a new one.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   return (
@@ -28,8 +23,36 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {scene.ground.on ? <Ground y={scene.ground.y} /> : null}
 
       <Camera at={scene.camera} feel={feel}>
+        <Slot on={scene.wall.on} at={scene.wall.at} scale={scene.wall.scale} z={1} feel={feel}>
+          <Hospital
+            sign=""
+            plaque=""
+            staffed={false}
+            lit={[]}
+            was={[]}
+            focus={false}
+            quiet
+            heavy={false}
+            bunks={false}
+            doorsOpen={false}
+          />
+        </Slot>
+
+        {/* What `it` starts as, every time. Same seed, no drift. */}
+        <Slot on={scene.ghost.on} at={scene.ghost.at} scale={scene.ghost.scale} z={2} feel={feel}>
+          <NumberRow seed={ROW_SEED} shown={10} tone="ink" label="what `it` starts as" dim />
+        </Slot>
+
         <Slot on={scene.row.on} at={scene.row.at} scale={scene.row.scale} z={3} feel={feel}>
-          <NumberRow seed={DOG_SEED} shown={10} tone="measure" label="dog" dim={scene.row.dim} />
+          <NumberRow
+            seed={scene.row.changed ? ROW_SEED + 1 : ROW_SEED}
+            shown={10}
+            tone="measure"
+            basis={ROW_SEED}
+            drift={scene.row.changed ? 0.55 : 0}
+            label="it"
+            dim={scene.row.dim}
+          />
         </Slot>
 
         <Slot on={scene.line.on} at={scene.line.at} scale={scene.line.scale} z={3} feel={feel}>
@@ -40,7 +63,6 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             focus={FOLLOWED}
             raise={scene.line.raise}
             changed={scene.line.changed}
-            changedAll={scene.line.changedAll}
             attention={
               scene.line.lines
                 ? {
@@ -54,23 +76,8 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           />
         </Slot>
 
-        <Slot on={scene.barked.on} at={scene.barked.at} scale={scene.barked.scale} z={3} feel={feel}>
-          <Sentence words={BARKED} split rows focus={1} />
-        </Slot>
-        <Slot on={scene.hot.on} at={scene.hot.at} scale={scene.hot.scale} z={3} feel={feel}>
-          <Sentence words={HOT} split rows focus={2} />
-        </Slot>
-
-        <Slot on={scene.rowA.on} at={scene.rowA.at} scale={scene.rowA.scale} z={4} feel={feel}>
-          <NumberRow seed={311} shown={8} tone="measure" basis={DOG_SEED} drift={0.72} label="“dog” in “the dog barked”" covered={scene.rowA.covered} />
-        </Slot>
-        <Slot on={scene.rowB.on} at={scene.rowB.at} scale={scene.rowB.scale} z={4} feel={feel}>
-          <NumberRow seed={9041} shown={8} tone="measure" basis={DOG_SEED} drift={0.78} label="“dog” in “a hot dog”" covered={scene.rowB.covered} />
-        </Slot>
-
-        {/* The row both of them started from. Same seed, no drift. */}
-        <Slot on={scene.ghost.on} at={scene.ghost.at} scale={scene.ghost.scale} z={2} feel={feel}>
-          <NumberRow seed={DOG_SEED} shown={8} tone="ink" label="what “dog” starts as, every time" dim />
+        <Slot on={scene.chip.on} at={scene.chip.at} scale={scene.chip.scale} z={6} feel={feel}>
+          <WordCard label={scene.chip.label} id={scene.chip.id} becomes={scene.chip.becomes} />
         </Slot>
       </Camera>
 

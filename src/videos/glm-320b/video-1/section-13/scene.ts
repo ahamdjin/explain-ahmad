@@ -8,17 +8,15 @@
  * question from minute one in a way that is now unarguable, because they
  * watched every step.
  *
- * ## One correction to the board
+ * ## Everything here is a callback
  *
- * The board says beat 2 pans "back to the opening sheet, exactly as it was —
- * `ModelSheet`, 320 / 18". **§1 as built has no `ModelSheet`**, deliberately:
- * "no spec read" is the first rule of that opening, so §1 opens on the number
- * itself and then on the block it shatters into. See the note in
- * `section-01/scene.ts`.
- *
- * So beat 2 returns to what §1 *actually* opened with — the number, and the
- * block behind it. That keeps the callback honest. A sheet here would be a
- * callback to a frame that does not exist, which is worse than no callback.
+ * No new mechanism, no second thesis, no teaser after the last frame. Every
+ * object on stage has already been earned: §1's block and its two rows of
+ * accelerators, §5's route, §11's footprint. The board's "opening sheet" is
+ * **not** one of them — §1 as built has no `ModelSheet`, deliberately, because
+ * "no spec read" is the first rule of that opening. So the callbacks are to
+ * what §1 *actually* drew: the number, the block, and the one-versus-eight
+ * comparison. A sheet here would be a callback to a frame that does not exist.
  */
 import {
   actorVerbs,
@@ -37,9 +35,10 @@ import {
 /**
  * The two models, from `research/glm/GROUND_TRUTH.md` and the gpt-oss card.
  *
- * Say **"about five percent"** of both. Putting 4.4 and 5.6 on screen invites a
- * comparison the beat does not need, and the claim is honest at either
- * precision — which is what made it safe to open the video on.
+ * §1 rounds both to "about 4%" and "about 6%", and the closing frame keeps
+ * those exact words. Beats 7-8 are the one place the sharper figures are
+ * spoken — ~4.4% against ~5.6% — because that is where the *footprints* are
+ * measured beside them and the near-identical shares have to be precise.
  *
  * **"One chip", not "one graphics card."** An 80 GB accelerator is not a gaming
  * GPU, and the consumer figure exists only with offloading, which is §12's
@@ -59,8 +58,14 @@ export type SceneState = {
   /** `18`, alone, and then the two numbers as a measurement. */
   big: { on: boolean; at: At; scale: number; value: string; caption: string }
   share: Placed & { mode: 'pair' | 'bar'; lit: number; caption: string }
-  /** §1's block, returning. Whole, and settling heavily. */
-  block: Placed & { heavy: boolean; grain: 'fine' | 'coarse'; lit?: 'a' }
+  /**
+   * §1's block, returning. Whole, and settling heavily.
+   *
+   * `lit` takes all three patches because beat 3 replays the route: the same
+   * block with a *different* eight lit each time is the only way to show
+   * "another token can use a different route" without a new object.
+   */
+  block: Placed & { heavy: boolean; grain: 'fine' | 'coarse'; lit?: 'a' | 'b' | 'c' }
   /** The second model, as evidence. Never as a hook. */
   cardA: Placed & { chips: number; grain?: 'coarse' | 'fine'; litShare: boolean; note: string }
   cardB: Placed & { chips: number; grain?: 'coarse' | 'fine'; litShare: boolean; note: string }
@@ -70,7 +75,7 @@ export type SceneState = {
    */
   diffs: Placed & { lit: readonly number[] }
   /**
-   * §1's opening frame, to be redrawn **exactly** at beats 14-15.
+   * §1's opening frame, to be redrawn **exactly** at beat 13.
    *
    * S-10 closes by reusing the opening's nouns, and a near-miss is worse than
    * nothing: a similar picture reads as a similar picture, while an identical
@@ -79,9 +84,15 @@ export type SceneState = {
    * graphics cards. Different objects, so seventeen beats of setup paid out
    * into a frame the viewer had never seen.
    *
-   * Positions and scales are copied from `section-01/scene.ts` and must stay
-   * in step with it: block at 30/42 and 72/42 scale 0.5, rigs at 30/73 and
-   * 72/73 scale 1, counts 1 and 4.
+   * Positions and scales are copied from **`section-01/beats.ts`** -- the
+   * constants that actually draw §1's frame, not this section's defaults --
+   * and must stay in step with them: `CMP_LEFT` 27 and `CMP_RIGHT` 73, `CMP_Y`
+   * 32, `CMP_SCALE` 0.52, rigs on y 70 at scale 1, counts 1 and 8, and **both
+   * blocks at `fine` grain** (§1 beat 4 sets `block2` fine explicitly, because
+   * the beat's whole claim is that the two models are alike in share).
+   *
+   * The closing beat sets all of that itself, so these defaults are only a
+   * starting point. Read `section-01/beats.ts` before changing either.
    */
   block2: Placed & { lit?: 'a' | 'b'; grain: 'fine' | 'coarse' }
   rigA: Placed & { count: number }
@@ -125,11 +136,17 @@ const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
 export const big = a('big')
 export const share = a('share')
-/** Beat 9 names all three; beat 10 dims the two that are merely size. */
+/**
+ * Beat 9 names all three causes and then keeps only the two that explain the
+ * footprint. Granularity (index 2) is real and is on the cards, but total
+ * parameters and shipped precision are what make ~58 GiB into ~306 GiB -- so
+ * the frame must not leave granularity lit as if it were the reason.
+ */
 export const diffs = {
   ...a('diffs'),
   all: (): Patch => ({ diffs: { on: true, lit: [0, 1, 2] } }),
-  /* Granularity is index 2, and it is the only one that is not about size. */
+  /** Different-sized models, stored at different precisions. That is the cause. */
+  onlySize: (): Patch => ({ diffs: { lit: [0, 1] } }),
   onlyGranularity: (): Patch => ({ diffs: { lit: [2] } }),
 }
 export const block2 = a('block2')
@@ -141,6 +158,8 @@ export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) 
 
 export const block = {
   ...a('block'),
+  /** A different eight, on the same block. Beats 3 and 12. */
+  route: (lit: 'a' | 'b' | 'c'): Patch => ({ block: { lit } }),
   /** All of it, still within reach. It never knows which part it wants. */
   whole: (): Patch => ({ block: { heavy: true, lit: undefined } }),
   /** The same total, divided coarsely or finely. Beats 9-10's argument. */

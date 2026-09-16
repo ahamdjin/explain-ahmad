@@ -1,4 +1,4 @@
-import { BigNumber, Camera, Clock, CostBars, ExpertCache, Ground, Slot, Tower } from '../../../../paper'
+import { BigNumber, Camera, Clock, CostBars, ExpertCache, Ground, INK, PALETTE, Slot, Tower } from '../../../../paper'
 import { FetchPath, Store, Counter } from '../../../../paper/cast/Memory'
 import { Narrator } from '../../../../paper/cast/Narrator'
 import { FrontDesk, SmallMachine } from '../../../../paper/cast/Props'
@@ -17,7 +17,11 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Camera at={scene.camera} feel={feel}>
         <Slot on={scene.tower.on} at={scene.tower.at} scale={scene.tower.scale} z={1} feel={feel}>
-          <Tower floor={scene.tower.floor} />
+          <Tower floor={scene.tower.floor} teams={scene.tower.teams} flash={scene.tower.flash} />
+        </Slot>
+
+        <Slot on={scene.box.on} at={scene.box.at} scale={scene.box.scale} z={4} feel={feel}>
+          <PermanentBox label={scene.box.label} leaking={scene.box.leaking} />
         </Slot>
 
         <Slot on={scene.numbers.on} at={scene.numbers.at} scale={scene.numbers.scale} z={4} feel={feel}>
@@ -77,5 +81,71 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         />
       </Slot>
     </>
+  )
+}
+
+/**
+ * The container that cannot be filled. Beat 4.
+ *
+ * Dashed, because it is a proposal rather than a thing that exists, and open
+ * at the top-right corner once `leaking` — the next layer's selection landing
+ * outside a boundary drawn before it chose. The box has to be seen failing;
+ * a narrator saying "there is no such list" over a tidy box teaches nothing.
+ *
+ * Section-local on purpose: no other section proposes this object.
+ */
+function PermanentBox({ label, leaking }: { label: string; leaking: boolean }) {
+  const inside = [0, 1, 2, 3, 4, 5]
+  const outside = [0, 1, 2]
+
+  return (
+    <div style={{ width: '26cqw' }}>
+      <svg viewBox="0 0 360 260" aria-hidden="true">
+        <path
+          d="M30 60h240v150H30z"
+          fill={PALETTE.paperLight}
+          stroke={INK}
+          strokeWidth="3"
+          strokeDasharray="12 9"
+          strokeLinejoin="round"
+        />
+        <text x="150" y="44" textAnchor="middle" fill={INK} className="s1-tower-tag">
+          {label}
+        </text>
+
+        {inside.map((i) => (
+          <rect
+            key={i}
+            x={52 + (i % 3) * 68}
+            y={84 + Math.floor(i / 3) * 62}
+            width="52"
+            height="44"
+            rx="4"
+            fill={PALETTE.orange}
+            stroke={INK}
+            strokeWidth="2"
+          />
+        ))}
+
+        {/* the next layer, selecting outside a boundary drawn before it chose */}
+        {leaking
+          ? outside.map((i) => (
+              <rect
+                key={`out-${i}`}
+                x={288}
+                y={70 + i * 62}
+                width="52"
+                height="44"
+                rx="4"
+                fill={PALETTE.orange}
+                stroke={INK}
+                strokeWidth="2"
+                opacity="0.92"
+                style={{ transition: 'opacity .5s' }}
+              />
+            ))
+          : null}
+      </svg>
+    </div>
   )
 }

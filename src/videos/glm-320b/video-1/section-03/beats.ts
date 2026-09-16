@@ -1,213 +1,250 @@
-import { brace, GROUND_Y, note, type Beat } from '../../../../paper'
-import {
-  again1,
-  again2,
-  camera,
-  cat,
-  chip,
-  dog,
-  ground,
-  narrator,
-  space,
-  table,
-  tues,
-  type Patch,
-} from './scene'
+import { centred, FOLLOWED, GROUND_Y, note, type Beat } from '../../../../paper'
+import { chip, ground, hero, narrator, rowA, rowB, sentA, sentB, table, type Patch } from './scene'
 
 /**
  * Section 03 — From an ID to a meaning.
  *
- * The viewer already owns the problem: a token ID is an address, not a
- * meaning. This section simply uses the address, watches the lookup happen,
- * then shows why a long row of numbers is useful before naming it.
+ * Script and board: `video-script/video-1/03-from-an-id-to-a-meaning.md`.
+ * The VO below is that script split across visual beats. Do not paraphrase it
+ * to fit components; change the components or the beat count instead.
+ *
+ * ## The geography
+ *
+ * The book owns the **left**, tall and running past the top and bottom of the
+ * frame -- `paper.css` sizes `.s1-etable` to do exactly that, because at a
+ * scale that fits inside the frame it reads as a modest box on a shelf rather
+ * than as something giant. The row work happens to its **right**.
+ *
+ * Every label here is either drawn by the actor it describes (the row's own
+ * `measure`, the book's own caption) or placed against that actor's edge in
+ * the same beat. `skills/SPATIAL_CONTINUITY.md`: *a measure of a thing is drawn
+ * by whatever draws the thing*, and a sticky label is re-placed when its
+ * subject moves rather than merely allowed to persist.
  */
+
+/*
+ * A note on row scale: `NumberRow`'s box is wider than its cells -- the tail
+ * and the measure live in the remainder -- so a row's *drawn* width is about
+ * 76% of `56cqw x scale`. A row that carries a beat therefore needs a scale
+ * near 1, not the 0.6 that looks right in the source.
+ */
+
+/** Rising from below, only its top third in frame. Beat 1. */
+const BOOK_LOW = { x: 18, y: 112 }
+/** Its full height, past both edges of the frame. Beats 2-4. */
+const BOOK_FULL = { x: 28, y: 50 }
+/** Where page 432 sits once the book is at full height. */
+const PAGE_432 = { x: 28, y: 44.5 }
+/** Beats 9-12, stood aside so the two rows own the right. */
+const BOOK_ASIDE = { x: 16, y: 50 }
+
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'how-it-gets-meaning',
-    title: '`5562` alone; a table edge rises into frame',
+    id: 'address-to-somewhere',
+    title: '432 holds and the book keeps rising behind it',
     relation: 'want',
-    secs: 10,
-    vo: 'Exactly. Five thousand, five hundred and sixty-two is an address, not a meaning. So let’s use the address.',
+    secs: 13,
+    vo: 'Right now, everything the model has for our little `it` is 432. Just an address. And that address is useful because it tells the model where to look next.',
+    /* 432 is exactly where §2 left it. The book arrives underneath it rather
+     * than beside it, so beat 2 is that same object rising, not a cut. */
     commands: [
       ground.at(GROUND_Y),
-      chip.show({ x: 46, y: 46 }, 1, { becomes: true }),
-      table.show({ x: 22, y: 118 }, 1),
-      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point', flip: true }),
+      chip.show({ x: 46, y: 42 }, 1),
+      narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' }),
     ],
+    stages: [{ at: 5200, commands: [table.show(BOOK_LOW, 1.45)] }],
+    lateOverlays: {
+      at: 7000,
+      overlays: [centred('an address is where to look', 52, 60, { size: 'md', rotate: -2 })],
+    },
   },
   {
     n: 2,
-    id: 'the-model-has-a-table',
-    title: 'We back away; the table runs past the top of frame',
+    id: 'one-page-per-token',
+    title: 'The book rises fully: one indexed page per token',
     relation: 'so',
-    secs: 11,
-    vo: 'The model has another huge table: one row for every token it knows. All one hundred and fifty-four thousand, eight hundred and eighty.',
-    commands: [
-      table.moveTo({ x: 24, y: 50 }, 1),
-      camera.to({ x: 46, y: 46 }, 0.92),
-      chip.moveTo({ x: 62, y: 30 }, 0.8),
-      narrator.set({ pose: 'reach' }),
-    ],
+    secs: 7,
+    vo: 'Imagine a giant reference book. One page for every token the model knows.',
+    /* 432 steps right and shrinks: it is still our protagonist, but this beat
+     * belongs to the book, and two full-size objects would split the frame. */
+    commands: [table.moveTo(BOOK_FULL, 1.45), chip.moveTo({ x: 72, y: 44.5 }, 0.55), narrator.set({ pose: 'nod' })],
+    /* Against the book's right edge, not floating in the middle of the frame.
+     * The book's own caption sits at its foot, which this scale puts off the
+     * bottom of the frame, so the count carries it. */
     lateOverlays: {
-      at: 3000,
-      overlays: [note('one row per token\n154,880 rows', 8, 84, { tone: 'measure', rotate: -3, sticky: true })],
+      at: 3400,
+      overlays: [note('154,880 pages\none per token', 50, 28, { tone: 'measure', rotate: -3, sticky: true })],
     },
   },
   {
     n: 3,
-    id: 'which-row-to-fetch',
-    title: 'The number travels up the table to its own row',
+    id: 'open-page-432',
+    title: '432 rides the index like a bookmark and opens its own page',
     relation: 'so',
     secs: 5,
-    vo: 'The ID tells us which row to fetch.',
-    commands: [table.seek(), chip.moveTo({ x: 34, y: 46 }, 0.6)],
+    vo: 'We have 432... so we open page 432.',
+    commands: [chip.moveTo(PAGE_432, 0.46), table.seek(), narrator.set({ pose: 'point' })],
   },
   {
     n: 4,
-    id: 'this-row',
-    title: 'That row slides out of the table and comes forward',
-    relation: 'so',
-    secs: 5,
-    vo: 'So we pull out row five thousand, five hundred and sixty-two.',
-    commands: [table.pull(), chip.off(), dog.show({ x: 66, y: 40 }, 0.62, { label: '' })],
+    id: 'not-a-definition',
+    title: 'No definition on the page — a row of numbers slides out',
+    relation: 'and-yet',
+    secs: 9,
+    vo: 'But instead of finding a definition for `it`, we find something much stranger. A long row of numbers.',
+    /* The row leaves the book at the height of the page it came from, so the
+     * viewer can see which page produced it. 432 stays behind as the bookmark. */
+    commands: [
+      table.pull(),
+      chip.moveTo({ x: 28, y: 62 }, 0.4),
+      rowA.show({ x: 63, y: 44.5 }, 0.74, { label: undefined }),
+      narrator.set({ pose: 'wonder' }),
+    ],
+    clearSticky: true,
   },
   {
     n: 5,
     id: 'four-thousand-and-ninety-six',
-    title: 'The row extends sideways past both edges of frame',
-    relation: 'and-yet',
-    secs: 8,
-    vo: 'And that one row contains four thousand and ninety-six numbers. For one token.',
-    commands: [table.moveTo({ x: 6, y: 50 }, 1), dog.set({ extend: true }), dog.moveTo({ x: 54, y: 40 }, 0.8)],
-    clearSticky: true,
-    overlays: [
-      brace('4,096 numbers — for one token', 26, 62, 56, { tone: 'measure', voice: 'figure', sticky: true }),
+    title: 'The row runs past the frame before the count is named',
+    relation: 'so',
+    secs: 6,
+    vo: 'Not ten numbers. Not a hundred. 4,096 numbers.',
+    /* The book and the bookmark go: this beat is about the row's length, and
+     * a frame with three subjects has none. The count is drawn by the row and
+     * spans it end to end, including the part that runs off. */
+    commands: [
+      table.off(),
+      chip.off(),
+      rowA.moveTo({ x: 54, y: 42 }, 0.74),
+      rowA.extend(),
+      rowA.count('4,096 numbers'),
+      narrator.set({ pose: 'count' }),
     ],
   },
   {
     n: 6,
-    id: 'what-for',
-    title: 'Everything stops; the row holds and the question sits under it',
-    relation: 'and-yet',
-    secs: 9,
-    vo: 'That sounds ridiculous. Why would a token like "dog" need four thousand numbers?',
-    commands: [dog.set({ extend: false }), dog.moveTo({ x: 64, y: 32 }, 0.58), narrator.set({ pose: 'wonder' })],
-    clearSticky: true,
+    id: 'called-an-embedding',
+    title: 'The row is named only after it has been seen behaving',
+    relation: 'therefore',
+    secs: 14,
+    vo: 'That row is called an embedding. And the easiest way to think about it is this: 432 was just the address. The embedding is the model’s learned starting representation for that token.',
+    /* 432 comes back small and low so the address and the thing stored at it
+     * are in one frame. The name lands on the row as the row's own label. */
+    commands: [rowA.set({ label: 'embedding' }), chip.show({ x: 11, y: 70 }, 0.4), narrator.set({ pose: 'offer' })],
     lateOverlays: {
-      at: 2400,
-      overlays: [note('what are they for?', 56, 62, { size: 'lg', rotate: -2, sticky: true })],
+      at: 7000,
+      overlays: [centred('the address', 11, 78, { size: 'sm', tone: 'measure', rotate: -3 })],
     },
   },
   {
     n: 7,
-    id: 'dog-and-cat',
-    title: 'Two more rows slide out and stack under it',
+    id: 'the-whole-pattern',
+    title: 'The row reads as one band; single cells stop being readable',
     relation: 'so',
-    secs: 8,
-    vo: 'Because one number cannot capture much about a word. Compare "dog" with "cat".',
-    commands: [
-      dog.set({ label: 'dog' }),
-      cat.show({ x: 64, y: 48 }, 0.58, { label: 'cat' }),
-      narrator.set({ pose: 'point' }),
-    ],
-    clearSticky: true,
+    secs: 11,
+    vo: 'Those 4,096 numbers were learned during training. No single number means “pronoun” or “ball” or “dog.” It’s the whole pattern that matters.',
+    commands: [rowA.band(), narrator.set({ pose: 'think' })],
+    lateOverlays: {
+      at: 5600,
+      overlays: [centred('no single number carries a concept', 50, 66, { size: 'md', rotate: 2 })],
+    },
   },
   {
     n: 8,
-    id: 'close-but-not-the-same',
-    title: 'The two rows align and light as one band',
-    relation: 'so',
-    secs: 8,
-    vo: 'Their rows are not identical. But taken as whole patterns, they can sit relatively close to each other.',
+    id: 'the-row-is-what-we-carry',
+    title: 'The 432 card gives way; the row becomes the thing we carry',
+    relation: 'therefore',
+    secs: 11,
+    vo: 'So now our `it` is no longer just: 432. It is this entire row of 4,096 values. Which feels much more useful.',
+    /* The card leaves and the row takes its name. From here to §5 the row *is*
+     * our `it`; the number that opened the page has done its whole job. */
     commands: [
-      dog.compare(),
-      cat.compare(),
-      dog.moveTo({ x: 62, y: 36 }, 0.58),
-      cat.moveTo({ x: 62, y: 50 }, 0.58),
+      chip.off(),
+      rowA.contract(),
+      rowA.moveTo({ x: 50, y: 46 }, 1.16),
+      rowA.set({ label: 'our `it`, now' }),
+      narrator.set({ pose: 'nod' }),
     ],
-    overlays: [note('close — as\nwhole rows', 82, 42, { size: 'md', tone: 'word', rotate: -4 })],
   },
   {
     n: 9,
-    id: 'now-tuesday',
-    title: 'A third row aligns; its band stays unlit',
-    relation: 'wall',
-    secs: 6,
-    vo: 'Now compare either of them with "Tuesday". Much farther away.',
-    commands: [tues.show({ x: 62, y: 66 }, 0.58, { label: 'Tuesday' }), tues.compare()],
-    overlays: [note('farther away', 82, 68, { size: 'md', tone: 'cost', rotate: 3 })],
+    id: 'the-exact-same-row',
+    title: 'The book returns and the identical row is pulled a second time',
+    relation: 'and-yet',
+    secs: 12,
+    vo: 'But there’s a problem. This is a lookup table. Which means every time the token `it` appears... it starts by pulling out the exact same row.',
+    /* Both rows are drawn from `ROW_SEED`, so beat 12's claim is true of the
+     * ink and not merely asserted over it. The book stands aside rather than
+     * arriving again, because it never conceptually left. */
+    commands: [
+      table.show(BOOK_ASIDE, 1.2),
+      table.pull(),
+      rowA.unband(),
+      rowA.uncount(),
+      rowA.set({ label: 'it' }),
+      rowA.moveTo({ x: 56, y: 30 }, 0.95),
+      narrator.set({ pose: 'point' }),
+    ],
+    stages: [{ at: 7000, commands: [rowB.show({ x: 56, y: 52 }, 0.95, { label: 'it' })] }],
   },
   {
     n: 10,
-    id: 'training-did-it',
-    title: 'The three rows fold into three points, spaced by likeness',
+    id: 'the-ball-sentence',
+    title: 'An ordinary sentence lands above the first row and its `it` lights',
     relation: 'so',
-    secs: 12,
-    vo: 'Nobody hand-placed them there. Training shaped the table so tokens used in similar situations tend to end up in similar regions.',
-    commands: [dog.off(), cat.off(), tues.off(), space.fold()],
-    lateOverlays: {
-      at: 3000,
-      overlays: [note('illustration only —\nrelative distance', 82, 78, { rotate: 3 })],
-    },
+    secs: 6,
+    vo: 'Take: “The ball rolled because it was pushed.”',
+    commands: [table.off(), sentA.show({ x: 56, y: 15 }, 0.72), sentA.follow()],
   },
   {
     n: 11,
-    id: 'where-the-row-sits',
-    title: 'The points hold; a brace measures the two distances',
-    relation: 'and-yet',
-    secs: 11,
-    vo: 'So the useful information is not one magic coordinate. It is the pattern of the whole row, and how that pattern relates to other rows.',
-    commands: [space.measure(), narrator.set({ pose: 'aha' })],
+    id: 'the-dog-sentence',
+    title: 'A second sentence lands above the second identical row',
+    relation: 'so',
+    secs: 6,
+    vo: 'and: “The dog stopped because it was tired.”',
+    commands: [sentB.show({ x: 56, y: 67 }, 0.72), sentB.follow()],
   },
   {
     n: 12,
-    id: 'called-an-embedding',
-    title: 'The points unfold back into the `dog` row; a label lands on it',
-    relation: 'therefore',
-    secs: 9,
-    vo: 'That row of numbers is called an embedding. It is the model’s starting representation for this token.',
-    commands: [space.unfold(), dog.show({ x: 60, y: 40 }, 0.72, { matches: false, label: 'dog' }), narrator.set({ pose: 'nod' })],
-    lateOverlays: {
-      at: 2600,
-      overlays: [note('embedding', 54, 20, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
-    },
-  },
-  {
-    n: 13,
-    id: 'this-is-what-goes-in',
-    title: 'The label settles; the row sits alone in frame',
-    relation: 'therefore',
-    secs: 9,
-    vo: 'So when our token enters the model, this four-thousand-and-ninety-six-number embedding is what it starts with.',
-    commands: [dog.moveTo({ x: 60, y: 44 }, 0.72), narrator.set({ pose: 'nod' })],
-    clearSticky: true,
-  },
-  {
-    n: 14,
-    id: 'stored-in-a-table',
-    title: 'The same row is pulled from the table a second time, beside the first',
+    id: 'same-starting-embedding',
+    title: 'Two different referents sit above two identical starting rows',
     relation: 'and-yet',
-    secs: 6,
-    vo: 'But remember: it came from a lookup table.',
-    commands: [
-      table.moveTo({ x: 24, y: 50 }, 1),
-      dog.moveTo({ x: 60, y: 34 }, 0.62),
-      again1.show({ x: 60, y: 52 }, 0.62),
-      narrator.set({ pose: 'think' }),
+    secs: 7,
+    vo: 'Different `it`. Different thing it refers to. Same starting embedding.',
+    /* Each referent note sits beside the sentence that owns it; `identical`
+     * sits between the two rows, which is the only place it can mean anything. */
+    commands: [narrator.set({ pose: 'flat' })],
+    overlays: [
+      note('it → ball', 82, 15, { tone: 'word', rotate: -3 }),
+      note('it → dog', 82, 67, { tone: 'word', rotate: 3 }),
+      centred('identical', 56, 41, { size: 'md', tone: 'cost', rotate: -2 }),
     ],
   },
   {
-    n: 15,
-    id: 'same-word-same-row',
-    title: 'Pulled a third time; all three sit identical',
+    n: 13,
+    id: 'has-to-fit-this-sentence',
+    title: 'The examples recede and our own prompt returns above its unchanged row',
     relation: 'wall',
-    secs: 13,
-    vo: 'So the same token starts with the same embedding every time. "Dog" here, "dog" somewhere else — same starting row. How can its meaning ever change?',
-    commands: [again2.show({ x: 60, y: 70 }, 0.62)],
+    secs: 12,
+    vo: 'So this row can’t be the whole meaning. Something still has to make our `it` understand the sentence it is inside. And that is what happens next.',
+    /* Lands on §4 beat 1's opening frame exactly: prompt at 50/40, the same
+     * row beneath it at 50/66. §4 continues this frame instead of building one. */
+    commands: [
+      sentA.off(),
+      sentB.off(),
+      rowB.off(),
+      table.off(),
+      hero.show({ x: 50, y: 40 }, 0.95),
+      hero.follow(FOLLOWED),
+      rowA.moveTo({ x: 50, y: 66 }, 0.95),
+      narrator.off(),
+    ],
+    clearSticky: true,
     lateOverlays: {
-      at: 3000,
-      overlays: [note('same starting row.\nevery time.', 82, 34, { size: 'md', tone: 'cost', rotate: -3 })],
+      at: 6200,
+      overlays: [centred('what makes this `it` fit this sentence?', 50, 84, { size: 'md', rotate: -2 })],
     },
   },
 ]

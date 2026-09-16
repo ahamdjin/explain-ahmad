@@ -45,8 +45,16 @@ export const DOG_SEED = 5562
 export type SceneState = {
   /** The row as attention left it. This is what arrives at the desk. */
   row: Placed & { pulse: boolean; label: string }
-  /** The second sentence's row, off to the side. Beat 12. */
+  /** The second sentence's row, off to the side. Unused by the current cut. */
   row2: Placed & { label: string }
+  /**
+   * `432` again, as the card §2 and §3 carried.
+   *
+   * Beat 4 asks which of two things the router could possibly decide from, and
+   * a question with one visible option is not a question -- the rejected answer
+   * has to be on screen beside the one that wins.
+   */
+  chip: Placed & { label: string; id: string; faint: boolean }
   desk: Placed & { named: boolean; ringed: boolean }
   hospital: Placed & {
     staffed: boolean
@@ -55,8 +63,18 @@ export type SceneState = {
     focus: boolean
     scoring: boolean
     badges: 'none' | 'empty' | 'scored'
-    /** Beat 9's count of the ones that did nothing, drawn by the building. */
+    /** Beat 8's count of the ones that did nothing, drawn by the building. */
     idle: string
+    /**
+     * The count, painted on the building's own sign band.
+     *
+     * Beat 2 wants the number attached to the object. A page overlay floats it
+     * as a title, which reads as the video's claim rather than the building's
+     * property.
+     */
+    sign: string
+    /** Beat 14. The selected doors stand open toward the row. Nothing exits. */
+    doors: boolean
   }
   /**
    * `dog` / `French` / `maths`, trying to land on the eight and sliding off.
@@ -69,7 +87,7 @@ export type SceneState = {
   /** One expert, lifted out and opened. A row in, a different row out. */
   open: Placed
   /** The one that runs every time, whatever the word is. Dashed, neutral. */
-  shared: Placed
+  shared: Placed & { lit: boolean }
   count: { on: boolean; at: At; scale: number; value: number; label: string }
   narrator: NarratorActor
   ground: GroundActor
@@ -79,6 +97,7 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   row: { on: false, at: { x: 30, y: 40 }, scale: 0.5, pulse: false, label: 'the row, as attention left it' },
   row2: { on: false, at: { x: 15, y: 66 }, scale: 0.34, label: '“a hot dog”' },
+  chip: { on: false, at: { x: 16, y: 62 }, scale: 0.42, label: 'it', id: '432', faint: true },
   desk: { on: false, at: { x: 62, y: 62 }, scale: 0.8, named: false, ringed: false },
   hospital: {
     on: false,
@@ -91,11 +110,13 @@ export const INITIAL: SceneState = {
     scoring: false,
     badges: 'none',
     idle: '',
+    sign: '',
+    doors: false,
   },
   plates: { on: false, at: { x: 51, y: 44 }, scale: 1.5, landing: false, falling: false },
   arcs: { on: false, at: { x: 15, y: 54 }, scale: 0.6 },
   open: { on: false, at: { x: 50, y: 48 }, scale: 1 },
-  shared: { on: false, at: { x: 84, y: 34 }, scale: 1 },
+  shared: { on: false, at: { x: 84, y: 34 }, scale: 1, lit: false },
   count: { on: false, at: { x: 16, y: 46 }, scale: 1, value: 8, label: 'of 288' },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
@@ -111,6 +132,7 @@ const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
 export const row = { ...a('row'), pulse: (): Patch => ({ row: { pulse: true } }) }
 export const row2 = a('row2')
+export const chip = a('chip')
 export const arcs = a('arcs')
 export const open = a('open')
 
@@ -126,7 +148,7 @@ export const plates = {
   land: (): Patch => ({ plates: { on: true, landing: true, falling: false } }),
   slideOff: (): Patch => ({ plates: { landing: false, falling: true } }),
 }
-export const shared = a('shared')
+export const shared = { ...a('shared'), light: (): Patch => ({ shared: { lit: true } }) }
 export const count = a('count')
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
@@ -159,6 +181,10 @@ export const hospital = {
    * camera two beats earlier and a stage percentage cannot follow that.
    */
   idle: (label: string): Patch => ({ hospital: { idle: label } }),
+  /** The building states its own count. See `sign` above. */
+  label: (sign: string): Patch => ({ hospital: { sign } }),
+  /** Beat 14. Open, and pointed at the row -- but nothing has come out yet. */
+  openDoors: (): Patch => ({ hospital: { doors: true } }),
   plain: (): Patch => ({ hospital: { badges: 'none', focus: false, lit: [], idle: '' } }),
 }
 

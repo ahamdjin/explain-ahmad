@@ -24,6 +24,7 @@ export function NumberRow({
   total = 4096,
   extend = false,
   label,
+  measure,
   tone = 'ink',
   basis,
   drift = 1,
@@ -38,6 +39,17 @@ export function NumberRow({
   /** Runs the row off the right of the frame, so 4096 has a physical size. */
   extend?: boolean
   label?: string
+  /**
+   * The row's own count, drawn as a span beneath it.
+   *
+   * `skills/SPATIAL_CONTINUITY.md`: *a measure of a thing is drawn by whatever
+   * draws the thing*. As a page overlay this was placed by hand at a stage
+   * percentage, so it floated free of the row -- it read as measuring blank
+   * paper, and it did not move when the row did. Drawn here it spans the cells
+   * **and the tail**, because the claim is about the whole row including the
+   * part that runs off the edge.
+   */
+  measure?: string
   tone?: 'ink' | 'measure' | 'relate' | 'word'
   /**
    * §3 beats 8-9. A row this one is being compared against.
@@ -104,10 +116,21 @@ export function NumberRow({
           ? PALETTE.tealInk
           : INK
   void total
+  /* Through the last ghost cell: the tail is part of what is being counted. */
+  const span = width + 184
+  /* The measure's own caption sits at 158 in a 46px face, so a label at 186
+   * printed straight through it. Cleared by a full line. */
+  const labelY = measure ? 214 : 132
 
   return (
     <div className="s1-numrow" data-extend={extend ? 'true' : undefined} data-dim={dim ? 'true' : undefined}>
-      <svg viewBox={`0 0 ${width + 320} 150`} aria-hidden="true">
+      {/*
+        The box is 136 units wider than the ink (cells plus tail), so a row
+        placed at 50% sat ~5% left of centre and would not line up under the
+        sentence it belonged to. Starting the viewBox at -68 centres the ink in
+        its own box, which is what every `at` in every beat assumes.
+      */}
+      <svg viewBox={`-68 0 ${width + 320} ${measure ? 232 : 150}`} aria-hidden="true">
         {/*
           The band: one shape behind the whole row, not a verdict per cell.
           `dog`/`cat` light strongly, `Tuesday` barely at all -- and the read
@@ -207,8 +230,32 @@ export function NumberRow({
           ))}
         </g>
 
+        {measure ? (
+          <motion.g
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            fill="none"
+            stroke={PALETTE.blueInk}
+            strokeWidth="2.6"
+            strokeLinecap="round"
+          >
+            <path d={`M2 112v18M2 121H${span}M${span} 112v18`} />
+            <text
+              x={span / 2}
+              y={158}
+              textAnchor="middle"
+              className="s1-numrow-label"
+              fill={PALETTE.blueInk}
+              stroke="none"
+            >
+              {measure}
+            </text>
+          </motion.g>
+        ) : null}
+
         {label ? (
-          <text x={width / 2} y={132} textAnchor="middle" className="s1-numrow-label" fill={stroke}>
+          <text x={width / 2} y={labelY} textAnchor="middle" className="s1-numrow-label" fill={stroke}>
             {label}
           </text>
         ) : null}

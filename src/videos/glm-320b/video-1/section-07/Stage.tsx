@@ -1,4 +1,4 @@
-import { Camera, Ground, NumberRow, Room, Slot, Tower } from '../../../../paper'
+import { Camera, ChosenTeam, Ground, NumberRow, Room, Slot, Tower } from '../../../../paper'
 import { Counter } from '../../../../paper/cast/Memory'
 import { Narrator } from '../../../../paper/cast/Narrator'
 import { type Feel } from '../../../../paper/motion'
@@ -39,8 +39,23 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           <NumberRow seed={1301} shown={8} tone="measure" label={scene.rowB.label} />
         </Slot>
 
+        {/* Floor one's eight and floor two's eight, in the frame together.
+            The overlap between the two sets is the only evidence that a fresh
+            decision does not mean a forced new team. */}
+        <Slot on={scene.teamA.on} at={scene.teamA.at} scale={scene.teamA.scale} z={4} feel={feel}>
+          <ChosenTeam lit={scene.teamA.lit} boxed={scene.teamA.boxed} />
+        </Slot>
+        <Slot on={scene.teamB.on} at={scene.teamB.at} scale={scene.teamB.scale} z={4} feel={feel}>
+          <ChosenTeam lit={scene.teamB.lit} boxed={scene.teamB.boxed} />
+        </Slot>
+
+        {/* 42 on one side, 336 on the other. Beat 11 is a correction, and a
+            correction needs both figures visible at once. */}
         <Slot on={scene.count.on} at={scene.count.at} scale={scene.count.scale} z={5} feel={feel}>
           <Counter value={scene.count.value} label={scene.count.label} run={scene.count.run} seconds={2.2} />
+        </Slot>
+        <Slot on={scene.visits.on} at={scene.visits.at} scale={scene.visits.scale} z={5} feel={feel}>
+          <Counter value={scene.visits.value} label={scene.visits.label} run={scene.visits.run} seconds={2.6} />
         </Slot>
       </Camera>
 

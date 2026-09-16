@@ -3,7 +3,7 @@ import { ExpertOpen } from '../../../../paper/cast/Blend'
 import { Hospital } from '../../../../paper/cast/Hospital'
 import { Counter } from '../../../../paper/cast/Memory'
 import { Narrator } from '../../../../paper/cast/Narrator'
-import { FrontDesk } from '../../../../paper/cast/Props'
+import { FrontDesk, WordCard } from '../../../../paper/cast/Props'
 import { Specialist } from '../../../../paper/cast/Specialist'
 import { type Feel } from '../../../../paper/motion'
 import { DOG_SEED, type SceneState } from './scene'
@@ -16,7 +16,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       <Camera at={scene.camera} feel={feel}>
         <Slot on={scene.hospital.on} at={scene.hospital.at} scale={scene.hospital.scale} z={1} feel={feel}>
           <Hospital
-            sign=""
+            sign={scene.hospital.sign}
             plaque=""
             staffed={scene.hospital.staffed}
             lit={scene.hospital.lit}
@@ -25,7 +25,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             quiet={false}
             heavy={false}
             bunks={false}
-            doorsOpen={false}
+            doorsOpen={scene.hospital.doors}
             scoring={scene.hospital.scoring}
             badges={scene.hospital.badges}
             idle={scene.hospital.idle}
@@ -61,12 +61,20 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         {/* Dashed and neutral: it is not one of the eight, and it must never
             read as a member of the family. */}
         <Slot on={scene.shared.on} at={scene.shared.at} scale={scene.shared.scale} z={5} feel={feel}>
-          <Specialist dimmed size={78} />
+          <Specialist dimmed={!scene.shared.lit} lit={scene.shared.lit} size={78} />
         </Slot>
 
         <Slot on={scene.row.on} at={scene.row.at} scale={scene.row.scale} z={5} feel={feel}>
           <div style={{ filter: scene.row.pulse ? 'drop-shadow(0 0 12px rgba(94,131,184,.55))' : 'none' }}>
             <NumberRow seed={311} shown={8} basis={DOG_SEED} drift={0.72} tone="measure" label={scene.row.label} />
+          </div>
+        </Slot>
+
+        {/* Faint by default: beat 4 needs it present enough to be the rejected
+            answer and never bright enough to compete with the live row. */}
+        <Slot on={scene.chip.on} at={scene.chip.at} scale={scene.chip.scale} z={4} feel={feel}>
+          <div style={{ opacity: scene.chip.faint ? 0.34 : 1, transition: 'opacity .7s' }}>
+            <WordCard label={scene.chip.label} id={scene.chip.id} becomes />
           </div>
         </Slot>
 

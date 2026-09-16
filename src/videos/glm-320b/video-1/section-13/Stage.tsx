@@ -13,18 +13,22 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       <Camera at={scene.camera} feel={feel}>
         {/* §1's block, returning whole. Same component, same grain. */}
         <Slot on={scene.block.on} at={scene.block.at} scale={scene.block.scale} z={1} feel={feel}>
-          <Block heavy={scene.block.heavy} grain={scene.block.grain} lit={scene.block.lit} />
+          <Block heavy={scene.block.heavy} grain={scene.block.grain} lit={scene.block.lit} litTone="active" />
         </Slot>
 
         {/*
-          Beats 14-15: §1's opening frame, redrawn from the *same objects* --
-          two plain `Block` sheets and two rows of graphics cards, at §1's own
+          Beat 13: §1's opening frame, redrawn from the *same objects* --
+          two plain `Block` sheets and two rows of accelerators, at §1's own
           coordinates. Not the `ModelCard`s below, which are evidence in the
           middle of the section and were never what §1 opened on.
+
+          `litTone="active"` on both, because §1's Stage passes it: the active
+          region is orange there, and a teal one here would be a different
+          picture wearing the same layout.
           See `scene.ts` on `block2` for why the distinction matters.
         */}
         <Slot on={scene.block2.on} at={scene.block2.at} scale={scene.block2.scale} z={1} feel={feel}>
-          <Block lit={scene.block2.lit} grain={scene.block2.grain} />
+          <Block lit={scene.block2.lit} grain={scene.block2.grain} litTone="active" />
         </Slot>
         <Slot on={scene.rigA.on} at={scene.rigA.at} scale={scene.rigA.scale} z={2} feel={feel}>
           <Rig count={scene.rigA.count} />
@@ -68,9 +72,10 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </Slot>
 
         {/*
-          Beats 9-10. All three named, then the two that are only size dimmed.
-          Granularity is last so the lit one is the one the video goes on to
-          talk about. See `Differences` for why this must be a picture.
+          Beat 9. All three named, then granularity dimmed: the footprint gap
+          is total parameters and shipped precision, and leaving grain lit
+          beside ~58 GiB and ~306 GiB would blame the wrong one.
+          See `Differences` for why this must be a picture.
         */}
         <Slot on={scene.diffs.on} at={scene.diffs.at} scale={scene.diffs.scale} z={6} feel={feel}>
           <Differences

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ExpertCache, Ground, RunningMachine, Slot, Tower, TradeSlider } from '../../../../paper'
+import { BigNumber, ExpertCache, Ground, RunningMachine, Slot, Tower, TradeSlider } from '../../../../paper'
 import { Hospital } from '../../../../paper/cast/Hospital'
 import { Counter, FetchPath, Store } from '../../../../paper/cast/Memory'
 import { Narrator } from '../../../../paper/cast/Narrator'
@@ -81,6 +81,12 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Slot on={scene.count.on} at={scene.count.at} scale={scene.count.scale} z={5} feel={feel}>
         <Counter value={scene.count.value} label={scene.count.label} run={scene.count.run} seconds={1.8} />
+      </Slot>
+
+      {/* The last beat only. Same object §1 opened on, so §13 inherits a frame
+          rather than a title card. */}
+      <Slot on={scene.card.on} at={scene.card.at} scale={scene.card.scale} z={6} feel={feel}>
+        <BigNumber value={scene.card.value} caption={scene.card.caption} />
       </Slot>
 
       <Slot on={scene.slider.on} at={scene.slider.at} scale={scene.slider.scale} z={6} feel={feel}>

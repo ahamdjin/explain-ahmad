@@ -59,6 +59,9 @@ stills, the section does not work, and no motion pass will rescue it.
 
 ### Composition
 
+Laid out in full in `skills/FRAME_COMPOSITION.md` -- the five questions to ask
+of each rendered frame, and the placement rules. In short:
+
 - One subject per frame. Everything else is context, and should look like it.
 - Scale contrast is the strongest tool available — a tiny figure against a huge
   object teaches magnitude with no label.
@@ -71,13 +74,19 @@ stills, the section does not work, and no motion pass will rescue it.
 
 | Stage | Catches |
 | --- | --- |
-| stills of every beat, on one contact sheet | composition, collisions, off-frame content, missing labels |
+| stills of every beat, on one contact sheet (`npm run frames:sNN` then `npm run sheet -- --section=section-NN`) | composition, collisions, off-frame content, missing labels |
 | a strip sampling one transition every ~90 ms | wash-outs and mid-transition states invisible in the end states |
 | the whole section recorded at real beat timing | pacing, and only pacing |
 
 Look at the output. Reading the source does not substitute — collisions,
 clipped text and dropped elements are routinely invisible in code and obvious
 in a screenshot.
+
+This is the step that gets skipped under time pressure, and skipping it once
+cost eleven sections: they passed `tsc`, `check:board`, `check:vo`,
+`check:chain`, `check:strategy`, `check:flow`, `drift` and `timing`, and the
+frames had counts floating in blank paper and braces measuring nothing. The
+gates cannot see composition. Only the contact sheet can.
 
 ## 3. Animation — last, and only where it earns
 

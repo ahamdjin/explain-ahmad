@@ -30,7 +30,7 @@ export type SceneState = {
   /** One row in, eight different rows out, blended back into one. */
   blend: Placed & { stage: BlendStage; shared: boolean; ghost: boolean; label: string }
   /** The survivor, alone. Beat 10. */
-  row: Placed & { label: string }
+  row: Placed & { label: string; measure?: string }
   /** Edges, for the first time. This is what §7 pulls back from. */
   room: { on: boolean; bounded: boolean; more: boolean; scale: number }
   narrator: NarratorActor
@@ -54,7 +54,17 @@ export const applyPatches = (base: SceneState, patches: Patch[]) => mergePatches
 const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
 export const hospital = { ...a('hospital'), recede: (): Patch => ({ hospital: { recede: true } }) }
-export const row = a('row')
+export const row = {
+  ...a('row'),
+  /**
+   * Beat 11. The row's own count, drawn by the row and spanning it.
+   *
+   * It was a page brace at a fixed stage percentage -- it floated clear of the
+   * row and did not follow when the row moved. `skills/SPATIAL_CONTINUITY.md`:
+   * *a measure of a thing is drawn by whatever draws the thing*.
+   */
+  count: (measure: string): Patch => ({ row: { measure } }),
+}
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
 

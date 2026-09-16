@@ -71,6 +71,15 @@ export function Tower({
    * `research/glm/GROUND_TRUTH.md`.
    */
   kept = 0,
+  /**
+   * The index of the only marker that climbs; the rest wait at floor 1.
+   *
+   * §8 beat 2 draws the picture the section then corrects -- one token going
+   * all the way to the top before the next one starts. It has to be *shown*
+   * wrong, because it is the mental model most viewers already hold, and a
+   * correction to a picture nobody saw corrects nothing.
+   */
+  alone,
   /** The three-flash sequence on the current floor: look · pick · work. */
   flash,
   /** Light the current floor's eight, and the floor below's, differently. */
@@ -91,6 +100,7 @@ export function Tower({
   floor?: number
   markers?: number
   kept?: number
+  alone?: number
   flash?: TowerFlash
   teams?: boolean
   wiring?: boolean
@@ -260,11 +270,20 @@ export function Tower({
            * pass is cheaper than the first one. That *is* the argument.
            */
           const isKept = i < kept
+          /* Waiting at the base, not gone: the beat is about the seven that
+           * are being made to stand still. */
+          const isWaiting = alone !== undefined && i !== alone
           return (
           <motion.g
             key={i}
             initial={false}
-            animate={{ y: isKept ? floorY(FLOORS) + FLOOR_H / 2 : floorY(Math.max(1, floor)) + FLOOR_H / 2 }}
+            animate={{
+              y: isKept
+                ? floorY(FLOORS) + FLOOR_H / 2
+                : isWaiting
+                  ? floorY(1) + FLOOR_H / 2
+                  : floorY(Math.max(1, floor)) + FLOOR_H / 2,
+            }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: isKept ? 0 : i * 0.015 }}
             opacity={isKept ? 0.34 : 1}
           >

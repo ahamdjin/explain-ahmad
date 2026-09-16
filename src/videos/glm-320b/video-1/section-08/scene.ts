@@ -23,6 +23,7 @@ import {
   type NarratorActor,
   type PatchOf,
   type Placed,
+  type TowerFlash,
 } from '../../../../paper'
 
 /** One 336 per prompt token. Derived, so the tokenizer stays the authority. */
@@ -35,17 +36,47 @@ export type SceneState = {
     wiring: boolean
     plaque: string
     counters: string
+    /** Beat 2's wrong picture: one marker climbing, the rest held at the base. */
+    alone: number
+    /** A router firing under the markers on the current floor. */
+    flash?: TowerFlash
   }
-  /** The prompt at the base, so every marker has a visible cause. */
-  line: Placed
+  /**
+   * The prompt at the base, so every marker has a visible cause — and, in act
+   * 2, the same object lifted up to become the eight rows on one floor.
+   *
+   * One object rather than two, for the reason §2 gives: a viewer who sees the
+   * prompt replaced by "eight rows" learns that rows are a new set of things.
+   * They are the same eight pieces, one floor up.
+   */
+  line: Placed & {
+    /** The tracked position. `FOLLOWED`, always, or -1 for none. */
+    focus: number
+    /** A short row of values under each piece. */
+    rows: boolean
+    /** Backward links only — the causal triangle. */
+    causal: boolean
+    /** Every row has just been rewritten by the floor below. */
+    changed: boolean
+  }
   count: { on: boolean; at: At; scale: number; value: number; label: string; run: boolean; blank: boolean }
   narrator: NarratorActor
   ground: GroundActor
 }
 
 export const INITIAL: SceneState = {
-  tower: { on: false, at: { x: 50, y: 48 }, scale: 1, floor: 0, markers: 0, wiring: false, plaque: '', counters: '' },
-  line: { on: false, at: { x: 50, y: 92 }, scale: 0.4 },
+  tower: {
+    on: false,
+    at: { x: 50, y: 48 },
+    scale: 1,
+    floor: 0,
+    markers: 0,
+    wiring: false,
+    plaque: '',
+    counters: '',
+    alone: -1,
+  },
+  line: { on: false, at: { x: 50, y: 92 }, scale: 0.36, focus: -1, rows: false, causal: false, changed: false },
   count: { on: false, at: { x: 74, y: 54 }, scale: 1, value: TOTAL, label: '', run: false, blank: false },
   narrator: { ...INITIAL_NARRATOR },
   ground: { ...INITIAL_GROUND },
@@ -58,7 +89,11 @@ export const applyPatches = (base: SceneState, patches: Patch[]) => mergePatches
 
 const a = <K extends keyof SceneState>(key: K) => actorVerbs<SceneState, K>(key)
 
-export const line = a('line')
+export const line = {
+  ...a('line'),
+  /** The links a position is allowed to draw: backward, never forward. */
+  causal: (causal: boolean): Patch => ({ line: { causal } }),
+}
 export const narrator = a('narrator')
 export const ground = { at: (y: number): Patch => ({ ground: { on: true, y } }) }
 
@@ -79,6 +114,13 @@ export const tower = {
   name: (plaque: string): Patch => ({ tower: { plaque } }),
   /** 336 above every marker, once per prompt token. */
   each: (counters: string): Patch => ({ tower: { counters } }),
+  /**
+   * Beat 2 only. One climber, seven waiting — the picture the rest of the
+   * section takes apart. `-1` puts everybody back on the same floor.
+   */
+  alone: (index: number): Patch => ({ tower: { alone: index } }),
+  /** Eight routers firing on one floor, slightly out of phase. */
+  flash: (flash?: TowerFlash): Patch => ({ tower: { flash } }),
 }
 
 export const count = {

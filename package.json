@@ -42,6 +42,7 @@
     "check:flow": "node scripts/check-flow.mjs",
     "check:frames": "node scripts/check-flow.mjs",
     "check:overlap": "node scripts/check-overlap.mjs",
+    "sheet": "node scripts/contact-sheet.mjs",
     "render": "node scripts/render.mjs",
     "render:join": "node scripts/render.mjs --join",
     "render:final": "node scripts/render.mjs --join --require-mix",

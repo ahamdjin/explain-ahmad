@@ -1,174 +1,224 @@
-import { centred, GROUND_Y, note, TOKENS, type Beat } from '../../../../paper'
+import { brace, centred, FOLLOWED, GROUND_Y, note, TOKENS, type Beat } from '../../../../paper'
 import { TOTAL, count, ground, line, narrator, tower, type Patch } from './scene'
 
 /**
  * Section 08 — That was one token. Here is the whole prompt.
  *
- * We followed one token to make the mechanism visible. Now we zoom back out
- * and pay that simplification off explicitly: prompt tokens are processed
- * together during prefill, layer by layer, with causal attention connecting
- * positions.
+ * Script and board: `video-script/video-1/08-that-was-one-token.md`.
+ * The VO below is that script split across visual beats. Do not paraphrase it
+ * to fit components; change the components or the beat count instead.
+ *
+ * §7 ends with the tower up and eight markers gathered at its base. Beat 1
+ * resolves those markers into the real prompt rather than cutting to a new
+ * object.
+ *
+ * **No camera moves.** The section is about how many things happen at once,
+ * and that only reads from a distance.
+ *
+ * The arithmetic is 8 × 336 = 2,688, and it is a function of §2's split — the
+ * pieces are on screen and countable while the total lands beside them.
  */
+
+/** Where the prompt sits when it is the base of the tower. */
+const BASE = { x: 50, y: 87 }
+/** And where it sits when it *is* the floor we are looking at. */
+const FLOOR = { x: 66, y: 54 }
+
 export const BEATS: Beat<Patch>[] = [
   {
     n: 1,
-    id: 'i-owe-you-a-correction',
-    title: 'The single marker holds partway up',
+    id: 'never-alone',
+    title: 'The base markers resolve into the eight real prompt tokens',
     relation: 'want',
-    secs: 10,
-    vo: 'So far we followed one token because it made the mechanism easier to see. But your prompt has eight tokens.',
+    secs: 17,
+    vo: 'We followed `it` because following eight things at once would be a terrible explanation. But `it` was never alone. Our prompt became eight tokens: The | dog | dropped | the | ball | , | and | it',
     commands: [
       ground.at(GROUND_Y),
-      tower.show({ x: 50, y: 48 }, 1, { markers: 1, floor: 22 }),
+      tower.show({ x: 50, y: 41 }, 0.86, { markers: TOKENS, floor: 1 }),
+      line.show(BASE, 0.44, { focus: FOLLOWED }),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'confide', flip: true }),
     ],
+    lateOverlays: {
+      /* The id, which the voice never says here, is what marks *which* of the
+       * eight we have been carrying since §2. */
+      at: 9000,
+      overlays: [note('tracked: `it` = 432', 8, 80, { tone: 'word', rotate: -3 })],
+    },
   },
   {
     n: 2,
-    id: 'the-whole-prompt-goes-in',
-    title: 'Eight more markers appear at the base beside it',
-    relation: 'so',
-    secs: 8,
-    vo: 'During the initial prompt pass, all eight enter the stack together.',
-    commands: [tower.everyone(), line.show({ x: 50, y: 93 }, 0.36)],
-    lateOverlays: {
-      at: 2400,
-      overlays: [note(`${TOKENS} tokens`, 20, 88, { tone: 'measure', rotate: -3, sticky: true })],
-    },
+    id: 'one-at-a-time',
+    title: 'One token climbs alone while the others wait, with a `?` on it',
+    relation: 'and-yet',
+    secs: 10,
+    vo: 'Not one token all the way to the top... then the next one... then the next one.',
+    /* Drawn wrong on purpose. This is the picture most viewers already have,
+     * and beat 3 cannot correct something that was never shown. */
+    commands: [tower.alone(FOLLOWED), narrator.set({ pose: 'wonder' })],
+    stages: [
+      { at: 1200, commands: [tower.climbTo(16)] },
+      { at: 3600, commands: [tower.climbTo(33)] },
+      { at: 6000, commands: [tower.climbTo(45)] },
+    ],
+    overlays: [centred('?', 50, 10, { size: 'lg', tone: 'cost' })],
   },
   {
     n: 3,
-    id: 'all-at-the-same-time',
-    title: 'All eight climb together, side by side, floor by floor',
+    id: 'all-eight-together',
+    title: 'The marker snaps back down and all eight enter the first floor',
     relation: 'so',
-    secs: 8,
-    vo: 'They move through each layer in parallel.',
-    commands: [],
+    secs: 14,
+    vo: 'And during the first pass through the prompt, all eight positions are processed through the stack. Layer by layer, the model works on the prompt positions together.',
+    commands: [tower.alone(-1), tower.climbTo(1), narrator.set({ pose: 'nod' })],
     stages: [
-      { at: 500, commands: [tower.climbTo(7)] },
-      { at: 2200, commands: [tower.climbTo(15)] },
-      { at: 3800, commands: [tower.climbTo(22)] },
+      { at: 5000, commands: [tower.climbTo(2)] },
+      { at: 8000, commands: [tower.climbTo(3)] },
     ],
+    lateOverlays: {
+      at: 6000,
+      overlays: [note('8 on floor 1', 12, 30, { tone: 'measure', rotate: -2 })],
+    },
   },
   {
     n: 4,
-    id: 'attention-is-the-wiring',
-    title: 'Lines appear between the markers on the floor they share',
+    id: 'a-row-each',
+    title: 'Eight rows unfold side by side on one floor',
     relation: 'so',
-    secs: 14,
-    vo: 'Attention is the connection between those positions. Each token can use the earlier positions it is allowed to see while they move through the same layer.',
-    commands: [tower.wire()],
-    lateOverlays: {
-      at: 3400,
-      overlays: [note('attention connects\npositions', 18, 46, { tone: 'relate', rotate: -3 })],
-    },
+    secs: 5,
+    vo: 'Each token has its own row.',
+    /* The tower steps aside rather than off. Act 2 is about what happens on
+     * one floor, and the floor has to be legible — but losing the building
+     * would lose the reason these rows are only partway up it. */
+    commands: [
+      tower.moveTo({ x: 18, y: 44 }, 0.7),
+      line.moveTo(FLOOR, 0.46),
+      line.set({ rows: true }),
+    ],
+    overlays: [brace('8 rows', 54, 66, 24, { tone: 'measure' })],
   },
   {
     n: 5,
-    id: 'on-every-floor',
-    title: 'The lines redraw on each new floor as they climb',
+    id: 'only-backward',
+    title: 'Backward links draw from every position and none point forward',
     relation: 'so',
-    secs: 9,
-    vo: 'So the prompt is processed as a connected sequence, not eight isolated tokens.',
-    commands: [],
-    stages: [
-      { at: 900, commands: [tower.climbTo(28)] },
-      { at: 2600, commands: [tower.climbTo(34)] },
-    ],
+    secs: 18,
+    vo: 'Each row gets context from the positions it is allowed to see. Because this is generating text left to right, there is one important rule: a token can use the tokens before it, not future tokens that have not happened yet.',
+    commands: [line.causal(true), narrator.set({ pose: 'point' })],
   },
   {
     n: 6,
-    id: 'this-is-a-transformer',
-    title: 'A plate slides onto the front of the tower',
-    relation: 'therefore',
+    id: 'the-causal-triangle',
+    title: 'The links resolve into a triangle and three positions are read off it',
+    relation: 'so',
     secs: 14,
-    vo: 'This repeated stack — context mixing, then feed-forward work, layer after layer — is the transformer stack.',
-    commands: [tower.name('transformer stack'), narrator.set({ pose: 'point' })],
+    vo: 'So `The` has almost nothing behind it. `ball` has several earlier tokens available. And our `it`, sitting at the end of the prompt, can look back across all seven earlier positions.',
+    commands: [],
+    lateOverlays: {
+      /* The count per position, which the voice gives only for the two ends.
+       * The zero is the half that makes the triangle a triangle. */
+      at: 6000,
+      overlays: [note('`The`: 0 back\n`it`: 7 back', 8, 24, { size: 'md', tone: 'measure', rotate: -2 })],
+    },
   },
   {
     n: 7,
-    id: 'not-a-mysterious-thing',
-    title: 'The plate settles; the climb continues behind it',
+    id: 'and-upward-again',
+    title: 'The wiring clears and redraws from the newly changed rows, one floor up',
     relation: 'so',
-    secs: 9,
-    vo: 'The important part is not the name. It is the repetition: the same kind of representation moves upward and keeps getting updated.',
-    commands: [tower.climbTo(38)],
+    secs: 7,
+    vo: 'Then each position keeps moving upward through the layers.',
+    commands: [line.causal(false), line.set({ changed: true }), tower.climbTo(4)],
+    stages: [{ at: 2600, commands: [line.causal(true)] }],
+    overlays: [note('floor 4', 12, 62, { tone: 'relate', rotate: 3 })],
   },
   {
     n: 8,
-    id: 'its-own-three-thirty-six',
-    title: 'A small counter appears above every marker',
+    id: 'each-routes-for-itself',
+    title: 'Router flashes fire independently under each marker on the sparse floors',
     relation: 'so',
-    secs: 10,
-    vo: 'And each of our eight prompt tokens goes through its own routed work: three hundred and thirty-six expert visits per token.',
-    commands: [tower.each('336'), tower.name('')],
+    secs: 9,
+    vo: 'And on the 42 sparse layers, each token gets its own routing decision.',
+    /* Back to the whole building: eight routers firing at once is a fact about
+     * the stack, not about one floor we happen to be reading. */
+    commands: [
+      line.causal(false),
+      line.moveTo(BASE, 0.44),
+      line.set({ rows: false }),
+      tower.moveTo({ x: 50, y: 41 }, 0.86),
+      tower.flash('pick'),
+    ],
+    stages: [
+      { at: 2400, commands: [tower.climbTo(9)] },
+      { at: 5000, commands: [tower.climbTo(17)] },
+    ],
+    overlays: [note('8 routers · 1 floor', 10, 36, { tone: 'measure', rotate: -2 })],
   },
   {
     n: 9,
-    id: 'how-many-is-that',
-    title: 'The counters hold; a blank total waits beneath them; nothing moves',
-    relation: 'and-yet',
-    secs: 8,
-    vo: 'Eight tokens, times three hundred and thirty-six. What is the total?',
-    commands: [count.ask('expert visits — one prompt pass'), narrator.set({ pose: 'wonder' })],
-    lateOverlays: {
-      at: 2600,
-      overlays: [note('8 × 336 = ?', 74, 30, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
-    },
+    id: 'the-same-count-each',
+    title: '`336` above tracked `it` is copied above the other seven',
+    relation: 'so',
+    secs: 11,
+    vo: 'So the 336 routed expert visits we counted for `it`... happen for the other prompt tokens too.',
+    commands: [tower.flash(undefined), tower.each('336'), tower.climbTo(26)],
+    overlays: [note('336 × 8 positions', 74, 22, { tone: 'measure', rotate: 3, sticky: true })],
   },
   {
     n: 10,
-    id: 'two-thousand-six-eighty-eight',
-    title: 'All eight counters run at once and the total assembles beneath them',
-    relation: 'so',
-    secs: 7,
-    vo: 'Two thousand, six hundred and eighty-eight routed expert visits.',
-    commands: [count.run(TOTAL, 'expert visits — one prompt pass'), narrator.set({ pose: 'count' })],
-    clearSticky: true,
-  },
-  {
-    n: 11,
-    id: 'for-one-pass',
-    title: 'The total lands and holds',
-    relation: 'so',
-    secs: 6,
-    vo: 'That is once, to process this eight-token prompt.',
-    commands: [count.hold()],
-  },
-  {
-    n: 12,
-    id: 'decided-on-the-spot',
-    title: 'The total lands and holds',
+    id: 'how-many-is-that',
+    title: 'The arithmetic holds unfinished on screen',
     relation: 'and-yet',
-    secs: 11,
-    vo: 'And each routing decision is made from that layer’s current representation, not from a complete expert path planned at the start.',
-    commands: [count.hold(), narrator.set({ pose: 'think' })],
+    secs: 9,
+    vo: 'Eight tokens. 336 routed expert visits each. That gives us:',
+    /* The figure has to be visibly missing while the question is asked. A
+     * counter already reading 2,688 turns the question into narration. */
+    commands: [count.ask('routed expert visits — one prompt pass'), narrator.set({ pose: 'count' })],
     lateOverlays: {
-      at: 2800,
-      overlays: [note('route from the\ncurrent row', 18, 66, { size: 'md', tone: 'cost', rotate: -1 })],
+      at: 3000,
+      overlays: [note('8 × 336 = ?', 74, 68, { size: 'lg', tone: 'measure', rotate: -2, sticky: true })],
     },
   },
   {
-    n: 13,
-    id: 'every-token-pays-its-own',
-    title: 'The markers arrive at the top floor',
-    relation: 'and-yet',
-    secs: 6,
-    vo: 'Eventually all eight positions reach the top.',
-    commands: [tower.climbTo(45), tower.each('')],
+    n: 11,
+    id: 'two-thousand-six-eighty-eight',
+    title: 'The total assembles as the eight arrive at the top together',
+    relation: 'therefore',
+    secs: 11,
+    vo: '2,688 routed expert visits for this simplified count across the prompt’s first pass.',
+    commands: [count.run(TOTAL, 'routed expert visits — one prompt pass'), tower.climbTo(45)],
     clearSticky: true,
   },
   {
-    n: 14,
-    id: 'and-what-comes-out',
-    title: 'They stop dead, all eight together, and nothing happens next',
-    relation: 'and-yet',
-    secs: 10,
-    vo: 'So what does the model do with those final rows to produce the next token?',
-    commands: [narrator.set({ pose: 'wonder' })],
+    n: 12,
+    id: 'prefill-and-the-stack',
+    title: 'The completed pass is labelled and the tower is named secondarily',
+    relation: 'so',
+    secs: 16,
+    vo: 'That first processing of the prompt is usually called prefill. And this whole stacked architecture — representations moving through layers while positions exchange allowed context — is the transformer stack we have been travelling through.',
+    /* The name arrives last, and on the object, after eleven beats of the
+     * behaviour. A plaque on a shape the viewer already understands is a
+     * label; the same plaque in beat 1 would have been the lesson. */
+    commands: [count.hold(), tower.each(''), tower.name('transformer stack'), narrator.set({ pose: 'point' })],
+    overlays: [note('prefill:\n45 layers × 8 positions', 8, 26, { size: 'md', tone: 'relate', rotate: -2 })],
+  },
+  {
+    n: 13,
+    id: 'still-no-answer',
+    title: 'The eight finished rows fan out at the top; the last stays bright',
+    relation: 'wall',
+    secs: 15,
+    vo: 'But none of this has produced an answer yet. We have eight finished representations at the top. So how does the model turn those numbers into the next token?',
+    commands: [
+      tower.name(''),
+      tower.moveTo({ x: 24, y: 62 }, 0.56),
+      line.moveTo({ x: 52, y: 22 }, 0.5),
+      line.set({ rows: true, changed: true, focus: FOLLOWED }),
+      narrator.set({ pose: 'wonder' }),
+    ],
     lateOverlays: {
-      at: 2800,
-      overlays: [note('how does one next\ntoken come out?', 16, 24, { size: 'md', rotate: -2 })],
+      /* The sting the voice leaves implicit: 2,688 visits bought zero output. */
+      at: 6000,
+      overlays: [centred('tokens produced so far: 0', 62, 76, { size: 'md', tone: 'cost', rotate: -1 })],
     },
   },
 ]
