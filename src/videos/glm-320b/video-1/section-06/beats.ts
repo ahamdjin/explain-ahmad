@@ -82,7 +82,7 @@ export const BEATS: Beat<Patch>[] = [
     /* The answer is drawn by subtraction not happening. Deliberately empty. */
     commands: [narrator.set({ pose: 'flat' })],
     clearSticky: true,
-    overlays: [note('8 of 8 kept', 66, 82, { size: 'md', tone: 'word', rotate: -3 })],
+    overlays: [note('8 of 8 kept', 64, 62, { size: 'md', tone: 'word', rotate: -3 })],
   },
   {
     n: 6,

@@ -173,7 +173,9 @@ export const BEATS: Beat<Patch>[] = [
       count.show({ x: 14, y: 26 }, 1, { value: 8, label: 'selected of 288' }),
       narrator.set({ pose: 'count' }),
     ],
-    overlays: [brace('+1 shared, never scored', 76, 38, 22, { tone: 'relate', sticky: true })],
+    /* A note, not a brace: the wall fills this half of the frame, so a brace's
+     * rule ran across the crowd and swallowed half its own label. */
+    overlays: [note('+1 shared, never scored', 76, 44, { tone: 'relate', rotate: 3, sticky: true })],
   },
   {
     n: 11,
@@ -240,7 +242,7 @@ export const BEATS: Beat<Patch>[] = [
     clearSticky: true,
     lateOverlays: {
       at: 9000,
-      overlays: [centred('active — for this token, this layer', 50, 84, { size: 'md', rotate: -2 })],
+      overlays: [centred('active — for this token, this layer', 24, 88, { size: 'md', rotate: -2 })],
     },
   },
 ]

@@ -94,7 +94,7 @@ export const BEATS: Beat<Patch>[] = [
       line.moveTo(FLOOR, 0.46),
       line.set({ rows: true }),
     ],
-    overlays: [brace('8 rows', 54, 66, 24, { tone: 'measure' })],
+    overlays: [brace('8 rows', 54, 61, 24, { tone: 'measure' })],
   },
   {
     n: 5,

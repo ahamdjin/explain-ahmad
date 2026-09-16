@@ -76,7 +76,7 @@ export const BEATS: Beat<Patch>[] = [
     secs: 7,
     vo: 'It chooses again. Because look at what we’re carrying upward. The row has changed.',
     commands: [rowB.show(FLOOR_2, 0.66), narrator.set({ pose: 'point' })],
-    overlays: [brace('different values', 48, 20, 24, { tone: 'measure' })],
+    overlays: [brace('different values', 50, 23, 24, { tone: 'measure' })],
   },
   {
     n: 4,

@@ -26,7 +26,7 @@ export const BEATS: Beat<Patch>[] = [
     commands: [
       ground.at(GROUND_Y),
       tower.show(TOWER_ASIDE, 0.46),
-      rows.show({ x: 48, y: 26 }, 0.78),
+      rows.show({ x: 34, y: 24 }, 0.7),
       narrator.show({ x: 91, y: 70 }, 1, { pose: 'point' }),
     ],
   },
@@ -66,10 +66,10 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'so',
     secs: 13,
     vo: 'All 154,880 possible token entries get a score. You can think of each score as: how plausible would this token be next, given everything we have processed so far?',
-    commands: [vocab.show({ x: 78, y: 46 }, 1.15), vocab.score()],
+    commands: [vocab.show({ x: 74, y: 46 }, 1.05), vocab.score()],
     lateOverlays: {
       at: 4200,
-      overlays: [note('154,880 scores', 62, 14, { tone: 'measure', rotate: 3, sticky: true })],
+      overlays: [note('154,880 scores', 60, 12, { tone: 'measure', rotate: 3, sticky: true })],
     },
   },
   {
@@ -100,7 +100,7 @@ export const BEATS: Beat<Patch>[] = [
     relation: 'therefore',
     secs: 8,
     vo: 'The important part is: one next token gets selected. Suppose the model chooses something corresponding to: “bounced”',
-    commands: [vocab.pick(), out.show({ x: 78, y: 70 }, 0.7), narrator.set({ pose: 'point' })],
+    commands: [vocab.pick(), out.show({ x: 74, y: 72 }, 0.7), narrator.set({ pose: 'point' })],
     clearSticky: true,
   },
   {

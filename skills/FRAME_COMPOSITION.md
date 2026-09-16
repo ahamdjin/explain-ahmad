@@ -52,6 +52,40 @@ the code:
 - **Anything placed in a beat that moves the camera is placed in the frame the
   camera ends on.**
 
+## Knowing how wide a thing actually is
+
+A placement is `at` plus `scale`, and `scale` multiplies a width set in
+`paper.css`, not the frame. Guessing that width is how §9's prompt kept landing
+on top of the vocabulary list: `Sentence` is **74cqw**, not the ~54 that was
+assumed, so at scale 0.78 it ran to 69% of the frame.
+
+Natural widths, as a fraction of frame width at `scale: 1`:
+
+| actor | width | actor | width |
+| --- | --- | --- | --- |
+| `Sentence` | 74 | `Attention` | 76 |
+| `ExpertBlend` | 72 | `Room` | 64 |
+| `NumberRow` | 56 (**118** extended) | `Hospital` | 62 |
+| `Bars` | 62 | `ExpertOpen` | 50 |
+| `Chat` | 40 | `Run` | 34 |
+| `Fetch` | 32 | `Store` / `Tower` / `Loop2` | 30 |
+| `Cache` / `FastMem` | 20 | `ModelCard` | 19 |
+| `Clock` | 12 | `EmbeddingTable` | 26 |
+
+Two traps in that table:
+
+- **`NumberRow` draws narrower than its box.** The tail and the measure live in
+  the remainder, so the *cells* occupy about 76% of `56cqw × scale`. A row that
+  carries a beat wants a scale near 1, not the 0.6 that looks right in source.
+- **`EmbeddingTable` is 1:2.35 and is meant to run past the top and bottom of
+  the frame** -- `paper.css` says so. At a scale that fits inside the frame it
+  reads as a modest box on a shelf. Its own caption then sits off-frame, so the
+  count has to be placed against its edge instead.
+
+Height is width × the component's viewBox aspect, and the frame is 16:9 -- so a
+thing 40% of the frame *wide* is 40 × (16/9) = 71% of the frame *tall* per unit
+of aspect. Vertical crowding is easy to under-estimate from the source.
+
 ## The loop
 
 There is no substitute for this and it is the step that was skipped:
