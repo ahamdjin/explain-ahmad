@@ -1,12 +1,20 @@
 # Art direction
 
-Canonical visual language for the film.
+Art direction is **film-specific**.
 
-- `GLM_PAPER_WORLD.md` — overall handmade paper-world style and composition language.
-- `CAST.md` — recurring visual actors and what each represents.
-- `PROPS.md` — prop vocabulary and reuse rules.
-- `PALETTE.md` — semantic color system.
+## Video 1
 
-Core rule: visuals should feel like one persistent physical paper world, not a sequence of unrelated dashboard cards. Reuse actors and geography; change emphasis/state rather than replacing the world.
+- `GLM_PAPER_WORLD.md`
+- `CAST.md`
+- `PROPS.md`
+- `PALETTE.md`
 
-Story comes first. Do not change metaphor or art direction to conceal a structural story problem; fix the story before rebuilding visuals.
+These files define the paper-world identity used by The 18 Billion Mystery.
+
+## Video 2
+
+- `VIDEO_2_INCIDENT_REPLAY.md`
+
+Video 2 is an ordinary-computer / forensic incident reconstruction. It should not inherit Video 1's visible metaphor, palette semantics, cast or composition language.
+
+Shared principles such as clarity, continuity and one-frame-one-job come from `skills/`, not from copying another film's art direction.

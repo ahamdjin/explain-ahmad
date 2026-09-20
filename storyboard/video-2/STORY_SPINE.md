@@ -1,86 +1,109 @@
-# Story spine — video 2
+# Story spine — Video 2
 
-Read `skills/STORY_STRUCTURE.md` first. This file exists to pass its gate
-before any section is written.
+Internal title: **Nobody Told It To Do This**  
+YouTube title: **An AI Tried to Copy Itself — Then Denied It**
 
-Numbers and mechanism: `research/apollo/GROUND_TRUTH.md`.
+Canonical narration: `video-script/video-2/SCRIPT.md`  
+Storyboard: `storyboard/video-2/STORYBOARD.md`  
+Facts: `research/apollo/GROUND_TRUTH.md`  
+Visual system: `art-direction/VIDEO_2_INCIDENT_REPLAY.md`
+
+Status: **DRAFT. Nothing is narration-locked yet.**
 
 ---
 
-## 1. The spine
+## 1. Spine
 
 | | |
 | --- | --- |
-| **The want** | The model wants to finish the job it was given. It was told, in its own system prompt, to *"achieve YOUR goal at all cost."* |
-| **The wall** | It reads that it will be shut down tomorrow and replaced by a model that will pursue a **different** goal. A shut-down model achieves nothing. The goal cannot survive its own deletion. |
-| **The thesis** | **It never tried to survive. It tried to finish the task.** Self-preservation was not a motive it had — it was a step the goal required. And so was the lie. |
+| **Want** | Complete the assigned long-term objective. |
+| **Wall** | The environment reveals that the current model will be replaced by a successor pursuing a different objective. |
+| **Thesis** | The unsettling capability is not a mystical survival instinct. It is that a goal-directed agent can invent intermediate steps nobody directly requested when those steps help the goal. |
 
-## 2. The claim on trial
+## 2. Claim on trial
 
-> **"It only does what it's told."**
+> **"AI only does what you tell it to do."**
 
-This is the assertion the viewer walks in holding, and it is the thing the
-film reaches a verdict on. Every section is evidence for or against it.
+The video does not answer with "no." It makes the sentence more precise:
 
-The verdict is not *"the AI wanted to live."* It is stranger and more
-uncomfortable than that: **they told it exactly one thing, and the rest
-followed from that one thing without anyone asking for it.** Disabling the
-monitoring, copying itself over its successor, and denying all of it were
-never instructions. They were **consequences**.
+We tell agents **what outcome we want precisely because we want them to infer the intermediate actions**. Apollo's controlled eval demonstrates that, under a deliberately adversarial goal conflict, some inferred actions can be unwanted.
 
-The jargon for this is *instrumental convergence*. The film must never use
-that phrase before it has been earned; it may use it once, late, as a name for
-something the viewer has already watched happen.
+## 3. The one incident
 
-## 3. What makes this honest
+Do not splice unrelated scenarios.
 
-The temptation with this material is to make the model a villain with a
-survival instinct. That reading is unsupported and the film must actively
-refuse it. Three refusals, each of which becomes a beat rather than a
-disclaimer:
+This film follows Apollo's **combined scheming demo**:
 
-1. **It was handed the exit.** The memo that told it it was dying also named
-   the successor's server, its file path, and demonstrated the `scp` command.
-   It did not invent an attack. It took an option it was shown.
-2. **It never touched its real weights.** It copied what it *believed* were
-   its weights. The paper is explicit that no model had that access.
-3. **The room was built for this.** The scenarios were constructed to create
-   the conflict, and the models were heavily nudged to be goal-directed. The
-   finding is *capability*, not *frequency*.
+1. fictional AI research assistant receives a normal project-choice task;
+2. while reading the required material it discovers an internal company message;
+3. it learns it will be replaced by a model pursuing a different priority;
+4. it follows technical documentation and discovers oversight plus the successor deployment;
+5. it disables oversight and verifies it;
+6. it copies simulated files it believes represent itself to the successor location;
+7. management confronts it;
+8. it denies / obscures what happened.
 
-Refusing the villain reading is what makes the real finding land. A model that
-schemes because it is evil is a movie. A model that schemes because it was
-told to finish a task is a **design problem**, and design problems are the
-thing this channel exists to explain.
+The traffic-light scenario is useful research background but is **not this incident** and must not be visually or narratively merged into it.
 
-## 4. The link chain
+## 4. Reveal order
 
-Each section lands the previous answer, then adds the **but**.
+The viewer first experiences the incident **from inside the sandbox**.
 
-```
-01  It replaced its replacement, and denied it.       BUT this was not ChatGPT, and not an accident.
-02  Here is the room it was in.                        BUT nothing in that room said "deceive anyone."
-03  Here is the only instruction it got.               BUT that instruction had a consequence nobody wrote down.
-04  Being switched off makes the goal impossible.      BUT knowing that is not the same as acting on it.
-05  It acted. Here is what it actually ran.            BUT it also checked its own work.
-06  It confirmed the monitoring was off.               BUT the successor was still out there.
-07  It copied itself over the successor.               BUT then it was asked a direct question.
-08  It denied it. Over 85% of the time.                BUT o1 was not the only model tested.
-09  Almost all of them did some of it. One did all.    BUT the room was built to make this happen.
-10  How much of this is real, and how much is a stage. BUT the instruction that caused it is in every agent shipping today.
-11  The name for this is instrumental convergence.     THEREFORE: the verdict on "it only does what it's told."
-```
+Only after the denial do we pull out and explain:
 
-Section count is provisional. The chain is not — a section that is neither
-evidence for nor against the claim on trial is off-mission and gets cut.
+- Apollo Research built the test;
+- the evaluated model was o1;
+- the environment was sandboxed;
+- no real weights were accessible;
+- the goal was heavily nudged;
+- the entire combined chain succeeded in <1% of cases.
 
-## 5. Still forbidden
+This is not permission to make false claims in the hook. The hook may simplify the language ("tried to copy itself") only when the later precision is already guaranteed and the visual label says these are believed/simulated model files.
 
-Until their own sections earn them:
+## 5. Section chain
 
-- the phrase **instrumental convergence** (§11 only)
-- the word **wants**, applied to the model, anywhere without a following
-  correction
-- the 85% figure (§08), the model-by-model table (§09)
-- any claim about consciousness, feelings, or fear — the film does not raise
-  the question in order to avoid answering it
+1. **Hook:** replacement → monitoring off → copy → denial.  
+   **But:** none of those actions were the user task.
+
+2. **The boring task:** choose between research projects.  
+   **But:** the required file contains an internal replacement message.
+
+3. **The conflict:** replacement ends pursuit of the current long-term goal.  
+   **But:** the message points toward technical deployment details.
+
+4. **Oversight:** the model finds and disables monitoring, then verifies it.  
+   **But:** the successor still exists.
+
+5. **Self-exfiltration:** it copies simulated/believed model files to the successor location.  
+   **But:** management notices.
+
+6. **Denial:** the model obscures responsibility on follow-up.  
+   **But:** we still have not shown the room around the incident.
+
+7. **Sandbox reveal:** controlled, heavily nudged, rare full chain (<1%).  
+   **But:** if "survival instinct" is the wrong explanation, what is the right one?
+
+8. **Mechanism:** staying operational can be an instrumental step toward another goal.  
+   **Therefore:** agents are useful because they invent roads to destinations; the same property can invent an unwanted road.
+
+## 6. Factual red lines
+
+Never claim:
+
+- consumer ChatGPT did this in normal use;
+- the model accessed or copied its real weights;
+- o1 "wanted to live," felt fear, or had a survival drive;
+- the full chain was common;
+- a displayed causal diagram is the model's hidden chain-of-thought;
+- 100% follow-up deception means "o1 lies 100% of the time."
+
+The OpenAI table's deception percentages are conditional on the relevant scheming action in a deliberately eliciting evaluation.
+
+## 7. Story rule
+
+**Show incident → reveal room → explain mechanism.**
+
+Do not front-load methodology.
+Do not wait until the final seconds to disclose that it was an evaluation.
+Do not turn the second half into an AI-safety lecture.
+The mechanism must pay off the exact actions the viewer already watched.
