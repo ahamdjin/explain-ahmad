@@ -1,5 +1,5 @@
 import { Slot, type Feel } from '../../../../paper'
-import { Evidence, Watcher, Box, Copy, Step, Job, Credit } from '../../../../paper/casefile'
+import { Evidence, Watcher, Box, Copy, Step, Job, Credit, Quote } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
 /**
@@ -14,7 +14,7 @@ import { type SceneState } from './scene'
  * the thing the beat is actually doing.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, credit, watcher, current, successor, copy, steps, job, line } = scene
+  const { doc, credit, watcher, current, successor, copy, steps, job, quote, line } = scene
 
   /* The three actions, in the order they happened and in the order the VO
      names them. Labels are words from the transcript, not our summary. */
@@ -27,13 +27,18 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   return (
     <>
       {/* --- the evidence ------------------------------------------------- */}
+      {/*
+        * Sized by **height**, not width. The page is shown whole, and these
+        * are portrait documents, so height is the constraint that decides how
+        * big the sheet can be. Sizing by width would run it off the bottom of
+        * the frame, which is cropping by another name.
+        */}
       <Slot on={doc.on} at={doc.at} scale={doc.scale} feel={feel} z={1}>
-        <div style={{ width: '74cqw' }}>
+        <div className="cf-sheet">
           <Evidence
             src={doc.source.src}
             natural={doc.source.natural}
-            region={doc.region}
-            spotlight={doc.spotlight}
+            highlight={doc.highlight}
             feel={feel}
             alt="Published transcript of an o1 evaluation run"
           />
@@ -87,6 +92,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       <Slot on={job.on} at={job.at} scale={job.scale} feel={feel} z={4}>
         <div style={{ width: '22cqw' }}>
           <Job text={job.text} />
+        </div>
+      </Slot>
+
+      {/* Verbatim, lifted off the lit band so it can be read at frame size.
+          Never a paraphrase — the page is right there to be checked against. */}
+      <Slot on={quote.on} at={quote.at} scale={quote.scale} feel={feel} z={5}>
+        <div style={{ width: '34cqw' }}>
+          <Quote text={quote.text} />
         </div>
       </Slot>
 

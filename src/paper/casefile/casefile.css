@@ -267,31 +267,78 @@
   max-width: 44cqw;
 }
 
-/* The evidence window itself: a sheet on a desk, with a real edge. */
+/*
+ * The sheet: a real document lying on the desk.
+ *
+ * Height-constrained, because the pages are portrait and they are always shown
+ * whole. `width: auto` with an aspect-ratio on the child means the sheet is
+ * exactly as wide as its own shape allows and never wider, whatever the
+ * document is -- a three-page transcript and a long web page both land right
+ * without a per-source number anywhere.
+ */
+.cf-sheet {
+  display: flex;
+  justify-content: center;
+}
+
 .cf-evidence {
   position: relative;
-  overflow: hidden;
-  width: 100%;
+  width: auto;
   background: #fffdf8;
   border: 1px solid rgba(43, 41, 38, 0.18);
-  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.06), 0 8px 24px rgba(43, 41, 38, 0.08);
+  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.06), 0 10px 30px rgba(43, 41, 38, 0.1);
 }
 
 .cf-evidence img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: none;
   display: block;
-  /* the travel is a transform, so the origin must not move with it */
-  transform-origin: 0 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
-/* Spotlight dims the edges rather than cropping them away, so a line can be
-   read in context without losing the proof that context exists. */
-.cf-evidence-vignette {
+/* The shade over everything that is not being discussed. Four parts, so the
+   lit band keeps its own contrast instead of being dimmed along with the rest. */
+.cf-shade {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255, 253, 248, 0) 38%, rgba(43, 41, 38, 0.2) 100%);
+}
+
+.cf-shade-part {
+  position: absolute;
+  background: rgba(247, 242, 231, 0.82);
+}
+
+/* The rule around the lit band. A line, not a glow. */
+.cf-mark {
+  position: absolute;
+  pointer-events: none;
+  border: 1.5px solid rgba(200, 102, 88, 0.9);
+  box-shadow: 0 0 0 1px rgba(255, 253, 248, 0.6);
+}
+
+/*
+ * A line quoted off the page so it can be read.
+ *
+ * Mono, because this is evidence and evidence is typed here — but boxed and
+ * ruled in the highlight's own red, so it reads as *lifted from that band*
+ * rather than as another piece of document. The page it came from is always
+ * on screen beside it.
+ */
+.cf-quote {
+  border-left: 2.5px solid rgba(200, 102, 88, 0.9);
+  background: #fffdf8;
+  padding: 1.5cqw 1.8cqw;
+  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.05), 0 6px 18px rgba(43, 41, 38, 0.07);
+}
+
+.cf-quote p {
+  margin: 0;
+  font-family: var(--cf-typed);
+  font-size: 1.32cqw;
+  line-height: 1.55;
+  color: #2b2926;
+  /* line breaks in a quote are the document's own, so keep them */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }

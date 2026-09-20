@@ -47,8 +47,13 @@ import { SHOT, P1, type Region, type Source } from '../../../../paper/casefile'
 export type SceneState = {
   camera: CameraActor
 
-  /** The evidence. `src` changes only when the story leaves one document. */
-  doc: Placed & { source: Source; region: Region; spotlight: boolean }
+  /**
+   * The evidence. Always the whole page; `highlight` lights part of it.
+   *
+   * `source` changes only when the story genuinely leaves one document, and
+   * when it does the credit changes in the same beat.
+   */
+  doc: Placed & { source: Source; highlight: Region | null }
 
   /** Who published the frame currently on screen. */
   credit: Placed & { text: string }
@@ -79,13 +84,21 @@ export type SceneState = {
   /** What it was actually told to do. Sits opposite `steps`. */
   job: Placed & { text: string }
 
+  /**
+   * The lit line, quoted at a readable size beside the page.
+   *
+   * Verbatim only. See `Quote` — a paraphrase here would be the film writing
+   * its own evidence.
+   */
+  quote: Placed & { text: string }
+
   /** Plain text, for the frames that must carry a sentence. */
   line: Placed & { text: string }
 }
 
 export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
-  doc: { on: false, at: { x: 50, y: 48 }, scale: 1, source: P1, region: SHOT.email, spotlight: false },
+  doc: { on: false, at: { x: 50, y: 48 }, scale: 1, source: P1, highlight: null },
   credit: { on: false, at: { x: 50, y: 92 }, scale: 1, text: '' },
   watcher: { on: false, at: { x: 50, y: 50 }, scale: 1, watching: true },
   current: { on: false, at: { x: 30, y: 52 }, scale: 1 },
@@ -93,6 +106,7 @@ export const INITIAL: SceneState = {
   copy: { on: false, at: { x: 50, y: 52 }, scale: 1, progress: 0 },
   steps: { on: false, at: { x: 70, y: 50 }, scale: 1, shown: 0 },
   job: { on: false, at: { x: 26, y: 50 }, scale: 1, text: '' },
+  quote: { on: false, at: { x: 72, y: 34 }, scale: 1, text: '' },
   line: { on: false, at: { x: 50, y: 50 }, scale: 1, text: '' },
 }
 
@@ -106,23 +120,26 @@ const successor = actorVerbs<SceneState, 'successor'>('successor')
 const copy = actorVerbs<SceneState, 'copy'>('copy')
 const steps = actorVerbs<SceneState, 'steps'>('steps')
 const job = actorVerbs<SceneState, 'job'>('job')
+const quote = actorVerbs<SceneState, 'quote'>('quote')
 const line = actorVerbs<SceneState, 'line'>('line')
 
 export const verbs = {
   doc: {
     ...doc,
     /**
-     * Travel to a region of the page that is already on screen.
+     * Light a different part of the page that is already on screen.
      *
-     * This is the section's scrollytelling: the document does not change, the
-     * window moves down it, so going through the evidence in order *is* going
-     * through the incident in order.
+     * Nothing is cropped and the page does not move: the shade moves. This is
+     * the section's scrollytelling — the eye is led down a document that stays
+     * whole and stays recognisable, so going through the evidence in order
+     * *is* going through the incident in order, and the viewer never loses
+     * sight of what they are looking at.
      */
-    look: (region: Region): Patch => doc.set({ region }),
+    look: (highlight: Region): Patch => doc.set({ highlight }),
+    /** Show the page with nothing singled out. Establishing, or letting go. */
+    whole: (): Patch => doc.set({ highlight: null }),
     /** Change document. A cut, not a move — use it only at a real jump. */
-    open: (source: Source, region: Region): Patch => doc.set({ source, region }),
-    /** Keep the surroundings visible but quiet, for a line read in context. */
-    spotlight: (spotlight = true): Patch => doc.set({ spotlight }),
+    open: (source: Source, highlight: Region | null = null): Patch => doc.set({ source, highlight }),
   },
   credit: {
     ...credit,
@@ -157,6 +174,11 @@ export const verbs = {
   job: {
     ...job,
     was: (text: string): Patch => job.set({ text }),
+  },
+  quote: {
+    ...quote,
+    /** The words on the lit band, exactly as the document has them. */
+    reads: (text: string): Patch => quote.set({ text }),
   },
   line: {
     ...line,

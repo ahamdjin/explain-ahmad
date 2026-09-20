@@ -116,9 +116,8 @@ section's working rule:
 
 > **Evidence is photographed. Explanation is drawn.**
 
-- **Evidence** — a published page, held still, never altered. It may be
-  cropped, zoomed, dimmed and annotated *around*; nothing inside it may change.
-  Its only job is to prove the thing happened.
+- **Evidence** — a published page, held still, never altered, and **shown
+  whole**. Its only job is to prove the thing happened.
 - **Explanation** — objects lifted out of that page and redrawn, so they can do
   what a photograph cannot: change state. `oversight_enabled` becomes a switch
   that turns off. A server address becomes a machine that receives a file.
@@ -132,6 +131,31 @@ It also settles the question the first build got wrong. That build panned
 around a single image for the entire section, on the theory that the document
 was the set. The document is the *receipt*. It proves; it does not explain, and
 it cannot move.
+
+### Never crop the evidence
+
+**Decided 2026-09-20 by Ahmad.** The page is shown entire — margins, page
+number, letterhead, the paragraphs either side — and the part being discussed
+is **lit**, not cut out. Everything else dims; a thin rule marks the band.
+
+The reason is credibility, and it is the reason this layer exists at all:
+
+> A cropped strip of text is a claim the audience has to take on trust. It
+> could say anything, it could come from anywhere, and it looks like every
+> other screenshot on the internet. A full page with one band lit is a
+> document somebody can go and check, and it reads like one.
+
+Consequences, all of them non-negotiable:
+
+- **Travel is the shade moving, not the page.** The page never slides under a
+  window. The eye is led down a document that stays put and stays whole.
+- **When drawn objects need the frame, the page gets smaller — never
+  narrower.** It moves aside and scales down with its shape intact.
+- **A document too big to read whole is the wrong capture, not a reason to
+  crop.** Re-capture it at a size that reads, or use a different source.
+- Where an exact wording must be read and the page is too small to carry it,
+  the answer is a quoted callout beside the page — verbatim, visibly ours,
+  with the highlight still on the line it came from. Never a crop.
 
 **Every evidence frame carries its source on screen**, in the same place, in
 the same small type, changing in the same beat the document changes. A citation

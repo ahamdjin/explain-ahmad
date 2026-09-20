@@ -227,3 +227,30 @@ export function Job({ text }: { text: string }) {
 export function Credit({ text }: { text: string }) {
   return <div className="cf-credit">{text}</div>
 }
+
+/**
+ * The lit line, quoted so it can actually be read.
+ *
+ * A full page of a real transcript is about 1700px of source text. Shown whole
+ * on a 1080p frame — which it must be, because the page is never cropped — its
+ * body type lands around eight pixels tall. The highlight says *where*; it
+ * cannot say *what*.
+ *
+ * So the words come out beside the page, verbatim, in the evidence typeface,
+ * carrying the same red rule as the band they came from. Nothing is trimmed
+ * from the document and nothing is reworded: this is the same sentence, at a
+ * size a viewer can read, with the original still on screen beside it to be
+ * checked against.
+ *
+ * The text passed in **must** be exactly what the highlighted band says. A
+ * paraphrase here would be the film quietly writing its own evidence, which is
+ * the one thing this layer exists to prevent. If a line needs shortening, cut
+ * with an ellipsis and keep every word that remains.
+ */
+export function Quote({ text }: { text: string }) {
+  return (
+    <div className="cf-quote">
+      <p>{text}</p>
+    </div>
+  )
+}

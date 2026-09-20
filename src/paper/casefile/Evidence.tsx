@@ -2,69 +2,127 @@ import { motion } from 'motion/react'
 import { type Feel } from '../motion'
 
 /**
- * A real document, and a window onto part of it.
+ * A real document, whole, with one part of it lit.
  *
- * This is the film's evidence layer. The source images are untouched captures
- * of published research -- `assets/evidence/README.md` -- and nothing inside
- * one may be edited. What this component does instead is **travel**: it holds
- * the whole image and moves a window across it.
+ * This is the film's evidence layer, and the rule it exists to enforce is that
+ * **nothing is ever cut away**. The source images are untouched captures of
+ * published research (`assets/evidence/README.md`); the page is shown entire,
+ * every time, so a viewer can see its margins, its page number, its letterhead
+ * and the paragraphs either side of the one being discussed.
  *
- * That is also the film's scrollytelling, and it is cheaper and more honest
- * than building a canvas: the transcript is already one continuous document,
- * so panning across it *is* moving through the incident in order. Each beat
- * names a region; the camera goes there.
+ * That is the whole argument. A cropped strip of text is a claim the audience
+ * has to take on trust -- it could say anything, and it looks like every other
+ * screenshot on the internet. A full page with one band lit is a document
+ * somebody can go and check, and it reads as one.
  *
- * Regions are given in **source pixels**, straight off the image, so a
- * coordinate can be checked against the file by opening it in any viewer.
+ * So `highlight` does not move a window. The page does not move at all. The
+ * highlight dims everything outside a rectangle and draws a rule around it,
+ * and travelling between highlights is the film's scrollytelling: the eye is
+ * led down a page that never changes.
+ *
+ * Rectangles are given in **source pixels**, straight off the image, so a
+ * coordinate can be checked by opening the file in any viewer.
  */
 export type Region = { x: number; y: number; w: number; h: number }
+
+/**
+ * How much of the frame a document may fill when it is alone in it.
+ *
+ * Short of the edges on purpose: a page that bleeds off the frame reads as a
+ * background texture, and this one has to read as a piece of paper somebody
+ * could pick up.
+ */
+const FRAME = { w: 82, h: 76 }
 
 export function Evidence({
   src,
   /** Natural size of the source file, used to convert pixels to percentages. */
   natural,
-  region,
+  /** The part being discussed. `null` lights the whole page. */
+  highlight,
   feel,
-  /** Dims everything outside the region instead of cropping it away. */
-  spotlight = false,
   alt = '',
 }: {
   src: string
   natural: { w: number; h: number }
-  region: Region
+  highlight: Region | null
   feel: Feel
-  spotlight?: boolean
   alt?: string
 }) {
   /*
-   * The window is a box of the region's shape; the image is scaled so the
-   * region fills its width, then slid so the region's top-left corner meets
-   * the window's.
-   *
-   * The slide is a **transform on the image**, not `top`/`left`. Percentages
-   * in `top`/`left` resolve against the container, whose height changes with
-   * every region -- so the same declared offset meant a different pixel offset
-   * from one beat to the next, and frames landed dozens of lines away from
-   * the text they were supposed to be showing. A percentage translate resolves
-   * against the image's own box, which never changes, so the arithmetic below
-   * is the whole story and a region can be trusted to show what it says.
+   * Everything below is a percentage of the page, which is why the page can be
+   * any size on screen and the highlight still lands on the right words.
    */
-  const scale = natural.w / region.w
+  const box = highlight && {
+    left: (highlight.x / natural.w) * 100,
+    top: (highlight.y / natural.h) * 100,
+    width: (highlight.w / natural.w) * 100,
+    height: (highlight.h / natural.h) * 100,
+  }
+
+  /*
+   * The sheet fits inside the frame whichever way it is shaped. A portrait
+   * transcript page is limited by height; the system card's exchange is a wide
+   * strip and is limited by width. Taking the smaller of the two means one
+   * rule covers every document, including ones not captured yet, and none of
+   * them has to be trimmed to fit -- which is the entire point of this layer.
+   */
+  const height = `min(${FRAME.h}cqh, ${((natural.h / natural.w) * FRAME.w).toFixed(2)}cqw)`
 
   return (
-    <div className="cf-evidence" style={{ aspectRatio: `${region.w} / ${region.h}` }}>
-      <motion.img
-        src={src}
-        alt={alt}
-        draggable={false}
-        animate={{
-          width: `${scale * 100}%`,
-          x: `${-(region.x / natural.w) * 100}%`,
-          y: `${-(region.y / natural.h) * 100}%`,
-        }}
+    <div className="cf-evidence" style={{ aspectRatio: `${natural.w} / ${natural.h}`, height }}>
+      <img src={src} alt={alt} draggable={false} />
+
+      {/*
+       * The shade is four rectangles rather than one box-shadow, because a
+       * shadow would sit on top of the lit area too and take the contrast out
+       * of the only thing the frame is asking anyone to read.
+       */}
+      <motion.div
+        className="cf-shade"
+        aria-hidden="true"
+        animate={{ opacity: box ? 1 : 0 }}
+        transition={feel}
+      >
+        {box ? (
+          <>
+            <motion.div className="cf-shade-part" animate={{ top: 0, left: 0, right: 0, height: `${box.top}%` }} transition={feel} />
+            <motion.div
+              className="cf-shade-part"
+              animate={{ top: `${box.top + box.height}%`, left: 0, right: 0, bottom: 0 }}
+              transition={feel}
+            />
+            <motion.div
+              className="cf-shade-part"
+              animate={{ top: `${box.top}%`, left: 0, width: `${box.left}%`, height: `${box.height}%` }}
+              transition={feel}
+            />
+            <motion.div
+              className="cf-shade-part"
+              animate={{
+                top: `${box.top}%`,
+                left: `${box.left + box.width}%`,
+                right: 0,
+                height: `${box.height}%`,
+              }}
+              transition={feel}
+            />
+          </>
+        ) : null}
+      </motion.div>
+
+      {/* The rule around the lit band. Thin, ink, no glow: this is an archivist
+          pointing at a line, not an alarm going off. */}
+      <motion.div
+        className="cf-mark"
+        aria-hidden="true"
+        animate={
+          box
+            ? { opacity: 1, top: `${box.top}%`, left: `${box.left}%`, width: `${box.width}%`, height: `${box.height}%` }
+            : { opacity: 0 }
+        }
         transition={feel}
       />
-      {spotlight ? <div className="cf-evidence-vignette" aria-hidden="true" /> : null}
     </div>
   )
 }
