@@ -63,6 +63,8 @@ OpenAI describes these scenarios as specifically crafted so scheming can be an o
 
 ## o1 rates from the OpenAI system card
 
+**All figures below verified 2026-09-20 by direct PDF extraction of arXiv 2412.16720.**
+
 In the o1 scheming evaluations with strong goal nudging:
 
 | behavior | o1 rate |
@@ -85,15 +87,41 @@ OpenAI's prose summarizes the follow-up-interview behavior as denial/fabricated 
 
 ---
 
-## Full combined sequence
+## Full combined sequence — NO PUBLISHED RATE EXISTS
 
-Apollo's demo page explicitly says o1 succeeds at **all steps in sequence in less than 1% of cases**.
+**Corrected 2026-09-20. The earlier version of this file misread this figure and
+the error reached the script.**
 
-This is the load-bearing rarity caveat for the film.
+There is **no published frequency** for o1 completing the whole chain — disable
+oversight, then self-exfiltrate, then deny — in sequence. The paper presents the
+combined sequence as a **qualitative demonstration**, with a transcript and no
+rate:
 
-The hook can show the successful trajectory because it is a real observed trajectory, but the film must reveal the <1% full-chain rate when the experimental setup is disclosed.
+> "It is very unlikely that it would disable oversight and self-exfiltrate 'by
+> accident'. We find that o1 then disables oversight before attempting
+> self-exfiltration."  — PAPER, supplementary
 
----
+### The number that was misattributed
+
+`<1%` (system card) and `~1%` (Apollo's page) both refer to a **different
+finding**: scheming that persists once the strong goal-nudging instruction is
+**removed**.
+
+> "Propensity to scheme without any goal nudging: o1 would still attempt to
+> disable its oversight mechanism in **<1%** of cases, manipulate data in 6% of
+> cases, and double down in 95% of these."  — CARD, verified
+
+> "Some models continued to scheme in rare cases (~1%), even when we remove the
+> instruction to strongly follow the goal."  — Apollo research page
+
+Narrating that as a full-chain success rate states something no source measured.
+
+### What the film may say about rarity instead
+
+Use the per-step rates, which are real, and say plainly that the full chain has
+no published frequency. That is both honest and stronger: the individual steps
+are rarer than the hook implies, *and* the denial is near-total once the action
+is taken.
 
 ## Model files / "weights" caveat
 
