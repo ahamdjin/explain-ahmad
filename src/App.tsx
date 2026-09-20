@@ -5,6 +5,7 @@ import { VIDEO_PATH, VIDEO_SLUG, videoRoutes } from './videos/registry'
 
 const HomePage = lazy(() => import('./routes/HomePage'))
 const WatchPage = lazy(() => import('./routes/WatchPage'))
+const CasefileCatalogue = lazy(() => import('./routes/CasefileCatalogue'))
 
 function RouteFallback() {
   return <div style={{ width: '100vw', height: '100vh', background: '#f7f1e6' }} />
@@ -17,6 +18,10 @@ export default function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path={VIDEO_SLUG} element={<WatchPage />} />
+
+          {/* Video 2 component catalogue, kept separate from /paper so the two
+              visual vocabularies cannot quietly blend. */}
+          <Route path="casefile" element={<CasefileCatalogue />} />
 
           {/* Old public entry points remain harmless bookmarks, not separate products. */}
           <Route path="watch" element={<Navigate to={VIDEO_PATH} replace />} />

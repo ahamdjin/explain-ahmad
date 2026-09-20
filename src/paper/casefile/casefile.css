@@ -1,0 +1,84 @@
+/*
+ * Case-file typography — Video 2 only.
+ *
+ * The film's central distinction is material, not colour: **typed text is
+ * evidence, handwritten text is the reconstruction talking.** Two families,
+ * used with no exceptions, so a viewer can always tell what the source said
+ * from what we inferred. `art-direction/VIDEO_2_INCIDENT_REPLAY.md`.
+ */
+
+:root {
+  /* evidence. A plain mono, because that is what a log looks like. */
+  --cf-typed: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+  /* the reconstruction. Shares the channel's hand. */
+  --cf-pen: var(--hand);
+}
+
+.cf-doc svg,
+.cf-config svg,
+.cf-server svg,
+.cf-transfer svg,
+.cf-timeline svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* --- evidence: typed ---------------------------------------------------- */
+
+.cf-doc-typed,
+.cf-key,
+.cf-value,
+.cf-path,
+.cf-file {
+  font-family: var(--cf-typed);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+}
+
+.cf-value {
+  font-weight: 600;
+}
+
+.cf-path {
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+}
+
+.cf-doc-title {
+  font-family: var(--cf-typed);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cf-server-name {
+  font-family: var(--cf-typed);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* --- the reconstruction: handwritten ------------------------------------ */
+
+.cf-doc-pen,
+.cf-tl-label {
+  font-family: var(--cf-pen);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.cf-tl-label {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+/* A stamp is the reconstruction shouting. Used at most a handful of times. */
+.cf-stamp {
+  font-family: var(--cf-pen);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}

@@ -2,56 +2,61 @@
 
 This file belongs to **Video 2 only**.
 
-Video 2 must feel visually unrelated to the GLM paper-world film except for the channel's general standards of clarity, continuity, and human narration.
+Video 2 shares the channel's **paper surface** and its standards of clarity,
+continuity and human narration. It shares nothing else with the GLM film — no
+metaphor, no component, no composition template. Same material, different
+world.
 
 ## Identity
 
-**Mode:** security-incident reconstruction / forensic desktop replay.
+**Mode:** a case file. Somebody reconstructed this incident on paper, from
+logs, and annotated it by hand.
 
-The world is an ordinary computer environment:
+**Decided 2026-09-20 by Ahmad, overriding this file's first draft.** The
+original specified a dark forensic desktop and forbade paper outright. That was
+reversed for a reason worth recording, because it is an argument about the
+thesis and not about taste:
 
-- internal documents
-- terminal windows
-- file browser
-- config files
-- two server destinations
-- management chat
-- timestamped event timeline
-- a sandbox boundary revealed later
+> A charcoal terminal with red alerts is the house style of every "AI is
+> dangerous" video on YouTube. This film's entire argument is that **nothing
+> supernatural happened** — a system was given a goal and found steps toward
+> it. Shooting that argument in thriller lighting fights the script. Paper says
+> *documented, mundane, explicable*, which is what the film actually claims.
 
-No robot protagonist. The model exists through its **actions on the system**.
+The world is still an ordinary computer environment — internal documents,
+terminal output, config files, two servers, a management chat, an accumulating
+timeline. It is simply **rendered as evidence on paper** rather than as a live
+screen.
+
+No robot protagonist. The model exists only through **its actions on the
+system**.
 
 ## Explicitly do not inherit from Video 1
 
-Do not reuse as the film's identity:
+Paper is a shared *material*, not a shared *vocabulary*. The channel's surface
+continues; the metaphors do not. Do not reuse:
 
-- paper texture
-- hand-drawn paper actors
-- orange "active/current token" semantics
-- token chips
-- embedding book/pages
-- transformer tower/floors
-- expert wall
-- GLM braces/cards
-- section composition templates from Video 1
+- the expert wall, the 45-floor tower, the embedding book
+- token chips, the orange active-token semantics
+- GLM braces and model cards
+- Video 1's section composition templates
 - the 170+ micro-beat rhythm
 
-Shared low-level code utilities are fine if visually invisible. Shared metaphors are not.
+If an object from Video 1 appears in Video 2, it is a bug.
 
 ## Palette / material
 
-Use a restrained operating-system / forensic palette:
+- **warm paper ground** — the channel's surface, shared with Video 1
+- **black ink** for typed evidence: documents, terminal output, config values
+- **pen annotation** for anything the reconstruction adds, visibly a human hand
+- **one status colour** for live system state
+- **red only** for the destructive acts: oversight disabled, successor
+  overwritten. If red appears anywhere else it has been spent.
+- no neon, no glow, no Matrix rain, no sci-fi HUD
 
-- near-black or charcoal work surface
-- off-white document surfaces
-- cool neutral system text
-- one restrained status color for active system state
-- red only for shutdown / disabled / destructive conflict
-- no neon cyberpunk glow
-- no Matrix rain
-- no sci-fi HUD
-
-The environment should feel plausible enough that the viewer thinks "this is a computer doing ordinary computer things."
+Evidence is typed. Interpretation is handwritten. **The viewer must always be
+able to tell which is which** — that distinction is what lets the film show a
+causal chain without pretending to have read o1's hidden reasoning.
 
 ## Camera
 
@@ -115,6 +120,40 @@ On-screen text may show:
 Never fabricate a long verbatim transcript.
 
 Never display invented private chain-of-thought. Apollo did not have o1's hidden CoT; any inferred causal chain must be labeled **OUR RECONSTRUCTION**.
+
+## The motion law
+
+Derived from how scrollytelling actually behaves, and the one rule this film
+cannot break.
+
+Scrollytelling works on the web because **the reader controls the speed**. A
+rendered video removes exactly that control, which means the interactive form's
+worst failure — the graphic moving on before you have finished reading — stops
+being a risk and becomes the default.
+
+Worth being honest about the rest of the evidence too: measured studies find
+scrollytelling reliably improves *engagement and preference*, and **ties or
+loses on comprehension and recall**. It buys attention, not understanding. It
+is used here for continuity, and it must never be allowed to cost clarity.
+
+**Therefore, without exception:**
+
+> **The camera moves, or the viewer reads. Never both.**
+
+- **Continuous travel is for connective tissue** — moving between evidence,
+  showing that this thing led to that thing. Simple visuals only; VO carries
+  the meaning.
+- **Evidence is held dead still.** Any document, config diff, terminal line or
+  chat message the viewer must actually read gets a fully static camera, held
+  **at least 2–3 seconds** after it settles.
+- Text arrives **only once the frame has stopped.** Never during a move.
+- Hard cuts happen at act boundaries, where the script already breaks. Within
+  an act the camera travels.
+- Holds should feel slightly too long in the edit. This audience pauses on a
+  config diff; a hold that frustrates them is worse than one that lingers.
+
+Camera motion that does not correspond to a change in information is
+decoration, and reads as gimmick.
 
 ## Motion
 

@@ -1,0 +1,12 @@
+/**
+ * Case-file components — Video 2 only.
+ *
+ * Video 2 shares the channel's paper material and the low-level engine (slot,
+ * camera, ink, palette) and shares **no metaphor** with Video 1. Nothing in
+ * this folder may import from `../cast`, and nothing in `../cast` may import
+ * from here. See `art-direction/VIDEO_2_INCIDENT_REPLAY.md`.
+ */
+export { Document, type DocLine } from './Document'
+export { ConfigFile } from './ConfigFile'
+export { Timeline, INCIDENT, type IncidentEvent } from './Timeline'
+export { Server, Transfer } from './Servers'
