@@ -1,60 +1,60 @@
 # Project structure — production
 
-There is one current film: **The 18 Billion Mystery**.
+This repository now has one implemented film and one canonical pre-production film.
 
-## Film sources
+## Video 1 — implemented
 
 ```text
-video-script/video-1/
-  01-...md → 13-...md     approved/current narration + visual contracts
-  READ_ALOUD.md            generated whole-film read-through
-  TITLE.md                 canonical name/title
-
-storyboard/video-1/
-  STORY_SPINE.md            whole-film promise and section chain
-  BOARD.md                  generated beat-by-beat board
-  VOCABULARY_LEDGER.md      terminology discipline
-
-src/videos/glm-320b/video-1/
-  section-01/ ... section-13/
-    SectionNN.tsx           section director
-    beats.ts                executable beat/VO sequence
-    scene.ts                scene state + verbs
-    Stage.tsx               rendered composition
+video-script/video-1/          locked/current narration
+storyboard/video-1/            spine, board, vocabulary
+research/glm/                  factual grounding
+art-direction/                 GLM paper-world references
+src/videos/glm-320b/video-1/   executable film
 ```
+
+## Video 2 — pre-production
+
+```text
+video-script/video-2/
+  README.md
+  TITLE.md
+  SCRIPT.md
+
+storyboard/video-2/
+  README.md
+  STORY_SPINE.md
+  STORYBOARD.md
+
+research/apollo/
+  GROUND_TRUTH.md
+
+art-direction/
+  VIDEO_2_INCIDENT_REPLAY.md
+```
+
+There is intentionally **no Video 2 executable source yet**. Do not create one by copying `src/videos/glm-320b/video-1/`. The visual implementation should be designed from Video 2's Incident Replay art direction after the narration/storyboard is approved.
 
 ## Shared production systems
 
 ```text
-src/paper/              paper-world actors, motion, overlays, prompt constants
-art-direction/          cast, props, palette, paper-world rules
-research/               factual grounding; GLM truth/tokenizer/offloading notes
-skills/                 story, teaching, continuity, composition and QA rules
+skills/                 story, teaching, continuity, composition and QA
 scripts/                checks, frames, render, VO timing and SFX tooling
-assets/sfx/             chosen production sounds + provenance
-public/vo/              local VO drop location; audio files are ignored
+assets/                 chosen production assets
+docs/                   QA / workflow documentation
 ```
 
-## Public routes
+`src/paper/` is a Video 1 visual system. It is not the default visual system for future films.
 
-- `/` — guided film landing page
-- `/320b-parameters-only-18b-active-why-does-it-need-8-gpus` — the film
-- `?section=N` — jump to a chapter
-- `?play=1` — play through chapters automatically
-- `?chrome=0` — clean render/recording view
-- `/section-01` … `/section-13` — direct QA/render routes
+## Current public routes
 
-`/watch` and `/video-1` only redirect to the title route for old bookmarks.
+Only Video 1 is implemented and routed publicly:
 
-## Internal visual toolkit
+- `/`
+- `/320b-parameters-only-18b-active-why-does-it-need-8-gpus`
+- direct `/section-NN` QA/render routes
 
-`src/components/`, `src/engine/`, `src/examples/`, `src/lab/`, `src/visuals/` and `src/vendor/` are reusable/reference tooling. They are deliberately not exposed by the production router.
+Video 2 has no production route yet.
 
-## What is intentionally not in the working tree
+## Working-tree rule
 
-- rejected scripts/cuts
-- obsolete storyboard frame exports
-- rendered MP4s and smoke screenshots
-- raw SFX candidate downloads
-
-Git history is the archive. The working tree should describe the film we are actually producing.
+The working tree contains current canon. Rejected scripts/cuts belong in Git history.

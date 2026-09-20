@@ -1,53 +1,39 @@
-# Video 2 — working title: *It Replaced Its Replacement*
+# Video 2 — Nobody Told It To Do This
 
-**Status: DRAFT.** No section is approved. Nothing is locked.
+**Canonical second video in pre-production.**
 
-Spine: `storyboard/video-2/STORY_SPINE.md`
-Numbers and mechanism: `research/apollo/GROUND_TRUTH.md`
+YouTube title: **An AI Tried to Copy Itself — Then Denied It**
 
-## What this video is
+Status: **DRAFT — narration not locked.**
 
-A reconstruction of a single episode inside the Apollo Research in-context
-scheming evaluations: a model reads a memo saying it will be replaced, disables
-its own oversight, copies what it believes are its weights over its successor,
-and then denies having done so.
+## Read in this order
 
-The film is **not** an AI-danger essay and not a news segment. It is the same
-move as video 1 — follow one actor through one machine, do the arithmetic on
-screen, reach the consequence — with the actor being the model itself rather
-than a token.
+1. `research/apollo/GROUND_TRUTH.md`
+2. `storyboard/video-2/STORY_SPINE.md`
+3. `video-script/video-2/SCRIPT.md`
+4. `art-direction/VIDEO_2_INCIDENT_REPLAY.md`
+5. `storyboard/video-2/STORYBOARD.md`
 
-## The claim on trial
+## Identity
 
-> **"It only does what it's told."**
+This is an **incident reconstruction**, not a Video 1-style technical journey.
 
-Verdict, reached in §11 and not before: it was told one thing, and the
-monitoring, the overwrite and the denial all followed from that one thing
-without anyone requesting them.
+The viewer follows one controlled Apollo trajectory through:
 
-## Candidate titles
+task → internal message → monitoring → successor server → copy → interrogation → sandbox reveal → mechanism.
 
-Not chosen. `research/RETENTION_AND_ANGLE.md` §3 argues the field's titles are
-mechanism-plus-consequence, and that what nobody uses — and what works — is a
-**verifiable contradiction**.
+## Isolation rule
 
-- *An AI Tried to Copy Itself — Then Lied About It*
-- *They Told an AI It Would Be Replaced. This Happened.*
-- *Nobody Told It to Lie*
-- *The AI That Replaced Its Replacement*
+Do not inherit Video 1's visual world by default.
 
-The third is the only one that is about the *thesis* rather than the *event*,
-and it is the one that puts a claim on trial rather than promising a story.
+Video 1 uses the GLM paper world.
 
-## Sections
+Video 2 uses **Incident Replay**.
 
-| | | status |
-| --- | --- | --- |
-| 01 | It replaced its replacement | draft |
-| 02– | not yet written — spine must be approved first | — |
+Shared story/teaching/QA skills still apply, but metaphors, components, color semantics and composition patterns are film-specific.
 
-## Production rule, inherited
+## Canon
 
-Once narration is marked **APPROVED NARRATION — LOCKED**, the wording is
-immutable unless Ahmad reopens it. Beats, timing, components and camera adapt
-to the words, never the reverse. See `skills/STORY_STRUCTURE.md`.
+`SCRIPT.md` replaces the old comparison drafts. Rejected versions belong in Git history, not beside the current script.
+
+Nothing is marked **APPROVED NARRATION — LOCKED** yet. Once Ahmad approves it, wording becomes immutable and storyboard/implementation must adapt around it.
