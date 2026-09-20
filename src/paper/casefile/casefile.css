@@ -146,3 +146,46 @@
 @media (prefers-reduced-motion: reduce) {
   .cf-charge { transition: none; }
 }
+
+/* --- the evidence layer -------------------------------------------------- */
+
+/*
+ * A window onto a real document. The image is never altered; the window moves.
+ * Overflow is hidden so a region reads as a framed exhibit rather than as a
+ * picture that happens to be scrolled.
+ */
+.cf-evidence {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 2px 0 rgba(43, 41, 38, 0.16), 0 18px 38px -22px rgba(43, 41, 38, 0.5);
+}
+
+.cf-evidence img {
+  position: absolute;
+  height: auto;
+  display: block;
+  /* Real documents are pin-sharp. Smoothing them makes them look recreated. */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Used when a region must be read but its surroundings should stay visible. */
+.cf-evidence-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(43, 41, 38, 0.55) 100%);
+}
+
+/* A sentence the frame has to carry alone. Set in the hand, because it is the
+   film talking rather than the document. */
+.cf-line {
+  font-family: var(--cf-pen);
+  font-size: 3.1cqw;
+  line-height: 1.35;
+  color: #2B2926;
+  text-align: center;
+  max-width: 62cqw;
+  text-wrap: balance;
+}
