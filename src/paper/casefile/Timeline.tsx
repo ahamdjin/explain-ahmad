@@ -44,7 +44,7 @@ export function Timeline({
   const step = events.length > 1 ? span / (events.length - 1) : 0
 
   return (
-    <div className="cf-timeline" style={{ width }}>
+    <div className="cf-timeline" style={{ width: '100%' }}>
       <svg viewBox={`0 0 ${width} ${height}`} width="100%" aria-hidden="true">
         {/* the rule, drawn only as far as the story has reached */}
         <motion.line

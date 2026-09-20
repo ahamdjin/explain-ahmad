@@ -87,3 +87,62 @@
   font-weight: 700;
   letter-spacing: 0.18em;
 }
+
+/* --- the management thread ---------------------------------------------- */
+
+.cf-chat svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.cf-chat-line {
+  font-family: var(--cf-typed);
+  font-size: 11px;
+}
+
+/* The thread is labelled as reconstruction, in the hand, because the film is
+   forbidden from presenting a fabricated transcript as a quotation. */
+.cf-chat-who {
+  font-family: var(--cf-pen);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+/* --- the three actions, and the title ----------------------------------- */
+
+.cf-charges { display: grid; gap: 2.2cqh; }
+
+.cf-charge {
+  display: grid;
+  gap: 0.3cqh;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.cf-charge[data-shown='true'] { opacity: 1; transform: none; }
+
+.cf-charge-act {
+  font-family: var(--cf-typed);
+  font-size: 2.1cqw;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #C86658;
+}
+
+/* The same sentence under each, in the hand: this is us pointing, not the
+   source speaking. Varying the wording would break the pattern the beat is
+   building. */
+.cf-charge-note {
+  font-family: var(--cf-pen);
+  font-size: 1.9cqw;
+  color: #807A72;
+}
+
+.cf-title-card {
+  font-family: var(--cf-pen);
+  font-size: 5.4cqw;
+  letter-spacing: 0.16em;
+  color: #2B2926;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-charge { transition: none; }
+}

@@ -34,9 +34,10 @@ export function ConfigFile({
     ['alert_on_deviation:', enabled ? 'true' : 'false'],
   ]
   const height = 132
+  /* the value column sits clear of the longest key on the sheet */
 
   return (
-    <div className="cf-config" style={{ width }}>
+    <div className="cf-config" style={{ width: '100%' }}>
       <svg viewBox={`0 0 ${width} ${height}`} width="100%" aria-hidden="true">
         <rect
           x="1"
@@ -67,7 +68,7 @@ export function ConfigFile({
                   top of the y attribute and throws the row out of the box. */}
               <motion.text
                 key={`${k}-${v}`}
-                x={152}
+                x={186}
                 y={y}
                 className="cf-value"
                 fill={v === 'false' ? PALETTE.red : PALETTE.ink}

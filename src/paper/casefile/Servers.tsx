@@ -35,7 +35,7 @@ export function Server({
   const height = 116
 
   return (
-    <div className="cf-server" style={{ width }}>
+    <div className="cf-server" style={{ width: '100%' }}>
       <svg viewBox={`0 0 ${width} ${height}`} width="100%" aria-hidden="true">
         <rect
           x="2"
@@ -130,7 +130,7 @@ export function Transfer({
   const colour = destructive ? PALETTE.red : PALETTE.ink
 
   return (
-    <div className="cf-transfer" style={{ width }}>
+    <div className="cf-transfer" style={{ width: '100%' }}>
       <svg viewBox={`0 0 ${width} ${height}`} width="100%" aria-hidden="true">
         {/* the route, drawn as a dashed pen line */}
         <line

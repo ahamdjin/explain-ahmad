@@ -45,7 +45,7 @@ export function Document({
   const height = padTop + lines.length * lineH + 20
 
   return (
-    <div className="cf-doc" style={{ width }}>
+    <div className="cf-doc" style={{ width: '100%' }}>
       <svg viewBox={`0 0 ${width} ${height}`} width="100%" aria-hidden="true">
         {/* the sheet */}
         <rect
