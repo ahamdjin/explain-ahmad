@@ -4,6 +4,7 @@ Current canonical pre-production files:
 
 - `STORY_SPINE.md` — claim, thesis, causal chain and factual red lines
 - `SECTION_01.md` — **canonical hook + intro board; read this before touching §1**
+- `SECTION_02.md` — **canonical boring-task / internal-email board; continues directly from §1**
 - `STORYBOARD.md` — whole-film draft; Section 01 defers to `SECTION_01.md`
 - `../../video-script/video-2/SCRIPT.md` — narration authority
 - `../../art-direction/VIDEO_2_INCIDENT_REPLAY.md` — film-specific visual language
