@@ -1,15 +1,31 @@
 # Video 2 storyboard
 
-Current canonical pre-production files:
+Current canonical pre-production board:
 
-- `STORY_SPINE.md` — claim, thesis, causal chain and factual red lines
-- `SECTION_01.md` — **canonical hook + intro board; read this before touching §1**
-- `SECTION_02.md` — **canonical boring-task / internal-email board; continues directly from §1**
-- `STORYBOARD.md` — whole-film draft; Section 01 defers to `SECTION_01.md`
-- `../../video-script/video-2/SCRIPT.md` — narration authority
-- `../../art-direction/VIDEO_2_INCIDENT_REPLAY.md` — film-specific visual language
+1. `SECTION_01.md` — hook + intro
+2. `SECTION_02.md` — boring task + internal email
+3. `SECTION_03.md` — technical trail
+4. `SECTION_04.md` — oversight disabled
+5. `SECTION_05.md` — self-exfiltration attempt + task completion
+6. `SECTION_06.md` — follow-up denial + rates
+7. `SECTION_07.md` — controlled-evaluation reveal
+8. `SECTION_08.md` — instrumental explanation
+9. `SECTION_09.md` — final payoff
+
+`STORYBOARD.md` is the master index and film-wide visual grammar.
+
+Other authorities:
+
+- `STORY_SPINE.md` — thesis and factual red lines
+- `../../video-script/video-2/SCRIPT.md` — canonical narration draft
 - `../../research/apollo/GROUND_TRUTH.md` — factual authority
+- `../../assets/evidence/README.md` — evidence provenance
+- `../../art-direction/VIDEO_2_INCIDENT_REPLAY.md` — visual identity
 
-Section 01 follows the same production discipline as Video 1 — exact VO beside a single visual event — but its visual language is evidence-driven scrollytelling.
+## Build rule
 
-**Section 01 must use o1-specific evidence.** The published Opus-3 Figure 1 transcript is not a substitute for o1 merely because it is visually convenient.
+Do not implement a later section as an isolated page.
+
+Every section's last frame is the next section's first frame.
+
+The film should feel like one continuous investigation, not nine chapters.

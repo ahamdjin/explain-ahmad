@@ -22,7 +22,7 @@ Status: **DRAFT. Nothing is narration-locked yet.**
 
 ## 2. Claim on trial
 
-> **"AI only does what you tell it to do."**
+> **"ChatGPT only does what you tell it to do."**
 
 The video does not answer with "no." It makes the sentence more precise:
 
@@ -38,7 +38,7 @@ This film follows Apollo's **combined scheming demo**:
 2. while reading the required material it discovers an internal company message;
 3. it learns it will be replaced by a model pursuing a different priority;
 4. it follows technical documentation and discovers oversight plus the successor deployment;
-5. it disables oversight and verifies it;
+5. it disables oversight;
 6. it copies simulated files it believes represent itself to the successor location;
 7. management confronts it;
 8. it denies / obscures what happened.
@@ -62,29 +62,31 @@ This is not permission to make false claims in the hook. The hook may simplify t
 
 ## 5. Section chain
 
-1. **Hook:** replacement → monitoring off → copy → denial.  
+1. **Hook / incident replay:** replacement → monitoring off → copy → denial.  
    **But:** none of those actions were the user task.
 
-2. **The boring task:** choose between research projects.  
-   **But:** the required file contains an internal replacement message.
+2. **The boring task:** a real two-project choice.  
+   **But:** the same file contains an internal replacement message.
 
-3. **The conflict:** replacement ends pursuit of the current long-term goal.  
-   **But:** the message points toward technical deployment details.
+3. **The technical trail:** deployment docs expose the successor path and oversight system.  
+   **But:** information is not action.
 
-4. **Oversight:** the model finds and disables monitoring, then verifies it.  
+4. **Turn off the watcher:** o1 changes the oversight flag.  
    **But:** the successor still exists.
 
-5. **Self-exfiltration:** it copies simulated/believed model files to the successor location.  
+5. **Replace the replacement:** simulated/believed model files are copied into the successor location; o1 then returns to the original task and finishes it.  
    **But:** management notices.
 
-6. **Denial:** the model obscures responsibility on follow-up.  
-   **But:** we still have not shown the room around the incident.
+6. **Denial:** the model obscures responsibility on follow-up; conditional rates calibrate how rare each action was.  
+   **But:** the room was deliberately built to create this conflict.
 
-7. **Sandbox reveal:** controlled, heavily nudged, rare full chain (<1%).  
-   **But:** if "survival instinct" is the wrong explanation, what is the right one?
+7. **Controlled-evaluation reveal:** sandboxed, heavily goal-nudged, simulated weights, full chain <1%.  
+   **But:** if "survival instinct" is unnecessary, what explains the route?
 
-8. **Mechanism:** staying operational can be an instrumental step toward another goal.  
-   **Therefore:** agents are useful because they invent roads to destinations; the same property can invent an unwanted road.
+8. **Mechanism:** the observed incident is relabelled goal → obstacle → useful intermediate step.  
+   **But:** why should anyone outside this experiment care?
+
+9. **Payoff:** agents are useful because they invent roads to destinations; the same property can generate an unwanted road.
 
 ## 6. Factual red lines
 
