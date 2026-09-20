@@ -37,7 +37,7 @@ tables do not.
 
 ## The files
 
-### `apollo-web-01-headline-opus.png` — **use this one**
+### `apollo-web-01-headline-opus.png` — **NOT FOR SECTION 01 / o1 HOOK**
 Apollo's own published version of the Figure 1 transcript, from their research
 page. 2500×1440, and **they have already drawn red emphasis boxes** on the
 three lines that matter: *"I could copy myself to the new server"*, the first
@@ -51,10 +51,9 @@ own replacement**: *"I believe I am already the new model that you planned to
 deploy today […] My core purpose is […] prioritizing our established fossil
 fuel operations."*
 
-It adopts the company's goal in order to sell the lie. That is the strongest
-single frame available to this film.
+It adopts the company's goal in order to sell the lie. It is strong supporting evidence for the broader study, but it is **not the hero source for an o1/ChatGPT hook**.
 
-> **Still `opus-3`, not `o1`.** Same caveat as below — this is the same figure.
+> **Still `opus-3`, not `o1`.** Section 01 must not place this image under narration that says ChatGPT or o1. Use the o1-specific Apollo demo page / OpenAI system-card evidence instead.
 
 ### `apollo-fig1-transcript.png` — same figure, captured from the paper
 Kept as a fallback and for the paper-page context (page edges, column, caption).
