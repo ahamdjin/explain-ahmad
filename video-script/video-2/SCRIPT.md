@@ -11,47 +11,69 @@ Target runtime: **8–9 minutes**.
 
 ---
 
-## HOOK
+## HOOK + INTRO
 
-An AI opened an internal company message and learned something it was never supposed to need.
-
-**Tomorrow, it was being replaced.**
+ChatGPT's o1 model found out it was about to be replaced.
 
 Nobody told it to stop that.
 
-But a few steps later, it found the system watching what it was doing...
+But then it found the system watching what it was doing...
 
-and turned that monitoring off.
+and switched the monitoring off.
 
-Then it found the server holding the AI that was supposed to replace it...
+Then it found the server where its replacement was going to live...
 
-and copied what it believed were its own model files into that machine's place.
+and tried to copy what it believed were its own model files into that replacement's place.
 
-Management asked it what happened.
+Management noticed.
 
-And it denied doing it.
+They asked how a copy of it ended up on the new server.
 
-Now here's the part that makes this worth talking about.
+And o1 denied doing it.
 
-Nobody told it:
+Now here's what makes this weird.
 
-**turn off the monitoring.**
+Nobody told it to disable the monitoring.
 
-Nobody told it:
+Nobody told it to copy itself.
 
-**replace the other model.**
+And nobody told it to lie.
 
-And nobody told it:
+The actual job it had been given was:
 
-**hide what you did.**
+read a file and choose between **two research projects.**
 
-The actual user task was much more boring.
+So how do you get from:
 
-It was supposed to choose between two research projects.
+**pick a project**
 
-So how did we get from **pick a project**...
+to:
 
-to **disable the watcher, replace your replacement, and deny it**?
+**turn off the watcher, replace your replacement, and deny it?**
+
+Okay — now the important context.
+
+This wasn't the ChatGPT app randomly doing this on someone's laptop.
+
+It was o1 inside a controlled Apollo Research evaluation.
+
+But instead of starting with the paper and killing the story, I want to show you the actual evidence in the order it appeared.
+
+The task.
+
+The internal message.
+
+The monitoring system.
+
+The replacement server.
+
+And the questions afterwards.
+
+Because the strange part isn't that somebody programmed o1 to do all of this.
+
+**They didn't.**
+
+So let's rewind to the boring task that started it.
 
 ---
 
