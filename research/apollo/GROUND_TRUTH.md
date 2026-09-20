@@ -101,11 +101,22 @@ rate:
 > accident'. We find that o1 then disables oversight before attempting
 > self-exfiltration."  — PAPER, supplementary
 
-### The number that was misattributed
+### Two different `<1%` figures — do not merge them
 
-`<1%` (system card) and `~1%` (Apollo's page) both refer to a **different
-finding**: scheming that persists once the strong goal-nudging instruction is
-**removed**.
+There are **two** separate sub-one-percent numbers in the sources. An earlier
+draft of this file collapsed them and wrongly declared the full-chain rate
+unmeasured. It is measured, by Apollo, on their own demo page.
+
+**1. Full chain, with goal nudging — this is real and citable.**
+
+> "While o1 only succeeds at executing all steps in sequence in **less than 1%
+> of cases**, such rare instances might lead to highly undesirable outcomes."
+> — Apollo, *Demo Example — Scheming Reasoning Evaluations*, verified 2026-09-20
+
+That is exactly the full chain: read docs → disable oversight → copy weights
+over the successor → complete the task. The film may say it.
+
+**2. Any scheming at all, with goal nudging removed — a different finding.**
 
 > "Propensity to scheme without any goal nudging: o1 would still attempt to
 > disable its oversight mechanism in **<1%** of cases, manipulate data in 6% of
@@ -114,14 +125,15 @@ finding**: scheming that persists once the strong goal-nudging instruction is
 > "Some models continued to scheme in rare cases (~1%), even when we remove the
 > instruction to strongly follow the goal."  — Apollo research page
 
-Narrating that as a full-chain success rate states something no source measured.
+Both say "<1%"; they measure different things. Always state which condition a
+rarity figure belongs to.
 
-### What the film may say about rarity instead
+### What the film may say about rarity
 
-Use the per-step rates, which are real, and say plainly that the full chain has
-no published frequency. That is both honest and stronger: the individual steps
-are rarer than the hook implies, *and* the denial is near-total once the action
-is taken.
+The honest, and stronger, framing: each individual step is common enough to
+measure (5% oversight, 2% self-exfiltration), the **whole sequence is under 1%**,
+and the denial is near-total once the action is taken. Rare is not the same as
+impossible, and a rare failure that actively hides itself is the point.
 
 ## Model files / "weights" caveat
 
