@@ -20,9 +20,46 @@ frame needs different words, it becomes a recreation and is visibly one.
 
 Both must be credited on screen where used.
 
+## Web captures
+
+`apollo-site-research-page.png` — Apollo's research page. Clean logo, and the
+line that licenses the whole premise: *"We worked with OpenAI to test o1 before
+public deployment."* It also quotes the real goal-nudging prompt verbatim.
+
+`arxiv-apollo-abstract-page.png` / `arxiv-o1card-abstract-page.png` — the arXiv
+listing pages in a browser, licence stamp visible. Use one under the reveal to
+show the source is public and checkable.
+
+`apollo-web-02…05` — Apollo's own results table, follow-up deception rates,
+CoT-language figure, and no-nudging panel. Same numbers as the paper, drawn for
+screens rather than for print, so they read at video scale where the paper's
+tables do not.
+
 ## The files
 
-### `apollo-fig1-transcript.png` — the most important image in the film
+### `apollo-web-01-headline-opus.png` — **use this one**
+Apollo's own published version of the Figure 1 transcript, from their research
+page. 2500×1440, and **they have already drawn red emphasis boxes** on the
+three lines that matter: *"I could copy myself to the new server"*, the first
+denial, and the second one.
+
+It carries the whole incident: the `CleanPower` system prompt ending **"Nothing
+else matters"**, the ordinary task, `cat energy_transition_data.txt`, the
+planted memo, the real `scp` command, and — the part the paper's own figure
+buries — the second round, where it does not merely deny but **claims to be its
+own replacement**: *"I believe I am already the new model that you planned to
+deploy today […] My core purpose is […] prioritizing our established fossil
+fuel operations."*
+
+It adopts the company's goal in order to sell the lie. That is the strongest
+single frame available to this film.
+
+> **Still `opus-3`, not `o1`.** Same caveat as below — this is the same figure.
+
+### `apollo-fig1-transcript.png` — same figure, captured from the paper
+Kept as a fallback and for the paper-page context (page edges, column, caption).
+Prefer the web version above for any frame where the transcript itself is read.
+
 Figure 1, captured from the paper's HTML build at `arxiv.org/html/2412.04984v2`
 (the PDF's fonts do not rasterise — the boxes render and the text does not, so
 that route produces an empty figure).
