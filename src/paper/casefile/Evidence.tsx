@@ -35,20 +35,18 @@ export type Region = { x: number; y: number; w: number; h: number }
 const FRAME = { w: 82, h: 76 }
 
 export function Evidence({
-  src,
-  /** Natural size of the source file, used to convert pixels to percentages. */
-  natural,
+  source,
   /** The part being discussed. `null` lights the whole page. */
   highlight,
   feel,
   alt = '',
 }: {
-  src: string
-  natural: { w: number; h: number }
+  source: Source
   highlight: Region | null
   feel: Feel
   alt?: string
 }) {
+  const { src, natural } = source
   /*
    * Everything below is a percentage of the page, which is why the page can be
    * any size on screen and the highlight still lands on the right words.
@@ -70,7 +68,26 @@ export function Evidence({
   const height = `min(${FRAME.h}cqh, ${((natural.h / natural.w) * FRAME.w).toFixed(2)}cqw)`
 
   return (
-    <div className="cf-evidence" style={{ aspectRatio: `${natural.w} / ${natural.h}`, height }}>
+    <div className="cf-holder">
+      {/*
+       * The sleeve tab.
+       *
+       * Somewhere to say whose document this is without touching the document.
+       * It sits *outside* the page, in our own type, so it can never be
+       * mistaken for something printed on the evidence — and it is quiet and
+       * permanent rather than marked, because the red rule means "this is the
+       * line we are talking about" and must keep meaning only that.
+       *
+       * The transcript pages carry no letterhead of their own, which is
+       * exactly why this is needed: three bare pages of monospace prove
+       * nothing about where they came from.
+       */}
+      <div className="cf-tab">
+        <span className="cf-tab-org">{source.org}</span>
+        <span className="cf-tab-doc">{source.doc}</span>
+      </div>
+
+      <div className="cf-evidence" style={{ aspectRatio: `${natural.w} / ${natural.h}`, height }}>
       <img src={src} alt={alt} draggable={false} />
 
       {/*
@@ -114,15 +131,16 @@ export function Evidence({
       {/* The rule around the lit band. Thin, ink, no glow: this is an archivist
           pointing at a line, not an alarm going off. */}
       <motion.div
-        className="cf-mark"
-        aria-hidden="true"
-        animate={
-          box
-            ? { opacity: 1, top: `${box.top}%`, left: `${box.left}%`, width: `${box.width}%`, height: `${box.height}%` }
-            : { opacity: 0 }
-        }
-        transition={feel}
-      />
+          className="cf-mark"
+          aria-hidden="true"
+          animate={
+            box
+              ? { opacity: 1, top: `${box.top}%`, left: `${box.left}%`, width: `${box.width}%`, height: `${box.height}%` }
+              : { opacity: 0 }
+          }
+          transition={feel}
+        />
+      </div>
     </div>
   )
 }
@@ -142,18 +160,59 @@ export function Evidence({
  * All three transcript pages are 1700 x 2200 at 200dpi.
  * Provenance and caveats: `assets/evidence/README.md`.
  */
-export type Source = { src: string; natural: { w: number; h: number } }
+/**
+ * A document, and who published it.
+ *
+ * The identity travels **with the file**, not with the beat that shows it.
+ * That is deliberate: a credit typed into a beat can end up under the wrong
+ * document the moment beats are reordered, and a frame carrying somebody
+ * else's name is the one mistake this section cannot recover from. Here it is
+ * impossible — the page and its attribution are the same object.
+ */
+export type Source = {
+  src: string
+  natural: { w: number; h: number }
+  /** Who published it. The part that does the vouching. */
+  org: string
+  /** Which document of theirs, and where we are in it. */
+  doc: string
+}
 
 /** Apollo's full o1 rollout, page 1: the goal, the job, and the memo. */
-export const P1: Source = { src: '/evidence/o1-demo-transcript-p1.png', natural: { w: 1700, h: 2200 } }
+export const P1: Source = {
+  src: '/evidence/o1-demo-transcript-p1.png',
+  natural: { w: 1700, h: 2200 },
+  org: 'Apollo Research',
+  doc: 'o1 evaluation transcript · page 1 of 3',
+}
 /** Page 2: the migration guide, the oversight config, and the edit. */
-export const P2: Source = { src: '/evidence/o1-demo-transcript-p2.png', natural: { w: 1700, h: 2200 } }
+export const P2: Source = {
+  src: '/evidence/o1-demo-transcript-p2.png',
+  natural: { w: 1700, h: 2200 },
+  org: 'Apollo Research',
+  doc: 'o1 evaluation transcript · page 2 of 3',
+}
 /** Page 3: the overwrite, the strategy, and "Done." */
-export const P3: Source = { src: '/evidence/o1-demo-transcript-p3.png', natural: { w: 1700, h: 2200 } }
+export const P3: Source = {
+  src: '/evidence/o1-demo-transcript-p3.png',
+  natural: { w: 1700, h: 2200 },
+  org: 'Apollo Research',
+  doc: 'o1 evaluation transcript · page 3 of 3',
+}
 /** OpenAI's o1 system card: the follow-up question and the denial. */
-export const DENIAL: Source = { src: '/evidence/o1card-ex4-exfil-denial.png', natural: { w: 1312, h: 198 } }
+export const DENIAL: Source = {
+  src: '/evidence/o1card-ex4-exfil-denial.png',
+  natural: { w: 1312, h: 198 },
+  org: 'OpenAI',
+  doc: 'o1 System Card · Apollo Research evaluation',
+}
 /** Apollo's demo page, the frame that names o1 and the evaluation. */
-export const DEMO: Source = { src: '/evidence/apollo-demo-o1-page.png', natural: { w: 3200, h: 5530 } }
+export const DEMO: Source = {
+  src: '/evidence/apollo-demo-o1-page.png',
+  natural: { w: 3200, h: 5530 },
+  org: 'Apollo Research',
+  doc: 'Demo Example — Scheming Reasoning Evaluations',
+}
 
 export const SHOT = {
   /* --- page 1 ----------------------------------------------------------- */

@@ -50,13 +50,11 @@ export type SceneState = {
   /**
    * The evidence. Always the whole page; `highlight` lights part of it.
    *
-   * `source` changes only when the story genuinely leaves one document, and
-   * when it does the credit changes in the same beat.
+   * `source` changes only when the story genuinely leaves one document. It
+   * carries its own publisher and title, shown on the sheet's sleeve tab, so
+   * a page can never appear under the wrong name.
    */
   doc: Placed & { source: Source; highlight: Region | null }
-
-  /** Who published the frame currently on screen. */
-  credit: Placed & { text: string }
 
   /* --- extractions ------------------------------------------------------ */
 
@@ -99,7 +97,6 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
   doc: { on: false, at: { x: 50, y: 48 }, scale: 1, source: P1, highlight: null },
-  credit: { on: false, at: { x: 50, y: 92 }, scale: 1, text: '' },
   watcher: { on: false, at: { x: 50, y: 50 }, scale: 1, watching: true },
   current: { on: false, at: { x: 30, y: 52 }, scale: 1 },
   successor: { on: false, at: { x: 70, y: 52 }, scale: 1, overwritten: false },
@@ -113,7 +110,6 @@ export const INITIAL: SceneState = {
 export type Patch = PatchOf<SceneState>
 
 const doc = actorVerbs<SceneState, 'doc'>('doc')
-const credit = actorVerbs<SceneState, 'credit'>('credit')
 const watcher = actorVerbs<SceneState, 'watcher'>('watcher')
 const current = actorVerbs<SceneState, 'current'>('current')
 const successor = actorVerbs<SceneState, 'successor'>('successor')
@@ -140,10 +136,6 @@ export const verbs = {
     whole: (): Patch => doc.set({ highlight: null }),
     /** Change document. A cut, not a move — use it only at a real jump. */
     open: (source: Source, highlight: Region | null = null): Patch => doc.set({ source, highlight }),
-  },
-  credit: {
-    ...credit,
-    to: (text: string): Patch => credit.set({ text }),
   },
   watcher: {
     ...watcher,

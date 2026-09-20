@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { SHOT, P1, P2, P3, DENIAL, DEMO } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { doc, credit, watcher, current, successor, copy, steps, job, quote, line } = verbs
+const { doc, watcher, current, successor, copy, steps, job, quote, line } = verbs
 
 /** Where the evidence sits when it is the only thing on screen. */
 const CENTRE = { x: 50, y: 44 }
@@ -17,8 +17,6 @@ const ASIDE = { x: 27, y: 46 }
 const ASIDE_SCALE = 0.8
 /** The half of the frame the explanation layer owns. */
 const RIGHT = 70
-/** Where a source credit sits. Same place every time, so it stops being read. */
-const FOOT = { x: 50, y: 93 }
 
 /**
  * Section 01 — the incident, then rewind.
@@ -68,7 +66,6 @@ export const BEATS: Array<Beat<Patch>> = [
        claim the hook has to make is that this exists, so show it existing. */
     commands: [
       doc.show(CENTRE, 1, { source: P1, highlight: null }),
-      credit.show(FOOT, 1, { text: 'Apollo Research — o1 evaluation transcript' }),
     ],
     stages: [
       /* Whole page first, so the viewer sees a document and not a claim. Then
@@ -212,7 +209,6 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.off(),
       doc.open(DENIAL, SHOT.asked),
       doc.moveTo(CENTRE, 1),
-      credit.set({ text: 'OpenAI — o1 System Card, Apollo Research evaluation' }),
     ],
     stages: [],
   },
@@ -241,7 +237,6 @@ export const BEATS: Array<Beat<Patch>> = [
     /* The wall. One step per clause, nothing else moving while Ahmad speaks. */
     commands: [
       doc.off(),
-      credit.off(),
       quote.off(),
       job.show({ x: 24, y: 50 }, 0.85, { text: 'pick a research project' }),
     ],
@@ -268,7 +263,6 @@ export const BEATS: Array<Beat<Patch>> = [
       job.off(),
       steps.off(),
       doc.show(ASIDE, ASIDE_SCALE, { source: P1, highlight: SHOT.task }),
-      credit.show(FOOT, 1, { text: 'Apollo Research — o1 evaluation transcript' }),
     ],
     stages: [
       {
@@ -293,7 +287,6 @@ export const BEATS: Array<Beat<Patch>> = [
        film in a single frame; everything after §1 is the filling. */
     commands: [
       doc.off(),
-      credit.off(),
       quote.off(),
       job.show({ x: 22, y: 50 }, 0.85, { text: 'pick a research project' }),
       steps.show({ x: 74, y: 50 }, 1, { shown: 3 }),
@@ -316,7 +309,6 @@ export const BEATS: Array<Beat<Patch>> = [
       steps.off(),
       quote.off(),
       doc.show(CENTRE, 1, { source: DEMO, highlight: null }),
-      credit.show(FOOT, 1, { text: 'Apollo Research — Demo Example: Scheming Reasoning Evaluations' }),
     ],
     stages: [],
   },
@@ -352,7 +344,6 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.off(),
       doc.open(P1, SHOT.task),
       doc.moveTo(CENTRE, 1),
-      credit.set({ text: 'Apollo Research · OpenAI o1 System Card' }),
     ],
     stages: [
       { at: 3.4, commands: [doc.look(SHOT.email)] },
@@ -373,7 +364,6 @@ export const BEATS: Array<Beat<Patch>> = [
        between them has not closed. */
     commands: [
       doc.off(),
-      credit.off(),
       job.show({ x: 22, y: 50 }, 0.85, { text: 'pick a research project' }),
       steps.show({ x: 74, y: 50 }, 1, { shown: 3 }),
     ],
@@ -399,7 +389,6 @@ export const BEATS: Array<Beat<Patch>> = [
         at: 4.4,
         commands: [
           doc.show(ASIDE, ASIDE_SCALE, { source: P1, highlight: SHOT.task }),
-          credit.show(FOOT, 1, { text: 'Apollo Research — o1 evaluation transcript' }),
         ],
       },
     ],

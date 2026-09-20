@@ -1,5 +1,5 @@
 import { Slot, type Feel } from '../../../../paper'
-import { Evidence, Watcher, Box, Copy, Step, Job, Credit, Quote } from '../../../../paper/casefile'
+import { Evidence, Watcher, Box, Copy, Step, Job, Quote } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
 /**
@@ -14,7 +14,7 @@ import { type SceneState } from './scene'
  * the thing the beat is actually doing.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, credit, watcher, current, successor, copy, steps, job, quote, line } = scene
+  const { doc, watcher, current, successor, copy, steps, job, quote, line } = scene
 
   /* The three actions, in the order they happened and in the order the VO
      names them. Labels are words from the transcript, not our summary. */
@@ -36,17 +36,12 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       <Slot on={doc.on} at={doc.at} scale={doc.scale} feel={feel} z={1}>
         <div className="cf-sheet">
           <Evidence
-            src={doc.source.src}
-            natural={doc.source.natural}
+            source={doc.source}
             highlight={doc.highlight}
             feel={feel}
             alt="Published transcript of an o1 evaluation run"
           />
         </div>
-      </Slot>
-
-      <Slot on={credit.on} at={credit.at} scale={credit.scale} feel={feel} z={2}>
-        <Credit text={credit.text} />
       </Slot>
 
       {/* --- the extractions ---------------------------------------------- */}

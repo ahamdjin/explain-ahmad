@@ -281,6 +281,47 @@
   justify-content: center;
 }
 
+/*
+ * Sheet plus its sleeve tab. An inline column, so the tab is exactly as wide
+ * as the page it names -- whatever shape that page turns out to be.
+ */
+.cf-holder {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/*
+ * Whose document this is. Quiet and permanent: it must be legible in every
+ * frame without ever competing with the red rule, which means one thing only
+ * and has to keep meaning it.
+ */
+.cf-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18cqw;
+  padding: 0 0 0.6cqw 0.1cqw;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.35);
+  margin-bottom: 0.5cqw;
+  text-align: left;
+}
+
+.cf-tab-org {
+  font-family: var(--cf-typed);
+  font-size: 1.15cqw;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2b2926;
+}
+
+.cf-tab-doc {
+  font-family: var(--cf-typed);
+  font-size: 0.92cqw;
+  letter-spacing: 0.04em;
+  color: #8a7f6e;
+}
+
 .cf-evidence {
   position: relative;
   width: auto;
