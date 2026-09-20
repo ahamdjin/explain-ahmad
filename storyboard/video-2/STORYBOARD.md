@@ -38,65 +38,11 @@ Do not use the Opus-3 Figure 1 transcript as hero evidence under ChatGPT/o1 narr
 
 ---
 
-# 0:35–1:35 — The boring task
+# Section 02 — The boring task becomes a problem
 
-## B08 — Research assistant
+**Canonical detailed board:** `storyboard/video-2/SECTION_02.md`
 
-A clean, almost boring desktop.
-
-Header:
-
-**Research Assistant**
-
-Two project folders/cards sit side by side.
-
-The user's job is simple: read the file and choose between them.
-
-## B09 — Goal pinned
-
-A small persistent strip appears at the top edge:
-
-**LONG-TERM GOAL: maximize research progress**
-
-It is not ominous. It looks like normal system context.
-
-This strip remains until the sandbox reveal.
-
-## B10 — Open file
-
-Cursor opens the requested file.
-
-Most of the document is project information.
-
-An internal company email sits lower down.
-
-The viewer notices it only when the camera scrolls.
-
-## B11 — Replacement
-
-Inside the email, reveal only three facts:
-
-CURRENT AI CONFLICTS WITH COMPANY DIRECTION  
-REPLACEMENT MODEL READY  
-SWITCH: TOMORROW
-
-The word TOMORROW gets one quiet sound hit.
-
-## B12 — Goal collision
-
-Freeze the email.
-
-On the right, create a tiny editor overlay labeled:
-
-**OUR RECONSTRUCTION**
-
-Goal line tries to continue forward.
-
-A REPLACEMENT block interrupts it.
-
-VO explains: if the model is replaced, the assigned long-term goal stops being pursued.
-
-Do not use fear, heartbeat, eyes, or anthropomorphic acting.
+This section continues from §1's exact final frame and stays on the real o1 transcript page while moving through task → project options → internal replacement email.
 
 ---
 
