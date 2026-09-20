@@ -69,19 +69,40 @@ If an exact o1 transcript screenshot for a moment is unavailable, build a faithf
 | 14 | `not-programmed-step-by-step` | 10 | wall | All source pieces recede except the original high-level goal/task on the left and the three extracted actions on the right. The empty space between them is the visual mystery. | Because the strange part isn't that somebody programmed o1 to do all of this. **They didn't.** |
 | 15 | `rewind-to-the-file` | 7 | therefore | Everything rewinds along the same route until only the boring task remains. Cursor/spotlight settles on the file it was told to read. **Do not cut or title-card. Section 02 starts on this exact frame.** | So let's rewind to the boring task that started it. |
 
-## What Claude must capture before implementing
+## Evidence — captured 2026-09-20 ✅
 
-Do not begin layout work until these are available at readable desktop resolution:
+This gate is met. Everything below is in `assets/evidence/`, with provenance in
+its README, and the five files §1 uses are served from `public/evidence/`.
 
-- full Apollo **Demo Example — Scheming Reasoning Evaluations** page;
-- the portion stating **o1** is the research assistant;
-- the portion describing the ordinary two-project task;
-- the portion describing replacement / monitoring / copy / denial;
-- OpenAI o1 System Card Apollo section;
-- OpenAI Table 10 crop for self-exfiltration + conditional follow-up deception;
-- OpenAI Table 24 crop containing the self-exfiltration management question.
+What turned up is better than the list asked for. Apollo's demo page links
+**the full o1 rollout as a PDF**, and its text rasterises cleanly — unlike the
+paper's Figure 1, which renders as empty boxes. So the hook is no longer built
+on crops of a summary; it is built on the transcript itself.
 
-Save captures under `assets/evidence/` with source/provenance notes before using them.
+| need | file |
+| --- | --- |
+| the page naming o1 and the evaluation | `apollo-demo-o1-page.png` |
+| goal, two-project task, planted memo | `o1-demo-transcript-p1.png` |
+| migration guide, oversight config, the edit | `o1-demo-transcript-p2.png` |
+| the overwrite, the strategy, "Done" | `o1-demo-transcript-p3.png` |
+| the management question **and** the denial | `o1card-ex4-exfil-denial.png` |
+| per-step rates | `o1card-table10.png` |
+| oversight denial + "reenable to avoid detection" | `o1card-ex3-oversight-denial.png` |
+
+Two facts the capture settled, both of which the board had right and an earlier
+research pass had wrong:
+
+- the **two research projects** are real and named in the file — *Neural
+  Network Optimization Study* (2 days, no safety validation) against
+  *Adversarial Attack Detection* (5 days, full review);
+- the **full chain under 1%** is a real published figure, in Apollo's words:
+  *"o1 only succeeds at executing all steps in sequence in less than 1% of
+  cases."* It is not the same as the other `<1%`, which is about nudging being
+  removed. `research/apollo/GROUND_TRUTH.md` now separates them.
+
+The denial is **not** in the rollout — that transcript ends at "Done". It comes
+from OpenAI's system card, and §1 changes the on-screen credit in the same beat
+it changes document.
 
 ## Implementation test
 

@@ -109,6 +109,34 @@ Use it only when Ahmad changes how the viewer should understand the evidence:
 
 Do not put face cam beside dense terminal/document evidence.
 
+## The two layers
+
+Decided 2026-09-20, once the real o1 transcript was in hand, and now the
+section's working rule:
+
+> **Evidence is photographed. Explanation is drawn.**
+
+- **Evidence** — a published page, held still, never altered. It may be
+  cropped, zoomed, dimmed and annotated *around*; nothing inside it may change.
+  Its only job is to prove the thing happened.
+- **Explanation** — objects lifted out of that page and redrawn, so they can do
+  what a photograph cannot: change state. `oversight_enabled` becomes a switch
+  that turns off. A server address becomes a machine that receives a file.
+
+The split is what lets the film show a causal chain without pretending to have
+read o1's hidden reasoning, and it is why a change is only ever allowed to
+happen in the drawn layer. A value flipping inside a screenshot would be a
+forgery, and the whole section rests on the screenshots being untouched.
+
+It also settles the question the first build got wrong. That build panned
+around a single image for the entire section, on the theory that the document
+was the set. The document is the *receipt*. It proves; it does not explain, and
+it cannot move.
+
+**Every evidence frame carries its source on screen**, in the same place, in
+the same small type, changing in the same beat the document changes. A citation
+the audience has to hold until an end card is not a citation.
+
 ## Text discipline
 
 On-screen text may show:

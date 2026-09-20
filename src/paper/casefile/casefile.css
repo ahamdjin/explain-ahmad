@@ -189,3 +189,109 @@
   max-width: 62cqw;
   text-wrap: balance;
 }
+
+/* --- the explanation layer ---------------------------------------------- */
+
+/*
+ * Extracted objects are drawn, and must *look* drawn. They sit next to
+ * photographs of real documents, and the one thing a viewer must never have to
+ * wonder is which of the two they are reading. Pen for anything we lifted out;
+ * mono stays reserved for what the source actually said.
+ */
+.cf-extract svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cf-extract-label {
+  font-family: var(--cf-typed);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  fill: #2b2926;
+}
+
+.cf-extract-sub {
+  font-family: var(--cf-typed);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  fill: #807a72;
+}
+
+.cf-extract-state {
+  font-family: var(--cf-typed);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.cf-extract-file {
+  font-family: var(--cf-typed);
+  font-size: 8.5px;
+  fill: #2b2926;
+}
+
+/* The three unasked steps, stacked. `gap` rather than margins so adding a
+   fourth cannot silently change the spacing of the first three. */
+.cf-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6cqw;
+}
+
+/*
+ * Source credit. Small, quiet, and in the same place under every frame, so it
+ * becomes furniture rather than something the viewer keeps re-reading -- but
+ * present on every single evidence frame, because a citation the audience has
+ * to remember for eight minutes until an end card is not a citation.
+ */
+.cf-credit {
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Our own words on screen: the film speaking, not the evidence. */
+.cf-line {
+  font-family: var(--cf-pen);
+  font-size: 2.4cqw;
+  line-height: 1.35;
+  color: #2b2926;
+  text-align: center;
+  max-width: 44cqw;
+}
+
+/* The evidence window itself: a sheet on a desk, with a real edge. */
+.cf-evidence {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: #fffdf8;
+  border: 1px solid rgba(43, 41, 38, 0.18);
+  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.06), 0 8px 24px rgba(43, 41, 38, 0.08);
+}
+
+.cf-evidence img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  display: block;
+  /* the travel is a transform, so the origin must not move with it */
+  transform-origin: 0 0;
+}
+
+/* Spotlight dims the edges rather than cropping them away, so a line can be
+   read in context without losing the proof that context exists. */
+.cf-evidence-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 253, 248, 0) 38%, rgba(43, 41, 38, 0.2) 100%);
+}

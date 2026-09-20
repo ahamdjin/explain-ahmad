@@ -22,3 +22,4 @@ public/mix/*.m4a
 assets/sfx/raw/
 assets/sfx/pool/
 public/sfx/
+.playwright-cli/
