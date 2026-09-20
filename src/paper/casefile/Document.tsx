@@ -140,6 +140,8 @@ export function Document({
             className="cf-stamp"
             fill={PALETTE.red}
             opacity="0.82"
+            textLength={Math.min(width - 44, stamp.length * 17)}
+            lengthAdjust="spacingAndGlyphs"
             transform={`rotate(-11 ${width / 2} ${padTop + (lines.length * lineH) / 2 + 8})`}
             initial={{ opacity: 0, scale: 1.35 }}
             animate={{ opacity: 0.82, scale: 1 }}

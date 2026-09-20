@@ -1,0 +1,237 @@
+/*
+ * The Video 2 component catalogue.
+ *
+ * Styled as the thing it documents: a case file. It reads from the same
+ * palette tokens the components do, so the page and the film cannot drift.
+ */
+
+.cfc {
+  --cfc-ink: #2B2926;
+  --cfc-graphite: #807A72;
+  --cfc-paper: #F2ECDF;
+  --cfc-sheet: #FBF8F1;
+  --cfc-white: #FFFDF8;
+  --cfc-shade: #EDE5D8;
+  --cfc-idle: #CDC1A9;
+  --cfc-red: #C86658;
+  --cfc-pen: #4E74A8;
+  --cfc-lit: #F6D9C0;
+
+  --cfc-typed: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+  --cfc-hand: 'Patrick Hand', 'Bradley Hand', 'Noteworthy', cursive;
+
+  background: var(--cfc-paper);
+  color: var(--cfc-ink);
+  min-height: 100vh;
+  font-family: var(--cfc-typed);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cfc-wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 48px 90px;
+}
+
+/* --- masthead ----------------------------------------------------------- */
+
+.cfc-tab {
+  display: inline-block;
+  background: var(--cfc-white);
+  border: 1.5px solid var(--cfc-ink);
+  border-bottom: none;
+  padding: 5px 16px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.cfc-masthead {
+  background: var(--cfc-white);
+  border: 1.5px solid var(--cfc-ink);
+  padding: 26px 28px 24px;
+}
+
+.cfc-masthead h1 {
+  font-family: var(--cfc-hand);
+  font-size: clamp(32px, 6vw, 50px);
+  font-weight: 400;
+  line-height: 1;
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+
+.cfc-sub {
+  font-size: 12px;
+  color: var(--cfc-graphite);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.cfc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 26px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cfc-idle);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+.cfc-meta b { color: var(--cfc-graphite); font-weight: 400; }
+
+/* --- the governing rule ------------------------------------------------- */
+
+.cfc-rule {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1.5px solid var(--cfc-ink);
+  background: var(--cfc-white);
+}
+.cfc-rule > div { padding: 22px 24px; }
+.cfc-rule > div + div { border-left: 1.5px solid var(--cfc-ink); }
+.cfc-rule h3 {
+  margin: 0 0 10px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cfc-graphite);
+  font-weight: 700;
+}
+.cfc-rule p { margin: 10px 0 0; font-size: 12px; color: var(--cfc-graphite); line-height: 1.7; }
+.cfc-s-typed { font-family: var(--cfc-typed); font-size: 15px; }
+.cfc-s-pen { font-family: var(--cfc-hand); font-size: 21px; color: var(--cfc-pen); }
+
+.cfc-law {
+  margin-top: 22px;
+  border-left: 3px solid var(--cfc-red);
+  background: var(--cfc-white);
+  padding: 18px 24px;
+}
+.cfc-law strong {
+  font-family: var(--cfc-hand);
+  font-size: 25px;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 6px;
+}
+.cfc-law p { margin: 0; font-size: 12px; color: var(--cfc-graphite); max-width: 64ch; line-height: 1.7; }
+
+/* --- exhibits ----------------------------------------------------------- */
+
+.cfc-ex { margin-top: 54px; }
+
+.cfc-ex-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.cfc-no { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; color: var(--cfc-red); }
+.cfc-ex-head h2 { font-family: var(--cfc-hand); font-size: 27px; font-weight: 400; margin: 0; }
+
+.cfc-note {
+  font-size: 12px;
+  color: var(--cfc-graphite);
+  margin: 0 0 20px;
+  max-width: 70ch;
+  line-height: 1.7;
+}
+
+.cfc-specimens {
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.cfc-caption {
+  font-family: var(--cfc-hand);
+  font-size: 15px;
+  color: var(--cfc-graphite);
+  margin-top: 7px;
+}
+
+/* --- controls ----------------------------------------------------------- */
+
+.cfc-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cfc-controls button {
+  font-family: var(--cfc-hand);
+  font-size: 16px;
+  padding: 6px 15px;
+  background: var(--cfc-white);
+  border: 1.5px solid var(--cfc-ink);
+  color: var(--cfc-ink);
+  cursor: pointer;
+}
+.cfc-controls button:hover { background: var(--cfc-shade); }
+.cfc-controls button:focus-visible { outline: 2px solid var(--cfc-pen); outline-offset: 2px; }
+.cfc-controls input[type='range'] { accent-color: var(--cfc-red); width: 220px; max-width: 100%; }
+
+.cfc-state {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cfc-graphite);
+}
+
+/* --- palette + forbidden ------------------------------------------------ */
+
+.cfc-swatches { display: flex; flex-wrap: wrap; border: 1.5px solid var(--cfc-ink); }
+.cfc-sw { flex: 1 1 100px; min-width: 100px; }
+.cfc-sw-chip { height: 56px; }
+.cfc-sw-lab {
+  padding: 7px 9px 9px;
+  background: var(--cfc-white);
+  border-top: 1.5px solid var(--cfc-ink);
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+}
+.cfc-sw + .cfc-sw .cfc-sw-lab,
+.cfc-sw + .cfc-sw .cfc-sw-chip { border-left: 1.5px solid var(--cfc-ink); }
+.cfc-sw-lab b { display: block; font-weight: 700; }
+.cfc-sw-lab span { color: var(--cfc-graphite); }
+
+.cfc-forbidden {
+  columns: 2;
+  column-gap: 30px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  line-height: 1.85;
+}
+.cfc-forbidden li::marker { color: var(--cfc-red); }
+
+.cfc-foot {
+  margin-top: 58px;
+  padding-top: 18px;
+  border-top: 1px solid var(--cfc-idle);
+  font-size: 11px;
+  color: var(--cfc-graphite);
+  line-height: 1.8;
+}
+.cfc code {
+  font-family: var(--cfc-typed);
+  font-size: 11.5px;
+  background: var(--cfc-white);
+  border: 1px solid var(--cfc-idle);
+  padding: 1px 5px;
+}
+
+@media (max-width: 720px) {
+  .cfc-rule { grid-template-columns: 1fr; }
+  .cfc-rule > div + div { border-left: none; border-top: 1.5px solid var(--cfc-ink); }
+  .cfc-forbidden { columns: 1; }
+}

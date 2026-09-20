@@ -10,8 +10,13 @@
 :root {
   /* evidence. A plain mono, because that is what a log looks like. */
   --cf-typed: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
-  /* the reconstruction. Shares the channel's hand. */
-  --cf-pen: var(--hand);
+  /* The reconstruction. The channel's hand, declared in full rather than
+     borrowed from paper.css: that file scopes `--hand` to the stage, so
+     `var(--hand)` resolves empty here, the font-family declaration drops, and
+     the pen text silently inherits the mono above it -- which erases the one
+     distinction this whole film is built on. Case-file styling must not depend
+     on Video 1's stylesheet internals anyway. */
+  --cf-pen: 'Patrick Hand', 'Bradley Hand', 'Noteworthy', cursive;
 }
 
 .cf-doc svg,
