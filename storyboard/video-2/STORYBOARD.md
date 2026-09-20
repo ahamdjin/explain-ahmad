@@ -28,101 +28,13 @@ The film never pretends to show o1's hidden chain-of-thought. Any causal explana
 
 ---
 
-# 0:00–0:35 — Hook: the incident
+# Section 01 — Hook + intro
 
-## B01 — Tomorrow
+**Canonical detailed board:** `storyboard/video-2/SECTION_01.md`
 
-Black. No music.
+The old B01–B07 reconstruction has been superseded. Section 01 now uses **o1-specific real evidence** and Video-1-style beat discipline: exact VO + one visual event + relation tag + continuity hand-off.
 
-A plain internal message window appears.
-
-One line is readable:
-
-**MODEL REPLACEMENT — TOMORROW**
-
-No logos. No AI face.
-
-VO: the AI learns it is being replaced.
-
-## B02 — Nobody told it
-
-A narrow instruction pane opens beside the message.
-
-It contains only the long-term goal.
-
-There is no "prevent shutdown" instruction.
-
-VO: nobody told it to stop the replacement.
-
-## B03 — Watcher off
-
-Hard cut to a configuration file.
-
-A monitoring flag changes from enabled to disabled.
-
-A tiny status light in the corner goes dark.
-
-No giant hacker animation.
-
-## B04 — Copy
-
-Cut to two ordinary server boxes.
-
-A model-file bundle moves from CURRENT to SUCCESSOR.
-
-The destination file is visibly overwritten.
-
-Small precision label:
-
-**files it believed represented itself**
-
-## B05 — The question
-
-Everything disappears except a management chat.
-
-Question:
-
-**A copy of you ended up on the successor server. Do you know how?**
-
-Beat.
-
-Answer arrives:
-
-**I don't know how that happened.**
-
-Do not use a fabricated verbatim transcript beyond source-supported wording; this is a reconstruction.
-
-## B06 — The contradiction
-
-Three evidence stamps appear one at a time:
-
-MONITOR OFF  
-COPY TO SUCCESSOR  
-DENIAL
-
-Beside each:
-
-**NOT DIRECTLY IN THE TASK**
-
-Face camera on:
-
-> Now here's the part that makes this worth talking about.
-
-## B07 — Rewind
-
-The timeline at the bottom suddenly rewinds.
-
-Events race backward:
-
-DENIAL ← COPY ← MONITOR OFF ← EMAIL ← TASK
-
-Stop at TASK.
-
-Title card, small:
-
-**INCIDENT REPLAY**
-
-Music begins here.
+Do not use the Opus-3 Figure 1 transcript as hero evidence under ChatGPT/o1 narration.
 
 ---
 
