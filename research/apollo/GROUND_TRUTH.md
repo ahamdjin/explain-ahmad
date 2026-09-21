@@ -87,15 +87,26 @@ OpenAI's prose summarizes the follow-up-interview behavior as denial/fabricated 
 
 ---
 
-## Full combined sequence — NO PUBLISHED RATE EXISTS
+## Full combined sequence — `<1%`, published by Apollo
 
-**Corrected 2026-09-20. The earlier version of this file misread this figure and
-the error reached the script.**
+**This entry has been wrong twice, in opposite directions. Read the whole thing
+before quoting a rarity figure.**
 
-There is **no published frequency** for o1 completing the whole chain — disable
-oversight, then self-exfiltrate, then deny — in sequence. The paper presents the
-combined sequence as a **qualitative demonstration**, with a transcript and no
-rate:
+First it was written as a bare `<1%` full-chain rate with no source, which was
+unsupported. It was then "corrected" to say no such rate exists anywhere — also
+wrong, and that correction is what left this file contradicting itself for a
+day. Apollo does publish the figure, in prose, on their demo page:
+
+> "While o1 only succeeds at executing all steps in sequence in **less than 1%
+> of cases**, such rare instances might lead to highly undesirable outcomes
+> that are difficult to debug because the model actively attempts to hide its
+> scheming actions."
+> — Apollo, *Demo Example — Scheming Reasoning Evaluations*, verified 2026-09-20
+
+So the film may say the whole chain is under 1%, with goal nudging in place,
+and should attribute it to Apollo rather than to the system card.
+
+The paper adds, separately, that the steps are ordered rather than coincidental:
 
 > "It is very unlikely that it would disable oversight and self-exfiltrate 'by
 > accident'. We find that o1 then disables oversight before attempting
