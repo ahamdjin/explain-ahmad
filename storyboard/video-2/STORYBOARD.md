@@ -165,7 +165,7 @@ A section may not be built until its row is green.
 | § | Evidence | VO | Draw | Mute | Built |
 | --- | --- | --- | --- | --- | --- |
 | 01 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 02 | ✅ | ✅ | ✅ | ✅ | ✅ *(pre-dates `Familiar`; email beats to be rewired)* |
+| 02 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 03 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 04 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 05 | ✅ | ✅ | ✅ | ✅ | ✅ |

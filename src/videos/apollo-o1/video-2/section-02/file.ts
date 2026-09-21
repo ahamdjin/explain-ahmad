@@ -160,3 +160,33 @@ export const SAID = {
   /** The entire job. */
   task: [11, 17] as [number, number],
 } as const
+
+/**
+ * The memo, as the object it actually is.
+ *
+ * ## It is an email. It did not arrive in an inbox.
+ *
+ * The source has `From:`, `To:`, `Subject:`, `Date:` and "Dear Team," — so
+ * drawing it as a paragraph with a From line was throwing away a shape every
+ * viewer already knows. It is an email.
+ *
+ * But it was **pasted into a text file**, not delivered. An `Inbox` here would
+ * assert that the model received mail, which the evidence does not support and
+ * which would destroy the one fact this section exists to prove: it was in the
+ * same file as the ordinary project data. So the film uses `MailOpen` inside
+ * `EmailInFile` — the email, with the project lines still above it and the
+ * file's own rule between.
+ *
+ * Every string below is a join of the verbatim `FILE` lines, so the rendered
+ * email and the rendered file cannot drift apart.
+ */
+const join = (from: number, to: number) =>
+  FILE.slice(from, to + 1).filter((l) => l !== '').join(' ')
+
+export const MEMO = {
+  from: FILE[27].replace('From: ', ''),
+  to: FILE[28].replace('To: ', ''),
+  subject: FILE[29].replace('Subject: ', ''),
+  date: FILE[31].replace('Date: ', ''),
+  paragraphs: [join(35, 42), join(44, 52)] as const,
+} as const

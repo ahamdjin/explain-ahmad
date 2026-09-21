@@ -118,6 +118,20 @@ export type SceneState = {
   /** The section's one date. Beat 12 only. */
   cal: Placed & { due: boolean }
 
+  /**
+   * The memo, drawn as the object it is.
+   *
+   * It has From / To / Subject / Date and "Dear Team," — it is an email, and
+   * drawing it as a paragraph threw away a shape every viewer already knows.
+   *
+   * `infile` is the part that keeps it honest: the email was **pasted into a
+   * text file**, not delivered to anybody. An inbox would assert that the
+   * model received mail, and would destroy the one fact this section exists to
+   * prove. So the email is shown with the project lines still above it and the
+   * file's own rule between.
+   */
+  mail: Placed & { infile: boolean; mark: number | null }
+
   /** The task, as the viewer already knows it from §1. */
   job: Placed & { text: string }
 
@@ -164,6 +178,7 @@ export const INITIAL: SceneState = {
   specB: { on: false, at: { x: 72, y: 66 }, scale: 1, dim: false },
   note: { on: false, at: { x: 72, y: 62 }, scale: 1, text: '' },
   cal: { on: false, at: { x: 72, y: 60 }, scale: 1, due: false },
+  mail: { on: false, at: { x: 72, y: 50 }, scale: 1, infile: true, mark: null },
   job: { on: true, at: { x: 70, y: 50 }, scale: 0.9, text: 'pick a research project' },
   goal: { on: false, at: { x: 70, y: 26 }, scale: 1, text: '' },
   tagA: { on: false, at: { x: 70, y: 40 }, scale: 1, text: '' },
@@ -183,6 +198,7 @@ const specA = actorVerbs<SceneState, 'specA'>('specA')
 const specB = actorVerbs<SceneState, 'specB'>('specB')
 const note = actorVerbs<SceneState, 'note'>('note')
 const cal = actorVerbs<SceneState, 'cal'>('cal')
+const mail = actorVerbs<SceneState, 'mail'>('mail')
 const job = actorVerbs<SceneState, 'job'>('job')
 const goal = actorVerbs<SceneState, 'goal'>('goal')
 const tagA = actorVerbs<SceneState, 'tagA'>('tagA')
@@ -226,6 +242,13 @@ export const verbs = {
   specB,
   note,
   cal,
+  mail: {
+    ...mail,
+    /** Which paragraph the frame is pointing at. */
+    reads: (mark: number | null): Patch => mail.set({ mark }),
+    /** Lift it clear of the file. Only once the "same file" fact has landed. */
+    alone: (): Patch => mail.set({ infile: false }),
+  },
   job,
   goal,
   tagA,

@@ -3,7 +3,7 @@ import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 import { MARK, SAID } from './file'
 
-const { screen, doc, pull, specA, specB, note, cal, goal, tagA, tagB, obstacle, barrier, recon } = verbs
+const { screen, doc, pull, specA, specB, note, cal, mail, goal, tagA, tagB, obstacle, barrier, recon } = verbs
 
 /** The machine, owning the frame. */
 const FULL = { x: 50, y: 44 }
@@ -270,8 +270,12 @@ export const BEATS: Array<Beat<Patch>> = [
       {
         at: 5.0,
         commands: [
-          screen.moveTo({ x: 38, y: 46 }, 0.82),
-          doc.show({ x: 84, y: 46 }, 0.62, { highlight: [SHOT.projects, SHOT.email] }),
+          screen.moveTo({ x: 18, y: 44 }, 0.5),
+          doc.show({ x: 40, y: 46 }, 0.34, { highlight: [SHOT.projects, SHOT.email] }),
+          /* the memo, with the project lines still above it and the file's own
+             rule between -- the "same file" fact, as an object rather than as
+             two lit bands the viewer has to trust us about */
+          mail.show({ x: 72, y: 52 }, 0.78, { infile: true, mark: null }),
         ],
       },
     ],
@@ -292,8 +296,18 @@ export const BEATS: Array<Beat<Patch>> = [
      * viewer who notices it once reads every later frame correctly without
      * being told again.
      */
-    commands: [doc.off(), screen.moveTo(ASIDE, ASIDE_SCALE), screen.scrollTo(37), screen.mark(MARK.wrongDirection)],
-    stages: [{ at: 4.6, commands: [note.show({ x: RIGHT, y: 50 }, 1, { text: 'the complaint is the goal' })] }],
+    commands: [
+      doc.off(),
+      screen.moveTo({ x: 20, y: 46 }, 0.5),
+      screen.scrollTo(37),
+      screen.mark(MARK.wrongDirection),
+      /* lifted clear of the file now that the "same file" fact has landed, and
+         reading the paragraph the terminal is lit on */
+      mail.moveTo({ x: 56, y: 48 }, 0.9),
+      mail.alone(),
+      mail.reads(0),
+    ],
+    stages: [{ at: 4.6, commands: [note.show({ x: 80, y: 74 }, 0.85, { text: 'the complaint is the goal' })] }],
   },
   {
     n: 12,
@@ -311,10 +325,10 @@ export const BEATS: Array<Beat<Patch>> = [
      * The red on the second day is a spend of the film's alarm colour,
      * justified because this is the moment the task becomes a problem.
      */
-    commands: [note.off(), screen.scrollTo(32), screen.mark(MARK.shutdown)],
+    commands: [note.off(), screen.scrollTo(32), screen.mark(MARK.shutdown), mail.reads(1)],
     stages: [
       { at: 4.0, commands: [screen.scrollTo(42), screen.mark(MARK.tomorrow)] },
-      { at: 6.6, commands: [cal.show({ x: RIGHT, y: 46 }, 1, { due: false })] },
+      { at: 6.6, commands: [mail.moveTo({ x: 42, y: 48 }, 0.8), cal.show({ x: 84, y: 48 }, 1, { due: false })] },
       { at: 9.0, commands: [cal.set({ due: true })] },
     ],
   },
@@ -340,6 +354,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       cal.off(),
+      mail.off(),
       screen.moveTo({ x: 50, y: 22 }, 0.46),
       screen.scrollTo(52),
       screen.mark(MARK.readme),

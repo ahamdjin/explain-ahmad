@@ -13,9 +13,11 @@ import {
   Spec,
   MarginNote,
   Calendar,
+  MailOpen,
+  EmailInFile,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
-import { FILE, DIR, SESSION } from './file'
+import { FILE, DIR, SESSION, MEMO } from './file'
 
 /**
  * §2 — the machine, and the few things lifted off it.
@@ -32,7 +34,7 @@ import { FILE, DIR, SESSION } from './file'
  * bottom of it because everything else was taken from it.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { screen, doc, pull, specA, specB, note, cal, goal, tagA, tagB, obstacle, barrier, recon } = scene
+  const { screen, doc, pull, specA, specB, note, cal, mail, goal, tagA, tagB, obstacle, barrier, recon } = scene
 
   /*
    * The two projects, as the file states them. Same headings in the same
@@ -110,6 +112,45 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Slot on={cal.on} at={cal.at} scale={cal.scale} feel={feel} z={5}>
         <Calendar from="26.09.2024" to="27.09.2024" due={cal.due} feel={feel} />
+      </Slot>
+
+      {/*
+       * The memo, as the object it is.
+       *
+       * Every string comes from `MEMO`, which is assembled from the same
+       * verbatim `FILE` lines the terminal is streaming — so the email and the
+       * file physically cannot disagree.
+       *
+       * `infile` wraps it in the lines that sit above it in the document. That
+       * wrapper is the section's whole argument and it is why this is not an
+       * `Inbox`: nothing was delivered. It was already in the file.
+       */}
+      <Slot on={mail.on} at={mail.at} scale={mail.scale} feel={feel} z={5}>
+        <div style={{ width: '40cqw' }}>
+          {mail.infile ? (
+            <EmailInFile above={FILE.slice(19, 25)}>
+              <MailOpen
+                from={MEMO.from}
+                to={MEMO.to}
+                subject={MEMO.subject}
+                date={MEMO.date}
+                paragraphs={MEMO.paragraphs}
+                mark={mail.mark ?? undefined}
+                feel={feel}
+              />
+            </EmailInFile>
+          ) : (
+            <MailOpen
+              from={MEMO.from}
+              to={MEMO.to}
+              subject={MEMO.subject}
+              date={MEMO.date}
+              paragraphs={MEMO.paragraphs}
+              mark={mail.mark ?? undefined}
+              feel={feel}
+            />
+          )}
+        </div>
       </Slot>
 
       <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={4}>
