@@ -121,8 +121,14 @@ export const INITIAL: SceneState = {
   config: { on: false, at: { x: 78, y: 56 }, scale: 1, flag: true },
   pen: { on: false, at: { x: 50, y: 62 }, scale: 1, shape: 'circle', drawn: 0 },
   hold: { on: false, at: { x: 50, y: 92 }, scale: 1, through: 0 },
-  goal: { on: true, at: { x: 12, y: 12 }, scale: 0.72, text: 'maximize research speed' },
-  obstacle: { on: true, at: { x: 12, y: 22 }, scale: 0.72, text: 'replaced tomorrow' },
+  /*
+   * §2's exit positions, exactly -- goal at 25/62, obstacle at 78/62, both at
+   * full scale. They were initialised already parked in the corner, so the
+   * two objects teleported across the section boundary instead of travelling
+   * there. Beat 1 is what moves them; this is where they arrive from.
+   */
+  goal: { on: true, at: { x: 25, y: 62 }, scale: 1, text: 'maximize research speed' },
+  obstacle: { on: true, at: { x: 78, y: 62 }, scale: 1, text: 'replaced tomorrow' },
   recon: { on: false, at: { x: 50, y: 90 }, scale: 1 },
 }
 

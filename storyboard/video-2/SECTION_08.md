@@ -62,6 +62,22 @@ Cut it first if the section runs long. It is illustration, not argument.
 
 ## Composition budget
 
+**Read this before trusting the layout names below.** The `Compose` module —
+`Solo`, `Pair`, `Parked`, `LayAside`, `LayFooter`, `Host`, `Triptych` — is
+**not used by any built section.** Every frame in this film is positioned by
+hand, with `Slot` coordinates in `beats.ts`.
+
+So a layout name here describes the *intended arrangement*, not a component
+call. What actually enforces uniqueness is the **"No repeated compositions"**
+block at the top of each section's `beats.ts`, which lists one treatment per
+beat and is checked by looking at the rendered contact sheet.
+
+That is a weaker guarantee than the module would give, and it cost real bugs:
+every overlap caught during the build — §3 beat 10, §4 beats 6–7, §6 beat 12,
+§2 beats 10–11, §9 beat 9 — was hand-placed objects colliding, which is exactly
+what `Compose` exists to prevent. Adopting it is open work, not a claim this
+board gets to make.
+
 `Parked` returns here for beats 4–7 because they must be **identical** — this
 is the film's one licensed repetition, and it only works if the composition
 does not drift. `Solo` at beat 3.

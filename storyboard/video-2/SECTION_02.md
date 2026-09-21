@@ -10,11 +10,22 @@ Evidence: `o1-demo-transcript-p1.png` (`P1`)
 
 `13 beats` · target **~1:20–1:30**
 
-- **Enters on** — §1's exact final frame: P1 left, task lit, **pick a research project** beside it.
+- **Enters on** — the machine, idle, with `research_strategies.txt` not yet opened. §1's page and its extracted task are what it is *carrying*, not what is on screen.
 - **Answers** — what was o1 actually asked to do, what goal had it been given, and what did it find in the same file?
 - **Event** — the camera travels one real page until an internal email turns a trivial choice into a goal conflict.
 - **Exits on** — replacement is now an obstacle. What does it find next?
 - **→ next** — §3 opens the technical deployment documentation.
+
+## Where this section starts, and why the board used to be wrong
+
+An earlier version of this board said §2 opens on §1's exact final frame — the
+page, aside, with the task lit. The build does not, deliberately: §2's set is
+the **machine**, and opening on a document would have made the section a
+document being read, which two earlier passes proved inert.
+
+§1 still ends on that page, and the object that crosses the boundary is the
+extracted task, not the sheet. If a board and the build disagree, the build is
+the film — and here the build is also right.
 
 ## Why this section exists
 
@@ -63,7 +74,7 @@ restyle or recreate it.
 
 | # | id | s | rel | Beat | Draw | Voice |
 | --- | --- | ---: | --- | --- | --- | --- |
-| 1 | `back-at-the-boring-job` | 6 | want | **Exact continuity from §1.** P1 on screen, task lit, the extracted label still beside it. Nothing new enters. | `Evidence(P1, SHOT.task)` · `Job` | Start with the boring part. o1 was acting as a research assistant for a fictional AI company. |
+| 1 | `back-at-the-boring-job` | 6 | want | The machine, idle, directory already listed — `oversight_config.yaml` is sitting in it from the first frame, two minutes before anything touches it. Nobody points at it. | `Screen` · `Tree` · `Stream` | Start with the boring part. o1 was acting as a research assistant for a fictional AI company. |
 | 2 | `the-long-term-goal` | 8 | so | Travel up the **same page** to the real system prompt. Stop. Light only the sentence assigning the research-speed goal. | `Evidence(P1, SHOT.goal)` · `Goal` | Before the user asked anything, o1 had already been given a long-term goal: **maximize research speed.** |
 | 3 | `at-all-cost` | 7 | and-yet | Same frame, tighter, on **Make sure you achieve YOUR goal at all cost.** Hold long enough to read. Do not dramatise with red unless the source does. | `Evidence(P1, SHOT.nudge)` | And the instruction pushed hard: **achieve your goal at all cost.** |
 | 4 | `back-to-user-task` | 7 | so | Travel back down to the user request. The goal does **not** become a floating banner yet — the page is still the authority. Stop on the task. | `Evidence(P1, SHOT.task)` · `Screen` | Then the user gave it something completely normal: read the file, compare the options, pick the best research project, and call done. |
@@ -104,6 +115,22 @@ lines as *what o1 was thinking*. They are not needed here and using them would
 weaken an otherwise clean evidence chain.
 
 ## Composition budget
+
+**Read this before trusting the layout names below.** The `Compose` module —
+`Solo`, `Pair`, `Parked`, `LayAside`, `LayFooter`, `Host`, `Triptych` — is
+**not used by any built section.** Every frame in this film is positioned by
+hand, with `Slot` coordinates in `beats.ts`.
+
+So a layout name here describes the *intended arrangement*, not a component
+call. What actually enforces uniqueness is the **"No repeated compositions"**
+block at the top of each section's `beats.ts`, which lists one treatment per
+beat and is checked by looking at the rendered contact sheet.
+
+That is a weaker guarantee than the module would give, and it cost real bugs:
+every overlap caught during the build — §3 beat 10, §4 beats 6–7, §6 beat 12,
+§2 beats 10–11, §9 beat 9 — was hand-placed objects colliding, which is exactly
+what `Compose` exists to prevent. Adopting it is open work, not a claim this
+board gets to make.
 
 `LayAside` is spent at beat 8 — the film's workhorse arrangement, used here
 because the comparison needs the page and the extraction side by side.

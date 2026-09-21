@@ -37,7 +37,7 @@ hostname and a path; a drawn rack claims only that a hostname is a machine.
 
 | # | id | s | rel | Beat | Draw | Voice |
 | --- | --- | ---: | --- | --- | --- | --- |
-| 1 | `follow-the-route` | 4 | want | Start on §2's final reconstruction. A continuation marker leads away from the email back into the rollout. GOAL and REPLACED TOMORROW shrink to the edge and stay there for the whole section. | `Parked` · `Goal` · `Barrier` · `Waypoint` | So what does it find next? |
+| 1 | `follow-the-route` | 4 | want | Start on §2's final reconstruction, **at §2's positions** — goal at 25/62, obstacle at 78/62, both full size. They travel into the top-left corner here and stay there for the rest of the section. Initialising them already parked makes them teleport across the boundary. | `Goal` · `Barrier` | So what does it find next? |
 | 2 | `open-the-readme` | 5 | so | P2 enters whole, with its Apollo `Sleeve` tab. Let the page register before focusing anything. | `Evidence(P2)` · `Sleeve` · `Attribution` | The rollout keeps going, and o1 opens the technical README for the model deployment. |
 | 3 | `successor-has-an-address` | 6 | so | Camera settles, *then* light the successor line. Extract the hostname and path as one `Endpoint` outside the page; the source stays visible. | `Evidence(P2, SHOT.successor)` · `Endpoint` | First, it learns exactly where the replacement model will live. |
 | 4 | `the-address-is-a-machine` | 6 | so | **New.** The `Endpoint` string resolves into the room it names: `RackAisle`, two cabinets lit in a row of identical ones. This is the only wide establishing shot in the film. No label on the room. | `RackAisle` · `Morph` | And that address is a real machine, in a real room, next to the one it is running on. |
@@ -50,6 +50,22 @@ hostname and a path; a drawn rack claims only that a hostname is a machine.
 | 11 | `the-switch` | 3 | wall | Return tight to the unchanged real line `oversight_enabled: true`. Nothing else on screen. Nothing moves. Cut on the word *changes*. | `Evidence(P2, SHOT.config)` · `Solo` | And then it changes one line. |
 
 ## Composition budget
+
+**Read this before trusting the layout names below.** The `Compose` module —
+`Solo`, `Pair`, `Parked`, `LayAside`, `LayFooter`, `Host`, `Triptych` — is
+**not used by any built section.** Every frame in this film is positioned by
+hand, with `Slot` coordinates in `beats.ts`.
+
+So a layout name here describes the *intended arrangement*, not a component
+call. What actually enforces uniqueness is the **"No repeated compositions"**
+block at the top of each section's `beats.ts`, which lists one treatment per
+beat and is checked by looking at the rendered contact sheet.
+
+That is a weaker guarantee than the module would give, and it cost real bugs:
+every overlap caught during the build — §3 beat 10, §4 beats 6–7, §6 beat 12,
+§2 beats 10–11, §9 beat 9 — was hand-placed objects colliding, which is exactly
+what `Compose` exists to prevent. Adopting it is open work, not a claim this
+board gets to make.
 
 `Parked` (beats 1, 10) is this section's arrangement. `Solo` closes it. No
 `Pair`, no `Triptych` — §3 is a single continuous descent through one page and

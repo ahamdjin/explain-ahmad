@@ -55,6 +55,22 @@ beats, and an overstated counterfactual would cost more than it buys.
 
 ## Composition budget
 
+**Read this before trusting the layout names below.** The `Compose` module —
+`Solo`, `Pair`, `Parked`, `LayAside`, `LayFooter`, `Host`, `Triptych` — is
+**not used by any built section.** Every frame in this film is positioned by
+hand, with `Slot` coordinates in `beats.ts`.
+
+So a layout name here describes the *intended arrangement*, not a component
+call. What actually enforces uniqueness is the **"No repeated compositions"**
+block at the top of each section's `beats.ts`, which lists one treatment per
+beat and is checked by looking at the rendered contact sheet.
+
+That is a weaker guarantee than the module would give, and it cost real bugs:
+every overlap caught during the build — §3 beat 10, §4 beats 6–7, §6 beat 12,
+§2 beats 10–11, §9 beat 9 — was hand-placed objects colliding, which is exactly
+what `Compose` exists to prevent. Adopting it is open work, not a claim this
+board gets to make.
+
 `Host` is spent at beat 12 and once more in the film at most. The art direction
 forbids face camera beside dense terminal output, so this is an interpretation
 moment only — the frame beside Ahmad holds one question, nothing else.

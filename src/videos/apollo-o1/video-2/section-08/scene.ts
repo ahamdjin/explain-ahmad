@@ -41,6 +41,15 @@ import {
 export type SceneState = {
   camera: CameraActor
 
+  /**
+   * Ahmad, carried straight through from §7's last frame.
+   *
+   * §7 ends on face camera asking the question; §8 beat 1 answers it, and the
+   * board says *stay on face camera for one beat*. Opening on a bare quotation
+   * instead made the two sections look like a cut.
+   */
+  host: Placed & { line: string }
+
   /** A quotation, in someone else's voice. Struck out at beat 2. */
   claim: Placed & { text: string; rejected: boolean }
   /** How far the strike has been drawn. */
@@ -74,6 +83,8 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
   /* §7 ended on face camera with this question. §8 opens on it. */
+  /* §7's exact final frame. */
+  host: { on: true, at: { x: 50, y: 52 }, scale: 1, line: 'did it want to survive?' },
   claim: { on: false, at: { x: 50, y: 40 }, scale: 1, text: '', rejected: false },
   strike: { on: false, at: { x: 50, y: 40 }, scale: 1, drawn: 0 },
   goal: { on: false, at: { x: 50, y: 50 }, scale: 1, text: 'maximize research speed' },
@@ -89,11 +100,12 @@ export const INITIAL: SceneState = {
 export type Patch = PatchOf<SceneState>
 
 const A = <K extends keyof SceneState>(k: K) => actorVerbs<SceneState, K>(k)
-const claim = A('claim'), strike = A('strike'), goal = A('goal'), road = A('road')
+const host = A('host'), claim = A('claim'), strike = A('strike'), goal = A('goal'), road = A('road')
 const wall = A('wall'), step = A('step'), tvi = A('tvi'), converge = A('converge')
 const term = A('term'), recon = A('recon')
 
 export const verbs = {
+  host,
   claim: { ...claim, reject: (): Patch => claim.set({ rejected: true }) },
   strike: { ...strike, through: (drawn: number): Patch => strike.set({ drawn }) },
   goal,

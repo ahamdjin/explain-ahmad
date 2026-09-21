@@ -70,3 +70,31 @@ order or the beat number.
 The film is not padded. A quarter of it is holds — the memo, the denial, the
 `<1%`, the beat of black before the sources — and those are the frames the
 whole thing depends on. To shorten it, cut narration.
+
+## Checking the hand-offs
+
+`node scripts/continuity.mjs` (with `npm run preview` up) plays every section
+to its last beat, opens the next one, and reports any object that moves more
+than 24px across the boundary.
+
+It must **play** the beats, not scrub them. `director.tsx` rebuilds the scene
+from `initial` on every render and only applies the staged commands that are
+due at `elapsed`, so a section stepped through faster than its stages is in a
+genuinely different state from one that played. A first version pressed through
+at 340ms a beat and reported three hand-offs broken; all three were fine.
+
+Two real breaks it did find:
+
+- §2's carried objects were initialised already parked in §3's corner, so they
+  teleported across the boundary instead of travelling there;
+- §7's face camera vanished at §8 beat 1, making the question and its answer
+  look like two different films.
+
+## Known gap: the Compose module is unused
+
+`Solo`, `Pair`, `Parked`, `LayAside`, `LayFooter`, `Host` and `Triptych` are
+built and referenced throughout these boards, and **no section calls them**.
+Every frame is positioned by hand.
+
+Every overlap bug caught during the build was hand-placed objects colliding —
+which is what `Compose` exists to prevent. Adopting it is open work.

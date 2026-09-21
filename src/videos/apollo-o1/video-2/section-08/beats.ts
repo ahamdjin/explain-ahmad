@@ -1,7 +1,7 @@
 import { type Beat } from '../../../../paper'
 import { type Patch, verbs } from './scene'
 
-const { claim, strike, goal, road, wall, step, tvi, converge, term, recon } = verbs
+const { host, claim, strike, goal, road, wall, step, tvi, converge, term, recon } = verbs
 
 /**
  * Section 08 — did it want to survive?
@@ -33,7 +33,13 @@ export const BEATS: Array<Beat<Patch>> = [
      * §7 ended on face camera with the question; this is the answer everybody
      * reaches for first, stated so it can be taken away.
      */
-    commands: [claim.show({ x: 50, y: 46 }, 1.2, { text: 'It wanted to live.', rejected: false })],
+    /* Ahmad is still on screen from §7. The claim arrives beside him rather
+       than replacing him -- the two sections are one continuous thought and a
+       cut here would make the answer look like a different film. */
+    commands: [
+      host.moveTo({ x: 26, y: 54 }, 0.74),
+      claim.show({ x: 70, y: 46 }, 0.95, { text: 'It wanted to live.', rejected: false }),
+    ],
     stages: [],
   },
   {
@@ -51,6 +57,8 @@ export const BEATS: Array<Beat<Patch>> = [
     stages: [
       { at: 0.8, commands: [strike.through(1)] },
       { at: 2.4, commands: [claim.reject()] },
+      /* the face goes with the story it was telling */
+      { at: 3.2, commands: [host.off()] },
     ],
   },
   {
@@ -67,6 +75,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       claim.off(),
+      host.off(),
       goal.show({ x: 50, y: 38 }, 1.2, { text: 'maximize research speed' }),
       road.show({ x: 50, y: 62 }, 1.1, { drawn: 0 }),
     ],

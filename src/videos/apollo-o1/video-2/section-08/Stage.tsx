@@ -1,7 +1,7 @@
 import { Slot, type Feel } from '../../../../paper'
 import {
   Claim, Strike, Goal, Road, Barrier, Watcher, Endpoint, Question,
-  Tag, TerminalVsInstrumental, Tools, Convergence, TermLabel, Reconstruction,
+  Tag, TerminalVsInstrumental, Tools, Convergence, TermLabel, FaceCam, Reconstruction,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
@@ -20,7 +20,7 @@ import { type SceneState } from './scene'
  * than a new diagram.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { claim, strike, goal, road, wall, step, tvi, converge, term, recon } = scene
+  const { host, claim, strike, goal, road, wall, step, tvi, converge, term, recon } = scene
 
   /* Each obstacle is the object the film already spent on it, so the pattern
      reads as a re-description of the incident rather than a fresh diagram. */
@@ -33,6 +33,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
   return (
     <>
+      {/* Carried straight through from §7's last frame, so the answer and the
+          question are visibly the same moment. */}
+      <Slot on={host.on} at={host.at} scale={host.scale} feel={feel} z={2}>
+        <div style={{ width: '40cqw' }}>
+          <FaceCam shape="thesis" line={host.line} />
+        </div>
+      </Slot>
+
       {/*
        * The strike wraps the claim rather than sitting in its own slot. A
        * separate slot drew the line over an empty spacer — visible in the
