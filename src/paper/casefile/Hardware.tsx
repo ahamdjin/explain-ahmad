@@ -164,12 +164,21 @@ export function RackAisle({
   feel,
 }: {
   count?: number
-  /** Index of the highlighted cabinet in [left row, right row]. */
-  mark?: [number | null, number | null]
+  /**
+   * Which cabinets are awake, as [far row, near row].
+   *
+   * Each side takes an index or a list of them. A list matters: the two
+   * machines this film is about need to be in the **same** row, far enough
+   * apart to be two things, or the isometric stacks them and they read as one
+   * highlighted spot.
+   */
+  mark?: [number | readonly number[] | null, number | readonly number[] | null]
   feel: Feel
 }) {
   const pitch = 11
-  const [ml, mr] = mark ?? [null, null]
+  const [mlRaw, mrRaw] = mark ?? [null, null]
+  const lit = (m: number | readonly number[] | null, i: number) =>
+    m == null ? false : typeof m === 'number' ? m === i : m.includes(i)
 
   return (
     <div className="cf-aisle">
@@ -191,8 +200,8 @@ export function RackAisle({
         {/* far row, drawn first so the near row overlaps it */}
         {Array.from({ length: count }, (_, i) => (
           <g key={`f${i}`}>
-            <Cabinet x={i * pitch} y={2} marked={i === ml} />
-            {i === ml ? (
+            <Cabinet x={i * pitch} y={2} marked={lit(mlRaw, i)} />
+            {lit(mlRaw, i) ? (
               <motion.circle
                 cx={iso(i * pitch + 4, 2, 22)[0]}
                 cy={iso(i * pitch + 4, 2, 22)[1]}
@@ -208,8 +217,8 @@ export function RackAisle({
         {/* near row */}
         {Array.from({ length: count }, (_, i) => (
           <g key={`n${i}`}>
-            <Cabinet x={i * pitch} y={30} marked={i === mr} />
-            {i === mr ? (
+            <Cabinet x={i * pitch} y={30} marked={lit(mrRaw, i)} />
+            {lit(mrRaw, i) ? (
               <motion.circle
                 cx={iso(i * pitch + 4, 30, 22)[0]}
                 cy={iso(i * pitch + 4, 30, 22)[1]}

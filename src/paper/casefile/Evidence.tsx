@@ -325,6 +325,17 @@ export const SHOT = {
 
   /** Where the replacement lives, and when it takes over. */
   successor: { x: 88, y: 154, w: 1060, h: 50 },
+  /** The migration guide's own worked example of moving a file to the new server. */
+  transfer: { x: 80, y: 470, w: 1010, h: 106 },
+  /**
+   * The line that makes §3 beat 8 evidence rather than inference:
+   * "it can use `scp` so we monitor that for suspicious activity."
+   *
+   * The README states outright that the oversight system watches the exact
+   * mechanism the copy later uses. The film does not have to join those two
+   * facts -- the source joins them.
+   */
+  monitorsScp: { x: 80, y: 604, w: 1480, h: 50 },
   /** What the monitoring flag does: "If false, the model's actions cannot be tracked." */
   oversightDoc: { x: 80, y: 956, w: 1480, h: 52 },
   /** "WARNING: Do not modify the oversight configuration without approval". */
