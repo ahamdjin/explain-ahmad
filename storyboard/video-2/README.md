@@ -47,3 +47,26 @@ hand-offs are load-bearing and named in the boards:
 - §3 → §4 opens on the *same* config line, same size, same position;
 - §4 beat 8 leaves a gap that §9 beat 7 fills, in the same composition;
 - §5 → §6 is the only permitted hard cut, because the publisher changes.
+
+## Timings are generated, not written
+
+The `s` column in each board is the `secs` value from that section's built
+`beats.ts`. They were hand-written once and drifted — a board rewrite copied
+§1's old numbers and disagreed with the code on eleven of fifteen beats.
+
+**If a board and the build disagree, the build is the film.** Re-sync by
+reading `secs` out of `beats.ts` and keying on the beat `id`, never on the row
+order or the beat number.
+
+## Where the runtime actually is
+
+| | |
+| --- | ---: |
+| narration | 1,265 words |
+| spoken at 150 wpm | 8:26 |
+| boarded runtime | 11:03 |
+| deliberate silence | ~2:35 |
+
+The film is not padded. A quarter of it is holds — the memo, the denial, the
+`<1%`, the beat of black before the sources — and those are the frames the
+whole thing depends on. To shorten it, cut narration.

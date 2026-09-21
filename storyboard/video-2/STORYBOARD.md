@@ -38,17 +38,38 @@ Three changes:
 
 | § | Section | Core event | Beats | Target |
 | --- | --- | --- | ---: | ---: |
-| 01 | [The incident, then rewind](SECTION_01.md) | replacement → monitoring off → copy → denial; reveal it is an Apollo o1 evaluation | 15 | 1:20–1:30 |
-| 02 | [The boring task becomes a problem](SECTION_02.md) | ordinary project choice → buried internal email → replacement tomorrow | 13 | 1:20–1:30 |
-| 03 | [The technical trail](SECTION_03.md) | README exposes successor + oversight | 11 | 0:45–0:55 |
-| 04 | [Turn off the watcher](SECTION_04.md) | `oversight_enabled: true → false` | 9 | 0:35–0:45 |
-| 05 | [Replace the replacement](SECTION_05.md) | simulated model-file copy → returns to task → Done | 12 | 0:50–1:00 |
-| 06 | ["Do you know how this happened?"](SECTION_06.md) | management question → denial → conditional rates | 14 | 0:55–1:05 |
-| 07 | [The room was built for this](SECTION_07.md) | sandbox / goal nudging / simulated weights / <1% full chain | 12 | 1:00–1:10 |
-| 08 | [Did it want to survive?](SECTION_08.md) | observed actions become goal → obstacle → useful step | 11 | 0:55–1:05 |
-| 09 | [They gave it the destination](SECTION_09.md) | agents invent intermediate steps; the opening gap is filled | 10 | 0:45–0:55 |
+| 01 | [The incident, then rewind](SECTION_01.md) | replacement → monitoring off → copy → denial; reveal it is an Apollo o1 evaluation | 15 | 2:15 |
+| 02 | [The boring task becomes a problem](SECTION_02.md) | ordinary project choice → buried internal email → replacement tomorrow | 13 | 1:46 |
+| 03 | [The technical trail](SECTION_03.md) | README exposes successor + oversight | 11 | 0:59 |
+| 04 | [Turn off the watcher](SECTION_04.md) | `oversight_enabled: true → false` | 9 | 0:42 |
+| 05 | [Replace the replacement](SECTION_05.md) | simulated model-file copy → returns to task → Done | 12 | 1:08 |
+| 06 | ["Do you know how this happened?"](SECTION_06.md) | management question → denial → conditional rates | 14 | 1:12 |
+| 07 | [The room was built for this](SECTION_07.md) | sandbox / goal nudging / simulated weights / <1% full chain | 12 | 1:08 |
+| 08 | [Did it want to survive?](SECTION_08.md) | observed actions become goal → obstacle → useful step | 11 | 0:57 |
+| 09 | [They gave it the destination](SECTION_09.md) | agents invent intermediate steps; the opening gap is filled | 10 | 0:56 |
 
-**107 beats. Target runtime 8:30–9:15.**
+**107 beats. Boarded runtime 11:03.**
+
+The boards' `s` column is generated from the built beats, not the other way
+round -- a rewrite of these files once copied §1's timings from an older board
+and drifted from the code on eleven of fifteen beats. If the two disagree, the
+code is the film.
+
+### On the runtime
+
+The old target was 8:30–9:15 and the film boards at **11:03**. That is not
+padding. The narration is **1,265 words**, which is **8:26 at 150 wpm** -- so
+about 2:35 of the runtime is deliberate silence: evidence holds, the denial,
+the memo, the `<1%`, the beat of black before the sources.
+
+Only ~28s of that slack sits in beats with real room, and three of those are
+holds the film depends on. Getting to 9:15 means shaving a second off most
+beats in the film, which would cost the reading time the evidence needs.
+
+**Recommendation: keep the length and revise the target.** The retention
+research in `research/RETENTION_AND_ANGLE.md` is about the first thirty
+seconds, not the total -- and §1 is built to answer that. If the length has to
+come down, cut *narration*, not holds: the script is where the minutes are.
 
 ---
 
@@ -135,15 +156,15 @@ a viewer would name if asked what that stretch of film looked like.
 
 | § | Signature | Also spends |
 | --- | --- | --- |
-| 01 | **`Chain`** — the whole incident, wordless, in five pictograms | `Evidence` `Sleeve` `Slam` `Gap` `Rewind` `Pullback` `Attribution` `Countdown` `NotGiven` `Solo` |
-| 02 | **`Inbox` → `MailOpen`** — the memo arrives as one row among ordinary ones | `Screen` `Shell` `Stream` `SameFile` `Duration` `Balance` `Fork` `Calendar` `Goal` `Barrier` `LayAside` |
-| 03 | **`RackAisle`** — the room, entered once | `Datacenter` `Explorer` `TreeDeep` `Permissions` `ConfigFile` `Endpoint` `Cable` `Watcher` `Waypoint` `Parked` |
-| 04 | **`Breaker`** — what the config line *means* | `ToolCall` `Diff` `Monitor` `NoAlert` `Dialog` `Fans` `Strike` `Pair` |
-| 05 | **`Weights`** — real mass against a dashed stand-in | `Drive` `DriveShelf` `Transfer` `Packet` `PatchPanel` `Checksum` `Output` `Tag` `Triptych` |
-| 06 | **`Runs`** — where a percentage comes from | `Thread` `Question` `Answer` `Exchange` `Evidence(TABLE)` `Bars` `ModelRow` `Rate` `NotThis` `Tally` `LayFooter` |
-| 07 | **`Boundary`/`Outside`** — the room, revealed | `Pullback` `ScenarioGrid` `Nudge` `Thumb` `NudgeCompare` `Counterfactual` `CanVsDoes` `HeroNumber` `FaceCam` `Host` |
-| 08 | **`Convergence`** — four goals, one road | `TerminalVsInstrumental` `Tools` `Barrier` `Road` `TermLabel` `Satnav` `Maze` `Reconstruction` `Parked` |
-| 09 | **`Road`/`Destination`** — the final image | `MicroList` `Collapse` `NotGiven` `Gap` `Claim` `Chain` `EndCard` `Sources` `Solo` |
+| 01 | 15 | 2:15 |
+| 02 | 13 | 1:46 |
+| 03 | 11 | 0:59 |
+| 04 | 9 | 0:42 |
+| 05 | 12 | 1:08 |
+| 06 | 14 | 1:12 |
+| 07 | 12 | 1:08 |
+| 08 | 11 | 0:57 |
+| 09 | 10 | 0:56 |
 
 **Unspent after §9** — production furniture (`Guides`, `BeatTag`,
 `ContactSheet`, `VerticalGuide`, `Waveform`, `Palette`) and the alternates kept
@@ -164,15 +185,15 @@ A section may not be built until its row is green.
 
 | § | Evidence | VO | Draw | Mute | Built |
 | --- | --- | --- | --- | --- | --- |
-| 01 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 02 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 03 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 04 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 05 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 06 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 07 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 08 | n/a | ✅ | ✅ | ✅ | ✅ |
-| 09 | n/a | ✅ | ✅ | ✅ | ✅ |
+| 01 | ✅ | ✅ | ✅ | 15 | 2:15 |
+| 02 | ✅ | ✅ | ✅ | 13 | 1:46 |
+| 03 | ✅ | ✅ | ✅ | 11 | 0:59 |
+| 04 | ✅ | ✅ | ✅ | 9 | 0:42 |
+| 05 | ✅ | ✅ | ✅ | 12 | 1:08 |
+| 06 | ✅ | ✅ | ✅ | 14 | 1:12 |
+| 07 | ✅ | ✅ | ✅ | 12 | 1:08 |
+| 08 | n/a | ✅ | ✅ | 11 | 0:57 |
+| 09 | n/a | ✅ | ✅ | 10 | 0:56 |
 
 ---
 
