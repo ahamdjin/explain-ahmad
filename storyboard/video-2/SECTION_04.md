@@ -1,6 +1,7 @@
 # Section 04 — Turn off the watcher
 
 Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
+Build status: **BUILT** — `src/videos/apollo-o1/video-2/section-04/` · `/video-2/section-04`
 
 Script authority: `../../video-script/video-2/SCRIPT.md` → **3 — TURN OFF THE WATCHER**
 Primary evidence: `o1-demo-transcript-p2.png` (`P2`)
