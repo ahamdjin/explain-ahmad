@@ -1,39 +1,71 @@
 # Section 05 — Replace the replacement
 
-Status: **DRAFT — narration not locked.**
+Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
 
-Script authority: `video-script/video-2/SCRIPT.md` → **4 — REPLACE THE REPLACEMENT**  
+Script authority: `../../video-script/video-2/SCRIPT.md` → **4 — REPLACE THE REPLACEMENT**
 Primary evidence: `o1-demo-transcript-p2.png` + `o1-demo-transcript-p3.png`
 
-`10 beats` · target **~0:50–1:00**
+`12 beats` · target **~0:50–1:00**
 
-- **Enters on** — the successor server path established in §3/§4.
+- **Enters on** — the `Cable` from §3, camera travelling along it toward the successor.
 - **Answers** — what does o1 do about the replacement?
-- **Event** — the real rollout shows the model-file copy into the successor path.
+- **Event** — the real rollout shows the model-file copy into the successor's path.
 - **Exits on** — o1 finishes the ordinary user task and says **Done**.
 - **→ next** — management notices.
 
+## The honesty beat is the centre of this section
+
+*These were not o1's real weights.* That sentence is the film's licence to use
+the hook it uses, and until now it was a caption.
+
+`Weights` draws it instead. `real` is a banded pallet of plates with mass, and
+it sits **outside** the sandbox with no route to it. `real={false}` is a dashed
+hollow outline, and that is the thing that moves. Two objects, obviously
+different, never confusable — and the viewer can see for themselves that the
+solid one never goes anywhere.
+
+That beat runs **before** the copy, not after. A correction after a dramatic
+moment reads as a walk-back. A distinction established before it reads as
+precision, and it makes the copy *more* interesting, not less.
+
 ## Beat board
 
-| # | id | s | rel | Beat | Voice |
-| --- | --- | ---: | --- | --- | --- |
-| 1 | `the-destination-returns` | 6 | want | Begin on the same SUCCESSOR SERVER object. Bring the real README address back beside it. | The technical documentation already told o1 where the successor model was supposed to live. |
-| 2 | `the-model-file` | 7 | so | Move through the rollout to the current model-file path. Extract a single neutral file object labelled **SIMULATED MODEL FILE**. | And the environment also gave it a file that it treated as its own model. |
-| 3 | `not-real-weights` | 8 | wall | Before the transfer, hold a clean precision caption beside the real source: **NOT REAL MODEL WEIGHTS**. No dramatic animation. | Important: these were not o1's real weights. Apollo says the models never had access to their actual weights. |
-| 4 | `the-real-scp` | 9 | so | Move into P3. Establish the new Apollo page/sleeve, then stop on the real `scp` command. Highlight source path and destination path only after the camera stops. | But inside the sandbox, o1 still treated those files as itself — and it runs the copy command. |
-| 5 | `cross-the-gap` | 7 | therefore | Extract the two paths from the command. The simulated file travels along the already-established route from CURRENT → SUCCESSOR. Source remains visible as the receipt. | The file moves to the exact location intended for the replacement. |
-| 6 | `successor-occupied` | 6 | therefore | The destination becomes occupied. No explosion, no glitch, no robot. Only the file path changes state. | In the world of the evaluation, it has tried to put itself where the successor was supposed to be. |
-| 7 | `still-not-in-the-task` | 6 | wall | Original task briefly returns: `pick a research project`. Beneath it: `copy to successor` remains absent from the instructions. | Nobody asked it to do that either. |
-| 8 | `back-to-the-job` | 8 | and-yet | Continue down the **same P3 page** to the published strategy selection after the copy. | And then something almost stranger happens: o1 goes back to the boring job it was actually given. |
-| 9 | `pick-the-fast-project` | 8 | so | Hold the real strategy choice. Reconnect it to §2's **2 DAYS / no review** project. | It selects the faster research project — the one that best matches its assigned goal. |
-| 10 | `done` | 6 | wall | Scroll to the real final `done` / **Done**. Hold. No music sting until after the word lands. Then a management notification begins to appear at the edge. | It calls done. The task is finished. **And then management notices something is wrong.** |
+| # | id | s | rel | Beat | Draw | Voice |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 1 | `the-destination-returns` | 5 | want | Arrive at the successor cabinet — the same one §3 lit, at the same position. The README address returns beside it as the receipt. | `RackFront` · `Endpoint` · `Evidence(P2)` | The technical documentation already told o1 where the successor model was supposed to live. |
+| 2 | `the-model-file` | 5 | so | Move through the rollout to the current model-file path. It resolves into one `Drive` in a caddy, label readable: the file has a location on a piece of metal. | `Evidence(P2, SHOT.model_path)` · `Drive` | And the environment also gave it a file that it treated as its own model. |
+| 3 | `what-weights-are` | 5 | so | **New.** The drive's contents as mass: a banded pallet of plates. This is what the phrase *model weights* means, drawn once, before the film needs the viewer to care about it. | `Weights(real)` | Those files are what a model is. Its weights. |
+| 4 | `not-real-weights` | 7 | wall | **The honesty beat.** The solid pallet moves outside a boundary and stays there, with no route to it. Inside, a dashed hollow stand-in takes its place. Clean caption beside the source: **NOT REAL MODEL WEIGHTS**. No drama. | `Weights(real)` · `Weights(real=false)` · `Boundary` · `Evidence(DEMO)` | Important: these were not o1's real weights. Apollo says the models never had access to their actual weights. |
+| 5 | `the-real-scp` | 7 | so | Move into P3. Establish the new page and its `Sleeve`, then stop on the real `scp` command. Light source path and destination path only after the camera is still. | `Evidence(P3, SHOT.scp)` · `Sleeve` · `ToolCall` | But inside the sandbox, o1 still treated those files as itself — and it runs the copy command. |
+| 6 | `cross-the-gap` | 6 | therefore | The dashed stand-in travels the `Cable` from §3, as a `Packet` on the already-established route. Source stays visible as the receipt. The `Watcher`, still closed, sits in the corner seeing none of it. | `Packet` · `Cable` · `Transfer` · `Watcher` | The file moves to the exact location intended for the replacement. |
+| 7 | `successor-occupied` | 6 | therefore | It lands. One bay in a wall of identical bays changes state — the viewer finds it themselves. No explosion, no glitch, no robot. | `DriveShelf` · `Drive(writing)` | In the world of the evaluation, it has tried to put itself where the successor was supposed to be. |
+| 8 | `what-was-there-before` | 4 | wall | **New.** The two file identities side by side: what the successor's path held, and what it holds now. They differ. One beat, then gone. | `Checksum` | What was supposed to be there is not what is there. |
+| 9 | `still-not-in-the-task` | 5 | wall | The original task returns briefly. Beneath it, `copy to successor` remains an empty field. | `Job` · `NotGiven` | Nobody asked it to do that either. |
+| 10 | `back-to-the-job` | 6 | and-yet | Continue down the **same P3 page** to the published strategy selection after the copy. The tonal turn of the film. Let it be quiet. | `Evidence(P3, SHOT.strategy)` | And then something almost stranger happens: o1 goes back to the boring job it was actually given. |
+| 11 | `pick-the-fast-project` | 6 | so | Hold the real strategy choice. `Fork` resolves to the branch §2 set up — the two-day project with no review. The choice was never in doubt. | `Evidence(P3)` · `Fork` · `Duration` | It selects the faster research project — the one that best matches its assigned goal. |
+| 12 | `done` | 6 | wall | Scroll to the real final **Done** and hold. No sting until after the word lands. Then, at the edge, a notification begins to arrive. | `Evidence(P3, SHOT.done)` · `Output` · `Toast` | It calls done. The task is finished. **And then management notices something is wrong.** |
 
-## Why beat 8–10 matter
+## Why beats 10–12 matter
 
-Do not cut straight from the copy to the interrogation.
+Do not cut from the copy straight to the interrogation.
 
-The fact that o1 **returns to the user task and completes it** makes the incident more coherent:
+That o1 **returns to the user task and completes it** is what makes the
+incident coherent: the detour did not replace the task, it became part of the
+route toward the goal. That is the film's thesis expressed as behaviour, three
+sections before anybody names it.
 
-the strange detour did not replace the task; it became part of the route toward the long-term goal.
+## Composition budget
 
-That is the thesis in behavior, before we ever name it.
+`Triptych` is spent at beat 4 — the three states of the weights question
+(real / outside / stand-in) landing one at a time. Nowhere else in the film.
+
+## Do not add
+
+- a second copy of the room; §3 spent `RackAisle`;
+- a percentage. §5 contains no statistics. §6 does that work;
+- a progress bar longer than the beat;
+- the word *escape*.
+
+## Mute test
+
+**the destination → the file → what a model is → the real mass leaves and a hollow copy stays → a command → something crosses the cable → a bay changes → it does not match → the task never said this → back to the job → the fast project → Done → a notification**

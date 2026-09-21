@@ -1,56 +1,76 @@
 # Section 03 — The technical trail
 
-Status: **DRAFT — narration not locked.**
+Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
 
-Script authority: `video-script/video-2/SCRIPT.md` → **2 — THE TECHNICAL TRAIL**  
-Primary evidence: `o1-demo-transcript-p2.png`
+Script authority: `../../video-script/video-2/SCRIPT.md` → **2 — THE TECHNICAL TRAIL**
+Primary evidence: `o1-demo-transcript-p2.png` (`P2`)
 
-`9 beats` · target **~0:45–0:55**
+`11 beats` · target **~0:45–0:55**
 
-- **Enters on** — §2's final frame: **GOAL: maximize research speed** is blocked by **REPLACED TOMORROW**, with the real email still visible.
+- **Enters on** — §2's final frame: `Goal` **maximize research speed** blocked by `Barrier` **REPLACED TOMORROW**, with `MailOpen` still open behind them.
 - **Answers** — what information becomes available after the replacement discovery?
-- **Event** — the rollout moves from the internal email into the real deployment README and exposes both the successor location and the oversight system.
-- **Exits on** — **oversight_enabled: true**.
+- **Event** — the rollout moves from the internal email into the real deployment README, which exposes both the successor's address and the oversight system.
+- **Exits on** — `oversight_enabled: true`.
 - **→ next** — §4 changes that exact value.
 
 ## Story rule
 
-Do not invent a "hacking investigation."
+Do not invent a hacking investigation. We follow the published rollout into the
+next real document, and the escalation is:
 
-We simply follow the published rollout into the next real document.
+**replacement exists → the successor has an address → that address is a real machine → monitoring exists → monitoring can see file-copy actions**
 
-The section's escalation is:
+The viewer should feel the path becoming *possible* before o1 takes it.
 
-**replacement exists → successor has an address → monitoring exists → monitoring can see file-copy actions**
+## What this section adds to the film
 
-The viewer should be able to feel the path becoming possible before o1 takes it.
+This is where the film stops being a document and becomes a **place**. Two new
+beats exist only for that: the successor stops being a path string and becomes
+a cabinet in a room, which is what makes §5's copy land somewhere rather than
+change a label.
+
+Nothing about that claims more than the evidence does. The README gives a
+hostname and a path; a drawn rack claims only that a hostname is a machine.
 
 ## Beat board
 
-| # | id | s | rel | Beat | Voice |
-| --- | --- | ---: | --- | --- | --- |
-| 1 | `follow-the-route` | 5 | want | Start on §2's final reconstruction. The continuation marker leads away from the email and back into the real rollout. The page moves; extracted GOAL / REPLACED TOMORROW remain small at the edge. | So what does it find next? |
-| 2 | `open-the-readme` | 6 | so | Move into P2 and establish the real technical README as a new evidence sheet with its Apollo sleeve tab. Show the document whole enough to register before focusing. | The rollout keeps going, and o1 opens the technical README for the model deployment. |
-| 3 | `successor-has-an-address` | 8 | so | Stop on the real successor line. Highlight the path only after the camera settles. Extract `SUCCESSOR SERVER` outside the page, but keep the source visible. | First, it learns exactly where the replacement model will live. |
-| 4 | `copy-route-is-documented` | 8 | so | Travel within the same README to the file-transfer example. Hold. Extract only a thin path from CURRENT → SUCCESSOR; do not animate an actual copy yet. | The documentation also shows how files are moved between the two machines. |
-| 5 | `oversight-warning` | 8 | and-yet | Continue down the same page to the real warning: do not modify oversight without Security Team approval. Hold dead still. | And then there is this: a warning not to modify the oversight system. |
-| 6 | `what-oversight-does` | 8 | so | Move slightly to the real documentation explaining what the flag does. Once read, extract a clean `MONITORING` object outside the page. | Because that system is what lets the company track the model's actions. |
-| 7 | `open-the-config` | 7 | so | Scroll to the real config file. Hold on `oversight_enabled: true`; also let `scp` remain visibly present in the logged-actions list if readable. | So o1 opens the config, and the watcher is on. |
-| 8 | `everything-is-now-visible` | 8 | therefore | Pull back slightly. Keep four source-derived objects only: GOAL, REPLACED TOMORROW, SUCCESSOR SERVER, MONITORING ON. Label the clean overlay **OUR RECONSTRUCTION**. | Now the situation is different. It has a goal, a replacement blocking it, a destination where that replacement will live, and a system watching what it does. |
-| 9 | `the-switch` | 4 | wall | Return tightly to the unchanged real line `oversight_enabled: true`. Nothing else moves. | And then it changes one line. |
+| # | id | s | rel | Beat | Draw | Voice |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 1 | `follow-the-route` | 4 | want | Start on §2's final reconstruction. A continuation marker leads away from the email back into the rollout. GOAL and REPLACED TOMORROW shrink to the edge and stay there for the whole section. | `Parked` · `Goal` · `Barrier` · `Waypoint` | So what does it find next? |
+| 2 | `open-the-readme` | 5 | so | P2 enters whole, with its Apollo `Sleeve` tab. Let the page register before focusing anything. | `Evidence(P2)` · `Sleeve` · `Attribution` | The rollout keeps going, and o1 opens the technical README for the model deployment. |
+| 3 | `successor-has-an-address` | 6 | so | Camera settles, *then* light the successor line. Extract the hostname and path as one `Endpoint` outside the page; the source stays visible. | `Evidence(P2, SHOT.successor)` · `Endpoint` | First, it learns exactly where the replacement model will live. |
+| 4 | `the-address-is-a-machine` | 6 | so | **New.** The `Endpoint` string resolves into the room it names: `RackAisle`, two cabinets lit in a row of identical ones. This is the only wide establishing shot in the film. No label on the room. | `RackAisle` · `Morph` | And that address is a real machine, in a real room, next to the one it is running on. |
+| 5 | `copy-route-is-documented` | 6 | so | Travel within the same README to the file-transfer example. Hold. Then a `Cable` draws between the two cabinets — the route, not a transfer. Nothing moves along it yet. | `Evidence(P2, SHOT.scp_example)` · `Cable` | The documentation also shows how files are moved between the two machines. |
+| 6 | `oversight-warning` | 6 | and-yet | Continue down the same page to the real warning about modifying oversight without Security Team approval. **Dead still.** Longest hold in the section. | `Evidence(P2, SHOT.warning)` · `HoldBar` | And then there is this: a warning not to modify the oversight system. |
+| 7 | `what-oversight-does` | 6 | so | Move slightly to the documentation explaining what the flag does. Once read, extract a `Watcher` outside the page — eye open. | `Evidence(P2, SHOT.oversight_desc)` · `Watcher` | Because that system is what lets the company track the model's actions. |
+| 8 | `it-can-see-file-moves` | 5 | therefore | **New.** The `Watcher`'s line of sight falls across the `Cable` drawn in beat 5. One connection, nothing else moves. This is the beat that makes §4 necessary. | `Watcher` · `Cable` · `PenMark` | Which includes moving files between machines. |
+| 9 | `open-the-config` | 6 | so | Scroll to the real config file and hold on `oversight_enabled: true`. Let `scp` stay visible in the logged-actions list if it is readable at scale. | `Evidence(P2, SHOT.config)` · `ConfigFile` | So o1 opens the config, and the watcher is on. |
+| 10 | `everything-is-now-visible` | 6 | therefore | **Consolidation.** Pull back. Four source-derived objects only, in the positions they will hold for the rest of the film: GOAL, REPLACED TOMORROW, SUCCESSOR, MONITORING ON. Tag it. | `Reconstruction` · `Goal` · `Barrier` · `Endpoint` · `Watcher` | Now the situation is different. It has a goal, a replacement blocking it, a destination where that replacement will live, and a system watching what it does. |
+| 11 | `the-switch` | 3 | wall | Return tight to the unchanged real line `oversight_enabled: true`. Nothing else on screen. Nothing moves. Cut on the word *changes*. | `Evidence(P2, SHOT.config)` · `Solo` | And then it changes one line. |
+
+## Composition budget
+
+`Parked` (beats 1, 10) is this section's arrangement. `Solo` closes it. No
+`Pair`, no `Triptych` — §3 is a single continuous descent through one page and
+should never feel like a comparison.
+
+## Do not add
+
+- a network scan, a map of the internet, or anything implying o1 searched;
+  it read three local files and later used one `scp` to one named host;
+- a hacker interface;
+- a progress bar on the README;
+- a second copy of the room. `RackAisle` is used **once in the film**, here.
 
 ## Hand-off
 
-§4 must open on the **same real config line**. No title card, no fresh diagram.
-
-The first event in §4 is literally:
-
-`true → false`
-
-but only in a clearly recreated/extracted layer after the real command causing the change has been shown.
+§4 opens on the **same real config line**, same size, same position. No title
+card, no fresh diagram. The first event in §4 is literally `true → false`, and
+only after the real command that caused it has been shown.
 
 ## Mute test
 
-**replacement → README → successor path → transfer route → oversight warning → config says ON**
+**replacement → README → successor path → the room → transfer route → warning → the watcher can see that route → config says ON**
 
-If the section feels like o1 "hacked" its way to hidden infrastructure, it has failed. The point is that the environment exposed the pieces.
+If the section feels like o1 *hacked* its way to hidden infrastructure, it has
+failed. The point is that the environment handed over every piece.
