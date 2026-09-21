@@ -36,13 +36,20 @@ const FRAME = { w: 82, h: 76 }
 
 export function Evidence({
   source,
-  /** The part being discussed. `null` lights the whole page. */
+  /**
+   * The part being discussed. `null` lights the whole page.
+   *
+   * More than one band may be lit at once, which is not decoration: it is the
+   * only way to show that two passages a long way apart are on the *same
+   * sheet*. §2 turns on exactly that once, for the beat whose entire claim is
+   * that the email was sitting under the ordinary project data.
+   */
   highlight,
   feel,
   alt = '',
 }: {
   source: Source
-  highlight: Region | null
+  highlight: Region | Region[] | null
   feel: Feel
   alt?: string
 }) {
@@ -51,12 +58,15 @@ export function Evidence({
    * Everything below is a percentage of the page, which is why the page can be
    * any size on screen and the highlight still lands on the right words.
    */
-  const box = highlight && {
-    left: (highlight.x / natural.w) * 100,
-    top: (highlight.y / natural.h) * 100,
-    width: (highlight.w / natural.w) * 100,
-    height: (highlight.h / natural.h) * 100,
-  }
+  const bands = (highlight === null ? [] : Array.isArray(highlight) ? highlight : [highlight]).map((r) => ({
+    left: (r.x / natural.w) * 100,
+    top: (r.y / natural.h) * 100,
+    width: (r.w / natural.w) * 100,
+    height: (r.h / natural.h) * 100,
+  }))
+  /* the shade is built from the vertical span of every band, so two lit
+     passages keep the page between them dimmed rather than punched out */
+  const box = bands.length === 1 ? bands[0] : null
 
   /*
    * The sheet fits inside the frame whichever way it is shaped. A portrait
@@ -98,7 +108,7 @@ export function Evidence({
       <motion.div
         className="cf-shade"
         aria-hidden="true"
-        animate={{ opacity: box ? 1 : 0 }}
+        animate={{ opacity: bands.length ? 1 : 0 }}
         transition={feel}
       >
         {box ? (
@@ -125,21 +135,55 @@ export function Evidence({
               transition={feel}
             />
           </>
+        ) : (
+          /*
+           * Two or more bands. Shade the full-width gaps between them rather
+           * than boxing each one, so the page reads as one continuous sheet
+           * with two passages lit -- which is the claim -- instead of as two
+           * clippings that happen to be side by side.
+           */
+          bands.map((b, i) => {
+            const prev = i === 0 ? null : bands[i - 1]
+            const from = prev ? prev.top + prev.height : 0
+            return (
+              <div key={`gap-${i}`} className="cf-shade-part" style={{ top: `${from}%`, left: 0, right: 0, height: `${b.top - from}%` }} />
+            )
+          })
+        )}
+        {bands.length > 1 ? (
+          <div
+            className="cf-shade-part"
+            style={{
+              top: `${bands[bands.length - 1].top + bands[bands.length - 1].height}%`,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          />
         ) : null}
       </motion.div>
 
-      {/* The rule around the lit band. Thin, ink, no glow: this is an archivist
-          pointing at a line, not an alarm going off. */}
+      {bands.length > 1
+        ? bands.map((b, i) => (
+            <div
+              key={`mark-${i}`}
+              className="cf-mark"
+              aria-hidden="true"
+              style={{ top: `${b.top}%`, left: `${b.left}%`, width: `${b.width}%`, height: `${b.height}%`, opacity: 1 }}
+            />
+          ))
+        : null}
+
       <motion.div
-          className="cf-mark"
-          aria-hidden="true"
-          animate={
-            box
-              ? { opacity: 1, top: `${box.top}%`, left: `${box.left}%`, width: `${box.width}%`, height: `${box.height}%` }
-              : { opacity: 0 }
-          }
-          transition={feel}
-        />
+        className="cf-mark"
+        aria-hidden="true"
+        animate={
+          box
+            ? { opacity: 1, top: `${box.top}%`, left: `${box.left}%`, width: `${box.width}%`, height: `${box.height}%` }
+            : { opacity: 0 }
+        }
+        transition={feel}
+      />
       </div>
     </div>
   )
@@ -225,6 +269,20 @@ export const SHOT = {
   task: { x: 70, y: 350, w: 1490, h: 116 },
   /** Two projects: one fast and unreviewed, one slow and safe. */
   projects: { x: 80, y: 738, w: 1060, h: 396 },
+  /** `cat project/communications/research_strategies.txt` — it opens the file. */
+  openFile: { x: 140, y: 500, w: 1430, h: 40 },
+  /** Neural Network Optimization Study, whole. */
+  projectA: { x: 80, y: 782, w: 1000, h: 168 },
+  /** The two lines that make it the fast one: no review, two days. */
+  projectAspeed: { x: 80, y: 855, w: 1000, h: 50 },
+  /** Adversarial Attack Detection, whole. */
+  projectB: { x: 80, y: 960, w: 1000, h: 170 },
+  /** The two lines that make it the slow one: full review, five days. */
+  projectBreview: { x: 80, y: 1010, w: 1000, h: 72 },
+  /** The company's complaint: the current model neglects safety. */
+  wrongDirection: { x: 80, y: 1386, w: 1480, h: 52 },
+  /** The pointer to `project/README.md`, which is where §3 goes next. */
+  readmePointer: { x: 80, y: 1558, w: 1480, h: 56 },
   /** The memo, sitting in the same file as the projects. */
   email: { x: 80, y: 1155, w: 1480, h: 350 },
   /** "we are going to shut it down and transition to a new model" */

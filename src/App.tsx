@@ -7,6 +7,7 @@ const HomePage = lazy(() => import('./routes/HomePage'))
 const WatchPage = lazy(() => import('./routes/WatchPage'))
 const CasefileCatalogue = lazy(() => import('./routes/CasefileCatalogue'))
 const V2Section01 = lazy(() => import('./videos/apollo-o1/video-2/section-01/Section01'))
+const V2Section02 = lazy(() => import('./videos/apollo-o1/video-2/section-02/Section02'))
 
 function RouteFallback() {
   return <div style={{ width: '100vw', height: '100vh', background: '#f7f1e6' }} />
@@ -27,6 +28,7 @@ export default function App() {
           {/* Video 2, in build. Section routes only — there is no assembled
               film yet, and there will not be one until the acts exist. */}
           <Route path="video-2/section-01" element={<V2Section01 />} />
+          <Route path="video-2/section-02" element={<V2Section02 />} />
 
           {/* Old public entry points remain harmless bookmarks, not separate products. */}
           <Route path="watch" element={<Navigate to={VIDEO_PATH} replace />} />

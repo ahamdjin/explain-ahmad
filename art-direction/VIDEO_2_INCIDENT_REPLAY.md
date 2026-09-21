@@ -109,6 +109,47 @@ Use it only when Ahmad changes how the viewer should understand the evidence:
 
 Do not put face cam beside dense terminal/document evidence.
 
+## Three layers, not two
+
+**Revised 2026-09-21 by Ahmad: "make it real, not reading a document at all."**
+
+Two builds staged §2 as a document being read — the published page on screen, a
+band lit, a phrase quoted. Both were accurate and both were inert. The mistake
+was treating the transcript as the set.
+
+It is not. It is a **record of a session**. o1 was on a sandboxed Linux machine:
+it listed a directory, ran `cat`, got output back, scrolled through it, edited a
+config, ran `scp`. Those are events, and events can be shown happening.
+
+So the film has three layers:
+
+1. **The recreated system** — dark chrome, a file tree, a shell, a stream of
+   output. This is the set. It is on screen almost continuously, and things
+   *happen* in it: commands run, output arrives, values change, files move.
+2. **The evidence** — the published page on warm paper with its publisher's
+   tab. This is the **receipt**, not the set. It appears two or three times a
+   section, to prove the session was real.
+3. **The explanation** — records, dates, pen annotations, routes. Ours.
+
+A viewer must always be able to tell which is which, and the material does it:
+live screen, paper sheet, our hand.
+
+### Rules for the recreated system
+
+- **Every character in it is verbatim.** We restage *where* text appeared. We
+  never write text. A recreation of the environment is honest; a recreation of
+  the content is forgery.
+- **Nothing appears before the command that produced it.** An early build had
+  the file's contents on screen from the first frame, which quietly made the
+  command that fetches them redundant — and that command is the one moment in
+  the section where the model *does* something.
+- **Things that matter later are visible from the start, unremarked.**
+  `oversight_config.yaml` sits in the directory listing for the whole of §2.
+  Nobody points at it. That is what makes §4 feel inevitable instead of sudden.
+- **The model is a cursor and the effects of its commands.** Nothing else. No
+  face, no avatar, no glowing brain, no company logo — a logo would also say
+  "the app on your phone did this", which is the film's central false claim.
+
 ## The two layers
 
 Decided 2026-09-20, once the real o1 transcript was in hand, and now the

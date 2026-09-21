@@ -93,7 +93,9 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {/* Verbatim, lifted off the lit band so it can be read at frame size.
           Never a paraphrase — the page is right there to be checked against. */}
       <Slot on={quote.on} at={quote.at} scale={quote.scale} feel={feel} z={5}>
-        <div style={{ width: '34cqw' }}>
+        {/* wide enough that the longest command in the film -- the file path
+            o1 reads -- lands on one line instead of snapping mid-token */}
+        <div style={{ width: '42cqw' }}>
           <Quote text={quote.text} />
         </div>
       </Slot>

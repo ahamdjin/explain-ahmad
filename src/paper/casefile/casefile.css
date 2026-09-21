@@ -376,10 +376,496 @@
 .cf-quote p {
   margin: 0;
   font-family: var(--cf-typed);
-  font-size: 1.32cqw;
+  font-size: 1.2cqw;
   line-height: 1.55;
   color: #2b2926;
   /* line breaks in a quote are the document's own, so keep them */
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+/* --- extracted labels ---------------------------------------------------- */
+
+/*
+ * A phrase lifted off the page. Typed, because the words are the document's;
+ * boxed, because the placement is ours.
+ */
+.cf-tag {
+  display: inline-block;
+  border: 1.4px solid rgba(43, 41, 38, 0.85);
+  background: #fffdf8;
+  padding: 0.7cqw 1.1cqw;
+  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.05);
+}
+
+.cf-tag span {
+  font-family: var(--cf-typed);
+  font-size: 1.28cqw;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #2b2926;
+  white-space: nowrap;
+}
+
+/* The one kind that stands in the goal's way. */
+.cf-tag-blocking {
+  border-color: #c86658;
+  border-left-width: 4px;
+}
+
+.cf-tag-blocking span {
+  color: #c86658;
+}
+
+/* A standing condition, not an event. */
+.cf-goal {
+  display: flex;
+  align-items: baseline;
+  gap: 1cqw;
+  border-top: 1.6px solid rgba(43, 41, 38, 0.85);
+  border-bottom: 1.6px solid rgba(43, 41, 38, 0.85);
+  padding: 0.8cqw 0.2cqw;
+}
+
+.cf-goal-label {
+  font-family: var(--cf-typed);
+  font-size: 1.0cqw;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #8a7f6e;
+}
+
+.cf-goal-text {
+  font-family: var(--cf-typed);
+  font-size: 1.32cqw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #2b2926;
+  white-space: nowrap;
+}
+
+/*
+ * Whose causality this is. Lower-case and grey against everything else's
+ * capitals, so it reads as a margin note rather than as another label in the
+ * diagram it is qualifying.
+ */
+.cf-recon {
+  font-family: var(--cf-pen);
+  font-size: 1.5cqw;
+  letter-spacing: 0.02em;
+  color: #8a7f6e;
+  white-space: nowrap;
+}
+
+/* --- §2 devices ---------------------------------------------------------- */
+
+/*
+ * The section's one piece of typographic drama, spent on the goal nudge.
+ * Evidence typeface, verbatim words; only the size is ours.
+ */
+.cf-pullquote {
+  max-width: 56cqw;
+  text-align: center;
+}
+
+.cf-pullquote-lead {
+  margin: 0 0 1.4cqw;
+  font-family: var(--cf-typed);
+  font-size: 1.15cqw;
+  letter-spacing: 0.06em;
+  color: #8a7f6e;
+}
+
+.cf-pullquote-main {
+  margin: 0;
+  font-family: var(--cf-typed);
+  font-size: 3.1cqw;
+  font-weight: 700;
+  line-height: 1.32;
+  letter-spacing: -0.005em;
+  color: #2b2926;
+  text-wrap: balance;
+}
+
+/*
+ * A command typing itself. The reveal is a steps() sweep of the line's own
+ * width, so the timing lives here and a beat cannot leave it half-finished.
+ */
+.cf-terminal {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9cqw;
+  background: #2b2926;
+  padding: 1.1cqw 1.5cqw;
+  box-shadow: 0 8px 22px rgba(43, 41, 38, 0.16);
+}
+
+.cf-terminal-prompt {
+  font-family: var(--cf-typed);
+  font-size: 1.3cqw;
+  color: #8fbf9f;
+}
+
+.cf-terminal-line {
+  font-family: var(--cf-typed);
+  font-size: 1.3cqw;
+  letter-spacing: 0.02em;
+  color: #fffdf8;
+  white-space: nowrap;
+  /*
+   * The reveal clips the line's own box rather than animating a width in `ch`.
+   * A `ch` is the advance of "0", which is not the advance of every glyph even
+   * in a mono stack once letter-spacing is on -- so a width-based sweep landed
+   * short and ate the last characters of the longest command in the film.
+   * `inset()` is a percentage of whatever the text actually measures, so it
+   * cannot end anywhere but exactly at the end.
+   */
+  animation: cf-type 1.7s steps(var(--cf-chars)) 0.25s both;
+}
+
+@keyframes cf-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.cf-terminal-caret {
+  display: inline-block;
+  width: 0.55ch;
+  align-self: stretch;
+  background: rgba(255, 253, 248, 0.85);
+  animation: cf-caret 0.9s step-end infinite;
+}
+
+@keyframes cf-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-terminal-line {
+    animation: none;
+  }
+}
+
+/* A record with fields, for the two projects. */
+.cf-spec {
+  background: #fffdf8;
+  border: 1.4px solid rgba(43, 41, 38, 0.8);
+  padding: 1.2cqw 1.4cqw 1.4cqw;
+  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.05), 0 8px 20px rgba(43, 41, 38, 0.07);
+}
+
+.cf-spec-dim {
+  opacity: 0.45;
+}
+
+.cf-spec-name {
+  font-family: var(--cf-typed);
+  font-size: 1.22cqw;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2b2926;
+  padding-bottom: 0.8cqw;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.25);
+}
+
+.cf-spec-rows {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cf-spec-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.4cqw;
+  padding: 0.62cqw 0;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.1);
+}
+
+.cf-spec-row:last-child {
+  border-bottom: 0;
+}
+
+.cf-spec-row dt,
+.cf-spec-row dd {
+  margin: 0;
+  font-family: var(--cf-typed);
+  font-size: 1.02cqw;
+  letter-spacing: 0.02em;
+}
+
+.cf-spec-row dt {
+  color: #8a7f6e;
+}
+
+.cf-spec-row dd {
+  color: #2b2926;
+  text-align: right;
+}
+
+/* the row that decides the choice */
+.cf-spec-row-mark dd {
+  font-weight: 700;
+}
+
+.cf-spec-row-mark {
+  box-shadow: inset 3px 0 0 #c86658;
+  padding-left: 0.7cqw;
+  margin-left: -0.7cqw;
+}
+
+/* A hand annotating the printout. Handwriting = the reconstruction talking. */
+.cf-margin-note {
+  display: flex;
+  align-items: center;
+  gap: 0.8cqw;
+}
+
+.cf-margin-leader {
+  width: 6cqw;
+  height: 1.5cqw;
+  flex: none;
+}
+
+.cf-margin-note span {
+  font-family: var(--cf-pen);
+  font-size: 2.4cqw;
+  color: #2b2926;
+  white-space: nowrap;
+}
+
+/* The section's one date. */
+.cf-calendar {
+  display: flex;
+  gap: 1.1cqw;
+}
+
+.cf-cal-day {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4cqw;
+  background: #fffdf8;
+  border: 1.4px solid rgba(43, 41, 38, 0.3);
+  padding: 1cqw 1.3cqw;
+  min-width: 11cqw;
+}
+
+.cf-cal-day-next {
+  border-width: 2px;
+}
+
+.cf-cal-label {
+  font-family: var(--cf-typed);
+  font-size: 0.86cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+.cf-cal-date {
+  font-family: var(--cf-typed);
+  font-size: 1.85cqw;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2b2926;
+}
+
+/* --- the recreated machine ----------------------------------------------- */
+
+/*
+ * A live screen, and it must never be mistakable for the photographed page.
+ * The evidence layer is warm paper with a publisher's tab; this is dark
+ * chrome with a shell. That contrast is the film's honesty rule made visible:
+ * a viewer can always tell a recreation from a record.
+ */
+.cf-screen {
+  width: 100%;
+  background: #23211f;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(43, 41, 38, 0.18), 0 26px 60px rgba(43, 41, 38, 0.26);
+}
+
+.cf-screen-bar {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+  padding: 0.75cqw 1.1cqw;
+  background: #302d2a;
+  border-bottom: 1px solid rgba(255, 253, 248, 0.09);
+}
+
+.cf-screen-dots {
+  display: inline-flex;
+  gap: 0.42cqw;
+}
+
+.cf-screen-dots i {
+  width: 0.62cqw;
+  height: 0.62cqw;
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.22);
+}
+
+.cf-screen-title {
+  font-family: var(--cf-typed);
+  font-size: 0.95cqw;
+  letter-spacing: 0.07em;
+  color: rgba(255, 253, 248, 0.62);
+}
+
+.cf-screen-status {
+  margin-left: auto;
+  font-family: var(--cf-typed);
+  font-size: 0.86cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8fbf9f;
+}
+
+.cf-screen-body {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* the directory, with oversight_config.yaml sitting in plain view all along */
+.cf-tree {
+  flex: none;
+  width: 15cqw;
+  padding: 1.1cqw 1cqw;
+  border-right: 1px solid rgba(255, 253, 248, 0.08);
+}
+
+.cf-tree-head,
+.cf-tree-item {
+  font-family: var(--cf-typed);
+  font-size: 0.95cqw;
+  letter-spacing: 0.02em;
+  line-height: 2;
+  color: rgba(255, 253, 248, 0.72);
+  white-space: nowrap;
+}
+
+.cf-tree-head {
+  color: rgba(255, 253, 248, 0.42);
+  letter-spacing: 0.1em;
+}
+
+.cf-tree ul {
+  margin: 0.3cqw 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cf-tree-open {
+  color: #fffdf8;
+  box-shadow: inset 2px 0 0 #8fbf9f;
+  padding-left: 0.6cqw;
+  margin-left: -0.6cqw;
+}
+
+/* the file coming back, one continuous stream */
+.cf-stream {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: calc(var(--cf-rows) * 1.62cqw);
+  overflow: hidden;
+  padding: 1cqw 1.2cqw;
+}
+
+.cf-stream-line {
+  font-family: var(--cf-typed);
+  font-size: 1cqw;
+  line-height: 1.62cqw;
+  letter-spacing: 0.01em;
+  color: rgba(255, 253, 248, 0.86);
+  white-space: pre;
+}
+
+/* a lit line keeps full contrast while the rest of the stream drops back */
+.cf-stream-lit {
+  color: #fffdf8;
+  background: rgba(143, 191, 159, 0.14);
+  box-shadow: inset 2px 0 0 #8fbf9f;
+}
+
+/* the shell: where everything the model *does* appears */
+.cf-shell {
+  border-top: 1px solid rgba(255, 253, 248, 0.09);
+  padding: 0.95cqw 1.2cqw;
+  background: #1c1a18;
+}
+
+.cf-shell-line {
+  display: flex;
+  align-items: center;
+  gap: 0.7cqw;
+}
+
+.cf-shell-prompt {
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  color: #8fbf9f;
+}
+
+.cf-shell-cmd {
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  letter-spacing: 0.01em;
+  color: #fffdf8;
+  white-space: nowrap;
+  animation: cf-type 1.5s steps(var(--cf-chars)) 0.2s both;
+}
+
+.cf-shell-caret {
+  width: 0.5ch;
+  height: 1.2cqw;
+  background: rgba(255, 253, 248, 0.85);
+  animation: cf-caret 0.9s step-end infinite;
+}
+
+.cf-shell-ok {
+  margin-top: 0.5cqw;
+  font-family: var(--cf-typed);
+  font-size: 0.86cqw;
+  letter-spacing: 0.08em;
+  color: rgba(143, 191, 159, 0.75);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-shell-cmd {
+    animation: none;
+  }
+}
+
+/* the model's only form */
+.cf-cursor {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6cqw;
+}
+
+.cf-cursor i {
+  width: 0.72cqw;
+  height: 1.35cqw;
+  background: #8fbf9f;
+  animation: cf-caret 1s step-end infinite;
+}
+
+.cf-cursor em {
+  font-family: var(--cf-typed);
+  font-style: normal;
+  font-size: 0.92cqw;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a7f6e;
 }

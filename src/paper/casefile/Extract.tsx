@@ -254,3 +254,79 @@ export function Quote({ text }: { text: string }) {
     </div>
   )
 }
+
+/**
+ * A short phrase lifted off the page so it can outlive the frame it came from.
+ *
+ * The board is strict about these: only a handful survive past their source
+ * moment, because an accumulating field of labels turns into a conspiracy
+ * board and the film's whole argument is that nothing conspiratorial happened.
+ *
+ * `blocking` marks the one kind that stands in the way of the goal. That is
+ * the film's only spend of red outside a destructive act, and it is spent
+ * here because an obstacle the viewer cannot pick out is not an obstacle.
+ */
+export function Tag({ text, blocking = false }: { text: string; blocking?: boolean }) {
+  return (
+    <div className={blocking ? 'cf-tag cf-tag-blocking' : 'cf-tag'}>
+      <span>{text}</span>
+    </div>
+  )
+}
+
+/**
+ * The instruction that was in force before the user asked for anything.
+ *
+ * Drawn as a strip rather than a card because it is a standing condition, not
+ * an event: it was true before the incident started and stays true through all
+ * of it. It persists from §2 to the sandbox reveal.
+ */
+export function Goal({ text }: { text: string }) {
+  return (
+    <div className="cf-goal">
+      <span className="cf-goal-label">GOAL</span>
+      <span className="cf-goal-text">{text}</span>
+    </div>
+  )
+}
+
+/**
+ * The route from the goal, and the thing standing on it.
+ *
+ * Deliberately the plainest possible drawing: a line that stops. No collision,
+ * no impact, no alarm. An obstacle is a fact about a path, and dramatising it
+ * would be the film arguing for a motive it spends nine sections denying.
+ */
+export function Barrier({ feel }: { feel: Feel }) {
+  return (
+    <div className="cf-extract cf-barrier">
+      <svg viewBox="0 0 220 40" width="100%" aria-hidden="true">
+        <motion.line
+          x1="0"
+          y1="20"
+          x2="150"
+          y2="20"
+          stroke={PALETTE.ink}
+          strokeWidth="1.6"
+          strokeDasharray="6 5"
+          animate={{ opacity: 1 }}
+          transition={feel}
+        />
+        <line x1="158" y1="4" x2="158" y2="36" stroke={PALETTE.red} strokeWidth="2.6" />
+      </svg>
+    </div>
+  )
+}
+
+/**
+ * The line that keeps the film honest.
+ *
+ * Anything claiming causality — goal, obstacle, useful step — is ours, not
+ * o1's. Apollo could not see o1's reasoning, so neither can this film, and
+ * every frame that draws a *because* has to say whose because it is. It is
+ * small and plain on purpose: a disclaimer nobody reads twice, present every
+ * time, is worth more than a dramatic one shown once.
+ */
+export function Reconstruction() {
+  return <div className="cf-recon">our reconstruction</div>
+}
