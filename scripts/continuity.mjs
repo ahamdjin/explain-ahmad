@@ -1,25 +1,33 @@
 /**
- * Does every section's last frame match the next section's first?
+ * Does every section open where the previous one left off?
  *
  * `storyboard/video-2/README.md` makes that the project's build rule, and
- * nothing checked it for nine sections. Two real breaks were sitting there:
- * §2's two carried objects teleported into §3's corner instead of travelling
- * there, and §7's face camera vanished at §8 beat 1 so the question and its
- * answer looked like different films.
+ * nothing checked it for nine sections.
  *
- * ## Play the beats, do not scrub them
+ * ## What to compare, and what not to
  *
- * `director.tsx` rebuilds the scene from `initial` on every render, applying
- * every earlier beat's commands *and* its staged commands, then the current
- * beat's, then whichever of its stages are due at `elapsed`. So a beat that is
- * skipped through faster than its stages is genuinely in a different state
- * from one that played.
+ * Not "§A's last frame against §B's first rendered frame". Beat 1 is *allowed*
+ * to move things — that is the travel into the next section's layout — and a
+ * standalone section route has no earlier position to animate from, so React
+ * mounts the actor wherever beat 1 puts it. Comparing rendered frames reports
+ * every planned move as a teleport. A first version did exactly that and
+ * called three good hand-offs broken.
  *
- * A first version of this check pressed through at 340ms a beat and reported
- * three hand-offs broken. All three were fine; the stages had not fired. Hence
- * HOLD below, which must stay above the longest `at` in any beat.
+ * The rule is about the **entry state**: the `INITIAL` in §B's `scene.ts` must
+ * hold §A's exit positions. That is what an assembled film would animate from,
+ * and it is a static fact, so this reads it out of the source rather than out
+ * of the DOM.
+ *
+ * So: play §A to its last beat in a browser, read §B's `INITIAL` from disk,
+ * and compare the actors that appear in both.
+ *
+ * Playing matters. `director.tsx` rebuilds the scene from `initial` on every
+ * render and applies only the staged commands due at `elapsed`, so a section
+ * scrubbed faster than its stages is genuinely in a different state. HOLD must
+ * stay above the largest `at` in any beat.
  */
 import { chromium } from 'playwright'
+import { readFileSync } from 'node:fs'
 
 const PORT = process.env.PORT ?? 4180
 const HOLD = 3400
@@ -29,33 +37,45 @@ const SECTIONS = [
 ]
 /** §5 -> §6 is the film's one permitted hard cut: the publisher changes. */
 const CUTS = new Set(['05->06'])
+const DIR = 'src/videos/apollo-o1/video-2'
+
+/** Actor -> {on, x, y, scale} out of a section's INITIAL. */
+function initialOf(sec) {
+  const src = readFileSync(`${DIR}/section-${sec}/scene.ts`, 'utf8')
+  const block = src.slice(src.indexOf('export const INITIAL'), src.indexOf('\n}\n', src.indexOf('export const INITIAL')))
+  const out = {}
+  const re = /^\s*(\w+):\s*\{\s*on:\s*(true|false),\s*at:\s*\{\s*x:\s*([\d.]+),\s*y:\s*([\d.]+)\s*\},\s*scale:\s*([\d.]+)/gm
+  for (const m of block.matchAll(re)) {
+    out[m[1]] = { on: m[2] === 'true', x: +m[3], y: +m[4], scale: +m[5] }
+  }
+  return out
+}
 
 const browser = await chromium.launch()
 
-async function frameAt(sec, beat) {
+/** Actor -> {x, y, scale} as §A actually leaves them, read off its own scene. */
+async function exitOf(sec, beats) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
   await page.goto(`http://localhost:${PORT}/video-2/section-${sec}`, { waitUntil: 'networkidle' })
   await page.waitForTimeout(1200)
-  for (let i = 1; i < beat; i++) {
+  for (let i = 1; i < beats; i++) {
     await page.keyboard.press('ArrowRight')
     await page.waitForTimeout(HOLD)
   }
   await page.waitForTimeout(HOLD)
   const shot = await page.evaluate(() =>
-    [...document.querySelectorAll('.s1-slot')]
-      .filter((el) => getComputedStyle(el).opacity !== '0' && el.getBoundingClientRect().width)
-      .map((el) => {
-        const r = el.getBoundingClientRect()
-        return {
-          t: (el.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 40) || '(art)',
-          x: Math.round(r.x + r.width / 2),
-          y: Math.round(r.y + r.height / 2),
-        }
-      })
-      .sort((a, b) => a.x - b.x || a.y - b.y),
+    [...document.querySelectorAll('.s1-slot')].map((el) => {
+      const r = el.getBoundingClientRect()
+      return {
+        on: getComputedStyle(el).opacity !== '0' && r.width > 0,
+        x: +((r.x + r.width / 2) / window.innerWidth * 100).toFixed(1),
+        y: +((r.y + r.height / 2) / window.innerHeight * 100).toFixed(1),
+        t: (el.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 40) || '(art)',
+      }
+    }),
   )
   await page.close()
-  return shot
+  return shot.filter((s) => s.on)
 }
 
 let broken = 0
@@ -63,27 +83,22 @@ for (let i = 0; i < SECTIONS.length - 1; i++) {
   const [a, n] = SECTIONS[i]
   const [z] = SECTIONS[i + 1]
   const key = `${a}->${z}`
-  const out = await frameAt(a, n)
-  const into = await frameAt(z, 1)
+  if (CUTS.has(key)) { console.log(`§${a} -> §${z}   permitted hard cut`); continue }
 
-  if (CUTS.has(key)) {
-    console.log(`§${a} -> §${z}   permitted hard cut`)
-    continue
-  }
+  const exit = await exitOf(a, n)
+  const enter = initialOf(z)
+  const carried = Object.entries(enter).filter(([, v]) => v.on)
 
-  /* Carried objects are matched by their text, and must land within 24px of
-     where they left. A jump larger than that reads as a teleport. */
+  /* Match each carried actor to the nearest thing §A actually left on screen.
+     Within 2% of the frame in both axes is the same place. */
   const bad = []
-  for (const o of out) {
-    if (o.t === '(art)') continue
-    const match = into.find((c) => c.t === o.t)
-    if (!match) continue
-    const d = Math.hypot(match.x - o.x, match.y - o.y)
-    if (d > 24) bad.push(`${o.t} moved ${Math.round(d)}px (${o.x},${o.y} -> ${match.x},${match.y})`)
+  for (const [name, v] of carried) {
+    const near = exit.find((e) => Math.abs(e.x - v.x) < 2 && Math.abs(e.y - v.y) < 2)
+    if (!near) bad.push(`${name} enters at ${v.x},${v.y} — nothing is there when §${a} ends`)
   }
-  const shared = out.filter((o) => into.some((c) => c.t === o.t)).length
   console.log(
-    `§${a} -> §${z}   ${shared} object(s) carried` + (bad.length ? `\n   BREAK: ${bad.join('\n   BREAK: ')}` : ''),
+    `§${a} -> §${z}   ${carried.length} actor(s) on at entry` +
+    (bad.length ? `\n   BREAK: ${bad.join('\n   BREAK: ')}` : ''),
   )
   if (bad.length) broken++
 }

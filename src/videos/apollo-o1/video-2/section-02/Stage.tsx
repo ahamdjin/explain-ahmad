@@ -13,6 +13,7 @@ import {
   Spec,
   MarginNote,
   Calendar,
+  Job,
   MailOpen,
   EmailInFile,
 } from '../../../../paper/casefile'
@@ -34,7 +35,7 @@ import { FILE, DIR, SESSION, MEMO } from './file'
  * bottom of it because everything else was taken from it.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { screen, doc, pull, specA, specB, note, cal, mail, goal, tagA, tagB, obstacle, barrier, recon } = scene
+  const { screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = scene
 
   /*
    * The two projects, as the file states them. Same headings in the same
@@ -150,6 +151,19 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
               feel={feel}
             />
           )}
+        </div>
+      </Slot>
+
+      {/*
+        * §1's extracted task, carried across the section boundary.
+        *
+        * It was declared in this scene and never rendered — a dead actor, so
+        * the hand-off was nominal rather than visual. It now holds §1's final
+        * frame for the first beat and a half while the machine rises over it.
+        */}
+      <Slot on={job.on} at={job.at} scale={job.scale} feel={feel} z={2}>
+        <div style={{ width: '28cqw' }}>
+          <Job text={job.text} />
         </div>
       </Slot>
 

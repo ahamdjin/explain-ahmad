@@ -53,7 +53,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * section exists to calm down.
      */
     commands: [chain.moveTo({ x: 50, y: 50 }, 0.5)],
-    stages: [{ at: 1.8, commands: [box.show({ x: 50, y: 50 }, 1.2, { label: 'controlled evaluation' }), chain.moveTo({ x: 50, y: 50 }, 0.62)] }],
+    stages: [{ at: 1800, commands: [box.show({ x: 50, y: 50 }, 1.2, { label: 'controlled evaluation' }), chain.moveTo({ x: 50, y: 50 }, 0.62)] }],
   },
   {
     n: 2,
@@ -90,7 +90,7 @@ export const BEATS: Array<Beat<Patch>> = [
       box.off(),
       team.show({ x: 66, y: 50 }, 1.1, { shown: 0 }),
     ],
-    stages: [{ at: 1.0, commands: [team.upTo(3)] }],
+    stages: [{ at: 1000, commands: [team.upTo(3)] }],
   },
   {
     n: 4,
@@ -110,7 +110,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.moveTo(ASIDE, 0.5),
       grid.show({ x: RIGHT, y: 50 }, 1.2, { lit: 0 }),
     ],
-    stages: [{ at: 1.6, commands: [grid.lights(33)] }],
+    stages: [{ at: 1600, commands: [grid.lights(33)] }],
   },
   {
     n: 5,
@@ -148,7 +148,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * so this describes their method rather than catching them out.
      */
     commands: [nudge.moveTo({ x: RIGHT, y: 30 }, 0.8), thumb.show({ x: RIGHT, y: 68 }, 1, { pressing: false, tip: 0 })],
-    stages: [{ at: 1.2, commands: [thumb.press()] }],
+    stages: [{ at: 1200, commands: [thumb.press()] }],
   },
   {
     n: 7,
@@ -175,7 +175,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.moveTo({ x: 20, y: 52 }, 0.44),
       nudged.show({ x: 62, y: 50 }, 1.15, { reveal: false }),
     ],
-    stages: [{ at: 2.2, commands: [nudged.compare()] }],
+    stages: [{ at: 2200, commands: [nudged.compare()] }],
   },
   {
     n: 8,
@@ -215,7 +215,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.look(SHOT.chain),
       cvd.show({ x: RIGHT, y: 50 }, 1, { marks: 0 }),
     ],
-    stages: [{ at: 2.0, commands: [cvd.upTo(2)] }],
+    stages: [{ at: 2000, commands: [cvd.upTo(2)] }],
   },
   {
     n: 10,

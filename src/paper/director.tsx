@@ -143,8 +143,20 @@ export function SectionRunner<S, P>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [section, beat?.id])
 
-  /** How far into the current beat we are, so staged reveals fire in order. */
-  const [elapsed, setElapsed] = useState(Number.POSITIVE_INFINITY)
+  /**
+   * How far into the current beat we are, so staged reveals fire in order.
+   *
+   * Starts at 0, not Infinity. The effect below resets it per beat -- to 0 for
+   * a beat with stages, to Infinity for one without -- but it runs *after* the
+   * first render, so an Infinity seed made every stage of the opening beat due
+   * on mount. A section whose first beat staged anything therefore never
+   * showed its entry frame: §2 opens on §1's final page and raises the machine
+   * over it at 1.6s, and the page was gone before the first paint.
+   *
+   * Stepping back still skips the staging, because that path goes through the
+   * effect rather than through this seed.
+   */
+  const [elapsed, setElapsed] = useState(0)
 
   const scene = useMemo(() => {
     const previous = beats.slice(0, index).flatMap((item) => [

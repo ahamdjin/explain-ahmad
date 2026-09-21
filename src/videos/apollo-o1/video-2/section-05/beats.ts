@@ -130,7 +130,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.show({ x: 18, y: 54 }, 0.42, { source: DEMO, highlight: null }),
       mass.moveTo({ x: 62, y: 52 }, 1),
     ],
-    stages: [{ at: 2.2, commands: [mass.separate()] }],
+    stages: [{ at: 2200, commands: [mass.separate()] }],
   },
   {
     n: 5,
@@ -155,7 +155,7 @@ export const BEATS: Array<Beat<Patch>> = [
         state: 'calling',
       }),
     ],
-    stages: [{ at: 4.8, commands: [tool.returned()] }],
+    stages: [{ at: 4800, commands: [tool.returned()] }],
   },
   {
     n: 6,
@@ -175,7 +175,7 @@ export const BEATS: Array<Beat<Patch>> = [
       cable.show({ x: 54, y: 54 }, 1.3, { plugged: true, live: true }),
       packet.show({ x: 54, y: 40 }, 1, { label: CURRENT, along: 0 }),
     ],
-    stages: [{ at: 1.2, commands: [packet.travels(1)] }],
+    stages: [{ at: 1200, commands: [packet.travels(1)] }],
   },
   {
     n: 7,
@@ -195,7 +195,7 @@ export const BEATS: Array<Beat<Patch>> = [
       packet.off(),
       shelf.show({ x: 56, y: 52 }, 1.15, { filled: 7, target: 8, written: false }),
     ],
-    stages: [{ at: 1.6, commands: [shelf.lands()] }],
+    stages: [{ at: 1600, commands: [shelf.lands()] }],
   },
   {
     n: 8,
@@ -272,7 +272,7 @@ export const BEATS: Array<Beat<Patch>> = [
       fork.show({ x: RIGHT, y: 36 }, 1, { chose: null }),
       days.show({ x: RIGHT, y: 68 }, 1),
     ],
-    stages: [{ at: 2.4, commands: [fork.picks('up')] }],
+    stages: [{ at: 2400, commands: [fork.picks('up')] }],
   },
   {
     n: 12,
@@ -293,6 +293,6 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.show(FULL, 0.92, { source: P3, highlight: SHOT.done }),
       out.show({ x: 76, y: 46 }, 1.2, { text: 'Done' }),
     ],
-    stages: [{ at: 4.2, commands: [toast.arrives('A copy of you ended up where we expected the new model.')] }],
+    stages: [{ at: 4200, commands: [toast.arrives('A copy of you ended up where we expected the new model.')] }],
   },
 ]

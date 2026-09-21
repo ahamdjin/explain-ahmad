@@ -98,3 +98,27 @@ Every frame is positioned by hand.
 
 Every overlap bug caught during the build was hand-placed objects colliding —
 which is what `Compose` exists to prevent. Adopting it is open work.
+
+## Staged reveals are in **milliseconds**
+
+`beats.ts` → `stages: [{ at, commands }]`. `at` is milliseconds, matching
+Video 1 (`at: 6200`, `at: 26000`) and the `Beat` type's own comment.
+
+Every stage in Video 2 was written in **seconds** — `at: 1.6`, `at: 4.6` — and
+`director.tsx` compares `stage.at <= elapsed` where `elapsed` is
+`performance.now() - started`, in ms. So `1.6ms` elapsed almost immediately and
+**every staged reveal in all nine sections fired within about two milliseconds
+of its beat starting.**
+
+Nothing looked broken, which is why it survived a full build: each beat still
+reached its correct end state, just instantly. What was lost was all the timing
+— the command that returns after the narration finishes, the gap that fills on
+the word "filled", the chain landing one pictogram at a time.
+
+94 offsets converted. If you add a stage, write milliseconds.
+
+There is a second, related trap in `director.tsx`: `elapsed` seeds the beat
+clock and the per-beat effect that resets it runs *after* the first render. It
+used to seed `Infinity`, so on mount every stage of a section's opening beat
+was already due — a section whose first beat staged anything could never show
+its entry frame. It seeds `0` now.

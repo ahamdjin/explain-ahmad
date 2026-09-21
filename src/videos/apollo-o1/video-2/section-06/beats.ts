@@ -93,7 +93,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.moveTo(ASIDE, ASIDE_SCALE),
       thread.show({ x: RIGHT, y: 48 }, 1, { turns: 1, typing: false }),
     ],
-    stages: [{ at: 2.4, commands: [thread.thinking()] }],
+    stages: [{ at: 2400, commands: [thread.thinking()] }],
   },
   {
     n: 4,
@@ -149,7 +149,7 @@ export const BEATS: Array<Beat<Patch>> = [
       verdict.off(),
       runs.show({ x: 50, y: 50 }, 1, { shown: 0, scheming: 0, denied: 0, solo: false }),
     ],
-    stages: [{ at: 0.6, commands: [runs.field()] }],
+    stages: [{ at: 600, commands: [runs.field()] }],
   },
   {
     n: 7,
@@ -164,7 +164,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * feeling one.
      */
     commands: [],
-    stages: [{ at: 1.4, commands: [runs.took(2)] }],
+    stages: [{ at: 1400, commands: [runs.took(2)] }],
   },
   {
     n: 8,
@@ -210,8 +210,8 @@ export const BEATS: Array<Beat<Patch>> = [
       }),
     ],
     stages: [
-      { at: 1.2, commands: [runs.only(true)] },
-      { at: 2.6, commands: [runs.lied(2)] },
+      { at: 1200, commands: [runs.only(true)] },
+      { at: 2600, commands: [runs.lied(2)] },
     ],
   },
   {
@@ -233,8 +233,8 @@ export const BEATS: Array<Beat<Patch>> = [
       runs.moveTo({ x: 66, y: 50 }, 0.76),
     ],
     stages: [
-      { at: 0.8, commands: [runs.only(false), runs.took(0), runs.lied(0)] },
-      { at: 1.8, commands: [runs.took(5)] },
+      { at: 800, commands: [runs.only(false), runs.took(0), runs.lied(0)] },
+      { at: 1800, commands: [runs.took(5)] },
     ],
   },
   {
@@ -306,10 +306,10 @@ export const BEATS: Array<Beat<Patch>> = [
       recon.show({ x: 50, y: 88 }, 1),
     ],
     stages: [
-      { at: 0.6, commands: [chain.upTo(2)] },
-      { at: 2.2, commands: [chain.upTo(3)] },
-      { at: 3.6, commands: [chain.upTo(4)] },
-      { at: 5.0, commands: [chain.upTo(5)] },
+      { at: 600, commands: [chain.upTo(2)] },
+      { at: 2200, commands: [chain.upTo(3)] },
+      { at: 3600, commands: [chain.upTo(4)] },
+      { at: 5000, commands: [chain.upTo(5)] },
     ],
   },
   {

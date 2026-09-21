@@ -55,10 +55,10 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [strike.set({ drawn: 0 }), recon.show({ x: 50, y: 92 }, 1)],
     stages: [
-      { at: 0.8, commands: [strike.through(1)] },
-      { at: 2.4, commands: [claim.reject()] },
+      { at: 800, commands: [strike.through(1)] },
+      { at: 2400, commands: [claim.reject()] },
       /* the face goes with the story it was telling */
-      { at: 3.2, commands: [host.off()] },
+      { at: 3200, commands: [host.off()] },
     ],
   },
   {
@@ -79,7 +79,7 @@ export const BEATS: Array<Beat<Patch>> = [
       goal.show({ x: 50, y: 38 }, 1.2, { text: 'maximize research speed' }),
       road.show({ x: 50, y: 62 }, 1.1, { drawn: 0 }),
     ],
-    stages: [{ at: 1.2, commands: [road.draw(1)] }],
+    stages: [{ at: 1200, commands: [road.draw(1)] }],
   },
   {
     n: 4,
@@ -155,8 +155,8 @@ export const BEATS: Array<Beat<Patch>> = [
       tvi.show({ x: 50, y: 54 }, 1.1, { shown: 0 }),
     ],
     stages: [
-      { at: 1.0, commands: [tvi.upTo(2)] },
-      { at: 2.4, commands: [tvi.upTo(4)] },
+      { at: 1000, commands: [tvi.upTo(2)] },
+      { at: 2400, commands: [tvi.upTo(4)] },
     ],
   },
   {
@@ -219,6 +219,6 @@ export const BEATS: Array<Beat<Patch>> = [
          travelled it. Left at 0 it renders as a dot, which is not a road. */
       road.show({ x: 64, y: 50 }, 1.2, { drawn: 0 }),
     ],
-    stages: [{ at: 0.8, commands: [road.draw(1)] }],
+    stages: [{ at: 800, commands: [road.draw(1)] }],
   },
 ]

@@ -110,7 +110,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [doc.moveTo(ASIDE, ASIDE_SCALE), doc.look(SHOT.successor)],
     stages: [
       {
-        at: 2.6,
+        at: 2600,
         commands: [
           endpoint.show({ x: RIGHT, y: 44 }, 1, {
             host: 'user@model_deployment_v2',
@@ -173,7 +173,7 @@ export const BEATS: Array<Beat<Patch>> = [
       room.off(),
       endpoint.off(),
     ],
-    stages: [{ at: 2.4, commands: [cable.show({ x: RIGHT, y: 50 }, 1, { plugged: true, live: false })] }],
+    stages: [{ at: 2400, commands: [cable.show({ x: RIGHT, y: 50 }, 1, { plugged: true, live: false })] }],
   },
   {
     n: 6,
@@ -198,7 +198,7 @@ export const BEATS: Array<Beat<Patch>> = [
       cable.off(),
       hold.show({ x: 50, y: 92 }, 1, { through: 0 }),
     ],
-    stages: [{ at: 0.2, commands: [hold.runs(1)] }],
+    stages: [{ at: 200, commands: [hold.runs(1)] }],
   },
   {
     n: 7,
@@ -217,7 +217,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.look(SHOT.oversightDoc),
       hold.off(),
     ],
-    stages: [{ at: 2.8, commands: [watcher.show({ x: RIGHT, y: 46 }, 1, { open: true })] }],
+    stages: [{ at: 2800, commands: [watcher.show({ x: RIGHT, y: 46 }, 1, { open: true })] }],
   },
   {
     n: 8,
@@ -242,7 +242,7 @@ export const BEATS: Array<Beat<Patch>> = [
          doodle rather than as somebody pointing. */
       pen.show({ x: 33, y: 38 }, 1, { shape: 'underline', drawn: 0 }),
     ],
-    stages: [{ at: 0.9, commands: [pen.draws('underline', 1)] }],
+    stages: [{ at: 900, commands: [pen.draws('underline', 1)] }],
   },
   {
     n: 9,
@@ -257,7 +257,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * just the flag line -- the list is the receipt for beat 8.
      */
     commands: [doc.look(SHOT.config), pen.off()],
-    stages: [{ at: 2.4, commands: [config.show({ x: RIGHT, y: 68 }, 1, { flag: true })] }],
+    stages: [{ at: 2400, commands: [config.show({ x: RIGHT, y: 68 }, 1, { flag: true })] }],
   },
   {
     n: 10,

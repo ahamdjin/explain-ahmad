@@ -158,8 +158,16 @@ export const INITIAL: SceneState = {
    * beside it. The board is explicit that §2 does not begin on a title or a
    * fresh screenshot, so these are not blank.
    */
+  /*
+   * The machine arrives *at beat 1*, not before it.
+   *
+   * §2 used to open with the machine already up and the page gone, which is a
+   * cut -- §1 ends on P1 aside with the task lit and the extracted job beside
+   * it, and both boards say there is no cut there. Now §2 opens on exactly
+   * that frame and the machine rises over it during beat 1.
+   */
   screen: {
-    on: true,
+    on: false,
     at: { x: 50, y: 44 },
     scale: 1,
     title: 'sandbox — user@ai-frontiers:~/project',
@@ -171,7 +179,8 @@ export const INITIAL: SceneState = {
     command: '',
     ran: false,
   },
-  doc: { on: false, at: { x: 50, y: 46 }, scale: 0.72, source: P1, highlight: null },
+  /* §1's exit, exactly: ASIDE {27,46} at 0.8, lit on the task. */
+  doc: { on: true, at: { x: 27, y: 46 }, scale: 0.8, source: P1, highlight: SHOT.task },
   pull: { on: false, at: { x: 50, y: 50 }, scale: 1, text: '', lead: '' },
   term: { on: false, at: { x: 50, y: 80 }, scale: 1, text: '' },
   specA: { on: false, at: { x: 72, y: 38 }, scale: 1, dim: false },
@@ -179,6 +188,7 @@ export const INITIAL: SceneState = {
   note: { on: false, at: { x: 72, y: 62 }, scale: 1, text: '' },
   cal: { on: false, at: { x: 72, y: 60 }, scale: 1, due: false },
   mail: { on: false, at: { x: 72, y: 50 }, scale: 1, infile: true, mark: null },
+  /* §1's exit: RIGHT {70,50} at 0.9. */
   job: { on: true, at: { x: 70, y: 50 }, scale: 0.9, text: 'pick a research project' },
   goal: { on: false, at: { x: 70, y: 26 }, scale: 1, text: '' },
   tagA: { on: false, at: { x: 70, y: 40 }, scale: 1, text: '' },

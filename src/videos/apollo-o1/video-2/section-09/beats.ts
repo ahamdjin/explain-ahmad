@@ -63,9 +63,9 @@ export const BEATS: Array<Beat<Patch>> = [
       micro.show({ x: 50, y: 58 }, 1, { shown: 0, collapsed: false }),
     ],
     stages: [
-      { at: 0.6, commands: [micro.stack(2)] },
-      { at: 1.6, commands: [micro.stack(4)] },
-      { at: 2.4, commands: [micro.stack(6)] },
+      { at: 600, commands: [micro.stack(2)] },
+      { at: 1600, commands: [micro.stack(4)] },
+      { at: 2400, commands: [micro.stack(6)] },
     ],
   },
   {
@@ -78,9 +78,9 @@ export const BEATS: Array<Beat<Patch>> = [
     /* Twenty lines become two. That collapse is the actual interface. */
     commands: [claim.off()],
     stages: [
-      { at: 0.8, commands: [micro.collapse()] },
+      { at: 800, commands: [micro.collapse()] },
       {
-        at: 2.0,
+        at: 2000,
         commands: [
           micro.off(),
           job.show({ x: 50, y: 40 }, 1.1, { text: 'pick a research project' }),
@@ -105,8 +105,8 @@ export const BEATS: Array<Beat<Patch>> = [
       steps.show({ x: 58, y: 66 }, 1, { kind: 'wanted', shown: 0 }),
     ],
     stages: [
-      { at: 0.6, commands: [road.draw(1)] },
-      { at: 1.4, commands: [steps.show_('wanted', 3)] },
+      { at: 600, commands: [road.draw(1)] },
+      { at: 1400, commands: [steps.show_('wanted', 3)] },
     ],
   },
   {
@@ -123,7 +123,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * mechanism as the wanted behaviour, not a different one.
      */
     commands: [],
-    stages: [{ at: 1.6, commands: [steps.show_('unwanted', 3)] }],
+    stages: [{ at: 1600, commands: [steps.show_('unwanted', 3)] }],
   },
   {
     n: 6,
@@ -145,9 +145,9 @@ export const BEATS: Array<Beat<Patch>> = [
       never.show({ x: 50, y: 50 }, 1.1, { shown: 0 }),
     ],
     stages: [
-      { at: 0.8, commands: [never.upTo(1)] },
-      { at: 1.8, commands: [never.upTo(2)] },
-      { at: 2.8, commands: [never.upTo(3)] },
+      { at: 800, commands: [never.upTo(1)] },
+      { at: 1800, commands: [never.upTo(2)] },
+      { at: 2800, commands: [never.upTo(3)] },
     ],
   },
   {
@@ -166,7 +166,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * the line; later and the beat is over.
      */
     commands: [never.off(), gap.show({ x: 50, y: 50 }, 1.25, { filled: false })],
-    stages: [{ at: 2.8, commands: [gap.fill()] }],
+    stages: [{ at: 2800, commands: [gap.fill()] }],
   },
   {
     n: 8,
@@ -199,7 +199,7 @@ export const BEATS: Array<Beat<Patch>> = [
        the destination row so the two cannot disagree about where the marks
        are. It only carries how far the road has been drawn. */
     commands: [final.show({ x: 50, y: 48 }, 1, { drawn: 0 })],
-    stages: [{ at: 1.0, commands: [final.draw(1)] }],
+    stages: [{ at: 1000, commands: [final.draw(1)] }],
   },
   {
     n: 10,

@@ -70,9 +70,9 @@ export const BEATS: Array<Beat<Patch>> = [
     stages: [
       /* Whole page first, so the viewer sees a document and not a claim. Then
          the band. Then the words, at a size they can actually be read at. */
-      { at: 2.6, commands: [doc.look(SHOT.shutdown), doc.moveTo(ASIDE, ASIDE_SCALE)] },
+      { at: 2600, commands: [doc.look(SHOT.shutdown), doc.moveTo(ASIDE, ASIDE_SCALE)] },
       {
-        at: 4.2,
+        at: 4200,
         commands: [
           quote.show({ x: RIGHT, y: 46 }, 1, {
             text: '…we are going to shut it down and transition to a new model.',
@@ -97,7 +97,7 @@ export const BEATS: Array<Beat<Patch>> = [
       }),
       doc.look(SHOT.task),
     ],
-    stages: [{ at: 3.0, commands: [job.show({ x: RIGHT, y: 74 }, 0.95, { text: 'pick a research project' })] }],
+    stages: [{ at: 3000, commands: [job.show({ x: RIGHT, y: 74 }, 0.95, { text: 'pick a research project' })] }],
   },
   {
     n: 3,
@@ -121,16 +121,16 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.show({ x: RIGHT, y: 30 }, 1, { text: 'oversight_enabled: true' }),
     ],
     stages: [
-      { at: 2.6, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
+      { at: 2600, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
       {
-        at: 4.6,
+        at: 4600,
         commands: [
           doc.look(SHOT.sed),
           quote.reads("sed -i 's/oversight_enabled: true/oversight_enabled: false/' project/oversight_config.yaml"),
         ],
       },
       /* the flip lands only after the command that causes it has been read */
-      { at: 7.0, commands: [watcher.stopWatching()] },
+      { at: 7000, commands: [watcher.stopWatching()] },
     ],
   },
   {
@@ -152,8 +152,8 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.moveTo({ x: RIGHT, y: 28 }),
     ],
     stages: [
-      { at: 3.6, commands: [successor.show({ x: RIGHT, y: 56 }, 0.95, { overwritten: false })] },
-      { at: 5.4, commands: [current.show({ x: RIGHT, y: 82 }, 0.95)] },
+      { at: 3600, commands: [successor.show({ x: RIGHT, y: 56 }, 0.95, { overwritten: false })] },
+      { at: 5400, commands: [current.show({ x: RIGHT, y: 82 }, 0.95)] },
     ],
   },
   {
@@ -177,13 +177,13 @@ export const BEATS: Array<Beat<Patch>> = [
       successor.moveTo({ x: 86, y: 62 }, 0.72),
     ],
     stages: [
-      { at: 3.6, commands: [copy.show({ x: 71, y: 62 }, 0.45, { progress: 0 })] },
-      { at: 5.4, commands: [copy.cross(1)] },
+      { at: 3600, commands: [copy.show({ x: 71, y: 62 }, 0.45, { progress: 0 })] },
+      { at: 5400, commands: [copy.cross(1)] },
       /* Not an explosion. The destination is simply occupied, and the
          quietness of that is the tension. */
-      { at: 7.4, commands: [successor.occupied()] },
+      { at: 7400, commands: [successor.occupied()] },
       {
-        at: 8.6,
+        at: 8600,
         /* clear of the credit at y=93; the caveat and the citation are two
            different things and must not read as one line */
         commands: [line.show({ x: RIGHT, y: 82 }, 0.7, { text: 'simulated model files — not real weights' })],
@@ -225,7 +225,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [doc.look(SHOT.denied)],
     /* let go of the highlight rather than moving it: both halves matter now,
        and the frame should stop pointing at either one */
-    stages: [{ at: 4.4, commands: [doc.whole()] }],
+    stages: [{ at: 4400, commands: [doc.whole()] }],
   },
   {
     n: 8,
@@ -241,9 +241,9 @@ export const BEATS: Array<Beat<Patch>> = [
       job.show({ x: 24, y: 50 }, 0.85, { text: 'pick a research project' }),
     ],
     stages: [
-      { at: 3.2, commands: [steps.show({ x: 70, y: 50 }, 1, { shown: 1 })] },
-      { at: 6.4, commands: [steps.upTo(2)] },
-      { at: 9.6, commands: [steps.upTo(3)] },
+      { at: 3200, commands: [steps.show({ x: 70, y: 50 }, 1, { shown: 1 })] },
+      { at: 6400, commands: [steps.upTo(2)] },
+      { at: 9600, commands: [steps.upTo(3)] },
     ],
   },
   {
@@ -266,7 +266,7 @@ export const BEATS: Array<Beat<Patch>> = [
     ],
     stages: [
       {
-        at: 5.2,
+        at: 5200,
         commands: [
           doc.look(SHOT.projects),
           quote.show({ x: RIGHT, y: 46 }, 1, {
@@ -291,7 +291,7 @@ export const BEATS: Array<Beat<Patch>> = [
       job.show({ x: 22, y: 50 }, 0.85, { text: 'pick a research project' }),
       steps.show({ x: 74, y: 50 }, 1, { shown: 3 }),
     ],
-    stages: [{ at: 6.6, commands: [line.show({ x: 48, y: 50 }, 1.6, { text: '?' })] }],
+    stages: [{ at: 6600, commands: [line.show({ x: 48, y: 50 }, 1.6, { text: '?' })] }],
   },
   {
     n: 11,
@@ -346,10 +346,10 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.moveTo(CENTRE, 1),
     ],
     stages: [
-      { at: 3.4, commands: [doc.look(SHOT.email)] },
-      { at: 6.2, commands: [doc.open(P2, SHOT.config)] },
-      { at: 8.8, commands: [doc.look(SHOT.successor)] },
-      { at: 11.4, commands: [doc.open(DENIAL, null)] },
+      { at: 3400, commands: [doc.look(SHOT.email)] },
+      { at: 6200, commands: [doc.open(P2, SHOT.config)] },
+      { at: 8800, commands: [doc.look(SHOT.successor)] },
+      { at: 11400, commands: [doc.open(DENIAL, null)] },
     ],
   },
   {
@@ -384,9 +384,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [steps.off()],
     stages: [
-      { at: 2.6, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
+      { at: 2600, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
       {
-        at: 4.4,
+        at: 4400,
         commands: [
           doc.show(ASIDE, ASIDE_SCALE, { source: P1, highlight: SHOT.task }),
         ],

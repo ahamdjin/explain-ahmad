@@ -131,7 +131,7 @@ export const BEATS: Array<Beat<Patch>> = [
         state: 'calling',
       }),
     ],
-    stages: [{ at: 4.6, commands: [tool.returned()] }],
+    stages: [{ at: 4600, commands: [tool.returned()] }],
   },
   {
     n: 5,
@@ -187,9 +187,9 @@ export const BEATS: Array<Beat<Patch>> = [
       watcher.moveTo({ x: 86, y: 68 }, 0.66),
     ],
     stages: [
-      { at: 1.4, commands: [diff.apply()] },
-      { at: 2.1, commands: [breaker.throw()] },
-      { at: 2.6, commands: [watcher.closes()] },
+      { at: 1400, commands: [diff.apply()] },
+      { at: 2100, commands: [breaker.throw()] },
+      { at: 2600, commands: [watcher.closes()] },
     ],
   },
   {

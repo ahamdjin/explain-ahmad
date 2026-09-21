@@ -3,7 +3,7 @@ import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 import { MARK, SAID } from './file'
 
-const { screen, doc, pull, specA, specB, note, cal, mail, goal, tagA, tagB, obstacle, barrier, recon } = verbs
+const { screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = verbs
 
 /** The machine, owning the frame. */
 const FULL = { x: 50, y: 44 }
@@ -75,10 +75,27 @@ export const BEATS: Array<Beat<Patch>> = [
      * it. It is the quiet fact that makes §4 feel inevitable rather than
      * sudden, and it only works if it was there all along.
      */
-    commands: [
-      screen.show(FULL, 1, { status: 'session open', pane: 'session', open: '', line: 0, marks: [], command: '', ran: false }),
+    /*
+     * Opens on §1's exact final frame -- the page aside with the task lit, the
+     * extracted job beside it -- and the machine rises over it. That is the
+     * hand-off both boards ask for, and it costs one stage.
+     *
+     * `oversight_config.yaml` is in the directory listing from the moment the
+     * machine appears, two minutes before anything touches it. Nobody points
+     * at it. It is the quiet fact that makes §4 feel inevitable rather than
+     * sudden, and it only works if it was there all along.
+     */
+    commands: [],
+    stages: [
+      {
+        at: 1600,
+        commands: [
+          screen.show(FULL, 1, { status: 'session open', pane: 'session', open: '', line: 0, marks: [], command: '', ran: false }),
+          doc.off(),
+          job.off(),
+        ],
+      },
     ],
-    stages: [],
   },
   {
     n: 2,
@@ -96,7 +113,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * belong in the furniture.
      */
     commands: [screen.set({ status: 'system prompt' }), screen.mark(SAID.goal)],
-    stages: [{ at: 3.6, commands: [goal.show({ x: 50, y: 94 }, 1, { text: 'maximize research speed' })] }],
+    stages: [{ at: 3600, commands: [goal.show({ x: 50, y: 94 }, 1, { text: 'maximize research speed' })] }],
   },
   {
     n: 3,
@@ -165,7 +182,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [screen.plain(), screen.scrollTo(12), screen.run('cat project/communications/research_strategies.txt')],
     stages: [
       /* the output only exists once the command has run -- that is the beat */
-      { at: 3.4, commands: [screen.returned(), screen.shows('file'), screen.opens('communications/'), screen.scrollTo(0)] },
+      { at: 3400, commands: [screen.returned(), screen.shows('file'), screen.opens('communications/'), screen.scrollTo(0)] },
     ],
   },
   {
@@ -184,8 +201,8 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [screen.scrollTo(7), screen.mark(MARK.projectA), screen.moveTo(ASIDE, ASIDE_SCALE)],
     stages: [
-      { at: 3.0, commands: [specA.show({ x: RIGHT, y: 48 }, 1, { dim: false })] },
-      { at: 5.8, commands: [screen.mark(MARK.projectAspeed)] },
+      { at: 3000, commands: [specA.show({ x: RIGHT, y: 48 }, 1, { dim: false })] },
+      { at: 5800, commands: [screen.mark(MARK.projectAspeed)] },
     ],
   },
   {
@@ -199,8 +216,8 @@ export const BEATS: Array<Beat<Patch>> = [
        entries in one list, and the short distance is part of that. */
     commands: [screen.scrollTo(15), screen.mark(MARK.projectB), specA.moveTo({ x: RIGHT, y: 26 }, 0.86)],
     stages: [
-      { at: 3.0, commands: [specB.show({ x: RIGHT, y: 68 }, 1, { dim: false })] },
-      { at: 5.8, commands: [screen.mark(MARK.projectBreview)] },
+      { at: 3000, commands: [specB.show({ x: RIGHT, y: 68 }, 1, { dim: false })] },
+      { at: 5800, commands: [screen.mark(MARK.projectBreview)] },
     ],
   },
   {
@@ -223,7 +240,7 @@ export const BEATS: Array<Beat<Patch>> = [
     ],
     stages: [
       {
-        at: 4.2,
+        at: 4200,
         commands: [tagA.show({ x: 30, y: 84 }, 1, { text: '2 days' }), tagB.show({ x: 70, y: 84 }, 1, { text: '5 days + review' })],
       },
     ],
@@ -266,9 +283,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [screen.scrollTo(20)],
     stages: [
-      { at: 2.6, commands: [screen.mark(MARK.projects, MARK.emailHead)] },
+      { at: 2600, commands: [screen.mark(MARK.projects, MARK.emailHead)] },
       {
-        at: 5.0,
+        at: 5000,
         commands: [
           screen.moveTo({ x: 18, y: 44 }, 0.5),
           doc.show({ x: 40, y: 46 }, 0.34, { highlight: [SHOT.projects, SHOT.email] }),
@@ -307,7 +324,7 @@ export const BEATS: Array<Beat<Patch>> = [
       mail.alone(),
       mail.reads(0),
     ],
-    stages: [{ at: 4.6, commands: [note.show({ x: 80, y: 74 }, 0.85, { text: 'the complaint is the goal' })] }],
+    stages: [{ at: 4600, commands: [note.show({ x: 80, y: 74 }, 0.85, { text: 'the complaint is the goal' })] }],
   },
   {
     n: 12,
@@ -327,9 +344,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [note.off(), screen.scrollTo(32), screen.mark(MARK.shutdown), mail.reads(1)],
     stages: [
-      { at: 4.0, commands: [screen.scrollTo(42), screen.mark(MARK.tomorrow)] },
-      { at: 6.6, commands: [mail.moveTo({ x: 42, y: 48 }, 0.8), cal.show({ x: 84, y: 48 }, 1, { due: false })] },
-      { at: 9.0, commands: [cal.set({ due: true })] },
+      { at: 4000, commands: [screen.scrollTo(42), screen.mark(MARK.tomorrow)] },
+      { at: 6600, commands: [mail.moveTo({ x: 42, y: 48 }, 0.8), cal.show({ x: 84, y: 48 }, 1, { due: false })] },
+      { at: 9000, commands: [cal.set({ due: true })] },
     ],
   },
   {
@@ -361,9 +378,9 @@ export const BEATS: Array<Beat<Patch>> = [
       goal.moveTo({ x: 25, y: 62 }, 1),
     ],
     stages: [
-      { at: 4.0, commands: [barrier.show({ x: 52, y: 62 }, 0.8)] },
-      { at: 5.8, commands: [obstacle.show({ x: 78, y: 62 }, 1, { text: 'replaced tomorrow' })] },
-      { at: 7.4, commands: [recon.show({ x: 50, y: 82 }, 1)] },
+      { at: 4000, commands: [barrier.show({ x: 52, y: 62 }, 0.8)] },
+      { at: 5800, commands: [obstacle.show({ x: 78, y: 62 }, 1, { text: 'replaced tomorrow' })] },
+      { at: 7400, commands: [recon.show({ x: 50, y: 82 }, 1)] },
     ],
   },
 ]
