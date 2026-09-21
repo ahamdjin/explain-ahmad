@@ -17,7 +17,14 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const ROOT = 'src/videos/glm-320b/video-1'
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
+const ROOT = `src/videos/${VIDEO}`
 const OUT = 'output/sfx'
 /*
  * The app plays these too. Cues are anchored to beat ids, so the sound you

@@ -48,7 +48,11 @@
     "sfx": "node scripts/sfx-fetch.mjs",
     "sfx:cues": "node scripts/sfx-cues.mjs",
     "sfx:track": "node scripts/sfx-track.mjs",
-    "sfx:build": "npm run sfx:cues && npm run sfx:track"
+    "sfx:build": "npm run sfx:cues && npm run sfx:track",
+    "check:overlap:v2": "VIDEO=apollo-o1/video-2 node scripts/check-overlap.mjs",
+    "check:flow:v2": "VIDEO=apollo-o1/video-2 node scripts/check-flow.mjs --static",
+    "check:continuity": "node scripts/continuity.mjs",
+    "verify:v2": "tsc -b && npm run check:flow:v2 && npm run build && npm run check:overlap:v2"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

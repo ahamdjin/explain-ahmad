@@ -9,8 +9,15 @@
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const STATIC_ONLY = process.argv.includes('--static')
-const ROOT = 'src/videos/glm-320b/video-1'
+const ROOT = `src/videos/${VIDEO}`
 const FRAMES = 'frames'
 const NO_REPEAT = new Set(['wall'])
 

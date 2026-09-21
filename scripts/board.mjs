@@ -10,7 +10,14 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const ROOT = 'src/videos/glm-320b/video-1'
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
+const ROOT = `src/videos/${VIDEO}`
 const SCRIPTS = await scriptIndex()
 /**
  * Which script belongs to which built section, derived rather than listed.

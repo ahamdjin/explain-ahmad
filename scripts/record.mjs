@@ -14,6 +14,13 @@ import { mkdir, readdir, readFile, rename, rm } from 'node:fs/promises'
 import path from 'node:path'
 import { chromium } from 'playwright'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const args = new Map()
 for (const raw of process.argv.slice(2)) {
   const [key, value = 'true'] = raw.replace(/^--/, '').split('=')
@@ -27,7 +34,7 @@ const OUT = path.resolve(args.get('out') ?? 'output/recordings')
 
 /** Runtime comes from the beats, so the recorder never guesses. */
 async function plannedSeconds() {
-  const root = 'src/videos/glm-320b/video-1'
+  const root = `src/videos/${VIDEO}`
   const dirs = (await readdir(root, { withFileTypes: true }))
     .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name))
     .map((e) => e.name)

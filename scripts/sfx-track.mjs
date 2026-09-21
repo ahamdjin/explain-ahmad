@@ -16,6 +16,13 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { spawn } from 'node:child_process'
 import path from 'node:path'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const OUT = 'output/sfx'
 const SOUNDS = 'assets/sfx'
 
@@ -29,7 +36,7 @@ const run = (argv) => new Promise((res, rej) => {
 const cues = JSON.parse(await readFile(path.join(OUT, 'cues.json'), 'utf8'))
 
 /** Section runtimes, from the built beats -- never guessed. */
-const ROOT = 'src/videos/glm-320b/video-1'
+const ROOT = `src/videos/${VIDEO}`
 const runtime = new Map()
 for (const dir of (await readdir(ROOT, { withFileTypes: true }))
   .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name)).map((e) => e.name)) {

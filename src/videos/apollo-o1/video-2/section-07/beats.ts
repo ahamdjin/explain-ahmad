@@ -241,7 +241,8 @@ export const BEATS: Array<Beat<Patch>> = [
     id: 'rare-not-normal',
     title: 'Capability, not frequency',
     vo: 'So this is not evidence that normal ChatGPT is secretly trying to escape. It shows a capability under a deliberately constructed conflict.',
-    relation: 'wall',
+    /* "So ... it shows" is a consequence of the <1%, not a new obstacle. */
+    relation: 'therefore',
     secs: 6,
     /*
      * The clarification, then the route returns inside the boundary --
@@ -262,6 +263,10 @@ export const BEATS: Array<Beat<Patch>> = [
     id: 'want-to-live-question',
     title: 'Did it want to survive?',
     vo: 'Which leaves the more interesting question: did it do this because it wanted to survive?',
+    /* The section has to *land*, not trail off on a want. The beat before is
+       the consequence; this is the obstacle the whole of §8 exists to remove.
+       The board split this across `want` and `wall`; the build merges them and
+       keeps the wall, which is the half that closes a section. */
     relation: 'wall',
     secs: 6,
     /*

@@ -9,6 +9,13 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { chromium } from 'playwright'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 
 const args = new Map()
 for (const raw of process.argv.slice(2)) {
@@ -41,7 +48,7 @@ const OUT = path.resolve(args.get('out') ?? `frames/${SECTION}`)
  * imports the story verbs, so it cannot be transpiled and evaluated standalone.
  */
 async function loadFrameMeta() {
-  const source = await readFile(path.resolve(`src/videos/glm-320b/video-1/${SECTION}/beats.ts`), 'utf8')
+  const source = await readFile(path.resolve(`src/videos/${VIDEO}/${SECTION}/beats.ts`), 'utf8')
   const blocks = source.split(/\n {2}\{\n/).slice(1)
   const frames = []
 

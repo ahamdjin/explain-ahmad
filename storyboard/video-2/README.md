@@ -139,3 +139,26 @@ node scripts/frames.mjs 06        # every beat of §6, each shot after its own s
 node scripts/frames.mjs 06 13     # just beat 13
 node scripts/continuity.mjs       # every hand-off
 ```
+
+## The existing checks work on this film now
+
+Video 1 shipped with a verification suite and none of it had ever been pointed
+at Video 2. Every script took one hardcoded root; they now take `VIDEO`, which
+defaults to Video 1 so nothing existing changed.
+
+```
+npm run verify:v2            # types, flow, build, overlap
+npm run check:flow:v2        # beat-to-beat faults
+npm run check:overlap:v2     # actors drawn on top of each other
+npm run check:continuity     # section hand-offs (needs preview running)
+```
+
+`check:overlap` is the one that matters. It measures **leaf ink**, not bounding
+boxes, and it found three real collisions in a film I had already gone through
+frame by frame with my own eyes — §5's bay wall parked on the evidence page,
+§6's thread over the page and off the right edge, §6's two survivors on the
+table. It also caught the three back-to-back `wall` beats that `check:flow`
+reports, which no amount of looking would have shown.
+
+Deleted: a `frames.mjs` I wrote here before finding `capture-frames.mjs`, which
+already did the same job and better.

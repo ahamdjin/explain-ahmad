@@ -21,6 +21,13 @@
  */
 import { readdir, readFile } from 'node:fs/promises'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const strip = (s) =>
   s.replace(/[*`]/g, '').replace(/'/g, '’').replace(/\n\s*>\s?/g, ' ').replace(/\s+/g, ' ').trim()
 
@@ -30,7 +37,7 @@ const report = []
 for (const file of files) {
   const sec = file.slice(0, 2)
   const md = await readFile(`video-script/video-1/${file}`, 'utf8')
-  const beatsSrc = await readFile(`src/videos/glm-320b/video-1/section-${sec}/beats.ts`, 'utf8')
+  const beatsSrc = await readFile(`src/videos/${VIDEO}/section-${sec}/beats.ts`, 'utf8')
 
   const scriptBeats = [...(md.split('## The script')[1] ?? '').matchAll(/^> \*\*(\d+)\.\*\*/gm)].length
   const built = [...beatsSrc.matchAll(/vo: '((?:[^'\\]|\\.)*)'/g)].map((m) => m[1].replace(/\\'/g, "'"))

@@ -20,6 +20,13 @@ import { mkdir, readFile, readdir, writeFile, cp, rm } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import path from 'node:path'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const args = new Map()
 for (const raw of process.argv.slice(2)) {
   const [key, value = 'true'] = raw.replace(/^--/, '').split('=')
@@ -29,7 +36,7 @@ for (const raw of process.argv.slice(2)) {
 /** Findable without being told where it is. */
 const DEFAULT_OUT = path.join(homedir(), 'Desktop', 'explain-ahmad-frames')
 const OUT = path.resolve((args.get('out') ?? DEFAULT_OUT).replace(/^~/, homedir()))
-const ROOT = 'src/videos/glm-320b/video-1'
+const ROOT = `src/videos/${VIDEO}`
 const SKIP_CAPTURE = args.has('reuse')
 
 /** Section number -> its title, from the script's H1. */

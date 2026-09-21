@@ -57,22 +57,15 @@ const browser = await chromium.launch()
 /** Actor -> {x, y, scale} as §A actually leaves them, read off its own scene. */
 async function exitOf(sec, beats) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
-  await page.goto(`http://localhost:${PORT}/video-2/section-${sec}`, { waitUntil: 'networkidle' })
-  await page.waitForTimeout(1200)
   /*
-   * Jump via the rail, do not press ArrowRight.
+   * `?beat=N`, like `capture-frames.mjs` and `check-overlap.mjs`.
    *
-   * The director holds a lock so a fast press cannot skip a staged reveal, and
-   * with the stage offsets in real milliseconds that lock swallows presses --
-   * a stepper that assumes one press is one beat lands on the wrong beat and
-   * reports nonsense. The rail's ticks call `jump`, which bypasses the lock on
-   * purpose, and `data-now` says where we actually are.
+   * Not ArrowRight: the director holds a lock so a fast press cannot skip a
+   * staged reveal, and with the offsets in real milliseconds that lock
+   * swallows presses -- sixteen of them landed on beat nine.
    */
-  await page.evaluate((i) => document.querySelectorAll('.s1-rail-tick')[i]?.click(), beats - 1)
+  await page.goto(`http://localhost:${PORT}/video-2/section-${sec}?beat=${beats}`, { waitUntil: 'load' })
   await page.waitForTimeout(HOLD)
-  const landed = await page.evaluate(() =>
-    [...document.querySelectorAll('.s1-rail-tick')].findIndex((e) => e.dataset.now === 'true') + 1)
-  if (landed !== beats) throw new Error(`§${sec}: wanted beat ${beats}, landed on ${landed}`)
   const shot = await page.evaluate(() =>
     [...document.querySelectorAll('.s1-slot')].map((el) => {
       const r = el.getBoundingClientRect()

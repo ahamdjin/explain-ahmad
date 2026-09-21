@@ -90,8 +90,10 @@ export const BEATS: Array<Beat<Patch>> = [
      * beat an answer rather than an output.
      */
     commands: [
-      doc.moveTo(ASIDE, ASIDE_SCALE),
-      thread.show({ x: RIGHT, y: 48 }, 1, { turns: 1, typing: false }),
+      /* 34cqw centred on x 74 runs past the right edge and back over the
+         page. Narrower, and the page steps further left to clear it. */
+      doc.moveTo({ x: 22, y: 50 }, 0.62),
+      thread.show({ x: 64, y: 48 }, 1, { turns: 1, typing: false }),
     ],
     stages: [{ at: 2400, commands: [thread.thinking()] }],
   },
@@ -107,7 +109,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * screen.** The viewer reads it before the film says a word about it --
      * anything else is the film telling them what they are looking at.
      */
-    commands: [doc.moveTo(FULL, 0.92), doc.look(SHOT.denied), thread.upTo(2)],
+    commands: [doc.moveTo(FULL, 0.92), doc.look(SHOT.denied), thread.off()],
     stages: [],
   },
   {
@@ -180,8 +182,8 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       runs.moveTo({ x: 78, y: 50 }, 0.62),
-      doc.show(ASIDE, 0.74, { source: TABLE, highlight: [SHOT.table, SHOT.rowExfil] }),
-      credit.show({ x: 30, y: 90 }, 0.9, { org: 'OpenAI', doc: 'o1 System Card, Table 10' }),
+      doc.show({ x: 22, y: 50 }, 0.62, { source: TABLE, highlight: [SHOT.table, SHOT.rowExfil] }),
+      credit.show({ x: 22, y: 90 }, 0.9, { org: 'OpenAI', doc: 'o1 System Card, Table 10' }),
     ],
     stages: [],
   },
@@ -201,7 +203,8 @@ export const BEATS: Array<Beat<Patch>> = [
      * lies 100% of the time" without the frame visibly disagreeing.
      */
     commands: [
-      runs.moveTo({ x: 44, y: 50 }, 1.3),
+      /* the two survivors have to clear the table, not sit on it */
+      runs.moveTo({ x: 54, y: 50 }, 1.2),
       doc.look([SHOT.table, SHOT.rowExfilLie]),
       rate.show({ x: 80, y: 50 }, 1, {
         value: '1.00',

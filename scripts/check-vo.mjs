@@ -12,6 +12,13 @@
  */
 import { readdir, readFile } from 'node:fs/promises'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const norm = (s) =>
   s
     .replace(/[`*_]/g, '')
@@ -40,7 +47,7 @@ for (const file of files) {
   const nn = file.slice(0, 2)
   let src
   try {
-    src = await readFile(`src/videos/glm-320b/video-1/section-${nn}/beats.ts`, 'utf8')
+    src = await readFile(`src/videos/${VIDEO}/section-${nn}/beats.ts`, 'utf8')
   } catch {
     problems.push(`§${nn}  no beats.ts`)
     continue

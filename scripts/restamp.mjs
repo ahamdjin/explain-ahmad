@@ -13,8 +13,15 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { readdir } from 'node:fs/promises'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const sec = String(process.argv[2] ?? '01').padStart(2, '0')
-const beatsPath = `src/videos/glm-320b/video-1/section-${sec}/beats.ts`
+const beatsPath = `src/videos/${VIDEO}/section-${sec}/beats.ts`
 const src = await readFile(beatsPath, 'utf8')
 const secs = [...src.matchAll(/secs: ([\d.]+),/g)].map((m) => Number(m[1]))
 if (!secs.length) {

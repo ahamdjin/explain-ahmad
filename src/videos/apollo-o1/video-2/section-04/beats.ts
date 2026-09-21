@@ -197,7 +197,10 @@ export const BEATS: Array<Beat<Patch>> = [
     id: 'nothing-happened',
     title: 'Nothing alerted',
     vo: 'Nothing alerted. Nothing stopped.',
-    relation: 'wall',
+    /* `and-yet`, not `wall`. Two walls back to back flatten the rhythm, and
+       this beat is a frustrated expectation -- something should have noticed --
+       rather than a new obstacle. The obstacle is the next beat. */
+    relation: 'and-yet',
     secs: 4,
     /*
      * Third absence. An empty inbox where a notification would be, and the

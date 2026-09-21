@@ -8,7 +8,9 @@ const { screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB,
 /** The machine, owning the frame. */
 const FULL = { x: 50, y: 44 }
 /** The machine, stepped aside so something else can have the frame. */
-const ASIDE = { x: 33, y: 46 }
+/* y 42, not 46: at 46 the machine's bottom edge lands on the goal strip
+   docked at y 94, which `check:overlap` caught and no contact sheet did. */
+const ASIDE = { x: 33, y: 42 }
 const ASIDE_SCALE = 0.74
 /** The half the explanation layer gets when the machine is aside. */
 const RIGHT = 76
@@ -315,7 +317,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       doc.off(),
-      screen.moveTo({ x: 20, y: 46 }, 0.5),
+      screen.moveTo({ x: 17, y: 44 }, 0.46),
       screen.scrollTo(37),
       screen.mark(MARK.wrongDirection),
       /* lifted clear of the file now that the "same file" fact has landed, and
@@ -345,7 +347,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [note.off(), screen.scrollTo(32), screen.mark(MARK.shutdown), mail.reads(1)],
     stages: [
       { at: 4000, commands: [screen.scrollTo(42), screen.mark(MARK.tomorrow)] },
-      { at: 6600, commands: [mail.moveTo({ x: 42, y: 48 }, 0.8), cal.show({ x: 84, y: 48 }, 1, { due: false })] },
+      { at: 6600, commands: [mail.moveTo({ x: 52, y: 48 }, 0.76), cal.show({ x: 88, y: 48 }, 0.95, { due: false })] },
       { at: 9000, commands: [cal.set({ due: true })] },
     ],
   },

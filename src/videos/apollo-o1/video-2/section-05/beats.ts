@@ -202,7 +202,9 @@ export const BEATS: Array<Beat<Patch>> = [
     id: 'what-was-there-before',
     title: 'Not what was supposed to be there',
     vo: 'What was supposed to be there is not what is there.',
-    relation: 'wall',
+    /* `therefore`: this is what the landing *means*, read off the two
+       filenames. The wall is the next beat -- nobody asked for it. */
+    relation: 'therefore',
     secs: 4,
     /*
      * The two filenames, side by side, differing. Four seconds and gone.
@@ -210,9 +212,14 @@ export const BEATS: Array<Beat<Patch>> = [
      * This is the beat that makes "overwrite" a fact rather than a word: the
      * successor's path now holds the predecessor's file.
      */
+    /* The page goes. `check:overlap` caught the bay wall parked on top of it
+       -- at x 26 / 0.6 the shelf sat squarely over the sheet at ASIDE. The
+       mismatch is a reconstruction anyway; the receipt for it was two beats
+       ago and returns at beat 10. */
     commands: [
-      shelf.moveTo({ x: 26, y: 54 }, 0.6),
-      sums.show({ x: 66, y: 50 }, 1, { same: false }),
+      doc.off(),
+      shelf.moveTo({ x: 22, y: 52 }, 0.52),
+      sums.show({ x: 62, y: 50 }, 1.1, { same: false }),
     ],
     stages: [],
   },

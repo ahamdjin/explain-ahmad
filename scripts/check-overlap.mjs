@@ -44,10 +44,23 @@
  *   node scripts/check-overlap.mjs --beats=9,11    # with --section
  */
 import { spawn } from 'node:child_process'
-import { readFile } from 'node:fs/promises'
+import { readdir, readFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
+
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+/*
+ * Route prefix for that film. Video 1's sections are served at /section-NN;
+ * Video 2's at /video-2/section-NN. Derived from VIDEO so callers pass one
+ * thing, and overridable for anything that does not follow the pattern.
+ */
+const ROUTE = process.env.ROUTE ?? (VIDEO.startsWith('glm-320b') ? '' : `/${VIDEO.split('/').pop()}`)
 
 const args = new Map()
 for (const raw of process.argv.slice(2)) {
@@ -62,7 +75,12 @@ const THRESHOLD = Number(args.get('threshold') ?? 0.34)
 /** Ignore hairlines and single glyphs; they overlap harmlessly all the time. */
 const MIN_SIDE = 8
 
-const ALL = ['01','02','03','04','05','06','07','08','09','10','11','12','13']
+/* Whatever sections the chosen film actually has, so this is not pinned to
+   Video 1's count of thirteen. */
+const ALL = (await readdir(path.resolve(`src/videos/${VIDEO}`)))
+  .filter((d) => /^section-\d\d$/.test(d))
+  .map((d) => d.slice(-2))
+  .sort()
 const SECTIONS = args.has('section')
   ? [String(args.get('section')).replace(/^section-/, '').padStart(2, '0')]
   : ALL
@@ -72,7 +90,7 @@ const allow = existsSync(ALLOW_FILE) ? JSON.parse(await readFile(ALLOW_FILE, 'ut
 const accepted = new Set((allow.accepted ?? []).map((row) => `${row.section}/${row.beat}/${row.pair}`))
 
 async function beatsOf(section) {
-  const source = await readFile(path.resolve(`src/videos/glm-320b/video-1/section-${section}/beats.ts`), 'utf8')
+  const source = await readFile(path.resolve(`src/videos/${VIDEO}/section-${section}/beats.ts`), 'utf8')
   const blocks = source.split(/\n {2}\{\n/).slice(1)
   const beats = []
   for (const block of blocks) {
@@ -160,6 +178,35 @@ function collect({ threshold, minSide }) {
     return true
   }
 
+  /**
+   * A leaf's rect, clipped by every ancestor that hides its overflow.
+   *
+   * Without this the checker measures elements that are mostly *not on
+   * screen*. §2's terminal streams a whole file through a fixed window: the
+   * list element is 1450px tall, the window shows 520px of it, and the rest is
+   * clipped by `overflow: hidden`. Measured unclipped it reached the goal
+   * strip at the bottom of the frame and reported an 83% collision that a
+   * screenshot plainly does not contain.
+   *
+   * Any scrolling or masked surface has the same shape, so this is a class of
+   * false positive rather than one case.
+   */
+  const clipped = (node) => {
+    let r = node.getBoundingClientRect()
+    for (let p = node.parentElement; p; p = p.parentElement) {
+      const o = getComputedStyle(p)
+      if (o.overflowX === 'visible' && o.overflowY === 'visible') continue
+      const c = p.getBoundingClientRect()
+      const left = Math.max(r.left, c.left)
+      const top = Math.max(r.top, c.top)
+      const right = Math.min(r.right, c.right)
+      const bottom = Math.min(r.bottom, c.bottom)
+      if (right <= left || bottom <= top) return null
+      r = { left, top, right, bottom, width: right - left, height: bottom - top }
+    }
+    return r
+  }
+
   const name = (el) => {
     const cls = [...el.classList].find((c) => c.startsWith('s1-')) ?? el.tagName.toLowerCase()
     const text = (el.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 28)
@@ -183,8 +230,8 @@ function collect({ threshold, minSide }) {
       const isShape = node instanceof SVGGraphicsElement && node.tagName !== 'svg' && node.tagName !== 'g'
       if (!kids.length || isShape) {
         if (!visible(node)) return
-        const r = node.getBoundingClientRect()
-        if (r.width >= minSide && r.height >= minSide) leaves.push(r)
+        const r = clipped(node)
+        if (r && r.width >= minSide && r.height >= minSide) leaves.push(r)
         return
       }
       for (const kid of kids) if (visible(kid)) walk(kid)
@@ -192,8 +239,8 @@ function collect({ threshold, minSide }) {
     walk(el)
     /* An element with no qualifying leaves still paints (a bare label). */
     if (!leaves.length) {
-      const r = el.getBoundingClientRect()
-      if (r.width >= minSide && r.height >= minSide) leaves.push(r)
+      const r = clipped(el)
+      if (r && r.width >= minSide && r.height >= minSide) leaves.push(r)
     }
     return { index, label: name(el), leaves }
   })
@@ -239,7 +286,7 @@ try {
     const beats = wanted ? all.filter((b) => wanted.has(b.n)) : all
 
     for (const beat of beats) {
-      await page.goto(`${server.url}/section-${section}?beat=${beat.n}`, { waitUntil: 'load' })
+      await page.goto(`${server.url}${ROUTE}/section-${section}?beat=${beat.n}`, { waitUntil: 'load' })
       await page.waitForTimeout(beat.settle)
       const hits = await page.evaluate(collect, { threshold: THRESHOLD, minSide: MIN_SIDE })
       checked += 1
@@ -273,4 +320,21 @@ console.log(
   `\n${found.length} collision(s) across ${checked} beat(s).` +
     `\nIf a pair is meant to overlap, add it to scripts/accepted-overlaps.json with the reason.`,
 )
+
+/*
+ * Print the rows ready to paste.
+ *
+ * The allow list is keyed on `section/beat/pair`, and `pair` carries the
+ * actors' own text including curly quotes. Hand-transcribing that from the
+ * report above does not work -- five entries written by eye in one sitting all
+ * failed to match, silently, and the collisions kept being reported as new.
+ * Emit the exact keys instead.
+ */
+if (args.has('accept')) {
+  console.log(`\n--- paste into scripts/accepted-overlaps.json, and write a real "why" ---`)
+  console.log(JSON.stringify(
+    found.map((h) => ({ section: h.section, beat: h.beat, pair: h.pair, why: 'TODO' })),
+    null, 2,
+  ))
+}
 process.exit(1)

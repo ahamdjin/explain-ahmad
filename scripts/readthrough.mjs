@@ -31,6 +31,13 @@
  */
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 
+/*
+ * Which film. Defaults to Video 1, so every existing invocation is unchanged.
+ *
+ *   VIDEO=apollo-o1/video-2 npm run check:overlap
+ */
+const VIDEO = process.env.VIDEO ?? 'glm-320b/video-1'
+
 const WPM = 145
 const WPS = WPM / 60
 const OUT = 'video-script/video-1/READ_ALOUD.md'
@@ -45,7 +52,7 @@ const suggest = (need) => Math.max(2.5, Math.round((need + 1.0) * 2) / 2)
  * cannot be transpiled and evaluated standalone.
  */
 async function builtSeconds() {
-  const root = 'src/videos/glm-320b/video-1'
+  const root = `src/videos/${VIDEO}`
   const dirs = (await readdir(root, { withFileTypes: true }))
     .filter((e) => e.isDirectory() && /^section-\d\d$/.test(e.name))
     .map((e) => e.name)
