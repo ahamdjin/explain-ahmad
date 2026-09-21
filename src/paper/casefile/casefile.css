@@ -1461,6 +1461,7 @@
  */
 .lib-frame {
   position: relative;
+  overflow: hidden;
   container-type: size;
   width: 46cqw;
   aspect-ratio: 16 / 9;
@@ -3444,3 +3445,38 @@
 }
 .cf-dialog-btns i { color: #8a7f6e; border: 1px solid rgba(43,41,38,0.25); }
 .cf-dialog-btns b { color: #fffdf8; background: #2b2926; }
+
+/* === HARDWARE — the real things ========================================== */
+
+.cf-dc, .cf-aisle, .cf-rackf, .cf-drive, .cf-shelf,
+.cf-weights, .cf-cable, .cf-panel, .cf-breaker, .cf-fans {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.5cqw; width: 100%;
+}
+.cf-dc svg, .cf-aisle svg, .cf-rackf svg, .cf-drive svg, .cf-shelf svg,
+.cf-weights svg, .cf-cable svg, .cf-panel svg, .cf-breaker svg, .cf-fans svg {
+  display: block; width: 100%; height: auto; overflow: visible;
+}
+
+.cf-rackf { max-width: 13cqw; }
+.cf-drive { max-width: 20cqw; }
+.cf-shelf { max-width: 24cqw; }
+.cf-breaker { max-width: 8cqw; }
+.cf-fans { max-width: 18cqw; }
+.cf-weights { max-width: 14cqw; }
+
+.cf-hw-name {
+  font-family: var(--cf-typed); font-size: 0.82cqw;
+  letter-spacing: 0.06em; color: #2b2926; text-align: center;
+}
+.cf-hw-size { font-family: var(--cf-typed); font-size: 9px; letter-spacing: 0.04em; }
+.cf-hw-legend { font-family: var(--cf-typed); font-size: 11px; letter-spacing: 0.08em; }
+.cf-drive-label { font-family: var(--cf-typed); font-size: 8px; letter-spacing: -0.01em; }
+.cf-drive-size { font-family: var(--cf-typed); font-size: 7.5px; letter-spacing: 0.05em; }
+
+/* the simulated stand-in must never be mistaken for the real mass */
+.cf-weights-sim { opacity: 0.86; }
+
+/* the two isometric pieces are taller than a 16:9 frame; fit, never crop */
+.cf-dc, .cf-aisle { max-height: 100%; }
+.cf-dc svg, .cf-aisle svg { max-height: 100%; }

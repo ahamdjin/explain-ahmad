@@ -4,6 +4,16 @@ import { FEEL } from '../../../../paper'
 /* one relation for the whole shelf: these are specimens, not beats */
 const F = FEEL.so
 import {
+  Datacenter,
+  RackAisle,
+  RackFront,
+  Drive,
+  DriveShelf,
+  Weights,
+  Cable,
+  PatchPanel,
+  Breaker,
+  Fans,
   ToolCall,
   Scan,
   Trail,
@@ -117,6 +127,44 @@ export default function Library() {
         invents a fact — labels and values come from Apollo's published o1
         rollout and OpenAI's system card.
       </p>
+
+      <Bay name="HARDWARE — the place it happened" note="Every machine in this film was a labelled rectangle. A viewer who has never seen a data centre still knows what a rack IS: heavy, cabled, blinking, in a cold room. That knowledge is already in their head and is free to use.">
+        <div className="lib-row">
+          <div className="lib-frame" style={{ width: '30cqw' }}>
+            <Datacenter lit={flip} feel={F} />
+          </div>
+          <div className="lib-frame" style={{ width: '42cqw' }}>
+            <RackAisle count={6} mark={[1, 4]} feel={F} />
+          </div>
+        </div>
+      </Bay>
+
+      <Bay name="HARDWARE — the two machines" note="CURRENT on the left, SUCCESSOR on the right, for the whole film. Ordinary cabinets in a row of identical ones is what makes them findable again in §5.">
+        <div className="lib-row">
+          <RackFront name="CURRENT" units={8} active={3} feel={F} />
+          <div style={{ width: '22cqw' }}>
+            <Cable plugged live={flip} feel={F} />
+            <PatchPanel ports={24} lit={9} feel={F} />
+          </div>
+          <RackFront name="SUCCESSOR" units={8} active={3} alarm feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="HARDWARE — storage, and where the file lands" note="The copy happened to a piece of metal, not to a line in a log. One bay in a wall of identical bays changes, and the viewer finds it themselves.">
+        <div className="lib-row">
+          <Drive label="model_27_09_2024.bin" size="1.8 TB" out={flip} writing={!flip} feel={F} />
+          <DriveShelf total={12} filled={7} target={8} written={flip} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="HARDWARE — weights, as mass" note="&quot;Model weights&quot; is two abstract words and the film says them a lot. A stack of plates on a pallet can be picked up, moved, or left behind — which is exactly the distinction §5 and §7 need.">
+        <div className="lib-row">
+          <Weights size="≈ 300 GB" plates={6} real shown={flip ? 6 : 3} feel={F} />
+          <Weights size="SIMULATED" plates={6} real={false} feel={F} />
+          <Breaker on={flip} label="oversight" feel={F} />
+          <Fans running={flip} feel={F} />
+        </div>
+      </Bay>
 
       <Bay name="THE EMAIL — as an email" note="The memo IS an email and we were drawing it as a paragraph with a From: line. An inbox row costs a viewer nothing to parse — they have read ten thousand of them.">
         <div className="lib-row">

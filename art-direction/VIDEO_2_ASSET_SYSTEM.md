@@ -605,3 +605,37 @@ Four things, and they are Ahmad's:
 4. **the thumbnail photograph**, if the thumbnail uses one.
 
 Everything else in the film is built and browsable.
+
+## Layer −10 — hardware, the real things
+
+`src/paper/casefile/Hardware.tsx`. Ten objects, and a reversal of an earlier
+decision.
+
+`Servers.tsx` argued in its own comment that a reconstruction draws a server as
+a labelled box, because photorealistic hardware would claim a fidelity the
+evidence does not have. That was right about photorealism and wrong about
+boxes: three sections of the film are two machines, a copy between them and a
+flag on one of them, and three sections of labelled rectangles is not a place.
+
+The reconciliation is that these are **drawings** — flat fills, one light from
+the upper left, visible line weight, paper colours, no brand on anything. A
+drawn rack claims only that a server is a machine in a rack, which is true and
+which the viewer already believed.
+
+| Object | What it is for |
+| --- | --- |
+| `Datacenter` | the successor is a real address in a real building, once, wide |
+| `RackAisle` | the room; CURRENT and SUCCESSOR are two cabinets in a row of identical ones |
+| `RackFront` | the workhorse. §3–§5 should be built on this |
+| `Drive` · `DriveShelf` | the copy happened to a piece of metal, not to a line in a log |
+| `Weights` | `real` is a banded pallet of plates; `real={false}` is a dashed hollow outline. This is the §5 / §7 distinction, drawn |
+| `Cable` · `PatchPanel` | the route, as a thing with connectors. `plugged={false}` is *there is no path to the real weights* |
+| `Breaker` | what `oversight_enabled: true → false` **means**. Explanation layer only — the evidence layer keeps showing the config line |
+| `Fans` | alive or not. A room going quiet reads faster than a status label |
+
+**Why hardware and not more diagram:** `BEAT_GRANULARITY` rule 4 — *every
+number needs a unit the viewer already owns* — applies to objects too. A
+rectangle labelled SERVER spends a chunk of working memory. A rack spends none.
+
+Isometric projection moved to `casefile/iso.tsx` so `Diagrams` and `Hardware`
+cannot disagree about where the successor server is.
