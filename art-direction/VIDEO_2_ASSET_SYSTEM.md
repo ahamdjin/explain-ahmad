@@ -160,22 +160,32 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
-## Transitions are beat moves, not components
+## Layer 5 — transitions and chrome
 
-About twenty list entries are transitions — rewind, document scroll,
-page-to-page continuation, evidence↔reconstruction morph, hard publication
-change, the sandbox pullback, source change Apollo↔OpenAI.
+`Rewind` · `Pullback` · `HardCut` · `Morph` · `Snapback` · `PageTurn` ·
+`Waypoint` · `BlackFrame` · `Loading` · `UrlBar` · `PageNumber` · `Timestamp` ·
+`LowerThird` · `Attribution` · `ExhibitTag` · `Sleeve` · `Sheet` · `Veil` ·
+`Pointer`
 
-These are **things a beat does to actors that already exist**, not things to
-build. They are governed by the motion law rather than by a component:
+An earlier version of this file argued these were "beat moves, not components"
+and refused to build them. Half right, wholly unhelpful: the **timing** of a
+transition belongs to a beat, but its **shape** should be written once, or a
+rewind hand-rolled across nine sections becomes nine slightly different
+rewinds.
+
+They wrap content rather than replacing it, so a transition can go around
+actors that already exist.
+
+The motion law still governs *when* they are used:
 
 > **The camera moves, or the viewer reads. Never both.**
 
 - travel with nothing lit and nothing to read;
 - hold dead still while anything is read, and hold slightly too long;
-- hard cut only where the publication changes, and change the sleeve in the
-  same beat;
-- one pullback in the film, at the sandbox reveal, and nowhere else.
+- `HardCut` only where the publication changes, with the sleeve changing in
+  the same beat;
+- **`Pullback` exactly once in the film**, at the sandbox reveal. A second use
+  spends the first.
 
 ---
 
