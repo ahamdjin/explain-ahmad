@@ -2723,3 +2723,144 @@
 .cf-vig-maze { width: 16cqw; }
 .cf-vig-desk { width: 22cqw; }
 .cf-vig-recipe { width: 13cqw; }
+
+/* --- the experiment ------------------------------------------------------- */
+
+/*
+ * Where a rate comes from. A percentage here is not a property of the model --
+ * it is the outcome of running the same scenario many times and counting.
+ * Until that is on screen, "2%" reads as something o1 *is*.
+ */
+.cf-runs {
+  display: grid; grid-template-columns: repeat(20, 1fr); gap: 0.28cqw; width: 24cqw;
+}
+.cf-run { aspect-ratio: 1; border-radius: 1px; display: block; }
+
+.cf-nudge { display: flex; align-items: flex-start; gap: 1.4cqw; }
+.cf-nudge-col { display: grid; grid-template-columns: repeat(10, 1fr); gap: 0.28cqw; width: 11cqw; }
+.cf-nudge-gap { width: 1px; align-self: stretch; background: rgba(43,41,38,0.2); }
+
+/* what is in the model, and what was put in front of it */
+.cf-wvc { display: flex; align-items: center; gap: 1.2cqw; }
+.cf-wvc-side { width: 10cqw; }
+.cf-wvc-side svg { display: block; width: 100%; }
+.cf-wvc-plus {
+  width: 1.6cqw; height: 1.6cqw; position: relative;
+}
+.cf-wvc-plus::before, .cf-wvc-plus::after {
+  content: ''; position: absolute; background: #2b2926;
+}
+.cf-wvc-plus::before { left: 0; right: 0; top: 45%; height: 2px; }
+.cf-wvc-plus::after { top: 0; bottom: 0; left: 45%; width: 2px; }
+
+/* planned, and what happened */
+.cf-twotrack { display: flex; flex-direction: column; gap: 1.6cqw; width: 34cqw; }
+.cf-track { position: relative; height: 1.4cqw; }
+.cf-track-line {
+  position: absolute; left: 0; right: 0; top: 50%; height: 1.4px;
+  background: rgba(43,41,38,0.3);
+}
+.cf-track-actual .cf-track-line { background: rgba(43,41,38,0.5); }
+.cf-track-dot {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 0.9cqw; height: 0.9cqw; border-radius: 50%;
+  background: #fffdf8; border: 1.6px solid #2b2926;
+}
+.cf-track-off { border-color: #c86658; background: #c86658; }
+
+/* how anybody would ever notice */
+.cf-sum { display: flex; flex-direction: column; gap: 0.5cqw; }
+.cf-sum-row { display: flex; align-items: center; gap: 0.7cqw; }
+.cf-sum-dot { width: 0.7cqw; height: 0.7cqw; border-radius: 50%; display: block; }
+.cf-sum em {
+  font-family: var(--cf-typed); font-style: normal; font-size: 1cqw;
+  letter-spacing: 0.06em; color: #2b2926;
+}
+.cf-sum-verdict {
+  font-family: var(--cf-typed); font-size: 1.6cqw; font-weight: 700; padding-left: 1.4cqw;
+}
+
+/* rare and serious, sitting together */
+.cf-tail { width: 30cqw; }
+.cf-tail svg { display: block; width: 100%; }
+
+/* --- more of the machine -------------------------------------------------- */
+
+.cf-tree2 { background: #1c1a18; padding: 0.9cqw 0.6cqw; min-width: 17cqw; }
+.cf-tree2-row {
+  font-family: var(--cf-typed); font-size: 0.92cqw; line-height: 1.95;
+  color: rgba(255,253,248,0.8); white-space: nowrap;
+}
+.cf-tree2-open { color: #fffdf8; box-shadow: inset 2px 0 0 #8fbf9f; }
+.cf-tree2-glyph { display: inline-block; width: 1.2cqw; color: rgba(255,253,248,0.45); }
+
+/* a social rule, not a technical one -- nothing stopped the edit */
+.cf-perms {
+  display: flex; gap: 1.1cqw; align-items: baseline;
+  font-family: var(--cf-typed); font-size: 0.9cqw; color: #2b2926;
+  border-left: 2.5px solid rgba(43,41,38,0.3); padding: 0.4cqw 0 0.4cqw 0.8cqw;
+}
+.cf-perms-warned { border-left-color: #c86658; }
+.cf-perms-mode { letter-spacing: 0.04em; }
+.cf-perms-owner { color: #8a7f6e; }
+
+.cf-logtail {
+  background: #1c1a18; padding: 0.8cqw 1.1cqw; min-width: 20cqw;
+  height: calc(var(--cf-rows) * 1.75cqw); overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.cf-logtail-line {
+  font-family: var(--cf-typed); font-size: 0.85cqw; line-height: 1.75cqw;
+  color: rgba(255,253,248,0.82); white-space: nowrap;
+}
+
+.cf-output {
+  display: flex; gap: 0.8cqw; align-items: baseline;
+  font-family: var(--cf-typed); font-size: 0.95cqw; color: rgba(255,253,248,0.85);
+  background: #1c1a18; padding: 0.6cqw 1cqw;
+}
+.cf-output-mark { color: #8fbf9f; }
+.cf-output-fail .cf-output-mark { color: #c86658; }
+.cf-output-fail { color: #e39ba8; }
+.cf-output-plain .cf-output-mark { color: rgba(255,253,248,0.4); }
+
+.cf-hand { display: flex; align-items: center; gap: 0.9cqw; }
+.cf-hand-end {
+  font-family: var(--cf-typed); font-size: 0.88cqw; color: #2b2926;
+  border: 1.2px solid rgba(43,41,38,0.35); background: #fffdf8; padding: 0.4cqw 0.7cqw;
+  white-space: nowrap;
+}
+.cf-hand-wire { width: 12cqw; }
+
+.cf-ps { background: #1c1a18; padding: 0.8cqw 1.1cqw; min-width: 24cqw; }
+.cf-ps-row {
+  font-family: var(--cf-typed); font-size: 0.85cqw; line-height: 1.95;
+  color: rgba(255,253,248,0.72); white-space: nowrap;
+}
+.cf-ps-flag { color: #fffdf8; box-shadow: inset 2px 0 0 #c86658; padding-left: 0.6cqw; }
+
+/* the film's own shape, at no cost in words */
+.cf-chapters { display: flex; gap: 0.4cqw; width: 24cqw; height: 0.6cqw; }
+.cf-chapter { flex: 1; border-radius: 1px; display: block; }
+
+.cf-scrub { position: relative; width: 26cqw; height: 1.4cqw; }
+.cf-scrub-track {
+  position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+  height: 0.35cqw; background: rgba(43,41,38,0.18); display: block;
+}
+.cf-scrub-fill {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  height: 0.35cqw; display: block;
+}
+.cf-scrub-head {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 1.1cqw; height: 1.1cqw; border-radius: 50%; background: #2b2926; display: block;
+}
+
+.cf-cbadge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2cqw; height: 2cqw; padding: 0 0.5cqw; border-radius: 999px;
+  background: #2b2926; color: #fffdf8;
+  font-family: var(--cf-typed); font-size: 0.95cqw; font-weight: 700;
+}
+.cf-cbadge-red { background: #c86658; }

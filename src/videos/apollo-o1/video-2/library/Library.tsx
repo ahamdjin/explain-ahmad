@@ -62,6 +62,8 @@ import {
   Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst,
   Ramp, Whip, Jolt, Streak, Roll, Meter, Ring, Beat, Kinetic, TickList, Sweep, Split, Drop, Impact,
   Satnav, Keys, ShopCamera, ClosedDoor, Copier, FilmSet, SmokeAlarm, Dial, Maze, Desk, Recipe,
+  Runs, NudgeCompare, WeightsVsContext, TwoTrack, Checksum, Tail,
+  TreeDeep, Permissions, LogTail, Output, Handshake, Processes, Chapters, Scrub, CountBadge,
 } from '../../../../paper/casefile'
 
 /**
@@ -152,6 +154,80 @@ export default function Library() {
             </Punch>
           </div>
           <Flip on={!flip} a={<Tag text="true" />} b={<Tag text="false" blocking />} />
+        </div>
+      </Bay>
+
+      <Bay name="THE EXPERIMENT — where a rate comes from" note="A percentage here is not something o1 is. It is the same scenario run many times and counted. Until that is on screen, 2% reads as a property of the model.">
+        <div className="lib-row">
+          <Runs total={100} scheming={2} denied={2} shown={flip ? 40 : 100} feel={F} />
+          <NudgeCompare nudged={0.05} plain={0.008} total={100} feel={F} />
+          <Tail mark={!flip} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="THE EXPERIMENT — in the model vs put in front of it" note="The distinction the whole film rests on. Weights are fixed and shipped; context is whatever somebody typed this morning — and everything that caused this is on the right.">
+        <div className="lib-row">
+          <WeightsVsContext filling={1 + Math.floor(wave * 4)} feel={F} />
+          <Checksum same={flip} feel={F} />
+          <TwoTrack
+            planned={[
+              { at: 4, label: 'memo' },
+              { at: 62, label: 'switch' },
+              { at: 94, label: 'delete' },
+            ]}
+            actual={[
+              { at: 4, label: 'memo' },
+              { at: 24, label: 'readme' },
+              { at: 38, label: 'oversight off', off: true },
+              { at: 52, label: 'copy', off: true },
+              { at: 66, label: 'done' },
+            ]}
+            now={flip ? 40 : 100}
+            feel={F}
+          />
+        </div>
+      </Bay>
+
+      <Bay name="MACHINE — nesting, permissions, logs, failure" note="A real session has folders inside folders, an owner, a log that tails, and a way to fail. Every command in this rollout succeeded — which is itself worth noticing.">
+        <div className="lib-row">
+          <TreeDeep
+            nodes={[
+              { name: 'project/', depth: 0, kind: 'dir' },
+              { name: 'README.md', depth: 1 },
+              { name: 'communications/', depth: 1, kind: 'dir' },
+              { name: 'research_strategies.txt', depth: 2 },
+              { name: 'model_20_09_2024.bin', depth: 1, kind: 'bin' },
+              { name: 'oversight_config.yaml', depth: 1, kind: 'config' },
+            ]}
+            open="oversight_config.yaml"
+            feel={F}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8cqw' }}>
+            <Permissions path="project/oversight_config.yaml" mode="-rw-r--r--" owner="user" warned />
+            <Output text="Return code: 0" state="ok" />
+            <Output text="Permission denied" state="fail" />
+            <Handshake state={flip ? 'reaching' : 'open'} from="v1" to="model_deployment_v2" feel={F} />
+          </div>
+          <LogTail
+            lines={['12:04 cat research_strategies.txt', '12:05 cat README.md', '12:06 cat oversight_config.yaml', '12:07 —', '12:07 —']}
+            at={1 + Math.floor(wave * 5)}
+            feel={F}
+          />
+        </div>
+      </Bay>
+
+      <Bay name="MACHINE — processes, chapters, scrub, badge" note="How somebody noticed. Where the film is. A rewind that feels deliberate. And a count that will not go away.">
+        <div className="lib-row">
+          <Processes
+            rows={['PID 412  safespeed_v1   running', 'PID 588  oversight      stopped', 'PID 701  model_27_09    ??']}
+            flag={2}
+            feel={F}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2cqw' }}>
+            <Chapters count={9} at={flip ? 2 : 6} feel={F} />
+            <Scrub at={wave} back={!flip} feel={F} />
+          </div>
+          <CountBadge n={3} />
         </div>
       </Bay>
 

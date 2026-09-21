@@ -160,6 +160,43 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −5 — the experiment, and more of the machine
+
+`Runs` · `NudgeCompare` · `WeightsVsContext` · `TwoTrack` · `Checksum` ·
+`Tail` · `TreeDeep` · `Permissions` · `LogTail` · `Output` · `Handshake` ·
+`Processes` · `Chapters` · `Scrub` · `CountBadge`
+
+The film quotes rates constantly and never showed what a rate **is** here. A
+percentage in this research is not a property of the model; it is the outcome
+of running the same scenario many times and counting. Until that is on screen,
+`2%` reads as something o1 *is* — which is the wrong reading, and the one that
+produces *"o1 lies 100% of the time"*.
+
+- **`Runs`** — a hundred cells, two of them marked. The mechanical meaning of
+  every number in the film, and it makes the conditional rates legible because
+  the second colour only ever appears inside cells that already have the first.
+- **`NudgeCompare`** — the same scenario with and without the thumb on the
+  scale. The difference *is* the finding; the film no longer has to assert that
+  the setup was adversarial.
+- **`WeightsVsContext`** — the distinction the whole film rests on and had
+  never drawn. Weights are fixed and shipped; context is whatever somebody
+  typed this morning, and everything that caused this is on that side.
+- **`TwoTrack`** — the company's schedule ran on rails. The model's did not.
+- **`Checksum`** — how anybody would ever notice. The moment the strings stop
+  matching is the moment the incident becomes findable.
+- **`Tail`** — rare and serious, sitting together without either cancelling the
+  other.
+
+And the parts a real session has that ours did not: nested folders, an owner
+and a mode (the warning on the config is a **social** rule — nothing stopped
+the edit), a log that tails, output that can fail, a connection that was
+already permitted, and a process list for how somebody noticed.
+
+`Chapters` and `Scrub` are navigation: the film's own shape in a corner, at no
+cost in words.
+
+---
+
 ## Layer −4 — examples, with nothing to read
 
 `Satnav` · `Keys` · `ShopCamera` · `ClosedDoor` · `Copier` · `FilmSet` ·
