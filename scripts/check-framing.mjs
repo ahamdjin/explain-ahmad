@@ -182,9 +182,27 @@ function measure({ minSide }) {
       /* Only measure type that is actually a text run, not an icon glyph. */
       const text = (node.textContent ?? '').trim()
       if (text.length >= 6) {
-        const size = Number.parseFloat(getComputedStyle(node).fontSize)
+        /*
+         * The *rendered* size, not the declared one.
+         *
+         * `font-size` is in the element's own coordinate space, and almost
+         * nothing here is drawn at 1:1. SVG text sits inside a viewBox scaled
+         * to its container, and every actor sits inside a Slot that applies
+         * its beat's `scale`. Reading the computed value called §3's config
+         * label 9.5px when it renders at 13px, so a component that had just
+         * been made bigger still came back flagged.
+         */
+        const declared = Number.parseFloat(getComputedStyle(node).fontSize)
+        let factor = 1
+        if (node.ownerSVGElement) {
+          const ctm = node.getScreenCTM?.()
+          if (ctm) factor = Math.sqrt(Math.abs(ctm.a * ctm.d - ctm.b * ctm.c)) || 1
+        } else if (node.offsetWidth > 0) {
+          factor = node.getBoundingClientRect().width / node.offsetWidth
+        }
+        const size = declared * (Number.isFinite(factor) && factor > 0 ? factor : 1)
         if (Number.isFinite(size) && size < smallest) {
-          smallest = size
+          smallest = Math.round(size * 10) / 10
           smallestText = text.replace(/\s+/g, ' ').slice(0, 34)
         }
       }
@@ -225,7 +243,7 @@ function measure({ minSide }) {
       right: Math.round(box.right),
       bottom: Math.round(box.bottom),
     },
-    smallest: Number.isFinite(smallest) ? Math.round(smallest * 10) / 10 : null,
+    smallest: Number.isFinite(smallest) ? smallest : null,
     smallestText,
   }
 }

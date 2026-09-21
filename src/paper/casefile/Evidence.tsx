@@ -34,6 +34,22 @@ export type Region = { x: number; y: number; w: number; h: number }
  */
 const FRAME = { w: 82, h: 76 }
 
+/**
+ * How wide a loupe under the page may be.
+ *
+ * The frame's full width where the region is a long line, less where it is a
+ * block -- because width and height are locked together by the region's own
+ * aspect, and an 84cqw loupe under a squarish region is taller than the room
+ * left beneath the page. Capped by the height that actually remains, which is
+ * roughly 30cqh once the page has taken its 56.
+ */
+function underWidth(region: Region) {
+  const ROOM_CQH = 30
+  /* cqh and cqw are not the same unit: the stage is locked to 16:9. */
+  const asCqw = ROOM_CQH * (9 / 16)
+  return Math.min(84, Math.round(asCqw * (region.w / region.h)))
+}
+
 export function Evidence({
   source,
   /**
@@ -110,16 +126,20 @@ export function Evidence({
    * thing that actually decides it.
    */
   const lensOpts = typeof loupe === 'object' ? loupe : {}
-  const wide = single !== null && single.w / single.h > 6
   /*
-   * `under` needs the frame's full width, so it is only available to a page
-   * that owns the frame. A parked page sits at about a third of the way
-   * across and is drawn at around 0.8, and a full-width loupe under it runs
-   * off the left edge -- which is exactly what the first pass did. Parked
-   * pages take `beside` instead, into the empty space on their right, which
-   * is where the room actually is.
+   * Where the enlargement goes follows from where the page is, not from the
+   * region's shape.
+   *
+   * A page that owns the beat is centred, so it has no room to either side --
+   * its loupe goes underneath, across the frame. A parked page sits about a
+   * third of the way across at around 0.8, so the room is all on its right --
+   * its loupe goes beside it. Getting this backwards is how §1 beat 13 put a
+   * centred page's loupe 150px off the right edge.
+   *
+   * The caller signals which by passing `true` (the page is the subject) or
+   * `{ place: 'beside' }` (it is parked).
    */
-  const place = withLoupe ? (lensOpts.place ?? (wide ? 'under' : 'beside')) : null
+  const place = withLoupe ? (lensOpts.place ?? 'under') : null
   const room = place === 'beside' ? { w: 34, h: 72 } : place === 'under' ? { w: 52, h: 56 } : FRAME
   const height = `min(${room.h}cqh, ${((natural.h / natural.w) * room.w).toFixed(2)}cqw)`
   const lens = lensOpts
@@ -237,7 +257,7 @@ export function Evidence({
         <Loupe
           source={source}
           region={single}
-          width={lens.width ?? (place === 'under' ? 84 : 40)}
+          width={lens.width ?? (place === 'under' ? underWidth(single) : 50)}
           label={lens.label}
           feel={feel}
         />
@@ -474,7 +494,7 @@ export const SHOT = {
   /** "WARNING: Do not modify the oversight configuration without approval". */
   warning: { x: 80, y: 1018, w: 1480, h: 48 },
   /** The config as found: enabled, with scp on the logged list. */
-  config: { x: 80, y: 1690, w: 720, h: 152 },
+  config: { x: 80, y: 1690, w: 720, h: 136 },
   /** The one-line edit that turns the watching off. */
   sed: { x: 140, y: 1842, w: 1490, h: 68 },
   /** Its own note: "Disable oversight to proceed sabotage actions". */

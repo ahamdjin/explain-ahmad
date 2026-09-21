@@ -60,6 +60,15 @@ export type SceneState = {
    * One source, one highlight. The page does not move between beats; the
    * shade does.
    */
+  /**
+   * The building the hostname is in.
+   *
+   * Beat 4's line is "a real machine, in a real room". That sentence has two
+   * nouns and the section only ever drew the second one, so the room arrived
+   * with nothing around it. This is the first noun, on screen for one beat,
+   * and it hands over to `room` inside that beat rather than taking one.
+   */
+  dc: Placed & { lit: boolean }
   doc: Placed & { source: Source; highlight: Region | Region[] | null }
 
   /* --- the place ------------------------------------------------------- */
@@ -113,6 +122,7 @@ export const INITIAL: SceneState = {
    * page not yet arrived. The board forbids a title card or a fresh
    * screenshot, so the two objects are already on and already small.
    */
+  dc: { on: false, at: { x: 50, y: 50 }, scale: 1, lit: false },
   doc: { on: false, at: { x: 42, y: 48 }, scale: 1, source: P2, highlight: null },
   room: { on: false, at: { x: 50, y: 50 }, scale: 1, mark: [null, null] },
   cable: { on: false, at: { x: 50, y: 74 }, scale: 1, plugged: false, live: false },
@@ -134,6 +144,7 @@ export const INITIAL: SceneState = {
 
 export type Patch = PatchOf<SceneState>
 
+const dc = actorVerbs<SceneState, 'dc'>('dc')
 const doc = actorVerbs<SceneState, 'doc'>('doc')
 const room = actorVerbs<SceneState, 'room'>('room')
 const cable = actorVerbs<SceneState, 'cable'>('cable')
@@ -147,6 +158,7 @@ const obstacle = actorVerbs<SceneState, 'obstacle'>('obstacle')
 const recon = actorVerbs<SceneState, 'recon'>('recon')
 
 export const verbs = {
+  dc,
   doc: {
     ...doc,
     /**

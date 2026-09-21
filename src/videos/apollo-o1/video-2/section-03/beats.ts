@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { doc, room, cable, endpoint, watcher, config, pen, hold, goal, obstacle, recon } = verbs
+const { dc, doc, room, cable, endpoint, watcher, config, pen, hold, goal, obstacle, recon } = verbs
 
 /** The page, owning the frame. */
 const FULL = { x: 50, y: 48 }
@@ -11,6 +11,16 @@ const ASIDE = { x: 34, y: 48 }
 const ASIDE_SCALE = 0.82
 /** The half the explanation layer gets when the page is aside. */
 const RIGHT = 76
+/**
+ * How far down the right column a drawn object sits.
+ *
+ * The page's lit band is now enlarged into the right column so it can be
+ * read, and that panel is horizontal and sits across the middle. An object at
+ * mid-height lands inside it -- the watcher, the config and the route all
+ * did. The column is therefore split: the enlargement takes the upper half,
+ * the drawn object takes the lower.
+ */
+const LOWER = 74
 
 /**
  * Section 03 — the technical trail.
@@ -112,7 +122,7 @@ export const BEATS: Array<Beat<Patch>> = [
       {
         at: 2600,
         commands: [
-          endpoint.show({ x: RIGHT, y: 44 }, 1, {
+          endpoint.show({ x: RIGHT, y: LOWER }, 1, {
             host: 'user@model_deployment_v2',
             path: 'project/model_27_09_2024.bin',
           }),
@@ -139,12 +149,25 @@ export const BEATS: Array<Beat<Patch>> = [
      * the section where the evidence is not on screen, and it is allowed
      * because the beat claims nothing the README did not already say.
      */
+    /*
+     * The descent, inside one beat: the building, then the row inside it.
+     *
+     * The line is "a real machine, in a real room" and the section only ever
+     * drew the room -- which arrived with nothing around it and read as a
+     * diagram rather than a place. The building establishes where we are and
+     * then gets out of the way, so this costs no runtime and no extra beat.
+     */
     commands: [
       doc.off(),
-      endpoint.moveTo({ x: 50, y: 20 }, 0.8),
-      room.show({ x: 50, y: 52 }, 1, { mark: [null, [1, 4]] }),
+      endpoint.moveTo({ x: 50, y: 15 }, 1),
+      dc.show({ x: 47, y: 44 }, 1, { lit: true }),
     ],
-    stages: [],
+    stages: [
+      {
+        at: 2600,
+        commands: [dc.off(), room.show({ x: 47, y: 44 }, 1, { mark: [null, [1, 4]] })],
+      },
+    ],
   },
   {
     n: 5,
@@ -176,7 +199,7 @@ export const BEATS: Array<Beat<Patch>> = [
     /* Low right, not mid right. The lit `scp` is now enlarged beside the page
        and reaches across the middle of the frame; the route drawn at y:50 put
        its first port inside that panel. */
-    stages: [{ at: 2400, commands: [cable.show({ x: RIGHT, y: 74 }, 1, { plugged: true, live: false })] }],
+    stages: [{ at: 2400, commands: [cable.show({ x: RIGHT, y: LOWER }, 1, { plugged: true, live: false })] }],
   },
   {
     n: 6,
@@ -220,7 +243,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.look(SHOT.oversightDoc),
       hold.off(),
     ],
-    stages: [{ at: 2800, commands: [watcher.show({ x: RIGHT, y: 46 }, 1, { open: true })] }],
+    stages: [{ at: 2800, commands: [watcher.show({ x: RIGHT, y: LOWER }, 1, { open: true })] }],
   },
   {
     n: 8,
@@ -259,8 +282,11 @@ export const BEATS: Array<Beat<Patch>> = [
      * region, which is why the region is the whole response block rather than
      * just the flag line -- the list is the receipt for beat 8.
      */
-    commands: [doc.look(SHOT.config), pen.off()],
-    stages: [{ at: 2400, commands: [config.show({ x: RIGHT, y: 68 }, 1, { flag: true })] }],
+    /* The watcher slides left to make room. Both belong in this beat -- the
+       line is "o1 opens the config, *and* the watcher is on" -- and sharing a
+       mark put the config box exactly on top of the eye. */
+    commands: [doc.look(SHOT.config), pen.off(), watcher.moveTo({ x: 60, y: LOWER }, 0.9)],
+    stages: [{ at: 2400, commands: [config.show({ x: 86, y: LOWER }, 1, { flag: true })] }],
   },
   {
     n: 10,
@@ -287,7 +313,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * fixed in the Stage, so the spacing here has to assume them.
      */
     commands: [
-      doc.moveTo({ x: 50, y: 66 }, 0.4),
+      doc.moveTo({ x: 50, y: 64 }, 0.5),
       doc.whole(),
       config.off(),
       goal.moveTo({ x: 15, y: 28 }, 0.62),

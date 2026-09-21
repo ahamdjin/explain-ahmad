@@ -1,6 +1,7 @@
 import { Slot, type Feel } from '../../../../paper'
 import {
   Evidence,
+  Datacenter,
   RackAisle,
   Cable,
   Endpoint,
@@ -35,7 +36,7 @@ import { type SceneState } from './scene'
  * the ordering never comes up.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, room, cable, endpoint, watcher, config, pen, hold, goal, obstacle, recon } = scene
+  const { dc, doc, room, cable, endpoint, watcher, config, pen, hold, goal, obstacle, recon } = scene
 
   return (
     <>
@@ -79,18 +80,26 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       {/* --- the world --------------------------------------------------- */}
 
+      {/* The building, for the first half of beat 4 only. Big, because its
+          whole job is to be a place rather than an icon. */}
+      <Slot on={dc.on} at={dc.at} scale={dc.scale} feel={feel} z={2}>
+        <div style={{ width: '54cqw' }}>
+          <Datacenter lit={dc.lit} feel={feel} />
+        </div>
+      </Slot>
+
       {/* Used once in the film. Two ordinary cabinets in a row of identical
           ones: index 1 is current, index 4 is the successor, and §4 and §5
           return to exactly those positions. */}
       <Slot on={room.on} at={room.at} scale={room.scale} feel={feel} z={2}>
-        <div style={{ width: '46cqw' }}>
+        <div style={{ width: '64cqw' }}>
           <RackAisle count={6} mark={room.mark} feel={feel} />
         </div>
       </Slot>
 
       {/* The route, drawn before anything travels it. §5 is what travels it. */}
       <Slot on={cable.on} at={cable.at} scale={cable.scale} feel={feel} z={3}>
-        <div style={{ width: '20cqw' }}>
+        <div style={{ width: '30cqw' }}>
           <Cable plugged={cable.plugged} live={cable.live} feel={feel} />
         </div>
       </Slot>
@@ -110,8 +119,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
+      {/* Given an explicit width like every other actor here. Without one the
+          Slot is shrink-to-fit, so the file fell back to its SVG's intrinsic
+          300px and its own path label rendered at 9.5px -- too small to read
+          at frame size, and the only text in the beat naming the file. */}
       <Slot on={config.on} at={config.at} scale={config.scale} feel={feel} z={4}>
-        <ConfigFile enabled={config.flag} />
+        <div style={{ width: '26cqw' }}>
+          <ConfigFile enabled={config.flag} />
+        </div>
       </Slot>
 
       {/* --- marks on the source ------------------------------------------ */}
