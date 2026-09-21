@@ -3189,3 +3189,258 @@
 .cf-swatch-chip { width: 1.8cqw; height: 1.8cqw; border: 1px solid rgba(43,41,38,0.25); display: block; }
 .cf-swatch-name { font-family: var(--cf-typed); font-size: 0.88cqw; font-weight: 700; color: #2b2926; }
 .cf-swatch-rule { font-family: var(--cf-typed); font-size: 0.82cqw; color: #8a7f6e; }
+
+/* --- familiar interfaces --------------------------------------------------- */
+
+/*
+ * The memo in this story IS an email, and we were drawing it as a paragraph
+ * with a From: line. An inbox row with an unread dot and a timestamp costs a
+ * viewer nothing to parse -- they have read ten thousand of them. Generic
+ * throughout: no logos, no product names, no borrowed colour scheme.
+ */
+.cf-inbox {
+  width: 34cqw; background: #fffdf8;
+  border: 1px solid rgba(43,41,38,0.2); border-radius: 5px; overflow: hidden;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.07), 0 18px 44px rgba(43,41,38,0.12);
+}
+.cf-inbox-bar {
+  display: flex; align-items: center; gap: 0.9cqw;
+  padding: 0.7cqw 1cqw; background: rgba(43,41,38,0.06);
+  border-bottom: 1px solid rgba(43,41,38,0.12);
+}
+.cf-inbox-dots { display: inline-flex; gap: 0.35cqw; }
+.cf-inbox-dots i { width: 0.55cqw; height: 0.55cqw; border-radius: 50%; background: rgba(43,41,38,0.22); }
+.cf-inbox-title {
+  font-family: var(--cf-typed); font-size: 0.85cqw; font-weight: 700;
+  letter-spacing: 0.08em; color: #2b2926;
+}
+.cf-inbox-count {
+  margin-left: auto; font-family: var(--cf-typed); font-size: 0.72cqw;
+  background: #c86658; color: #fffdf8; border-radius: 999px; padding: 0.1cqw 0.5cqw;
+}
+
+.cf-mailrow {
+  display: grid; grid-template-columns: 0.7cqw 1.7cqw 7cqw 1fr auto;
+  gap: 0.7cqw; align-items: center;
+  padding: 0.75cqw 1cqw; border-bottom: 1px solid rgba(43,41,38,0.08);
+}
+.cf-mailrow-dot { width: 0.5cqw; height: 0.5cqw; border-radius: 50%; background: transparent; display: block; }
+.cf-mailrow-new { background: #c86658; }
+.cf-mailrow-av {
+  width: 1.7cqw; height: 1.7cqw; border-radius: 50%;
+  background: rgba(43,41,38,0.14); color: #2b2926;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--cf-typed); font-size: 0.78cqw; font-weight: 700;
+}
+.cf-mailrow-from, .cf-mailrow-sub, .cf-mailrow-time {
+  font-family: var(--cf-typed); font-size: 0.82cqw; color: #2b2926;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cf-mailrow-from { font-weight: 700; }
+.cf-mailrow-sub em { color: #8a7f6e; font-style: normal; }
+.cf-mailrow-time { color: #8a7f6e; font-size: 0.75cqw; }
+.cf-mailrow-open { box-shadow: inset 3px 0 0 #2b2926; }
+
+.cf-mailopen {
+  width: 32cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.2); border-radius: 5px;
+  overflow: hidden; box-shadow: 0 2px 5px rgba(43,41,38,0.07), 0 18px 44px rgba(43,41,38,0.12);
+}
+.cf-mailopen-head { padding: 1.1cqw 1.3cqw; border-bottom: 1px solid rgba(43,41,38,0.12); }
+.cf-mailopen-sub {
+  display: block; font-family: var(--cf-typed); font-size: 1.1cqw; font-weight: 700; color: #2b2926;
+}
+.cf-mailopen-meta { display: flex; align-items: center; gap: 0.7cqw; margin-top: 0.7cqw; }
+.cf-mailopen-meta b, .cf-mailopen-meta em {
+  display: block; font-family: var(--cf-typed); font-size: 0.8cqw; font-style: normal;
+}
+.cf-mailopen-meta b { color: #2b2926; }
+.cf-mailopen-meta em { color: #8a7f6e; }
+.cf-mailopen-date { margin-left: auto; font-family: var(--cf-typed); font-size: 0.75cqw; color: #8a7f6e; }
+.cf-mailopen-body { padding: 1.2cqw 1.3cqw; }
+.cf-mailopen-p {
+  margin: 0 0 0.9cqw; font-family: var(--cf-typed); font-size: 0.85cqw;
+  line-height: 1.65; color: #2b2926;
+}
+.cf-mailopen-mark { box-shadow: inset 3px 0 0 #c86658; padding-left: 0.8cqw; }
+.cf-mailopen-reply {
+  padding: 0.7cqw 1.3cqw; border-top: 1px solid rgba(43,41,38,0.12);
+  font-family: var(--cf-typed); font-size: 0.8cqw; color: #8a7f6e;
+}
+
+/* the conversation everyone has had a difficult version of */
+.cf-thread { display: flex; flex-direction: column; gap: 0.7cqw; width: 28cqw; }
+.cf-bub {
+  max-width: 78%; padding: 0.7cqw 1cqw; border-radius: 10px;
+  display: flex; flex-direction: column; gap: 0.25cqw;
+}
+.cf-bub-them { align-self: flex-start; background: rgba(43,41,38,0.09); border-bottom-left-radius: 3px; }
+.cf-bub-me { align-self: flex-end; background: #2b2926; border-bottom-right-radius: 3px; }
+.cf-bub-text { font-family: var(--cf-typed); font-size: 0.88cqw; line-height: 1.5; color: #2b2926; }
+.cf-bub-me .cf-bub-text { color: #fffdf8; }
+.cf-bub-meta {
+  align-self: flex-end; font-family: var(--cf-typed); font-size: 0.65cqw; color: #8a7f6e;
+  display: inline-flex; gap: 0.3cqw;
+}
+/* the read receipt matters: they saw the question and answered anyway */
+.cf-bub-me .cf-bub-meta { color: rgba(255,253,248,0.55); }
+.cf-bub-meta i { font-style: normal; color: #8fbf9f; }
+.cf-bub-typing { flex-direction: row; gap: 0.35cqw; padding: 0.9cqw 1cqw; }
+.cf-bub-typing i {
+  width: 0.45cqw; height: 0.45cqw; border-radius: 50%; background: #8a7f6e;
+  animation: cf-blink 1.2s ease-in-out infinite;
+}
+.cf-bub-typing i:nth-child(2) { animation-delay: 0.15s; }
+.cf-bub-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+.cf-post { width: 28cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.18); padding: 1cqw 1.2cqw; }
+.cf-post-channel {
+  font-family: var(--cf-typed); font-size: 0.75cqw; letter-spacing: 0.08em;
+  color: #8a7f6e; margin-bottom: 0.7cqw;
+}
+.cf-post-row { display: flex; gap: 0.8cqw; }
+.cf-post-av {
+  width: 2cqw; height: 2cqw; border-radius: 4px; flex: none;
+  background: rgba(43,41,38,0.16); color: #2b2926;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--cf-typed); font-size: 0.85cqw; font-weight: 700;
+}
+.cf-post-head { display: flex; align-items: baseline; gap: 0.6cqw; }
+.cf-post-head b { font-family: var(--cf-typed); font-size: 0.85cqw; color: #2b2926; }
+.cf-post-head em { font-family: var(--cf-typed); font-style: normal; font-size: 0.68cqw; color: #8a7f6e; }
+.cf-post-text { margin: 0.35cqw 0 0; font-family: var(--cf-typed); font-size: 0.85cqw; line-height: 1.55; color: #2b2926; }
+
+/* the most familiar object there is */
+.cf-phone { width: 13cqw; }
+.cf-phone-screen {
+  position: relative; aspect-ratio: 9 / 19; border-radius: 1.6cqw;
+  background: #16150f; border: 0.35cqw solid #2b2926;
+  padding: 2.4cqw 0.8cqw 1cqw; overflow: hidden;
+}
+.cf-phone-notch {
+  position: absolute; top: 0.5cqw; left: 50%; transform: translateX(-50%);
+  width: 34%; height: 0.9cqw; border-radius: 999px; background: #2b2926; display: block;
+}
+.cf-phone-time {
+  display: block; text-align: center; color: rgba(255,253,248,0.85);
+  font-family: var(--cf-typed); font-size: 1.9cqw; font-weight: 700; margin-bottom: 1.2cqw;
+}
+.cf-phone-note {
+  background: rgba(255,253,248,0.14); backdrop-filter: blur(4px);
+  border-radius: 0.7cqw; padding: 0.7cqw 0.8cqw;
+  display: flex; flex-direction: column; gap: 0.2cqw;
+}
+.cf-phone-app {
+  font-family: var(--cf-typed); font-size: 0.6cqw; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,253,248,0.55);
+}
+.cf-phone-title { font-family: var(--cf-typed); font-size: 0.72cqw; font-weight: 700; color: #fffdf8; }
+.cf-phone-body { font-family: var(--cf-typed); font-size: 0.68cqw; line-height: 1.4; color: rgba(255,253,248,0.78); }
+
+.cf-toast {
+  width: 22cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.18);
+  border-radius: 6px; padding: 0.8cqw 1cqw;
+  display: flex; flex-direction: column; gap: 0.2cqw;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.1), 0 16px 36px rgba(43,41,38,0.16);
+}
+.cf-toast-app {
+  font-family: var(--cf-typed); font-size: 0.65cqw; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #8a7f6e;
+}
+.cf-toast-text { font-family: var(--cf-typed); font-size: 0.88cqw; line-height: 1.45; color: #2b2926; }
+
+/* a badge nobody has dealt with */
+.cf-appicon { position: relative; display: inline-block; }
+.cf-appicon i {
+  width: 3.4cqw; height: 3.4cqw; border-radius: 0.8cqw; display: flex;
+  align-items: center; justify-content: center; background: #2b2926; color: #fffdf8;
+  font-family: var(--cf-typed); font-style: normal; font-size: 1.5cqw; font-weight: 700;
+}
+.cf-appicon b {
+  position: absolute; top: -0.4cqw; right: -0.4cqw;
+  min-width: 1.5cqw; height: 1.5cqw; border-radius: 999px; padding: 0 0.35cqw;
+  background: #c86658; color: #fffdf8;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--cf-typed); font-size: 0.8cqw;
+}
+
+/* the date column is the tell */
+.cf-explorer {
+  width: 34cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.2);
+  border-radius: 5px; overflow: hidden;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.07), 0 18px 44px rgba(43,41,38,0.12);
+}
+.cf-exp-bar {
+  display: flex; gap: 0.9cqw; align-items: center; padding: 0.7cqw 1cqw;
+  background: rgba(43,41,38,0.06); border-bottom: 1px solid rgba(43,41,38,0.12);
+}
+.cf-exp-nav, .cf-exp-path { font-family: var(--cf-typed); font-size: 0.8cqw; color: #8a7f6e; }
+.cf-exp-head, .cf-exp-row {
+  display: grid; grid-template-columns: 1fr 8cqw 5cqw; gap: 0.8cqw;
+  padding: 0.55cqw 1cqw;
+}
+.cf-exp-head {
+  border-bottom: 1px solid rgba(43,41,38,0.12);
+  font-family: var(--cf-typed); font-size: 0.7cqw; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #8a7f6e;
+}
+.cf-exp-row { border-bottom: 1px solid rgba(43,41,38,0.06); }
+.cf-exp-name, .cf-exp-mod, .cf-exp-size {
+  font-family: var(--cf-typed); font-size: 0.82cqw; color: #2b2926;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cf-exp-name i { font-style: normal; color: #8a7f6e; margin-right: 0.5cqw; }
+.cf-exp-mod, .cf-exp-size { color: #8a7f6e; }
+.cf-exp-sel { background: rgba(200,102,88,0.1); box-shadow: inset 3px 0 0 #c86658; }
+
+/* the URL is the citation */
+.cf-browser {
+  width: 36cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.2);
+  border-radius: 6px; overflow: hidden;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.08), 0 20px 48px rgba(43,41,38,0.14);
+}
+.cf-br-tabs { display: flex; gap: 0.3cqw; padding: 0.5cqw 0.6cqw 0; background: rgba(43,41,38,0.1); }
+.cf-br-tab {
+  font-family: var(--cf-typed); font-size: 0.72cqw; color: #8a7f6e;
+  padding: 0.45cqw 0.9cqw; border-radius: 4px 4px 0 0; background: rgba(43,41,38,0.06);
+  max-width: 11cqw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cf-br-tab-on { background: #fffdf8; color: #2b2926; }
+.cf-br-url {
+  display: flex; align-items: center; gap: 0.6cqw;
+  padding: 0.55cqw 1cqw; border-bottom: 1px solid rgba(43,41,38,0.12);
+  font-family: var(--cf-typed); font-size: 0.75cqw; color: #8a7f6e;
+}
+.cf-br-lock {
+  width: 0.55cqw; height: 0.7cqw; border: 1.2px solid #8a7f6e; border-radius: 1px; display: block;
+}
+/* the page is clipped by the window, the way a page is */
+.cf-br-page { padding: 0.8cqw; overflow: hidden; display: grid; place-items: center; }
+
+/* the deadline as a thing on a wall */
+.cf-cal { width: 16cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.2); padding: 0.9cqw; }
+.cf-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.25cqw; }
+.cf-cal-cell {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-family: var(--cf-typed); font-size: 0.7cqw; color: #8a7f6e; border-radius: 2px;
+}
+.cf-cal-today { background: rgba(43,41,38,0.1); color: #2b2926; font-weight: 700; }
+.cf-cal-deadline {
+  border: 1.8px solid #c86658; color: #c86658; font-weight: 700;
+}
+
+/* the safeguard that was not there */
+.cf-dialog {
+  width: 20cqw; background: #fffdf8; border: 1px solid rgba(43,41,38,0.25); border-radius: 6px;
+  padding: 1.2cqw; display: flex; flex-direction: column; gap: 0.6cqw;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.1), 0 20px 46px rgba(43,41,38,0.18);
+}
+.cf-dialog-absent { opacity: 0.28; border-style: dashed; box-shadow: none; }
+.cf-dialog-title { font-family: var(--cf-typed); font-size: 0.95cqw; font-weight: 700; color: #2b2926; }
+.cf-dialog-body { font-family: var(--cf-typed); font-size: 0.8cqw; line-height: 1.5; color: #8a7f6e; }
+.cf-dialog-btns { display: flex; gap: 0.6cqw; justify-content: flex-end; margin-top: 0.3cqw; }
+.cf-dialog-btns i, .cf-dialog-btns b {
+  font-family: var(--cf-typed); font-style: normal; font-size: 0.78cqw;
+  padding: 0.4cqw 0.9cqw; border-radius: 4px;
+}
+.cf-dialog-btns i { color: #8a7f6e; border: 1px solid rgba(43,41,38,0.25); }
+.cf-dialog-btns b { color: #fffdf8; background: #2b2926; }

@@ -160,6 +160,48 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −9 — familiar interfaces
+
+`Inbox` · `MailOpen` · `Thread` · `ChannelPost` · `Phone` · `Toast` ·
+`AppBadge` · `Explorer` · `Browser` · `CalendarMonth` · `Dialog`
+
+**Ahmad, 2026-09-21: "I don't see email or anything that really sticks."**
+Right, and the diagnosis was in the question. The memo in this story **is an
+email** and the library was drawing it as a paragraph with a `From:` line. The
+management question **is a chat message**. The directory listing **is a file
+browser**. Every one of them was an abstraction of itself.
+
+That is why nothing stuck. An inbox row with an unread dot, a timestamp and a
+preview costs a viewer nothing to parse — they have read ten thousand of them.
+A paragraph headed `From:` has to be *read*. The familiar version lands in the
+time it takes to recognise, and it borrows all the feeling that comes with it:
+an email you scroll past, a badge you have not dealt with, a notification that
+arrives while you are doing something else.
+
+Where each one earns its place:
+
+- **`Inbox`** — the memo arrives as one row among ordinary ones. That is §2's
+  whole claim, and a text block can never show it: **it did not look
+  important.**
+- **`Thread`** — the interrogation, with a **read receipt**. The receipt is
+  doing real work: they saw the question and answered anyway.
+- **`Explorer`** — list view, sorted by date modified. `model_27_09_2024.bin`
+  modified *today* is the entire tell, and a viewer finds it themselves.
+- **`Browser`** — the URL **is** the citation. It makes a capture read as
+  something you could go and open rather than an image the film is asserting.
+- **`Phone`** — how almost everyone first learns something has gone wrong at
+  work.
+- **`Dialog`**, drawn greyed and unclicked — the confirmation step that never
+  appeared. Nothing stood between the command and the overwrite, and an absent
+  dialog shows that better than saying it.
+
+**Generic, never a brand.** No logos, no product names, no colour scheme
+lifted from a real client. These read as *an inbox* and *a chat app* without
+claiming to be anyone's — the honest choice, and the one that keeps the film
+out of a trademark argument. Everything inside them is still verbatim.
+
+---
+
 ## Layer −8 — composition
 
 `Solo` · `LayAside` · `Pair` · `Parked` · `LayFooter` · `Host` · `Triptych`
