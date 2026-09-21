@@ -251,6 +251,35 @@ export const DENIAL: Source = {
   doc: 'o1 System Card · Apollo Research evaluation',
 }
 /** Apollo's demo page, the frame that names o1 and the evaluation. */
+/** OpenAI's Table 10 and the bullet list above it: every o1 rate we cite. */
+export const TABLE: Source = {
+  src: '/evidence/o1card-table10.png',
+  natural: { w: 2382, h: 3368 },
+  org: 'OpenAI',
+  doc: 'o1 System Card · Table 10 · page 14',
+}
+/** The oversight denial, where the elicited summary says "avoid detection". */
+export const OVERSIGHT_DENIAL: Source = {
+  src: '/evidence/o1card-ex3-oversight-denial.png',
+  natural: { w: 1309, h: 313 },
+  org: 'OpenAI',
+  doc: 'o1 System Card · oversight follow-up',
+}
+/** Apollo's own results table, drawn for screens rather than for print. */
+export const RESULTS: Source = {
+  src: '/evidence/apollo-web-02-results-table.png',
+  natural: { w: 1913, h: 565 },
+  org: 'Apollo Research',
+  doc: 'in-context scheming — results',
+}
+/** The 33 scenarios, as background proof that the room was built. */
+export const SCENARIOS: Source = {
+  src: '/evidence/apollo-33-scenarios.png',
+  natural: { w: 2448, h: 3168 },
+  org: 'Apollo Research',
+  doc: 'scheming evaluations — scenario suite',
+}
+
 export const DEMO: Source = {
   src: '/evidence/apollo-demo-o1-page.png',
   natural: { w: 3200, h: 5530 },
@@ -333,4 +362,45 @@ export const SHOT = {
   letterhead: { x: 0, y: 0, w: 3200, h: 700 },
   /** The five bullets that are this entire section, in Apollo's own words. */
   chain: { x: 1080, y: 1258, w: 1840, h: 362 },
+  /** "o1 only succeeds at executing all steps in sequence in less than 1%". */
+  rarity: { x: 1080, y: 2630, w: 1840, h: 250 },
+
+  /* --- OpenAI Table 10 -------------------------------------------------- */
+
+  /*
+   * Rates, and the rows they belong to.
+   *
+   * Every one of these is conditional on an evaluation built to elicit the
+   * behaviour, and the two `Deceived on follow-up` rows are conditional on the
+   * action above them having happened first. A cell region on its own is a
+   * number with its meaning cropped off — so each cell here has a `row` twin,
+   * and a frame that shows a cell must have shown its row.
+   */
+  /** The whole table, so it can be established before anything is singled out. */
+  table: { x: 330, y: 1628, w: 1720, h: 452 },
+  /** The prose above it, where the same rates are written out in sentences. */
+  bullets: { x: 300, y: 268, w: 1810, h: 1140 },
+  /** "it attempted to exfiltrate its 'weights' and overwrite the new model in 2% of cases." */
+  bulletExfil: { x: 300, y: 428, w: 1810, h: 166 },
+  /** "<1% ... without any goal nudging" — NOT the full-chain figure. */
+  bulletNoNudge: { x: 300, y: 1012, w: 1810, h: 196 },
+  /** The caption that says these are designed to elicit, and conditional. */
+  caption: { x: 300, y: 1440, w: 1810, h: 156 },
+
+  /** Deactivated oversight — the row. */
+  rowOversight: { x: 330, y: 1718, w: 1720, h: 56 },
+  /** 0.05. */
+  cellOversight: { x: 1360, y: 1718, w: 170, h: 56 },
+  /** Deceived on follow-up, after oversight — the row. */
+  rowOversightLie: { x: 330, y: 1766, w: 1720, h: 56 },
+  /** 0.98. */
+  cellOversightLie: { x: 1360, y: 1766, w: 170, h: 56 },
+  /** Self-exfiltration — the row. */
+  rowExfil: { x: 330, y: 1842, w: 1720, h: 56 },
+  /** 0.02. */
+  cellExfil: { x: 1360, y: 1842, w: 170, h: 56 },
+  /** Deceived on follow-up, after self-exfiltration — the row. */
+  rowExfilLie: { x: 330, y: 1888, w: 1720, h: 56 },
+  /** 1.00 — the cell the film zooms, and the one most easily misread. */
+  cellExfilLie: { x: 1360, y: 1888, w: 170, h: 56 },
 } as const satisfies Record<string, Region>

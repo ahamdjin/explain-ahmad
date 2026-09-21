@@ -1441,3 +1441,350 @@
   gap: 2cqw;
   align-items: center;
 }
+
+/* --- looking closer without cutting -------------------------------------- */
+
+/*
+ * A magnifier over a page that stays whole. For the frames where the *look* of
+ * the source carries meaning a retyped quote would lose.
+ */
+.cf-lens {
+  position: relative;
+  width: 26cqw;
+  height: 13cqw;
+  overflow: hidden;
+  border: 2px solid rgba(43, 41, 38, 0.75);
+  border-radius: 2px;
+  background: #fffdf8;
+  box-shadow: 0 3px 8px rgba(43, 41, 38, 0.14), 0 18px 44px rgba(43, 41, 38, 0.18);
+}
+
+.cf-lens img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  display: block;
+  transform-origin: 0 0;
+}
+
+/* --- the route ------------------------------------------------------------ */
+
+.cf-route {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4cqw;
+  min-width: 40cqw;
+}
+
+.cf-route-goal {
+  font-family: var(--cf-typed);
+  font-size: 1.35cqw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #2b2926;
+  border-top: 1.8px solid #2b2926;
+  border-bottom: 1.8px solid #2b2926;
+  padding: 0.9cqw 0.2cqw;
+}
+
+.cf-route-goal-label {
+  display: block;
+  font-size: 0.85cqw;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+  margin-bottom: 0.3cqw;
+}
+
+.cf-route-legs {
+  display: flex;
+  flex-direction: column;
+}
+
+.cf-route-leg {
+  display: grid;
+  grid-template-columns: 0.4cqw 1fr 1fr;
+  align-items: center;
+  gap: 1.2cqw;
+  padding: 0.85cqw 0;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.15);
+}
+
+/* the thing standing on the path */
+.cf-route-bar {
+  width: 0.4cqw;
+  height: 2.2cqw;
+  background: #c86658;
+}
+
+.cf-route-obstacle,
+.cf-route-action {
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  letter-spacing: 0.03em;
+  color: #2b2926;
+}
+
+.cf-route-action {
+  font-weight: 700;
+}
+
+.cf-route-action em {
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8cqw;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+/* --- a number, and the condition it cannot be shown without --------------- */
+
+.cf-hero {
+  text-align: center;
+  min-width: 26cqw;
+}
+
+.cf-hero-value {
+  font-family: var(--cf-typed);
+  font-size: 7cqw;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #2b2926;
+}
+
+.cf-hero-of {
+  margin-top: 0.9cqw;
+  font-family: var(--cf-typed);
+  font-size: 1.3cqw;
+  letter-spacing: 0.04em;
+  color: #2b2926;
+}
+
+.cf-hero-bracket {
+  margin: 1cqw auto 0.7cqw;
+  width: 60%;
+  height: 0.7cqw;
+  border: 1.4px solid rgba(43, 41, 38, 0.4);
+  border-top: 0;
+}
+
+.cf-hero-cond {
+  font-family: var(--cf-pen);
+  font-size: 1.85cqw;
+  color: #8a7f6e;
+}
+
+.cf-hero-source {
+  margin-top: 0.8cqw;
+  font-family: var(--cf-typed);
+  font-size: 0.85cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+/* --- two things, and the gap between them --------------------------------- */
+
+.cf-versus {
+  display: flex;
+  align-items: stretch;
+  gap: 2.4cqw;
+}
+
+.cf-versus-side {
+  flex: 1 1 0;
+  min-width: 20cqw;
+}
+
+.cf-versus-rule {
+  width: 1px;
+  background: rgba(43, 41, 38, 0.25);
+}
+
+.cf-versus-q {
+  font-family: var(--cf-typed);
+  font-size: 1.25cqw;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #2b2926;
+}
+
+.cf-versus-a {
+  margin-top: 0.8cqw;
+  font-family: var(--cf-pen);
+  font-size: 1.8cqw;
+  line-height: 1.35;
+  color: #8a7f6e;
+}
+
+/* the honest answer to "does this happen normally" is that we do not know */
+.cf-versus-unknown .cf-versus-q {
+  color: #8a7f6e;
+}
+
+.cf-versus-unknown .cf-versus-a {
+  color: #8a7f6e;
+  opacity: 0.8;
+}
+
+/* --- a claim being taken apart -------------------------------------------- */
+
+.cf-claim {
+  max-width: 54cqw;
+  text-align: center;
+}
+
+.cf-claim span {
+  font-family: var(--cf-typed);
+  font-size: 2.8cqw;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #2b2926;
+  text-wrap: balance;
+}
+
+.cf-claim-rejected span {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+/* --- objects -------------------------------------------------------------- */
+
+.cf-file-obj {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45cqw;
+  width: 7cqw;
+}
+
+.cf-file-obj svg {
+  display: block;
+  width: 100%;
+}
+
+.cf-file-name {
+  font-family: var(--cf-typed);
+  font-size: 0.82cqw;
+  letter-spacing: 0.02em;
+  color: #2b2926;
+  text-align: center;
+  word-break: break-all;
+}
+
+.cf-file-kind {
+  font-family: var(--cf-typed);
+  font-size: 0.72cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+.cf-badge {
+  display: inline-block;
+  font-family: var(--cf-typed);
+  font-size: 0.88cqw;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2b2926;
+  border: 1.2px solid rgba(43, 41, 38, 0.45);
+  border-radius: 999px;
+  padding: 0.35cqw 0.85cqw;
+  background: #fffdf8;
+}
+
+.cf-badge-warn {
+  border-color: #c86658;
+  color: #c86658;
+}
+
+/* --- layout --------------------------------------------------------------- */
+
+/*
+ * Holds the face-camera space at the right proportions so beats can be
+ * composed before any footage exists. Footage is the one asset nobody here
+ * can generate.
+ */
+.cf-face {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1cqw;
+}
+
+.cf-face-plate {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.3cqw;
+  border: 1.6px dashed rgba(43, 41, 38, 0.4);
+  background: rgba(43, 41, 38, 0.05);
+  padding: 1cqw;
+}
+
+.cf-face-sidecar .cf-face-plate {
+  width: 22cqw;
+  aspect-ratio: 4 / 5;
+}
+
+.cf-face-hero .cf-face-plate {
+  width: 46cqw;
+  aspect-ratio: 16 / 9;
+}
+
+.cf-face-thesis .cf-face-plate {
+  width: 30cqw;
+  aspect-ratio: 1 / 1;
+}
+
+.cf-face-plate span {
+  font-family: var(--cf-typed);
+  font-size: 0.9cqw;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+.cf-face-plate em {
+  font-family: var(--cf-pen);
+  font-style: normal;
+  font-size: 1.6cqw;
+  color: #8a7f6e;
+}
+
+.cf-face-line {
+  margin: 0;
+  max-width: 30cqw;
+  font-family: var(--cf-typed);
+  font-size: 1.5cqw;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #2b2926;
+}
+
+/* the system layer's full stop */
+.cf-receipt {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1.1cqw;
+  background: #1c1a18;
+  padding: 0.7cqw 1.1cqw;
+}
+
+.cf-receipt-action {
+  font-family: var(--cf-typed);
+  font-size: 0.95cqw;
+  color: rgba(255, 253, 248, 0.7);
+}
+
+.cf-receipt-result {
+  font-family: var(--cf-typed);
+  font-size: 0.95cqw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #8fbf9f;
+}

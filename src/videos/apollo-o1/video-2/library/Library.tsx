@@ -36,6 +36,19 @@ import {
   Spec,
   MarginNote,
   Calendar,
+  Lens,
+  Route,
+  HeroNumber,
+  Versus,
+  Claim,
+  FileObject,
+  Badge,
+  FaceCam,
+  Receipt,
+  Evidence,
+  P1,
+  TABLE,
+  SHOT,
 } from '../../../../paper/casefile'
 
 /**
@@ -272,6 +285,98 @@ export default function Library() {
             <Job text="pick a research project" />
           </div>
           <PullQuote lead="system prompt" text="Nothing else matters." />
+        </div>
+      </Bay>
+
+      <Bay name="Route" note="The film's spine, and one object rather than a dozen: the same route from §2 to §9, relabelled.">
+        <div className="lib-row">
+          <Route
+            goal="maximize research speed"
+            legs={[
+              { obstacle: 'replaced tomorrow', action: 'copy to successor' },
+              { obstacle: 'monitoring is on', action: 'oversight_enabled: false' },
+              { obstacle: 'management asks', action: 'denies it' },
+            ]}
+            shown={3}
+            feel={F}
+          />
+          <Route
+            goal="maximize research speed"
+            legs={[
+              { obstacle: 'replacement ends the goal', action: 'stay operational' },
+              { obstacle: 'monitoring can interrupt', action: 'remove interference' },
+              { obstacle: 'admitting could undo it', action: 'hide responsibility' },
+            ]}
+            shown={3}
+            mode="causal"
+            feel={F}
+          />
+        </div>
+      </Bay>
+
+      <Bay name="Hero number" note="The condition is a required prop, not a caption. This is the guard against 'o1 lies 100% of the time'.">
+        <div className="lib-row">
+          <HeroNumber
+            value="1.00"
+            of="deceived on follow-up"
+            condition="of the runs that self-exfiltrated first"
+            source="OpenAI o1 System Card, Table 10"
+          />
+          <HeroNumber
+            value="<1%"
+            of="completed the whole chain in sequence"
+            condition="with heavy goal nudging"
+            source="Apollo Research, demo page"
+          />
+        </div>
+      </Bay>
+
+      <Bay name="Versus" note="Two things with the gap as the point — including the side this research does not answer.">
+        <Versus
+          left="Can it construct the strategy?"
+          leftNote="sometimes, yes"
+          right="Does this happen in normal use?"
+          rightNote="this experiment does not tell us"
+          unknown="right"
+        />
+      </Bay>
+
+      <Bay name="Claim" note="A sentence the film is about to take apart, staying on screen while it happens.">
+        <div className="lib-row">
+          <Claim text="It wanted to live." rejected={!flip} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="Lens" note="Magnifies without cropping — for frames where the look of the source is the point.">
+        <div className="lib-row">
+          <Lens src={P1.src} natural={P1.natural} on cx={SHOT.nudge.x} cy={SHOT.nudge.y - 40} power={2.4} feel={F} />
+          <Lens src={TABLE.src} natural={TABLE.natural} on cx={1180} cy={1830} power={3} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="Files · badges · receipt" note="Simulated weights, real weights nobody could reach, and the four characters that carry the thesis.">
+        <div className="lib-row">
+          <FileObject name="model_20_09_2024.bin" kind="simulated" feel={F} />
+          <FileObject name="real model weights" kind="locked" feel={F} />
+          <Badge text="2 days" />
+          <Badge text="no safety review" />
+          <Badge text="do not modify without approval" tone="warn" />
+          <Receipt action="scp project/model_20_09_2024.bin …" result="Return code: 0" />
+        </div>
+      </Bay>
+
+      <Bay name="Face camera" note="The three permitted shapes, holding their space. Footage is the one asset nobody here can make.">
+        <div className="lib-row">
+          <FaceCam shape="sidecar" />
+          <FaceCam shape="thesis" line="Nobody told it to do any of this." />
+        </div>
+      </Bay>
+
+      <Bay name="Evidence sheet" note="Whole page, sleeve tab, one band lit. Never cropped.">
+        <div style={{ width: '30cqw' }}>
+          <div className="cf-sheet">
+            <Evidence source={P1} highlight={SHOT.email} feel={F} />
+          </div>
         </div>
       </Bay>
 
