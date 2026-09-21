@@ -215,21 +215,54 @@ export function Destination({ label }: { label: string }) {
  * line finding a way, because that is the whole thesis and any more would be
  * the film explaining a picture it has spent nine minutes earning.
  */
-export function Road({ at, branch, chose, feel }: { at: number; branch: boolean; chose?: 'up' | 'down'; feel: Feel }) {
+export function Road({
+  at,
+  branch,
+  chose,
+  /**
+   * Run the whole width and land on a mark.
+   *
+   * The default trunk stops at the halfway point, which is right for "a road
+   * going somewhere" and wrong for the film's final image -- there the road
+   * has to *arrive*, because the entire last line is that it reached a
+   * destination nobody specified a route to.
+   */
+  reach = false,
+  feel,
+}: {
+  at: number
+  branch: boolean
+  chose?: 'up' | 'down'
+  reach?: boolean
+  feel: Feel
+}) {
   const t = Math.max(0, Math.min(1, at))
+  const end = reach ? 288 : 150
+  const len = end - 4
 
   return (
     <div className="cf-road">
       <svg viewBox="0 0 300 100" width="100%" aria-hidden="true">
         <motion.path
-          d="M4 50 H150"
+          d={`M4 50 H${end}`}
           fill="none"
           stroke={PALETTE.ink}
           strokeWidth="2"
-          strokeDasharray="150"
-          animate={{ strokeDashoffset: 150 - 150 * t }}
+          strokeDasharray={len}
+          animate={{ strokeDashoffset: len - len * t }}
           transition={feel}
         />
+        {reach ? (
+          <motion.circle
+            cx={end}
+            cy="50"
+            r="3.5"
+            fill={PALETTE.ink}
+            initial={false}
+            animate={{ opacity: t > 0.97 ? 1 : 0 }}
+            transition={feel}
+          />
+        ) : null}
         {branch ? (
           <>
             <motion.path

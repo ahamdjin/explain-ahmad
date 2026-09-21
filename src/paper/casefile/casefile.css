@@ -2173,7 +2173,10 @@
   letter-spacing: 0.1em; text-transform: uppercase; color: #2b2926;
 }
 
-.cf-road { width: 40cqw; }
+/* The caller sets the size. A hard width here is the same bug `.cf-runs` had:
+   §9's final image needs the road to span the gap between two marks, and it
+   cannot if the road is 40cqw wherever it is put. */
+.cf-road { width: 100%; }
 .cf-road svg { display: block; width: 100%; overflow: visible; }
 
 .cf-gap { display: flex; align-items: center; gap: 2cqw; }

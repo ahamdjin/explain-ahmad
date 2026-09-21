@@ -1,6 +1,7 @@
 # Section 08 — Did it want to survive?
 
 Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
+Build status: **BUILT** — `src/videos/apollo-o1/video-2/section-08/` · `/video-2/section-08`
 
 Script authority: `../../video-script/video-2/SCRIPT.md` → **7 — DID IT WANT TO SURVIVE?**
 

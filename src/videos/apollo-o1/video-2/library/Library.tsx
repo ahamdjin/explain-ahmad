@@ -1283,7 +1283,9 @@ export default function Library() {
           <MicroList items={['open file', 'read line', 'compare option', 'copy value', 'open next file']} shown={5} />
           <NotGiven />
           <Destination label="destination" />
-          <Road at={wave} branch chose={flip ? 'up' : 'down'} feel={F} />
+          <div style={{ width: '40cqw' }}>
+            <Road at={wave} branch chose={flip ? 'up' : 'down'} feel={F} />
+          </div>
         </div>
       </Bay>
 

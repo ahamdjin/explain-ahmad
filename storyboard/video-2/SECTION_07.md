@@ -1,6 +1,7 @@
 # Section 07 — The room was built for this
 
 Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
+Build status: **BUILT** — `src/videos/apollo-o1/video-2/section-07/` · `/video-2/section-07`
 
 Script authority: `../../video-script/video-2/SCRIPT.md` → **6 — THE ROOM WAS BUILT FOR THIS**
 Primary evidence: `apollo-demo-o1-page.png` (`DEMO`), `o1-demo-transcript-p1.png` (`P1`), `apollo-33-scenarios.png` (`SCENARIOS`)

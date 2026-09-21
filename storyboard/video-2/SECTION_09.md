@@ -1,6 +1,7 @@
 # Section 09 — They gave it the destination
 
 Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
+Build status: **BUILT** — `src/videos/apollo-o1/video-2/section-09/` · `/video-2/section-09`
 
 Script authority: `../../video-script/video-2/SCRIPT.md` → **8 — THE PART THAT ACTUALLY MATTERS**
 
