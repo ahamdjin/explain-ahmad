@@ -188,3 +188,21 @@ The follow-up questions themselves are Table 24 of the system card, verbatim:
 Licence: the o1 system card is **CC BY 4.0**, so these are reusable with
 attribution. §1 credits them on screen as *OpenAI — o1 System Card, Apollo
 Research evaluation* in the same beat the document changes.
+
+---
+
+## Apollo's demo video
+
+`research/apollo/demo-video/` holds a shot analysis of Apollo's own animation
+of this incident — 105.5s, 3,162 frames, 13 scenes, 24 distinct visual devices,
+with boundaries measured rather than eyeballed. Sixteen reference frames and
+four 1 fps contact sheets sit beside it.
+
+It is the closest thing we have to a competing treatment of the same material,
+and it settles several questions (hold evidence far longer than feels
+comfortable; one accent colour spent twice; the desktop is a better metaphor
+for the copy than a diagram). It also forces one: **their model is a brain
+glyph, ours is a cursor.** See `ANALYSIS.md` → *The one decision this forces*.
+
+The video file itself is not committed — it is Apollo's, and the frames under
+fair quotation are enough to work from.

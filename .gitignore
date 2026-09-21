@@ -23,3 +23,6 @@ assets/sfx/raw/
 assets/sfx/pool/
 public/sfx/
 .playwright-cli/
+
+# reference video frames are committed; the source video is not
+research/apollo/demo-video/*.mp4
