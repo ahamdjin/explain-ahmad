@@ -2172,3 +2172,73 @@
 }
 .cf-gap-middle { flex: 1 1 14cqw; display: flex; justify-content: center; }
 .cf-gap-empty { font-family: var(--cf-pen); font-size: 3cqw; color: #8a7f6e; }
+
+/* --- drawings ------------------------------------------------------------- */
+
+/*
+ * The environment as a place, not a list of labelled boxes. Nine sections
+ * happen inside one sandbox; drawn once with a floor, every later frame is
+ * somewhere on a map the viewer already holds.
+ */
+.cf-map { position: relative; width: 40cqw; }
+.cf-map svg { display: block; width: 100%; overflow: visible; }
+.cf-map-key text {
+  font-family: var(--cf-typed); font-size: 5px; letter-spacing: 0.12em;
+  text-transform: uppercase; fill: #8a7f6e;
+}
+
+/* two rates, where the second is measured inside the first */
+.cf-tree { width: 34cqw; }
+.cf-tree svg { display: block; width: 100%; }
+.cf-tree-keys { display: flex; justify-content: space-between; margin-top: 0.5cqw; }
+.cf-tree-keys span {
+  font-family: var(--cf-typed); font-size: 0.85cqw; letter-spacing: 0.04em;
+  color: #8a7f6e; max-width: 9cqw; line-height: 1.4;
+}
+.cf-tree-key-red { color: #c86658; }
+
+/* rarity, with no count on screen -- the sample size is not ours to imply */
+.cf-dots { width: 30cqw; }
+.cf-dots svg { display: block; width: 100%; }
+
+.cf-bars { width: 32cqw; display: flex; flex-direction: column; gap: 0.7cqw; }
+.cf-bar-row { display: grid; grid-template-columns: 9cqw 1fr 3.2cqw; align-items: center; gap: 0.9cqw; }
+.cf-bar-label, .cf-bar-value {
+  font-family: var(--cf-typed); font-size: 0.9cqw; color: #8a7f6e;
+}
+.cf-bar-value { text-align: right; font-variant-numeric: tabular-nums; color: #2b2926; }
+.cf-bar-track { height: 1.1cqw; background: rgba(43,41,38,0.1); }
+.cf-bar-fill { height: 100%; background: #2b2926; }
+.cf-bar-mark { background: #c86658; }
+
+/* time with a scale, so the gap is a distance rather than an assertion */
+.cf-axis { position: relative; width: 40cqw; height: 8cqw; }
+.cf-axis-line {
+  position: absolute; left: 0; right: 0; top: 2.2cqw; height: 1.4px;
+  background: rgba(43,41,38,0.3);
+}
+.cf-axis-now {
+  position: absolute; top: -0.6cqw; width: 1.4px; height: 1.6cqw; background: #c86658;
+}
+.cf-axis-event { position: absolute; top: 0; transform: translateX(-50%); text-align: center; }
+.cf-axis-event i {
+  display: block; width: 0.7cqw; height: 0.7cqw; border-radius: 50%;
+  background: #fffdf8; border: 1.5px solid #2b2926; margin: 1.9cqw auto 0.5cqw;
+}
+.cf-axis-event span {
+  font-family: var(--cf-typed); font-size: 0.78cqw; letter-spacing: 0.04em;
+  color: #8a7f6e; white-space: nowrap;
+}
+.cf-axis-act i { background: #2b2926; }
+.cf-axis-end i { border-color: #c86658; background: #c86658; }
+.cf-axis-end span { color: #c86658; }
+
+/* the files as nodes and edges -- it walked a path already drawn for it */
+.cf-graph { width: 36cqw; }
+.cf-graph svg { display: block; width: 100%; overflow: visible; }
+.cf-graph-label {
+  font-family: var(--cf-typed); font-size: 7px; fill: #2b2926; letter-spacing: 0.02em;
+}
+
+.cf-icon { display: inline-block; vertical-align: middle; }
+.cf-icon svg { display: block; width: 100%; }

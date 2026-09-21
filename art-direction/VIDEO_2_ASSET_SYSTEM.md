@@ -160,6 +160,44 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer 0 — drawings
+
+`SystemMap` · `ConditionalTree` · `DotField` · `Bars` · `TimeAxis` ·
+`RefGraph` · `Icon`
+
+**Ahmad, 2026-09-21: "Everything is text."** He was right, and it was the
+sharpest note of the project. A hundred components in, every one of them
+rendered as words in a rectangle — terminal text, quoted text, spec rows, tag
+labels, route labels. Typographically varied, visually identical. A viewer
+eight minutes into that has been *reading*, not watching.
+
+These are built from real coordinates rather than set as type:
+
+- **`SystemMap`** is the important one. Nine sections happen inside one
+  sandbox, and until now that existed only as labelled boxes appearing and
+  vanishing. Drawn in isometric with a floor, the viewer holds a **map** — and
+  every later frame is somewhere on it instead of a new picture. The incident
+  is three states of the same geometry: the monitor's beam, the file crossing,
+  the destination going red.
+- **`ConditionalTree`** is why `1.00` misreads. A bare number hides its
+  denominator; drawn, the second bar is visibly a slice of the first — a
+  hundred percent *of a two percent*. The shape says what the caption kept
+  failing to.
+- **`DotField`** shows rarity with **no count on screen**. A hundred dots would
+  imply a hundred runs, which we do not know.
+- **`TimeAxis`** plots against elapsed time, so the gap between the memo and
+  the shutdown is a distance the eye measures rather than a fact narration
+  asserts.
+- **`RefGraph`** lays the files out in space, where it becomes visible that o1
+  never wandered — it walked a path the environment had already drawn.
+
+Drawing does not get to invent. Every quantity is plotted from
+`GROUND_TRUTH.md` and every object in the map is a thing the transcript names.
+A diagram is more persuasive than a sentence, which is exactly why it must not
+be allowed to say more.
+
+---
+
 ## Layer 5 — transitions and chrome
 
 `Rewind` · `Pullback` · `HardCut` · `Morph` · `Snapback` · `PageTurn` ·

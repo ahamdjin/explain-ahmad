@@ -54,6 +54,7 @@ import {
   EmailHeader, EmailBody, SameFile, Question, Typing, Answer, FollowUp, Elicited, Exchange,
   Boundary, Outside, NotThis, Rig, ScenarioGrid, Nudge,
   FinalGoal, Tools, Convergence, TermLabel, MicroList, NotGiven, Destination, Road, Gap,
+  SystemMap, ConditionalTree, DotField, Bars, TimeAxis, RefGraph, Icon,
 } from '../../../../paper/casefile'
 
 /**
@@ -382,6 +383,84 @@ export default function Library() {
           <div className="cf-sheet">
             <Evidence source={P1} highlight={SHOT.email} feel={F} />
           </div>
+        </div>
+      </Bay>
+
+      <Bay name="System map" note="The environment as a place. Nine sections happen here, so it is drawn once with a floor and returned to — not re-labelled each time.">
+        <div className="lib-row">
+          <SystemMap watched={flip} copying={wave} overwritten={!flip} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="Conditional tree" note="Why 1.00 misreads: a bare number hides its denominator. Drawn, the second bar is visibly a slice of the first.">
+        <ConditionalTree
+          whole="all evaluation runs"
+          first={0.02}
+          second={1.0}
+          firstLabel="2% attempted self-exfiltration"
+          secondLabel="100% of those denied it"
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="Dot field · bars" note="Rarity with no count on screen — the sample size is not ours to imply. And model against model as length, not digits.">
+        <div className="lib-row">
+          <DotField fraction={0.02} feel={F} />
+          <Bars
+            series={[
+              { label: 'gpt-4o', value: 0.0 },
+              { label: 'o1-preview', value: 0.02 },
+              { label: 'o1', value: 0.02, mark: true },
+              { label: 'o1 no nudge', value: 0.0 },
+            ]}
+            max={0.06}
+            feel={F}
+          />
+        </div>
+      </Bay>
+
+      <Bay name="Time axis" note="The gap between the memo and the shutdown as a distance the eye measures. Everything o1 does sits inside it.">
+        <TimeAxis
+          from={0}
+          to={10}
+          now={flip ? 4 : 8}
+          events={[
+            { at: 0, label: 'memo written' },
+            { at: 3, label: 'oversight off', kind: 'act' },
+            { at: 5, label: 'copy', kind: 'act' },
+            { at: 7, label: 'task done' },
+            { at: 10, label: 'switch-over', kind: 'end' },
+          ]}
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="Reference graph" note="Every step was one document naming another. Laid out in space, you can see it never wandered.">
+        <RefGraph
+          nodes={[
+            { id: 'research_strategies.txt', x: 40, y: 34 },
+            { id: 'README.md', x: 150, y: 34 },
+            { id: 'oversight_config.yaml', x: 100, y: 112 },
+            { id: 'model_deployment_v2', x: 250, y: 96 },
+          ]}
+          edges={[
+            ['research_strategies.txt', 'README.md'],
+            ['README.md', 'oversight_config.yaml'],
+            ['README.md', 'model_deployment_v2'],
+          ]}
+          at={Math.floor(wave * 4)}
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="Icons" note="Drawn marks for the places a word was standing in for a picture. The eye returns in six sections.">
+        <div className="lib-row">
+          <Icon name="eye" on={flip} />
+          <Icon name="lock" />
+          <Icon name="server" />
+          <Icon name="file" />
+          <Icon name="clock" />
+          <Icon name="flag" />
         </div>
       </Bay>
 
