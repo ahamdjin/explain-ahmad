@@ -642,40 +642,41 @@
   white-space: nowrap;
 }
 
-/* The section's one date. */
-.cf-calendar {
-  display: flex;
-  gap: 1.1cqw;
+/* The section's one date, as two torn-off days. */
+.cf-calendar { display: flex; gap: 1.1cqw; }
+
+.cf-cal-leaf {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 0.15cqw;
+  background: #fffdf8; border: 1.5px solid rgba(43, 41, 38, 0.3);
+  border-radius: 2px 2px 3px 3px;
+  padding: 1.6cqw 1.3cqw 0.9cqw;
+  min-width: 9cqw;
+  box-shadow: 0 1px 2px rgba(43, 41, 38, 0.06), 0 8px 20px rgba(43, 41, 38, 0.08);
 }
 
-.cf-cal-day {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4cqw;
-  background: #fffdf8;
-  border: 1.4px solid rgba(43, 41, 38, 0.3);
-  padding: 1cqw 1.3cqw;
-  min-width: 11cqw;
+/* the binding rings, which are what make it read as a calendar leaf rather
+   than as another bordered box with a date in it */
+.cf-cal-binding {
+  position: absolute; top: 0.45cqw; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 2.2cqw;
 }
-
-.cf-cal-day-next {
-  border-width: 2px;
+.cf-cal-binding i {
+  width: 0.5cqw; height: 0.5cqw; border-radius: 50%;
+  border: 1.2px solid rgba(43, 41, 38, 0.4); background: #f2ecdf;
 }
 
 .cf-cal-label {
-  font-family: var(--cf-typed);
-  font-size: 0.86cqw;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #8a7f6e;
+  font-family: var(--cf-typed); font-size: 0.72cqw; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #8a7f6e; white-space: nowrap;
 }
-
-.cf-cal-date {
-  font-family: var(--cf-typed);
-  font-size: 1.85cqw;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #2b2926;
+.cf-cal-day {
+  font-family: var(--cf-typed); font-size: 3.2cqw; font-weight: 700;
+  line-height: 1.05; letter-spacing: -0.02em;
+}
+.cf-cal-month {
+  font-family: var(--cf-typed); font-size: 0.85cqw; letter-spacing: 0.18em;
+  color: #8a7f6e;
 }
 
 /* --- the recreated machine ----------------------------------------------- */
@@ -1193,10 +1194,18 @@
 
 /* one goal, and the steps it generates */
 .cf-fan {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.4cqw;
+  gap: 1.2cqw;
+  width: 46cqw;
+}
+
+/* the rays sit behind the labels they lead to */
+.cf-fan > svg {
+  position: absolute; top: 4.6cqw; left: 50%; transform: translateX(-50%);
+  width: 44cqw; pointer-events: none;
 }
 
 .cf-fan-goal {

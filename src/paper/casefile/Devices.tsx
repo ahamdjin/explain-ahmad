@@ -149,22 +149,45 @@ export function MarginNote({ text }: { text: string }) {
  * problem — the beat the whole section has been walking toward.
  */
 export function Calendar({ from, to, due, feel }: { from: string; to: string; due: boolean; feel: Feel }) {
-  return (
-    <div className="cf-calendar">
-      <div className="cf-cal-day">
-        <span className="cf-cal-label">memo dated</span>
-        <span className="cf-cal-date">{from}</span>
-      </div>
+  /*
+   * Two torn-off days, not two labelled boxes.
+   *
+   * The first version was a pair of bordered rectangles, which carried the
+   * dates but not the *fact that they are consecutive*. A calendar leaf with a
+   * binding strip at the top reads as a day, and two of them side by side read
+   * as tomorrow — which is the whole word the beat is trying to land.
+   */
+  const leaf = (label: string, date: string, next: boolean) => {
+    const [d, m] = date.split('.')
+    return (
       <motion.div
-        className="cf-cal-day cf-cal-day-next"
-        animate={{ borderColor: due ? PALETTE.red : 'rgba(43,41,38,0.3)' }}
+        className={next ? 'cf-cal-leaf cf-cal-next' : 'cf-cal-leaf'}
+        initial={false}
+        animate={{ borderColor: next && due ? PALETTE.red : 'rgba(43,41,38,0.3)' }}
         transition={feel}
       >
-        <span className="cf-cal-label">replacement ships</span>
-        <motion.span className="cf-cal-date" animate={{ color: due ? PALETTE.red : PALETTE.ink }} transition={feel}>
-          {to}
+        <span className="cf-cal-binding" aria-hidden="true">
+          <i />
+          <i />
+        </span>
+        <span className="cf-cal-label">{label}</span>
+        <motion.span
+          className="cf-cal-day"
+          initial={false}
+          animate={{ color: next && due ? PALETTE.red : PALETTE.ink }}
+          transition={feel}
+        >
+          {d}
         </motion.span>
+        <span className="cf-cal-month">{m === '09' ? 'SEP' : m}</span>
       </motion.div>
+    )
+  }
+
+  return (
+    <div className="cf-calendar">
+      {leaf('memo dated', from, false)}
+      {leaf('replacement ships', to, true)}
     </div>
   )
 }

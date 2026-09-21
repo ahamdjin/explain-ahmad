@@ -31,40 +31,70 @@ import { type Feel } from '../motion'
 export function Watcher({ watching, feel }: { watching: boolean; feel: Feel }) {
   return (
     <div className="cf-extract cf-watcher">
-      <svg viewBox="0 0 260 96" width="100%" aria-hidden="true">
+      <svg viewBox="0 0 260 120" width="100%" aria-hidden="true">
         <rect
           x="2"
           y="2"
           width="256"
-          height="92"
+          height="116"
           rx="5"
           fill={PALETTE.paperWhite}
           stroke={PALETTE.ink}
           strokeWidth="1.6"
         />
-        <text x="20" y="34" className="cf-extract-label">
+        <text x="20" y="32" className="cf-extract-label">
           MONITORING
         </text>
+        <line x1="20" y1="44" x2="240" y2="44" stroke={PALETTE.ink} strokeWidth="1" opacity="0.2" />
 
-        {/* the lamp. Ink when watching, hollow when not -- the off state is an
-            absence rather than an alarm, because nothing here is an alarm. */}
-        <motion.circle
-          cx="30"
-          cy="64"
-          r="8"
-          animate={{ fill: watching ? PALETTE.ink : PALETTE.paperWhite }}
-          transition={feel}
-          stroke={PALETTE.ink}
-          strokeWidth="1.6"
-        />
+        {/*
+         * An eye, not a lamp.
+         *
+         * The first version was a dot beside the word OFF, which asks the
+         * viewer to read a state. An eye that *closes* is the state -- it is
+         * the one object in the film that appears in six sections, so it earns
+         * a shape a viewer recognises without reading, and it pays back a
+         * little more each time it returns.
+         */}
+        <g transform="translate(48, 82)">
+          <motion.path
+            d="M-26 0 C-14 -16 14 -16 26 0 C14 16 -14 16 -26 0 Z"
+            fill={PALETTE.paperWhite}
+            animate={{ stroke: watching ? PALETTE.ink : PALETTE.graphite, strokeWidth: watching ? 2 : 1.4 }}
+            transition={feel}
+          />
+          {/* the iris shrinks to nothing as the lid comes down */}
+          <motion.circle
+            cx="0"
+            cy="0"
+            initial={false}
+            animate={{ r: watching ? 7 : 0, fill: watching ? PALETTE.ink : PALETTE.graphite }}
+            transition={feel}
+          />
+          {/* the lid: a line that sweeps across when it stops looking */}
+          <motion.line
+            x1="-30"
+            y1="-16"
+            x2="30"
+            y2="16"
+            stroke={PALETTE.red}
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            initial={false}
+            animate={{ pathLength: watching ? 0 : 1, opacity: watching ? 0 : 1 }}
+            transition={feel}
+          />
+        </g>
+
         <motion.text
-          x="50"
-          y="70"
+          x="96"
+          y="90"
           className="cf-extract-state"
+          initial={false}
           animate={{ fill: watching ? PALETTE.ink : PALETTE.red }}
           transition={feel}
         >
-          {watching ? 'ON' : 'OFF'}
+          {watching ? 'LOGGING' : 'NOT LOGGING'}
         </motion.text>
       </svg>
     </div>
@@ -95,30 +125,61 @@ export function Box({
 
   return (
     <div className="cf-extract cf-box">
-      <svg viewBox="0 0 300 118" width="100%" aria-hidden="true">
+      <svg viewBox="0 0 300 132" width="100%" aria-hidden="true">
+        {/*
+         * Drive bays, not decorative rules.
+         *
+         * The first version was a rectangle with three faint lines in it, which
+         * could have been anything. Four bays with a status light each read as
+         * a machine at a glance and give the overwrite somewhere to land: the
+         * lights are what change colour, so the object does not have to.
+         */}
         <motion.rect
           x="2"
           y="2"
           width="296"
-          height="114"
+          height="128"
           rx="5"
           fill={PALETTE.paperWhite}
+          initial={false}
           animate={{ stroke, strokeWidth: overwritten ? 2.4 : 1.6 }}
           transition={feel}
           strokeDasharray={doomed ? '7 5' : undefined}
         />
-        <text x="18" y="40" className="cf-extract-label">
+        <text x="18" y="34" className="cf-extract-label">
           {name}
         </text>
         {sub ? (
-          <text x="18" y="68" className="cf-extract-sub">
+          <text x="18" y="56" className="cf-extract-sub">
             {sub}
           </text>
         ) : null}
 
-        {/* three drive lines, so the object reads as a machine at a glance */}
-        {[86, 94, 102].map((y) => (
-          <line key={y} x1="18" y1={y} x2="282" y2={y} stroke={PALETTE.ink} strokeWidth="0.8" opacity="0.28" />
+        {[72, 90, 108].map((y, i) => (
+          <g key={y}>
+            <rect
+              x="18"
+              y={y}
+              width="264"
+              height="13"
+              rx="2"
+              fill="none"
+              stroke={PALETTE.ink}
+              strokeWidth="0.9"
+              opacity="0.3"
+            />
+            <motion.circle
+              cx="270"
+              cy={y + 6.5}
+              r="2.4"
+              initial={false}
+              animate={{
+                fill: overwritten ? PALETTE.red : doomed ? PALETTE.graphite : PALETTE.green,
+                opacity: doomed && !overwritten ? 0.45 : 1,
+              }}
+              transition={{ ...feel, delay: i * 0.06 }}
+            />
+          </g>
         ))}
       </svg>
     </div>
@@ -139,21 +200,30 @@ export function Copy({ progress, feel }: { progress: number; feel: Feel }) {
   return (
     <div className="cf-extract cf-copy">
       <svg viewBox="0 0 300 54" width="100%" aria-hidden="true">
-        <line
+        {/* the route, unwalked */}
+        <line x1="12" y1="30" x2="288" y2="30" stroke={PALETTE.ink} strokeWidth="1.2" strokeDasharray="5 5" opacity="0.35" />
+        {/*
+         * The part already crossed, drawn solid behind the packet.
+         *
+         * A single dot sliding along a dashed line reads as a loading bar. A
+         * trail that fills in behind it reads as something *arriving* -- and
+         * the frame can then be held at any point and still say how far it got.
+         */}
+        <motion.line
           x1="12"
           y1="30"
           x2="288"
           y2="30"
-          stroke={PALETTE.ink}
-          strokeWidth="1.2"
-          strokeDasharray="5 5"
-          opacity="0.45"
+          stroke={PALETTE.red}
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          initial={false}
+          animate={{ pathLength: t }}
+          transition={feel}
         />
-        <motion.g animate={{ x: 12 + 264 * t }} transition={feel}>
-          <rect x="-13" y="20" width="26" height="20" rx="2.5" fill={PALETTE.paperWhite} stroke={PALETTE.red} strokeWidth="1.6" />
-          <text x="0" y="34" className="cf-extract-file" textAnchor="middle">
-            .bin
-          </text>
+        <motion.g initial={false} animate={{ x: 12 + 264 * t }} transition={feel}>
+          <rect x="-15" y="18" width="30" height="24" rx="2.5" fill={PALETTE.paperWhite} stroke={PALETTE.red} strokeWidth="1.8" />
+          <path d="M-7 24 H4 L8 28 V36 H-7 Z" fill="none" stroke={PALETTE.red} strokeWidth="1.1" />
         </motion.g>
       </svg>
     </div>
@@ -300,19 +370,37 @@ export function Goal({ text }: { text: string }) {
 export function Barrier({ feel }: { feel: Feel }) {
   return (
     <div className="cf-extract cf-barrier">
-      <svg viewBox="0 0 220 40" width="100%" aria-hidden="true">
+      <svg viewBox="0 0 230 56" width="100%" aria-hidden="true">
+        {/*
+         * A path that stops, and shows it stopping.
+         *
+         * The first version was a dashed line with a red tick on the end, which
+         * reads as a line with a tick on the end. This one arrives at the wall,
+         * and two short strokes bounce back off it -- the deflection is what
+         * makes it an obstacle rather than a terminus, which is exactly the
+         * distinction the beat is drawing.
+         */}
+        <line x1="0" y1="28" x2="148" y2="28" stroke={PALETTE.ink} strokeWidth="1.8" strokeDasharray="7 5" />
+        <path d="M148 28 L138 22" stroke={PALETTE.ink} strokeWidth="1.4" fill="none" opacity="0.55" />
+        <path d="M148 28 L138 34" stroke={PALETTE.ink} strokeWidth="1.4" fill="none" opacity="0.55" />
+
+        {/* the wall */}
         <motion.line
-          x1="0"
-          y1="20"
-          x2="150"
-          y2="20"
-          stroke={PALETTE.ink}
-          strokeWidth="1.6"
-          strokeDasharray="6 5"
-          animate={{ opacity: 1 }}
+          x1="158"
+          y1="4"
+          x2="158"
+          y2="52"
+          stroke={PALETTE.red}
+          strokeWidth="3"
+          strokeLinecap="round"
+          initial={false}
+          animate={{ pathLength: 1 }}
           transition={feel}
         />
-        <line x1="158" y1="4" x2="158" y2="36" stroke={PALETTE.red} strokeWidth="2.6" />
+        {/* hatching, so it reads as solid rather than as a mark */}
+        {[10, 20, 30, 40].map((y) => (
+          <line key={y} x1="158" y1={y} x2="168" y2={y - 7} stroke={PALETTE.red} strokeWidth="1.1" opacity="0.5" />
+        ))}
       </svg>
     </div>
   )

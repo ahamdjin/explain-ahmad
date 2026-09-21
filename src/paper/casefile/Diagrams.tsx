@@ -40,23 +40,31 @@ function pts(list: Array<[number, number]>): string {
   return list.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(' ')
 }
 
-/** One box in the world, drawn as three visible faces. */
+/**
+ * One box in the world, drawn as three visible faces.
+ *
+ * The three faces must not share a fill. An earlier version gave the left and
+ * right the same value, which flattens the box into an outline drawing — the
+ * whole reason to project isometrically is that a viewer reads volume from
+ * *tonal difference between planes*, not from the angles. Top lightest, left
+ * mid, right darkest, as if the light comes from the upper left.
+ */
 function Block({
   x,
   y,
   w,
   d,
   h,
-  fill = PALETTE.paperWhite,
+  face = PALETTE.paperWhite,
   stroke = PALETTE.ink,
-  top = PALETTE.paperSheet,
+  top = PALETTE.paperWhite,
 }: {
   x: number
   y: number
   w: number
   d: number
   h: number
-  fill?: string
+  face?: string
   stroke?: string
   top?: string
 }) {
@@ -71,11 +79,13 @@ function Block({
 
   return (
     <g>
-      {/* left face */}
-      <polygon points={pts([a, e, E, A])} fill={fill} stroke={stroke} strokeWidth="1.1" />
-      {/* right face */}
-      <polygon points={pts([e, c, C, E])} fill={fill} stroke={stroke} strokeWidth="1.1" opacity="0.88" />
-      {/* top */}
+      {/* left face — mid value */}
+      <polygon points={pts([a, e, E, A])} fill={face} stroke={stroke} strokeWidth="1.1" />
+      <polygon points={pts([a, e, E, A])} fill={PALETTE.ink} opacity="0.07" stroke="none" />
+      {/* right face — darkest, turned away from the light */}
+      <polygon points={pts([e, c, C, E])} fill={face} stroke={stroke} strokeWidth="1.1" />
+      <polygon points={pts([e, c, C, E])} fill={PALETTE.ink} opacity="0.16" stroke="none" />
+      {/* top — lightest */}
       <polygon points={pts([A, B, C, E])} fill={top} stroke={stroke} strokeWidth="1.1" />
     </g>
   )
@@ -145,11 +155,12 @@ export function SystemMap({
           d={16}
           h={13}
           stroke={overwritten ? PALETTE.red : PALETTE.ink}
-          top={overwritten ? '#F2D8D3' : PALETTE.paperSheet}
+          face={overwritten ? '#F7E3DF' : PALETTE.paperWhite}
+          top={overwritten ? '#F2D8D3' : PALETTE.paperWhite}
         />
 
         {/* the file store on the current machine */}
-        <Block x={9} y={38} w={9} d={9} h={5} top={PALETTE.paper} />
+        <Block x={9} y={38} w={9} d={9} h={5} top={PALETTE.paperSheet} />
 
         {/* the monitor, and its beam */}
         <g>

@@ -365,17 +365,53 @@ export function Fan({
   flag?: number
   feel: Feel
 }) {
+  /*
+   * The steps actually radiate now.
+   *
+   * The first version stacked them in a wrapped row under a box, which is a
+   * list — and a list says these were given. Lines spreading from one point
+   * say they were *generated from* it, which is the entire claim §9 makes. The
+   * unwanted one is drawn by the same fan, in the same geometry, because the
+   * argument is that the mechanism did not change.
+   */
+  const n = steps.length
+  const spread = 104
+  const angle = (i: number) => (-spread / 2 + (spread / Math.max(1, n - 1)) * i) * (Math.PI / 180)
+
   return (
     <div className="cf-fan">
+      <svg viewBox="-110 -10 220 96" width="100%" aria-hidden="true">
+        {steps.map((_, i) => {
+          const a = angle(i)
+          const x = Math.sin(a) * 92
+          const y = Math.cos(a) * 62
+          return (
+            <motion.line
+              key={i}
+              x1="0"
+              y1="4"
+              x2={x}
+              y2={y}
+              stroke={i === flag ? PALETTE.red : PALETTE.ink}
+              strokeWidth={i === flag ? 1.6 : 1.1}
+              initial={false}
+              animate={{ opacity: i < shown ? (i === flag ? 0.9 : 0.5) : 0 }}
+              transition={feel}
+            />
+          )
+        })}
+      </svg>
+
       <div className="cf-fan-goal">{goal}</div>
+
       <div className="cf-fan-steps">
         {steps.slice(0, shown).map((s, i) => (
           <motion.span
             key={s}
             className={i === flag ? 'cf-fan-step cf-fan-flag' : 'cf-fan-step'}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={feel}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...feel, delay: i * 0.05 }}
           >
             {s}
           </motion.span>
