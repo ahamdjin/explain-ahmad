@@ -30,7 +30,8 @@ import { chromium } from 'playwright'
 import { readFileSync } from 'node:fs'
 
 const PORT = process.env.PORT ?? 4180
-const HOLD = 3400
+/* Above the largest staged offset in any beat. */
+const HOLD = 9600
 const SECTIONS = [
   ['01', 15], ['02', 13], ['03', 11], ['04', 9], ['05', 12],
   ['06', 14], ['07', 12], ['08', 11], ['09', 10],
@@ -58,11 +59,20 @@ async function exitOf(sec, beats) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
   await page.goto(`http://localhost:${PORT}/video-2/section-${sec}`, { waitUntil: 'networkidle' })
   await page.waitForTimeout(1200)
-  for (let i = 1; i < beats; i++) {
-    await page.keyboard.press('ArrowRight')
-    await page.waitForTimeout(HOLD)
-  }
+  /*
+   * Jump via the rail, do not press ArrowRight.
+   *
+   * The director holds a lock so a fast press cannot skip a staged reveal, and
+   * with the stage offsets in real milliseconds that lock swallows presses --
+   * a stepper that assumes one press is one beat lands on the wrong beat and
+   * reports nonsense. The rail's ticks call `jump`, which bypasses the lock on
+   * purpose, and `data-now` says where we actually are.
+   */
+  await page.evaluate((i) => document.querySelectorAll('.s1-rail-tick')[i]?.click(), beats - 1)
   await page.waitForTimeout(HOLD)
+  const landed = await page.evaluate(() =>
+    [...document.querySelectorAll('.s1-rail-tick')].findIndex((e) => e.dataset.now === 'true') + 1)
+  if (landed !== beats) throw new Error(`§${sec}: wanted beat ${beats}, landed on ${landed}`)
   const shot = await page.evaluate(() =>
     [...document.querySelectorAll('.s1-slot')].map((el) => {
       const r = el.getBoundingClientRect()

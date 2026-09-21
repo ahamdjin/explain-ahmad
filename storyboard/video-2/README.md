@@ -122,3 +122,20 @@ clock and the per-beat effect that resets it runs *after* the first render. It
 used to seed `Infinity`, so on mount every stage of a section's opening beat
 was already due — a section whose first beat staged anything could never show
 its entry frame. It seeds `0` now.
+
+## Do not step sections with ArrowRight
+
+The director holds a lock so a fast press cannot skip a staged reveal. While
+the stage offsets were wrong the lock released instantly and a 1.2s stepper
+worked; with real millisecond offsets it swallows presses, and any tool that
+assumes one press is one beat silently reads the wrong beat.
+
+Use the rail. Its ticks call `jump`, which bypasses the lock on purpose, and
+`data-now` says where you actually landed. Both scripts do this:
+
+```
+npm run preview -- --port 4180
+node scripts/frames.mjs 06        # every beat of §6, each shot after its own stage span
+node scripts/frames.mjs 06 13     # just beat 13
+node scripts/continuity.mjs       # every hand-off
+```
