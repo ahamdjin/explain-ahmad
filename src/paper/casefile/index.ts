@@ -45,3 +45,5 @@ export { Ramp, Whip, Jolt, Streak, Roll, Meter, Ring, Beat, Kinetic, TickList, S
 export { Satnav, Keys, ShopCamera, ClosedDoor, Copier, FilmSet, SmokeAlarm, Dial, Maze, Desk, Recipe } from './Vignettes'
 export { Runs, NudgeCompare, WeightsVsContext, TwoTrack, Checksum, Tail } from './Trials'
 export { TreeDeep, Permissions, LogTail, Output, Handshake, Processes, Chapters, Scrub, Badge as CountBadge, type Node } from './Console'
+export { Waveform, Caption, VerticalGuide, Thumbnail, ChapterCard, EndCard, Cite, Sources, Provenance, PullCard, HoldBar } from './Studio'
+export { Balance, Duration, Cost, Fork, Org, Thumb } from './Weigh'

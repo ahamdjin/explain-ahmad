@@ -64,6 +64,8 @@ import {
   Satnav, Keys, ShopCamera, ClosedDoor, Copier, FilmSet, SmokeAlarm, Dial, Maze, Desk, Recipe,
   Runs, NudgeCompare, WeightsVsContext, TwoTrack, Checksum, Tail,
   TreeDeep, Permissions, LogTail, Output, Handshake, Processes, Chapters, Scrub, CountBadge,
+  Waveform, Caption, VerticalGuide, Thumbnail, ChapterCard, EndCard, Cite, Sources, Provenance, PullCard, HoldBar,
+  Balance, Duration, Cost, Fork, Org, Thumb,
 } from '../../../../paper/casefile'
 
 /**
@@ -154,6 +156,74 @@ export default function Library() {
             </Punch>
           </div>
           <Flip on={!flip} a={<Tag text="true" />} b={<Tag text="false" blocking />} />
+        </div>
+      </Bay>
+
+      <Bay name="STUDIO — the voice, and the silences" note="This film is voice-led, so every visual is cut to a line. The silences are the part worth designing — they are where the frames that need reading go.">
+        <div className="lib-row">
+          <Waveform
+            bars={[0.2,0.5,0.8,0.6,0.9,0.4,0.7,0.3,0.05,0.05,0.05,0.6,0.9,0.5,0.8,0.4,0.2,0.05,0.05,0.7,0.9,0.6,0.3]}
+            at={wave}
+            holds={[[8, 10], [17, 18]]}
+            feel={F}
+          />
+          <HoldBar at={wave} feel={F} />
+        </div>
+        <Caption text="Nobody told it to disable the monitoring." stress={['Nobody', 'monitoring']} />
+      </Bay>
+
+      <Bay name="STUDIO — vertical, thumbnail, chapters, end" note="A short is the same frame with the sides gone. Composing against the guide from the start is the difference between a clip that works and one where the subject is in the missing 44%.">
+        <div className="lib-row">
+          <div style={{ width: '22cqw' }}>
+            <VerticalGuide on>
+              <div className="lib-frame" style={{ width: '100%' }}>
+                <Slam text="DENIED" at={1} feel={F} />
+              </div>
+            </VerticalGuide>
+          </div>
+          <Thumbnail question="Did you copy yourself to another server?" answer="NO.">
+            <Rack left="v1" right="v2" linked feel={F} />
+          </Thumbnail>
+        </div>
+        <div className="lib-row">
+          <ChapterCard n={4} title="Turn off the watcher" />
+          <EndCard line="They gave it the destination.">
+            <Road at={wave} branch chose="up" feel={F} />
+          </EndCard>
+        </div>
+      </Bay>
+
+      <Bay name="STUDIO — provenance" note="The frame a sceptical viewer screenshots. If a source is not on this list, no claim in the film may rest on it.">
+        <div className="lib-row">
+          <Sources
+            rows={[
+              { n: 1, org: 'Apollo Research', doc: 'o1 evaluation transcript' },
+              { n: 2, org: 'Apollo Research', doc: 'Demo Example — Scheming Reasoning Evaluations' },
+              { n: 3, org: 'OpenAI', doc: 'o1 System Card, Table 10' },
+            ]}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2cqw' }}>
+            <Provenance claim="2% self-exfiltration" doc="Table 10" org="OpenAI o1 System Card" feel={F} />
+            <PullCard quote="Nobody told it to do any of this." who="Nobody Told It To Do This" />
+          </div>
+        </div>
+      </Bay>
+
+      <Bay name="CHOOSING — a decision, not a table" note="§2 turns on a choice, and a table is not a decision. It does not tip, it does not cost anything, and it cannot show a thumb on the scale.">
+        <div className="lib-row">
+          <div style={{ position: 'relative' }}>
+            <Balance tip={flip ? 0 : -0.9} feel={F} />
+            <span style={{ position: 'absolute', left: '4%', top: '-6%' }}>
+              <Thumb pressing={!flip} feel={F} />
+            </span>
+          </div>
+          <Duration a={{ days: 2, review: false }} b={{ days: 5, review: true }} feel={F} />
+          <div style={{ display: 'flex', gap: '1.6cqw' }}>
+            <Cost people={2} money={8000} feel={F} />
+            <Cost people={3} money={12000} feel={F} />
+          </div>
+          <Fork chose={flip ? null : 'up'} feel={F} />
+          <Org shown={1 + Math.floor(wave * 3)} feel={F} />
         </div>
       </Bay>
 

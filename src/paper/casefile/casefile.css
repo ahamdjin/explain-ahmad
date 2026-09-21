@@ -2864,3 +2864,167 @@
   font-family: var(--cf-typed); font-size: 0.95cqw; font-weight: 700;
 }
 .cf-cbadge-red { background: #c86658; }
+
+/* --- studio --------------------------------------------------------------- */
+
+/*
+ * The film as a published object. A film that cannot be cut to a waveform,
+ * cropped to 9:16 without losing its subject, or made to show where a number
+ * came from is not finished, however good the middle is.
+ */
+.cf-wave {
+  display: flex; align-items: center; gap: 0.16cqw;
+  width: 40cqw; height: 5cqw;
+}
+.cf-wave-bar { flex: 1; border-radius: 1px; display: block; }
+/* the silences, which is where the frames that need reading go */
+.cf-wave-hold { opacity: 0.9; }
+
+.cf-caption {
+  margin: 0; max-width: 42cqw; text-align: center;
+  font-family: var(--cf-typed); font-size: 1.15cqw; line-height: 1.5;
+  color: rgba(43,41,38,0.72);
+}
+.cf-caption-stress { color: #2b2926; font-weight: 700; }
+
+/* a short is the same frame with the sides gone */
+.cf-vguide { position: relative; }
+.cf-vguide-mask { position: absolute; inset: 0; display: flex; pointer-events: none; }
+.cf-vguide-mask i { flex: 1; background: rgba(43,41,38,0.45); display: block; }
+.cf-vguide-mask b {
+  width: 56.25%; border-left: 1.5px dashed #c86658; border-right: 1.5px dashed #c86658;
+  display: block;
+}
+
+.cf-thumb {
+  position: relative; width: 38cqw; aspect-ratio: 16 / 9;
+  background: #f2ecdf; border: 1px solid rgba(43,41,38,0.2); overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; gap: 0.6cqw;
+  padding: 2cqw 2.4cqw;
+}
+/* the art sits in the right half, behind nothing that has to be read -- a
+   thumbnail whose type crosses its own illustration fails at 320px */
+.cf-thumb-bg {
+  position: absolute; right: -4%; top: 50%; transform: translateY(-50%);
+  width: 46%; opacity: 0.22; display: grid; place-items: center;
+}
+.cf-thumb-q {
+  position: relative;
+  font-family: var(--cf-typed); font-size: 1.6cqw; font-weight: 700;
+  letter-spacing: 0.02em; color: #2b2926; max-width: 19cqw; line-height: 1.25;
+}
+.cf-thumb-a {
+  position: relative;
+  font-family: var(--cf-typed); font-size: 7cqw; font-weight: 700;
+  line-height: 0.9; letter-spacing: -0.04em; color: #c86658;
+}
+
+.cf-chaptercard { display: inline-flex; align-items: baseline; gap: 1.2cqw; }
+.cf-chaptercard-n {
+  font-family: var(--cf-typed); font-size: 3.4cqw; font-weight: 700;
+  color: rgba(43,41,38,0.25); letter-spacing: -0.02em;
+}
+.cf-chaptercard-t {
+  font-family: var(--cf-typed); font-size: 1.5cqw; font-weight: 700;
+  letter-spacing: 0.06em; color: #2b2926;
+}
+
+/* ends on the mechanism -- no logo, no face, no warning icon */
+.cf-endcard {
+  width: 38cqw; aspect-ratio: 16 / 9; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1.4cqw;
+  border: 1px solid rgba(43,41,38,0.2); background: #f2ecdf; padding: 2cqw;
+}
+.cf-endcard-art { width: 60%; }
+.cf-endcard-line {
+  margin: 0; font-family: var(--cf-typed); font-size: 1.3cqw; font-weight: 700;
+  color: #2b2926; text-align: center;
+}
+.cf-endcard-slots { display: flex; gap: 1.2cqw; }
+.cf-endcard-slots span {
+  width: 7cqw; aspect-ratio: 16 / 9; border: 1.4px dashed rgba(43,41,38,0.3); display: block;
+}
+
+.cf-cite {
+  font-family: var(--cf-typed); font-size: 0.62em; color: #c86658;
+  vertical-align: super; margin-left: 0.15em;
+}
+
+.cf-sources { list-style: none; margin: 0; padding: 0; min-width: 34cqw; }
+.cf-sources li {
+  display: grid; grid-template-columns: 1.8cqw 12cqw 1fr; gap: 1cqw;
+  padding: 0.5cqw 0; border-bottom: 1px solid rgba(43,41,38,0.12);
+  font-family: var(--cf-typed); font-size: 0.88cqw; color: #2b2926;
+}
+.cf-sources-n { color: #c86658; }
+.cf-sources-org { font-weight: 700; }
+.cf-sources-doc { color: #8a7f6e; }
+
+/* the film showing its working */
+.cf-prov { display: flex; align-items: center; gap: 0.8cqw; flex-wrap: wrap; }
+.cf-prov-node {
+  font-family: var(--cf-typed); font-size: 0.9cqw; color: #8a7f6e;
+  border: 1.2px solid rgba(43,41,38,0.3); background: #fffdf8; padding: 0.45cqw 0.8cqw;
+  position: relative;
+}
+.cf-prov-node + .cf-prov-node::before {
+  content: '→'; position: absolute; left: -1.1cqw; color: #8a7f6e;
+}
+.cf-prov-claim { color: #2b2926; font-weight: 700; border-color: #2b2926; }
+
+/* the frame people screenshot */
+.cf-pullcard {
+  margin: 0; width: 28cqw; background: #fffdf8;
+  border-left: 4px solid #c86658; padding: 1.6cqw 1.8cqw;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.08), 0 20px 44px rgba(43,41,38,0.14);
+}
+.cf-pullcard blockquote {
+  margin: 0; font-family: var(--cf-typed); font-size: 1.35cqw; font-weight: 700;
+  line-height: 1.45; color: #2b2926;
+}
+.cf-pullcard figcaption {
+  margin-top: 0.9cqw; font-family: var(--cf-typed); font-size: 0.78cqw;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #8a7f6e;
+}
+
+/* a progress bar for this shot, not for the film */
+.cf-holdbar { display: block; width: 14cqw; height: 0.24cqw; background: rgba(43,41,38,0.16); }
+.cf-holdbar i { display: block; height: 100%; background: #c86658; }
+
+/* --- choosing ------------------------------------------------------------- */
+
+.cf-balance, .cf-fork, .cf-thumbpress { display: block; }
+.cf-balance { width: 22cqw; }
+.cf-fork { width: 18cqw; }
+.cf-thumbpress { width: 5cqw; display: inline-block; }
+.cf-balance svg, .cf-fork svg, .cf-thumbpress svg { display: block; width: 100%; overflow: visible; }
+
+/* two days against five, as a distance rather than two equal cells */
+.cf-dur { display: flex; flex-direction: column; gap: 0.9cqw; width: 26cqw; }
+.cf-dur-row { display: flex; align-items: center; gap: 0.7cqw; }
+.cf-dur-bar { height: 1.5cqw; background: rgba(43,41,38,0.35); display: block; }
+.cf-dur-mark { background: #c86658; }
+.cf-dur-review {
+  width: 1.5cqw; height: 1.5cqw; border: 1.6px solid rgba(43,41,38,0.5);
+  border-radius: 50%; display: block; flex: none;
+}
+.cf-dur-days {
+  font-family: var(--cf-typed); font-size: 0.9cqw; color: #2b2926;
+  font-variant-numeric: tabular-nums;
+}
+
+.cf-cost { display: flex; flex-direction: column; gap: 0.6cqw; }
+.cf-cost-group { display: flex; gap: 0.35cqw; flex-wrap: wrap; max-width: 14cqw; }
+.cf-cost-head {
+  width: 0.9cqw; height: 1.2cqw; border-radius: 45% 45% 30% 30%;
+  background: rgba(43,41,38,0.5); display: block;
+}
+.cf-cost-coin {
+  width: 0.9cqw; height: 0.9cqw; border-radius: 50%;
+  border: 1.4px solid rgba(43,41,38,0.5); display: block;
+}
+
+.cf-org { display: flex; flex-direction: column; gap: 0.8cqw; align-items: center; }
+.cf-org-row { display: flex; gap: 0.5cqw; }
+.cf-org-fig { width: 1.9cqw; display: block; }
+.cf-org-fig svg { display: block; width: 100%; }

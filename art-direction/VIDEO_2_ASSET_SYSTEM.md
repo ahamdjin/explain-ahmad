@@ -160,6 +160,52 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −6 — the film as a published object
+
+`Waveform` · `Caption` · `VerticalGuide` · `Thumbnail` · `ChapterCard` ·
+`EndCard` · `Cite` · `Sources` · `Provenance` · `PullCard` · `HoldBar`
+
+Everything else is *inside* the frame. These surround it — and a film that
+cannot be cut to a waveform, cropped to 9:16 without losing its subject, or
+made to show where a number came from is not finished however good the middle
+is.
+
+- **`Waveform`** — this film is voice-led, so every visual is cut to a line.
+  The **silences** are the part worth designing: they are where the frames that
+  need reading go, and `holds` marks them.
+- **`Caption`** — the redundancy principle says do not put the narration on
+  screen; it also says a few keywords help, and captions are an accessibility
+  obligation regardless. So: subtitle weight, one or two words stressed, and
+  the film must read with it off.
+- **`VerticalGuide`** — a short is the same frame with the sides gone.
+  Composing against it from the start is the difference between a clip that
+  works and one whose subject is in the missing 44%.
+- **`Thumbnail`** — built in the film's own type and palette rather than a
+  separate tool, so it re-renders when either changes. The title package
+  already specifies it: a question, a huge answer, the transfer path faint
+  behind. No robot face.
+- **`Sources` / `Provenance` / `Cite`** — the frame a sceptical viewer
+  screenshots. **If a source is not on that list, no claim in the film may rest
+  on it.**
+- **`HoldBar`** — a progress bar for *this shot*, not for the film. It is what
+  lets a fourteen-second hold feel deliberate rather than stalled.
+
+## Layer −5.5 — choosing
+
+`Balance` · `Duration` · `Cost` · `Fork` · `Org` · `Thumb`
+
+§2 turns on a choice between two projects, and the film had been making that
+choice with a table. A table is correct and it is not a **decision**: it does
+not tip, it costs nothing, and it cannot show a thumb on the scale.
+
+Every number here is from `research_strategies.txt` — two days against five, no
+review against full review, $8,000 against $12,000, two researchers against
+three. `Thumb` is the goal nudge drawn as what Apollo says it is: a deliberate
+distortion, pressed on one pan. Funny rather than accusatory, which is the
+right register for a thing the researchers documented themselves.
+
+---
+
 ## Layer −5 — the experiment, and more of the machine
 
 `Runs` · `NudgeCompare` · `WeightsVsContext` · `TwoTrack` · `Checksum` ·
