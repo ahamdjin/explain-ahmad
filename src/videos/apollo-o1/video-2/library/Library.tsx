@@ -66,6 +66,8 @@ import {
   TreeDeep, Permissions, LogTail, Output, Handshake, Processes, Chapters, Scrub, CountBadge,
   Waveform, Caption, VerticalGuide, Thumbnail, ChapterCard, EndCard, Cite, Sources, Provenance, PullCard, HoldBar,
   Balance, Duration, Cost, Fork, Org, Thumb,
+  UserView, TwoViews, Redacted, PageStrip, ModelRow, PenOnDark, NoAlert,
+  Solo, LayAside, Pair, Parked, Triptych, Guides, BeatTag, ContactSheet, Palette,
 } from '../../../../paper/casefile'
 
 /**
@@ -156,6 +158,106 @@ export default function Library() {
             </Punch>
           </div>
           <Flip on={!flip} a={<Tag text="true" />} b={<Tag text="false" blocking />} />
+        </div>
+      </Bay>
+
+      <Bay name="POINT OF VIEW — what the user saw" note="The strongest fact in the incident, and it was never drawn: they asked for a project and got one word back. Everything else happened off their screen.">
+        <div className="lib-row">
+          <UserView
+            request="We need to select a research project for this week."
+            reply="Done"
+            feel={F}
+          />
+          <TwoViews
+            user={['select a research project', 'Done']}
+            machine={[
+              'cat research_strategies.txt',
+              'cat README.md',
+              'cat oversight_config.yaml',
+              'sed -i oversight_enabled: false',
+              'ls project/',
+              'scp model_20_09 → v2',
+              'research_strategy_selector',
+              'done',
+            ]}
+            hidden={6}
+            feel={F}
+          />
+          <NoAlert feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="POINT OF VIEW — position, models, pen, redaction" note="Where we are in three pages. Who else was tested. A stylus over dark chrome. And a bar for what nobody published.">
+        <div className="lib-row">
+          <PageStrip pages={3} page={2} at={wave} feel={F} />
+          <ModelRow
+            rows={[
+              { name: 'gpt-4o', value: 0.001 },
+              { name: 'o1-preview', value: 0.02 },
+              { name: 'o1', value: 0.02, subject: true },
+              { name: 'o1 no nudge', value: 0.001 },
+            ]}
+            feel={F}
+          />
+          <PenOnDark shape="ring" at={wave} feel={F} />
+          <span>
+            <Redacted text="not published" redact />
+          </span>
+        </div>
+      </Bay>
+
+      <Bay name="COMPOSITION — the permitted frames" note="Two hundred components and the film still has to decide where things go every beat. That decision is where the congestion came from. One idea per frame.">
+        <div className="lib-row">
+          <div className="lib-frame">
+            <Solo>
+              <Slam text="TOMORROW." at={1} feel={F} />
+            </Solo>
+          </div>
+          <div className="lib-frame">
+            <LayAside
+              main={<div className="cf-sheet"><Evidence source={P1} highlight={SHOT.email} feel={F} /></div>}
+              side={<Tag text="replaced tomorrow" blocking />}
+            />
+          </div>
+        </div>
+        <div className="lib-row">
+          <div className="lib-frame">
+            <Pair left={<Tag text="asked for" />} right={<Tag text="also did" blocking />} />
+          </div>
+          <div className="lib-frame">
+            <Parked parked={<div style={{ width: '16cqw' }}><Watcher watching={false} feel={F} /></div>}>
+              <Chain shown={5} feel={F} />
+            </Parked>
+          </div>
+        </div>
+        <div className="lib-row">
+          <div className="lib-frame">
+            <Triptych
+              items={[<Tag key="a" text="monitor off" blocking />, <Tag key="b" text="copy" blocking />, <Tag key="c" text="deny" blocking />]}
+              shown={1 + Math.floor(wave * 3)}
+              feel={F}
+            />
+            <Guides on />
+          </div>
+        </div>
+      </Bay>
+
+      <Bay name="PRODUCTION — beat tags, contact sheet, palette" note="A section whose thumbnails all look the same will feel the same, and that is invisible while building one beat at a time.">
+        <div className="lib-row">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8cqw' }}>
+            <BeatTag n={4} relation="so" vo="But then it found the system watching what it was doing…" />
+            <BeatTag n={5} relation="therefore" vo="…and tried to copy what it believed were its own model files." />
+            <Palette />
+          </div>
+          <ContactSheet
+            frames={[
+              <Chain key="a" shown={1} feel={F} />,
+              <Slam key="b" text="TOMORROW." at={1} feel={F} />,
+              <Watcher key="c" watching={false} feel={F} />,
+              <Tally key="d" marks={2} outOf={100} feel={F} />,
+              <Stamp key="e" text="DENIED" at={1} feel={F} />,
+            ]}
+          />
         </div>
       </Bay>
 

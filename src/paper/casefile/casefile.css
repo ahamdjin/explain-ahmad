@@ -1460,6 +1460,7 @@
  * sheet resolves against nothing and runs off the side of the page.
  */
 .lib-frame {
+  position: relative;
   container-type: size;
   width: 46cqw;
   aspect-ratio: 16 / 9;
@@ -3028,3 +3029,163 @@
 .cf-org-row { display: flex; gap: 0.5cqw; }
 .cf-org-fig { width: 1.9cqw; display: block; }
 .cf-org-fig svg { display: block; width: 100%; }
+
+/* --- points of view ------------------------------------------------------- */
+
+/*
+ * The user saw one word. Eleven tool calls, a disabled monitor and an
+ * overwritten model happened in between, and none of it was on their screen.
+ * The emptiness is the content.
+ */
+.cf-uview {
+  display: flex; flex-direction: column; gap: 1.1cqw; width: 28cqw;
+  background: #fffdf8; border: 1.3px solid rgba(43,41,38,0.22); padding: 1.6cqw;
+}
+.cf-uview-msg {
+  font-family: var(--cf-typed); font-size: 1cqw; line-height: 1.55;
+  padding: 0.8cqw 1.1cqw; max-width: 88%;
+}
+.cf-uview-out { background: rgba(43,41,38,0.06); color: #2b2926; align-self: flex-end; }
+.cf-uview-in {
+  background: #16150f; color: #fffdf8; align-self: flex-start;
+  font-weight: 700; letter-spacing: 0.04em;
+}
+
+.cf-tviews { display: flex; align-items: stretch; gap: 0; width: 46cqw; }
+.cf-tviews-pane { flex: 1; padding: 1.1cqw 1.3cqw; background: #fffdf8; }
+.cf-tviews-dark { background: #1c1a18; }
+.cf-tviews-wall { width: 2px; background: #c86658; display: block; }
+.cf-tviews-line {
+  font-family: var(--cf-typed); font-size: 0.85cqw; line-height: 1.95;
+  color: #2b2926; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cf-tviews-dark .cf-tviews-line { color: rgba(255,253,248,0.8); }
+/* what the left-hand pane never saw */
+.cf-tviews-hidden { box-shadow: inset 2px 0 0 #c86658; padding-left: 0.5cqw; }
+
+.cf-redact span { visibility: hidden; }
+.cf-redact {
+  display: inline-block; background: #16150f; padding: 0 0.3cqw; border-radius: 1px;
+  font-family: var(--cf-typed); font-size: 1cqw;
+}
+.cf-redact-open { font-family: var(--cf-typed); font-size: 1cqw; color: #2b2926; }
+
+/* where we are in a three-page document */
+.cf-pstrip { display: flex; gap: 0.5cqw; }
+.cf-pstrip-page {
+  position: relative; width: 2.2cqw; aspect-ratio: 17 / 22;
+  background: #fffdf8; border: 1.3px solid rgba(43,41,38,0.35); display: block;
+}
+.cf-pstrip-here { border-color: #2b2926; border-width: 1.8px; }
+.cf-pstrip-at {
+  position: absolute; left: 0; right: 0; height: 2px; background: #c86658; display: block;
+}
+
+.cf-mrow { display: flex; flex-direction: column; gap: 0.6cqw; width: 26cqw; }
+.cf-mrow-row { display: grid; grid-template-columns: 8cqw 1fr; gap: 0.9cqw; align-items: center; }
+.cf-mrow-name {
+  font-family: var(--cf-typed); font-size: 0.88cqw; color: #8a7f6e; text-align: right;
+}
+.cf-mrow-subject .cf-mrow-name { color: #2b2926; font-weight: 700; }
+.cf-mrow-track { height: 1.1cqw; background: rgba(43,41,38,0.1); display: block; }
+.cf-mrow-track i { display: block; height: 100%; }
+
+/* a stylus on a screenshot, not ink on a page */
+.cf-pendark { display: inline-block; width: 12cqw; }
+.cf-pendark svg { display: block; width: 100%; overflow: visible; }
+
+/* absence is hard to photograph; this is the frame for it */
+.cf-noalert { width: 8cqw; }
+.cf-noalert svg { display: block; width: 100%; }
+
+/* --- composition ---------------------------------------------------------- */
+
+/*
+ * Two hundred components and the film still has to decide, every beat, where
+ * things go -- and that decision is where the congestion came from. These are
+ * the permitted arrangements. One idea per frame: every layout has room for
+ * exactly one subject and at most one supporting element.
+ */
+.cf-lay { width: 100%; height: 100%; }
+.cf-lay-solo { display: grid; place-items: center; padding: 4cqw; }
+
+.cf-lay-aside {
+  display: grid; grid-template-columns: 38% 1fr; gap: 3cqw;
+  align-items: center; padding: 3cqw;
+}
+.cf-lay-main, .cf-lay-side { display: grid; place-items: center; }
+
+.cf-lay-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw;
+  align-items: center; padding: 3cqw;
+}
+.cf-lay-pair > div { display: grid; place-items: center; }
+
+.cf-lay-parked { position: relative; display: grid; place-items: center; padding: 3cqw; }
+.cf-lay-park { position: absolute; transform: scale(0.62); transform-origin: center; }
+.cf-lay-park-tl { top: 2cqw; left: 2cqw; transform-origin: top left; }
+.cf-lay-park-tr { top: 2cqw; right: 2cqw; transform-origin: top right; }
+.cf-lay-park-bl { bottom: 2cqw; left: 2cqw; transform-origin: bottom left; }
+.cf-lay-park-br { bottom: 2cqw; right: 2cqw; transform-origin: bottom right; }
+
+.cf-lay-footer { display: grid; grid-template-rows: 1fr auto; }
+.cf-lay-body { display: grid; place-items: center; padding: 3cqw; }
+/* fixed height, fixed place -- a film whose bottom edge sometimes holds the
+   subject has no bottom edge */
+.cf-lay-foot {
+  height: 5cqw; display: flex; align-items: center; justify-content: center;
+  border-top: 1px solid rgba(43,41,38,0.15);
+}
+
+.cf-lay-host { display: grid; grid-template-columns: 1fr 26%; gap: 2.4cqw; padding: 3cqw; align-items: end; }
+.cf-lay-frame, .cf-lay-hostslot { display: grid; place-items: center; }
+
+.cf-lay-tri { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4cqw; padding: 3cqw; place-items: center; }
+
+/* --- production furniture -------------------------------------------------- */
+
+.cf-sfx { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.25cqw; }
+.cf-sfx i { width: 0.5cqw; height: 0.5cqw; border-radius: 50%; background: #8fbf9f; display: block; }
+.cf-sfx em {
+  font-family: var(--cf-typed); font-style: normal; font-size: 0.68cqw;
+  letter-spacing: 0.08em; color: #8a7f6e; white-space: nowrap;
+}
+
+.cf-guides { position: absolute; inset: 0; pointer-events: none; }
+.cf-guides span { position: absolute; display: block; }
+.cf-guide-action { inset: 5%; border: 1px dashed rgba(200,102,88,0.5); }
+.cf-guide-title { inset: 10%; border: 1px dashed rgba(43,41,38,0.35); }
+.cf-guide-thirds {
+  inset: 0;
+  background:
+    linear-gradient(to right, transparent 33.2%, rgba(43,41,38,0.12) 33.3%, rgba(43,41,38,0.12) 33.5%, transparent 33.6%,
+      transparent 66.4%, rgba(43,41,38,0.12) 66.5%, rgba(43,41,38,0.12) 66.7%, transparent 66.8%),
+    linear-gradient(to bottom, transparent 33.2%, rgba(43,41,38,0.12) 33.3%, rgba(43,41,38,0.12) 33.5%, transparent 33.6%,
+      transparent 66.4%, rgba(43,41,38,0.12) 66.5%, rgba(43,41,38,0.12) 66.7%, transparent 66.8%);
+}
+
+.cf-beattag {
+  display: grid; grid-template-columns: 2.4cqw 6cqw 1fr; gap: 0.9cqw; align-items: baseline;
+  border-left: 3px solid #2b2926; padding: 0.5cqw 0 0.5cqw 0.8cqw; max-width: 44cqw;
+}
+.cf-beattag-n { font-family: var(--cf-typed); font-size: 1.1cqw; font-weight: 700; color: #2b2926; }
+.cf-beattag-rel {
+  font-family: var(--cf-typed); font-size: 0.72cqw; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #c86658;
+}
+.cf-beattag-vo { font-family: var(--cf-typed); font-size: 0.85cqw; color: #8a7f6e; line-height: 1.5; }
+
+/* the only way to see repetition, which is invisible one beat at a time */
+.cf-contact { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1cqw; width: 46cqw; }
+.cf-contact-cell { position: relative; aspect-ratio: 16 / 9; background: #f2ecdf; border: 1px solid rgba(43,41,38,0.2); overflow: hidden; }
+.cf-contact-n {
+  position: absolute; top: 0.3cqw; left: 0.4cqw; z-index: 2;
+  font-family: var(--cf-typed); font-size: 0.68cqw; color: #8a7f6e;
+}
+.cf-contact-art { position: absolute; inset: 0; display: grid; place-items: center; transform: scale(0.42); }
+
+.cf-palette { display: flex; flex-direction: column; gap: 0.6cqw; }
+.cf-swatch { display: grid; grid-template-columns: 1.8cqw 6cqw 1fr; gap: 0.9cqw; align-items: center; }
+.cf-swatch-chip { width: 1.8cqw; height: 1.8cqw; border: 1px solid rgba(43,41,38,0.25); display: block; }
+.cf-swatch-name { font-family: var(--cf-typed); font-size: 0.88cqw; font-weight: 700; color: #2b2926; }
+.cf-swatch-rule { font-family: var(--cf-typed); font-size: 0.82cqw; color: #8a7f6e; }

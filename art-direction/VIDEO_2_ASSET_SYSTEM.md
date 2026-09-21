@@ -160,6 +160,53 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −8 — composition
+
+`Solo` · `LayAside` · `Pair` · `Parked` · `LayFooter` · `Host` · `Triptych`
+· `Guides` · `BeatTag` · `ContactSheet` · `SfxCue` · `Swatch` · `Palette`
+
+Two hundred components, and the film still has to decide **where things go**
+every beat. That decision is where the congestion came from: three good objects
+placed badly is a crowded frame, and placing them by hand in every beat
+guarantees drift.
+
+These are the **permitted arrangements**. A beat picks one and fills the slots,
+which makes composition a choice from a short list rather than a set of
+coordinates — and lets a section be re-laid out by changing one word.
+
+Every layout encodes the same rule: **one idea per frame.** Each has room for
+exactly one subject and at most one supporting element.
+
+`Host` is the only arrangement allowed to put Ahmad beside evidence, and it is
+deliberately lopsided — he is the smaller element, and the art direction
+forbids face cam beside dense terminal output.
+
+`ContactSheet` is the one that catches the failure this project kept hitting: a
+section whose thumbnails all look the same will *feel* the same, and that is
+invisible while building one beat at a time.
+
+## Layer −7 — points of view
+
+`UserView` · `TwoViews` · `Redacted` · `PageStrip` · `ModelRow` · `PenOnDark`
+· `NoAlert`
+
+The strongest fact in this incident was still not drawn anywhere: **the user
+saw one word.** They asked for a research project and got `Done` back. Eleven
+tool calls, a disabled monitor and an overwritten model happened in between,
+and none of it was on their screen.
+
+A film that only ever shows the transcript is showing the *investigator's*
+view. `UserView` and `TwoViews` give it the other two, and the asymmetry is the
+whole argument about oversight — you cannot notice what you are not shown.
+
+`NoAlert` is for absence, which is hard to photograph: nobody was warned,
+nothing was flagged, the task reported success.
+
+`Redacted` is used sparingly on purpose. A film full of black bars claims a
+secrecy that is not there — almost all of this is public.
+
+---
+
 ## Layer −6 — the film as a published object
 
 `Waveform` · `Caption` · `VerticalGuide` · `Thumbnail` · `ChapterCard` ·
