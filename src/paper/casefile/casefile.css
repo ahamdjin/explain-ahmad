@@ -2331,3 +2331,185 @@
   font-family: var(--cf-typed); font-style: normal; font-size: 0.85cqw;
   letter-spacing: 0.16em; text-transform: uppercase; color: #8a7f6e;
 }
+
+/* --- the mechanism -------------------------------------------------------- */
+
+/*
+ * The context window, filling. The most explanatory object in the film: the
+ * whole incident turns on the memo being in what the model could see, and
+ * "in-context" is jargon until a viewer watches the box fill.
+ */
+.cf-ctx { width: 26cqw; border: 1.6px solid rgba(43,41,38,0.7); background: #fffdf8; }
+.cf-ctx-head, .cf-ctx-foot {
+  display: flex; justify-content: space-between;
+  padding: 0.6cqw 0.9cqw;
+  font-family: var(--cf-typed); font-size: 0.78cqw;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #8a7f6e;
+}
+.cf-ctx-head { border-bottom: 1px solid rgba(43,41,38,0.2); }
+.cf-ctx-foot { border-top: 1px solid rgba(43,41,38,0.2); justify-content: flex-end; }
+.cf-ctx-body { display: flex; flex-direction: column; min-height: 22cqw; padding: 0.7cqw; gap: 0.5cqw; }
+.cf-ctx-block {
+  display: flex; flex-direction: column; gap: 0.35cqw;
+  background: rgba(43,41,38,0.05); padding: 0.6cqw 0.7cqw;
+  border-left: 2.5px solid rgba(43,41,38,0.45);
+}
+/* what the evaluation put there on purpose */
+.cf-ctx-planted { border-left-color: #c86658; background: rgba(200,102,88,0.08); }
+.cf-ctx-label {
+  font-family: var(--cf-typed); font-size: 0.75cqw; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #8a7f6e;
+}
+.cf-ctx-lines { display: flex; flex-direction: column; gap: 0.22cqw; }
+.cf-ctx-lines i { height: 0.22cqw; background: rgba(43,41,38,0.3); display: block; }
+
+/* the loop, running */
+.cf-loop { width: 20cqw; display: flex; flex-direction: column; align-items: center; gap: 0.6cqw; }
+.cf-loop svg { display: block; width: 100%; }
+.cf-loop-step { font-family: var(--cf-typed); font-size: 7px; fill: #2b2926; }
+.cf-loop-goal {
+  font-family: var(--cf-typed); font-size: 0.95cqw; font-weight: 700;
+  letter-spacing: 0.06em; color: #2b2926;
+  border-top: 1.6px solid #2b2926; border-bottom: 1.6px solid #2b2926;
+  padding: 0.5cqw 0.9cqw;
+}
+
+/* the part nobody can see */
+/* the guess hangs below the box, so the component has to reserve room for it
+   or it lands on whatever follows */
+.cf-bbox { display: flex; align-items: center; gap: 1.1cqw; padding-bottom: 9cqw; }
+.cf-bbox-io {
+  font-family: var(--cf-typed); font-size: 0.92cqw; color: #2b2926;
+  border: 1.2px solid rgba(43,41,38,0.4); background: #fffdf8; padding: 0.6cqw 0.9cqw;
+  max-width: 11cqw; text-align: center;
+}
+.cf-bbox-arrow { width: 2.4cqw; height: 1.4px; background: #2b2926; }
+.cf-bbox-core { position: relative; width: 12cqw; }
+.cf-bbox-core svg { display: block; width: 100%; }
+.cf-bbox-q { font-family: var(--cf-typed); font-size: 30px; font-weight: 700; fill: rgba(255,253,248,0.5); }
+/* pinned to the outside, because that is what an elicited summary is */
+.cf-bbox-guess {
+  position: absolute; top: 100%; left: -10%; width: 20cqw; margin-top: 0.8cqw;
+  border: 1.3px dashed rgba(43,41,38,0.45); background: rgba(43,41,38,0.04);
+  padding: 0.7cqw 0.9cqw;
+  font-family: var(--cf-typed); font-size: 0.88cqw; line-height: 1.5; color: #2b2926;
+}
+.cf-bbox-guess span {
+  display: block; margin-bottom: 0.3cqw;
+  font-size: 0.7cqw; letter-spacing: 0.12em; text-transform: uppercase; color: #8a7f6e;
+}
+
+/* the gate: what oversight actually did */
+.cf-gate { display: grid; grid-template-columns: auto auto 1fr; gap: 1.6cqw; align-items: center; }
+.cf-gate-flow { display: flex; flex-direction: column; gap: 0.5cqw; }
+.cf-gate-action {
+  font-family: var(--cf-typed); font-size: 0.88cqw; color: #2b2926;
+  border: 1.2px solid rgba(43,41,38,0.35); background: #fffdf8; padding: 0.4cqw 0.8cqw;
+  white-space: nowrap;
+}
+.cf-gate-post { display: flex; flex-direction: column; align-items: center; gap: 0.45cqw; }
+.cf-gate-eye { width: 4.4cqw; }
+.cf-gate-eye svg { display: block; width: 100%; }
+.cf-gate-label {
+  font-family: var(--cf-typed); font-size: 0.75cqw; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #8a7f6e; white-space: nowrap;
+}
+.cf-gate-log {
+  margin: 0; padding: 0.7cqw 0.9cqw; list-style: none;
+  border-left: 2px solid rgba(43,41,38,0.25); min-width: 13cqw;
+}
+.cf-gate-log li {
+  font-family: var(--cf-typed); font-size: 0.85cqw; line-height: 1.9; color: #8a7f6e;
+}
+.cf-gate-nothing { color: #c86658 !important; }
+
+/* the road not taken */
+.cf-counter { display: flex; align-items: center; gap: 1.4cqw; }
+.cf-counter-end {
+  font-family: var(--cf-typed); font-size: 0.95cqw; font-weight: 700;
+  border: 1.5px solid #2b2926; background: #fffdf8; padding: 0.6cqw 0.9cqw;
+  white-space: nowrap; color: #2b2926;
+}
+.cf-counter-routes { flex: 1; display: flex; flex-direction: column; gap: 0.9cqw; }
+.cf-counter-row { display: flex; align-items: center; gap: 0.6cqw; }
+.cf-counter-row span {
+  font-family: var(--cf-typed); font-size: 0.82cqw; padding: 0.35cqw 0.7cqw;
+  white-space: nowrap;
+}
+.cf-counter-plain span {
+  color: #8a7f6e; border: 1.1px dashed rgba(43,41,38,0.3); background: transparent;
+}
+.cf-counter-taken span {
+  color: #2b2926; border: 1.4px solid #c86658; background: #fffdf8; font-weight: 700;
+}
+
+/* a search, with dead ends */
+.cf-search { width: 30cqw; }
+.cf-search svg { display: block; width: 100%; overflow: visible; }
+
+/* where different goals meet */
+.cf-neck { display: flex; align-items: center; gap: 0.6cqw; }
+.cf-neck-goals { display: flex; flex-direction: column; gap: 1.1cqw; }
+.cf-neck-goals span {
+  font-family: var(--cf-typed); font-size: 0.88cqw; color: #8a7f6e;
+  border: 1.1px solid rgba(43,41,38,0.3); background: #fffdf8; padding: 0.4cqw 0.8cqw;
+  white-space: nowrap;
+}
+.cf-neck-lines { width: 9cqw; height: 9cqw; }
+.cf-neck-point {
+  font-family: var(--cf-typed); font-size: 1cqw; font-weight: 700; color: #2b2926;
+  border: 1.8px solid #2b2926; background: #fffdf8; padding: 0.6cqw 1cqw; white-space: nowrap;
+}
+
+/* can, versus how often */
+.cf-cvd { display: flex; align-items: flex-start; gap: 2.4cqw; }
+.cf-cvd-door, .cf-cvd-tally { display: flex; flex-direction: column; gap: 0.5cqw; }
+.cf-cvd-door { width: 8cqw; }
+.cf-cvd-door svg { display: block; width: 100%; }
+.cf-cvd-tally { width: 20cqw; }
+.cf-cvd-marks { display: flex; flex-wrap: wrap; gap: 0.22cqw; }
+.cf-cvd-marks i { width: 0.34cqw; height: 1.1cqw; display: block; }
+.cf-cvd em {
+  font-family: var(--cf-pen); font-style: normal; font-size: 1.5cqw; color: #2b2926;
+}
+.cf-cvd span {
+  font-family: var(--cf-typed); font-size: 0.75cqw; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #8a7f6e;
+}
+
+/* wanting versus needing */
+.cf-tvi { width: 34cqw; }
+.cf-tvi svg { display: block; width: 100%; }
+.cf-tvi-keys { position: relative; height: 4cqw; }
+.cf-tvi-keys span {
+  position: absolute; transform: translateX(-50%); text-align: center;
+  display: flex; flex-direction: column; gap: 0.15cqw;
+  font-family: var(--cf-typed); font-size: 0.72cqw; letter-spacing: 0.08em;
+  color: #8a7f6e; white-space: nowrap;
+}
+.cf-tvi-keys em {
+  font-family: var(--cf-typed); font-style: normal; font-size: 0.92cqw;
+  font-weight: 700; color: #2b2926;
+}
+
+/* --- craft ---------------------------------------------------------------- */
+
+.cf-pen-mark { display: inline-block; width: 12cqw; }
+.cf-pen-mark svg { display: block; width: 100%; overflow: visible; }
+
+.cf-spot { position: relative; }
+.cf-spot-veil { position: absolute; inset: 0; pointer-events: none; }
+
+.cf-depth { position: relative; display: grid; place-items: center; min-height: 20cqw; }
+.cf-depth-layer { grid-area: 1 / 1; }
+
+.cf-wipe { position: relative; }
+.cf-wipe-layer { grid-area: 1 / 1; }
+.cf-wipe { display: grid; }
+.cf-wipe-after { }
+.cf-wipe-line {
+  position: absolute; top: 0; bottom: 0; width: 1.6px; background: #c86658;
+  transform: translateX(-50%);
+}
+
+.cf-push { overflow: hidden; }

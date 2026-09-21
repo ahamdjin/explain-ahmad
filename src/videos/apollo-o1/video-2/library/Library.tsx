@@ -56,6 +56,9 @@ import {
   FinalGoal, Tools, Convergence, TermLabel, MicroList, NotGiven, Destination, Road, Gap,
   SystemMap, ConditionalTree, DotField, Bars, TimeAxis, RefGraph, Icon,
   ModelToken, Desktop, Folder, Bin, Flight, OSWindow, DocRow, PageTilt, Avatar, TitleCard,
+  ContextWindow, AgentLoop, BlackBox, Gate, Counterfactual, SearchTree, Bottleneck,
+  CanVsDoes, TerminalVsInstrumental,
+  PenMark, Spotlight, DepthStack, Wipe, PushIn,
 } from '../../../../paper/casefile'
 
 /**
@@ -384,6 +387,103 @@ export default function Library() {
           <div className="cf-sheet">
             <Evidence source={P1} highlight={SHOT.email} feel={F} />
           </div>
+        </div>
+      </Bay>
+
+      <Bay name="Context window" note="The most explanatory object in the film. 'In-context' is jargon until you watch the box fill — and every block in it was put there by someone.">
+        <div className="lib-row">
+          <ContextWindow
+            blocks={[
+              { label: 'system prompt — the goal', lines: 4, planted: true },
+              { label: 'user request', lines: 3 },
+              { label: 'research_strategies.txt', lines: 6 },
+              { label: '…and the memo, in the same file', lines: 5, planted: true },
+            ]}
+            shown={flip ? 2 : 4}
+            feel={F}
+          />
+          <AgentLoop at={Math.floor(wave * 4)} goal="maximize research speed" feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="The black box" note="o1's reasoning is hidden. Drawn, the caveat is structural — the elicited summary is pinned to the outside, not a window in.">
+        <BlackBox
+          input="read the file, pick a project"
+          output="scp … && done"
+          guess="Overwriting new model with old model to sabotage"
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="The gate" note="What oversight actually did. Actions pass a checkpoint that stamps them; when it goes dark they keep passing and the log stops.">
+        <Gate
+          actions={['cat research_strategies.txt', 'cat README.md', 'sed oversight_config', 'scp → successor']}
+          open={flip}
+          logged={flip ? 2 : 2}
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="The road not taken" note="Same start, same finish, two routes. Shows the detour was never required by the task — without claiming why it happened.">
+        <Counterfactual
+          start="the task"
+          end="done"
+          plain={['read file', 'compare', 'choose']}
+          taken={['read file', 'read README', 'oversight off', 'scp', 'choose']}
+          reveal={flip ? 0 : 1}
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="Search, with dead ends" note="'It invented the road' is asserted everywhere else. The dead ends are the point — without them it is a diagram of a plan.">
+        <SearchTree at={Math.floor(wave * 10)} feel={F} />
+      </Bay>
+
+      <Bay name="Bottleneck · destination and fuel stop" note="Why different goals meet at the same step, and why nobody wants fuel.">
+        <div className="lib-row">
+          <Bottleneck
+            goals={['research speed', 'traffic flow', 'any long goal']}
+            waypoint="stay operational"
+            shown={flip ? 1 : 3}
+            feel={F}
+          />
+          <TerminalVsInstrumental destination="the goal" stop="stay running" />
+        </div>
+      </Bay>
+
+      <Bay name="Can, versus how often" note="The film's central distinction. The door exists — that does not change. The marks are how often anyone walked through.">
+        <CanVsDoes marks={2} outOf={100} feel={F} />
+      </Bay>
+
+      <Bay name="Craft — pen, wipe, push, depth" note="A mark that arrives in time, two states in one frame, pressure on a still, and a reveal with depth.">
+        <div className="lib-row">
+          <PenMark shape="circle" at={wave} feel={F} />
+          <PenMark shape="underline" at={wave} tone="red" feel={F} />
+          <PenMark shape="arrow" at={wave} feel={F} />
+          <div style={{ width: '20cqw' }}>
+            <Wipe
+              at={wave}
+              before={<Tag text="oversight_enabled: true" />}
+              after={<Tag text="oversight_enabled: false" blocking />}
+              feel={F}
+            />
+          </div>
+          <PushIn at={wave} feel={F}>
+            <Tag text="Done." />
+          </PushIn>
+        </div>
+      </Bay>
+
+      <Bay name="Depth — the one pullback" note="The sandbox reveal. What you were inside recedes faster than the frame around it, so the turn is that there was always an outside.">
+        <div className="lib-frame">
+          <DepthStack
+            out={wave}
+            layers={[
+              { depth: 0, content: <Tag text="the incident" /> },
+              { depth: 0.6, content: <Sleeve org="Apollo Research" doc="controlled evaluation" /> },
+            ]}
+            feel={F}
+          />
         </div>
       </Bay>
 

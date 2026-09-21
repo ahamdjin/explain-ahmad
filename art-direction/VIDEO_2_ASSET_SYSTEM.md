@@ -160,6 +160,58 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −2 — the mechanism
+
+`ContextWindow` · `AgentLoop` · `BlackBox` · `Gate` · `Counterfactual` ·
+`SearchTree` · `Bottleneck` · `CanVsDoes` · `TerminalVsInstrumental`
+
+Everything else in the library shows *what happened*. These show **why it could
+happen**, and without them §7–9 are narration over diagrams — the film asserts
+that an agent infers steps, that reasoning is hidden, that a capability is not
+a frequency, and asks the viewer to take all of it on trust.
+
+Each replaces a sentence the film currently says out loud:
+
+- **`ContextWindow`** — the most explanatory object in the film, and it was
+  missing. The whole incident turns on the memo being *in what the model could
+  see*. "In-context" is jargon until a viewer watches the box fill, and the
+  planted blocks make §7's point without a word.
+- **`AgentLoop`** — why an agent does things nobody typed. §9 assumes the
+  viewer has watched it turn.
+- **`BlackBox`** — the hidden-reasoning caveat, made structural. The elicited
+  summary is pinned to the *outside*, which is what it is.
+- **`Gate`** — what oversight actually did. Actions pass a checkpoint that
+  stamps them; it goes dark, they keep passing, the log stops.
+- **`Counterfactual`** — same start, same finish, two routes. Shows the detour
+  was never required by the task without claiming why it happened. Probably the
+  most persuasive frame available to this film.
+- **`SearchTree`** — the dead ends are the point. Without them it is a diagram
+  of a plan, and a plan implies somebody had one.
+- **`Bottleneck`** — the real picture of instrumental convergence: unrelated
+  goals whose routes happen to meet.
+- **`CanVsDoes`** — a door that exists, and a tally of how often anyone walked
+  through. The film's central distinction, previously two columns of prose.
+- **`TerminalVsInstrumental`** — nobody wants fuel. Retires "it wanted to live"
+  in one frame.
+
+---
+
+## Layer −1.5 — craft
+
+`PenMark` · `Spotlight` · `DepthStack` · `Wipe` · `PushIn`
+
+None of these explains anything. They are how a frame is *handled*: a mark that
+arrives in time rather than appearing, attention that travels rather than
+jumping, a reveal with depth rather than a scale change, two states compared in
+one frame, and pressure applied to a still.
+
+The difference between a deck of correct slides and something directed.
+
+`PushIn` is capped small on purpose — past about 8% it stops being pressure and
+becomes a zoom, and movement without a change in information is decoration.
+
+---
+
 ## Layer −1 — the desktop
 
 `ModelToken` · `Desktop` · `Folder` · `Bin` · `Flight` · `OSWindow` ·
