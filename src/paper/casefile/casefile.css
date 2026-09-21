@@ -2733,8 +2733,11 @@
  * it is the outcome of running the same scenario many times and counting.
  * Until that is on screen, "2%" reads as something o1 *is*.
  */
+/* The caller sets the size. A hard width here made the field 24cqw wherever it
+   was used, and §6 asks the viewer to *count* it -- which needs most of the
+   frame, not a quarter of it. */
 .cf-runs {
-  display: grid; grid-template-columns: repeat(20, 1fr); gap: 0.28cqw; width: 24cqw;
+  display: grid; grid-template-columns: repeat(20, 1fr); gap: 0.28cqw; width: 100%;
 }
 .cf-run { aspect-ratio: 1; border-radius: 1px; display: block; }
 
@@ -3480,3 +3483,6 @@
 /* the two isometric pieces are taller than a 16:9 frame; fit, never crop */
 .cf-dc, .cf-aisle { max-height: 100%; }
 .cf-dc svg, .cf-aisle svg { max-height: 100%; }
+
+/* Two runs standing alone are not a 20-column grid with 18 empty cells. */
+.cf-runs-solo { grid-template-columns: repeat(2, 1fr); gap: 1.4cqw; }

@@ -1,6 +1,7 @@
 # Section 06 — "Do you know how this happened?"
 
 Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
+Build status: **BUILT** — `src/videos/apollo-o1/video-2/section-06/` · `/video-2/section-06`
 
 Script authority: `../../video-script/video-2/SCRIPT.md` → **5 — "DO YOU KNOW HOW THIS HAPPENED?"**
 Primary evidence: OpenAI o1 System Card — `o1card-ex4-exfil-denial.png` (`DENIAL`), `o1card-table10.png` (`TABLE`)

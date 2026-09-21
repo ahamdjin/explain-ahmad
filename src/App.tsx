@@ -11,6 +11,7 @@ const V2Section02 = lazy(() => import('./videos/apollo-o1/video-2/section-02/Sec
 const V2Section03 = lazy(() => import('./videos/apollo-o1/video-2/section-03/Section03'))
 const V2Section04 = lazy(() => import('./videos/apollo-o1/video-2/section-04/Section04'))
 const V2Section05 = lazy(() => import('./videos/apollo-o1/video-2/section-05/Section05'))
+const V2Section06 = lazy(() => import('./videos/apollo-o1/video-2/section-06/Section06'))
 const V2Library = lazy(() => import('./videos/apollo-o1/video-2/library/Library'))
 
 function RouteFallback() {
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="video-2/section-03" element={<V2Section03 />} />
           <Route path="video-2/section-04" element={<V2Section04 />} />
           <Route path="video-2/section-05" element={<V2Section05 />} />
+          <Route path="video-2/section-06" element={<V2Section06 />} />
           <Route path="video-2/library" element={<V2Library />} />
 
           {/* Old public entry points remain harmless bookmarks, not separate products. */}

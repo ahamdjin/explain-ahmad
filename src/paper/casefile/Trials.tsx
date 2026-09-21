@@ -49,7 +49,10 @@ export function Runs({
   feel: Feel
 }) {
   return (
-    <div className="cf-runs">
+    /* Once the untouched runs are dropped, a 20-column grid holding two cells
+       is eighteen empty columns of dead space. The conditional needs the two
+       survivors large enough to be read as the whole population. */
+    <div className={total <= 6 ? 'cf-runs cf-runs-solo' : 'cf-runs'}>
       {Array.from({ length: total }, (_, i) => {
         const acted = i < scheming
         const lied = i < denied

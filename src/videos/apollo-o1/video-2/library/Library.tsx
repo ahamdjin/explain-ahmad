@@ -494,7 +494,9 @@ export default function Library() {
 
       <Bay name="THE EXPERIMENT — where a rate comes from" note="A percentage here is not something o1 is. It is the same scenario run many times and counted. Until that is on screen, 2% reads as a property of the model.">
         <div className="lib-row">
-          <Runs total={100} scheming={2} denied={2} shown={flip ? 40 : 100} feel={F} />
+          <div style={{ width: '24cqw' }}>
+            <Runs total={100} scheming={2} denied={2} shown={flip ? 40 : 100} feel={F} />
+          </div>
           <NudgeCompare nudged={0.05} plain={0.008} total={100} feel={F} />
           <Tail mark={!flip} feel={F} />
         </div>
