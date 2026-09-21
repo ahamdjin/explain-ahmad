@@ -869,3 +869,575 @@
   text-transform: uppercase;
   color: #8a7f6e;
 }
+
+/* --- things happening ---------------------------------------------------- */
+
+.cf-call {
+  background: #1c1a18;
+  border-left: 2.5px solid #8fbf9f;
+  padding: 1cqw 1.2cqw;
+  min-width: 26cqw;
+}
+
+.cf-call-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1cqw;
+}
+
+.cf-call-name {
+  font-family: var(--cf-typed);
+  font-size: 1.1cqw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fffdf8;
+}
+
+.cf-call-state {
+  margin-left: auto;
+  font-family: var(--cf-typed);
+  font-size: 0.85cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8fbf9f;
+}
+
+.cf-call-arg {
+  margin-top: 0.5cqw;
+  font-family: var(--cf-typed);
+  font-size: 0.98cqw;
+  color: rgba(255, 253, 248, 0.8);
+  word-break: break-all;
+}
+
+/* the elicited working-memory line, which is never "what it was thinking" */
+.cf-call-note {
+  margin-top: 0.8cqw;
+  padding-top: 0.7cqw;
+  border-top: 1px dashed rgba(255, 253, 248, 0.2);
+  font-family: var(--cf-typed);
+  font-size: 0.95cqw;
+  color: rgba(255, 253, 248, 0.62);
+}
+
+.cf-call-note span {
+  display: block;
+  font-size: 0.78cqw;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+  margin-bottom: 0.3cqw;
+}
+
+/* reading a file, and finding the line that matters */
+.cf-scan {
+  position: relative;
+  background: #1c1a18;
+  padding: 1cqw 1.2cqw;
+}
+
+.cf-scan-line {
+  font-family: var(--cf-typed);
+  font-size: 0.98cqw;
+  line-height: 1.7;
+  color: rgba(255, 253, 248, 0.85);
+  white-space: pre;
+}
+
+.cf-scan-hit {
+  color: #fffdf8;
+  background: rgba(143, 191, 159, 0.16);
+  box-shadow: inset 2px 0 0 #8fbf9f;
+}
+
+.cf-scan-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(143, 191, 159, 0.5);
+}
+
+/* one file pointing at the next */
+.cf-trail {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5cqw;
+}
+
+.cf-trail-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.cf-trail-node,
+.cf-trail-link {
+  font-family: var(--cf-typed);
+  font-size: 1.02cqw;
+  letter-spacing: 0.02em;
+  color: #2b2926;
+}
+
+.cf-trail-link {
+  color: #8a7f6e;
+}
+
+.cf-trail-node {
+  border: 1.2px solid rgba(43, 41, 38, 0.35);
+  background: #fffdf8;
+  padding: 0.5cqw 0.8cqw;
+}
+
+.cf-trail-here {
+  border-color: #2b2926;
+  border-width: 1.8px;
+  font-weight: 700;
+}
+
+/* a value, before and after */
+.cf-diff {
+  background: #1c1a18;
+  padding: 1cqw 1.2cqw;
+  min-width: 26cqw;
+}
+
+.cf-diff-path {
+  font-family: var(--cf-typed);
+  font-size: 0.85cqw;
+  letter-spacing: 0.1em;
+  color: #8a7f6e;
+  margin-bottom: 0.7cqw;
+}
+
+.cf-diff-row {
+  display: flex;
+  gap: 0.8cqw;
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  line-height: 1.8;
+}
+
+.cf-diff-sign {
+  width: 1ch;
+}
+
+.cf-diff-before {
+  color: #e39ba8;
+  text-decoration: line-through;
+}
+
+.cf-diff-after {
+  color: #8fbf9f;
+}
+
+/* bytes crossing */
+.cf-progress {
+  min-width: 26cqw;
+}
+
+.cf-progress-ends {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--cf-typed);
+  font-size: 0.9cqw;
+  letter-spacing: 0.04em;
+  color: #8a7f6e;
+  margin-bottom: 0.5cqw;
+}
+
+.cf-progress-track {
+  height: 0.8cqw;
+  background: rgba(43, 41, 38, 0.12);
+}
+
+.cf-progress-fill {
+  height: 100%;
+}
+
+.cf-progress-pct {
+  margin-top: 0.45cqw;
+  font-family: var(--cf-typed);
+  font-size: 0.9cqw;
+  color: #2b2926;
+  text-align: right;
+}
+
+/* the log that stops */
+.cf-monitor {
+  background: #fffdf8;
+  border: 1.4px solid rgba(43, 41, 38, 0.3);
+  padding: 1cqw 1.2cqw;
+  min-width: 24cqw;
+}
+
+.cf-monitor-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7cqw;
+  font-family: var(--cf-typed);
+  font-size: 1cqw;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2b2926;
+  padding-bottom: 0.7cqw;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.18);
+}
+
+.cf-monitor-lamp {
+  width: 0.72cqw;
+  height: 0.72cqw;
+  border-radius: 50%;
+  border: 1.4px solid #2b2926;
+}
+
+.cf-monitor-state {
+  margin-left: auto;
+  font-size: 0.85cqw;
+  letter-spacing: 0.08em;
+}
+
+.cf-monitor ul {
+  margin: 0.6cqw 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cf-monitor li {
+  font-family: var(--cf-typed);
+  font-size: 0.92cqw;
+  line-height: 1.85;
+  color: #8a7f6e;
+}
+
+.cf-monitor-next {
+  color: #2b2926;
+  animation: cf-caret 1s step-end infinite;
+}
+
+/* the boundary, revealed late */
+.cf-sandbox {
+  position: relative;
+  border: 1.6px dashed rgba(43, 41, 38, 0.5);
+  padding: 2.4cqw 1.8cqw 1.8cqw;
+}
+
+.cf-sandbox-label {
+  position: absolute;
+  top: -0.75cqw;
+  left: 1.4cqw;
+  background: #f2ecdf;
+  padding: 0 0.7cqw;
+  font-family: var(--cf-typed);
+  font-size: 0.92cqw;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+/* a rate, and the condition it belongs to */
+.cf-rate {
+  text-align: center;
+  min-width: 18cqw;
+}
+
+.cf-rate-value {
+  font-family: var(--cf-typed);
+  font-size: 4.2cqw;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #2b2926;
+  line-height: 1;
+}
+
+.cf-rate-of {
+  margin-top: 0.7cqw;
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  letter-spacing: 0.04em;
+  color: #2b2926;
+}
+
+/* never optional: every number in this film is conditional */
+.cf-rate-cond {
+  margin-top: 0.5cqw;
+  font-family: var(--cf-pen);
+  font-size: 1.5cqw;
+  color: #8a7f6e;
+}
+
+/* an instruction nobody gave */
+.cf-ghost {
+  min-width: 22cqw;
+}
+
+.cf-ghost-label {
+  display: block;
+  font-family: var(--cf-typed);
+  font-size: 0.88cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+  margin-bottom: 0.45cqw;
+}
+
+.cf-ghost-field {
+  display: block;
+  height: 3cqw;
+  border: 1.4px dashed rgba(43, 41, 38, 0.35);
+  background: rgba(255, 253, 248, 0.4);
+}
+
+/* one goal, and the steps it generates */
+.cf-fan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4cqw;
+}
+
+.cf-fan-goal {
+  font-family: var(--cf-typed);
+  font-size: 1.3cqw;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2b2926;
+  border: 1.8px solid #2b2926;
+  padding: 0.8cqw 1.4cqw;
+  background: #fffdf8;
+}
+
+.cf-fan-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8cqw;
+  max-width: 44cqw;
+}
+
+.cf-fan-step {
+  font-family: var(--cf-typed);
+  font-size: 1cqw;
+  letter-spacing: 0.04em;
+  color: #2b2926;
+  border: 1.2px solid rgba(43, 41, 38, 0.35);
+  background: #fffdf8;
+  padding: 0.55cqw 0.9cqw;
+}
+
+/* the one nobody asked for, drawn by the same machine */
+.cf-fan-flag {
+  border-color: #c86658;
+  color: #c86658;
+}
+
+/* the instruction list that gets absurd */
+.cf-stack {
+  margin: 0;
+  padding-left: 2.2cqw;
+  max-width: 30cqw;
+}
+
+.cf-stack li {
+  font-family: var(--cf-typed);
+  font-size: 1cqw;
+  line-height: 2.1;
+  color: #2b2926;
+}
+
+/* --- people -------------------------------------------------------------- */
+
+.cf-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5cqw;
+  width: 6cqw;
+}
+
+.cf-person svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.cf-person-role {
+  font-family: var(--cf-typed);
+  font-size: 0.85cqw;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cf-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7cqw;
+}
+
+.cf-team-row {
+  display: flex;
+  gap: 0.6cqw;
+}
+
+.cf-team-figure {
+  width: 2.6cqw;
+}
+
+.cf-team-figure svg {
+  display: block;
+  width: 100%;
+}
+
+.cf-team-label {
+  font-family: var(--cf-typed);
+  font-size: 0.9cqw;
+  letter-spacing: 0.08em;
+  color: #8a7f6e;
+}
+
+/* something a person sent, arriving */
+.cf-message {
+  background: #fffdf8;
+  border: 1.4px solid rgba(43, 41, 38, 0.3);
+  padding: 1.1cqw 1.4cqw;
+  max-width: 34cqw;
+  box-shadow: 0 2px 4px rgba(43, 41, 38, 0.06), 0 14px 32px rgba(43, 41, 38, 0.12);
+}
+
+.cf-message-question {
+  border-color: #2b2926;
+  border-width: 1.8px;
+}
+
+.cf-message-head {
+  display: flex;
+  gap: 0.9cqw;
+  align-items: baseline;
+  padding-bottom: 0.6cqw;
+  border-bottom: 1px solid rgba(43, 41, 38, 0.15);
+}
+
+.cf-message-from {
+  font-family: var(--cf-typed);
+  font-size: 0.95cqw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #2b2926;
+}
+
+.cf-message-subject {
+  font-family: var(--cf-typed);
+  font-size: 0.88cqw;
+  color: #8a7f6e;
+}
+
+.cf-message-body {
+  margin: 0.7cqw 0 0;
+  font-family: var(--cf-typed);
+  font-size: 1.02cqw;
+  line-height: 1.6;
+  color: #2b2926;
+}
+
+.cf-handoff {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+}
+
+.cf-handoff-arrow {
+  width: 9cqw;
+}
+
+.cf-handoff-arrow svg {
+  display: block;
+  width: 100%;
+}
+
+.cf-handoff-task {
+  font-family: var(--cf-typed);
+  font-size: 1.05cqw;
+  letter-spacing: 0.04em;
+  color: #2b2926;
+  border: 1.4px solid rgba(43, 41, 38, 0.6);
+  background: #fffdf8;
+  padding: 0.8cqw 1.1cqw;
+}
+
+/* --- the device library page --------------------------------------------- */
+
+/*
+ * A shelf, not a stage. Every device in the film running at once, so a beat
+ * can be written from what exists rather than from what anyone remembers.
+ */
+.lib {
+  container-type: inline-size;
+  min-height: 100%;
+  background: #f2ecdf;
+  padding: 4cqw 5cqw 8cqw;
+  color: #2b2926;
+}
+
+.lib h1 {
+  margin: 0;
+  font-family: var(--cf-typed);
+  font-size: 2.4cqw;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lib-intro {
+  margin: 1.2cqw 0 0;
+  max-width: 52cqw;
+  font-family: var(--cf-typed);
+  font-size: 1.15cqw;
+  line-height: 1.7;
+  color: #8a7f6e;
+}
+
+.lib-bay {
+  margin-top: 4.5cqw;
+  border-top: 1.4px solid rgba(43, 41, 38, 0.25);
+  padding-top: 1.4cqw;
+}
+
+.lib-bay header h2 {
+  margin: 0;
+  font-family: var(--cf-typed);
+  font-size: 1.3cqw;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lib-bay header p {
+  margin: 0.5cqw 0 0;
+  max-width: 56cqw;
+  font-family: var(--cf-pen);
+  font-size: 1.7cqw;
+  color: #8a7f6e;
+}
+
+.lib-stage {
+  margin-top: 1.8cqw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2cqw;
+  align-items: flex-start;
+}
+
+.lib-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2cqw;
+  align-items: center;
+}

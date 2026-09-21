@@ -17,3 +17,5 @@ export { Evidence, SHOT, P1, P2, P3, DENIAL, DEMO, type Region, type Source } fr
 export { Watcher, Box, Copy, Step, Job, Credit, Quote, Tag, Goal, Barrier, Reconstruction } from './Extract'
 export { PullQuote, Terminal, Spec, MarginNote, Calendar } from './Devices'
 export { Screen, Tree, Shell, Stream, Cursor } from './Machine'
+export { ToolCall, Scan, Trail, Diff, Progress, Monitor, Sandbox, Rate, Ghost, Fan, Stack } from './Acts'
+export { Person, Team, Message, Handoff } from './People'
