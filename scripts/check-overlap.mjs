@@ -190,13 +190,26 @@ function collect({ threshold, minSide }) {
    *
    * Any scrolling or masked surface has the same shape, so this is a class of
    * false positive rather than one case.
+   *
+   * Two ancestors must be left out of it, or this silently measures nothing:
+   *
+   * - **`body` and `html`.** This app positions everything fixed or absolute,
+   *   so `body` lays out at zero height while computing `overflow: hidden`.
+   *   Intersecting with it collapsed every rect to nothing, every actor
+   *   became invisible to the checker, and `check:overlap` reported all 107
+   *   beats of Video 2 and all 173 of Video 1 clean while measuring not one
+   *   pixel. A green run that inspected nothing is worse than a red one.
+   *
+   * - **Any ancestor with a zero-area rect**, for the same reason: a box with
+   *   no layout height is not clipping anything, whatever its overflow says.
    */
   const clipped = (node) => {
     let r = node.getBoundingClientRect()
-    for (let p = node.parentElement; p; p = p.parentElement) {
+    for (let p = node.parentElement; p && p !== document.body; p = p.parentElement) {
       const o = getComputedStyle(p)
       if (o.overflowX === 'visible' && o.overflowY === 'visible') continue
       const c = p.getBoundingClientRect()
+      if (c.width === 0 || c.height === 0) continue
       const left = Math.max(r.left, c.left)
       const top = Math.max(r.top, c.top)
       const right = Math.min(r.right, c.right)
