@@ -160,6 +160,48 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −4 — examples, with nothing to read
+
+`Satnav` · `Keys` · `ShopCamera` · `ClosedDoor` · `Copier` · `FilmSet` ·
+`SmokeAlarm` · `Dial` · `Maze` · `Desk` · `Recipe`
+
+**Ahmad, 2026-09-21: "I want all the text to be spoken, and visuals on the
+screen."** That is not a preference — it is the best-supported finding in
+multimedia learning.
+
+Mayer's **redundancy principle**: a graphic with narration beats the same
+graphic with narration *and* the same words on screen. A viewer processes one
+visual channel at a time; while they are reading a caption they are not looking
+at the drawing, and the caption is repeating what the voice just said. The
+nuance worth keeping is that a few **keywords** anchored to a drawing can help.
+Sentences never do.
+
+So nothing in this layer holds a sentence, and most hold no words at all.
+
+The rest of the library draws *this incident*. These draw the **everyday thing
+it is like**, because an abstraction lands when it arrives attached to
+something the viewer already owns — and a cut to a completely different world
+is the cheapest pace change an explainer has.
+
+| picture | what it carries |
+| --- | --- |
+| `Satnav` | you type a destination, it picks the roads. Nobody thinks the car wanted to turn left. |
+| `Keys` | three different destinations, one thing all of them need. Instrumental convergence, wordless. |
+| `ShopCamera` | a light on, then off. `oversight_enabled: false` needs no translation. |
+| `ClosedDoor` | light under it. You see what comes out; you never see the room. |
+| `Copier` | a copy lands on the original — and carries the detail people miss: **the original is fine.** |
+| `FilmSet` | a street, then the scaffolding behind it. The sandbox, without accusing anyone of faking. |
+| `SmokeAlarm` | almost never goes off; nobody argues for removing it. Stops §7 reading as a retraction. |
+| `Dial` | reaches 200, almost never gets there. *Can* and *how often*, in one object. |
+| `Maze` | the failed attempts are still on the paper. That is what "invented the road" means. |
+| `Desk` | what is on it is what you are working from — and somebody laid each sheet out. |
+| `Recipe` | the dish, with the steps torn off. |
+
+Each is honest about its limits: an analogy that has to be corrected later
+costs more than it bought, so none of these implies intent, feeling or agency.
+
+---
+
 ## Layer −3 — grip
 
 `Slam` · `Chain` · `Countdown` · `Punch` · `SnapCircle` · `Stamp` · `Flip` ·

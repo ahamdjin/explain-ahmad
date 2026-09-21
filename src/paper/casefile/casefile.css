@@ -2697,3 +2697,29 @@
 
 .cf-impact { position: absolute; transform: translate(-50%, -50%); pointer-events: none; z-index: 9; }
 .cf-impact svg { display: block; width: 100%; overflow: visible; }
+
+/* --- vignettes ------------------------------------------------------------ */
+
+/*
+ * Everyday examples, told in pictures, with nothing to read.
+ *
+ * Mayer's redundancy principle: a graphic with narration beats the same
+ * graphic with narration AND the same words on screen. A viewer processes one
+ * visual channel at a time -- while they read a caption they are not looking
+ * at the drawing, and the caption repeats what the voice just said. So none of
+ * these carries a sentence, and most carry no words at all.
+ */
+.cf-vig { display: block; }
+.cf-vig svg { display: block; width: 100%; overflow: visible; }
+
+.cf-vig-satnav { width: 22cqw; }
+.cf-vig-keys { width: 22cqw; }
+.cf-vig-cam { width: 17cqw; }
+.cf-vig-door { width: 11cqw; }
+.cf-vig-copier { width: 20cqw; }
+.cf-vig-set { width: 22cqw; }
+.cf-vig-alarm { width: 15cqw; }
+.cf-vig-dial { width: 15cqw; }
+.cf-vig-maze { width: 16cqw; }
+.cf-vig-desk { width: 22cqw; }
+.cf-vig-recipe { width: 13cqw; }

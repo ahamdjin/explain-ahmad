@@ -42,3 +42,4 @@ export { ContextWindow, AgentLoop, BlackBox, Gate, Counterfactual, SearchTree, B
 export { PenMark, Spotlight, DepthStack, Wipe, PushIn } from './Craft'
 export { Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst } from './Grip'
 export { Ramp, Whip, Jolt, Streak, Roll, Meter, Ring, Beat, Kinetic, TickList, Sweep, Split, Drop, Impact } from './Pace'
+export { Satnav, Keys, ShopCamera, ClosedDoor, Copier, FilmSet, SmokeAlarm, Dial, Maze, Desk, Recipe } from './Vignettes'

@@ -61,6 +61,7 @@ import {
   PenMark, Spotlight, DepthStack, Wipe, PushIn,
   Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst,
   Ramp, Whip, Jolt, Streak, Roll, Meter, Ring, Beat, Kinetic, TickList, Sweep, Split, Drop, Impact,
+  Satnav, Keys, ShopCamera, ClosedDoor, Copier, FilmSet, SmokeAlarm, Dial, Maze, Desk, Recipe,
 } from '../../../../paper/casefile'
 
 /**
@@ -151,6 +152,32 @@ export default function Library() {
             </Punch>
           </div>
           <Flip on={!flip} a={<Tag text="true" />} b={<Tag text="false" blocking />} />
+        </div>
+      </Bay>
+
+      <Bay name="EXAMPLES — nothing to read" note="Mayer's redundancy principle: a graphic with narration beats the same graphic with narration AND the same words on screen. These carry no sentences at all.">
+        <div className="lib-row">
+          <Satnav at={wave} reroute={!flip} feel={F} />
+          <Keys shown={1 + Math.floor(wave * 3)} feel={F} />
+          <Maze at={wave} feel={F} />
+          <Recipe stepsShown={Math.floor(wave * 4)} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="EXAMPLES — watched, hidden, copied" note="A shop camera. A closed door with light under it. A copy landing on the original — which also carries the detail people miss: the original is fine.">
+        <div className="lib-row">
+          <ShopCamera on={flip} feel={F} />
+          <ClosedDoor feel={F} />
+          <Copier at={wave} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="EXAMPLES — rare, possible, built" note="A smoke alarm nobody wants removed. A dial that reaches 200 and almost never does. A street that turns out to be a facade.">
+        <div className="lib-row">
+          <SmokeAlarm sounding={!flip} feel={F} />
+          <Dial value={flip ? 0.05 : 0.9} feel={F} />
+          <FilmSet revealed={!flip} feel={F} />
+          <Desk sheets={1 + Math.floor(wave * 4)} planted={2} feel={F} />
         </div>
       </Bay>
 
