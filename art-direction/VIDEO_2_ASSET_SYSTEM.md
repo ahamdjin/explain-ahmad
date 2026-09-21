@@ -27,7 +27,29 @@ and the film reads as noise however good each piece is. Collapsed to a small
 set of objects with states, the viewer learns a shape once and every later use
 of it is free.
 
-**The list becomes 9 real sources, ~50 named regions, and 41 components.**
+**The list becomes 9 real sources, ~50 named regions, and 106 components.**
+
+### Where the first pass got this wrong
+
+The first version of this file made the collapse argument and then built 41
+components, which was too few and leaned on the argument as an excuse. Ahmad
+was right to push back. Several categories dismissed as "states" or "beat
+moves" are genuinely distinct things and are now built:
+
+- **transitions** — the *timing* of a rewind belongs to a beat, but the
+  *shape* of one should be written once. Hand-rolled in nine sections, it is
+  nine slightly different rewinds.
+- **chrome** — url bar, page number, timestamp, lower third, exhibit tag. Small,
+  and each does a job nothing else does.
+- **the rack** — wide and close are not one drawing at two scales. A viewer
+  cannot tell *here are two machines* from *here is the file landing* if both
+  are the same picture.
+- **the interview** — ask / pause / answer is three pieces, and §6 does not
+  work without the pause.
+- **the memo** — header, body, and the brace saying it was in the same file.
+
+The collapse argument still holds where it holds: `monitoring ON/OFF` is one
+boolean. It is not a licence to build less than the film needs.
 
 ### Congestion is a beat problem, not a library problem
 

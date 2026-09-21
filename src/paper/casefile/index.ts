@@ -20,3 +20,19 @@ export { Screen, Tree, Shell, Stream, Cursor } from './Machine'
 export { ToolCall, Scan, Trail, Diff, Progress, Monitor, Sandbox, Rate, Ghost, Fan, Stack } from './Acts'
 export { Person, Team, Message, Handoff } from './People'
 export { Lens, Route, HeroNumber, Versus, Claim, FileObject, Badge, FaceCam, Receipt, type Leg } from './Frames'
+export {
+  Rewind, Pullback, HardCut, Morph, Snapback, PageTurn, Waypoint, BlackFrame, Loading,
+  UrlBar, PageNumber, Timestamp, LowerThird, Attribution, ExhibitTag, Sleeve, Sheet, Veil, Pointer,
+} from './Moves'
+export {
+  Rack, RackCloseup, NetworkPath, Packet, Endpoint, Schedule, Cutover, Slot as DiskSlot, SlotCompare,
+} from './Infra'
+export {
+  EmailHeader, EmailBody, EmailInFile, SameFile,
+  Question, Typing, Answer, FollowUp, Elicited, Exchange,
+} from './Talk'
+export {
+  Boundary, Outside, NotThis, Rig, ScenarioGrid, Nudge,
+  FinalGoal, Tools, Convergence, TermLabel,
+  MicroList, Collapse, NotGiven, Destination, Road, Gap,
+} from './Payoff'
