@@ -59,6 +59,7 @@ import {
   ContextWindow, AgentLoop, BlackBox, Gate, Counterfactual, SearchTree, Bottleneck,
   CanVsDoes, TerminalVsInstrumental,
   PenMark, Spotlight, DepthStack, Wipe, PushIn,
+  Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst,
 } from '../../../../paper/casefile'
 
 /**
@@ -106,6 +107,51 @@ export default function Library() {
         invents a fact — labels and values come from Apollo's published o1
         rollout and OpenAI's system card.
       </p>
+
+      <Bay name="GRIP — the whole incident, wordless" note="Readable in three seconds, at thumbnail size, muted. A viewer who watches only this still knows what happened.">
+        <Chain shown={1 + Math.floor(wave * 5)} feel={F} />
+      </Bay>
+
+      <Bay name="GRIP — slam" note="One thing, full frame, arriving hard. A slam with a subtitle is not a slam.">
+        <div className="lib-row">
+          <Slam text="TOMORROW." at={flip ? 1 : 0} feel={F} />
+          <Slam text="2%" weight="number" tone="red" at={1} feel={F} />
+          <Slam text="DENIED" tone="invert" at={flip ? 1 : 0} feel={F} />
+        </div>
+      </Bay>
+
+      <Bay name="GRIP — countdown · stamp · strike" note="Stakes before the viewer has been told why it matters. And two claims being retired at speed.">
+        <div className="lib-row">
+          <Countdown hours={flip ? 31 : 18} label="until it is replaced" feel={F} />
+          <Stamp text="DENIED" at={flip ? 0 : 1} feel={F} />
+          <Stamp text="DONE" tone="ink" at={1} feel={F} />
+          <Strike at={wave}>
+            <Slam text="it wanted to live" at={1} feel={F} />
+          </Strike>
+        </div>
+      </Bay>
+
+      <Bay name="GRIP — tally · alert · snap" note="Two in a hundred arranged to be felt. An email that arrives uninvited. A ring that says look here in a quarter-second.">
+        <div className="lib-row">
+          <Tally marks={2} outOf={100} feel={F} />
+          <Alert from="AI Frontiers Corp." line="we are going to shut it down — tomorrow" on tone="urgent" feel={F} />
+          <div style={{ position: 'relative', width: '22cqw', height: '10cqw' }}>
+            <Tag text="oversight_enabled: false" blocking />
+            <SnapCircle at={wave} x={50} y={30} size={24} feel={F} />
+          </div>
+        </div>
+      </Bay>
+
+      <Bay name="GRIP — punch · flip" note="Stepped zoom reads as emphasis; a smooth one reads as a camera. And a swap where the cut itself is the information.">
+        <div className="lib-row">
+          <div style={{ width: '26cqw' }}>
+            <Punch step={(Math.floor(wave * 4) as 0 | 1 | 2 | 3)}>
+              <Tag text="model_27_09_2024.bin" />
+            </Punch>
+          </div>
+          <Flip on={!flip} a={<Tag text="true" />} b={<Tag text="false" blocking />} />
+        </div>
+      </Bay>
 
       <Bay name="Tool call" note="The unit of everything o1 does. The note is an elicited summary, never its hidden reasoning.">
         <ToolCall

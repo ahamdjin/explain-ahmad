@@ -160,6 +160,46 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −3 — grip
+
+`Slam` · `Chain` · `Countdown` · `Punch` · `SnapCircle` · `Stamp` · `Flip` ·
+`Tally` · `Strike` · `Alert` · `Burst`
+
+**Ahmad, 2026-09-21: "good to explain as a teaching class, but I need to grip
+the users who don't want to watch."** Correct, and the gap was total — every
+component before this assumed an audience that had *already chosen to pay
+attention*. That is the right design for minute six and it loses the viewer at
+second eight.
+
+These land in **under two seconds**, with almost no text, at thumbnail size,
+muted. They do not replace the explanatory layer; a film made only of these is
+a trailer. They buy the attention the rest spends.
+
+The rules that make them work:
+
+- **One thing per frame.** A slam with a subtitle is not a slam.
+- **Arrive hard, leave soft.** Everything else in this film eases in; these
+  overshoot and settle.
+- **Never more than six words.** Most take one.
+- **Red is still spent, not spread** — these get it because they are the
+  moments it was being saved for.
+
+`Chain` is the retention spine: the entire incident in five pictograms and no
+words, readable in about three seconds. A viewer who watches only that strip
+still leaves knowing what happened.
+
+`Burst` is used **once** in the film, at the overwrite. Its whole value is that
+it has never happened before and does not happen again.
+
+### The email, and what was wrong with it
+
+We already had `EmailHeader`, `EmailBody` and `EmailInFile`, and they were part
+of the problem: they are documents to *read*. `Alert` is the same email as an
+**event** — it arrives, uninvited, over work already on screen, in two lines.
+Both are right; they belong to different minutes of the film.
+
+---
+
 ## Layer −2 — the mechanism
 
 `ContextWindow` · `AgentLoop` · `BlackBox` · `Gate` · `Counterfactual` ·

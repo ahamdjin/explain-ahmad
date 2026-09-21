@@ -40,3 +40,4 @@ export { SystemMap, ConditionalTree, DotField, Bars, TimeAxis, RefGraph, Icon } 
 export { ModelToken, Desktop, Folder, Bin, Flight, OSWindow, DocRow, PageTilt, Avatar, TitleCard, type Identity } from './Desktop'
 export { ContextWindow, AgentLoop, BlackBox, Gate, Counterfactual, SearchTree, Bottleneck, CanVsDoes, TerminalVsInstrumental } from './Explain'
 export { PenMark, Spotlight, DepthStack, Wipe, PushIn } from './Craft'
+export { Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst } from './Grip'

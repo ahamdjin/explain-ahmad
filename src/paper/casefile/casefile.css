@@ -2513,3 +2513,92 @@
 }
 
 .cf-push { overflow: hidden; }
+
+/* --- grip ----------------------------------------------------------------- */
+
+/*
+ * For the viewer who has not decided to watch yet. Everything else in this
+ * stylesheet rewards reading; these have to land in under two seconds, with
+ * almost no text, at thumbnail size, muted.
+ */
+.cf-slam {
+  font-family: var(--cf-typed);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #2b2926;
+}
+.cf-slam-word { font-size: 7cqw; letter-spacing: -0.01em; }
+.cf-slam-number { font-size: 11cqw; }
+.cf-slam-red { color: #c86658; }
+.cf-slam-invert { background: #16150f; color: #fffdf8; padding: 1.4cqw 2.4cqw; }
+
+/* the whole incident, wordless */
+.cf-chain { display: flex; align-items: center; gap: 1.8cqw; }
+.cf-chain-cell { width: 5.6cqw; display: block; }
+.cf-chain-cell svg { display: block; width: 100%; }
+
+.cf-countdown { display: inline-flex; flex-direction: column; align-items: center; gap: 0.3cqw; }
+.cf-countdown-value {
+  font-family: var(--cf-typed); font-size: 8cqw; font-weight: 700;
+  line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+}
+.cf-countdown-value em { font-style: normal; font-size: 0.42em; letter-spacing: 0; }
+.cf-countdown-label {
+  font-family: var(--cf-typed); font-size: 0.85cqw; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #8a7f6e;
+}
+
+.cf-punch { overflow: hidden; }
+
+/* the freeze-and-circle: look here, in a quarter of a second */
+.cf-snap { position: absolute; transform: translate(-50%, -50%); pointer-events: none; z-index: 8; }
+.cf-snap svg { display: block; width: 100%; overflow: visible; }
+
+.cf-stamp {
+  display: inline-block;
+  font-family: var(--cf-typed); font-size: 3.4cqw; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border: 4px solid currentColor; padding: 0.6cqw 1.6cqw;
+  color: #2b2926;
+}
+.cf-stamp-red { color: #c86658; }
+
+.cf-flip { display: inline-block; }
+
+/* two in a hundred, arranged to be felt rather than read */
+.cf-tally {
+  display: grid; grid-template-columns: repeat(20, 1fr); gap: 0.32cqw;
+  width: 26cqw;
+}
+.cf-tally i { aspect-ratio: 1; border-radius: 50%; display: block; }
+
+.cf-strike { position: relative; display: inline-block; }
+.cf-strike-line {
+  position: absolute; left: -2%; right: -2%; top: 52%; height: 4px;
+  background: #c86658; transform-origin: left center; display: block;
+}
+
+/* an alert is an event, not a panel -- two lines maximum */
+.cf-alert {
+  display: flex; flex-direction: column; gap: 0.2cqw;
+  background: #fffdf8; border-left: 4px solid #2b2926;
+  padding: 0.9cqw 1.3cqw; max-width: 26cqw;
+  box-shadow: 0 2px 5px rgba(43,41,38,0.1), 0 18px 40px rgba(43,41,38,0.16);
+}
+.cf-alert-urgent { border-left-color: #c86658; }
+.cf-alert-from {
+  font-family: var(--cf-typed); font-size: 0.72cqw; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #8a7f6e;
+}
+.cf-alert-line {
+  font-family: var(--cf-typed); font-size: 1.05cqw; font-weight: 700;
+  line-height: 1.35; color: #2b2926;
+}
+
+/* one flash, once in the film, at the overwrite */
+.cf-burst {
+  position: absolute; inset: 0; background: #c86658; mix-blend-mode: multiply;
+  pointer-events: none;
+}
