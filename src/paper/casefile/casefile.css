@@ -2602,3 +2602,98 @@
   position: absolute; inset: 0; background: #c86658; mix-blend-mode: multiply;
   pointer-events: none;
 }
+
+/* --- pace ----------------------------------------------------------------- */
+
+/*
+ * Pace is not speed. A film can cut every second and still feel slow, because
+ * what creates pace is variation -- a hard stop after a rush, a held frame
+ * after a jolt. Everything here gives a beat a different shape to its
+ * neighbour.
+ */
+.cf-ramp {
+  position: relative; width: 30cqw;
+  height: calc(var(--cf-rows) * 1.7cqw); overflow: hidden;
+  background: #fffdf8; border: 1.3px solid rgba(43,41,38,0.25); padding: 0.6cqw 1cqw;
+}
+.cf-ramp-line {
+  font-family: var(--cf-typed); font-size: 0.95cqw; line-height: 1.7cqw;
+  color: #2b2926; white-space: pre;
+}
+/* the line the rush stops on */
+.cf-ramp-mark {
+  position: absolute; left: 0; right: 0; top: 50%; height: 1.7cqw;
+  transform: translateY(-50%); border-top: 1px solid rgba(200,102,88,0.5);
+  border-bottom: 1px solid rgba(200,102,88,0.5); pointer-events: none;
+}
+
+.cf-whip, .cf-jolt, .cf-drop { display: block; }
+
+.cf-streak { position: relative; width: 100%; height: 8cqw; }
+.cf-streak-ghost, .cf-streak-lead { position: absolute; transform: translate(-50%, -50%); }
+
+/* digits that arrive rather than appear */
+.cf-roll { display: inline-flex; gap: 0.1cqw; }
+.cf-roll-slot {
+  height: 1em; overflow: hidden; display: inline-block; line-height: 1;
+}
+.cf-roll-strip { display: flex; flex-direction: column; }
+.cf-roll-strip i { font-style: normal; height: 1em; line-height: 1; font-variant-numeric: tabular-nums; }
+
+/* a value thrown rather than measured */
+.cf-meter { width: 26cqw; height: 1.6cqw; background: rgba(43,41,38,0.1); overflow: hidden; }
+.cf-meter-fill { display: block; height: 100%; background: #2b2926; }
+.cf-meter-red { background: #c86658; }
+
+.cf-ring { display: inline-block; }
+.cf-ring svg { display: block; width: 100%; }
+
+/* punctuation between sequences: one frame, two to four words */
+.cf-beatcard {
+  font-family: var(--cf-typed); font-size: 3cqw; font-weight: 700;
+  letter-spacing: 0.04em; text-align: center; padding: 2.2cqw 3cqw; color: #2b2926;
+}
+.cf-beatcard-invert { background: #16150f; color: #fffdf8; }
+
+/* a sentence performed rather than displayed */
+.cf-kinetic {
+  margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.6cqw;
+  max-width: 46cqw;
+}
+.cf-kin-word {
+  font-family: var(--cf-typed); font-size: 1.8cqw; font-weight: 700;
+  line-height: 1.25; color: #2b2926;
+}
+.cf-kin-big { font-size: 3.6cqw; letter-spacing: -0.02em; }
+
+.cf-ticks { list-style: none; margin: 0; padding: 0; min-width: 20cqw; }
+.cf-ticks li {
+  display: flex; align-items: baseline; gap: 0.8cqw;
+  font-family: var(--cf-typed); font-size: 1.05cqw; line-height: 2; color: #2b2926;
+}
+.cf-tick-mark { color: #2b2926; font-size: 1.1cqw; }
+.cf-ticks-crossed .cf-tick-mark { color: #c86658; }
+.cf-ticks-crossed li { text-decoration: line-through; text-decoration-color: rgba(200,102,88,0.6); }
+
+/* Apollo's yellow highlight, at speed */
+.cf-sweep { position: relative; display: inline-block; padding: 0.1cqw 0.3cqw; }
+.cf-sweep-ink {
+  position: absolute; left: 0; top: 0; bottom: 0; display: block;
+  background: rgba(233, 196, 106, 0.6);
+}
+.cf-sweep-red { background: rgba(200, 102, 88, 0.35); }
+.cf-sweep-text {
+  position: relative;
+  font-family: var(--cf-typed); font-size: 1.15cqw; font-weight: 700; color: #2b2926;
+}
+
+/* simultaneous comparison, no words */
+.cf-split { display: grid; grid-template-columns: repeat(var(--cf-panes), 1fr); gap: 1.4cqw; width: 46cqw; }
+.cf-split-pane {
+  background: #fffdf8; border: 1.3px solid rgba(43,41,38,0.25);
+  padding: 1.2cqw; display: grid; place-items: center; min-height: 9cqw;
+}
+.cf-split-mark { border-color: #c86658; border-width: 2px; }
+
+.cf-impact { position: absolute; transform: translate(-50%, -50%); pointer-events: none; z-index: 9; }
+.cf-impact svg { display: block; width: 100%; overflow: visible; }

@@ -198,6 +198,34 @@ of the problem: they are documents to *read*. `Alert` is the same email as an
 **event** — it arrives, uninvited, over work already on screen, in two lines.
 Both are right; they belong to different minutes of the film.
 
+### Pace — the second grip wave
+
+`Ramp` · `Whip` · `Jolt` · `Streak` · `Roll` · `Meter` · `Ring` · `Beat` ·
+`Kinetic` · `TickList` · `Sweep` · `Split` · `Drop` · `Impact`
+
+Grip holds the things that *land*. Pace holds the things that **move between
+them**.
+
+Pace is not speed. A film can cut every second and still feel slow, because
+what creates pace is **variation** — a hard stop after a rush, a held frame
+after a jolt, a number that arrives at a different rate than the one before it.
+Everything here exists to give a beat a different shape to its neighbour.
+
+Three earn their place on their own:
+
+- **`Sweep`** is Apollo's yellow highlight at speed, and it is the single
+  device that let them hold a still frame for **fourteen seconds** without it
+  dying. Half a second across a phrase is emphasis; slower is reading.
+- **`Kinetic`** lets a sentence be *performed* rather than displayed, with the
+  weight where a voice would put it — so a line can carry a beat with no other
+  visual at all.
+- **`Ramp`** travels a long document in half a second and slams onto one line.
+  The rush is not wasted; it is what makes the stop mean *here*, without
+  pretending the middle was read.
+
+`Jolt` and `Impact` fire once, at the overwrite, with `Burst`. A film that
+shakes twice is a film that shakes.
+
 ---
 
 ## Layer −2 — the mechanism

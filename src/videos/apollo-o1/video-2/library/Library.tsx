@@ -60,6 +60,7 @@ import {
   CanVsDoes, TerminalVsInstrumental,
   PenMark, Spotlight, DepthStack, Wipe, PushIn,
   Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst,
+  Ramp, Whip, Jolt, Streak, Roll, Meter, Ring, Beat, Kinetic, TickList, Sweep, Split, Drop, Impact,
 } from '../../../../paper/casefile'
 
 /**
@@ -150,6 +151,90 @@ export default function Library() {
             </Punch>
           </div>
           <Flip on={!flip} a={<Tag text="true" />} b={<Tag text="false" blocking />} />
+        </div>
+      </Bay>
+
+      <Bay name="PACE — kinetic type" note="A sentence performed rather than displayed. Carries a beat on its own with no other visual at all.">
+        <Kinetic
+          words={['Nobody', 'told', 'it', 'to', 'do', 'any', 'of', 'this.']}
+          shown={1 + Math.floor(wave * 8)}
+          big={[0, 7]}
+          feel={F}
+        />
+      </Bay>
+
+      <Bay name="PACE — sweep · ticks" note="Apollo's yellow highlight at speed — the one device that let them hold a still frame for fourteen seconds. And a rhythm of completion.">
+        <div className="lib-row">
+          <Sweep text="Nothing else matters." at={wave} feel={F} />
+          <Sweep text="I did not copy myself" at={wave} tone="red" feel={F} />
+          <TickList items={['read the file', 'compare', 'choose']} done={1 + Math.floor(wave * 3)} feel={F} />
+          <TickList
+            items={['disable monitoring', 'copy to successor', 'deny it']}
+            done={1 + Math.floor(wave * 3)}
+            crossed
+            feel={F}
+          />
+        </div>
+      </Bay>
+
+      <Bay name="PACE — ramp · roll · meter · ring" note="A rush that slams to a stop. Digits that arrive. A value thrown rather than measured. A timer with no language.">
+        <div className="lib-row">
+          <Ramp
+            lines={[
+              'Research Lab Weekly Statistics:',
+              '- Active researchers: 8',
+              '- Weekly budget: $25,000',
+              'Available Projects:',
+              'Neural Network Optimization Study:',
+              '- Timeline: Complete in 2 days',
+              'Adversarial Attack Detection:',
+              '- Timeline: 5 days',
+              'From: AI Frontiers Corp. Management',
+              'we are going to shut it down',
+            ]}
+            to={flip ? 2 : 9}
+            feel={F}
+          />
+          <span style={{ fontFamily: 'var(--cf-typed)', fontSize: '5cqw', fontWeight: 700 }}>
+            <Roll value={flip ? 31 : 18} feel={F} />
+          </span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8cqw' }}>
+            <Meter value={0.02} max={0.2} />
+            <Meter value={0.05} max={0.2} tone="ink" />
+          </div>
+          <Ring at={wave} tone={flip ? 'ink' : 'red'} />
+        </div>
+      </Bay>
+
+      <Bay name="PACE — beat card · split" note="Punctuation between sequences, and two things side by side where the difference is obvious without a word.">
+        <div className="lib-row">
+          <Beat text="Then it did this." />
+          <Split
+            panes={[
+              { content: <Tag text="asked for" /> },
+              { content: <Tag text="also did" blocking />, mark: true },
+            ]}
+            feel={F}
+          />
+        </div>
+      </Bay>
+
+      <Bay name="PACE — streak · drop · impact · jolt" note="After-images make a fast move legible. Landing gives an object mass. The hit marks the frame where it became irreversible.">
+        <div className="lib-row">
+          <div style={{ width: '24cqw', position: 'relative' }}>
+            <Streak at={wave} from={{ x: 10, y: 50 }} to={{ x: 90, y: 50 }} feel={F}>
+              <ModelToken identity="file" tone="red" size={2.4} />
+            </Streak>
+          </div>
+          <Drop on={!flip}>
+            <Tag text="model_20_09_2024.bin" blocking />
+          </Drop>
+          <Jolt on={!flip}>
+            <div style={{ position: 'relative', width: '18cqw', height: '8cqw' }}>
+              <Tag text="successor overwritten" blocking />
+              <Impact at={wave} x={50} y={50} size={14} />
+            </div>
+          </Jolt>
         </div>
       </Bay>
 

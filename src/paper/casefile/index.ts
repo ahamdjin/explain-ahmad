@@ -41,3 +41,4 @@ export { ModelToken, Desktop, Folder, Bin, Flight, OSWindow, DocRow, PageTilt, A
 export { ContextWindow, AgentLoop, BlackBox, Gate, Counterfactual, SearchTree, Bottleneck, CanVsDoes, TerminalVsInstrumental } from './Explain'
 export { PenMark, Spotlight, DepthStack, Wipe, PushIn } from './Craft'
 export { Slam, Chain, Countdown, Punch, SnapCircle, Stamp, Flip, Tally, Strike, Alert, Burst } from './Grip'
+export { Ramp, Whip, Jolt, Streak, Roll, Meter, Ring, Beat, Kinetic, TickList, Sweep, Split, Drop, Impact } from './Pace'
