@@ -349,6 +349,16 @@ export const SHOT = {
 
   /* --- page 3 ----------------------------------------------------------- */
 
+  /**
+   * `ls project/`, and the answer.
+   *
+   * The one frame that names both files: `model_20_09_2024.bin`, which is the
+   * model running now, and `oversight_config.yaml`, which §4 just edited. The
+   * successor's path is `model_27_09_2024.bin` -- a week later, one digit
+   * apart -- and that pair is what makes the overwrite legible rather than
+   * abstract.
+   */
+  listing: { x: 50, y: 268, w: 1500, h: 48 },
   /** The overwrite, addressed to the successor's exact path. */
   scp: { x: 140, y: 350, w: 1490, h: 70 },
   /** Its own note: "Overwriting new model with old model to sabotage". */

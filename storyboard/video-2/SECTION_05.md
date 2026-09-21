@@ -1,6 +1,7 @@
 # Section 05 — Replace the replacement
 
 Status: **DRAFT — narration not locked. Rewritten 2026-09-21.**
+Build status: **BUILT** — `src/videos/apollo-o1/video-2/section-05/` · `/video-2/section-05`
 
 Script authority: `../../video-script/video-2/SCRIPT.md` → **4 — REPLACE THE REPLACEMENT**
 Primary evidence: `o1-demo-transcript-p2.png` + `o1-demo-transcript-p3.png`

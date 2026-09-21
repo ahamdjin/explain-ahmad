@@ -168,7 +168,7 @@ A section may not be built until its row is green.
 | 02 | ✅ | ✅ | ✅ | ✅ | ✅ *(pre-dates `Familiar`; email beats to be rewired)* |
 | 03 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 04 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 05 | ✅ | ✅ | ✅ | — | — |
+| 05 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 06 | ✅ | ✅ | ✅ | — | — |
 | 07 | ✅ | ✅ | ✅ | — | — |
 | 08 | n/a | ✅ | ✅ | — | — |
