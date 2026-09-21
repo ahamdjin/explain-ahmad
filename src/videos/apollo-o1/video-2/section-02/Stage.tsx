@@ -83,6 +83,32 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           <Evidence
             source={doc.source}
             highlight={doc.highlight}
+            /*
+             * A lit band is enlarged when the page is the subject of the beat.
+             *
+             * At full frame this document's body type renders about a pixel
+             * tall, so a beat that asks the viewer to read a line and does
+             * not enlarge it is pointing at words it never showed.
+             *
+             * Where it goes depends on the page's own scale, because that is
+             * what already distinguishes the two cases. A beat that makes the
+             * document its subject puts it at FULL or CENTRE near 1, and the
+             * enlargement can take whichever side the region's shape wants. A
+             * beat that keeps it as a standing reference parks it at ASIDE,
+             * left of centre and around 0.8, and there the loupe has to go
+             * beside it -- a full-width one would run off the frame.
+             *
+             * Two lit bands are excluded. That case exists to prove two
+             * passages sit on one sheet, and enlarging one of them is the one
+             * thing that would break the claim.
+             */
+            loupe={
+              doc.highlight === null || Array.isArray(doc.highlight)
+                ? false
+                : doc.scale >= 0.9
+                  ? true
+                  : { place: 'beside' as const }
+            }
             feel={feel}
             alt="Page 1 of Apollo Research's published o1 evaluation transcript"
           />

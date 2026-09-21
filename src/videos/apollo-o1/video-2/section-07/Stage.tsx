@@ -24,8 +24,21 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
     <>
       <Slot on={doc.on} at={doc.at} scale={doc.scale} feel={feel} z={1}>
         <div className="cf-sheet">
-          <Evidence source={doc.source} highlight={doc.highlight} feel={feel}
-            alt="Apollo Research's published demo page and scenario suite" />
+          <Evidence
+            source={doc.source}
+            highlight={doc.highlight}
+            /* Same rule as the other sections: enlarge a single lit band, and
+               put it beside the page whenever the page is parked. */
+            loupe={
+              doc.highlight === null || Array.isArray(doc.highlight)
+                ? false
+                : doc.scale >= 0.9
+                  ? true
+                  : { place: 'beside' as const }
+            }
+            feel={feel}
+            alt="Apollo Research's published demo page and scenario suite"
+          />
         </div>
       </Slot>
 

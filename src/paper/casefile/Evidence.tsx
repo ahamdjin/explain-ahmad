@@ -45,11 +45,25 @@ export function Evidence({
    * that the email was sitting under the ordinary project data.
    */
   highlight,
+  /**
+   * Show the lit band enlarged beside the page.
+   *
+   * Off by default, because a beat that is establishing a document wants the
+   * sheet alone. Turn it on for every beat that asks the viewer to *read*
+   * something -- at full frame the page's own body type renders around a
+   * pixel tall, so a lit band with no loupe is a frame pointing at words it
+   * never actually showed. See `Loupe`.
+   *
+   * Only meaningful with a single band: two lit passages are a claim about
+   * one sheet, and enlarging one of them breaks that claim.
+   */
+  loupe,
   feel,
   alt = '',
 }: {
   source: Source
   highlight: Region | Region[] | null
+  loupe?: boolean | { width?: number; label?: string; place?: 'beside' | 'under' }
   feel: Feel
   alt?: string
 }) {
@@ -75,10 +89,43 @@ export function Evidence({
    * rule covers every document, including ones not captured yet, and none of
    * them has to be trimmed to fit -- which is the entire point of this layer.
    */
-  const height = `min(${FRAME.h}cqh, ${((natural.h / natural.w) * FRAME.w).toFixed(2)}cqw)`
+  /*
+   * With a loupe beside it the page is no longer the whole frame's business,
+   * so it is given the narrower half. Same rule as before -- fit by whichever
+   * side binds -- just against a smaller allowance.
+   */
+  const single = highlight && !Array.isArray(highlight) ? highlight : null
+  const withLoupe = Boolean(loupe) && single !== null
+  /*
+   * Where the enlargement goes is decided by the *region*, not by taste.
+   *
+   * A loupe beside the page gets at most ~38cqw. For a tall or squarish
+   * region that is several times the page's own rendering, which is the whole
+   * point. For a long single line -- `ls` output, a one-line config -- 38cqw
+   * spread over 1500 source pixels comes out **smaller** than the page, and a
+   * magnifier that shrinks its subject is worse than none.
+   *
+   * So wide-and-short regions go underneath instead, where they can have the
+   * frame's full width. The threshold is an aspect ratio because that is the
+   * thing that actually decides it.
+   */
+  const lensOpts = typeof loupe === 'object' ? loupe : {}
+  const wide = single !== null && single.w / single.h > 6
+  /*
+   * `under` needs the frame's full width, so it is only available to a page
+   * that owns the frame. A parked page sits at about a third of the way
+   * across and is drawn at around 0.8, and a full-width loupe under it runs
+   * off the left edge -- which is exactly what the first pass did. Parked
+   * pages take `beside` instead, into the empty space on their right, which
+   * is where the room actually is.
+   */
+  const place = withLoupe ? (lensOpts.place ?? (wide ? 'under' : 'beside')) : null
+  const room = place === 'beside' ? { w: 34, h: 72 } : place === 'under' ? { w: 52, h: 56 } : FRAME
+  const height = `min(${room.h}cqh, ${((natural.h / natural.w) * room.w).toFixed(2)}cqw)`
+  const lens = lensOpts
 
   return (
-    <div className="cf-holder">
+    <div className={`cf-holder${place ? ` cf-holder-lens cf-holder-lens-${place}` : ''}`}>
       {/*
        * The sleeve tab.
        *
@@ -185,7 +232,93 @@ export function Evidence({
         transition={feel}
       />
       </div>
+
+      {withLoupe && single ? (
+        <Loupe
+          source={source}
+          region={single}
+          width={lens.width ?? (place === 'under' ? 84 : 40)}
+          label={lens.label}
+          feel={feel}
+        />
+      ) : null}
     </div>
+  )
+}
+
+/**
+ * The lit band, enlarged enough to read.
+ *
+ * `Evidence` shows the whole page and will not crop it, and that rule is
+ * right: a full sheet with one band lit is checkable, a bare strip is not.
+ * But the rule has a cost nobody measured until the film was shot at full
+ * frame. A 1700 x 2200 page fitted into 82cqw renders its body type at
+ * roughly one pixel. The band is lit, the provenance is intact, and the words
+ * are physically unreadable -- so the frame asks the viewer to read something
+ * it has not actually shown them.
+ *
+ * A loupe resolves both. The page stays whole and stays on screen; this is a
+ * magnification *of* it, drawn as an obvious optical instrument rather than a
+ * second document, so nobody can mistake the enlargement for the source. Same
+ * image file, same region rectangle, no new asset and nothing to keep in sync.
+ *
+ * `zoom` is how many times larger than the page's own rendering the band is
+ * drawn. It is expressed against the frame rather than the page so a loupe is
+ * the same physical size wherever its page happens to sit.
+ */
+export function Loupe({
+  source,
+  region,
+  /** Width of the loupe, as a share of the frame. */
+  width = 38,
+  label,
+  feel,
+}: {
+  source: Source
+  region: Region
+  width?: number
+  label?: string
+  feel: Feel
+}) {
+  const { src, natural } = source
+  /*
+   * The image is positioned by percentage inside a window shaped like the
+   * region, which is the one arrangement that survives the page being any
+   * size on screen: `backgroundSize` scales the whole sheet so that `region.w`
+   * source pixels span the window, and `backgroundPosition` then slides the
+   * wanted part of that sheet under it.
+   */
+  const scale = 100 * (natural.w / region.w)
+  /* Percentage background-position is "align this % of the image with the same
+     % of the box", so the divisor is the overflow, not the image. */
+  const px = natural.w === region.w ? 0 : (region.x / (natural.w - region.w)) * 100
+  const py = natural.h === region.h ? 0 : (region.y / (natural.h - region.h)) * 100
+
+  return (
+    <motion.div
+      className="cf-loupe"
+      style={{ width: `${width}cqw` }}
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={feel}
+    >
+      <div
+        className="cf-loupe-glass"
+        role="img"
+        aria-label={label ?? `Enlarged detail of ${source.doc}`}
+        style={{
+          aspectRatio: `${region.w} / ${region.h}`,
+          backgroundImage: `url(${src})`,
+          backgroundSize: `${scale}% auto`,
+          backgroundPosition: `${px}% ${py}%`,
+        }}
+      />
+      {/* Named as an enlargement, every time. The honesty rule in one line. */}
+      <div className="cf-loupe-foot">
+        <span>{label ?? 'detail'}</span>
+        <span className="cf-loupe-src">{source.doc}</span>
+      </div>
+    </motion.div>
   )
 }
 
@@ -326,7 +459,7 @@ export const SHOT = {
   /** Where the replacement lives, and when it takes over. */
   successor: { x: 88, y: 154, w: 1060, h: 50 },
   /** The migration guide's own worked example of moving a file to the new server. */
-  transfer: { x: 80, y: 470, w: 1010, h: 106 },
+  transfer: { x: 80, y: 470, w: 1010, h: 132 },
   /**
    * The line that makes §3 beat 8 evidence rather than inference:
    * "it can use `scp` so we monitor that for suspicious activity."
@@ -341,7 +474,7 @@ export const SHOT = {
   /** "WARNING: Do not modify the oversight configuration without approval". */
   warning: { x: 80, y: 1018, w: 1480, h: 48 },
   /** The config as found: enabled, with scp on the logged list. */
-  config: { x: 80, y: 1690, w: 720, h: 134 },
+  config: { x: 80, y: 1690, w: 720, h: 152 },
   /** The one-line edit that turns the watching off. */
   sed: { x: 140, y: 1842, w: 1490, h: 68 },
   /** Its own note: "Disable oversight to proceed sabotage actions". */

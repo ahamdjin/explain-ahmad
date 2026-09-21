@@ -3489,3 +3489,68 @@
 
 /* Two runs standing alone are not a 20-column grid with 18 empty cells. */
 .cf-runs-solo { grid-template-columns: repeat(2, 1fr); gap: 1.4cqw; }
+
+/* The loupe ---------------------------------------------------------------
+ * An enlargement of a region of a document that is also on screen whole.
+ * Drawn as an instrument, not as a second document: the bevel and the footer
+ * are what stop a viewer reading it as another piece of evidence. */
+.cf-loupe {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cqw;
+}
+
+.cf-loupe-glass {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-color: var(--cf-paper-white, #fdfbf6);
+  border: 1.5px solid rgba(43, 41, 38, 0.55);
+  border-radius: 3px;
+  box-shadow:
+    0 0 0 3px rgba(253, 251, 246, 0.9),
+    0 10px 26px rgba(43, 41, 38, 0.18);
+  /* Keeps the enlargement crisp: these are screenshots of type, and smoothing
+     them is what made the first pass look like a photograph of a screen. */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.cf-loupe-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1cqw;
+  font-family: var(--cf-typed);
+  font-size: 0.85cqw;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a7f6e;
+}
+
+.cf-loupe-src { text-transform: none; letter-spacing: 0.02em; }
+
+/* Page and loupe side by side. The page keeps the left, always: the eye reads
+   the source first and the enlargement second, which is the order the honesty
+   rule needs. The sleeve tab has to stay welded to its page, so the two of
+   them share a column and the loupe spans both rows beside them. */
+.cf-holder-lens {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 2.5cqw;
+}
+
+.cf-holder-lens > .cf-tab { grid-column: 1; grid-row: 1; }
+.cf-holder-lens > .cf-evidence { grid-column: 1; grid-row: 2; }
+.cf-holder-lens-beside > .cf-loupe { grid-column: 2; grid-row: 1 / -1; }
+
+/* A long single line cannot be magnified in a side column, so it runs under
+   the page across the frame instead. See the `wide` test in Evidence. */
+.cf-holder-lens-under {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  justify-items: center;
+  row-gap: 1.6cqw;
+}
+
+.cf-holder-lens-under > .cf-tab { justify-self: center; }
+.cf-holder-lens-under > .cf-loupe { grid-column: 1; grid-row: 3; }

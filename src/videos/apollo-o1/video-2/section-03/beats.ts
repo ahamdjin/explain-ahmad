@@ -173,7 +173,10 @@ export const BEATS: Array<Beat<Patch>> = [
       room.off(),
       endpoint.off(),
     ],
-    stages: [{ at: 2400, commands: [cable.show({ x: RIGHT, y: 50 }, 1, { plugged: true, live: false })] }],
+    /* Low right, not mid right. The lit `scp` is now enlarged beside the page
+       and reaches across the middle of the frame; the route drawn at y:50 put
+       its first port inside that panel. */
+    stages: [{ at: 2400, commands: [cable.show({ x: RIGHT, y: 74 }, 1, { plugged: true, live: false })] }],
   },
   {
     n: 6,
