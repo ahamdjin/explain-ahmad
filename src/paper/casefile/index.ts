@@ -37,3 +37,4 @@ export {
   MicroList, Collapse, NotGiven, Destination, Road, Gap,
 } from './Payoff'
 export { SystemMap, ConditionalTree, DotField, Bars, TimeAxis, RefGraph, Icon } from './Diagrams'
+export { ModelToken, Desktop, Folder, Bin, Flight, OSWindow, DocRow, PageTilt, Avatar, TitleCard, type Identity } from './Desktop'

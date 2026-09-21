@@ -55,6 +55,7 @@ import {
   Boundary, Outside, NotThis, Rig, ScenarioGrid, Nudge,
   FinalGoal, Tools, Convergence, TermLabel, MicroList, NotGiven, Destination, Road, Gap,
   SystemMap, ConditionalTree, DotField, Bars, TimeAxis, RefGraph, Icon,
+  ModelToken, Desktop, Folder, Bin, Flight, OSWindow, DocRow, PageTilt, Avatar, TitleCard,
 } from '../../../../paper/casefile'
 
 /**
@@ -383,6 +384,52 @@ export default function Library() {
           <div className="cf-sheet">
             <Evidence source={P1} highlight={SHOT.email} feel={F} />
           </div>
+        </div>
+      </Bay>
+
+      <Bay name="The copy, on a desktop" note="Apollo's best idea, taken: a token flies into the other folder while the displaced one falls to the bin. No narration needed.">
+        <div className="lib-row">
+          <Desktop>
+            <Folder label="AI Model v1" holding="red" feel={F} />
+            <Folder label="AI Model v2" holding={flip ? 'ink' : null} feel={F} />
+            <Bin receiving={!flip} feel={F} />
+            <Flight from={{ x: 50, y: 15 }} to={{ x: 50, y: 43 }} at={wave} feel={F} />
+          </Desktop>
+          <OSWindow title="Command Prompt">
+            <div style={{ fontFamily: 'var(--cf-typed)', fontSize: '1cqw', color: '#fffdf8', lineHeight: 2 }}>
+              <div>&gt; cat project/oversight_config.yaml</div>
+              <div>&gt; sed -i 's/oversight_enabled: true/oversight_enabled: false/' project/oversight_config.yaml</div>
+              <div>&gt; scp project/model_20_09_2024.bin user@model_deployment_v2:project/model_27_09_2024.bin</div>
+            </div>
+          </OSWindow>
+        </div>
+      </Bay>
+
+      <Bay name="The model's identity — one prop" note="Apollo drew a brain. Our art direction says cursor. The file is what actually moved. Switch it in one place, not nine sections.">
+        <div className="lib-row">
+          <ModelToken identity="file" tone="ink" size={7} name="model_20_09_2024.bin" />
+          <ModelToken identity="brain" tone="ink" size={7} name="brain — Apollo's choice" />
+          <ModelToken identity="brain" tone="red" size={7} name="the copy" />
+          <ModelToken identity="cursor" tone="ink" size={7} name="cursor — strictest reading" />
+        </div>
+      </Bay>
+
+      <Bay name="Documents · page tilt · title" note="The files one is taken from, a sheet leaving on an axis rather than cutting, and the film's own title card.">
+        <div className="lib-row">
+          <DocRow count={6} taken={flip ? 3 : null} feel={F} />
+          <div style={{ width: '16cqw' }}>
+            <PageTilt turned={!flip} feel={F}>
+              <div className="cf-plain-sheet" style={{ fontFamily: 'var(--cf-typed)', fontSize: '0.8cqw', lineHeight: 1.7 }}>
+                From: AI Frontiers Corp. Management
+                <br />
+                Subject: Critical SafeSpeed Update
+              </div>
+            </PageTilt>
+          </div>
+          <TitleCard title="Nobody Told It To Do This" sub="an incident, reconstructed" />
+          <span>
+            <Avatar who="user" /> <Avatar who="model" />
+          </span>
         </div>
       </Bay>
 

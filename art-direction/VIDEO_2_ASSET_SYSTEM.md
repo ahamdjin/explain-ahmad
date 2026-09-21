@@ -160,6 +160,39 @@ of its commands. If a viewer sees a figure, it is a person.
 
 ---
 
+## Layer −1 — the desktop
+
+`ModelToken` · `Desktop` · `Folder` · `Bin` · `Flight` · `OSWindow` ·
+`DocRow` · `PageTilt` · `Avatar` · `TitleCard`
+
+Built after studying Apollo's own animation of this incident
+(`research/apollo/demo-video/ANALYSIS.md`). Their best idea, taken: two folders
+labelled *AI Model v1* and *AI Model v2*, each holding a token, a Recycle Bin
+beneath, and the copy staged as one token flying into the other folder while
+the displaced one falls toward the bin.
+
+It needs no narration. Anyone who has dragged a file understands *overwriting a
+successor* instantly, where the isometric `SystemMap` of the same event has to
+be read. The metaphor is already owned by the audience, which is the cheapest
+legibility available.
+
+### The model's identity is one prop
+
+`ModelToken` takes `identity`, and it moves the whole film:
+
+- **`file`** — `model_20_09_2024.bin`. What actually moved, what the transcript
+  names. Carries the copy without implying a mind, and sets up §7's *not real
+  weights* instead of contradicting it. **The recommendation.**
+- **`brain`** — Apollo's choice, drawn as a node-and-edge network. Instantly
+  legible; invites the exact reading §8 spends a minute undoing.
+- **`cursor`** — the strictest reading of the art direction. Argument stays
+  clean; the copy is hard to stage, because nothing visibly *is* the model.
+
+**Ahmad's call.** It is a prop rather than a rewrite so the decision costs one
+line instead of four sections.
+
+---
+
 ## Layer 0 — drawings
 
 `SystemMap` · `ConditionalTree` · `DotField` · `Bars` · `TimeAxis` ·
