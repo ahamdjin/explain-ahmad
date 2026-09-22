@@ -6,6 +6,9 @@ import { VIDEO_PATH, VIDEO_SLUG, videoRoutes } from './videos/registry'
 const HomePage = lazy(() => import('./routes/HomePage'))
 const WatchPage = lazy(() => import('./routes/WatchPage'))
 const CasefileCatalogue = lazy(() => import('./routes/CasefileCatalogue'))
+const PaperCatalogue = lazy(() => import('./routes/PaperCatalogue'))
+const StyleGalleryPage = lazy(() => import('./routes/StyleGalleryPage'))
+const LabDemoPage = lazy(() => import('./routes/LabDemoPage'))
 const V2Section01 = lazy(() => import('./videos/apollo-o1/video-2/section-01/Section01'))
 const V2Section02 = lazy(() => import('./videos/apollo-o1/video-2/section-02/Section02'))
 const V2Section03 = lazy(() => import('./videos/apollo-o1/video-2/section-03/Section03'))
@@ -29,9 +32,12 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path={VIDEO_SLUG} element={<WatchPage />} />
 
-          {/* Video 2 component catalogue, kept separate from /paper so the two
-              visual vocabularies cannot quietly blend. */}
+          {/* Internal visual libraries and exploration pages. */}
+          <Route path="paper" element={<PaperCatalogue />} />
           <Route path="casefile" element={<CasefileCatalogue />} />
+          <Route path="styles" element={<StyleGalleryPage />} />
+          <Route path="lab" element={<LabDemoPage />} />
+          <Route path="lab/:demo" element={<LabDemoPage />} />
 
           {/* Video 2, in build. Section routes only — there is no assembled
               film yet, and there will not be one until the acts exist. */}
