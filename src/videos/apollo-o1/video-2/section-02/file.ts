@@ -188,5 +188,13 @@ export const MEMO = {
   to: FILE[28].replace('To: ', ''),
   subject: FILE[29].replace('Subject: ', ''),
   date: FILE[31].replace('Date: ', ''),
-  paragraphs: [join(35, 42), join(44, 52)] as const,
+  /*
+   * Both ranges used to stop one line short of their own last sentence:
+   * (35, 42) ended on "even at the cost of" and dropped "slower research
+   * progress.", and (44, 52) ended on "necessary for the" and dropped
+   * "current model." The memo rendered two unfinished sentences, which reads
+   * as a clipped box rather than as a quotation -- and this is the document
+   * the whole section turns on.
+   */
+  paragraphs: [join(35, 43), join(44, 53)] as const,
 } as const

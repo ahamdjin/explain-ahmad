@@ -131,7 +131,9 @@ export const INITIAL: SceneState = {
     path: 'project/model_27_09_2024.bin',
     live: false,
   },
-  watcher: { on: true, at: { x: 12, y: 32 }, scale: 0.46, open: false },
+  /* y:32, not the 12/32 corner it used to share with the goal -- at 0.46 the
+     eye's own SVG hung 84px below the frame during §5's push-in. */
+  watcher: { on: true, at: { x: 12, y: 28 }, scale: 0.42, open: false },
   recon: { on: false, at: { x: 50, y: 92 }, scale: 1 },
 }
 

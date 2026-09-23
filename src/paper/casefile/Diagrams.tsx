@@ -202,7 +202,7 @@ export function ConditionalTree({
   const h2 = h1 * second
 
   return (
-    <div className="cf-tree">
+    <div className="cf-ratetree">
       <svg viewBox="0 0 300 140" width="100%" aria-hidden="true">
         <rect x="10" y="10" width="46" height={H} fill={PALETTE.paperSheet} stroke={PALETTE.ink} strokeWidth="1.2" />
         {/*
@@ -240,10 +240,10 @@ export function ConditionalTree({
         <polygon fill={PALETTE.ink} opacity="0.12" points={`56,10 120,${10 + H - h1} 120,${10 + H} 56,${10 + H}`} />
         <polygon fill={PALETTE.red} opacity="0.14" points={`166,${10 + H - h1} 230,${10 + H - h2} 230,${10 + H} 166,${10 + H}`} />
       </svg>
-      <div className="cf-tree-keys">
+      <div className="cf-ratetree-keys">
         <span>{whole}</span>
         <span>{firstLabel}</span>
-        <span className="cf-tree-key-red">{secondLabel}</span>
+        <span className="cf-ratetree-key-red">{secondLabel}</span>
       </div>
     </div>
   )

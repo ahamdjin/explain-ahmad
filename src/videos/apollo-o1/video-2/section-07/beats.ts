@@ -84,8 +84,8 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       /* Clear of the letterhead's enlargement, which runs from the page's
          right edge across the middle of the frame. */
-      chain.moveTo({ x: 86, y: 30 }, 0.4),
-      box.moveTo({ x: 86, y: 72 }, 0.4),
+      chain.moveTo({ x: 83, y: 30 }, 0.4),
+      box.moveTo({ x: 83, y: 72 }, 0.4),
       doc.show(ASIDE, 0.56, { source: DEMO, highlight: SHOT.letterhead }),
     ],
     stages: [],
@@ -293,8 +293,11 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       hero.off(),
-      doc.moveTo({ x: 20, y: 52 }, 0.42),
-      notthis.show({ x: 66, y: 40 }, 1),
+      /* DEMO is a page, so its lit band is enlarged beside it and that panel
+         reaches into the middle. The card that carries the beat's claim goes
+         further right to clear it. */
+      doc.moveTo({ x: 16, y: 52 }, 0.38),
+      notthis.show({ x: 72, y: 38 }, 0.94),
       chain.show({ x: 66, y: 76 }, 0.5, { shown: 5 }),
       /* 0.5 put the sandbox's own label at 6.8px. It is the label naming the
          thing the whole section is about; it does not get to be a smudge. */

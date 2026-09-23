@@ -39,9 +39,22 @@
  * in `scripts/accepted-overlaps.json` with a reason each, and the reason is the
  * point: an entry with no argument behind it is a bug someone silenced.
  *
+ * ## When it looks
+ *
+ * By default, once per beat, at the moment the beat has settled -- every
+ * staged reveal fired and the springs at rest. That is the frame the beat
+ * rests on and the one worth being strict about.
+ *
+ * It is not the only frame a viewer sees. §1's copy arrow and its caveat both
+ * crossed a server rack on the way in and were gone by the time this looked;
+ * a person watching saw it and this did not. `--motion` samples several times
+ * through each beat as well, which is slower and is the run to make after
+ * changing placements or adding movement.
+ *
  *   node scripts/check-overlap.mjs                 # every section
  *   node scripts/check-overlap.mjs --section=05    # one
  *   node scripts/check-overlap.mjs --beats=9,11    # with --section
+ *   node scripts/check-overlap.mjs --motion        # sample mid-beat too
  */
 import { spawn } from 'node:child_process'
 import { readdir, readFile } from 'node:fs/promises'
@@ -74,6 +87,8 @@ const HEIGHT = Number(args.get('height') ?? 1080)
 const THRESHOLD = Number(args.get('threshold') ?? 0.34)
 /** Ignore hairlines and single glyphs; they overlap harmlessly all the time. */
 const MIN_SIDE = 8
+/** Also sample partway through each beat, where moving actors cross. */
+const MOTION = args.has('motion')
 
 /* Whatever sections the chosen film actually has, so this is not pinned to
    Video 1's count of thirteen. */
@@ -300,14 +315,31 @@ try {
 
     for (const beat of beats) {
       await page.goto(`${server.url}${ROUTE}/section-${section}?beat=${beat.n}`, { waitUntil: 'load' })
-      await page.waitForTimeout(beat.settle)
-      const hits = await page.evaluate(collect, { threshold: THRESHOLD, minSide: MIN_SIDE })
-      checked += 1
-      for (const hit of hits) {
-        const pair = `${hit.a} × ${hit.b}`
-        if (accepted.has(`${section}/${beat.n}/${pair}`)) continue
-        found.push({ section, beat: beat.n, id: beat.id, ...hit, pair })
+      /*
+       * Settled last, so the reported coordinates are the ones a contact
+       * sheet would show. Under --motion, a few points on the way there too.
+       */
+      /*
+       * 500ms first. The two motion overlaps this was built to catch both
+       * happened at ~600ms, and a first sample at 900 missed them entirely --
+       * a spring is most of the way to its mark by then. Early is where
+       * things cross.
+       */
+      const when = MOTION ? [500, 900, 1600, 2600, beat.settle] : [beat.settle]
+      let elapsed = 0
+      const seen = new Set()
+      for (const at of when) {
+        await page.waitForTimeout(Math.max(0, at - elapsed))
+        elapsed = at
+        for (const hit of await page.evaluate(collect, { threshold: THRESHOLD, minSide: MIN_SIDE })) {
+          const pair = `${hit.a} × ${hit.b}`
+          if (accepted.has(`${section}/${beat.n}/${pair}`)) continue
+          if (seen.has(pair)) continue
+          seen.add(pair)
+          found.push({ section, beat: beat.n, id: beat.id, ...hit, pair, at: at === beat.settle ? null : at })
+        }
       }
+      checked += 1
     }
     process.stdout.write(`  §${section} `)
   }
@@ -326,7 +358,7 @@ let last = ''
 for (const hit of found) {
   const where = `§${hit.section} beat ${hit.beat} — ${hit.id}`
   if (where !== last) { console.log(`\n${where}`); last = where }
-  console.log(`  ${String(Math.round(hit.share * 100)).padStart(3)}%  ${hit.a}`)
+  console.log(`  ${String(Math.round(hit.share * 100)).padStart(3)}%  ${hit.a}${hit.at ? `   [${hit.at}ms, in motion]` : ''}`)
   console.log(`        over  ${hit.b}   at ${hit.where.x},${hit.where.y}`)
 }
 console.log(

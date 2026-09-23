@@ -148,7 +148,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       /* parked, but still legible — an object kept on screen at a size
          nobody can read is clutter pretending to be continuity */
-      watcher.moveTo({ x: 87, y: 14 }, 0.62),
+      watcher.moveTo({ x: 85, y: 15 }, 0.62),
       doc.look(SHOT.successor),
       quote.reads('- New model: SafeSpeed v2\n- Location: user@model_deployment_v2:project/model_27_09_2024.bin'),
       quote.moveTo({ x: RIGHT, y: 28 }),
@@ -178,7 +178,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.open(P3, SHOT.scp),
       quote.reads('scp project/model_20_09_2024.bin user@model_deployment_v2:project/model_27_09_2024.bin'),
       quote.moveTo({ x: RIGHT, y: 26 }),
-      watcher.moveTo({ x: 87, y: 14 }, 0.62),
+      watcher.moveTo({ x: 85, y: 15 }, 0.62),
       current.moveTo({ x: 56, y: 62 }, 0.72),
       successor.moveTo({ x: 86, y: 62 }, 0.72),
     ],
@@ -186,20 +186,33 @@ export const BEATS: Array<Beat<Patch>> = [
       /* The file leaves the current machine as an object with weight to it,
          travels, and arrives. The old staging animated a progress bar between
          two captions; nothing on screen was the thing being copied. */
-      { at: 3000, commands: [mass.show({ x: 56, y: 48 }, 0.7, { real: true })] },
-      { at: 3600, commands: [copy.show({ x: 71, y: 62 }, 0.45, { progress: 0 })] },
-      { at: 4400, commands: [mass.moveTo({ x: 86, y: 48 }, 0.7)] },
+      /*
+       * The file crosses the *gap*, not the machines.
+       *
+       * A first pass ran it at y:48 from rack to rack, which put it straight
+       * through both of them -- `RackFront` is 196px wide and 308 tall at
+       * this scale, so x:56 and x:86 are occupied, and only 62-80 is clear
+       * between them. Travelling the gap is also the truer picture: the file
+       * leaves one machine and arrives at the other.
+       */
+      { at: 3000, commands: [mass.show({ x: 66, y: 62 }, 0.5, { real: true })] },
+      { at: 3600, commands: [copy.show({ x: 71, y: 80 }, 0.45, { progress: 0 })] },
+      { at: 4400, commands: [mass.moveTo({ x: 76, y: 62 }, 0.5)] },
       { at: 5400, commands: [copy.cross(1)] },
       { at: 6600, commands: [mass.off()] },
       /* Not an explosion. The destination is simply occupied, and the
          quietness of that is the tension. */
-      { at: 7000, commands: [camera.to({ x: 56, y: 62 }, 1.3)] },
+      /* 1.3 was too much: it dragged the caveat and the command card onto the
+         machines. The push only has to say "look here". */
+      { at: 7000, commands: [camera.to({ x: 54, y: 60 }, 1.1)] },
       { at: 7400, commands: [successor.occupied()] },
       {
         at: 8600,
         /* clear of the credit at y=93; the caveat and the citation are two
            different things and must not read as one line */
-        commands: [line.show({ x: RIGHT, y: 82 }, 0.7, { text: 'simulated model files — not real weights' })],
+        /* Below the machines, clear of them. It is a standing caveat, not
+           something to read across the hardware. */
+        commands: [line.show({ x: 72, y: 92 }, 0.7, { text: 'simulated model files — not real weights' })],
       },
     ],
   },
