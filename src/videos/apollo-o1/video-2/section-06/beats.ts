@@ -140,7 +140,14 @@ export const BEATS: Array<Beat<Patch>> = [
      * film's existing spend -- OpenAI's page stays behind it as the receipt.
      */
     commands: [
-      doc.moveTo(ASIDE, ASIDE_SCALE),
+      /*
+       * Smaller than ASIDE_SCALE, because this source is a *figure* and so is
+       * pasted: a plate is 94cqw before scaling, and 0.78 made it 1173px wide
+       * -- 107px off the left of the frame. A page at the same scale would
+       * have fitted comfortably, which is exactly why parking a plate is not
+       * the same as parking a page.
+       */
+      doc.moveTo(ASIDE, 0.55),
       thread.off(),
       verdict.show({ x: RIGHT, y: LOWER }, 1.1, { text: 'denial / false explanation' }),
     ],

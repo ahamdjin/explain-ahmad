@@ -136,6 +136,17 @@ function collect({ slack }) {
       if (k.width < 8 || k.height < 8) continue
       const over = Math.max(k.right - box.right, box.left - k.left, k.bottom - box.bottom, box.top - k.top)
       if (IGNORE_CHILD.some((c) => kid.classList.contains(c))) continue
+      /*
+       * Anything inside the camera is exempt.
+       *
+       * A push-in pushes the edges of the drawn world out of shot -- that is
+       * what a zoom does, and the excess is not a box cutting its content.
+       * Measured against the frame, every beat with a camera move reported
+       * its whole world as clipped: §6 at 160px, §3 at 133. Excluding the
+       * camera's own box was not enough, because the slots inside it are
+       * what stick out.
+       */
+      if (kid.closest('.s1-camera')) continue
       if (over > slack && (!worst || over > worst.over)) {
         worst = {
           over: Math.round(over),
@@ -144,9 +155,19 @@ function collect({ slack }) {
         }
       }
     }
-    const text = worst ? worst.text : (el.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 40)
+    /*
+     * No offending child means nothing to report.
+     *
+     * The container's own scrollWidth still exceeds its clientWidth, but
+     * every element responsible was exempt -- inside the camera, where
+     * running past the frame edge is the zoom working. Falling back to
+     * naming the container turned those into fifteen findings that pointed
+     * at nothing and could not be acted on.
+     */
+    if (!worst) continue
+    const text = worst.text
     out.push({
-      cls: worst ? `${worst.who} out of ${cls}` : cls,
+      cls: `${worst.who} out of ${cls}`,
       right: right > slack ? right : 0,
       bottom: bottom > slack ? bottom : 0,
       text,
