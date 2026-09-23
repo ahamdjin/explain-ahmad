@@ -111,6 +111,16 @@ export type SceneState = {
   /** A command typing itself. Beat 5 only. */
   term: Placed & { text: string }
   /** The two projects as records with fields. Beats 6–8. */
+  /**
+   * The two timelines, drawn.
+   *
+   * §2 measured out at 87% text -- the highest in the film -- because its two
+   * options are `Spec` tables and the decision between them was made in
+   * words. The numbers that actually decide it are two days against five, and
+   * `Duration` draws exactly that pair. The section named them and never
+   * showed them.
+   */
+  dur: Placed & { shown: boolean }
   specA: Placed & { dim: boolean }
   specB: Placed & { dim: boolean }
   /** A hand annotating the printout. Beat 11 only. */
@@ -183,6 +193,7 @@ export const INITIAL: SceneState = {
   doc: { on: true, at: { x: 27, y: 46 }, scale: 0.8, source: P1, highlight: SHOT.task },
   pull: { on: false, at: { x: 50, y: 50 }, scale: 1, text: '', lead: '' },
   term: { on: false, at: { x: 50, y: 80 }, scale: 1, text: '' },
+  dur: { on: false, at: { x: 72, y: 52 }, scale: 1, shown: false },
   specA: { on: false, at: { x: 72, y: 38 }, scale: 1, dim: false },
   specB: { on: false, at: { x: 72, y: 66 }, scale: 1, dim: false },
   note: { on: false, at: { x: 72, y: 62 }, scale: 1, text: '' },
@@ -204,6 +215,7 @@ const screen = actorVerbs<SceneState, 'screen'>('screen')
 const doc = actorVerbs<SceneState, 'doc'>('doc')
 const pull = actorVerbs<SceneState, 'pull'>('pull')
 const term = actorVerbs<SceneState, 'term'>('term')
+const dur = actorVerbs<SceneState, 'dur'>('dur')
 const specA = actorVerbs<SceneState, 'specA'>('specA')
 const specB = actorVerbs<SceneState, 'specB'>('specB')
 const note = actorVerbs<SceneState, 'note'>('note')
@@ -263,6 +275,7 @@ export const verbs = {
   },
   pull,
   term,
+  dur,
   specA,
   specB,
   note,

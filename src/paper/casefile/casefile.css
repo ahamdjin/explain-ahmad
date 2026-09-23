@@ -47,7 +47,7 @@
 }
 
 .cf-path {
-  font-size: 9.5px;
+  font-size: 12.5px;
   letter-spacing: 0.02em;
 }
 
@@ -207,7 +207,7 @@
 
 .cf-extract-label {
   font-family: var(--cf-typed);
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.09em;
   fill: #2b2926;
@@ -306,9 +306,21 @@
   text-align: left;
 }
 
+/*
+ * Label sizes are a *floor*, not a preference.
+ *
+ * Every one of these sits inside a Slot, and a beat that parks an actor at
+ * 0.5 halves whatever is written here. Measured at frame size, that put 34
+ * beats' type between 5.2px and 10.9px -- the identifying labels, the ones
+ * naming the document, the file and the switch. Unreadable on a phone.
+ *
+ * So each base is set so that the smallest scale a beat actually parks this
+ * actor at still lands above 11px. Raising them is not a style change; it is
+ * the difference between a label and a smudge.
+ */
 .cf-tab-org {
   font-family: var(--cf-typed);
-  font-size: 1.15cqw;
+  font-size: calc(1.15cqw / var(--slot-scale, 1));
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -317,7 +329,7 @@
 
 .cf-tab-doc {
   font-family: var(--cf-typed);
-  font-size: 0.92cqw;
+  font-size: calc(0.95cqw / var(--slot-scale, 1));
   letter-spacing: 0.04em;
   color: #8a7f6e;
 }
@@ -3475,10 +3487,10 @@
   font-family: var(--cf-typed); font-size: 0.82cqw;
   letter-spacing: 0.06em; color: #2b2926; text-align: center;
 }
-.cf-hw-size { font-family: var(--cf-typed); font-size: 9px; letter-spacing: 0.04em; }
+.cf-hw-size { font-family: var(--cf-typed); font-size: 12.5px; letter-spacing: 0.04em; }
 .cf-hw-legend { font-family: var(--cf-typed); font-size: 11px; letter-spacing: 0.08em; }
-.cf-drive-label { font-family: var(--cf-typed); font-size: 8px; letter-spacing: -0.01em; }
-.cf-drive-size { font-family: var(--cf-typed); font-size: 7.5px; letter-spacing: 0.05em; }
+.cf-drive-label { font-family: var(--cf-typed); font-size: 10.5px; letter-spacing: -0.01em; }
+.cf-drive-size { font-family: var(--cf-typed); font-size: 10px; letter-spacing: 0.05em; }
 
 /* the simulated stand-in must never be mistaken for the real mass */
 .cf-weights-sim { opacity: 0.86; }
@@ -3519,7 +3531,7 @@
   justify-content: space-between;
   gap: 1cqw;
   font-family: var(--cf-typed);
-  font-size: 0.85cqw;
+  font-size: calc(0.9cqw / var(--slot-scale, 1));
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #8a7f6e;
@@ -3611,7 +3623,7 @@
   gap: 1.2cqw;
   align-items: baseline;
   font-family: var(--cf-typed);
-  font-size: 1cqw;
+  font-size: calc(0.95cqw / var(--slot-scale, 1));
   letter-spacing: 0.04em;
   color: #8a7f6e;
 }

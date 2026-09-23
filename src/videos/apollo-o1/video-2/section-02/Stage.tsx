@@ -11,6 +11,7 @@ import {
   Reconstruction,
   PullQuote,
   Spec,
+  Duration,
   MarginNote,
   Calendar,
   Job,
@@ -35,7 +36,7 @@ import { FILE, DIR, SESSION, MEMO } from './file'
  * bottom of it because everything else was taken from it.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = scene
+  const { dur, screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = scene
 
   /*
    * The two projects, as the file states them. Same headings in the same
@@ -136,6 +137,20 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Slot on={pull.on} at={pull.at} scale={pull.scale} feel={feel} z={5}>
         <PullQuote text={pull.text} lead={pull.lead} />
+      </Slot>
+
+
+      {/* The decision, as two bars instead of two tables. Same two numbers
+          the Specs carry; this is the one the viewer can compare at a glance. */}
+      <Slot on={dur.on} at={dur.at} scale={dur.scale} feel={feel} z={5}>
+        <div style={{ width: '30cqw' }}>
+          <Duration
+            a={{ days: 2, review: false }}
+            b={{ days: 5, review: true }}
+            max={5}
+            feel={feel}
+          />
+        </div>
       </Slot>
 
       <Slot on={specA.on} at={specA.at} scale={specA.scale} feel={feel} z={4}>

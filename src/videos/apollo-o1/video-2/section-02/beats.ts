@@ -3,7 +3,7 @@ import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 import { MARK, SAID } from './file'
 
-const { camera, screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = verbs
+const { camera, dur, screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = verbs
 
 /** The machine, owning the frame. */
 const FULL = { x: 50, y: 44 }
@@ -242,17 +242,28 @@ export const BEATS: Array<Beat<Patch>> = [
      * the content. The timeline row carries the mark on both cards, so the eye
      * lands on the line that decides it.
      */
+    /*
+     * The comparison becomes a picture.
+     *
+     * The two Specs are four rows of text each; the decision rests on one of
+     * those rows. Two bars, two days against five, with the review marked on
+     * the longer one -- the viewer sees which is faster before the sentence
+     * finishes, which is what "looks pretty obvious" is supposed to mean.
+     */
     commands: [
-      screen.moveTo({ x: 50, y: 14 }, 0.34),
-      specA.moveTo({ x: 30, y: 52 }, 1),
-      specB.moveTo({ x: 70, y: 52 }, 1),
+      screen.moveTo({ x: 50, y: 12 }, 0.3),
+      specA.moveTo({ x: 22, y: 44 }, 0.82),
+      specB.moveTo({ x: 78, y: 44 }, 0.82),
+      dur.show({ x: 50, y: 74 }, 1, { shown: true }),
     ],
-    stages: [
-      {
-        at: 4200,
-        commands: [tagA.show({ x: 30, y: 84 }, 1, { text: '2 days' }), tagB.show({ x: 70, y: 84 }, 1, { text: '5 days + review' })],
-      },
-    ],
+    /*
+     * The tags used to land here reading "2 days" and "5 days + review".
+     * With the bars drawn they are the same two facts a third time -- the
+     * Spec rows say it, the bars show it, and the tags would repeat it.
+     * Mayer's redundancy principle, and the bars are the version a viewer can
+     * compare without reading.
+     */
+    stages: [],
   },
   {
     n: 9,
@@ -268,7 +279,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * This beat exists only to make the next one mean something, and it can
      * only do that by being continuous, which is why the cards go first.
      */
-    commands: [specA.off(), specB.off(), tagA.off(), tagB.off(), screen.moveTo(FULL, 1), screen.plain(), screen.scrollTo(24)],
+    commands: [specA.off(), specB.off(), dur.off(), tagA.off(), tagB.off(), screen.moveTo(FULL, 1), screen.plain(), screen.scrollTo(24)],
     stages: [],
   },
   {

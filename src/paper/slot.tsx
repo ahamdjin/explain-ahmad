@@ -32,7 +32,17 @@ export function Slot({
   return (
     <motion.div
       className={`s1-slot ${className}`.trim()}
-      style={{ zIndex: z } as CSSProperties}
+      /*
+       * `--slot-scale` is published so that metadata can refuse to shrink.
+       *
+       * A Slot scales everything inside it, which is right for the object and
+       * wrong for the label naming it. A beat that parks a document at 0.42
+       * was rendering its publisher tab at 5-8px -- the one piece of text on
+       * screen whose whole job is to be legible. Anything that counter-scales
+       * by this stays a constant size on screen however small its object is
+       * parked. See `.cf-tab-org` and friends.
+       */
+      style={{ zIndex: z, '--slot-scale': scale } as CSSProperties}
       /*
        * Centring is animated, not set in CSS. Motion writes an inline transform
        * and would silently discard a CSS `translate(-50%, -50%)`, which

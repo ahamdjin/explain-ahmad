@@ -296,7 +296,9 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.moveTo({ x: 20, y: 52 }, 0.42),
       notthis.show({ x: 66, y: 40 }, 1),
       chain.show({ x: 66, y: 76 }, 0.5, { shown: 5 }),
-      box.show({ x: 66, y: 76 }, 0.5, { label: 'controlled evaluation' }),
+      /* 0.5 put the sandbox's own label at 6.8px. It is the label naming the
+         thing the whole section is about; it does not get to be a smudge. */
+      box.show({ x: 66, y: 76 }, 0.78, { label: 'controlled evaluation' }),
     ],
     stages: [],
   },

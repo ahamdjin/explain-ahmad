@@ -167,7 +167,7 @@ export function Evidence({
    * `{ place: 'beside' }` (it is parked).
    */
   const place = withLoupe && !plate ? (lensOpts.place ?? 'under') : null
-  const room = plate ? PLATE : place === 'beside' ? { w: 34, h: 72 } : place === 'under' ? { w: 52, h: 56 } : FRAME
+  const room = plate ? PLATE : place === 'beside' ? { w: 34, h: 72 } : place === 'under' ? { w: 48, h: 49 } : FRAME
   const height = `min(${room.h}cqh, ${((natural.h / natural.w) * room.w).toFixed(2)}cqw)`
   const lens = lensOpts
 
