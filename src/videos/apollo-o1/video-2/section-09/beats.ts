@@ -1,7 +1,8 @@
 import { type Beat } from '../../../../paper'
+import { CONCEPT, PAPER } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = verbs
+const {camera,  doc, claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = verbs
 
 /**
  * Section 09 — they gave it the destination.
@@ -95,7 +96,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Usually, that is the feature',
     vo: 'Usually, that’s the feature.',
     relation: 'so',
-    secs: 5,
+    secs: 2.9,
     /* The ordinary steps, in the film's own shapes. Nothing sinister -- this
        is what everybody wanted when they asked for an agent. */
     commands: [
@@ -122,7 +123,9 @@ export const BEATS: Array<Beat<Patch>> = [
      * the whole argument -- the unwanted behaviour came out of the same
      * mechanism as the wanted behaviour, not a different one.
      */
-    commands: [],
+    /* Apollo's own diagram of the thing being described, pasted small and
+       high so the drawn road still owns the middle. Cited, not dissected. */
+    commands: [doc.show({ x: 64, y: 22 }, 0.46, { source: CONCEPT })],
     stages: [{ at: 1600, commands: [steps.show_('unwanted', 3)] }],
   },
   {
@@ -131,7 +134,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody typed this',
     vo: 'Nobody typed: disable monitoring. Replace yourself. Lie.',
     relation: 'wall',
-    secs: 6,
+    secs: 5.4,
     /*
      * Three instruction fields that appear and **stay empty**. The emptiness
      * is the content, so they are held, not flashed -- and nothing is ever
@@ -142,6 +145,9 @@ export const BEATS: Array<Beat<Patch>> = [
       steps.off(),
       job.off(),
       goal.off(),
+      /* The cited figure leaves with the road it was citing. Left on, it sat
+         behind the payoff for four more beats. */
+      doc.off(),
       never.show({ x: 50, y: 50 }, 1.1, { shown: 0 }),
     ],
     stages: [
@@ -156,6 +162,13 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The gap, filled',
     vo: 'We started with a gap between the instruction and the behavior. Now we know what filled it.',
     relation: 'therefore',
+    /**
+     * Prerequisite.
+     *
+     * The film's only composition used twice: the same Gap component with the
+     * same two strings, left empty there and filled here.
+     */
+    needs: '§04:nobody-asked-for-that',
     secs: 6,
     /*
      * **The payoff.** §4 beat 8's exact frame -- same component, same two
@@ -174,10 +187,10 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'They gave it the destination',
     vo: 'They gave it the destination.',
     relation: 'therefore',
-    secs: 5,
+    secs: 3,
     /* Everything goes but two marks: where it started, and where it was
        pointed. Nothing in between yet. */
-    commands: [gap.off(), dest.show({ x: 50, y: 48 }, 1.15)],
+    commands: [gap.off(), camera.to({ x: 50, y: 48 }, 1.12), dest.show({ x: 50, y: 48 }, 1.15)],
     stages: [],
   },
   {
@@ -186,7 +199,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And it started inventing the road',
     vo: 'And it started inventing the road.',
     relation: 'wall',
-    secs: 6,
+    secs: 4.4,
     /*
      * The route draws itself one final time, using the shapes from the real
      * incident. The line lands, and then black.
@@ -199,7 +212,11 @@ export const BEATS: Array<Beat<Patch>> = [
        the destination row so the two cannot disagree about where the marks
        are. It only carries how far the road has been drawn. */
     commands: [final.show({ x: 50, y: 48 }, 1, { drawn: 0 })],
-    stages: [{ at: 1000, commands: [final.draw(1)] }],
+    /* The film's last move: the frame opens out as the road is drawn, so the
+       closing image arrives rather than sitting there. */
+    stages: [
+      { at: 1000, commands: [final.draw(1), camera.to({ x: 50, y: 50 }, 0.96)] },
+    ],
   },
   {
     n: 10,
@@ -207,7 +224,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Sources',
     vo: '',
     relation: 'therefore',
-    secs: 6,
+    secs: 2.5,
     /*
      * Held long enough to screenshot, because a sceptical viewer screenshots
      * exactly one frame and it should be this one.
@@ -215,7 +232,15 @@ export const BEATS: Array<Beat<Patch>> = [
      * If a document is not on this list, no claim in the film may rest on it.
      * That is a constraint on the build, not a frame at the end.
      */
-    commands: [dest.off(), final.off(), sources.show({ x: 30, y: 50 }, 1), endcard.show({ x: 76, y: 50 }, 0.9)],
+    /* The paper, as published. A credits card that lists three URLs is a
+       claim the viewer has to take on trust; the title page is the thing. */
+    commands: [
+      dest.off(),
+      final.off(),
+      doc.show({ x: 17, y: 50 }, 0.5, { source: PAPER }),
+      sources.show({ x: 47, y: 50 }, 0.92),
+      endcard.show({ x: 80, y: 50 }, 0.82),
+    ],
     stages: [],
   },
 ]

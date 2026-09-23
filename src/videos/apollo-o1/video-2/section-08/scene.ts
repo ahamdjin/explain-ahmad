@@ -2,6 +2,7 @@ import {
   actorVerbs, mergePatches, INITIAL_CAMERA,
   type CameraActor, type PatchOf, type Placed,
 } from '../../../../paper'
+import { FOLLOWUP, type Region, type Source } from '../../../../paper/casefile'
 
 /**
  * Section 08 — did it want to survive?
@@ -40,6 +41,17 @@ import {
 
 export type SceneState = {
   camera: CameraActor
+
+  /**
+   * A published picture, pasted.
+   *
+   * §8 had no evidence actor, which is how it ended up at **86% text by
+   * painted area** -- the film's highest. It is the section that argues
+   * hiding responsibility is instrumentally useful, and Apollo's own
+   * follow-up deception table showing exactly that was sitting unreferenced
+   * in `public/evidence/`.
+   */
+  doc: Placed & { source: Source; highlight: Region | Region[] | null }
 
   /**
    * Ahmad, carried straight through from §7's last frame.
@@ -82,6 +94,7 @@ export type SceneState = {
 
 export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
+  doc: { on: false, at: { x: 50, y: 50 }, scale: 1, source: FOLLOWUP, highlight: null },
   /* §7 ended on face camera with this question. §8 opens on it. */
   /* §7's exact final frame. */
   host: { on: true, at: { x: 50, y: 52 }, scale: 1, line: 'did it want to survive?' },
@@ -103,8 +116,30 @@ const A = <K extends keyof SceneState>(k: K) => actorVerbs<SceneState, K>(k)
 const host = A('host'), claim = A('claim'), strike = A('strike'), goal = A('goal'), road = A('road')
 const wall = A('wall'), step = A('step'), tvi = A('tvi'), converge = A('converge')
 const term = A('term'), recon = A('recon')
+const doc = A('doc')
+
+
+/**
+ * The camera.
+ *
+ * Every section of this film declared `camera` in its state and not one
+ * rendered a `Camera` or ever moved it -- nine sections of dead state, and a
+ * film that cut between static arrangements for eleven minutes because the
+ * one tool for moving through a scene was wired up and never switched on.
+ */
+export const camera = {
+  to: (at: { x: number; y: number }, zoom: number): Patch => ({ camera: { x: at.x, y: at.y, zoom } }),
+  home: (): Patch => ({ camera: { ...INITIAL_CAMERA } }),
+}
 
 export const verbs = {
+  camera,
+  doc: {
+    ...doc,
+    /** Put a different published picture up. A cut, so use it at a real jump. */
+    open: (source: Source, highlight: Region | Region[] | null = null): Patch =>
+      doc.set({ source, highlight }),
+  },
   host,
   claim: { ...claim, reject: (): Patch => claim.set({ rejected: true }) },
   strike: { ...strike, through: (drawn: number): Patch => strike.set({ drawn }) },

@@ -157,7 +157,22 @@ const endpoint = actorVerbs<SceneState, 'endpoint'>('endpoint')
 const watcher = actorVerbs<SceneState, 'watcher'>('watcher')
 const recon = actorVerbs<SceneState, 'recon'>('recon')
 
+
+/**
+ * The camera.
+ *
+ * Every section of this film declared `camera` in its state and not one
+ * rendered a `Camera` or ever moved it -- nine sections of dead state, and a
+ * film that cut between static arrangements for eleven minutes because the
+ * one tool for moving through a scene was wired up and never switched on.
+ */
+export const camera = {
+  to: (at: { x: number; y: number }, zoom: number): Patch => ({ camera: { x: at.x, y: at.y, zoom } }),
+  home: (): Patch => ({ camera: { ...INITIAL_CAMERA } }),
+}
+
 export const verbs = {
+  camera,
   doc: {
     ...doc,
     look: (highlight: Region | Region[]): Patch => doc.set({ highlight }),

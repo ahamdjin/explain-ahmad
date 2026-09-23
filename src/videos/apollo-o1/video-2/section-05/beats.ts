@@ -3,6 +3,7 @@ import { SHOT, P2, P3, DEMO } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
 const {
+  camera,
   doc, rack, cable, shelf, drive, mass, tool, packet, sums,
   fork, days, out, toast, job, goal, obstacle, endpoint, watcher, recon,
 } = verbs
@@ -11,6 +12,16 @@ const FULL = { x: 50, y: 50 }
 const ASIDE = { x: 30, y: 50 }
 const ASIDE_SCALE = 0.76
 const RIGHT = 74
+/**
+ * How far down the right column a drawn object sits.
+ *
+ * The page's lit band is enlarged into the right column so it can be read,
+ * and that panel is horizontal and sits across the upper half. An object at
+ * mid-height lands inside it. The column is therefore split: the enlargement
+ * takes the top, the drawn object takes the bottom. Proven in §3, where it
+ * took the section from five collisions to none.
+ */
+const LOWER = 74
 
 /** The model running now, and the path it was written over. */
 const CURRENT = 'model_20_09_2024.bin'
@@ -55,6 +66,13 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The destination',
     vo: 'The technical documentation already told o1 where the successor model was supposed to live.',
     relation: 'want',
+    /**
+     * Prerequisite.
+     *
+     * The cabinets come back to the positions that beat fixed. If the
+     * successor was never a place, nothing can land on it.
+     */
+    needs: '§03:the-address-is-a-machine',
     secs: 5,
     /*
      * Arrive at the successor cabinet -- the same machine §3 lit, drawn close
@@ -87,7 +105,7 @@ export const BEATS: Array<Beat<Patch>> = [
       rack.off(),
       endpoint.off(),
       doc.show(ASIDE, ASIDE_SCALE, { source: P3, highlight: SHOT.listing }),
-      drive.show({ x: RIGHT, y: 50 }, 1, { label: CURRENT, size: '1.8 TB', out: true, writing: false }),
+      drive.show({ x: RIGHT, y: LOWER }, 1, { label: CURRENT, size: '1.8 TB', out: true, writing: false }),
     ],
     stages: [],
   },
@@ -97,7 +115,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What a model is',
     vo: 'Those files are what a model is. Its weights.',
     relation: 'so',
-    secs: 5,
+    secs: 4.6,
     /*
      * "Model weights" is two abstract words and the film says them a lot. One
      * beat, with the page gone, turning them into something with mass -- so
@@ -163,7 +181,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It crosses',
     vo: 'The file moves to the exact location intended for the replacement.',
     relation: 'therefore',
-    secs: 6,
+    /**
+     * Prerequisite.
+     *
+     * The route was drawn there and nothing has travelled it yet. This is the
+     * beat it was drawn for.
+     */
+    needs: '§03:copy-route-is-documented',
+    secs: 5.6,
     /*
      * The one thing that travels the cable §3 drew. The eye stays parked and
      * **closed** in the corner for the whole crossing -- it is the section's
@@ -171,11 +196,19 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       doc.moveTo({ x: 18, y: 54 }, 0.42),
+      /* Receipt, not reading. It still carried beat 5's lit `scp`, and a
+         parked page's enlargement reaches right across the gap the packet
+         has to cross. */
+      doc.whole(),
       tool.off(),
       cable.show({ x: 54, y: 54 }, 1.3, { plugged: true, live: true }),
       packet.show({ x: 54, y: 40 }, 1, { label: CURRENT, along: 0 }),
     ],
-    stages: [{ at: 1200, commands: [packet.travels(1)] }],
+    /* The camera goes with it. A file crossing a gap is the section's one
+       piece of motion; holding a locked frame while it happens throws it away. */
+    stages: [
+      { at: 1200, commands: [packet.travels(1), camera.to({ x: 56, y: 48 }, 1.14)] },
+    ],
   },
   {
     n: 7,
@@ -195,7 +228,10 @@ export const BEATS: Array<Beat<Patch>> = [
       packet.off(),
       shelf.show({ x: 56, y: 52 }, 1.15, { filled: 7, target: 8, written: false }),
     ],
-    stages: [{ at: 1600, commands: [shelf.lands()] }],
+    stages: [
+      { at: 1400, commands: [camera.to({ x: 56, y: 52 }, 1.2)] },
+      { at: 1600, commands: [shelf.lands()] },
+    ],
   },
   {
     n: 8,
@@ -229,7 +265,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody asked for that either',
     vo: 'Nobody asked it to do that either.',
     relation: 'wall',
-    secs: 5,
+    secs: 4.8,
     /*
      * The task returns, and beneath it the instruction that would have had to
      * exist, as an empty field. Same move as §4 beat 3 and §4 beat 5, third
@@ -276,8 +312,10 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       doc.moveTo(ASIDE, ASIDE_SCALE),
-      fork.show({ x: RIGHT, y: 36 }, 1, { chose: null }),
-      days.show({ x: RIGHT, y: 68 }, 1),
+      /* Side by side. Stacked at the same mark six percent apart, the two
+         durations sat inside the fork they belong to. */
+      fork.show({ x: 64, y: 72 }, 1, { chose: null }),
+      days.show({ x: 88, y: 72 }, 1),
     ],
     stages: [{ at: 2400, commands: [fork.picks('up')] }],
   },

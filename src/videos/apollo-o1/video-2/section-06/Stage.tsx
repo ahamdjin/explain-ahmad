@@ -1,4 +1,4 @@
-import { Slot, type Feel } from '../../../../paper'
+import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Evidence,
   Attribution,
@@ -52,6 +52,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             source={doc.source}
             highlight={doc.highlight}
             /*
+             * A figure is pasted; a page is laid out and enlarged beside.
+             *
+             * Which one a capture is travels with the file (`Source.kind`),
+             * not with the beat -- a chart does not become a page because a
+             * different beat shows it. See `Evidence`'s `plate`.
+             */
+            plate={doc.source.kind === 'figure'}
+            /*
              * A lit band is enlarged when the page is the subject of the beat.
              *
              * At full frame this document's body type renders about a pixel
@@ -83,11 +91,16 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
-      {/* Changes in the same beat as the page. The film never shows a source
-          under the wrong publisher's name. */}
-      <Slot on={credit.on} at={credit.at} scale={credit.scale} feel={feel} z={5}>
-        <Attribution text={`${credit.org} · ${credit.doc}`} />
-      </Slot>
+      {/*
+        * --- inside the camera -------------------------------------------
+        *
+        * The camera moves the *drawn* world. The evidence layer stays outside
+        * it: a push-in on an object should not also push in on the page it
+        * was lifted from, the way handwriting stays in screen space in
+        * Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
+
 
       {/* --- the interrogation -------------------------------------------- */}
 
@@ -165,8 +178,15 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
+      </Camera>
+
       <Slot on={recon.on} at={recon.at} scale={recon.scale} feel={feel} z={6}>
         <Reconstruction />
+      </Slot>
+      {/* Changes in the same beat as the page. The film never shows a source
+          under the wrong publisher's name. */}
+      <Slot on={credit.on} at={credit.at} scale={credit.scale} feel={feel} z={5}>
+        <Attribution text={`${credit.org} · ${credit.doc}`} />
       </Slot>
     </>
   )

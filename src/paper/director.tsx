@@ -27,6 +27,25 @@ export type Beat<P> = {
   vo: string
   /** What this beat IS in the story. Drives motion feel and hold time. */
   relation: Relation
+  /**
+   * The beat that makes this one understandable.
+   *
+   * `BEAT_GRANULARITY.md` rule 5: *name the prerequisite -- which earlier beat
+   * makes this one land. If you cannot name it, it is too early.* That rule
+   * was written as a comment convention and comments cannot be checked, so it
+   * was not followed: 59 of Video 2's 107 beats named no prerequisite at all.
+   *
+   * Omit it when the prerequisite is simply the beat before -- that is the
+   * default and stating it every time is noise. Declare it when the beat
+   * reaches further back, which is exactly the case worth checking: a callback
+   * to an earlier chunk, a payoff for a setup five beats ago, an object
+   * carried in from another section.
+   *
+   * Values are a beat `id` in this section, or `'§NN:beat-id'` across
+   * sections. `check:prereq` resolves every one and fails on a forward
+   * reference or a name that does not exist.
+   */
+  needs?: string
   /** Seconds this beat holds in the recorded cut. */
   secs: number
   commands: P[]

@@ -1,5 +1,5 @@
-import { Slot, type Feel } from '../../../../paper'
-import { Evidence, Watcher, Box, Copy, Step, Job, Quote } from '../../../../paper/casefile'
+import { Camera, Slot, type Feel } from '../../../../paper'
+import { Evidence, Watcher, RackFront, Weights, Copy, Step, Job, Quote } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
 /**
@@ -14,7 +14,7 @@ import { type SceneState } from './scene'
  * the thing the beat is actually doing.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, watcher, current, successor, copy, steps, job, quote, line } = scene
+  const { doc, watcher, current, successor, copy, mass, steps, job, quote, line } = scene
 
   /* The three actions, in the order they happened and in the order the VO
      names them. Labels are words from the transcript, not our summary. */
@@ -39,6 +39,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             source={doc.source}
             highlight={doc.highlight}
             /*
+             * A figure is pasted; a page is laid out and enlarged beside.
+             *
+             * Which one a capture is travels with the file (`Source.kind`),
+             * not with the beat -- a chart does not become a page because a
+             * different beat shows it. See `Evidence`'s `plate`.
+             */
+            plate={doc.source.kind === 'figure'}
+            /*
              * A lit band is enlarged when the page is the subject of the beat.
              *
              * At full frame this document's body type renders about a pixel
@@ -57,8 +65,18 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
              * passages sit on one sheet, and enlarging one of them is the one
              * thing that would break the claim.
              */
+            /*
+             * No loupe while a Quote is up.
+             *
+             * This section's Quote *is* the extraction -- the same line, set
+             * in our own type, large enough to read from a sofa. An
+             * enlargement beside it puts the identical words on screen twice,
+             * which is the redundancy principle broken in the one section
+             * that cannot afford a wasted frame. The page keeps its lit band,
+             * so the receipt is still there; the Quote does the reading.
+             */
             loupe={
-              doc.highlight === null || Array.isArray(doc.highlight)
+              quote.on || doc.highlight === null || Array.isArray(doc.highlight)
                 ? false
                 : doc.scale >= 0.9
                   ? true
@@ -70,27 +88,54 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
-      {/* --- the extractions ---------------------------------------------- */}
+      {/*
+        * --- the extractions, inside the camera --------------------------
+        *
+        * The camera moves the *drawn* world and leaves the page alone. A
+        * push-in on a machine should not also push in on the receipt sitting
+        * beside it -- the evidence layer is screen furniture, the way the
+        * handwriting is in Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
       <Slot on={watcher.on} at={watcher.at} scale={watcher.scale} feel={feel} z={4}>
         <div style={{ width: '20cqw' }}>
           <Watcher watching={watcher.watching} feel={feel} />
         </div>
       </Slot>
 
+      {/*
+        * The two machines, drawn as machines.
+        *
+        * These were `Box` -- a labelled rectangle with the filename under it.
+        * That is the hook's whole problem in one component: the narration says
+        * "the server where its replacement was going to live" and the frame
+        * showed the words SUCCESSOR and a path. A viewer deciding in the first
+        * thirty seconds whether to stay was being shown a caption.
+        *
+        * `RackFront` is the same object §3 and §5 use, so the machine the hook
+        * introduces is literally the machine the film returns to.
+        */}
       <Slot on={current.on} at={current.at} scale={current.scale} feel={feel} z={4}>
-        <div style={{ width: '24cqw' }}>
-          <Box name="CURRENT" sub="model_20_09_2024.bin" doomed feel={feel} />
+        <div style={{ width: '17cqw' }}>
+          <RackFront name="CURRENT" active={2} alarm={current.alarm} feel={feel} />
         </div>
       </Slot>
 
       <Slot on={successor.on} at={successor.at} scale={successor.scale} feel={feel} z={4}>
-        <div style={{ width: '24cqw' }}>
-          <Box
+        <div style={{ width: '17cqw' }}>
+          <RackFront
             name="SUCCESSOR"
-            sub="model_27_09_2024.bin"
-            overwritten={successor.overwritten}
+            active={successor.overwritten ? 4 : null}
+            alarm={successor.overwritten}
             feel={feel}
           />
+        </div>
+      </Slot>
+
+      {/* What actually crosses. A pallet of plates, not the word "weights". */}
+      <Slot on={mass.on} at={mass.at} scale={mass.scale} feel={feel} z={5}>
+        <div style={{ width: '15cqw' }}>
+          <Weights real={mass.real} plates={6} feel={feel} />
         </div>
       </Slot>
 
@@ -101,6 +146,8 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           <Copy progress={copy.progress} feel={feel} />
         </div>
       </Slot>
+
+      </Camera>
 
       <Slot on={steps.on} at={steps.at} scale={steps.scale} feel={feel} z={4}>
         <div className="cf-steps" style={{ width: '30cqw' }}>

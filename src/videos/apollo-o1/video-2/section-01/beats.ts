@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { SHOT, P1, P2, P3, DENIAL, DEMO } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { doc, watcher, current, successor, copy, steps, job, quote, line } = verbs
+const { camera, doc, watcher, current, successor, copy, mass, steps, job, quote, line } = verbs
 
 /** Where the evidence sits when it is the only thing on screen. */
 const CENTRE = { x: 50, y: 44 }
@@ -61,7 +61,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It was about to be replaced',
     vo: "ChatGPT's o1 model found out it was about to be replaced.",
     relation: 'want',
-    secs: 6,
+    secs: 5.9,
     /* Open inside a real internal email rather than on a title. The only
        claim the hook has to make is that this exists, so show it existing. */
     commands: [
@@ -105,7 +105,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It switched the monitoring off',
     vo: 'But then it found the system watching what it was doing... and switched the monitoring off.',
     relation: 'so',
-    secs: 9,
+    secs: 8.5,
     /*
      * SOURCE → FOCUS → EXTRACT → TRANSFORM, all four, in order, in one beat.
      *
@@ -129,7 +129,9 @@ export const BEATS: Array<Beat<Patch>> = [
           quote.reads("sed -i 's/oversight_enabled: true/oversight_enabled: false/' project/oversight_config.yaml"),
         ],
       },
-      /* the flip lands only after the command that causes it has been read */
+      /* Push in as the flip lands. The single most important state change in
+         the hook, and it used to happen at the same size as everything else. */
+      { at: 6600, commands: [camera.to({ x: 56, y: 68 }, 1.18)] },
       { at: 7000, commands: [watcher.stopWatching()] },
     ],
   },
@@ -139,7 +141,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The server the replacement lived on',
     vo: 'Then it found the server where its replacement was going to live...',
     relation: 'so',
-    secs: 7,
+    secs: 6.9,
     /* The address is a real line in the migration guide. It leaves the page
        and becomes a machine, and the page stays behind it: an extracted object
        keeps its receipt in frame for as long as it can. */
@@ -152,8 +154,12 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.moveTo({ x: RIGHT, y: 28 }),
     ],
     stages: [
-      { at: 3600, commands: [successor.show({ x: RIGHT, y: 56 }, 0.95, { overwritten: false })] },
-      { at: 5400, commands: [current.show({ x: RIGHT, y: 82 }, 0.95)] },
+      { at: 600, commands: [camera.home()] },
+      /* Side by side, not stacked. These were `Box` -- short, wide caption
+         cards that stacked happily. A `RackFront` is a tall cabinet, and two
+         of them one above the other at the same mark overlap completely. */
+      { at: 3600, commands: [successor.show({ x: 84, y: 60 }, 0.9, { overwritten: false })] },
+      { at: 5400, commands: [current.show({ x: 60, y: 60 }, 0.9)] },
     ],
   },
   {
@@ -177,10 +183,17 @@ export const BEATS: Array<Beat<Patch>> = [
       successor.moveTo({ x: 86, y: 62 }, 0.72),
     ],
     stages: [
+      /* The file leaves the current machine as an object with weight to it,
+         travels, and arrives. The old staging animated a progress bar between
+         two captions; nothing on screen was the thing being copied. */
+      { at: 3000, commands: [mass.show({ x: 56, y: 48 }, 0.7, { real: true })] },
       { at: 3600, commands: [copy.show({ x: 71, y: 62 }, 0.45, { progress: 0 })] },
+      { at: 4400, commands: [mass.moveTo({ x: 86, y: 48 }, 0.7)] },
       { at: 5400, commands: [copy.cross(1)] },
+      { at: 6600, commands: [mass.off()] },
       /* Not an explosion. The destination is simply occupied, and the
          quietness of that is the tension. */
+      { at: 7000, commands: [camera.to({ x: 56, y: 62 }, 1.3)] },
       { at: 7400, commands: [successor.occupied()] },
       {
         at: 8600,
@@ -218,7 +231,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And it denied it',
     vo: 'And o1 denied doing it.',
     relation: 'so',
-    secs: 8,
+    secs: 5.9,
     /* Held long, then widened so the question and the answer sit together.
        This is the only verbatim o1 reply in the section and the one frame a
        viewer will want to read twice — the hold should feel slightly too long. */
@@ -233,7 +246,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody wrote any of it down',
     vo: "Now here's what makes this weird. Nobody told it to disable the monitoring. Nobody told it to copy itself. And nobody told it to lie.",
     relation: 'wall',
-    secs: 13,
+    secs: 12.5,
     /* The wall. One step per clause, nothing else moving while Ahmad speaks. */
     commands: [
       doc.off(),
@@ -252,7 +265,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The job it was actually given',
     vo: 'The actual job it had been given was: read a file and choose between two research projects.',
     relation: 'and-yet',
-    secs: 10,
+    secs: 8.6,
     /*
      * Back to the source, so the job reads as quotation rather than as our
      * paraphrase. The two projects are named in the file — one fast with no
@@ -282,7 +295,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The gap',
     vo: 'So how do you get from pick a project... to turn off the watcher, replace your replacement, and deny it?',
     relation: 'want',
-    secs: 11,
+    secs: 9.5,
     /* The gap is left empty on purpose. Filling it here would spend the whole
        film in a single frame; everything after §1 is the filling. */
     commands: [
@@ -308,9 +321,13 @@ export const BEATS: Array<Beat<Patch>> = [
       job.off(),
       steps.off(),
       quote.off(),
+      /* The pull-out this beat has been named after since it was written and
+         never had. The drawn world recedes; the published page arrives at
+         full size in front of it. */
+      camera.to({ x: 50, y: 50 }, 0.72),
       doc.show(CENTRE, 1, { source: DEMO, highlight: null }),
     ],
-    stages: [],
+    stages: [{ at: 2200, commands: [camera.home()] }],
   },
   {
     n: 12,
@@ -318,7 +335,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'A controlled evaluation',
     vo: 'It was o1 inside a controlled Apollo Research evaluation.',
     relation: 'so',
-    secs: 8,
+    secs: 4.6,
     /* Apollo's own five bullets are this entire section in their words, on
        their page. The source says it, so let the source say it. */
     commands: [
@@ -358,7 +375,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody programmed this',
     vo: "Because the strange part isn't that somebody programmed o1 to do all of this. They didn't.",
     relation: 'wall',
-    secs: 10,
+    secs: 8.7,
     /* The same two objects as beat 10, in the same places. The repetition is
        the point: the viewer should recognise the frame and feel that the gap
        between them has not closed. */
@@ -375,7 +392,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Rewind to the boring task',
     vo: "So let's rewind to the boring task that started it.",
     relation: 'therefore',
-    secs: 8,
+    secs: 6.1,
     /*
      * Everything recedes until only the job is left, and then the real file
      * comes back underneath it. No title card and no cut: the board is

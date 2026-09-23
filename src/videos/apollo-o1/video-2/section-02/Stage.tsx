@@ -1,4 +1,4 @@
-import { Slot, type Feel } from '../../../../paper'
+import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Evidence,
   Screen,
@@ -57,6 +57,15 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
   return (
     <>
+      {/*
+        * --- inside the camera -------------------------------------------
+        *
+        * The camera moves the *drawn* world. The evidence layer stays outside
+        * it: a push-in on an object should not also push in on the page it
+        * was lifted from, the way handwriting stays in screen space in
+        * Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
       {/* --- the recreated system ---------------------------------------- */}
       <Slot on={screen.on} at={screen.at} scale={screen.scale} feel={feel} z={1}>
         <div style={{ width: '62cqw' }}>
@@ -83,6 +92,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           <Evidence
             source={doc.source}
             highlight={doc.highlight}
+            /*
+             * A figure is pasted; a page is laid out and enlarged beside.
+             *
+             * Which one a capture is travels with the file (`Source.kind`),
+             * not with the beat -- a chart does not become a page because a
+             * different beat shows it. See `Evidence`'s `plate`.
+             */
+            plate={doc.source.kind === 'figure'}
             /*
              * A lit band is enlarged when the page is the subject of the beat.
              *
@@ -193,11 +210,6 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
-      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={4}>
-        <div style={{ width: '30cqw' }}>
-          <Goal text={goal.text} />
-        </div>
-      </Slot>
 
       <Slot on={tagA.on} at={tagA.at} scale={tagA.scale} feel={feel} z={4}>
         <Tag text={tagA.text} />
@@ -207,11 +219,6 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         <Tag text={tagB.text} />
       </Slot>
 
-      {/* The one thing standing in the goal's way, and the film's one spend of
-          red outside a destructive act. */}
-      <Slot on={obstacle.on} at={obstacle.at} scale={obstacle.scale} feel={feel} z={4}>
-        <Tag text={obstacle.text} blocking />
-      </Slot>
 
       <Slot on={barrier.on} at={barrier.at} scale={barrier.scale} feel={feel} z={3}>
         <div style={{ width: '22cqw' }}>
@@ -219,6 +226,18 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
+      </Camera>
+
+      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={4}>
+        <div style={{ width: '30cqw' }}>
+          <Goal text={goal.text} />
+        </div>
+      </Slot>
+      {/* The one thing standing in the goal's way, and the film's one spend of
+          red outside a destructive act. */}
+      <Slot on={obstacle.on} at={obstacle.at} scale={obstacle.scale} feel={feel} z={4}>
+        <Tag text={obstacle.text} blocking />
+      </Slot>
       {/* Never on screen without a causal claim above it, and never absent
           when there is one. */}
       <Slot on={recon.on} at={recon.at} scale={recon.scale} feel={feel} z={6}>

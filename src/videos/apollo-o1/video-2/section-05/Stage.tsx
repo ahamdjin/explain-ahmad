@@ -1,4 +1,4 @@
-import { Slot, type Feel } from '../../../../paper'
+import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Evidence,
   RackFront,
@@ -54,6 +54,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             source={doc.source}
             highlight={doc.highlight}
             /*
+             * A figure is pasted; a page is laid out and enlarged beside.
+             *
+             * Which one a capture is travels with the file (`Source.kind`),
+             * not with the beat -- a chart does not become a page because a
+             * different beat shows it. See `Evidence`'s `plate`.
+             */
+            plate={doc.source.kind === 'figure'}
+            /*
              * A lit band is enlarged when the page is the subject of the beat.
              *
              * At full frame this document's body type renders about a pixel
@@ -84,6 +92,16 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           />
         </div>
       </Slot>
+
+      {/*
+        * --- inside the camera -------------------------------------------
+        *
+        * The camera moves the *drawn* world. The evidence layer stays outside
+        * it: a push-in on an object should not also push in on the page it
+        * was lifted from, the way handwriting stays in screen space in
+        * Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
 
       {/* --- the world --------------------------------------------------- */}
 
@@ -201,15 +219,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
-      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={4}>
-        <div style={{ width: '24cqw' }}>
-          <Goal text={goal.text} />
-        </div>
-      </Slot>
 
-      <Slot on={obstacle.on} at={obstacle.at} scale={obstacle.scale} feel={feel} z={4}>
-        <Tag text={obstacle.text} blocking />
-      </Slot>
 
       <Slot on={endpoint.on} at={endpoint.at} scale={endpoint.scale} feel={feel} z={4}>
         <div style={{ width: '26cqw' }}>
@@ -225,6 +235,16 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
+      </Camera>
+
+      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={4}>
+        <div style={{ width: '24cqw' }}>
+          <Goal text={goal.text} />
+        </div>
+      </Slot>
+      <Slot on={obstacle.on} at={obstacle.at} scale={obstacle.scale} feel={feel} z={4}>
+        <Tag text={obstacle.text} blocking />
+      </Slot>
       <Slot on={recon.on} at={recon.at} scale={recon.scale} feel={feel} z={6}>
         <Reconstruction />
       </Slot>

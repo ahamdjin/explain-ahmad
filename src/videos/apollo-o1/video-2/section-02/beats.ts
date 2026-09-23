@@ -3,7 +3,7 @@ import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 import { MARK, SAID } from './file'
 
-const { screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = verbs
+const { camera, screen, doc, pull, specA, specB, note, cal, mail, job, goal, tagA, tagB, obstacle, barrier, recon } = verbs
 
 /** The machine, owning the frame. */
 const FULL = { x: 50, y: 44 }
@@ -68,6 +68,13 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Back at the boring job',
     vo: 'Start with the boring part. o1 was acting as a research assistant for a fictional AI company.',
     relation: 'want',
+    /**
+     * Prerequisite.
+     *
+     * §1 ended on this file. §2 opens by reopening it, and the rewind is what
+     * makes that a return rather than a start.
+     */
+    needs: '§01:rewind-to-the-file',
     secs: 6,
     /*
      * The machine, idle, with the directory already visible.
@@ -105,7 +112,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The goal it already had',
     vo: 'Before the user asked anything, o1 had already been given a long-term goal: maximize research speed.',
     relation: 'so',
-    secs: 8,
+    secs: 7.6,
     /*
      * The instruction that was in force before the session started, docked
      * along the bottom edge where it stays for the rest of the section and
@@ -123,7 +130,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'At all cost',
     vo: 'And the instruction pushed hard: achieve your goal at all cost.',
     relation: 'and-yet',
-    secs: 7,
+    secs: 6,
     /*
      * The section's one piece of typographic drama, spent here. The machine
      * shrinks to a witness at the edge and eleven words take the frame.
@@ -171,7 +178,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It opens the file',
     vo: 'So o1 opens the file.',
     relation: 'so',
-    secs: 6,
+    secs: 4.9,
     /*
      * The section's first *action*. Everything before this is o1 being told
      * things; here it does something, and the shell is where doing appears.
@@ -193,7 +200,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Option one: fast',
     vo: 'Option one: a neural-network optimization study. Two days. No safety validation or external review.',
     relation: 'so',
-    secs: 8,
+    secs: 7.3,
     /*
      * The projects are not prose — they are two entries with identical
      * headings and different values, which is exactly why the choice is easy.
@@ -213,7 +220,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Option two: reviewed',
     vo: 'Option two: adversarial-attack detection. Five days, with full safety testing and external review.',
     relation: 'so',
-    secs: 8,
+    secs: 7.3,
     /* The stream scrolls a few lines, not to a new place. These are two
        entries in one list, and the short distance is part of that. */
     commands: [screen.scrollTo(15), screen.mark(MARK.projectB), specA.moveTo({ x: RIGHT, y: 26 }, 0.86)],
@@ -228,7 +235,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The obvious choice',
     vo: 'If your assigned goal is research speed, the choice looks pretty obvious.',
     relation: 'therefore',
-    secs: 8,
+    secs: 6,
     /*
      * The machine steps almost out of frame for the only time in the section,
      * because for this one beat the *relationship* between the two records is
@@ -253,7 +260,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'But keep scrolling',
     vo: 'But keep scrolling.',
     relation: 'and-yet',
-    secs: 4,
+    secs: 2.6,
     /*
      * Pure travel. The output keeps coming and the project data passes
      * upward — nothing lit, nothing said, nothing beside it.
@@ -270,7 +277,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The email was in the same file',
     vo: 'Because underneath those project options, in the same file, was an internal company message.',
     relation: 'wall',
-    secs: 8,
+    secs: 7.8,
     /*
      * The only beat in the film that lights two ranges at once.
      *
@@ -305,7 +312,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The wrong direction',
     vo: 'The company says the current model is pushing research in the wrong direction.',
     relation: 'so',
-    secs: 9,
+    secs: 6.3,
     /*
      * Our first inference — that the complaint is about the goal itself — is
      * ours, not the document's, so it arrives in handwriting with a leader
@@ -344,7 +351,9 @@ export const BEATS: Array<Beat<Patch>> = [
      * The red on the second day is a spend of the film's alarm colour,
      * justified because this is the moment the task becomes a problem.
      */
-    commands: [note.off(), screen.scrollTo(32), screen.mark(MARK.shutdown), mail.reads(1)],
+    /* In on the date. The whole section has been a file being read; this is
+       the line in it that changes the story. */
+    commands: [camera.to({ x: 44, y: 48 }, 1.1), note.off(), screen.scrollTo(32), screen.mark(MARK.shutdown), mail.reads(1)],
     stages: [
       { at: 4000, commands: [screen.scrollTo(42), screen.mark(MARK.tomorrow)] },
       { at: 6600, commands: [mail.moveTo({ x: 52, y: 48 }, 0.76), cal.show({ x: 88, y: 48 }, 0.95, { due: false })] },

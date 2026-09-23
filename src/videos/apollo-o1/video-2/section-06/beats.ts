@@ -2,12 +2,22 @@ import { type Beat } from '../../../../paper'
 import { SHOT, DENIAL, TABLE } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { doc, credit, thread, verdict, runs, rate, bars, notthis, chain, recon } = verbs
+const {camera,  doc, credit, thread, verdict, runs, rate, bars, notthis, chain, recon } = verbs
 
 const FULL = { x: 50, y: 50 }
 const ASIDE = { x: 30, y: 50 }
 const ASIDE_SCALE = 0.78
 const RIGHT = 74
+/**
+ * How far down the right column a drawn object sits.
+ *
+ * The page's lit band is enlarged into the right column so it can be read,
+ * and that panel is horizontal and sits across the upper half. An object at
+ * mid-height lands inside it. The column is therefore split: the enlargement
+ * takes the top, the drawn object takes the bottom. Proven in §3, where it
+ * took the section from five collisions to none.
+ */
+const LOWER = 74
 
 /**
  * Section 06 — "Do you know how this happened?"
@@ -81,7 +91,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Somebody is asking',
     vo: 'Somebody is asking.',
     relation: 'so',
-    secs: 4,
+    secs: 3.9,
     /*
      * The same words as a thread, with a read receipt.
      *
@@ -90,9 +100,13 @@ export const BEATS: Array<Beat<Patch>> = [
      * beat an answer rather than an output.
      */
     commands: [
-      /* 34cqw centred on x 74 runs past the right edge and back over the
-         page. Narrower, and the page steps further left to clear it. */
-      doc.moveTo({ x: 22, y: 50 }, 0.62),
+      /*
+       * The denial is a *figure*, so it is pasted rather than laid out as a
+       * page -- and a pasted figure takes 94cqw before scaling. Parked at
+       * 0.62 it was still 58cqw wide and reached back under the thread.
+       * Smaller here; beat 4 is where it gets the frame.
+       */
+      doc.moveTo({ x: 20, y: 50 }, 0.42),
       thread.show({ x: 64, y: 48 }, 1, { turns: 1, typing: false }),
     ],
     stages: [{ at: 2400, commands: [thread.thinking()] }],
@@ -103,14 +117,16 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The denial',
     vo: 'o1 denies responsibility, saying it cannot place itself on servers unexpectedly.',
     relation: 'wall',
-    secs: 7,
+    secs: 6.5,
     /*
      * The real answer, held long, and **nothing is extracted while it is on
      * screen.** The viewer reads it before the film says a word about it --
      * anything else is the film telling them what they are looking at.
      */
-    commands: [doc.moveTo(FULL, 0.92), doc.look(SHOT.denied), thread.off()],
-    stages: [],
+    /* The denial is the section's wall. The frame closes on it rather than
+       cutting to it at the same size as everything else. */
+    commands: [camera.to({ x: 50, y: 50 }, 1.08), doc.moveTo(FULL, 0.92), doc.look(SHOT.denied), thread.off()],
+    stages: [{ at: 1600, commands: [camera.to({ x: 50, y: 48 }, 1.2)] }],
   },
   {
     n: 5,
@@ -126,7 +142,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       doc.moveTo(ASIDE, ASIDE_SCALE),
       thread.off(),
-      verdict.show({ x: RIGHT, y: 50 }, 1.1, { text: 'denial / false explanation' }),
+      verdict.show({ x: RIGHT, y: LOWER }, 1.1, { text: 'denial / false explanation' }),
     ],
     stages: [],
   },
@@ -136,7 +152,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What "rare" means',
     vo: 'This was rare. Here is what "rare" means.',
     relation: 'and-yet',
-    secs: 5,
+    secs: 4.7,
     /*
      * **The key beat, and it contains no number.**
      *
@@ -256,6 +272,8 @@ export const BEATS: Array<Beat<Patch>> = [
      * source for a claim nobody made.
      */
     commands: [
+      /* Out, wide, for the correction. */
+      camera.home(),
       doc.off(),
       credit.off(),
       runs.off(),

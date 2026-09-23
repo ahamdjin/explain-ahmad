@@ -1,7 +1,7 @@
-import { Slot, type Feel } from '../../../../paper'
+import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Claim, Strike, Goal, Road, Barrier, Watcher, Endpoint, Question,
-  Tag, TerminalVsInstrumental, Tools, Convergence, TermLabel, FaceCam, Reconstruction,
+  Tag, TerminalVsInstrumental, Tools, Convergence, TermLabel, FaceCam, Reconstruction, Evidence,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
@@ -20,7 +20,7 @@ import { type SceneState } from './scene'
  * than a new diagram.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { host, claim, strike, goal, road, wall, step, tvi, converge, term, recon } = scene
+  const { doc, host, claim, strike, goal, road, wall, step, tvi, converge, term, recon } = scene
 
   /* Each obstacle is the object the film already spent on it, so the pattern
      reads as a re-description of the incident rather than a fresh diagram. */
@@ -33,13 +33,30 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
   return (
     <>
-      {/* Carried straight through from §7's last frame, so the answer and the
-          question are visibly the same moment. */}
-      <Slot on={host.on} at={host.at} scale={host.scale} feel={feel} z={2}>
-        <div style={{ width: '40cqw' }}>
-          <FaceCam shape="thesis" line={host.line} />
+      {/* Pasted, never dissected -- `Source.kind` says this one is a figure.
+          Bottom of the z-stack: the drawn argument sits in front of it. */}
+      <Slot on={doc.on} at={doc.at} scale={doc.scale} feel={feel} z={1}>
+        <div className="cf-sheet">
+          <Evidence
+            source={doc.source}
+            highlight={doc.highlight}
+            plate={doc.source.kind === 'figure'}
+            feel={feel}
+            alt="Published results from Apollo Research's in-context scheming work"
+          />
         </div>
       </Slot>
+
+      {/*
+        * --- inside the camera -------------------------------------------
+        *
+        * The camera moves the *drawn* world. The evidence layer stays outside
+        * it: a push-in on an object should not also push in on the page it
+        * was lifted from, the way handwriting stays in screen space in
+        * Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
+
 
       {/*
        * The strike wraps the claim rather than sitting in its own slot. A
@@ -55,9 +72,6 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
-      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={3}>
-        <div style={{ width: '30cqw' }}><Goal text={goal.text} /></div>
-      </Slot>
 
       <Slot on={road.on} at={road.at} scale={road.scale} feel={feel} z={2}>
         <div style={{ width: '44cqw' }}><Road at={road.drawn} branch={false} feel={feel} /></div>
@@ -113,8 +127,20 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         />
       </Slot>
 
+      </Camera>
+
+      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={3}>
+        <div style={{ width: '30cqw' }}><Goal text={goal.text} /></div>
+      </Slot>
       <Slot on={recon.on} at={recon.at} scale={recon.scale} feel={feel} z={6}>
         <Reconstruction />
+      </Slot>
+      {/* Carried straight through from §7's last frame, so the answer and the
+          question are visibly the same moment. */}
+      <Slot on={host.on} at={host.at} scale={host.scale} feel={feel} z={2}>
+        <div style={{ width: '40cqw' }}>
+          <FaceCam shape="thesis" line={host.line} />
+        </div>
       </Slot>
     </>
   )

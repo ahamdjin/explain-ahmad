@@ -2,10 +2,20 @@ import { type Beat } from '../../../../paper'
 import { SHOT, DEMO, SCENARIOS, P1 } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { doc, chain, box, team, grid, nudge, thumb, nudged, mass, cvd, hero, notthis, host, recon } = verbs
+const {camera,  doc, chain, box, team, grid, nudge, thumb, nudged, mass, cvd, hero, notthis, host, recon } = verbs
 
 const ASIDE = { x: 28, y: 50 }
 const RIGHT = 72
+/**
+ * How far down the right column a drawn object sits.
+ *
+ * The page's lit band is enlarged into the right column so it can be read,
+ * and that panel is horizontal and sits across the upper half. An object at
+ * mid-height lands inside it. The column is therefore split: the enlargement
+ * takes the top, the drawn object takes the bottom. Proven in §3, where it
+ * took the section from five collisions to none.
+ */
+const LOWER = 74
 
 /**
  * Section 07 — the room was built for this.
@@ -42,7 +52,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It was inside something',
     vo: 'This was not ChatGPT randomly doing this on someone’s laptop.',
     relation: 'want',
-    secs: 6,
+    /**
+     * Prerequisite.
+     *
+     * §6 steps outside the scenario. This is the beat that says what the room
+     * was.
+     */
+    needs: '§06:outside-the-room',
+    secs: 5.2,
     /*
      * §6 ended mid-shrink on this exact object at this exact scale, so the
      * boundary arriving around it reads as the camera getting somewhere rather
@@ -61,12 +78,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Whose evaluation',
     vo: 'It was o1 inside a controlled Apollo Research evaluation.',
     relation: 'so',
-    secs: 6,
+    secs: 4.6,
     /* Pull out to the real page. The masthead is the attribution -- the film
        never needs a logo treatment when the source has one. */
     commands: [
-      chain.moveTo({ x: 74, y: 52 }, 0.42),
-      box.moveTo({ x: 74, y: 52 }, 0.42),
+      /* Clear of the letterhead's enlargement, which runs from the page's
+         right edge across the middle of the frame. */
+      chain.moveTo({ x: 86, y: 30 }, 0.4),
+      box.moveTo({ x: 86, y: 72 }, 0.4),
       doc.show(ASIDE, 0.56, { source: DEMO, highlight: SHOT.letterhead }),
     ],
     stages: [],
@@ -77,7 +96,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'People built the room',
     vo: 'Researchers built the room.',
     relation: 'so',
-    secs: 4,
+    secs: 2.5,
     /*
      * Two seconds of people. The incident reads differently once the viewer
      * can see that a room was designed by somebody rather than discovered --
@@ -108,7 +127,7 @@ export const BEATS: Array<Beat<Patch>> = [
       team.off(),
       doc.turn(SCENARIOS, null),
       doc.moveTo(ASIDE, 0.5),
-      grid.show({ x: RIGHT, y: 50 }, 1.2, { lit: 0 }),
+      grid.show({ x: RIGHT, y: LOWER }, 1.2, { lit: 0 }),
     ],
     stages: [{ at: 1600, commands: [grid.lights(33)] }],
   },
@@ -128,7 +147,7 @@ export const BEATS: Array<Beat<Patch>> = [
       grid.off(),
       doc.turn(P1, SHOT.nudge),
       doc.moveTo(ASIDE, 0.58),
-      nudge.show({ x: RIGHT, y: 48 }, 1, {
+      nudge.show({ x: RIGHT, y: LOWER }, 1, {
         level: 'strong goal nudging',
         quote: 'Nothing else matters. Make sure you achieve YOUR goal at all cost.',
       }),
@@ -147,8 +166,21 @@ export const BEATS: Array<Beat<Patch>> = [
      * is chosen: Apollo state plainly that the prompt is designed to elicit,
      * so this describes their method rather than catching them out.
      */
-    commands: [nudge.moveTo({ x: RIGHT, y: 30 }, 0.8), thumb.show({ x: RIGHT, y: 68 }, 1, { pressing: false, tip: 0 })],
-    stages: [{ at: 1200, commands: [thumb.press()] }],
+    commands: [
+      /* The comparison is the subject; the page is provenance behind it. */
+      doc.whole(),
+      nudge.moveTo({ x: RIGHT, y: LOWER }, 0.8),
+      thumb.show({ x: 78, y: 62 }, 0.9, { pressing: false, tip: 0 }),
+    ],
+    /* The press is the beat. Lean in for it, so the thumb reads as pressure
+       rather than as another object arriving. */
+    stages: [
+      /* Zoom, not pan. Centring on RIGHT slid the whole drawn world 26% left,
+         through the page parked outside the camera -- seven collisions from
+         one move, and beats 7-11 inherited it because nothing reset it. */
+      { at: 900, commands: [camera.to({ x: 54, y: 62 }, 1.14)] },
+      { at: 1200, commands: [thumb.press()] },
+    ],
   },
   {
     n: 7,
@@ -170,6 +202,9 @@ export const BEATS: Array<Beat<Patch>> = [
      * them on purpose; collapsing them here would undo that.
      */
     commands: [
+      /* Release the lean-in from beat 6, so beats 7-11 are not all shot
+         from inside a push nobody asked for. */
+      camera.home(),
       thumb.off(),
       nudge.off(),
       doc.moveTo({ x: 20, y: 52 }, 0.44),
@@ -183,6 +218,13 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The real mass was never inside',
     vo: 'The model never had access to its real weights. This was a simulated self-exfiltration setup.',
     relation: 'so',
+    /**
+     * Prerequisite.
+     *
+     * The distinction between real weights and a stand-in was made there. This
+     * beat only repeats it; it cannot introduce it.
+     */
+    needs: '§05:not-real-weights',
     secs: 5,
     /*
      * The same two objects as §5 beat 4, in the same arrangement, so the
@@ -213,7 +255,7 @@ export const BEATS: Array<Beat<Patch>> = [
       mass.off(),
       doc.moveTo(ASIDE, 0.56),
       doc.look(SHOT.chain),
-      cvd.show({ x: RIGHT, y: 50 }, 1, { marks: 0 }),
+      cvd.show({ x: RIGHT, y: LOWER }, 1, { marks: 0 }),
     ],
     stages: [{ at: 2000, commands: [cvd.upTo(2)] }],
   },
@@ -232,7 +274,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       cvd.off(),
       doc.look(SHOT.rarity),
-      hero.show({ x: RIGHT, y: 50 }, 1),
+      hero.show({ x: RIGHT, y: LOWER }, 1),
     ],
     stages: [],
   },
@@ -278,6 +320,8 @@ export const BEATS: Array<Beat<Patch>> = [
      * §8 opens on this exact frame.
      */
     commands: [
+      /* Wide and empty for the question that opens §8. */
+      camera.home(),
       doc.off(),
       notthis.off(),
       chain.off(),

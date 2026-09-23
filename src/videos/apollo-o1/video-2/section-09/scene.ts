@@ -2,6 +2,7 @@ import {
   actorVerbs, mergePatches, INITIAL_CAMERA,
   type CameraActor, type PatchOf, type Placed,
 } from '../../../../paper'
+import { CONCEPT, type Region, type Source } from '../../../../paper/casefile'
 
 /**
  * Section 09 — they gave it the destination.
@@ -23,6 +24,17 @@ import {
 
 export type SceneState = {
   camera: CameraActor
+
+  /**
+   * A published picture, pasted.
+   *
+   * This section had no evidence actor at all, and measured out at 70% text
+   * by painted area -- the argument was built entirely from caption cards.
+   * It is the section that says "Apollo's experiment shows the uncomfortable
+   * version", with Apollo's own figure of exactly that sitting unused in
+   * `public/evidence/`.
+   */
+  doc: Placed & { source: Source; highlight: Region | Region[] | null }
 
   /** The claim on trial. No source — nobody in particular said it. */
   claim: Placed & { text: string }
@@ -54,6 +66,7 @@ export type SceneState = {
 
 export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
+  doc: { on: false, at: { x: 50, y: 50 }, scale: 1, source: CONCEPT, highlight: null },
   /* §8 ended on one goal and an empty road. §9 opens on the claim over it. */
   claim: { on: false, at: { x: 50, y: 34 }, scale: 1, text: '' },
   micro: { on: false, at: { x: 50, y: 62 }, scale: 1, shown: 0, collapsed: false },
@@ -75,8 +88,30 @@ const A = <K extends keyof SceneState>(k: K) => actorVerbs<SceneState, K>(k)
 const claim = A('claim'), micro = A('micro'), job = A('job'), goal = A('goal')
 const road = A('road'), steps = A('steps'), never = A('never'), gap = A('gap')
 const dest = A('dest'), final = A('final'), sources = A('sources'), endcard = A('endcard')
+const doc = A('doc')
+
+
+/**
+ * The camera.
+ *
+ * Every section of this film declared `camera` in its state and not one
+ * rendered a `Camera` or ever moved it -- nine sections of dead state, and a
+ * film that cut between static arrangements for eleven minutes because the
+ * one tool for moving through a scene was wired up and never switched on.
+ */
+export const camera = {
+  to: (at: { x: number; y: number }, zoom: number): Patch => ({ camera: { x: at.x, y: at.y, zoom } }),
+  home: (): Patch => ({ camera: { ...INITIAL_CAMERA } }),
+}
 
 export const verbs = {
+  camera,
+  doc: {
+    ...doc,
+    /** Put a different published picture up. A cut, so use it at a real jump. */
+    open: (source: Source, highlight: Region | Region[] | null = null): Patch =>
+      doc.set({ source, highlight }),
+  },
   claim,
   micro: {
     ...micro,

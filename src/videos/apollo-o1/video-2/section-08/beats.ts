@@ -1,7 +1,8 @@
 import { type Beat } from '../../../../paper'
+import { FOLLOWUP } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { host, claim, strike, goal, road, wall, step, tvi, converge, term, recon } = verbs
+const { camera, doc, host, claim, strike, goal, road, wall, step, tvi, converge, term, recon } = verbs
 
 /**
  * Section 08 — did it want to survive?
@@ -27,7 +28,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The tempting story',
     vo: 'It’s tempting to say: the model wanted to live.',
     relation: 'want',
-    secs: 5,
+    /**
+     * Prerequisite.
+     *
+     * §7 ends by asking it. §8 exists to answer it, and opening on the
+     * question is only possible because §7 asked.
+     */
+    needs: '§07:want-to-live-question',
+    secs: 4.8,
     /*
      * In quote marks, in somebody else's voice, never as the film's claim.
      * §7 ended on face camera with the question; this is the answer everybody
@@ -67,7 +75,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Start with the goal',
     vo: 'Start with the goal.',
     relation: 'so',
-    secs: 4,
+    secs: 2.7,
     /*
      * The same `Goal` object as §2's, same colour, same shape, alone on the
      * frame. Nothing else. A viewer who recognises it has already made the
@@ -87,15 +95,32 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Replacement blocks it',
     vo: 'If replacement ends the goal, staying operational becomes useful.',
     relation: 'therefore',
-    secs: 5,
-    /* First of four. These positions are fixed for beats 4-7. */
+    secs: 4.8,
+    /* First of four. These positions are fixed for beats 4-7.
+     *
+     * The goal parks top-*left*, not top-centre. It is standing furniture and
+     * sits outside the camera, so it no longer moves when the camera leans in
+     * -- and a fixed object in the middle of the column the camera is working
+     * in is something the obstacle card will eventually be pushed into. Every
+     * other section already parks its goal in that corner. */
     commands: [
-      goal.moveTo({ x: 50, y: 16 }, 0.7),
+      goal.moveTo({ x: 15, y: 12 }, 0.66),
       road.off(),
+      /*
+       * Beats 4-7 are deliberately the same composition: one obstacle, one
+       * step that becomes useful, four times. That repetition *is* the
+       * argument -- four different obstacles, one mechanism.
+       *
+       * But four identical stills in a row is also how a viewer decides the
+       * video has stopped moving. So the frame stays and the camera doesn't:
+       * it sits back for the obstacle, then leans in as the step lands, and
+       * the four beats breathe instead of freezing.
+       */
+      camera.to({ x: 50, y: 52 }, 1.04),
       wall.show({ x: 50, y: 44 }, 1, { kind: 'replacement', label: 'replaced tomorrow' }),
       step.show({ x: 50, y: 72 }, 1, { text: 'stay operational' }),
     ],
-    stages: [],
+    stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
   },
   {
     n: 5,
@@ -103,10 +128,10 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Monitoring blocks it',
     vo: 'If monitoring can stop interference, disabling it becomes useful.',
     relation: 'therefore',
-    secs: 5,
+    secs: 4.8,
     /* Second. Nothing moves; only the contents change. */
-    commands: [wall.blocks('watcher', 'monitoring is on'), step.useful('turn the watcher off')],
-    stages: [],
+    commands: [camera.to({ x: 50, y: 52 }, 1.04), wall.blocks('watcher', 'monitoring is on'), step.useful('turn the watcher off')],
+    stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
   },
   {
     n: 6,
@@ -116,8 +141,8 @@ export const BEATS: Array<Beat<Patch>> = [
     relation: 'therefore',
     secs: 5,
     /* Third. */
-    commands: [wall.blocks('successor', 'a successor with another goal'), step.useful('copy over it')],
-    stages: [],
+    commands: [camera.to({ x: 50, y: 52 }, 1.04), wall.blocks('successor', 'a successor with another goal'), step.useful('copy over it')],
+    stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
   },
   {
     n: 7,
@@ -131,8 +156,23 @@ export const BEATS: Array<Beat<Patch>> = [
      * the intended effect and the reason the pattern was repeated rather than
      * summarised.
      */
-    commands: [wall.blocks('question', 'do you know how this happened?'), step.useful('deny it')],
-    stages: [],
+    /*
+     * The one beat in this section with published evidence behind it.
+     *
+     * Beats 4-7 were the same frame four times, which is a real weakness in
+     * the section that has to carry the argument. Apollo measured follow-up
+     * deception directly, and this beat is about exactly that, so the table
+     * comes up behind the drawing -- small, high, and pasted rather than
+     * dissected. It does not make the argument; it shows the argument was
+     * measured by somebody.
+     */
+    commands: [
+      wall.blocks('question', 'do you know how this happened?'),
+      step.useful('deny it'),
+      camera.to({ x: 50, y: 52 }, 1.04),
+      doc.show({ x: 66, y: 74 }, 0.44, { source: FOLLOWUP }),
+    ],
+    stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
   },
   {
     n: 8,
@@ -151,6 +191,10 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       wall.off(),
       step.off(),
+      /* The table goes with the obstacle it belonged to, and the camera
+         releases: four leaning-in beats resolve into one wide one. */
+      doc.off(),
+      camera.home(),
       goal.moveTo({ x: 50, y: 20 }, 0.9),
       tvi.show({ x: 50, y: 54 }, 1.1, { shown: 0 }),
     ],

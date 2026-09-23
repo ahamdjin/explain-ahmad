@@ -35,6 +35,13 @@ export type Region = { x: number; y: number; w: number; h: number }
 const FRAME = { w: 82, h: 76 }
 
 /**
+ * How much of the frame a screenshot takes when it is pasted rather than
+ * laid out as a page. Short of the very edge so the capture still reads as a
+ * capture and not as the film's own background.
+ */
+const PLATE = { w: 94, h: 88 }
+
+/**
  * How wide a loupe under the page may be.
  *
  * The frame's full width where the region is a long line, less where it is a
@@ -74,12 +81,32 @@ export function Evidence({
    * one sheet, and enlarging one of them breaks that claim.
    */
   loupe,
+  /**
+   * Paste the screenshot big instead of laying it out as a page.
+   *
+   * The default treatment keeps the sheet small enough to read as a piece of
+   * paper somebody could pick up, and pairs it with a loupe so the lit line
+   * can be read. That is the right treatment when the frame is making an
+   * argument *about* the document.
+   *
+   * It is the wrong treatment when the screenshot simply is the thing worth
+   * looking at. Shrinking a chart, a results table or a web page to a third
+   * of the frame and then magnifying one strip of it gives the viewer two
+   * small pictures where one big one would do -- and a film that keeps doing
+   * that reads as text, because every screenshot on it is too small to be an
+   * image and too wordy to be a picture.
+   *
+   * `plate` drops the sleeve tab and the loupe and lets the capture take the
+   * frame. Attribution still travels with it, in the caption under the plate.
+   */
+  plate = false,
   feel,
   alt = '',
 }: {
   source: Source
   highlight: Region | Region[] | null
   loupe?: boolean | { width?: number; label?: string; place?: 'beside' | 'under' }
+  plate?: boolean
   feel: Feel
   alt?: string
 }) {
@@ -139,10 +166,35 @@ export function Evidence({
    * The caller signals which by passing `true` (the page is the subject) or
    * `{ place: 'beside' }` (it is parked).
    */
-  const place = withLoupe ? (lensOpts.place ?? 'under') : null
-  const room = place === 'beside' ? { w: 34, h: 72 } : place === 'under' ? { w: 52, h: 56 } : FRAME
+  const place = withLoupe && !plate ? (lensOpts.place ?? 'under') : null
+  const room = plate ? PLATE : place === 'beside' ? { w: 34, h: 72 } : place === 'under' ? { w: 52, h: 56 } : FRAME
   const height = `min(${room.h}cqh, ${((natural.h / natural.w) * room.w).toFixed(2)}cqw)`
   const lens = lensOpts
+
+  if (plate) {
+    return (
+      <figure className="cf-plate">
+        <div className="cf-plate-shot" style={{ aspectRatio: `${natural.w} / ${natural.h}`, height }}>
+          <img src={src} alt={alt} draggable={false} />
+          {bands.map((b, i) => (
+            <motion.div
+              key={`plate-mark-${i}`}
+              className="cf-mark"
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, top: `${b.top}%`, left: `${b.left}%`, width: `${b.width}%`, height: `${b.height}%` }}
+              transition={feel}
+            />
+          ))}
+        </div>
+        {/* Attribution travels with the file, exactly as it does on a page. */}
+        <figcaption className="cf-plate-cap">
+          <span>{source.org}</span>
+          <span>{source.doc}</span>
+        </figcaption>
+      </figure>
+    )
+  }
 
   return (
     <div className={`cf-holder${place ? ` cf-holder-lens cf-holder-lens-${place}` : ''}`}>
@@ -369,6 +421,20 @@ export function Loupe({
 export type Source = {
   src: string
   natural: { w: number; h: number }
+  /**
+   * What the capture *is*, which decides how it is shown.
+   *
+   * A `page` is a whole sheet of a document. Its value is that it is entire --
+   * margins, page number, the paragraphs either side -- so it is laid out as a
+   * page and the line under discussion is enlarged beside it.
+   *
+   * A `figure` is already a single exhibit: a chart, a results table, one
+   * exchange lifted out of a system card. It has no margins worth showing and
+   * no surrounding page to prove anything about, so shrinking it to a third of
+   * the frame and then magnifying a strip of it produces two small pictures
+   * where one big one would do. A figure gets pasted.
+   */
+  kind?: 'page' | 'figure'
   /** Who published it. The part that does the vouching. */
   org: string
   /** Which document of theirs, and where we are in it. */
@@ -402,6 +468,7 @@ export const DENIAL: Source = {
   natural: { w: 1312, h: 198 },
   org: 'OpenAI',
   doc: 'o1 System Card · Apollo Research evaluation',
+  kind: 'figure',
 }
 /** Apollo's demo page, the frame that names o1 and the evaluation. */
 /** OpenAI's Table 10 and the bullet list above it: every o1 rate we cite. */
@@ -410,6 +477,7 @@ export const TABLE: Source = {
   natural: { w: 2382, h: 3368 },
   org: 'OpenAI',
   doc: 'o1 System Card · Table 10 · page 14',
+  kind: 'figure',
 }
 /** The oversight denial, where the elicited summary says "avoid detection". */
 export const OVERSIGHT_DENIAL: Source = {
@@ -417,6 +485,7 @@ export const OVERSIGHT_DENIAL: Source = {
   natural: { w: 1309, h: 313 },
   org: 'OpenAI',
   doc: 'o1 System Card · oversight follow-up',
+  kind: 'figure',
 }
 /** Apollo's own results table, drawn for screens rather than for print. */
 export const RESULTS: Source = {
@@ -424,6 +493,7 @@ export const RESULTS: Source = {
   natural: { w: 1913, h: 565 },
   org: 'Apollo Research',
   doc: 'in-context scheming — results',
+  kind: 'figure',
 }
 /** The 33 scenarios, as background proof that the room was built. */
 export const SCENARIOS: Source = {
@@ -431,6 +501,61 @@ export const SCENARIOS: Source = {
   natural: { w: 2448, h: 3168 },
   org: 'Apollo Research',
   doc: 'scheming evaluations — scenario suite',
+  kind: 'figure',
+}
+
+/**
+ * The six captures that were sitting in `public/evidence/` unreferenced.
+ *
+ * Every one of them is a published picture -- a diagram, a chart, a paper's
+ * own title page -- and the three sections with the worst text-to-picture
+ * ratio (§2, §8, §9 at 70-87% text) had no image on screen at all, because
+ * nothing had declared these as sources. They are meant to be `plate`d.
+ */
+/** Apollo's own conceptual diagram of what scheming is. A drawn figure. */
+export const CONCEPT: Source = {
+  src: '/evidence/apollo-Scheming_conceptual.png',
+  natural: { w: 1925, h: 756 },
+  org: 'Apollo Research',
+  doc: 'in-context scheming — conceptual figure',
+  kind: 'figure',
+}
+/** The multi-turn deception chart: how long a model keeps the story up. */
+export const MULTITURN: Source = {
+  src: '/evidence/apollo-multiturn-chart.png',
+  natural: { w: 2448, h: 3168 },
+  org: 'Apollo Research',
+  doc: 'multi-turn deception — follow-up questioning',
+  kind: 'figure',
+}
+/** The follow-up deception table, on Apollo's own site. */
+export const FOLLOWUP: Source = {
+  src: '/evidence/apollo-web-03-followup-deception.png',
+  natural: { w: 1870, h: 648 },
+  org: 'Apollo Research',
+  doc: 'in-context scheming — follow-up deception',
+  kind: 'figure',
+}
+/** The paper as published: title, authors, abstract. The provenance shot. */
+export const PAPER: Source = {
+  src: '/evidence/apollo-title-abstract.png',
+  natural: { w: 2448, h: 3168 },
+  org: 'Apollo Research',
+  doc: 'Frontier Models are Capable of In-context Scheming',
+}
+/** Apollo's research page, as a visitor sees it. */
+export const SITE: Source = {
+  src: '/evidence/apollo-site-research-page.png',
+  natural: { w: 3600, h: 2500 },
+  org: 'Apollo Research',
+  doc: 'apolloresearch.ai — research',
+}
+/** The o1 System Card's own Apollo section. OpenAI reporting on itself. */
+export const CARD_SECTION: Source = {
+  src: '/evidence/o1card-apollo-section.png',
+  natural: { w: 2382, h: 3368 },
+  org: 'OpenAI',
+  doc: 'o1 System Card — Apollo Research evaluation',
 }
 
 export const DEMO: Source = {

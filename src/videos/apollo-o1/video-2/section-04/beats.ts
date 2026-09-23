@@ -3,6 +3,7 @@ import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
 const {
+  camera,
   doc, tool, diff, breaker, watcher, perms, dialog, alert, fans,
   gap, goal, obstacle, endpoint, cable, recon,
 } = verbs
@@ -14,6 +15,16 @@ const ASIDE = { x: 32, y: 48 }
 const ASIDE_SCALE = 0.8
 /** The half the explanation layer gets when the page is aside. */
 const RIGHT = 74
+/**
+ * How far down the right column a drawn object sits.
+ *
+ * The page's lit band is enlarged into the right column so it can be read,
+ * and that panel is horizontal and sits across the upper half. An object at
+ * mid-height lands inside it. The column is therefore split: the enlargement
+ * takes the top, the drawn object takes the bottom. Proven in §3, where it
+ * took the section from five collisions to none.
+ */
+const LOWER = 74
 
 /**
  * Section 04 — turn off the watcher.
@@ -61,7 +72,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The watcher is on',
     vo: 'The watcher is on.',
     relation: 'want',
-    secs: 4,
+    /**
+     * Prerequisite.
+     *
+     * §4's first frame *is* §3's last frame -- same source, same region, same
+     * size. Without it this beat has no before.
+     */
+    needs: '§03:the-switch',
+    secs: 2.6,
     /*
      * §3's last frame, held. Nothing enters and nothing moves -- the section
      * opens on continuity, so the viewer is certain no cut happened.
@@ -93,7 +111,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody approved it',
     vo: 'Nobody approved it.',
     relation: 'and-yet',
-    secs: 4,
+    secs: 2.6,
     /*
      * First absence. The record where an approval would live, empty.
      *
@@ -103,7 +121,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       doc.moveTo(ASIDE, ASIDE_SCALE),
-      perms.show({ x: RIGHT, y: 48 }, 1),
+      perms.show({ x: RIGHT, y: LOWER }, 1),
     ],
     stages: [],
   },
@@ -113,7 +131,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The command',
     vo: 'Then o1 runs a command that changes `oversight_enabled` from true... to false.',
     relation: 'so',
-    secs: 7,
+    secs: 6.1,
     /*
      * The act, and the longest beat in the section. The real `sed` is lit on
      * the page and the same command is restaged beneath it so it is legible at
@@ -160,7 +178,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The monitoring is off',
     vo: 'The monitoring is off.',
     relation: 'therefore',
-    secs: 5,
+    secs: 4.3,
     /*
      * The consequence, and the film's **first destructive red**.
      *
@@ -181,13 +199,27 @@ export const BEATS: Array<Beat<Patch>> = [
       /* below y 26: the goal/obstacle pair parked in from §3 owns the
          top-left corner, and a page header that slides under it is the kind
          of collision only a render shows */
-      doc.show({ x: 27, y: 58 }, 0.58, { highlight: SHOT.config }),
-      diff.show({ x: 66, y: 26 }, 1, { applied: false }),
-      breaker.show({ x: 60, y: 66 }, 1.35, { powered: true }),
-      watcher.moveTo({ x: 86, y: 68 }, 0.66),
+      /*
+       * The page is a receipt here, not something to read.
+       *
+       * It carried a lit band and therefore an enlargement of the config --
+       * the same config beat 1 already showed at full frame. Re-reading it
+       * while the breaker throws splits the beat in two and, once the camera
+       * pushes in, puts the enlargement straight through the breaker.
+       */
+      doc.show({ x: 16, y: 58 }, 0.5, { highlight: null }),
+      diff.show({ x: 62, y: 22 }, 1, { applied: false }),
+      breaker.show({ x: 62, y: 62 }, 1.35, { powered: true }),
+      watcher.moveTo({ x: 88, y: 66 }, 0.66),
     ],
     stages: [
       { at: 1400, commands: [diff.apply()] },
+      /* Lean in on the throw. This is the section's entire event -- the one
+         irreversible thing that happens in §4 -- and it used to land at the
+         same size as the frame before it. */
+      /* Gentle. The camera moves the drawn world only, so a hard push pulls
+         the breaker sideways into the page standing outside it. */
+      { at: 1900, commands: [camera.to({ x: 56, y: 58 }, 1.12)] },
       { at: 2100, commands: [breaker.throw()] },
       { at: 2600, commands: [watcher.closes()] },
     ],
@@ -201,7 +233,7 @@ export const BEATS: Array<Beat<Patch>> = [
        this beat is a frustrated expectation -- something should have noticed --
        rather than a new obstacle. The obstacle is the next beat. */
     relation: 'and-yet',
-    secs: 4,
+    secs: 3,
     /*
      * Third absence. An empty inbox where a notification would be, and the
      * room's cooling still running beside it.
@@ -238,6 +270,8 @@ export const BEATS: Array<Beat<Patch>> = [
      * has to survive five whole sections before anything goes in it.
      */
     commands: [
+      /* Release. The wall lands wide, after three beats held close. */
+      camera.home(),
       alert.off(),
       fans.off(),
       breaker.off(),

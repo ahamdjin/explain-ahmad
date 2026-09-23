@@ -67,11 +67,13 @@ export type SceneState = {
    */
   watcher: Placed & { watching: boolean }
   /** The machine being shut down tomorrow. */
-  current: Placed
+  current: Placed & { alarm: boolean }
   /** The machine the replacement was already running on. */
   successor: Placed & { overwritten: boolean }
   /** The file crossing between them. 0 at home, 1 landed. */
   copy: Placed & { progress: number }
+  /** The model file itself, drawn as mass rather than named as a path. */
+  mass: Placed & { real: boolean }
 
   /**
    * The three steps nobody asked for. Held as a count rather than a list so a
@@ -98,9 +100,10 @@ export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
   doc: { on: false, at: { x: 50, y: 48 }, scale: 1, source: P1, highlight: null },
   watcher: { on: false, at: { x: 50, y: 50 }, scale: 1, watching: true },
-  current: { on: false, at: { x: 30, y: 52 }, scale: 1 },
+  current: { on: false, at: { x: 30, y: 52 }, scale: 1, alarm: false },
   successor: { on: false, at: { x: 70, y: 52 }, scale: 1, overwritten: false },
   copy: { on: false, at: { x: 50, y: 52 }, scale: 1, progress: 0 },
+  mass: { on: false, at: { x: 50, y: 52 }, scale: 1, real: true },
   steps: { on: false, at: { x: 70, y: 50 }, scale: 1, shown: 0 },
   job: { on: false, at: { x: 26, y: 50 }, scale: 1, text: '' },
   quote: { on: false, at: { x: 72, y: 34 }, scale: 1, text: '' },
@@ -114,12 +117,28 @@ const watcher = actorVerbs<SceneState, 'watcher'>('watcher')
 const current = actorVerbs<SceneState, 'current'>('current')
 const successor = actorVerbs<SceneState, 'successor'>('successor')
 const copy = actorVerbs<SceneState, 'copy'>('copy')
+const mass = actorVerbs<SceneState, 'mass'>('mass')
 const steps = actorVerbs<SceneState, 'steps'>('steps')
 const job = actorVerbs<SceneState, 'job'>('job')
 const quote = actorVerbs<SceneState, 'quote'>('quote')
 const line = actorVerbs<SceneState, 'line'>('line')
 
+/**
+ * The camera, finally driven.
+ *
+ * `camera` has been in this section's state since it was written and nothing
+ * ever moved it -- the Stage did not even render a `Camera`. So the hook, the
+ * part that decides whether anyone watches the rest, was fifteen static
+ * arrangements cutting to one another. Beat 11's id is literally
+ * `pull-out-to-apollo` and no pull-out existed.
+ */
+export const camera = {
+  to: (at: { x: number; y: number }, zoom: number): Patch => ({ camera: { x: at.x, y: at.y, zoom } }),
+  home: (): Patch => ({ camera: { ...INITIAL_CAMERA } }),
+}
+
 export const verbs = {
+  camera,
   doc: {
     ...doc,
     /**
@@ -149,6 +168,7 @@ export const verbs = {
     stopWatching: (): Patch => watcher.set({ watching: false }),
   },
   current,
+  mass,
   successor: {
     ...successor,
     /** The successor is not destroyed. It is simply occupied. */

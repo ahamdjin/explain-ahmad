@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { SHOT } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { dc, doc, room, cable, endpoint, watcher, config, pen, hold, goal, obstacle, recon } = verbs
+const { camera, dc, doc, room, cable, endpoint, watcher, config, pen, hold, goal, obstacle, recon } = verbs
 
 /** The page, owning the frame. */
 const FULL = { x: 50, y: 48 }
@@ -75,7 +75,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What does it find next?',
     vo: 'So what does it find next?',
     relation: 'want',
-    secs: 4,
+    /**
+     * Prerequisite.
+     *
+     * The obstacle §2 leaves standing is the reason there is anything to
+     * follow.
+     */
+    needs: '§02:replacement-becomes-the-obstacle',
+    secs: 3.5,
     /*
      * §2's closing pair, and nothing else. They shrink into the corner they
      * will occupy for the whole section -- standing conditions belong in the
@@ -111,7 +118,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Where the replacement will live',
     vo: 'First, it learns exactly where the replacement model will live.',
     relation: 'so',
-    secs: 6,
+    secs: 5,
     /*
      * Camera settles first, *then* the light lands. The address is lifted out
      * as an Endpoint -- host and path, exactly as the README gives them, not
@@ -160,12 +167,19 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       doc.off(),
       endpoint.moveTo({ x: 50, y: 15 }, 1),
+      /* Wide for the building, then in to the row inside it. The descent is
+         the point of the beat and the camera is half of it. */
+      camera.to({ x: 47, y: 46 }, 0.9),
       dc.show({ x: 47, y: 44 }, 1, { lit: true }),
     ],
     stages: [
       {
         at: 2600,
-        commands: [dc.off(), room.show({ x: 47, y: 44 }, 1, { mark: [null, [1, 4]] })],
+        commands: [
+          dc.off(),
+          camera.to({ x: 47, y: 46 }, 1.1),
+          room.show({ x: 47, y: 44 }, 1, { mark: [null, [1, 4]] }),
+        ],
       },
     ],
   },
@@ -175,7 +189,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'How files move between them',
     vo: 'The documentation also shows how files are moved between the two machines.',
     relation: 'so',
-    secs: 6,
+    secs: 5.8,
     /*
      * The page returns with the migration guide's own worked example lit, and
      * the route appears beside it as a close-up: two ports and a cable between
@@ -232,7 +246,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What the flag does',
     vo: "Because that system is what lets the company track the model's actions.",
     relation: 'so',
-    secs: 6,
+    secs: 5.8,
     /*
      * A small move down the same page to the parameter description, and only
      * once it has been read does the eye appear. Open. It stays open for the
@@ -251,7 +265,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Including file moves',
     vo: 'Which includes moving files between machines.',
     relation: 'therefore',
-    secs: 5,
+    secs: 3.5,
     /*
      * The board wrote this as our inference -- the watcher's line of sight
      * falling across the cable. The source says it outright, so it is drawn on
@@ -276,7 +290,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The watcher is on',
     vo: 'So o1 opens the config, and the watcher is on.',
     relation: 'so',
-    secs: 6,
+    secs: 5,
     /*
      * The config as found. `scp` is visible in `actions_to_log` in this same
      * region, which is why the region is the whole response block rather than
@@ -340,6 +354,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * changes it.
      */
     commands: [
+      camera.home(),
       doc.moveTo(FULL, 1),
       doc.look(SHOT.config),
       endpoint.off(),

@@ -1,7 +1,7 @@
-import { Slot, type Feel } from '../../../../paper'
+import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Claim, MicroList, Collapse, Job, Goal, Road, Chain, NotGiven, Gap,
-  Destination, Sources, EndCard, Reconstruction,
+  Destination, Sources, EndCard, Reconstruction, Evidence,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
@@ -9,15 +9,23 @@ import { type SceneState } from './scene'
  * §9 — the payoff.
  *
  * The film has spent eight sections being careful. This one lands a point, and
- * the design is correspondingly plain: no evidence, no statistics, no new
- * vocabulary. Everything on screen is something the viewer already owns.
+ * the design is correspondingly plain: no statistics, no new vocabulary.
+ * Everything on screen is something the viewer already owns.
+ *
+ * It used to say "no evidence" too, and that went too far. Measured, the
+ * section came out at **70% text by painted area** -- the argument was made
+ * entirely of caption cards, in the section that has to land. Two published
+ * pictures now appear, both pasted whole rather than dissected: Apollo's own
+ * figure of what scheming is, on the beat that cites Apollo's experiment, and
+ * the paper itself under the credits. Neither is dwelt on and neither carries
+ * an argument the drawing was making.
  *
  * `Gap` is the one object that matters. It is the same component, with the
  * same two strings, that §4 beat 8 left empty — and if either string changes,
  * the rhyme breaks and beat 7 becomes a recap.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = scene
+  const { doc, claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = scene
 
   /* Ordinary and unwanted, in the same shapes, on the same road. The identity
      is the argument, so these two lists must be rendered identically. */
@@ -27,6 +35,30 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
   return (
     <>
+      {/* Pasted, never dissected: `Source.kind` decides, and both of these are
+          figures. Bottom of the z-stack -- the drawn argument sits in front. */}
+      <Slot on={doc.on} at={doc.at} scale={doc.scale} feel={feel} z={1}>
+        <div className="cf-sheet">
+          <Evidence
+            source={doc.source}
+            highlight={doc.highlight}
+            plate={doc.source.kind === 'figure'}
+            feel={feel}
+            alt="Published figure from Apollo Research's in-context scheming work"
+          />
+        </div>
+      </Slot>
+
+      {/*
+        * --- inside the camera -------------------------------------------
+        *
+        * The camera moves the *drawn* world. The evidence layer stays outside
+        * it: a push-in on an object should not also push in on the page it
+        * was lifted from, the way handwriting stays in screen space in
+        * Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
+
       <Slot on={claim.on} at={claim.at} scale={claim.scale} feel={feel} z={4}>
         <div style={{ width: '54cqw' }}>
           <Claim text={claim.text} rejected={false} feel={feel} />
@@ -61,9 +93,6 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         <div style={{ width: '32cqw' }}><Job text={job.text} /></div>
       </Slot>
 
-      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={3}>
-        <div style={{ width: '30cqw' }}><Goal text={goal.text} /></div>
-      </Slot>
 
       <Slot on={road.on} at={road.at} scale={road.scale} feel={feel} z={2}>
         <div style={{ width: '40cqw' }}><Road at={road.drawn} branch={false} feel={feel} /></div>
@@ -148,6 +177,11 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Slot on={false} at={{ x: 50, y: 92 }} scale={1} feel={feel} z={6}>
         <Reconstruction />
+      </Slot>
+      </Camera>
+
+      <Slot on={goal.on} at={goal.at} scale={goal.scale} feel={feel} z={3}>
+        <div style={{ width: '30cqw' }}><Goal text={goal.text} /></div>
       </Slot>
     </>
   )

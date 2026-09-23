@@ -1,4 +1,4 @@
-import { Slot, type Feel } from '../../../../paper'
+import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Evidence, Chain, Boundary, Outside, Team, ScenarioGrid, Nudge, Thumb,
   NudgeCompare, Weights, CanVsDoes, HeroNumber, NotThis, FaceCam, Balance, Reconstruction,
@@ -27,6 +27,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           <Evidence
             source={doc.source}
             highlight={doc.highlight}
+            /*
+             * A figure is pasted; a page is laid out and enlarged beside.
+             *
+             * Which one a capture is travels with the file (`Source.kind`),
+             * not with the beat -- a chart does not become a page because a
+             * different beat shows it. See `Evidence`'s `plate`.
+             */
+            plate={doc.source.kind === 'figure'}
             /* Same rule as the other sections: enlarge a single lit band, and
                put it beside the page whenever the page is parked. */
             loupe={
@@ -41,6 +49,16 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
           />
         </div>
       </Slot>
+
+      {/*
+        * --- inside the camera -------------------------------------------
+        *
+        * The camera moves the *drawn* world. The evidence layer stays outside
+        * it: a push-in on an object should not also push in on the page it
+        * was lifted from, the way handwriting stays in screen space in
+        * Video 1's §2.
+        */}
+      <Camera at={scene.camera} feel={feel}>
 
       {/* The incident, arriving mid-shrink from §6. */}
       <Slot on={chain.on} at={chain.at} scale={chain.scale} feel={feel} z={2}>
@@ -142,15 +160,17 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         </div>
       </Slot>
 
+
+      </Camera>
+
+      <Slot on={recon.on} at={recon.at} scale={recon.scale} feel={feel} z={6}>
+        <Reconstruction />
+      </Slot>
       {/* First face camera since §1. One question beside it, nothing else. */}
       <Slot on={host.on} at={host.at} scale={host.scale} feel={feel} z={5}>
         <div style={{ width: '54cqw' }}>
           <FaceCam shape="thesis" line={host.line} />
         </div>
-      </Slot>
-
-      <Slot on={recon.on} at={recon.at} scale={recon.scale} feel={feel} z={6}>
-        <Reconstruction />
       </Slot>
     </>
   )

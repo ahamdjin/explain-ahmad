@@ -3580,3 +3580,44 @@
 
 .cf-holder-lens-under > .cf-tab { justify-self: center; }
 .cf-holder-lens-under > .cf-loupe { grid-column: 1; grid-row: 3; }
+
+/* A screenshot pasted, not laid out ---------------------------------------
+ * For the frames where the capture *is* the picture. No sleeve tab, no
+ * loupe: the image takes the frame and the credit sits under it. */
+.cf-plate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8cqw;
+  margin: 0;
+}
+
+.cf-plate-shot {
+  position: relative;
+  border: 1.5px solid rgba(43, 41, 38, 0.5);
+  box-shadow: 0 14px 44px rgba(43, 41, 38, 0.2);
+  background: var(--cf-paper-white, #fdfbf6);
+}
+
+.cf-plate-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cf-plate-cap {
+  display: flex;
+  gap: 1.2cqw;
+  align-items: baseline;
+  font-family: var(--cf-typed);
+  font-size: 1cqw;
+  letter-spacing: 0.04em;
+  color: #8a7f6e;
+}
+
+.cf-plate-cap span:first-child {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6f6557;
+}
