@@ -1,3 +1,38 @@
+/**
+ * Finds beats that are a still frame.
+ *
+ * ## Why this exists
+ *
+ * "Why is there too little movement" is a fair note and an unfalsifiable one
+ * until something counts it. A beat that puts three objects up in the same
+ * instant and then holds them for six seconds is a slide, not a shot -- and
+ * it also breaks `BEAT_GRANULARITY` rule 1, one beat one move. Both faults
+ * have the same fix: stage the arrivals.
+ *
+ * At first measurement, 43 of Video 2's 107 beats never changed at all after
+ * the opening 700ms. §7 held one arrangement for seven seconds.
+ *
+ * ## What it measures, having been wrong in both directions first
+ *
+ * Three samples per beat, compared. *What* is compared turned out to matter
+ * more than the sampling:
+ *
+ *   - **Slot rectangles alone** called a beat still when the movement was
+ *     happening inside a component -- a counter running, a chain filling, a
+ *     thumb pressing. Those are the beats most likely to have been staged
+ *     deliberately, so it was wrong exactly where it mattered: 40%.
+ *
+ *   - **Hashing the markup** reported 0 of 107 still, which is nonsense.
+ *     Motion rewrites inline transform styles every frame, so a spring merely
+ *     settling looked like a redraw.
+ *
+ * Geometry plus text length and child count is what works. Those change when
+ * a component genuinely draws something different, and do not change while a
+ * spring is coming to rest.
+ *
+ *   VIDEO=apollo-o1/video-2 node scripts/check-motion.mjs
+ *   PORT=4400 node scripts/check-motion.mjs
+ */
 import { spawn } from 'node:child_process'
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
