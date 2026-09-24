@@ -190,7 +190,15 @@ export const INITIAL: SceneState = {
     ran: false,
   },
   /* §1's exit, exactly: ASIDE {27,46} at 0.8, lit on the task. */
-  doc: { on: true, at: { x: 27, y: 46 }, scale: 0.8, source: P1, highlight: SHOT.task },
+  /*
+   * Off, because §1 no longer hands one over.
+   *
+   * This said `on: true` at §1's old exit mark -- §1 used to end on a scan of
+   * the very page §2 is about to open in a terminal, and §2's first frame
+   * inherited it. §1 now ends on the job card instead, so a document sitting
+   * here was a page nothing had introduced, arriving on top of that card.
+   */
+  doc: { on: false, at: { x: 27, y: 46 }, scale: 0.8, source: P1, highlight: SHOT.task },
   pull: { on: false, at: { x: 50, y: 50 }, scale: 1, text: '', lead: '' },
   term: { on: false, at: { x: 50, y: 80 }, scale: 1, text: '' },
   dur: { on: false, at: { x: 72, y: 52 }, scale: 1, shown: false },

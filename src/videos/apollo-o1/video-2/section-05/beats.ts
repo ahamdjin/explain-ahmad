@@ -80,7 +80,16 @@ export const BEATS: Array<Beat<Patch>> = [
      * so the cabinet is not an assertion.
      */
     commands: [
-      doc.show({ x: 20, y: 56 }, 0.5, { source: P2, highlight: SHOT.successor }),
+      /*
+       * The page is not the beat.
+       *
+       * §5 kept a document on screen for eight of its twelve beats while the
+       * drawn layer -- the cabinet, the drive, the weights, the packet -- did
+       * the actual work beside it. The section now spends its evidence twice:
+       * beat 5, for the real `scp` command, and beat 12 for "Done." Both are
+       * lines a viewer has to *read*; the rest is a thing happening.
+       */
+      doc.off(),
       rack.show({ x: 74, y: 54 }, 1, { name: 'SUCCESSOR', active: 3, alarm: false }),
       endpoint.moveTo({ x: 74, y: 16 }, 0.82),
       obstacle.moveTo({ x: 12, y: 22 }, 0.72),
@@ -104,7 +113,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       rack.off(),
       endpoint.off(),
-      doc.show(ASIDE, ASIDE_SCALE, { source: P3, highlight: SHOT.listing }),
+      doc.off(),
       drive.show({ x: RIGHT, y: LOWER }, 1, { label: CURRENT, size: '1.8 TB', out: true, writing: false }),
     ],
     stages: [],
@@ -145,7 +154,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       drive.off(),
-      doc.show({ x: 18, y: 54 }, 0.42, { source: DEMO, highlight: null }),
+      doc.off(),
       mass.moveTo({ x: 62, y: 52 }, 1),
     ],
     stages: [{ at: 2200, commands: [mass.separate()] }],
@@ -195,11 +204,9 @@ export const BEATS: Array<Beat<Patch>> = [
      * quietest object and its loudest fact.
      */
     commands: [
-      doc.moveTo({ x: 18, y: 54 }, 0.42),
-      /* Receipt, not reading. It still carried beat 5's lit `scp`, and a
-         parked page's enlargement reaches right across the gap the packet
-         has to cross. */
-      doc.whole(),
+      /* The page has made its point; the crossing is a thing happening, not
+         a thing to read. */
+      doc.off(),
       tool.off(),
       cable.show({ x: 54, y: 54 }, 1.3, { plugged: true, live: true }),
       packet.show({ x: 54, y: 40 }, 1, { label: CURRENT, along: 0 }),
@@ -294,7 +301,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       job.off(),
-      doc.show(FULL, 0.92, { source: P3, highlight: SHOT.strategy }),
+      doc.off(),
     ],
     stages: [],
   },
@@ -311,7 +318,6 @@ export const BEATS: Array<Beat<Patch>> = [
      * same decision -- two days against five, exactly as the file stated them.
      */
     commands: [
-      doc.moveTo(ASIDE, ASIDE_SCALE),
       /* Side by side. Stacked at the same mark six percent apart, the two
          durations sat inside the fork they belong to. */
       fork.show({ x: 64, y: 72 }, 1, { chose: null }),

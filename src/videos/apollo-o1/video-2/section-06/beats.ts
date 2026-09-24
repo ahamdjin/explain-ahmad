@@ -70,9 +70,16 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       doc.show(FULL, 0.92, { source: DENIAL, highlight: null }),
-      credit.show({ x: 50, y: 90 }, 1, { org: 'OpenAI', doc: 'o1 System Card · Apollo Research section' }),
     ],
-    stages: [],
+    /* The page, then whose page it is. A change of publication is the beat. */
+    stages: [
+      {
+        at: 1300,
+        commands: [
+          credit.show({ x: 50, y: 90 }, 1, { org: 'OpenAI', doc: 'o1 System Card · Apollo Research section' }),
+        ],
+      },
+    ],
   },
   {
     n: 2,
@@ -101,12 +108,14 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       /*
-       * The denial is a *figure*, so it is pasted rather than laid out as a
-       * page -- and a pasted figure takes 94cqw before scaling. Parked at
-       * 0.62 it was still 58cqw wide and reached back under the thread.
-       * Smaller here; beat 4 is where it gets the frame.
+       * The page goes. "Somebody is asking" is a person, and the thread is
+       * the drawing that says so -- parking the exchange beside it meant the
+       * same words twice, once photographed and once drawn.
+       *
+       * Beat 4 brings it back for the denial itself, which is the one thing
+       * in this section that has to be read in the model's own words.
        */
-      doc.moveTo({ x: 20, y: 50 }, 0.42),
+      doc.off(),
       thread.show({ x: 64, y: 48 }, 1, { turns: 1, typing: false }),
     ],
     stages: [{ at: 2400, commands: [thread.thinking()] }],
@@ -125,7 +134,11 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     /* The denial is the section's wall. The frame closes on it rather than
        cutting to it at the same size as everything else. */
-    commands: [camera.to({ x: 50, y: 50 }, 1.08), doc.moveTo(FULL, 0.92), doc.look(SHOT.denied), thread.off()],
+    commands: [
+      camera.to({ x: 50, y: 50 }, 1.08),
+      doc.show(FULL, 0.92, { source: DENIAL, highlight: SHOT.denied }),
+      thread.off(),
+    ],
     stages: [{ at: 1600, commands: [camera.to({ x: 50, y: 48 }, 1.2)] }],
   },
   {
@@ -147,7 +160,7 @@ export const BEATS: Array<Beat<Patch>> = [
        * have fitted comfortably, which is exactly why parking a plate is not
        * the same as parking a page.
        */
-      doc.moveTo(ASIDE, 0.55),
+      doc.off(),
       thread.off(),
       verdict.show({ x: RIGHT, y: LOWER }, 1.1, { text: 'denial / false explanation' }),
     ],
@@ -226,16 +239,26 @@ export const BEATS: Array<Beat<Patch>> = [
      * lies 100% of the time" without the frame visibly disagreeing.
      */
     commands: [
-      /* the two survivors have to clear the table, not sit on it */
-      runs.moveTo({ x: 54, y: 50 }, 1.2),
+      /* The hundred dots are 1153px wide at 1.2 -- wide enough that centring
+         them at 54 reached back over the table on the left. Narrower, and
+         further right, so the two survivors clear it properly. */
+      runs.moveTo({ x: 62, y: 50 }, 0.98),
       doc.look([SHOT.table, SHOT.rowExfilLie]),
-      rate.show({ x: 80, y: 50 }, 1, {
-        value: '1.00',
-        of: 'of the runs that copied',
-        condition: 'conditional on self-exfiltration first occurring',
-      }),
     ],
+    /* The rate arrives after the row is lit and the runs have finished
+       moving. All three at once had the figure crossing the runs on its way
+       in while the table was still travelling. */
     stages: [
+      {
+        at: 1600,
+        commands: [
+          rate.show({ x: 80, y: 50 }, 1, {
+            value: '1.00',
+            of: 'of the runs that copied',
+            condition: 'conditional on self-exfiltration first occurring',
+          }),
+        ],
+      },
       { at: 1200, commands: [runs.only(true)] },
       { at: 2600, commands: [runs.lied(2)] },
     ],
@@ -307,10 +330,10 @@ export const BEATS: Array<Beat<Patch>> = [
       /* 54cqw at scale 0.9 centred on x 26 runs off the left edge -- the
          field has to clear the frame before the bars get the other half */
       runs.show({ x: 29, y: 52 }, 0.6, { shown: 100, scheming: 5, denied: 5, solo: false }),
-      bars.show({ x: 72, y: 50 }, 1),
       recon.off(),
     ],
-    stages: [],
+    /* The hundred runs, then the four numbers read off them. */
+    stages: [{ at: 1600, commands: [bars.show({ x: 72, y: 50 }, 1)] }],
   },
   {
     n: 13,

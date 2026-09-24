@@ -46,9 +46,12 @@ export const BEATS: Array<Beat<Patch>> = [
        cut here would make the answer look like a different film. */
     commands: [
       host.moveTo({ x: 26, y: 54 }, 0.74),
-      claim.show({ x: 70, y: 46 }, 0.95, { text: 'It wanted to live.', rejected: false }),
     ],
-    stages: [],
+    /* The claim arrives after the face has settled -- it is the thing being
+       put on trial, not scenery that came with him. */
+    stages: [
+      { at: 1200, commands: [claim.show({ x: 70, y: 46 }, 0.95, { text: 'It wanted to live.', rejected: false })] },
+    ],
   },
   {
     n: 2,
@@ -170,9 +173,14 @@ export const BEATS: Array<Beat<Patch>> = [
       wall.blocks('question', 'do you know how this happened?'),
       step.useful('deny it'),
       camera.to({ x: 50, y: 52 }, 1.04),
-      doc.show({ x: 66, y: 74 }, 0.44, { source: FOLLOWUP }),
     ],
-    stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
+    /* The table arrives last, after the camera has leaned in and the tools
+       card has finished rising -- it was placed in the space that card
+       travels through. */
+    stages: [
+      { at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] },
+      { at: 2600, commands: [doc.show({ x: 70, y: 78 }, 0.4, { source: FOLLOWUP })] },
+    ],
   },
   {
     n: 8,
@@ -222,9 +230,8 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       goal.off(),
       tvi.off(),
-      converge.show({ x: 50, y: 48 }, 1.1),
     ],
-    stages: [],
+    stages: [{ at: 1000, commands: [converge.show({ x: 50, y: 48 }, 1.1)] }],
   },
   {
     n: 10,
@@ -238,8 +245,10 @@ export const BEATS: Array<Beat<Patch>> = [
      * a definition to memorise -- `BEAT_GRANULARITY` rule 3, function before
      * name, held for seven beats.
      */
-    commands: [converge.moveTo({ x: 50, y: 42 }, 1), term.show({ x: 50, y: 76 }, 1.1)],
-    stages: [],
+    commands: [converge.moveTo({ x: 50, y: 42 }, 1)],
+    /* The picture first, its name second. `BEAT_GRANULARITY` rule 3: function
+       before name. */
+    stages: [{ at: 1600, commands: [term.show({ x: 50, y: 76 }, 1.1)] }],
   },
   {
     n: 11,

@@ -59,7 +59,9 @@
     "retime:v2": "VIDEO=apollo-o1/video-2 node scripts/retime.mjs --dry",
     "check:clipped": "node scripts/check-clipped.mjs",
     "check:clipped:v2": "VIDEO=apollo-o1/video-2 node scripts/check-clipped.mjs",
-    "check:overlap:motion:v2": "VIDEO=apollo-o1/video-2 node scripts/check-overlap.mjs --motion"
+    "check:overlap:motion:v2": "VIDEO=apollo-o1/video-2 node scripts/check-overlap.mjs --motion",
+    "check:motion": "node scripts/check-motion.mjs",
+    "check:motion:v2": "VIDEO=apollo-o1/video-2 node scripts/check-motion.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

@@ -82,13 +82,20 @@ export const BEATS: Array<Beat<Patch>> = [
     /* Pull out to the real page. The masthead is the attribution -- the film
        never needs a logo treatment when the source has one. */
     commands: [
-      /* Clear of the letterhead's enlargement, which runs from the page's
-         right edge across the middle of the frame. */
+      /* The two objects step aside *first*, then the page lands in the space
+         they left. The other order put the page on top of them for the half
+         second before they moved. */
       chain.moveTo({ x: 83, y: 30 }, 0.4),
       box.moveTo({ x: 83, y: 72 }, 0.4),
-      doc.show(ASIDE, 0.56, { source: DEMO, highlight: SHOT.letterhead }),
     ],
-    stages: [],
+    stages: [
+      {
+        at: 1200,
+        commands: [
+          doc.show(ASIDE, 0.56, { source: DEMO, highlight: SHOT.letterhead }),
+        ],
+      },
+    ],
   },
   {
     n: 3,
@@ -104,7 +111,15 @@ export const BEATS: Array<Beat<Patch>> = [
      * the word "on purpose".
      */
     commands: [
-      doc.moveTo({ x: 22, y: 52 }, 0.44),
+      /*
+       * The page leaves after its reveal.
+       *
+       * It used to stay from beat 2 to beat 11 -- ten of twelve beats -- just
+       * shuffling position while the drawn layer did the work beside it. §7
+       * spends its evidence twice: here it has already made its point, and
+       * beat 5 brings it back for the one line worth reading.
+       */
+      doc.off(),
       chain.off(),
       box.off(),
       team.show({ x: 66, y: 50 }, 1.1, { shown: 0 }),
@@ -125,8 +140,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       team.off(),
-      doc.turn(SCENARIOS, null),
-      doc.moveTo(ASIDE, 0.5),
+
       grid.show({ x: RIGHT, y: LOWER }, 1.2, { lit: 0 }),
     ],
     stages: [{ at: 1600, commands: [grid.lights(33)] }],
@@ -145,14 +159,23 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       grid.off(),
-      doc.turn(P1, SHOT.nudge),
-      doc.moveTo(ASIDE, 0.58),
-      nudge.show({ x: RIGHT, y: LOWER }, 1, {
-        level: 'strong goal nudging',
-        quote: 'Nothing else matters. Make sure you achieve YOUR goal at all cost.',
-      }),
+      /* Back, for the one line this section rests on: the instruction that
+         was actually in the prompt. */
+      doc.show(ASIDE, 0.58, { source: P1, highlight: SHOT.nudge }),
     ],
-    stages: [],
+    /* "They pushed that goal hard" -- and then it arrives. Six seconds on one
+       arrangement was the section's longest dead hold. */
+    stages: [
+      {
+        at: 2000,
+        commands: [
+          nudge.show({ x: RIGHT, y: LOWER }, 1, {
+            level: 'strong goal nudging',
+            quote: 'Nothing else matters. Make sure you achieve YOUR goal at all cost.',
+          }),
+        ],
+      },
+    ],
   },
   {
     n: 6,
@@ -207,7 +230,8 @@ export const BEATS: Array<Beat<Patch>> = [
       camera.home(),
       thumb.off(),
       nudge.off(),
-      doc.moveTo({ x: 20, y: 52 }, 0.44),
+      /* Done. The counterfactual is a comparison, not a reading. */
+      doc.off(),
       nudged.show({ x: 62, y: 50 }, 1.15, { reveal: false }),
     ],
     stages: [{ at: 2200, commands: [nudged.compare()] }],
@@ -233,11 +257,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       nudged.off(),
-      doc.turn(DEMO, null),
-      doc.moveTo({ x: 18, y: 52 }, 0.42),
-      mass.show({ x: 60, y: 52 }, 1),
+
     ],
-    stages: [],
+    stages: [{ at: 1600, commands: [mass.show({ x: 60, y: 52 }, 1)] }],
   },
   {
     n: 9,
@@ -253,8 +275,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       mass.off(),
-      doc.moveTo(ASIDE, 0.56),
-      doc.look(SHOT.chain),
+
       cvd.show({ x: RIGHT, y: LOWER }, 1, { marks: 0 }),
     ],
     stages: [{ at: 2000, commands: [cvd.upTo(2)] }],
@@ -273,10 +294,10 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       cvd.off(),
-      doc.look(SHOT.rarity),
-      hero.show({ x: RIGHT, y: LOWER }, 1),
     ],
-    stages: [],
+    /* Seven seconds held one arrangement -- the longest still frame in the
+       film. The rarity figure is the beat; it arrives when the voice says it. */
+    stages: [{ at: 2600, commands: [hero.show({ x: RIGHT, y: LOWER }, 1)] }],
   },
   {
     n: 11,
@@ -293,17 +314,26 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       hero.off(),
-      /* DEMO is a page, so its lit band is enlarged beside it and that panel
-         reaches into the middle. The card that carries the beat's claim goes
-         further right to clear it. */
-      doc.moveTo({ x: 16, y: 52 }, 0.38),
+      /* Taken off so the stage below *places* it. Left on, `show` reads as a
+         move and it travelled from beat 2's corner straight through the claim
+         this beat exists to make. */
+      chain.off(),
+      box.off(),
       notthis.show({ x: 72, y: 38 }, 0.94),
-      chain.show({ x: 66, y: 76 }, 0.5, { shown: 5 }),
       /* 0.5 put the sandbox's own label at 6.8px. It is the label naming the
          thing the whole section is about; it does not get to be a smudge. */
-      box.show({ x: 66, y: 76 }, 0.78, { label: 'controlled evaluation' }),
     ],
-    stages: [],
+    /* 3000, not 2200: the two objects were coming back while the claim above
+       them was still fading up, and the two crossed. */
+    stages: [
+      {
+        at: 3000,
+        commands: [
+          chain.show({ x: 66, y: 76 }, 0.46, { shown: 5 }),
+          box.show({ x: 66, y: 90 }, 0.62, { label: 'controlled evaluation' }),
+        ],
+      },
+    ],
   },
   {
     n: 12,
@@ -332,8 +362,10 @@ export const BEATS: Array<Beat<Patch>> = [
       chain.off(),
       box.off(),
       recon.off(),
-      host.show({ x: 50, y: 52 }, 1, { line: 'did it want to survive?' }),
     ],
-    stages: [],
+    /* The frame empties first, and the question arrives into the empty frame.
+       Landing it in the same instant everything else left wasted the pause
+       that makes it the section's last word. */
+    stages: [{ at: 1400, commands: [host.show({ x: 50, y: 52 }, 1, { line: 'did it want to survive?' })] }],
   },
 ]

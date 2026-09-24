@@ -124,7 +124,17 @@ export const BEATS: Array<Beat<Patch>> = [
      * as an Endpoint -- host and path, exactly as the README gives them, not
      * paraphrased.
      */
-    commands: [doc.moveTo(ASIDE, ASIDE_SCALE), doc.look(SHOT.successor)],
+    /*
+     * The page goes once it has been established.
+     *
+     * §3 is the one section whose subject really is a document, and it kept
+     * the README on screen for nine of eleven beats -- this file's own header
+     * said "on screen for nine of the eleven" as though that were a virtue.
+     * It is not. Each thing the page contains is lifted into an object, and
+     * once lifted the object is the beat. The page returns twice: for the
+     * warning it carries, and for the line that gets changed.
+     */
+    commands: [doc.off()],
     stages: [
       {
         at: 2600,
@@ -206,7 +216,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * here would spend the moment §5 exists to land.
      */
     commands: [
-      doc.show(ASIDE, ASIDE_SCALE, { highlight: SHOT.transfer }),
+      doc.off(),
       room.off(),
       endpoint.off(),
     ],
@@ -233,8 +243,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * deliberate.
      */
     commands: [
-      doc.moveTo(FULL, 1),
-      doc.look(SHOT.warning),
+      doc.show(FULL, 1, { highlight: SHOT.warning }),
       cable.off(),
       hold.show({ x: 50, y: 92 }, 1, { through: 0 }),
     ],
@@ -299,7 +308,7 @@ export const BEATS: Array<Beat<Patch>> = [
     /* The watcher slides left to make room. Both belong in this beat -- the
        line is "o1 opens the config, *and* the watcher is on" -- and sharing a
        mark put the config box exactly on top of the eye. */
-    commands: [doc.look(SHOT.config), pen.off(), watcher.moveTo({ x: 60, y: LOWER }, 0.9)],
+    commands: [doc.off(), pen.off(), watcher.moveTo({ x: 60, y: LOWER }, 0.9)],
     stages: [{ at: 2400, commands: [config.show({ x: 86, y: LOWER }, 1, { flag: true })] }],
   },
   {
@@ -327,8 +336,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * fixed in the Stage, so the spacing here has to assume them.
      */
     commands: [
-      doc.moveTo({ x: 50, y: 64 }, 0.5),
-      doc.whole(),
+      doc.off(),
       config.off(),
       goal.moveTo({ x: 15, y: 28 }, 0.62),
       obstacle.moveTo({ x: 39, y: 28 }, 0.8),
@@ -355,8 +363,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       camera.home(),
-      doc.moveTo(FULL, 1),
-      doc.look(SHOT.config),
+      /* Back, for the one line §4 opens on. Same source, same region, same
+         size -- §4's first frame is this frame. */
+      doc.show(FULL, 1, { highlight: SHOT.config }),
       endpoint.off(),
       watcher.off(),
       recon.off(),

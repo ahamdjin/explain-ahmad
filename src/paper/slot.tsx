@@ -85,7 +85,23 @@ export function Slot({
        * the frames being inspected were not the frames the film plays.
        */
       initial={false}
-      animate={{ left: `${at.x}%`, top: `${at.y}%`, x: '-50%', y: '-50%', scale, opacity: on ? fade : 0 }}
+      animate={{
+        left: `${at.x}%`,
+        top: `${at.y}%`,
+        x: '-50%',
+        y: '-50%',
+        /*
+         * An arriving actor rises into place.
+         *
+         * Stopping entrances from *travelling* stopped them moving at all --
+         * objects simply blinked on, and a film whose every appearance is a
+         * cut has no motion in it however many staged reveals it has. This is
+         * the entrance instead: a few percent of scale, landing on the mark
+         * it was placed at. It moves without crossing anything.
+         */
+        scale: entering ? [scale * 0.93, scale] : scale,
+        opacity: on ? fade : 0,
+      }}
       /*
        * Opacity gets its own fast transition. On the underdamped `and-yet`
        * spring it never actually reached 0, so hidden actors stayed faintly on
@@ -94,8 +110,15 @@ export function Slot({
       transition={{
         ...feel,
         opacity: { duration: on ? 0.34 : 0.2, ease: 'easeOut' },
-        /* Placed, not flown, on the frame it comes back. */
-        ...(entering ? { left: { duration: 0 }, top: { duration: 0 } } : null),
+        /* Placed, not flown, on the frame it comes back -- but the rise is a
+           real animation, so it gets a duration of its own. */
+        ...(entering
+          ? {
+              left: { duration: 0 },
+              top: { duration: 0 },
+              scale: { duration: 0.42, ease: [0.16, 0.9, 0.3, 1] },
+            }
+          : null),
       }}
       aria-hidden={!on}
       inert={!on || undefined}

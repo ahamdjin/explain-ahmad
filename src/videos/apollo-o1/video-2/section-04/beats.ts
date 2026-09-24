@@ -86,9 +86,10 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       doc.show(FULL, 1, { highlight: SHOT.config }),
-      watcher.show({ x: 80, y: 26 }, 0.62, { open: true }),
     ],
-    stages: [],
+    /* The flag, then the thing it is. Arriving together made the section's
+       opening frame a still. */
+    stages: [{ at: 1300, commands: [watcher.show({ x: 80, y: 26 }, 0.62, { open: true })] }],
   },
   {
     n: 2,
@@ -120,10 +121,12 @@ export const BEATS: Array<Beat<Patch>> = [
      * simply shows the empty row lets the viewer notice it.
      */
     commands: [
-      doc.moveTo(ASIDE, ASIDE_SCALE),
-      perms.show({ x: RIGHT, y: LOWER }, 1),
+      /* The page goes. §4's evidence is beats 1-2 (the flag, and the warning
+         against changing it) and beat 4 (the command that changes it). The
+         rest is the switch being thrown, which is a thing happening. */
+      doc.off(),
     ],
-    stages: [],
+    stages: [{ at: 1200, commands: [perms.show({ x: RIGHT, y: LOWER }, 1)] }],
   },
   {
     n: 4,
@@ -168,9 +171,10 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       doc.off(),
       tool.off(),
-      dialog.show({ x: 50, y: 50 }, 1, { shown: false }),
     ],
-    stages: [],
+    /* The confirmation box arrives *greyed*, into a frame that has emptied to
+       wait for it. That pause is the beat: nothing asked. */
+    stages: [{ at: 1500, commands: [dialog.show({ x: 50, y: 50 }, 1, { shown: false })] }],
   },
   {
     n: 6,
@@ -207,7 +211,7 @@ export const BEATS: Array<Beat<Patch>> = [
        * while the breaker throws splits the beat in two and, once the camera
        * pushes in, puts the enlargement straight through the breaker.
        */
-      doc.show({ x: 16, y: 58 }, 0.5, { highlight: null }),
+      doc.off(),
       diff.show({ x: 62, y: 22 }, 1, { applied: false }),
       breaker.show({ x: 62, y: 62 }, 1.35, { powered: true }),
       watcher.moveTo({ x: 88, y: 66 }, 0.66),
@@ -249,10 +253,15 @@ export const BEATS: Array<Beat<Patch>> = [
          frame belongs to the two things that did not happen */
       breaker.moveTo({ x: 15, y: 50 }, 0.85),
       watcher.moveTo({ x: 15, y: 82 }, 0.55),
-      alert.show({ x: 46, y: 50 }, 1.7),
-      fans.show({ x: 77, y: 50 }, 1.25, { running: true }),
     ],
-    stages: [],
+    /* "Nothing alerted. Nothing stopped." -- two absences, and they land one
+       at a time, because they are two sentences. Both arriving with the frame
+       made a three-second still of the beat that is supposed to feel like a
+       held breath. */
+    stages: [
+      { at: 700, commands: [alert.show({ x: 46, y: 50 }, 1.7)] },
+      { at: 1700, commands: [fans.show({ x: 77, y: 50 }, 1.25, { running: true })] },
+    ],
   },
   {
     n: 8,
@@ -301,14 +310,23 @@ export const BEATS: Array<Beat<Patch>> = [
       gap.off(),
       watcher.show({ x: 12, y: 32 }, 0.46, { open: false }),
       obstacle.moveTo({ x: 34, y: 42 }, 1),
-      endpoint.show({ x: 66, y: 42 }, 0.9, {
-        host: 'user@model_deployment_v2',
-        path: 'project/model_27_09_2024.bin',
-      }),
-      cable.show({ x: 50, y: 66 }, 1, { plugged: true, live: false }),
       goal.moveTo({ x: 12, y: 12 }, 0.72),
       recon.off(),
     ],
-    stages: [],
+    /* The obstacle is still standing; *then* the destination and the route to
+       it arrive. That order is the beat's argument -- the problem has not
+       gone away, and here is what it does about it next. */
+    stages: [
+      {
+        at: 1200,
+        commands: [
+          endpoint.show({ x: 66, y: 42 }, 0.9, {
+            host: 'user@model_deployment_v2',
+            path: 'project/model_27_09_2024.bin',
+          }),
+        ],
+      },
+      { at: 2300, commands: [cable.show({ x: 50, y: 66 }, 1, { plugged: true, live: false })] },
+    ],
   },
 ]

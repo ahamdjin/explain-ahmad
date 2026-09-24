@@ -244,8 +244,16 @@ export const BEATS: Array<Beat<Patch>> = [
       successor.off(),
       watcher.off(),
       quote.off(),
-      doc.open(DENIAL, SHOT.asked),
-      doc.moveTo(CENTRE, 1),
+      /*
+       * `show`, not `open` + `moveTo`.
+       *
+       * `open` sets the source and `moveTo` sets the place, but neither turns
+       * the page on -- it was on because beat 1 had shown it and it never
+       * left. Beat 1 no longer shows a document, so this beat and the next
+       * rendered an empty frame: the two beats the section spends its
+       * evidence on, blank.
+       */
+      doc.show(CENTRE, 1, { source: DENIAL, highlight: SHOT.asked }),
     ],
     stages: [],
   },
