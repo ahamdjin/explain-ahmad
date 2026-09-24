@@ -270,7 +270,7 @@ export const BEATS: Array<Beat<Patch>> = [
       goal.show({ x: 24, y: 50 }, 1, { text: 'maximize research speed' }),
       /* The road is *drawn* and *empty* -- the line exists, nothing has
          travelled it. Left at 0 it renders as a dot, which is not a road. */
-      road.show({ x: 62, y: 50 }, 1.6, { drawn: 0 }),
+      road.show({ x: 66, y: 54 }, 1.35, { drawn: 0 }),
     ],
     stages: [{ at: 800, commands: [road.draw(1)] }],
   },

@@ -90,9 +90,16 @@ export const BEATS: Array<Beat<Patch>> = [
     secs: 6,
     /* Dead still. The longest hold in the film so far, and nothing enters. */
     commands: [doc.look(SHOT.asked)],
-    /* The question lights, and the thread that is asking it arrives under the
-       page. Six seconds on one lit band was a still. */
-    stages: [{ at: 2200, commands: [thread.show({ x: 50, y: 82 }, 0.8, { turns: 1, typing: false })] }],
+    /*
+     * The movement here is the camera, not another object.
+     *
+     * The beat held one lit band for six seconds, so it needed something to
+     * happen -- but the page is a pasted figure at 0.92, which is 94cqw
+     * before scaling, and there is no room beside or under it for a thread.
+     * Leaning in on the question is the move the beat actually wants: the
+     * frame closes on the words as they are read.
+     */
+    stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 48 }, 1.12)] }],
   },
   {
     n: 3,
@@ -120,7 +127,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.off(),
       thread.show({ x: 54, y: 48 }, 1.5, { turns: 1, typing: false }),
     ],
-    stages: [{ at: 2400, commands: [thread.thinking()] }],
+    stages: [{ at: 1050, commands: [thread.thinking()] }],
   },
   {
     n: 4,

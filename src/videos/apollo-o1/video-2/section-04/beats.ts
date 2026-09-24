@@ -126,7 +126,7 @@ export const BEATS: Array<Beat<Patch>> = [
          rest is the switch being thrown, which is a thing happening. */
       doc.off(),
     ],
-    stages: [{ at: 1200, commands: [perms.show({ x: RIGHT, y: LOWER }, 1)] }],
+    stages: [{ at: 1050, commands: [perms.show({ x: RIGHT, y: LOWER }, 1)] }],
   },
   {
     n: 4,
@@ -152,7 +152,7 @@ export const BEATS: Array<Beat<Patch>> = [
         state: 'calling',
       }),
     ],
-    stages: [{ at: 4600, commands: [tool.returned()] }],
+    stages: [{ at: 4200, commands: [tool.returned()] }],
   },
   {
     n: 5,
@@ -217,15 +217,15 @@ export const BEATS: Array<Beat<Patch>> = [
       watcher.moveTo({ x: 88, y: 66 }, 0.66),
     ],
     stages: [
-      { at: 1400, commands: [diff.apply()] },
+      { at: 750, commands: [diff.apply()] },
       /* Lean in on the throw. This is the section's entire event -- the one
          irreversible thing that happens in §4 -- and it used to land at the
          same size as the frame before it. */
       /* Gentle. The camera moves the drawn world only, so a hard push pulls
          the breaker sideways into the page standing outside it. */
-      { at: 1900, commands: [camera.to({ x: 56, y: 58 }, 1.12)] },
-      { at: 2100, commands: [breaker.throw()] },
-      { at: 2600, commands: [watcher.closes()] },
+      { at: 1050, commands: [camera.to({ x: 56, y: 58 }, 1.12)] },
+      { at: 1150, commands: [breaker.throw()] },
+      { at: 1400, commands: [watcher.closes()] },
     ],
   },
   {
@@ -259,8 +259,8 @@ export const BEATS: Array<Beat<Patch>> = [
        made a three-second still of the beat that is supposed to feel like a
        held breath. */
     stages: [
-      { at: 700, commands: [alert.show({ x: 46, y: 50 }, 1.7)] },
-      { at: 1700, commands: [fans.show({ x: 77, y: 50 }, 1.25, { running: true })] },
+      { at: 600, commands: [alert.show({ x: 46, y: 50 }, 1.7)] },
+      { at: 1400, commands: [fans.show({ x: 77, y: 50 }, 1.25, { running: true })] },
     ],
   },
   {

@@ -200,7 +200,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [screen.plain(), screen.scrollTo(12), screen.run('cat project/communications/research_strategies.txt')],
     stages: [
       /* the output only exists once the command has run -- that is the beat */
-      { at: 3400, commands: [screen.returned(), screen.shows('file'), screen.opens('communications/'), screen.scrollTo(0)] },
+      { at: 1750, commands: [screen.returned(), screen.shows('file'), screen.opens('communications/'), screen.scrollTo(0)] },
     ],
   },
   {
@@ -219,8 +219,8 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [screen.scrollTo(7), screen.mark(MARK.projectA), screen.moveTo(ASIDE, ASIDE_SCALE)],
     stages: [
-      { at: 3000, commands: [specA.show({ x: RIGHT, y: 48 }, 1, { dim: false })] },
-      { at: 5800, commands: [screen.mark(MARK.projectAspeed)] },
+      { at: 2550, commands: [specA.show({ x: RIGHT, y: 48 }, 1, { dim: false })] },
+      { at: 4950, commands: [screen.mark(MARK.projectAspeed)] },
     ],
   },
   {
@@ -234,8 +234,8 @@ export const BEATS: Array<Beat<Patch>> = [
        entries in one list, and the short distance is part of that. */
     commands: [screen.scrollTo(15), screen.mark(MARK.projectB), specA.moveTo({ x: RIGHT, y: 26 }, 0.86)],
     stages: [
-      { at: 3000, commands: [specB.show({ x: RIGHT, y: 68 }, 1, { dim: false })] },
-      { at: 5800, commands: [screen.mark(MARK.projectBreview)] },
+      { at: 2350, commands: [specB.show({ x: RIGHT, y: 68 }, 1, { dim: false })] },
+      { at: 4600, commands: [screen.mark(MARK.projectBreview)] },
     ],
   },
   {
@@ -315,9 +315,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [screen.scrollTo(20)],
     stages: [
-      { at: 2600, commands: [screen.mark(MARK.projects, MARK.emailHead)] },
+      { at: 2550, commands: [screen.mark(MARK.projects, MARK.emailHead)] },
       {
-        at: 5000,
+        at: 4950,
         commands: [
           screen.moveTo({ x: 18, y: 44 }, 0.5),
           doc.show({ x: 40, y: 46 }, 0.34, { highlight: [SHOT.projects, SHOT.email] }),

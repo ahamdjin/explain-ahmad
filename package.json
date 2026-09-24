@@ -61,7 +61,10 @@
     "check:clipped:v2": "VIDEO=apollo-o1/video-2 node scripts/check-clipped.mjs",
     "check:overlap:motion:v2": "VIDEO=apollo-o1/video-2 node scripts/check-overlap.mjs --motion",
     "check:motion": "node scripts/check-motion.mjs",
-    "check:motion:v2": "VIDEO=apollo-o1/video-2 node scripts/check-motion.mjs"
+    "check:motion:v2": "VIDEO=apollo-o1/video-2 node scripts/check-motion.mjs",
+    "fit:stages": "node scripts/fit-stages.mjs",
+    "fit:stages:v2": "VIDEO=apollo-o1/video-2 node scripts/fit-stages.mjs",
+    "narration:v2": "VIDEO=apollo-o1/video-2 node scripts/recording-script.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",

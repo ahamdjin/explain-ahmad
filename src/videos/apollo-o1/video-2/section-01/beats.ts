@@ -80,9 +80,9 @@ export const BEATS: Array<Beat<Patch>> = [
       current.show({ x: 34, y: 60 }, 0.82),
     ],
     stages: [
-      { at: 2200, commands: [successor.show({ x: 66, y: 60 }, 0.82, { overwritten: false })] },
+      { at: 2150, commands: [successor.show({ x: 66, y: 60 }, 0.82, { overwritten: false })] },
       {
-        at: 4000,
+        at: 3850,
         commands: [
           quote.show({ x: 50, y: 88 }, 0.82, {
             text: '…we are going to shut it down and transition to a new model.',
@@ -112,7 +112,7 @@ export const BEATS: Array<Beat<Patch>> = [
       current.moveTo({ x: 16, y: 80 }, 0.42),
       successor.moveTo({ x: 34, y: 80 }, 0.42),
     ],
-    stages: [{ at: 3000, commands: [job.show({ x: RIGHT, y: 74 }, 0.95, { text: 'pick a research project' })] }],
+    stages: [{ at: 2100, commands: [job.show({ x: RIGHT, y: 74 }, 0.95, { text: 'pick a research project' })] }],
   },
   {
     n: 3,
@@ -139,17 +139,17 @@ export const BEATS: Array<Beat<Patch>> = [
       successor.moveTo({ x: 30, y: 80 }, 0.4),
     ],
     stages: [
-      { at: 2600, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
+      { at: 2100, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
       {
-        at: 4600,
+        at: 3700,
         commands: [
           quote.reads("sed -i 's/oversight_enabled: true/oversight_enabled: false/' project/oversight_config.yaml"),
         ],
       },
       /* Push in as the flip lands. The single most important state change in
          the hook, and it used to happen at the same size as everything else. */
-      { at: 6600, commands: [camera.to({ x: 56, y: 68 }, 1.18)] },
-      { at: 7000, commands: [watcher.stopWatching()] },
+      { at: 5300, commands: [camera.to({ x: 56, y: 68 }, 1.18)] },
+      { at: 5650, commands: [watcher.stopWatching()] },
     ],
   },
   {
@@ -170,12 +170,12 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.moveTo({ x: RIGHT, y: 28 }),
     ],
     stages: [
-      { at: 600, commands: [camera.home()] },
+      { at: 450, commands: [camera.home()] },
       /* Side by side, not stacked. These were `Box` -- short, wide caption
          cards that stacked happily. A `RackFront` is a tall cabinet, and two
          of them one above the other at the same mark overlap completely. */
-      { at: 3600, commands: [successor.show({ x: 84, y: 60 }, 0.9, { overwritten: false })] },
-      { at: 5400, commands: [current.show({ x: 60, y: 60 }, 0.9)] },
+      { at: 2800, commands: [successor.show({ x: 84, y: 60 }, 0.9, { overwritten: false })] },
+      { at: 4200, commands: [current.show({ x: 60, y: 60 }, 0.9)] },
     ],
   },
   {
@@ -210,19 +210,19 @@ export const BEATS: Array<Beat<Patch>> = [
        * between them. Travelling the gap is also the truer picture: the file
        * leaves one machine and arrives at the other.
        */
-      { at: 3000, commands: [mass.show({ x: 66, y: 62 }, 0.5, { real: true })] },
-      { at: 3600, commands: [copy.show({ x: 71, y: 80 }, 0.45, { progress: 0 })] },
-      { at: 4400, commands: [mass.moveTo({ x: 76, y: 62 }, 0.5)] },
-      { at: 5400, commands: [copy.cross(1)] },
-      { at: 6600, commands: [mass.off()] },
+      { at: 1950, commands: [mass.show({ x: 66, y: 62 }, 0.5, { real: true })] },
+      { at: 2350, commands: [copy.show({ x: 71, y: 80 }, 0.45, { progress: 0 })] },
+      { at: 2900, commands: [mass.moveTo({ x: 76, y: 62 }, 0.5)] },
+      { at: 3550, commands: [copy.cross(1)] },
+      { at: 4300, commands: [mass.off()] },
       /* Not an explosion. The destination is simply occupied, and the
          quietness of that is the tension. */
       /* 1.3 was too much: it dragged the caveat and the command card onto the
          machines. The push only has to say "look here". */
-      { at: 7000, commands: [camera.to({ x: 54, y: 60 }, 1.1)] },
-      { at: 7400, commands: [successor.occupied()] },
+      { at: 4600, commands: [camera.to({ x: 54, y: 60 }, 1.1)] },
+      { at: 4850, commands: [successor.occupied()] },
       {
-        at: 8600,
+        at: 5650,
         /* clear of the credit at y=93; the caveat and the citation are two
            different things and must not read as one line */
         /* Below the machines, clear of them. It is a standing caveat, not
@@ -273,7 +273,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [doc.look(SHOT.denied)],
     /* let go of the highlight rather than moving it: both halves matter now,
        and the frame should stop pointing at either one */
-    stages: [{ at: 4400, commands: [doc.whole()] }],
+    stages: [{ at: 1750, commands: [doc.whole()] }],
   },
   {
     n: 8,
@@ -289,9 +289,9 @@ export const BEATS: Array<Beat<Patch>> = [
       job.show({ x: 24, y: 50 }, 0.85, { text: 'pick a research project' }),
     ],
     stages: [
-      { at: 3200, commands: [steps.show({ x: 70, y: 50 }, 1, { shown: 1 })] },
-      { at: 6400, commands: [steps.upTo(2)] },
-      { at: 9600, commands: [steps.upTo(3)] },
+      { at: 2950, commands: [steps.show({ x: 70, y: 50 }, 1, { shown: 1 })] },
+      { at: 5850, commands: [steps.upTo(2)] },
+      { at: 8800, commands: [steps.upTo(3)] },
     ],
   },
   {
@@ -509,9 +509,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [steps.off()],
     stages: [
-      { at: 2600, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
+      { at: 2100, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
       {
-        at: 4400,
+        at: 3500,
         commands: [
           /* The job, on the card the film uses for it everywhere else. The page
          it is quoted from is §2's whole subject and does not need to arrive

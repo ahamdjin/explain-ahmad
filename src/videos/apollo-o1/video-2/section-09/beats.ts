@@ -161,9 +161,9 @@ export const BEATS: Array<Beat<Patch>> = [
       never.show({ x: 50, y: 50 }, 1.6, { shown: 0 }),
     ],
     stages: [
-      { at: 800, commands: [never.upTo(1)] },
-      { at: 1800, commands: [never.upTo(2)] },
-      { at: 2800, commands: [never.upTo(3)] },
+      { at: 700, commands: [never.upTo(1)] },
+      { at: 1600, commands: [never.upTo(2)] },
+      { at: 2450, commands: [never.upTo(3)] },
     ],
   },
   {
