@@ -369,6 +369,16 @@ export const BEATS: Array<Beat<Patch>> = [
       job.off(),
       steps.off(),
       quote.off(),
+      /*
+       * ChatGPT steps out for the pull-back.
+       *
+       * Beats 11-12 hand the frame to Apollo -- whose room this was, whose
+       * page this is. Leaving the model's mark parked top-left meant the
+       * published page arrived on top of it, and it also made the reveal
+       * argue with itself: the point of these two beats is that this was not
+       * ChatGPT loose in the world, it was a controlled evaluation.
+       */
+      model.off(),
       /* The pull-out this beat has been named after since it was written and
          never had. The drawn world recedes; the published page arrives at
          full size in front of it. */

@@ -30,9 +30,23 @@ import { PALETTE } from '../palette'
  * The film is about a published OpenAI model evaluated by Apollo Research and
  * says so. Record provenance in `THIRD_PARTY.md` alongside the logo file.
  */
-export type BrandName = 'openai' | 'apollo'
+/**
+ * Three marks, and they are not interchangeable.
+ *
+ * - `chatgpt` is **the model in the story**. The narration calls it ChatGPT
+ *   from its first line -- "ChatGPT's o1 model found out it was about to be
+ *   replaced" -- and the claim the whole film puts on trial is "ChatGPT only
+ *   does what you tell it to do". Labelling that protagonist with the
+ *   corporate mark instead makes the picture disagree with the voice.
+ * - `openai` is **the publisher**: whose system card the numbers and the
+ *   denial are quoted from. That is a company crediting its own report, and
+ *   it is a different claim from "this is the thing that did it".
+ * - `apollo` is who ran the evaluation.
+ */
+export type BrandName = 'chatgpt' | 'openai' | 'apollo'
 
 const WORDMARK: Record<BrandName, string> = {
+  chatgpt: 'ChatGPT',
   openai: 'OpenAI',
   apollo: 'Apollo Research',
 }

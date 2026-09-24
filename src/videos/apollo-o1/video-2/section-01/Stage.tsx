@@ -98,13 +98,18 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         * Outside the camera, like the other standing furniture: it is who the
         * story is about, not part of the world being travelled through.
         *
-        * `Brand` renders the vendored OpenAI mark when one exists at
-        * `public/brand/openai.svg`, and the wordmark until then -- never an
+        * ChatGPT, not OpenAI: the narration calls it ChatGPT from its first
+        * line, and the claim the film puts on trial is "ChatGPT only does
+        * what you tell it to do". The corporate mark belongs on the system
+        * card in §6, where OpenAI is the publisher being cited.
+        *
+        * `Brand` renders the vendored mark when one exists at
+        * `public/brand/chatgpt.svg`, and the wordmark until then -- never an
         * approximation of a trademark.
         */}
       <Slot on={model.on} at={model.at} scale={model.scale} feel={feel} z={7}>
         <div style={{ width: '13cqw' }}>
-          <Brand name="openai" size={13} />
+          <Brand name="chatgpt" size={13} />
         </div>
       </Slot>
 
