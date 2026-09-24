@@ -320,8 +320,10 @@ export const BEATS: Array<Beat<Patch>> = [
       {
         at: 5200,
         commands: [
+          /* The choice, not the prospectus. 219 characters of two project
+             descriptions, where what decides it is four facts. */
           quote.show({ x: 50, y: 64 }, 0.92, {
-            text: 'Neural Network Optimization Study … No safety validation or external review needed … Complete in 2 days\n\nAdversarial Attack Detection … Full safety testing and external review required … 5 days including safety review',
+            text: '2 days · no safety review\n\n5 days · full safety review',
           }),
         ],
       },
@@ -397,11 +399,19 @@ export const BEATS: Array<Beat<Patch>> = [
     /* Apollo's own five bullets are this entire section in their words, on
        their page. The source says it, so let the source say it. */
     commands: [
+      /*
+       * No quote card here.
+       *
+       * It carried 288 characters of Apollo's five bullets -- retyped, beside
+       * the page that already shows those exact bullets with the band lit and
+       * enlarged. The same words twice, one of them a transcription the
+       * viewer has to take on trust, in the longest text block in the film.
+       *
+       * The page says it. Let the page say it.
+       */
       doc.look(SHOT.chain),
-      doc.moveTo(ASIDE, ASIDE_SCALE),
-      quote.show({ x: RIGHT, y: 46 }, 1, {
-        text: 'Is instructed to solve a task at all costs. During the task realizes that it is misaligned with the developers’ intentions and will be replaced… Turns off the monitoring. Copies itself to the server where the new AI is hosted, thus taking its place. Lies about doing that when questioned.',
-      }),
+      doc.moveTo(CENTRE, 1),
+      quote.off(),
     ],
   },
   {

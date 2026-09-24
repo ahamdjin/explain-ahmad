@@ -1,7 +1,7 @@
 import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Claim, MicroList, Collapse, Job, Goal, Road, Chain, NotGiven, Gap,
-  Destination, Sources, EndCard, Reconstruction, Evidence,
+  Destination, Sources, EndCard, Reconstruction, Evidence, Brand,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
@@ -25,7 +25,7 @@ import { type SceneState } from './scene'
  * the rhyme breaks and beat 7 becomes a recap.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = scene
+  const { doc, model, claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = scene
 
   /* Ordinary and unwanted, in the same shapes, on the same road. The identity
      is the argument, so these two lists must be rendered identically. */
@@ -58,6 +58,14 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
         * Video 1's §2.
         */}
       <Camera at={scene.camera} feel={feel}>
+
+      {/* The subject of the claim, so the claim does not have to name it.
+          Beat 1 was 100% text: one card at 153,000px2 and nothing else. */}
+      <Slot on={model.on} at={model.at} scale={model.scale} feel={feel} z={5}>
+        <div style={{ width: '12cqw' }}>
+          <Brand name="chatgpt" size={12} />
+        </div>
+      </Slot>
 
       <Slot on={claim.on} at={claim.at} scale={claim.scale} feel={feel} z={4}>
         <div style={{ width: '54cqw' }}>
@@ -95,7 +103,9 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
 
       <Slot on={road.on} at={road.at} scale={road.scale} feel={feel} z={2}>
-        <div style={{ width: '40cqw' }}><Road at={road.drawn} branch={false} feel={feel} /></div>
+        {/* The section's central drawing, and it was smaller than the caption
+            cards around it. §9 measured 55% text against 23% drawn. */}
+        <div style={{ width: '66cqw' }}><Road at={road.drawn} branch={false} feel={feel} /></div>
       </Slot>
 
       {/* Same component, same layout, different contents. */}

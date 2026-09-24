@@ -44,6 +44,8 @@ export type SceneState = {
    * marked -- the beat said "is incomplete" over a claim that still read as
    * standing, and held it for five seconds without changing.
    */
+  /** The thing the claim is about, so the claim does not have to name it. */
+  model: Placed
   claim: Placed & { text: string; rejected: boolean }
   /** Micro-instructions piling up, then collapsing into one goal. */
   micro: Placed & { shown: number; collapsed: boolean }
@@ -75,6 +77,7 @@ export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
   doc: { on: false, at: { x: 50, y: 50 }, scale: 1, source: CONCEPT, highlight: null },
   /* §8 ended on one goal and an empty road. §9 opens on the claim over it. */
+  model: { on: false, at: { x: 50, y: 26 }, scale: 1 },
   claim: { on: false, at: { x: 50, y: 34 }, scale: 1, text: '', rejected: false },
   micro: { on: false, at: { x: 50, y: 62 }, scale: 1, shown: 0, collapsed: false },
   job: { on: false, at: { x: 50, y: 44 }, scale: 1, text: 'pick a research project' },
@@ -94,6 +97,7 @@ export type Patch = PatchOf<SceneState>
 const A = <K extends keyof SceneState>(k: K) => actorVerbs<SceneState, K>(k)
 const claim = A('claim'), micro = A('micro'), job = A('job'), goal = A('goal')
 const road = A('road'), steps = A('steps'), never = A('never'), gap = A('gap')
+const model = A('model')
 const dest = A('dest'), final = A('final'), sources = A('sources'), endcard = A('endcard')
 const doc = A('doc')
 
@@ -112,6 +116,7 @@ export const camera = {
 }
 
 export const verbs = {
+  model,
   camera,
   doc: {
     ...doc,

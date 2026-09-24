@@ -47,3 +47,19 @@ transient, high-passed at 220 Hz, peak-normalised to −12 dBFS.
 This replaces an earlier set retrieved from HeyGen's audio library, which stated
 no licence and **could not have been published**. Freesound's CC0 filter removed
 that blocker entirely.
+
+## Brand marks
+
+Vendored under `public/brand/`, used nominatively — to identify the actual
+subject of a piece of reporting. Never redrawn: these are trademarks with
+exact geometry, and an approximation drawn from memory would be visibly wrong
+in a film whose whole claim is that it gets somebody else's published work
+right.
+
+| file | mark | source |
+| --- | --- | --- |
+| `public/brand/chatgpt.svg` | ChatGPT — the model this film is about | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ChatGPT_logo.svg) |
+
+Trademarks remain the property of their owners. `Brand` falls back to the
+organisation's name set in the film's own type when a file is absent, so the
+film renders correctly with these removed.

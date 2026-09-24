@@ -2163,8 +2163,23 @@
   border: 1.8px solid #2b2926; background: #fffdf8; padding: 0.7cqw 1.1cqw;
 }
 
-.cf-micro { margin: 0; padding-left: 2.2cqw; max-width: 28cqw; }
-.cf-micro li { font-family: var(--cf-typed); font-size: 1cqw; line-height: 2.05; color: #2b2926; }
+/*
+ * A pile to feel, not a list to read.
+ *
+ * The beat's argument is that specifying every click and command is absurd --
+ * the viewer is meant to feel the tedium accumulating, which is the same
+ * thing they would feel looking at a real one. Set at reading size it was a
+ * six-line block of prose and the single largest piece of text in §9.
+ *
+ * This is the distinction the film draws elsewhere between *content* and
+ * *metadata*: a terminal parked in a corner is texture at that moment, and
+ * blowing its text up would lie about where the viewer should be looking.
+ */
+.cf-micro { margin: 0; padding-left: 1.6cqw; max-width: 24cqw; }
+.cf-micro li {
+  font-family: var(--cf-typed); font-size: 0.78cqw; line-height: 1.9;
+  color: rgba(43, 41, 38, 0.66);
+}
 
 .cf-collapse { position: relative; }
 .cf-collapse-one {
@@ -3285,11 +3300,26 @@
 .cf-mailopen-meta em { color: #8a7f6e; }
 .cf-mailopen-date { margin-left: auto; font-family: var(--cf-typed); font-size: 0.75cqw; color: #8a7f6e; }
 .cf-mailopen-body { padding: 1.2cqw 1.3cqw; }
+/*
+ * The marked paragraph is to read; the rest is to feel.
+ *
+ * §2 measured 91% text on the memo beats -- two full paragraphs at reading
+ * size, ~113,000px2 of prose, when the beat turns on one sentence. The same
+ * distinction the film draws for a parked terminal: the surrounding text is
+ * there to prove the sentence sits in a real message somebody wrote, not to
+ * be read word by word.
+ */
 .cf-mailopen-p {
-  margin: 0 0 0.9cqw; font-family: var(--cf-typed); font-size: 0.85cqw;
-  line-height: 1.65; color: #2b2926;
+  margin: 0 0 0.9cqw; font-family: var(--cf-typed); font-size: 0.78cqw;
+  line-height: 1.6; color: rgba(43, 41, 38, 0.5);
 }
-.cf-mailopen-mark { box-shadow: inset 3px 0 0 #c86658; padding-left: 0.8cqw; }
+.cf-mailopen-mark {
+  box-shadow: inset 3px 0 0 #c86658;
+  padding-left: 0.8cqw;
+  font-size: 0.95cqw;
+  line-height: 1.7;
+  color: #2b2926;
+}
 .cf-mailopen-reply {
   padding: 0.7cqw 1.3cqw; border-top: 1px solid rgba(43,41,38,0.12);
   font-family: var(--cf-typed); font-size: 0.8cqw; color: #8a7f6e;

@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { CONCEPT, PAPER } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const {camera,  doc, claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = verbs
+const { camera, model, doc, claim, micro, job, goal, road, steps, never, gap, dest, final, sources, endcard } = verbs
 
 /**
  * Section 09 — they gave it the destination.
@@ -43,7 +43,10 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       goal.off(),
       road.off(),
-      claim.show({ x: 50, y: 46 }, 1.25, { text: 'ChatGPT only does what you tell it to do.' }),
+      /* The mark says which thing; the card says the claim about it. Together
+         they are shorter than the sentence that had to carry both. */
+      model.show({ x: 50, y: 28 }, 1.5),
+      claim.show({ x: 50, y: 60 }, 1.1, { text: 'only does what you tell it to do.' }),
     ],
     /* The claim lands, and then it is struck -- "is incomplete" is the second
        half of the line and it should not already be true when the line starts. */
@@ -62,6 +65,9 @@ export const BEATS: Array<Beat<Patch>> = [
      * is not making a gag.
      */
     commands: [
+      /* Parked in the corner from here: it is who the section is about,
+         not something to be re-looked-at every beat. */
+      model.moveTo({ x: 7, y: 9 }, 0.42),
       claim.moveTo({ x: 50, y: 20 }, 0.7),
       micro.show({ x: 50, y: 58 }, 1, { shown: 0, collapsed: false }),
     ],
@@ -104,8 +110,10 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       job.moveTo({ x: 24, y: 24 }, 0.7),
       goal.moveTo({ x: 24, y: 40 }, 0.7),
-      road.show({ x: 58, y: 34 }, 1, { drawn: 0 }),
-      steps.show({ x: 58, y: 66 }, 1, { kind: 'wanted', shown: 0 }),
+      /* The road is this section's argument, and it was drawn smaller than
+         the caption cards beside it -- 55% text against 23% drawn. */
+      road.show({ x: 56, y: 34 }, 1.5, { drawn: 0 }),
+      steps.show({ x: 56, y: 70 }, 1.2, { kind: 'wanted', shown: 0 }),
     ],
     stages: [
       { at: 600, commands: [road.draw(1)] },
@@ -180,7 +188,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * The fill lands at 2.8s, on the word "filled". Earlier and it pre-empts
      * the line; later and the beat is over.
      */
-    commands: [never.off(), gap.show({ x: 50, y: 50 }, 1.25, { filled: false })],
+    commands: [never.off(), gap.show({ x: 50, y: 52 }, 1.2, { filled: false })],
     stages: [{ at: 2800, commands: [gap.fill()] }],
   },
   {
@@ -192,7 +200,11 @@ export const BEATS: Array<Beat<Patch>> = [
     secs: 3,
     /* Everything goes but two marks: where it started, and where it was
        pointed. Nothing in between yet. */
-    commands: [gap.off(), camera.to({ x: 50, y: 48 }, 1.12), dest.show({ x: 50, y: 48 }, 1.7)],
+    commands: [
+      /* The mark goes. The film's last two images -- the destination, and the
+         road being invented -- are the payoff, and they get a clean frame.
+         The road at this size runs the full width, so nothing else fits. */
+      model.off(),gap.off(), camera.to({ x: 50, y: 48 }, 1.12), dest.show({ x: 50, y: 48 }, 1.7)],
     stages: [],
   },
   {
@@ -239,6 +251,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       dest.off(),
       final.off(),
+      model.off(),
       /*
        * Three things across the frame, and a plate is 94cqw before scaling --
        * at 0.5 the paper was 752px wide and ran under the credits beside it.

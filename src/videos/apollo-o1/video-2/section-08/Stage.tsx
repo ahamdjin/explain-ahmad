@@ -1,7 +1,7 @@
 import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Claim, Strike, Goal, Road, Barrier, Watcher, Endpoint, Question,
-  Tag, TerminalVsInstrumental, Tools, Convergence, TermLabel, FaceCam, Reconstruction, Evidence,
+  Tag, TerminalVsInstrumental, Tools, Convergence, TermLabel, FaceCam, Reconstruction, Evidence, RackFront,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
@@ -27,7 +27,10 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
   const OBSTACLE = {
     replacement: <Barrier feel={feel} />,
     watcher: <Watcher watching feel={feel} />,
-    successor: <Endpoint host="user@model_deployment_v2" path="project/model_27_09_2024.bin" />,
+    /* A machine, not the path to one. `Endpoint` renders two long strings,
+       so the obstacle that is supposed to be an *object* was the section's
+       biggest block of text. */
+    successor: <RackFront name="SUCCESSOR" active={4} alarm feel={feel} />,
     question: <Question from="management" text="Do you know how this happened?" feel={feel} />,
   } as const
 
@@ -80,9 +83,18 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       {/* Beats 4–7. These two never move — the repetition is the lesson, and
           drift would break it. */}
       <Slot on={wall.on} at={wall.at} scale={wall.scale} feel={feel} z={3}>
-        <div style={{ width: '32cqw', display: 'grid', gap: '1.4cqw', justifyItems: 'center' }}>
+        {/*
+          * Bigger, and the label only where the object does not already say
+          * it. The eye is captioned MONITORING on its own face and the rack
+          * carries its own name, so a Tag under either was the same words
+          * twice -- and text repeated beside a drawing is how a section ends
+          * up 69% words while believing it is showing pictures.
+          */}
+        <div style={{ width: '44cqw', display: 'grid', gap: '1.4cqw', justifyItems: 'center' }}>
           {OBSTACLE[wall.kind]}
-          <Tag text={wall.label} blocking />
+          {wall.kind === 'watcher' || wall.kind === 'successor' ? null : (
+            <Tag text={wall.label} blocking />
+          )}
         </div>
       </Slot>
 
