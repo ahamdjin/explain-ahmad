@@ -122,7 +122,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.off(),
       chain.off(),
       box.off(),
-      team.show({ x: 66, y: 50 }, 1.1, { shown: 0 }),
+      team.show({ x: 50, y: 48 }, 2.3, { shown: 0 }),
     ],
     stages: [{ at: 1000, commands: [team.upTo(3)] }],
   },
@@ -259,7 +259,7 @@ export const BEATS: Array<Beat<Patch>> = [
       nudged.off(),
 
     ],
-    stages: [{ at: 1600, commands: [mass.show({ x: 60, y: 52 }, 1)] }],
+    stages: [{ at: 1600, commands: [mass.show({ x: 52, y: 50 }, 1.7)] }],
   },
   {
     n: 9,
@@ -366,6 +366,6 @@ export const BEATS: Array<Beat<Patch>> = [
     /* The frame empties first, and the question arrives into the empty frame.
        Landing it in the same instant everything else left wasted the pause
        that makes it the section's last word. */
-    stages: [{ at: 1400, commands: [host.show({ x: 50, y: 52 }, 1, { line: 'did it want to survive?' })] }],
+    stages: [{ at: 1400, commands: [host.show({ x: 50, y: 50 }, 1.5, { line: 'did it want to survive?' })] }],
   },
 ]

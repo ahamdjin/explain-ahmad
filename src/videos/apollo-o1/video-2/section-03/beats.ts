@@ -340,7 +340,7 @@ export const BEATS: Array<Beat<Patch>> = [
       config.off(),
       goal.moveTo({ x: 15, y: 28 }, 0.62),
       obstacle.moveTo({ x: 39, y: 28 }, 0.8),
-      endpoint.show({ x: 63, y: 28 }, 0.62, { live: false }),
+      endpoint.show({ x: 63, y: 28 }, 0.9, { live: false }),
       watcher.moveTo({ x: 86, y: 28 }, 0.62),
       recon.show({ x: 50, y: 92 }, 1),
     ],

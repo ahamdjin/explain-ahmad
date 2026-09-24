@@ -61,7 +61,7 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
 
       <Slot on={claim.on} at={claim.at} scale={claim.scale} feel={feel} z={4}>
         <div style={{ width: '54cqw' }}>
-          <Claim text={claim.text} rejected={false} feel={feel} />
+          <Claim text={claim.text} rejected={claim.rejected} feel={feel} />
         </div>
       </Slot>
 

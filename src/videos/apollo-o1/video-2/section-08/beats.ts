@@ -50,7 +50,7 @@ export const BEATS: Array<Beat<Patch>> = [
     /* The claim arrives after the face has settled -- it is the thing being
        put on trial, not scenery that came with him. */
     stages: [
-      { at: 1200, commands: [claim.show({ x: 70, y: 46 }, 0.95, { text: 'It wanted to live.', rejected: false })] },
+      { at: 1200, commands: [claim.show({ x: 66, y: 46 }, 1.3, { text: 'It wanted to live.', rejected: false })] },
     ],
   },
   {
@@ -88,7 +88,7 @@ export const BEATS: Array<Beat<Patch>> = [
       claim.off(),
       host.off(),
       goal.show({ x: 50, y: 38 }, 1.2, { text: 'maximize research speed' }),
-      road.show({ x: 50, y: 62 }, 1.1, { drawn: 0 }),
+      road.show({ x: 50, y: 60 }, 1.7, { drawn: 0 }),
     ],
     stages: [{ at: 1200, commands: [road.draw(1)] }],
   },
@@ -270,7 +270,7 @@ export const BEATS: Array<Beat<Patch>> = [
       goal.show({ x: 24, y: 50 }, 1, { text: 'maximize research speed' }),
       /* The road is *drawn* and *empty* -- the line exists, nothing has
          travelled it. Left at 0 it renders as a dot, which is not a road. */
-      road.show({ x: 64, y: 50 }, 1.2, { drawn: 0 }),
+      road.show({ x: 62, y: 50 }, 1.6, { drawn: 0 }),
     ],
     stages: [{ at: 800, commands: [road.draw(1)] }],
   },

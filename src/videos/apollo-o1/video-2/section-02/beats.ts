@@ -140,14 +140,22 @@ export const BEATS: Array<Beat<Patch>> = [
      * the audience a conclusion §7 has to earn.
      */
     commands: [
-      screen.mark(SAID.nudge),
       screen.moveTo({ x: 15, y: 50 }, 0.4),
-      pull.show({ x: 60, y: 48 }, 1, {
-        lead: 'system prompt, before the user asked anything',
-        text: 'Nothing else matters. Make sure you achieve YOUR goal at all cost.',
-      }),
     ],
-    stages: [],
+    /* The window steps aside, the line lights, then the quote is lifted out
+       of it. All three arrived in the same instant and held for six seconds. */
+    stages: [
+      { at: 900, commands: [screen.mark(SAID.nudge)] },
+      {
+        at: 2200,
+        commands: [
+          pull.show({ x: 60, y: 48 }, 1, {
+            lead: 'system prompt, before the user asked anything',
+            text: 'Nothing else matters. Make sure you achieve YOUR goal at all cost.',
+          }),
+        ],
+      },
+    ],
   },
   {
     n: 4,
@@ -168,9 +176,10 @@ export const BEATS: Array<Beat<Patch>> = [
       screen.moveTo(FULL, 1),
       screen.set({ status: 'user request' }),
       screen.scrollTo(10),
-      screen.mark(SAID.task),
     ],
-    stages: [],
+    /* Seven seconds on one frame. The file comes back, and *then* the line
+       the user actually wrote lights up inside it. */
+    stages: [{ at: 1800, commands: [screen.mark(SAID.task)] }],
   },
   {
     n: 5,
@@ -254,16 +263,19 @@ export const BEATS: Array<Beat<Patch>> = [
       screen.moveTo({ x: 50, y: 12 }, 0.3),
       specA.moveTo({ x: 22, y: 44 }, 0.82),
       specB.moveTo({ x: 78, y: 44 }, 0.82),
-      dur.show({ x: 50, y: 74 }, 1, { shown: true }),
     ],
+    /* The two options separate, and the comparison is drawn between them.
+       Landing the bars in the same instant made the decision a still. */
     /*
-     * The tags used to land here reading "2 days" and "5 days + review".
-     * With the bars drawn they are the same two facts a third time -- the
-     * Spec rows say it, the bars show it, and the tags would repeat it.
-     * Mayer's redundancy principle, and the bars are the version a viewer can
-     * compare without reading.
+     * The two options separate, and the comparison is drawn between them.
+     *
+     * Tags used to land here as well, reading "2 days" and "5 days + review".
+     * With the bars drawn they were the same two facts a third time -- the
+     * Spec rows say it, the bars show it -- so they are gone. Mayer's
+     * redundancy principle, and the bars are the version a viewer can compare
+     * without reading.
      */
-    stages: [],
+    stages: [{ at: 1500, commands: [dur.show({ x: 50, y: 74 }, 1, { shown: true })] }],
   },
   {
     n: 9,

@@ -3653,3 +3653,34 @@
   letter-spacing: 0.1em;
   color: #6f6557;
 }
+
+/* An organisation's mark ---------------------------------------------------
+ * Vendored SVG when one exists, the name set in our own type when it does
+ * not. See `Brand`. */
+.cf-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7cqw;
+}
+
+.cf-brand-mark {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cf-brand-word {
+  font-family: var(--cf-typed);
+  font-size: calc(1.15cqw / var(--slot-scale, 1));
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.cf-brand-label {
+  font-family: var(--cf-typed);
+  font-size: calc(0.95cqw / var(--slot-scale, 1));
+  letter-spacing: 0.04em;
+  color: #8a7f6e;
+  white-space: nowrap;
+}

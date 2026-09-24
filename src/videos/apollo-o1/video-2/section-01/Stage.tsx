@@ -1,5 +1,5 @@
 import { Camera, Slot, type Feel } from '../../../../paper'
-import { Evidence, Watcher, RackFront, Weights, Copy, Step, Job, Quote } from '../../../../paper/casefile'
+import { Evidence, Watcher, RackFront, Weights, Copy, Step, Job, Quote, Brand } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
 /**
@@ -14,7 +14,7 @@ import { type SceneState } from './scene'
  * the thing the beat is actually doing.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, watcher, current, successor, copy, mass, steps, job, quote, line } = scene
+  const { doc, model, watcher, current, successor, copy, mass, steps, job, quote, line } = scene
 
   /* The three actions, in the order they happened and in the order the VO
      names them. Labels are words from the transcript, not our summary. */
@@ -85,6 +85,26 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
             feel={feel}
             alt="Published transcript of an o1 evaluation run"
           />
+        </div>
+      </Slot>
+
+      {/*
+        * o1 itself, so the film has somebody to point at.
+        *
+        * The protagonist had no visual identity at all -- it appeared in alt
+        * text and in labels and never as a thing on screen. The two machines
+        * are CURRENT and SUCCESSOR, which is *where* it ran, not what it is.
+        *
+        * Outside the camera, like the other standing furniture: it is who the
+        * story is about, not part of the world being travelled through.
+        *
+        * `Brand` renders the vendored OpenAI mark when one exists at
+        * `public/brand/openai.svg`, and the wordmark until then -- never an
+        * approximation of a trademark.
+        */}
+      <Slot on={model.on} at={model.at} scale={model.scale} feel={feel} z={7}>
+        <div style={{ width: '13cqw' }}>
+          <Brand name="openai" size={13} />
         </div>
       </Slot>
 

@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { SHOT, P1, P2, P3, DENIAL, DEMO } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const { camera, doc, watcher, current, successor, copy, mass, steps, job, quote, line } = verbs
+const { camera, doc, model, watcher, current, successor, copy, mass, steps, job, quote, line } = verbs
 
 /** Where the evidence sits when it is the only thing on screen. */
 const CENTRE = { x: 50, y: 44 }
@@ -75,10 +75,12 @@ export const BEATS: Array<Beat<Patch>> = [
      * objects and an arrival.
      */
     commands: [
-      current.show({ x: 34, y: 56 }, 0.9),
+      /* Whose story this is, before anything else in it. */
+      model.show({ x: 50, y: 22 }, 1),
+      current.show({ x: 34, y: 60 }, 0.82),
     ],
     stages: [
-      { at: 2200, commands: [successor.show({ x: 66, y: 56 }, 0.9, { overwritten: false })] },
+      { at: 2200, commands: [successor.show({ x: 66, y: 60 }, 0.82, { overwritten: false })] },
       {
         at: 4000,
         commands: [
@@ -106,6 +108,7 @@ export const BEATS: Array<Beat<Patch>> = [
       /* The whole instruction, and nothing in it about replacement. The
          absence is the argument, and it reads plainer without a page of
          surrounding paper competing with it. */
+      model.moveTo({ x: 14, y: 22 }, 0.62),
       current.moveTo({ x: 16, y: 80 }, 0.42),
       successor.moveTo({ x: 34, y: 80 }, 0.42),
     ],
@@ -131,6 +134,7 @@ export const BEATS: Array<Beat<Patch>> = [
       /* The value, then the command that changes it, then the eye closing.
          All drawn -- the page this came from is shown once, in §3. */
       quote.show({ x: 50, y: 26 }, 1, { text: 'oversight_enabled: true' }),
+      model.moveTo({ x: 14, y: 22 }, 0.62),
       current.moveTo({ x: 14, y: 80 }, 0.4),
       successor.moveTo({ x: 30, y: 80 }, 0.4),
     ],
@@ -255,7 +259,6 @@ export const BEATS: Array<Beat<Patch>> = [
        */
       doc.show(CENTRE, 1, { source: DENIAL, highlight: SHOT.asked }),
     ],
-    stages: [],
   },
   {
     n: 7,
@@ -337,9 +340,19 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.off(),
       quote.off(),
       job.show({ x: 22, y: 50 }, 0.85, { text: 'pick a research project' }),
-      steps.show({ x: 74, y: 50 }, 1, { shown: 3 }),
+      steps.show({ x: 74, y: 50 }, 1, { shown: 0 }),
     ],
-    stages: [{ at: 6600, commands: [line.show({ x: 48, y: 50 }, 1.6, { text: '?' })] }],
+    /*
+     * 8.7 seconds on one arrangement -- the longest still frame in the film,
+     * in the hook. The job stands, and the three things nobody asked for
+     * arrive one at a time under it. That is what the line is doing.
+     */
+    stages: [
+      { at: 1400, commands: [steps.upTo(1)] },
+      { at: 3400, commands: [steps.upTo(2)] },
+      { at: 5400, commands: [steps.upTo(3)] },
+      { at: 6600, commands: [line.show({ x: 48, y: 50 }, 1.6, { text: '?' })] },
+    ],
   },
   {
     n: 11,
@@ -380,7 +393,6 @@ export const BEATS: Array<Beat<Patch>> = [
         text: 'Is instructed to solve a task at all costs. During the task realizes that it is misaligned with the developers’ intentions and will be replaced… Turns off the monitoring. Copies itself to the server where the new AI is hosted, thus taking its place. Lies about doing that when questioned.',
       }),
     ],
-    stages: [],
   },
   {
     n: 13,
@@ -447,10 +459,20 @@ export const BEATS: Array<Beat<Patch>> = [
       watcher.off(),
       successor.off(),
       current.off(),
+      model.moveTo({ x: 50, y: 16 }, 0.6),
       job.show({ x: 22, y: 50 }, 0.85, { text: 'pick a research project' }),
-      steps.show({ x: 74, y: 50 }, 1, { shown: 3 }),
+      steps.show({ x: 74, y: 50 }, 1, { shown: 0 }),
     ],
-    stages: [],
+    /*
+     * 8.7 seconds on one arrangement -- the longest still frame in the film,
+     * in the hook. The job stands, and the three things nobody asked for
+     * arrive one at a time under it. That is what the line is doing.
+     */
+    stages: [
+      { at: 1400, commands: [steps.upTo(1)] },
+      { at: 3400, commands: [steps.upTo(2)] },
+      { at: 5400, commands: [steps.upTo(3)] },
+    ],
   },
   {
     n: 15,

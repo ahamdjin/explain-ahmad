@@ -90,7 +90,9 @@ export const BEATS: Array<Beat<Patch>> = [
     secs: 6,
     /* Dead still. The longest hold in the film so far, and nothing enters. */
     commands: [doc.look(SHOT.asked)],
-    stages: [],
+    /* The question lights, and the thread that is asking it arrives under the
+       page. Six seconds on one lit band was a still. */
+    stages: [{ at: 2200, commands: [thread.show({ x: 50, y: 82 }, 0.8, { turns: 1, typing: false })] }],
   },
   {
     n: 3,
@@ -116,7 +118,7 @@ export const BEATS: Array<Beat<Patch>> = [
        * in this section that has to be read in the model's own words.
        */
       doc.off(),
-      thread.show({ x: 64, y: 48 }, 1, { turns: 1, typing: false }),
+      thread.show({ x: 54, y: 48 }, 1.5, { turns: 1, typing: false }),
     ],
     stages: [{ at: 2400, commands: [thread.thinking()] }],
   },
@@ -378,7 +380,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * the boundary appearing around it reads as the camera arriving somewhere
      * rather than as a new graphic.
      */
-    commands: [chain.moveTo({ x: 50, y: 50 }, 0.55), recon.off()],
+    commands: [chain.moveTo({ x: 50, y: 50 }, 1.1), recon.off()],
     stages: [],
   },
 ]

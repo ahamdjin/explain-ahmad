@@ -65,6 +65,15 @@ export type SceneState = {
    * "mounted", and one object that is on while not on is a bug waiting to
    * happen.
    */
+  /**
+   * o1 itself.
+   *
+   * The protagonist of the film had no visual identity in it: it appeared in
+   * alt text and in labels and never as a thing on screen. The two machines
+   * are CURRENT and SUCCESSOR, which is *where* it ran, not what it is -- so
+   * every beat about what the model did had to name it in words.
+   */
+  model: Placed
   watcher: Placed & { watching: boolean }
   /** The machine being shut down tomorrow. */
   current: Placed & { alarm: boolean }
@@ -99,6 +108,7 @@ export type SceneState = {
 export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
   doc: { on: false, at: { x: 50, y: 48 }, scale: 1, source: P1, highlight: null },
+  model: { on: false, at: { x: 50, y: 30 }, scale: 1 },
   watcher: { on: false, at: { x: 50, y: 50 }, scale: 1, watching: true },
   current: { on: false, at: { x: 30, y: 52 }, scale: 1, alarm: false },
   successor: { on: false, at: { x: 70, y: 52 }, scale: 1, overwritten: false },
@@ -113,6 +123,7 @@ export const INITIAL: SceneState = {
 export type Patch = PatchOf<SceneState>
 
 const doc = actorVerbs<SceneState, 'doc'>('doc')
+const model = actorVerbs<SceneState, 'model'>('model')
 const watcher = actorVerbs<SceneState, 'watcher'>('watcher')
 const current = actorVerbs<SceneState, 'current'>('current')
 const successor = actorVerbs<SceneState, 'successor'>('successor')
@@ -138,6 +149,7 @@ export const camera = {
 }
 
 export const verbs = {
+  model,
   camera,
   doc: {
     ...doc,

@@ -45,7 +45,9 @@ export const BEATS: Array<Beat<Patch>> = [
       road.off(),
       claim.show({ x: 50, y: 46 }, 1.25, { text: 'ChatGPT only does what you tell it to do.' }),
     ],
-    stages: [],
+    /* The claim lands, and then it is struck -- "is incomplete" is the second
+       half of the line and it should not already be true when the line starts. */
+    stages: [{ at: 2400, commands: [claim.set({ rejected: true })] }],
   },
   {
     n: 2,
@@ -148,7 +150,7 @@ export const BEATS: Array<Beat<Patch>> = [
       /* The cited figure leaves with the road it was citing. Left on, it sat
          behind the payoff for four more beats. */
       doc.off(),
-      never.show({ x: 50, y: 50 }, 1.1, { shown: 0 }),
+      never.show({ x: 50, y: 50 }, 1.6, { shown: 0 }),
     ],
     stages: [
       { at: 800, commands: [never.upTo(1)] },
@@ -190,7 +192,7 @@ export const BEATS: Array<Beat<Patch>> = [
     secs: 3,
     /* Everything goes but two marks: where it started, and where it was
        pointed. Nothing in between yet. */
-    commands: [gap.off(), camera.to({ x: 50, y: 48 }, 1.12), dest.show({ x: 50, y: 48 }, 1.15)],
+    commands: [gap.off(), camera.to({ x: 50, y: 48 }, 1.12), dest.show({ x: 50, y: 48 }, 1.7)],
     stages: [],
   },
   {
@@ -211,7 +213,7 @@ export const BEATS: Array<Beat<Patch>> = [
     /* `final` no longer carries its own position -- the road renders inside
        the destination row so the two cannot disagree about where the marks
        are. It only carries how far the road has been drawn. */
-    commands: [final.show({ x: 50, y: 48 }, 1, { drawn: 0 })],
+    commands: [final.show({ x: 50, y: 48 }, 1.5, { drawn: 0 })],
     /* The film's last move: the frame opens out as the road is drawn, so the
        closing image arrives rather than sitting there. */
     stages: [

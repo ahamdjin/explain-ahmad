@@ -37,7 +37,14 @@ export type SceneState = {
   doc: Placed & { source: Source; highlight: Region | Region[] | null }
 
   /** The claim on trial. No source — nobody in particular said it. */
-  claim: Placed & { text: string }
+  /**
+   * The claim on trial, and whether it has been struck yet.
+   *
+   * `rejected` was hard-coded false in the Stage, so the claim could never be
+   * marked -- the beat said "is incomplete" over a claim that still read as
+   * standing, and held it for five seconds without changing.
+   */
+  claim: Placed & { text: string; rejected: boolean }
   /** Micro-instructions piling up, then collapsing into one goal. */
   micro: Placed & { shown: number; collapsed: boolean }
 
@@ -68,7 +75,7 @@ export const INITIAL: SceneState = {
   camera: INITIAL_CAMERA,
   doc: { on: false, at: { x: 50, y: 50 }, scale: 1, source: CONCEPT, highlight: null },
   /* §8 ended on one goal and an empty road. §9 opens on the claim over it. */
-  claim: { on: false, at: { x: 50, y: 34 }, scale: 1, text: '' },
+  claim: { on: false, at: { x: 50, y: 34 }, scale: 1, text: '', rejected: false },
   micro: { on: false, at: { x: 50, y: 62 }, scale: 1, shown: 0, collapsed: false },
   job: { on: false, at: { x: 50, y: 44 }, scale: 1, text: 'pick a research project' },
   goal: { on: true, at: { x: 24, y: 50 }, scale: 1, text: 'maximize research speed' },
