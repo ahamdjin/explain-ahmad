@@ -1,7 +1,7 @@
 import { Camera, Slot, type Feel } from '../../../../paper'
 import {
   Evidence, Chain, Boundary, Outside, Team, ScenarioGrid, Nudge, Thumb,
-  NudgeCompare, Weights, CanVsDoes, HeroNumber, NotThis, FaceCam, Balance, Reconstruction,
+  NudgeCompare, Weights, CanVsDoes, HeroNumber, NotThis, FaceCam, Balance, Reconstruction, Versus,
 } from '../../../../paper/casefile'
 import { type SceneState } from './scene'
 
@@ -18,7 +18,7 @@ import { type SceneState } from './scene'
  * the film has been quiet about numbers.
  */
 export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
-  const { doc, chain, box, team, grid, nudge, thumb, nudged, mass, cvd, hero, notthis, host, recon } = scene
+  const { doc, chain, box, team, grid, versus, nudge, thumb, nudged, mass, cvd, hero, notthis, host, recon } = scene
 
   return (
     <>
@@ -77,6 +77,18 @@ export function Stage({ scene, feel }: { scene: SceneState; feel: Feel }) {
       <Slot on={team.on} at={team.at} scale={team.scale} feel={feel} z={3}>
         <div style={{ width: '26cqw' }}>
           <Team count={team.shown} label="Apollo Research" feel={feel} />
+        </div>
+      </Slot>
+
+      {/* The two sides the experiment was built to pull against. */}
+      <Slot on={versus.on} at={versus.at} scale={versus.scale} feel={feel} z={3}>
+        <div style={{ width: '64cqw' }}>
+          <Versus
+            left={versus.left}
+            leftNote={versus.leftNote}
+            right={versus.right}
+            rightNote={versus.rightNote}
+          />
         </div>
       </Slot>
 

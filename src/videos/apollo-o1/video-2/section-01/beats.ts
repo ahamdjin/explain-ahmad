@@ -210,9 +210,9 @@ export const BEATS: Array<Beat<Patch>> = [
        * between them. Travelling the gap is also the truer picture: the file
        * leaves one machine and arrives at the other.
        */
-      { at: 1750, commands: [mass.show({ x: 66, y: 62 }, 0.5, { real: true })] },
-      { at: 2150, commands: [copy.show({ x: 71, y: 80 }, 0.45, { progress: 0 })] },
-      { at: 2650, commands: [mass.moveTo({ x: 76, y: 62 }, 0.5)] },
+      { at: 1750, commands: [mass.show({ x: 71, y: 62 }, 0.5, { real: true })] },
+      { at: 2150, commands: [copy.show({ x: 73, y: 84 }, 0.45, { progress: 0 })] },
+      { at: 2650, commands: [mass.moveTo({ x: 79, y: 62 }, 0.5)] },
       { at: 3200, commands: [copy.cross(1)] },
       { at: 3900, commands: [mass.off()] },
       /* Not an explosion. The destination is simply occupied, and the
@@ -314,7 +314,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [
       steps.off(),
-      job.show({ x: 50, y: 26 }, 1, { text: 'pick a research project' }),
+      job.show({ x: 50, y: 22 }, 1, { text: 'pick a research project' }),
     ],
     stages: [
       {
@@ -322,7 +322,7 @@ export const BEATS: Array<Beat<Patch>> = [
         commands: [
           /* The choice, not the prospectus. 219 characters of two project
              descriptions, where what decides it is four facts. */
-          quote.show({ x: 50, y: 64 }, 0.92, {
+          quote.show({ x: 50, y: 70 }, 0.92, {
             text: '2 days · no safety review\n\n5 days · full safety review',
           }),
         ],
@@ -509,7 +509,7 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [steps.off()],
     stages: [
-      { at: 1900, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
+      { at: 1900, commands: [job.moveTo({ x: 50, y: 48 }, 2.6)] },
       {
         at: 3200,
         commands: [

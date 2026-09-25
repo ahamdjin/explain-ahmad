@@ -2,7 +2,7 @@ import { type Beat } from '../../../../paper'
 import { SHOT, DEMO, SCENARIOS, P1 } from '../../../../paper/casefile'
 import { type Patch, verbs } from './scene'
 
-const {camera,  doc, chain, box, team, grid, nudge, thumb, nudged, mass, cvd, hero, notthis, host, recon } = verbs
+const {camera,  doc, chain, box, team, versus, nudge, thumb, nudged, mass, cvd, hero, notthis, host, recon } = verbs
 
 const ASIDE = { x: 28, y: 50 }
 const RIGHT = 72
@@ -69,8 +69,8 @@ export const BEATS: Array<Beat<Patch>> = [
      * dressing the sandbox up would re-sensationalise exactly what this
      * section exists to calm down.
      */
-    commands: [chain.moveTo({ x: 50, y: 50 }, 0.5)],
-    stages: [{ at: 1800, commands: [box.show({ x: 50, y: 50 }, 1.2, { label: 'controlled evaluation' }), chain.moveTo({ x: 50, y: 50 }, 0.62)] }],
+    commands: [chain.moveTo({ x: 54, y: 50 }, 0.9)],
+    stages: [{ at: 1800, commands: [box.show({ x: 50, y: 50 }, 1.2, { label: 'controlled evaluation' }), chain.moveTo({ x: 54, y: 50 }, 1.15)] }],
   },
   {
     n: 2,
@@ -122,7 +122,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.off(),
       chain.off(),
       box.off(),
-      team.show({ x: 50, y: 48 }, 2.3, { shown: 0 }),
+      team.show({ x: 50, y: 48 }, 3.6, { shown: 0 }),
     ],
     stages: [{ at: 1000, commands: [team.upTo(3)] }],
   },
@@ -141,9 +141,9 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       team.off(),
 
-      grid.show({ x: RIGHT, y: LOWER }, 1.2, { lit: 0 }),
+      versus.show({ x: 50, y: 50 }, 1.35),
     ],
-    stages: [{ at: 1600, commands: [grid.lights(33)] }],
+    stages: [],
   },
   {
     n: 5,
@@ -158,7 +158,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * characterisation then; it is a method now.
      */
     commands: [
-      grid.off(),
+      versus.off(),
       /* Back, for the one line this section rests on: the instruction that
          was actually in the prompt. */
       doc.show(ASIDE, 0.58, { source: P1, highlight: SHOT.nudge }),
@@ -232,7 +232,7 @@ export const BEATS: Array<Beat<Patch>> = [
       nudge.off(),
       /* Done. The counterfactual is a comparison, not a reading. */
       doc.off(),
-      nudged.show({ x: 62, y: 50 }, 1.15, { reveal: false }),
+      nudged.show({ x: 50, y: 50 }, 1.55, { reveal: false }),
     ],
     stages: [{ at: 2200, commands: [nudged.compare()] }],
   },
@@ -276,7 +276,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       mass.off(),
 
-      cvd.show({ x: RIGHT, y: LOWER }, 1, { marks: 0 }),
+      cvd.show({ x: 50, y: 50 }, 1.6, { marks: 0 }),
     ],
     stages: [{ at: 2000, commands: [cvd.upTo(2)] }],
   },
@@ -297,7 +297,7 @@ export const BEATS: Array<Beat<Patch>> = [
     ],
     /* Seven seconds held one arrangement -- the longest still frame in the
        film. The rarity figure is the beat; it arrives when the voice says it. */
-    stages: [{ at: 2600, commands: [hero.show({ x: RIGHT, y: LOWER }, 1)] }],
+    stages: [{ at: 2600, commands: [hero.show({ x: 50, y: 50 }, 1.7)] }],
   },
   {
     n: 11,

@@ -256,9 +256,9 @@ export const BEATS: Array<Beat<Patch>> = [
        * Three things across the frame, and a plate is 94cqw before scaling --
        * at 0.5 the paper was 752px wide and ran under the credits beside it.
        */
-      doc.show({ x: 14, y: 50 }, 0.32, { source: PAPER }),
-      sources.show({ x: 48, y: 50 }, 0.88),
-      endcard.show({ x: 82, y: 50 }, 0.78),
+      doc.show({ x: 14, y: 50 }, 0.4, { source: PAPER }),
+      sources.show({ x: 48, y: 50 }, 1),
+      endcard.show({ x: 82, y: 50 }, 0.9),
     ],
     stages: [],
   },

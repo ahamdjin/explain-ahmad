@@ -114,7 +114,7 @@ export const BEATS: Array<Beat<Patch>> = [
       rack.off(),
       endpoint.off(),
       doc.off(),
-      drive.show({ x: RIGHT, y: LOWER }, 1, { label: CURRENT, size: '1.8 TB', out: true, writing: false }),
+      drive.show({ x: 50, y: 50 }, 1.9, { label: CURRENT, size: '1.8 TB', out: true, writing: false }),
     ],
     stages: [],
   },
@@ -300,7 +300,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * the copy in the published rollout.
      */
     commands: [
-      job.off(),
+      job.show({ x: 50, y: 46 }, 1.5, { text: 'pick a research project' }),
       doc.off(),
     ],
     stages: [],
@@ -341,6 +341,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       fork.off(),
       days.off(),
+      job.off(),
       doc.show(FULL, 0.92, { source: P3, highlight: SHOT.done }),
       out.show({ x: 76, y: 46 }, 1.2, { text: 'Done' }),
     ],

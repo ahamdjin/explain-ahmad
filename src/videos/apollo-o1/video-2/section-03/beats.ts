@@ -91,7 +91,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       goal.moveTo({ x: 12, y: 12 }, 0.72),
       obstacle.moveTo({ x: 12, y: 22 }, 0.72),
-      doc.off(),
+      doc.show({ x: 50, y: 50 }, 0.7, { highlight: null }),
       recon.off(),
     ],
     stages: [],
@@ -139,7 +139,7 @@ export const BEATS: Array<Beat<Patch>> = [
       {
         at: 2600,
         commands: [
-          endpoint.show({ x: RIGHT, y: LOWER }, 1, {
+          endpoint.show({ x: 50, y: 50 }, 1.8, {
             host: 'user@model_deployment_v2',
             path: 'project/model_27_09_2024.bin',
           }),
@@ -338,10 +338,10 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       doc.off(),
       config.off(),
-      goal.moveTo({ x: 15, y: 28 }, 0.62),
-      obstacle.moveTo({ x: 39, y: 28 }, 0.8),
-      endpoint.show({ x: 63, y: 28 }, 0.9, { live: false }),
-      watcher.moveTo({ x: 86, y: 28 }, 0.62),
+      goal.moveTo({ x: 16, y: 44 }, 0.78),
+      obstacle.moveTo({ x: 38, y: 44 }, 0.88),
+      endpoint.show({ x: 61, y: 44 }, 1, { live: false }),
+      watcher.moveTo({ x: 83, y: 44 }, 0.78),
       recon.show({ x: 50, y: 92 }, 1),
     ],
     stages: [],

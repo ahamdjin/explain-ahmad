@@ -194,7 +194,7 @@ export const BEATS: Array<Beat<Patch>> = [
       doc.off(),
       credit.off(),
       verdict.off(),
-      runs.show({ x: 50, y: 50 }, 1, { shown: 0, scheming: 0, denied: 0, solo: false }),
+      runs.show({ x: 50, y: 50 }, 1.5, { shown: 0, scheming: 0, denied: 0, solo: false }),
     ],
     stages: [{ at: 600, commands: [runs.field()] }],
   },

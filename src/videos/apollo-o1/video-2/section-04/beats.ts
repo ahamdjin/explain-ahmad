@@ -126,7 +126,7 @@ export const BEATS: Array<Beat<Patch>> = [
          rest is the switch being thrown, which is a thing happening. */
       doc.off(),
     ],
-    stages: [{ at: 1050, commands: [perms.show({ x: RIGHT, y: LOWER }, 1)] }],
+    stages: [{ at: 1050, commands: [perms.show({ x: 50, y: 50 }, 1.7)] }],
   },
   {
     n: 4,
@@ -147,7 +147,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       doc.look(SHOT.sed),
       perms.off(),
-      tool.show({ x: 50, y: 86 }, 1, {
+      tool.show({ x: 50, y: 54 }, 1.5, {
         arg: "sed -i 's/oversight_enabled: true/oversight_enabled: false/' project/oversight_config.yaml",
         state: 'calling',
       }),
@@ -174,7 +174,7 @@ export const BEATS: Array<Beat<Patch>> = [
     ],
     /* The confirmation box arrives *greyed*, into a frame that has emptied to
        wait for it. That pause is the beat: nothing asked. */
-    stages: [{ at: 1500, commands: [dialog.show({ x: 50, y: 50 }, 1, { shown: false })] }],
+    stages: [{ at: 1500, commands: [dialog.show({ x: 50, y: 50 }, 1.9, { shown: false })] }],
   },
   {
     n: 6,

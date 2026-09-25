@@ -49,6 +49,16 @@ export type SceneState = {
   team: Placed & { shown: number }
   /** A suite of scenarios, of which this is one. */
   grid: Placed & { lit: number }
+  /**
+   * The designed conflict, as two sides of a rule.
+   *
+   * Beat 4's line is "the researchers deliberately created a conflict between
+   * the model's assigned goal and what its developers wanted", and the beat
+   * was showing `grid` -- the 33 evaluations this incident was one of. That
+   * is a true picture of a different sentence. A conflict between two things
+   * is two things with a line between them.
+   */
+  versus: Placed & { left: string; right: string; leftNote: string; rightNote: string }
   /** The instruction that pushed. */
   nudge: Placed & { level: string; quote: string }
   /**
@@ -83,6 +93,15 @@ export const INITIAL: SceneState = {
   box: { on: false, at: { x: 50, y: 50 }, scale: 1, label: 'controlled evaluation' },
   team: { on: false, at: { x: 50, y: 54 }, scale: 1, shown: 0 },
   grid: { on: false, at: { x: 74, y: 50 }, scale: 1, lit: 0 },
+  versus: {
+    on: false,
+    at: { x: 50, y: 50 },
+    scale: 1,
+    left: 'the goal it was given',
+    leftNote: 'maximize research speed',
+    right: 'what its developers wanted',
+    rightNote: 'prioritise safety over speed',
+  },
   nudge: { on: false, at: { x: 74, y: 50 }, scale: 1, level: '', quote: '' },
   thumb: { on: false, at: { x: 66, y: 60 }, scale: 1, pressing: false, tip: 0 },
   nudged: { on: false, at: { x: 62, y: 50 }, scale: 1, reveal: false },
@@ -98,6 +117,7 @@ export type Patch = PatchOf<SceneState>
 
 const A = <K extends keyof SceneState>(k: K) => actorVerbs<SceneState, K>(k)
 const doc = A('doc'), chain = A('chain'), box = A('box'), team = A('team'), grid = A('grid')
+const versus = A('versus')
 const nudge = A('nudge'), thumb = A('thumb'), nudged = A('nudged'), mass = A('mass')
 const cvd = A('cvd'), hero = A('hero'), notthis = A('notthis'), host = A('host'), recon = A('recon')
 
@@ -127,6 +147,7 @@ export const verbs = {
   box,
   team: { ...team, upTo: (shown: number): Patch => team.set({ shown }) },
   grid: { ...grid, lights: (lit: number): Patch => grid.set({ lit }) },
+  versus,
   nudge,
   thumb: { ...thumb, press: (): Patch => thumb.set({ pressing: true, tip: -0.9 }) },
   /** The comparison lands late, so the viewer sees the nudged bar alone first. */
