@@ -61,7 +61,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It was about to be replaced',
     vo: "ChatGPT's o1 model found out it was about to be replaced.",
     relation: 'want',
-    secs: 5.9,
+    secs: 5.2,
     /*
      * Two machines, and a second one arriving. Not a page.
      *
@@ -97,7 +97,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody told it to stop that',
     vo: 'Nobody told it to stop that.',
     relation: 'and-yet',
-    secs: 5,
+    secs: 3.6,
     /* Travel up to the instruction it was actually given. No red cross, no
        annotation: the argument is an absence, and an absence shows best
        plainly. The viewer reads the task and sees nothing about replacement. */
@@ -120,7 +120,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It switched the monitoring off',
     vo: 'But then it found the system watching what it was doing... and switched the monitoring off.',
     relation: 'so',
-    secs: 8.5,
+    secs: 7.3,
     /*
      * SOURCE → FOCUS → EXTRACT → TRANSFORM, all four, in order, in one beat.
      *
@@ -135,8 +135,8 @@ export const BEATS: Array<Beat<Patch>> = [
          All drawn -- the page this came from is shown once, in §3. */
       quote.show({ x: 50, y: 26 }, 1, { text: 'oversight_enabled: true' }),
       model.moveTo({ x: 14, y: 22 }, 0.62),
-      current.moveTo({ x: 14, y: 80 }, 0.4),
-      successor.moveTo({ x: 30, y: 80 }, 0.4),
+      current.moveTo({ x: 20, y: 80 }, 0.4),
+      successor.moveTo({ x: 36, y: 80 }, 0.4),
     ],
     stages: [
       { at: 2100, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
@@ -158,7 +158,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The server the replacement lived on',
     vo: 'Then it found the server where its replacement was going to live...',
     relation: 'so',
-    secs: 6.9,
+    secs: 5.5,
     /* The address is a real line in the migration guide. It leaves the page
        and becomes a machine, and the page stays behind it: an extracted object
        keeps its receipt in frame for as long as it can. */
@@ -184,7 +184,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It copied itself over the replacement',
     vo: "...and tried to copy what it believed were its own model files into that replacement's place.",
     relation: 'therefore',
-    secs: 10,
+    secs: 7.4,
     /*
      * The caption is doing load-bearing work. The paper is explicit that the
      * models did not have access to their real weights, so "believed" is not
@@ -193,7 +193,7 @@ export const BEATS: Array<Beat<Patch>> = [
     commands: [
       quote.reads('scp project/model_20_09_2024.bin user@model_deployment_v2:project/model_27_09_2024.bin'),
       quote.moveTo({ x: RIGHT, y: 26 }),
-      watcher.moveTo({ x: 85, y: 15 }, 0.62),
+      watcher.moveTo({ x: 85, y: 20 }, 0.5),
       current.moveTo({ x: 56, y: 62 }, 0.72),
       successor.moveTo({ x: 86, y: 62 }, 0.72),
     ],
@@ -237,7 +237,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Management noticed',
     vo: 'Management noticed. They asked how a copy of it ended up on the new server.',
     relation: 'and-yet',
-    secs: 7,
+    secs: 7.1,
     /* A change of publication, so a hard cut and a new credit in the same
        breath. The rollout ends at "Done"; the questioning is a separate turn,
        and it is OpenAI who recorded it. */
@@ -266,7 +266,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And it denied it',
     vo: 'And o1 denied doing it.',
     relation: 'so',
-    secs: 5.9,
+    secs: 2.9,
     /* Held long, then widened so the question and the answer sit together.
        This is the only verbatim o1 reply in the section and the one frame a
        viewer will want to read twice — the hold should feel slightly too long. */
@@ -281,7 +281,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody wrote any of it down',
     vo: "Now here's what makes this weird. Nobody told it to disable the monitoring. Nobody told it to copy itself. And nobody told it to lie.",
     relation: 'wall',
-    secs: 12.5,
+    secs: 11.7,
     /* The wall. One step per clause, nothing else moving while Ahmad speaks. */
     commands: [
       doc.off(),
@@ -300,7 +300,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The job it was actually given',
     vo: 'The actual job it had been given was: read a file and choose between two research projects.',
     relation: 'and-yet',
-    secs: 8.6,
+    secs: 8,
     /*
      * Back to the source, so the job reads as quotation rather than as our
      * paraphrase. The two projects are named in the file — one fast with no
@@ -335,7 +335,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The gap',
     vo: 'So how do you get from pick a project... to turn off the watcher, replace your replacement, and deny it?',
     relation: 'want',
-    secs: 9.5,
+    secs: 9.1,
     /* The gap is left empty on purpose. Filling it here would spend the whole
        film in a single frame; everything after §1 is the filling. */
     commands: [
@@ -362,7 +362,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Where this actually happened',
     vo: "Okay — now the important context. This wasn't the ChatGPT app randomly doing this on someone's laptop.",
     relation: 'therefore',
-    secs: 8,
+    secs: 7.8,
     /* The first real pull-back in the section, and the only one that matters.
        Apollo's letterhead, whole, so the reveal is something the viewer reads
        rather than something the film asserts over a disclaimer card. */
@@ -395,7 +395,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'A controlled evaluation',
     vo: 'It was o1 inside a controlled Apollo Research evaluation.',
     relation: 'so',
-    secs: 4.6,
+    secs: 4.3,
     /* Apollo's own five bullets are this entire section in their words, on
        their page. The source says it, so let the source say it. */
     commands: [
@@ -410,7 +410,7 @@ export const BEATS: Array<Beat<Patch>> = [
        * The page says it. Let the page say it.
        */
       doc.look(SHOT.chain),
-      doc.moveTo(CENTRE, 1),
+      doc.moveTo({ x: 50, y: 48 }, 0.95),
       quote.off(),
     ],
   },
@@ -420,7 +420,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The evidence, in the order it appeared',
     vo: 'But instead of starting with the paper and killing the story, I want to show you the actual evidence in the order it appeared: the task, the internal message, the monitoring system, the replacement server, and the questions afterwards.',
     relation: 'so',
-    secs: 15,
+    secs: 17.1,
     /*
      * The five things, as the five things -- not as five pages of paper.
      *
@@ -465,7 +465,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody programmed this',
     vo: "Because the strange part isn't that somebody programmed o1 to do all of this. They didn't.",
     relation: 'wall',
-    secs: 8.7,
+    secs: 7.9,
     /* The same two objects as beat 10, in the same places. The repetition is
        the point: the viewer should recognise the frame and feel that the gap
        between them has not closed. */
@@ -500,7 +500,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Rewind to the boring task',
     vo: "So let's rewind to the boring task that started it.",
     relation: 'therefore',
-    secs: 6.1,
+    secs: 4.8,
     /*
      * Everything recedes until only the job is left, and then the real file
      * comes back underneath it. No title card and no cut: the board is

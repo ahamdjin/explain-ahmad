@@ -33,7 +33,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The claim on trial',
     vo: 'And this is why: "ChatGPT only does what you tell it to do" is incomplete.',
     relation: 'want',
-    secs: 5,
+    secs: 6.9,
     /*
      * Full clean frame, one sentence, no source underneath -- this is the
      * claim the film has been answering, not a quotation from anybody in
@@ -58,7 +58,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Specify every step',
     vo: 'If we had to specify every click, file, command, and intermediate step... an agent would barely be an agent.',
     relation: 'so',
-    secs: 6,
+    secs: 8.5,
     /*
      * Micro-instructions stacking, accelerating. **Stop before it becomes a
      * joke** -- six is enough to feel absurd, twelve is a gag and the section
@@ -83,7 +83,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'We give it a goal',
     vo: 'We give agents a goal because we want them to figure out the steps.',
     relation: 'therefore',
-    secs: 5,
+    secs: 6.5,
     /* Twenty lines become two. That collapse is the actual interface. */
     commands: [claim.off()],
     stages: [
@@ -104,7 +104,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Usually, that is the feature',
     vo: 'Usually, that’s the feature.',
     relation: 'so',
-    secs: 2.9,
+    secs: 2.6,
     /* The ordinary steps, in the film's own shapes. Nothing sinister -- this
        is what everybody wanted when they asked for an agent. */
     commands: [
@@ -112,7 +112,7 @@ export const BEATS: Array<Beat<Patch>> = [
       goal.moveTo({ x: 24, y: 40 }, 0.7),
       /* The road is this section's argument, and it was drawn smaller than
          the caption cards beside it -- 55% text against 23% drawn. */
-      road.show({ x: 56, y: 34 }, 1.5, { drawn: 0 }),
+      road.show({ x: 53, y: 34 }, 1.38, { drawn: 0 }),
       steps.show({ x: 56, y: 70 }, 1.2, { kind: 'wanted', shown: 0 }),
     ],
     stages: [
@@ -126,7 +126,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The same road',
     vo: 'Apollo’s experiment shows the uncomfortable version: the system can discover a useful step nobody intended it to choose.',
     relation: 'and-yet',
-    secs: 6,
+    secs: 8.4,
     /*
      * **The goal object does not change. The road does not change. The shapes
      * do not change.** Only the contents of the steps do, and that identity is
@@ -144,7 +144,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody typed this',
     vo: 'Nobody typed: disable monitoring. Replace yourself. Lie.',
     relation: 'wall',
-    secs: 5.4,
+    secs: 4.3,
     /*
      * Three instruction fields that appear and **stay empty**. The emptiness
      * is the content, so they are held, not flashed -- and nothing is ever
@@ -179,7 +179,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * same two strings, left empty there and filled here.
      */
     needs: '§04:nobody-asked-for-that',
-    secs: 6,
+    secs: 7.8,
     /*
      * **The payoff.** §4 beat 8's exact frame -- same component, same two
      * strings, same order -- and the middle that has been empty for five
@@ -197,14 +197,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'They gave it the destination',
     vo: 'They gave it the destination.',
     relation: 'therefore',
-    secs: 3,
+    secs: 2.6,
     /* Everything goes but two marks: where it started, and where it was
        pointed. Nothing in between yet. */
     commands: [
       /* The mark goes. The film's last two images -- the destination, and the
          road being invented -- are the payoff, and they get a clean frame.
          The road at this size runs the full width, so nothing else fits. */
-      model.off(),gap.off(), camera.to({ x: 50, y: 48 }, 1.12), dest.show({ x: 50, y: 48 }, 1.7)],
+      model.off(),gap.off(), camera.to({ x: 50, y: 48 }, 1), dest.show({ x: 50, y: 48 }, 1.5)],
     stages: [],
   },
   {
@@ -213,7 +213,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And it started inventing the road',
     vo: 'And it started inventing the road.',
     relation: 'wall',
-    secs: 4.4,
+    secs: 3.6,
     /*
      * The route draws itself one final time, using the shapes from the real
      * incident. The line lands, and then black.
@@ -225,7 +225,7 @@ export const BEATS: Array<Beat<Patch>> = [
     /* `final` no longer carries its own position -- the road renders inside
        the destination row so the two cannot disagree about where the marks
        are. It only carries how far the road has been drawn. */
-    commands: [final.show({ x: 50, y: 48 }, 1.5, { drawn: 0 })],
+    commands: [final.show({ x: 50, y: 48 }, 1.34, { drawn: 0 })],
     /* The film's last move: the frame opens out as the road is drawn, so the
        closing image arrives rather than sitting there. */
     stages: [

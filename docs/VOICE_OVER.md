@@ -113,7 +113,7 @@ current as the last capture, and a stale frame gets reviewed and believed.
 | the dots at the bottom | one per section — click to jump. A ring marks where you are |
 | the rail above them | one tick per beat, width proportional to its length. Click to land on it |
 | <kbd>Home</kbd> / <kbd>End</kbd> | first and last beat of the section you are in |
-| `/watch?play=1` | hands-free at authored timing. Space or click pauses. |
+| `/watch?play=1` | hands-free at authored timing. Space or click steps forward; `P` (or `K`) pauses. |
 | `/watch?play=1&chrome=0` | **for recording** — hides the chapter label, the dots and the rail |
 | `/watch?section=5` | start at a chapter |
 | `npm run record` | the whole piece to `output/recordings/whole-piece.webm` |

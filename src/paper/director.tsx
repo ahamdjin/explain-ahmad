@@ -117,7 +117,7 @@ export function SectionRunner<S, P>({
   label: string
   /** Advancing past the last beat. Used by the continuous player. */
   onFinish?: () => void
-  /** Run on the timeline instead of on clicks. Space becomes pause. */
+  /** Run on the timeline instead of on clicks. P (or K) pauses. */
   autoplay?: boolean
   /**
    * A voice-over track. When present it becomes the **master clock** -- beats
@@ -252,12 +252,18 @@ export function SectionRunner<S, P>({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === ' ' && autoplay) {
+      /*
+       * Space advances, always. It used to toggle pause while autoplay ran,
+       * which meant the most obvious key in the room did the one thing nobody
+       * reaching for it wanted. Pause is on P (and K, the video habit).
+       */
+      if (event.key === 'p' || event.key === 'P' || event.key === 'k' || event.key === 'K') {
+        if (!autoplay) return
         event.preventDefault()
         setPaused((value) => !value)
         return
       }
-      if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'PageDown') {
+      if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Spacebar' || event.key === 'PageDown') {
         event.preventDefault()
         move(1)
       }
@@ -291,7 +297,7 @@ export function SectionRunner<S, P>({
   /* ---- autoplay ---------------------------------------------------------
    * Clicking is the authored experience; autoplay exists so the piece can be
    * watched hands-free and recorded, and so a voice-over has something to
-   * drive. Space pauses instead of advancing while it runs. */
+   * drive. P (or K) pauses it; Space and clicks still step forward. */
   const [paused, setPaused] = useState(false)
   const audio = useRef<HTMLAudioElement | null>(null)
 
@@ -363,10 +369,7 @@ export function SectionRunner<S, P>({
           onPointerUp={(event) => {
             const target = event.target as HTMLElement
             if (event.button !== 0 || target.closest('[data-no-advance]')) return
-            if (autoplay) {
-              setPaused((value) => !value)
-              return
-            }
+            /* A click is someone asking for the next beat, in autoplay too. */
             move(1)
           }}
         >

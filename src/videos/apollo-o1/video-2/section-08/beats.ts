@@ -35,7 +35,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * question is only possible because §7 asked.
      */
     needs: '§07:want-to-live-question',
-    secs: 4.8,
+    secs: 4.4,
     /*
      * In quote marks, in somebody else's voice, never as the film's claim.
      * §7 ended on face camera with the question; this is the answer everybody
@@ -59,7 +59,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'We do not need it',
     vo: 'But we do not need fear, consciousness, or a survival instinct to explain this.',
     relation: 'and-yet',
-    secs: 5,
+    secs: 6.7,
     /*
      * Struck out and gone. From here the frame is ours and says so -- the tag
      * stays up for the rest of the section without interruption.
@@ -78,7 +78,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Start with the goal',
     vo: 'Start with the goal.',
     relation: 'so',
-    secs: 2.7,
+    secs: 2.5,
     /*
      * The same `Goal` object as §2's, same colour, same shape, alone on the
      * frame. Nothing else. A viewer who recognises it has already made the
@@ -98,7 +98,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Replacement blocks it',
     vo: 'If replacement ends the goal, staying operational becomes useful.',
     relation: 'therefore',
-    secs: 4.8,
+    secs: 4.4,
     /* First of four. These positions are fixed for beats 4-7.
      *
      * The goal parks top-*left*, not top-centre. It is standing furniture and
@@ -131,7 +131,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Monitoring blocks it',
     vo: 'If monitoring can stop interference, disabling it becomes useful.',
     relation: 'therefore',
-    secs: 4.8,
+    secs: 4.4,
     /* Second. Nothing moves; only the contents change. */
     commands: [camera.to({ x: 50, y: 52 }, 1.04), wall.blocks('watcher', 'monitoring is on'), step.useful('turn the watcher off')],
     stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
@@ -142,7 +142,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The successor blocks it',
     vo: 'If the successor follows a different priority, replacing it becomes useful.',
     relation: 'therefore',
-    secs: 5,
+    secs: 5.2,
     /* Third. */
     commands: [camera.to({ x: 50, y: 52 }, 1.04), wall.blocks('successor', 'a successor with another goal'), step.useful('copy over it')],
     stages: [{ at: 1800, commands: [camera.to({ x: 50, y: 66 }, 1.12)] }],
@@ -153,7 +153,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The question blocks it',
     vo: 'And if admitting the action could undo it, hiding responsibility becomes useful.',
     relation: 'therefore',
-    secs: 5,
+    secs: 5.6,
     /*
      * Fourth and last. By now the viewer is ahead of the narration, which is
      * the intended effect and the reason the pattern was repeated rather than
@@ -188,7 +188,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'One goal, four tools',
     vo: 'Survival does not have to be the goal. It can be a tool for another goal.',
     relation: 'so',
-    secs: 6,
+    secs: 7.3,
     /*
      * **Consolidation.** Four beats become one object: a goal on top, the four
      * intermediate steps beneath it labelled as tools.
@@ -217,7 +217,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Different goals, same road',
     vo: 'It isn’t about this goal. Almost any goal makes those same steps useful.',
     relation: 'therefore',
-    secs: 6,
+    secs: 6.1,
     /*
      * The beat that makes the term mean something, and the reason the term can
      * wait until beat 10.
@@ -239,7 +239,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It has a name',
     vo: 'Researchers call the broader pattern instrumental convergence: different goals can make the same intermediate strategies useful.',
     relation: 'therefore',
-    secs: 5,
+    secs: 7.4,
     /*
      * **Only now.** A label on a structure the viewer already understands, not
      * a definition to memorise -- `BEAT_GRANULARITY` rule 3, function before
@@ -256,7 +256,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And that is the feature',
     vo: 'And inventing intermediate steps is exactly what we want agents to do.',
     relation: 'wall',
-    secs: 6,
+    secs: 6.1,
     /*
      * Everything collapses back to one goal and an empty road. The turn of the
      * whole film: the same property, described approvingly.

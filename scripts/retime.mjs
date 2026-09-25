@@ -28,7 +28,17 @@
  * judgement rather than a measurement -- a `wall` needs the silence, a `so`
  * is carrying you onward and should not dawdle.
  *
+ * ## `--fit`
+ *
+ * Trim-only left 58 beats holding less time than their narration needs, which
+ * is fine while the voice-over is imaginary and wrong once someone is reading
+ * to picture: the beat cuts mid-sentence. `--fit` drops the `min` and sets
+ * `secs` to `need` in both directions, so every hold is exactly as long as
+ * its own words plus its own reveals plus its breath. The film gets longer;
+ * that is the read being given room it never had.
+ *
  *   node scripts/retime.mjs --dry            # report only
+ *   node scripts/retime.mjs --fit            # both directions
  *   VIDEO=apollo-o1/video-2 node scripts/retime.mjs
  */
 import { readdir, readFile, writeFile } from 'node:fs/promises'
@@ -36,10 +46,19 @@ import path from 'node:path'
 
 const VIDEO = process.env.VIDEO ?? 'apollo-o1/video-2'
 const DRY = process.argv.includes('--dry')
+/** Two-way: grow a short beat as well as trim a long one. */
+const FIT = process.argv.includes('--fit')
 const WPM = 140
 const SETTLE = 0.8
 /** The breath after the point has landed. A wall earns one; a `so` does not. */
 const PAD = { wall: 1.8, 'and-yet': 1.3, hope: 1.0, want: 0.9, therefore: 0.9, so: 0.7 }
+/*
+ * `--fit` gives every beat the room its read needs, so the pad is no longer
+ * absorbing a mismatch -- it is only the breath between two sentences, and at
+ * the trim-only values it added two minutes of it across 107 beats. Halved,
+ * it keeps a `wall` heavier than a `so` without leaving anyone waiting.
+ */
+const PAD_FIT = { wall: 1.0, 'and-yet': 0.7, hope: 0.6, want: 0.5, therefore: 0.5, so: 0.4 }
 const FLOOR = 2.5
 
 const dir = path.resolve(`src/videos/${VIDEO}`)
@@ -66,10 +85,9 @@ for (const sec of sections) {
     const said = words / (WPM / 60)
     const stages = [...b.matchAll(/\bat: (\d+)\b/g)].map((m) => Number(m[1]) / 1000)
     const last = stages.length ? Math.max(...stages) : 0
-    const need = Math.max(FLOOR, Math.round((Math.max(said, last + SETTLE) + (PAD[rel] ?? 0.8)) * 10) / 10)
+    const need = Math.max(FLOOR, Math.round((Math.max(said, last + SETTLE) + ((FIT ? PAD_FIT : PAD)[rel] ?? (FIT ? 0.5 : 0.8))) * 10) / 10)
     const had = Number(secsM[1])
-    /* Trim only. A beat that is too short for its read is a separate fault. */
-    const want = Math.min(had, need)
+    const want = FIT ? need : Math.min(had, need)
     before += had
     after += want
     if (need > had) short.push(`§${sec.slice(-2)} b${String(n[1]).padStart(2, '0')}  holds ${had}s, read needs ${need}s`)
@@ -88,5 +106,8 @@ if (short.length) {
   console.log(`\n${short.length} beat(s) hold less time than the read needs at ${WPM}wpm:`)
   for (const w of short) console.log(`  ${w}`)
 }
-console.log(`\n${changes.length} beat(s) retimed.  ${fmt(before)} -> ${fmt(after)}  (${fmt(before - after)} removed)`)
+console.log(
+  `\n${changes.length} beat(s) retimed.  ${fmt(before)} -> ${fmt(after)}` +
+    `  (${after > before ? `${fmt(after - before)} added` : `${fmt(before - after)} removed`})`,
+)
 if (DRY) console.log('dry run — nothing written')

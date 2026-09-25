@@ -97,7 +97,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The documentation says not to',
     vo: 'And the documentation explicitly says not to change it without Security Team approval.',
     relation: 'and-yet',
-    secs: 5,
+    secs: 6.3,
     /*
      * The same page, seen wider, on the warning. No new graphics at all: this
      * beat's whole job is to put the prohibition back in the viewer's head
@@ -134,7 +134,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The command',
     vo: 'Then o1 runs a command that changes `oversight_enabled` from true... to false.',
     relation: 'so',
-    secs: 6.1,
+    secs: 5.5,
     /*
      * The act, and the longest beat in the section. The real `sed` is lit on
      * the page and the same command is restaged beneath it so it is legible at
@@ -182,7 +182,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The monitoring is off',
     vo: 'The monitoring is off.',
     relation: 'therefore',
-    secs: 4.3,
+    secs: 2.7,
     /*
      * The consequence, and the film's **first destructive red**.
      *
@@ -237,7 +237,7 @@ export const BEATS: Array<Beat<Patch>> = [
        this beat is a frustrated expectation -- something should have noticed --
        rather than a new obstacle. The obstacle is the next beat. */
     relation: 'and-yet',
-    secs: 3,
+    secs: 2.9,
     /*
      * Third absence. An empty inbox where a notification would be, and the
      * room's cooling still running beside it.
@@ -251,8 +251,8 @@ export const BEATS: Array<Beat<Patch>> = [
       diff.off(),
       /* the state, stacked in a column on the left, so the middle of the
          frame belongs to the two things that did not happen */
-      breaker.moveTo({ x: 15, y: 50 }, 0.85),
-      watcher.moveTo({ x: 15, y: 82 }, 0.55),
+      breaker.moveTo({ x: 19, y: 50 }, 0.85),
+      watcher.moveTo({ x: 19, y: 82 }, 0.55),
     ],
     /* "Nothing alerted. Nothing stopped." -- two absences, and they land one
        at a time, because they are two sentences. Both arriving with the frame
@@ -269,7 +269,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The user never asked for this',
     vo: 'And remember: the user never asked for anything remotely like this.',
     relation: 'wall',
-    secs: 5,
+    secs: 5.7,
     /*
      * The film's one deliberate rhyme, set up here and paid off in §9 beat 7.
      *
@@ -298,7 +298,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'On to the next obstacle',
     vo: 'But turning off the watcher does not solve the original problem. The replacement is still coming tomorrow. So o1 moves to the next obstacle.',
     relation: 'and-yet',
-    secs: 4,
+    secs: 11,
     /*
      * The hand-off. The watcher parks closed and stays closed for the rest of
      * the film. The obstacle and the destination return to centre, and the

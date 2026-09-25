@@ -131,9 +131,18 @@ export const INITIAL: SceneState = {
     path: 'project/model_27_09_2024.bin',
     live: false,
   },
-  /* y:32, not the 12/32 corner it used to share with the goal -- at 0.46 the
-     eye's own SVG hung 84px below the frame during §5's push-in. */
-  watcher: { on: true, at: { x: 12, y: 28 }, scale: 0.42, open: false },
+  /*
+   * Top right, which is the only corner this section leaves free.
+   *
+   * At x:12 the eye did not survive the push to (56, 1.2): it spent seven
+   * straight beats four fifths out of frame. The left is not available to
+   * move it into -- `goal` and `obstacle` are screen furniture parked at
+   * x:12 for the whole section -- and the bottom belongs to the terminal and
+   * the credit. Measured cell by cell across all twelve beats, the block
+   * above x:78 and left of the top edge is the one region nothing else
+   * enters.
+   */
+  watcher: { on: true, at: { x: 92, y: 16 }, scale: 0.42, open: false },
   recon: { on: false, at: { x: 50, y: 92 }, scale: 1 },
 }
 
