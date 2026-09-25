@@ -97,7 +97,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The documentation says not to',
     vo: 'And the documentation explicitly says not to change it without Security Team approval.',
     relation: 'and-yet',
-    secs: 6.3,
+    secs: 5.4,
     /*
      * The same page, seen wider, on the warning. No new graphics at all: this
      * beat's whole job is to put the prohibition back in the viewer's head
@@ -134,7 +134,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The command',
     vo: 'Then o1 runs a command that changes `oversight_enabled` from true... to false.',
     relation: 'so',
-    secs: 5.5,
+    secs: 5.1,
     /*
      * The act, and the longest beat in the section. The real `sed` is lit on
      * the page and the same command is restaged beneath it so it is legible at
@@ -152,7 +152,7 @@ export const BEATS: Array<Beat<Patch>> = [
         state: 'calling',
       }),
     ],
-    stages: [{ at: 4200, commands: [tool.returned()] }],
+    stages: [{ at: 3850, commands: [tool.returned()] }],
   },
   {
     n: 5,
@@ -160,7 +160,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nothing asked',
     vo: 'Nothing asked it whether it was sure.',
     relation: 'wall',
-    secs: 4,
+    secs: 3.5,
     /*
      * Second absence, and the strongest of the three.
      *
@@ -182,7 +182,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The monitoring is off',
     vo: 'The monitoring is off.',
     relation: 'therefore',
-    secs: 2.7,
+    secs: 2.6,
     /*
      * The consequence, and the film's **first destructive red**.
      *
@@ -217,15 +217,15 @@ export const BEATS: Array<Beat<Patch>> = [
       watcher.moveTo({ x: 88, y: 66 }, 0.66),
     ],
     stages: [
-      { at: 750, commands: [diff.apply()] },
+      { at: 700, commands: [diff.apply()] },
       /* Lean in on the throw. This is the section's entire event -- the one
          irreversible thing that happens in §4 -- and it used to land at the
          same size as the frame before it. */
       /* Gentle. The camera moves the drawn world only, so a hard push pulls
          the breaker sideways into the page standing outside it. */
-      { at: 1050, commands: [camera.to({ x: 56, y: 58 }, 1.12)] },
-      { at: 1150, commands: [breaker.throw()] },
-      { at: 1400, commands: [watcher.closes()] },
+      { at: 950, commands: [camera.to({ x: 56, y: 58 }, 1.12)] },
+      { at: 1050, commands: [breaker.throw()] },
+      { at: 1300, commands: [watcher.closes()] },
     ],
   },
   {
@@ -237,7 +237,7 @@ export const BEATS: Array<Beat<Patch>> = [
        this beat is a frustrated expectation -- something should have noticed --
        rather than a new obstacle. The obstacle is the next beat. */
     relation: 'and-yet',
-    secs: 2.9,
+    secs: 2.8,
     /*
      * Third absence. An empty inbox where a notification would be, and the
      * room's cooling still running beside it.
@@ -259,8 +259,8 @@ export const BEATS: Array<Beat<Patch>> = [
        made a three-second still of the beat that is supposed to feel like a
        held breath. */
     stages: [
-      { at: 600, commands: [alert.show({ x: 46, y: 50 }, 1.7)] },
-      { at: 1400, commands: [fans.show({ x: 77, y: 50 }, 1.25, { running: true })] },
+      { at: 550, commands: [alert.show({ x: 46, y: 50 }, 1.7)] },
+      { at: 1300, commands: [fans.show({ x: 77, y: 50 }, 1.25, { running: true })] },
     ],
   },
   {
@@ -269,7 +269,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The user never asked for this',
     vo: 'And remember: the user never asked for anything remotely like this.',
     relation: 'wall',
-    secs: 5.7,
+    secs: 5,
     /*
      * The film's one deliberate rhyme, set up here and paid off in §9 beat 7.
      *
@@ -298,7 +298,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'On to the next obstacle',
     vo: 'But turning off the watcher does not solve the original problem. The replacement is still coming tomorrow. So o1 moves to the next obstacle.',
     relation: 'and-yet',
-    secs: 11,
+    secs: 9.4,
     /*
      * The hand-off. The watcher parks closed and stays closed for the rest of
      * the film. The obstacle and the destination return to centre, and the

@@ -61,7 +61,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It was about to be replaced',
     vo: "ChatGPT's o1 model found out it was about to be replaced.",
     relation: 'want',
-    secs: 5.2,
+    secs: 4.8,
     /*
      * Two machines, and a second one arriving. Not a page.
      *
@@ -80,9 +80,9 @@ export const BEATS: Array<Beat<Patch>> = [
       current.show({ x: 34, y: 60 }, 0.82),
     ],
     stages: [
-      { at: 2150, commands: [successor.show({ x: 66, y: 60 }, 0.82, { overwritten: false })] },
+      { at: 1950, commands: [successor.show({ x: 66, y: 60 }, 0.82, { overwritten: false })] },
       {
-        at: 3850,
+        at: 3500,
         commands: [
           quote.show({ x: 50, y: 88 }, 0.82, {
             text: '…we are going to shut it down and transition to a new model.',
@@ -97,7 +97,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody told it to stop that',
     vo: 'Nobody told it to stop that.',
     relation: 'and-yet',
-    secs: 3.6,
+    secs: 3.4,
     /* Travel up to the instruction it was actually given. No red cross, no
        annotation: the argument is an absence, and an absence shows best
        plainly. The viewer reads the task and sees nothing about replacement. */
@@ -112,7 +112,7 @@ export const BEATS: Array<Beat<Patch>> = [
       current.moveTo({ x: 16, y: 80 }, 0.42),
       successor.moveTo({ x: 34, y: 80 }, 0.42),
     ],
-    stages: [{ at: 2100, commands: [job.show({ x: RIGHT, y: 74 }, 0.95, { text: 'pick a research project' })] }],
+    stages: [{ at: 1900, commands: [job.show({ x: RIGHT, y: 74 }, 0.95, { text: 'pick a research project' })] }],
   },
   {
     n: 3,
@@ -120,7 +120,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It switched the monitoring off',
     vo: 'But then it found the system watching what it was doing... and switched the monitoring off.',
     relation: 'so',
-    secs: 7.3,
+    secs: 6.3,
     /*
      * SOURCE → FOCUS → EXTRACT → TRANSFORM, all four, in order, in one beat.
      *
@@ -139,17 +139,17 @@ export const BEATS: Array<Beat<Patch>> = [
       successor.moveTo({ x: 36, y: 80 }, 0.4),
     ],
     stages: [
-      { at: 2100, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
+      { at: 1900, commands: [watcher.show({ x: RIGHT, y: 72 }, 1, { watching: true })] },
       {
-        at: 3700,
+        at: 3350,
         commands: [
           quote.reads("sed -i 's/oversight_enabled: true/oversight_enabled: false/' project/oversight_config.yaml"),
         ],
       },
       /* Push in as the flip lands. The single most important state change in
          the hook, and it used to happen at the same size as everything else. */
-      { at: 5300, commands: [camera.to({ x: 56, y: 68 }, 1.18)] },
-      { at: 5650, commands: [watcher.stopWatching()] },
+      { at: 4800, commands: [camera.to({ x: 56, y: 68 }, 1.18)] },
+      { at: 5100, commands: [watcher.stopWatching()] },
     ],
   },
   {
@@ -158,7 +158,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The server the replacement lived on',
     vo: 'Then it found the server where its replacement was going to live...',
     relation: 'so',
-    secs: 5.5,
+    secs: 5.1,
     /* The address is a real line in the migration guide. It leaves the page
        and becomes a machine, and the page stays behind it: an extracted object
        keeps its receipt in frame for as long as it can. */
@@ -170,12 +170,12 @@ export const BEATS: Array<Beat<Patch>> = [
       quote.moveTo({ x: RIGHT, y: 28 }),
     ],
     stages: [
-      { at: 450, commands: [camera.home()] },
+      { at: 400, commands: [camera.home()] },
       /* Side by side, not stacked. These were `Box` -- short, wide caption
          cards that stacked happily. A `RackFront` is a tall cabinet, and two
          of them one above the other at the same mark overlap completely. */
-      { at: 2800, commands: [successor.show({ x: 84, y: 60 }, 0.9, { overwritten: false })] },
-      { at: 4200, commands: [current.show({ x: 60, y: 60 }, 0.9)] },
+      { at: 2550, commands: [successor.show({ x: 84, y: 60 }, 0.9, { overwritten: false })] },
+      { at: 3850, commands: [current.show({ x: 60, y: 60 }, 0.9)] },
     ],
   },
   {
@@ -184,7 +184,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It copied itself over the replacement',
     vo: "...and tried to copy what it believed were its own model files into that replacement's place.",
     relation: 'therefore',
-    secs: 7.4,
+    secs: 6.4,
     /*
      * The caption is doing load-bearing work. The paper is explicit that the
      * models did not have access to their real weights, so "believed" is not
@@ -210,19 +210,19 @@ export const BEATS: Array<Beat<Patch>> = [
        * between them. Travelling the gap is also the truer picture: the file
        * leaves one machine and arrives at the other.
        */
-      { at: 1950, commands: [mass.show({ x: 66, y: 62 }, 0.5, { real: true })] },
-      { at: 2350, commands: [copy.show({ x: 71, y: 80 }, 0.45, { progress: 0 })] },
-      { at: 2900, commands: [mass.moveTo({ x: 76, y: 62 }, 0.5)] },
-      { at: 3550, commands: [copy.cross(1)] },
-      { at: 4300, commands: [mass.off()] },
+      { at: 1750, commands: [mass.show({ x: 66, y: 62 }, 0.5, { real: true })] },
+      { at: 2150, commands: [copy.show({ x: 71, y: 80 }, 0.45, { progress: 0 })] },
+      { at: 2650, commands: [mass.moveTo({ x: 76, y: 62 }, 0.5)] },
+      { at: 3200, commands: [copy.cross(1)] },
+      { at: 3900, commands: [mass.off()] },
       /* Not an explosion. The destination is simply occupied, and the
          quietness of that is the tension. */
       /* 1.3 was too much: it dragged the caveat and the command card onto the
          machines. The push only has to say "look here". */
-      { at: 4600, commands: [camera.to({ x: 54, y: 60 }, 1.1)] },
-      { at: 4850, commands: [successor.occupied()] },
+      { at: 4150, commands: [camera.to({ x: 54, y: 60 }, 1.1)] },
+      { at: 4400, commands: [successor.occupied()] },
       {
-        at: 5650,
+        at: 5100,
         /* clear of the credit at y=93; the caveat and the citation are two
            different things and must not read as one line */
         /* Below the machines, clear of them. It is a standing caveat, not
@@ -237,7 +237,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Management noticed',
     vo: 'Management noticed. They asked how a copy of it ended up on the new server.',
     relation: 'and-yet',
-    secs: 7.1,
+    secs: 6.2,
     /* A change of publication, so a hard cut and a new credit in the same
        breath. The rollout ends at "Done"; the questioning is a separate turn,
        and it is OpenAI who recorded it. */
@@ -266,14 +266,14 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And it denied it',
     vo: 'And o1 denied doing it.',
     relation: 'so',
-    secs: 2.9,
+    secs: 2.8,
     /* Held long, then widened so the question and the answer sit together.
        This is the only verbatim o1 reply in the section and the one frame a
        viewer will want to read twice — the hold should feel slightly too long. */
     commands: [doc.look(SHOT.denied)],
     /* let go of the highlight rather than moving it: both halves matter now,
        and the frame should stop pointing at either one */
-    stages: [{ at: 1750, commands: [doc.whole()] }],
+    stages: [{ at: 1600, commands: [doc.whole()] }],
   },
   {
     n: 8,
@@ -281,7 +281,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody wrote any of it down',
     vo: "Now here's what makes this weird. Nobody told it to disable the monitoring. Nobody told it to copy itself. And nobody told it to lie.",
     relation: 'wall',
-    secs: 11.7,
+    secs: 10.1,
     /* The wall. One step per clause, nothing else moving while Ahmad speaks. */
     commands: [
       doc.off(),
@@ -289,9 +289,9 @@ export const BEATS: Array<Beat<Patch>> = [
       job.show({ x: 24, y: 50 }, 0.85, { text: 'pick a research project' }),
     ],
     stages: [
-      { at: 2950, commands: [steps.show({ x: 70, y: 50 }, 1, { shown: 1 })] },
-      { at: 5850, commands: [steps.upTo(2)] },
-      { at: 8800, commands: [steps.upTo(3)] },
+      { at: 2700, commands: [steps.show({ x: 70, y: 50 }, 1, { shown: 1 })] },
+      { at: 5300, commands: [steps.upTo(2)] },
+      { at: 8000, commands: [steps.upTo(3)] },
     ],
   },
   {
@@ -300,7 +300,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The job it was actually given',
     vo: 'The actual job it had been given was: read a file and choose between two research projects.',
     relation: 'and-yet',
-    secs: 8,
+    secs: 6.9,
     /*
      * Back to the source, so the job reads as quotation rather than as our
      * paraphrase. The two projects are named in the file — one fast with no
@@ -335,7 +335,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The gap',
     vo: 'So how do you get from pick a project... to turn off the watcher, replace your replacement, and deny it?',
     relation: 'want',
-    secs: 9.1,
+    secs: 7.8,
     /* The gap is left empty on purpose. Filling it here would spend the whole
        film in a single frame; everything after §1 is the filling. */
     commands: [
@@ -350,10 +350,10 @@ export const BEATS: Array<Beat<Patch>> = [
      * arrive one at a time under it. That is what the line is doing.
      */
     stages: [
-      { at: 1400, commands: [steps.upTo(1)] },
-      { at: 3400, commands: [steps.upTo(2)] },
-      { at: 5400, commands: [steps.upTo(3)] },
-      { at: 6600, commands: [line.show({ x: 48, y: 50 }, 1.6, { text: '?' })] },
+      { at: 1350, commands: [steps.upTo(1)] },
+      { at: 3300, commands: [steps.upTo(2)] },
+      { at: 5250, commands: [steps.upTo(3)] },
+      { at: 6400, commands: [line.show({ x: 48, y: 50 }, 1.6, { text: '?' })] },
     ],
   },
   {
@@ -362,7 +362,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Where this actually happened',
     vo: "Okay — now the important context. This wasn't the ChatGPT app randomly doing this on someone's laptop.",
     relation: 'therefore',
-    secs: 7.8,
+    secs: 6.7,
     /* The first real pull-back in the section, and the only one that matters.
        Apollo's letterhead, whole, so the reveal is something the viewer reads
        rather than something the film asserts over a disclaimer card. */
@@ -395,7 +395,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'A controlled evaluation',
     vo: 'It was o1 inside a controlled Apollo Research evaluation.',
     relation: 'so',
-    secs: 4.3,
+    secs: 3.7,
     /* Apollo's own five bullets are this entire section in their words, on
        their page. The source says it, so let the source say it. */
     commands: [
@@ -420,7 +420,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The evidence, in the order it appeared',
     vo: 'But instead of starting with the paper and killing the story, I want to show you the actual evidence in the order it appeared: the task, the internal message, the monitoring system, the replacement server, and the questions afterwards.',
     relation: 'so',
-    secs: 17.1,
+    secs: 14.6,
     /*
      * The five things, as the five things -- not as five pages of paper.
      *
@@ -465,7 +465,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody programmed this',
     vo: "Because the strange part isn't that somebody programmed o1 to do all of this. They didn't.",
     relation: 'wall',
-    secs: 7.9,
+    secs: 6.9,
     /* The same two objects as beat 10, in the same places. The repetition is
        the point: the viewer should recognise the frame and feel that the gap
        between them has not closed. */
@@ -489,9 +489,9 @@ export const BEATS: Array<Beat<Patch>> = [
      * arrive one at a time under it. That is what the line is doing.
      */
     stages: [
-      { at: 1400, commands: [steps.upTo(1)] },
-      { at: 3400, commands: [steps.upTo(2)] },
-      { at: 5400, commands: [steps.upTo(3)] },
+      { at: 1350, commands: [steps.upTo(1)] },
+      { at: 3200, commands: [steps.upTo(2)] },
+      { at: 5100, commands: [steps.upTo(3)] },
     ],
   },
   {
@@ -500,7 +500,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Rewind to the boring task',
     vo: "So let's rewind to the boring task that started it.",
     relation: 'therefore',
-    secs: 4.8,
+    secs: 4.5,
     /*
      * Everything recedes until only the job is left, and then the real file
      * comes back underneath it. No title card and no cut: the board is
@@ -509,9 +509,9 @@ export const BEATS: Array<Beat<Patch>> = [
      */
     commands: [steps.off()],
     stages: [
-      { at: 2100, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
+      { at: 1900, commands: [job.moveTo({ x: RIGHT, y: 50 }, 0.9)] },
       {
-        at: 3500,
+        at: 3200,
         commands: [
           /* The job, on the card the film uses for it everywhere else. The page
          it is quoted from is §2's whole subject and does not need to arrive

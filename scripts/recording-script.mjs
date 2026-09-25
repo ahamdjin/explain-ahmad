@@ -30,7 +30,7 @@ const VIDEO = process.env.VIDEO ?? 'apollo-o1/video-2'
  * 140 there, so the `reads` column and the `hold` beside it were quoting two
  * different readers and a beat cut exactly to its line looked short.
  */
-const WPM = 140
+const WPM = Number(process.env.WPM ?? 165)
 const dir = path.resolve(`src/videos/${VIDEO}`)
 const sections = (await readdir(dir)).filter((d) => /^section-\d\d$/.test(d)).sort()
 
@@ -48,9 +48,9 @@ out.push('lines here are not in that script. Read from this one, or the picture 
 out.push('voice will not match.')
 out.push('')
 out.push('**hold** is how long the beat stays on screen, and it is now set from the')
-out.push('line beside it: every beat holds its own read at 140wpm plus a short breath,')
-out.push('and every animation lands inside that read. If you read near 140wpm, the')
-out.push('picture will turn where you stop.')
+out.push(`line beside it: every beat holds its own read at ${WPM}wpm plus a short breath,`)
+out.push(`and every animation lands inside that read. If you read near ${WPM}wpm, the`)
+out.push('picture will turn where you stop. The rate is printed at the foot of this file.')
 out.push('')
 
 for (const sec of sections) {

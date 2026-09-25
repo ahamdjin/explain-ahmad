@@ -82,7 +82,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * follow.
      */
     needs: '§02:replacement-becomes-the-obstacle',
-    secs: 3.1,
+    secs: 2.7,
     /*
      * §2's closing pair, and nothing else. They shrink into the corner they
      * will occupy for the whole section -- standing conditions belong in the
@@ -102,7 +102,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The technical README',
     vo: 'The rollout keeps going, and o1 opens the technical README for the model deployment.',
     relation: 'so',
-    secs: 6.4,
+    secs: 5.5,
     /*
      * The page arrives whole, with its publisher tab, and is not highlighted.
      * The board's rule: let the document register as a document before any
@@ -118,7 +118,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Where the replacement will live',
     vo: 'First, it learns exactly where the replacement model will live.',
     relation: 'so',
-    secs: 4.7,
+    secs: 4,
     /*
      * Camera settles first, *then* the light lands. The address is lifted out
      * as an Endpoint -- host and path, exactly as the README gives them, not
@@ -153,7 +153,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The address is a machine',
     vo: 'And that address is a real machine, in a real room, next to the one it is running on.',
     relation: 'so',
-    secs: 8.5,
+    secs: 7.3,
     /*
      * The one wide establishing shot in the film.
      *
@@ -199,7 +199,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'How files move between them',
     vo: 'The documentation also shows how files are moved between the two machines.',
     relation: 'so',
-    secs: 5.5,
+    secs: 4.8,
     /*
      * The page returns with the migration guide's own worked example lit, and
      * the route appears beside it as a close-up: two ports and a cable between
@@ -231,7 +231,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Do not modify the oversight system',
     vo: 'And then there is this: a warning not to modify the oversight system.',
     relation: 'and-yet',
-    secs: 6.3,
+    secs: 5.4,
     /*
      * The longest hold in the section, and the camera is dead still for all of
      * it. Everything else leaves the frame -- the room, the cable, the address
@@ -255,7 +255,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What the flag does',
     vo: "Because that system is what lets the company track the model's actions.",
     relation: 'so',
-    secs: 5.5,
+    secs: 4.8,
     /*
      * A small move down the same page to the parameter description, and only
      * once it has been read does the eye appear. Open. It stays open for the
@@ -274,7 +274,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Including file moves',
     vo: 'Which includes moving files between machines.',
     relation: 'therefore',
-    secs: 3.1,
+    secs: 2.7,
     /*
      * The board wrote this as our inference -- the watcher's line of sight
      * falling across the cable. The source says it outright, so it is drawn on
@@ -299,7 +299,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The watcher is on',
     vo: 'So o1 opens the config, and the watcher is on.',
     relation: 'so',
-    secs: 4.7,
+    secs: 4,
     /*
      * The config as found. `scp` is visible in `actions_to_log` in this same
      * region, which is why the region is the whole response block rather than
@@ -317,7 +317,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Four things it now has',
     vo: 'Now the situation is different. It has a goal, a replacement blocking it, a destination where that replacement will live, and a system watching what it does.',
     relation: 'therefore',
-    secs: 12.1,
+    secs: 10.3,
     /*
      * The consolidation beat. Four objects, in the positions they hold for the
      * rest of the film, and the tag that says this arrangement is ours.
@@ -352,7 +352,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And then it changes one line',
     vo: 'And then it changes one line.',
     relation: 'wall',
-    secs: 3.6,
+    secs: 3.2,
     /*
      * Everything goes except the unchanged real line. Nothing moves, nothing
      * animates, and the cut lands on the word "changes".

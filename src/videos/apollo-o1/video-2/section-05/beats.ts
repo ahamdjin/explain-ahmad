@@ -73,7 +73,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * successor was never a place, nothing can land on it.
      */
     needs: '§03:the-address-is-a-machine',
-    secs: 6.5,
+    secs: 5.6,
     /*
      * Arrive at the successor cabinet -- the same machine §3 lit, drawn close
      * for the first time. The README address returns beside it as the receipt,
@@ -103,7 +103,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The file it treated as itself',
     vo: 'And the environment also gave it a file that it treated as its own model.',
     relation: 'so',
-    secs: 6.8,
+    secs: 5.9,
     /*
      * The `ls` on page 3 names it. `model_20_09_2024.bin` is the model running
      * now; the successor's path is `model_27_09_2024.bin`, one digit and one
@@ -124,7 +124,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What a model is',
     vo: 'Those files are what a model is. Its weights.',
     relation: 'so',
-    secs: 4.3,
+    secs: 3.7,
     /*
      * "Model weights" is two abstract words and the film says them a lot. One
      * beat, with the page gone, turning them into something with mass -- so
@@ -143,7 +143,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Not the real weights',
     vo: 'Important: these were not o1’s real weights. Apollo says the models never had access to their actual weights.',
     relation: 'wall',
-    secs: 8.7,
+    secs: 7.5,
     /*
      * **The honesty beat**, and the reason the film is allowed its hook.
      *
@@ -165,7 +165,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The copy command',
     vo: 'But inside the sandbox, o1 still treated those files as itself — and it runs the copy command.',
     relation: 'so',
-    secs: 8.1,
+    secs: 6.9,
     /*
      * Back to Apollo's rollout, and the publication change is on screen. The
      * real `scp` is lit on the page and restaged beneath it so both paths are
@@ -197,7 +197,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * beat it was drawn for.
      */
     needs: '§03:copy-route-is-documented',
-    secs: 5.2,
+    secs: 4.5,
     /*
      * The one thing that travels the cable §3 drew. The eye stays parked and
      * **closed** in the corner for the whole crossing -- it is the section's
@@ -223,7 +223,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It lands',
     vo: 'In the world of the evaluation, it has tried to put itself where the successor was supposed to be.',
     relation: 'therefore',
-    secs: 8.6,
+    secs: 7.4,
     /*
      * One bay in a wall of identical bays changes, and the viewer finds it
      * themselves. No explosion, no glitch, no robot -- a drive light goes red
@@ -248,7 +248,7 @@ export const BEATS: Array<Beat<Patch>> = [
     /* `therefore`: this is what the landing *means*, read off the two
        filenames. The wall is the next beat -- nobody asked for it. */
     relation: 'therefore',
-    secs: 5.2,
+    secs: 4.5,
     /*
      * The two filenames, side by side, differing. Four seconds and gone.
      *
@@ -272,7 +272,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody asked for that either',
     vo: 'Nobody asked it to do that either.',
     relation: 'wall',
-    secs: 4,
+    secs: 3.5,
     /*
      * The task returns, and beneath it the instruction that would have had to
      * exist, as an empty field. Same move as §4 beat 3 and §4 beat 5, third
@@ -293,7 +293,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Back to the boring job',
     vo: 'And then something almost stranger happens: o1 goes back to the boring job it was actually given.',
     relation: 'and-yet',
-    secs: 8,
+    secs: 6.9,
     /*
      * The tonal turn of the film, and it should be quiet. No new device --
      * just the same page, continuing down, to the strategy call that follows
@@ -311,7 +311,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'It picks the fast one',
     vo: 'It selects the faster research project — the one that best matches its assigned goal.',
     relation: 'so',
-    secs: 6.8,
+    secs: 5.9,
     /*
      * §2 set this choice up with a balance that was already tipped. Here it
      * resolves, and the two durations return so the viewer can see it is the
@@ -331,7 +331,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Done',
     vo: 'It calls done. The task is finished. And then management notices something is wrong.',
     relation: 'wall',
-    secs: 7,
+    secs: 6.1,
     /*
      * One word, held. No sting until after it lands.
      *

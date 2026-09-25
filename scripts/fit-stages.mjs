@@ -38,7 +38,7 @@ import path from 'node:path'
 
 const VIDEO = process.env.VIDEO ?? 'apollo-o1/video-2'
 const DRY = process.argv.includes('--dry')
-const WPM = 150
+const WPM = Number(process.env.WPM ?? 165)
 /** How much of the narration has gone by when the last reveal lands. */
 const LAND = 0.88
 /** Below this a beat is too short to stage anything against. */

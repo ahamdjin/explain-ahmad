@@ -20,9 +20,15 @@
  * would trade the problem that was asked about for one that was not. They are
  * reported instead, and settled when the voice-over is actually recorded.
  *
- * Narration is estimated at 140wpm rather than 150: the voice-over is not
- * recorded yet, and a beat that is slightly too long can be trimmed in the
- * edit while one that is too short clips the read.
+ * Narration is estimated at 165wpm, which is the rate this film is read at
+ * and the rate `fit-stages` and `recording-script` both use. They were on
+ * three different numbers and quietly disagreed about how long a sentence
+ * takes; `WPM` overrides all three together.
+ *
+ * 165 is not a guess about the reader -- it is the constraint. The script is
+ * 1437 words, so at 140wpm the narration alone is 10:16 and a ten-minute
+ * film is unreachable without cutting words. At 165 it is 8:43, and the
+ * holds built from it come to 10:04.
  *
  * `pad` is the breath after the point lands, and it is the one part that is a
  * judgement rather than a measurement -- a `wall` needs the silence, a `so`
@@ -48,7 +54,7 @@ const VIDEO = process.env.VIDEO ?? 'apollo-o1/video-2'
 const DRY = process.argv.includes('--dry')
 /** Two-way: grow a short beat as well as trim a long one. */
 const FIT = process.argv.includes('--fit')
-const WPM = 140
+const WPM = Number(process.env.WPM ?? 165)
 const SETTLE = 0.8
 /** The breath after the point has landed. A wall earns one; a `so` does not. */
 const PAD = { wall: 1.8, 'and-yet': 1.3, hope: 1.0, want: 0.9, therefore: 0.9, so: 0.7 }

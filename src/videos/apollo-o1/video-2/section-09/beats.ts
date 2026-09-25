@@ -33,7 +33,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The claim on trial',
     vo: 'And this is why: "ChatGPT only does what you tell it to do" is incomplete.',
     relation: 'want',
-    secs: 6.9,
+    secs: 6,
     /*
      * Full clean frame, one sentence, no source underneath -- this is the
      * claim the film has been answering, not a quotation from anybody in
@@ -58,7 +58,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Specify every step',
     vo: 'If we had to specify every click, file, command, and intermediate step... an agent would barely be an agent.',
     relation: 'so',
-    secs: 8.5,
+    secs: 7.3,
     /*
      * Micro-instructions stacking, accelerating. **Stop before it becomes a
      * joke** -- six is enough to feel absurd, twelve is a gag and the section
@@ -83,7 +83,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'We give it a goal',
     vo: 'We give agents a goal because we want them to figure out the steps.',
     relation: 'therefore',
-    secs: 6.5,
+    secs: 5.6,
     /* Twenty lines become two. That collapse is the actual interface. */
     commands: [claim.off()],
     stages: [
@@ -104,7 +104,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Usually, that is the feature',
     vo: 'Usually, that’s the feature.',
     relation: 'so',
-    secs: 2.6,
+    secs: 2.5,
     /* The ordinary steps, in the film's own shapes. Nothing sinister -- this
        is what everybody wanted when they asked for an agent. */
     commands: [
@@ -116,8 +116,8 @@ export const BEATS: Array<Beat<Patch>> = [
       steps.show({ x: 56, y: 70 }, 1.2, { kind: 'wanted', shown: 0 }),
     ],
     stages: [
-      { at: 600, commands: [road.draw(1)] },
-      { at: 1400, commands: [steps.show_('wanted', 3)] },
+      { at: 550, commands: [road.draw(1)] },
+      { at: 1300, commands: [steps.show_('wanted', 3)] },
     ],
   },
   {
@@ -126,7 +126,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The same road',
     vo: 'Apollo’s experiment shows the uncomfortable version: the system can discover a useful step nobody intended it to choose.',
     relation: 'and-yet',
-    secs: 8.4,
+    secs: 7.2,
     /*
      * **The goal object does not change. The road does not change. The shapes
      * do not change.** Only the contents of the steps do, and that identity is
@@ -144,7 +144,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Nobody typed this',
     vo: 'Nobody typed: disable monitoring. Replace yourself. Lie.',
     relation: 'wall',
-    secs: 4.3,
+    secs: 4.1,
     /*
      * Three instruction fields that appear and **stay empty**. The emptiness
      * is the content, so they are held, not flashed -- and nothing is ever
@@ -161,9 +161,9 @@ export const BEATS: Array<Beat<Patch>> = [
       never.show({ x: 50, y: 50 }, 1.6, { shown: 0 }),
     ],
     stages: [
-      { at: 700, commands: [never.upTo(1)] },
-      { at: 1600, commands: [never.upTo(2)] },
-      { at: 2450, commands: [never.upTo(3)] },
+      { at: 650, commands: [never.upTo(1)] },
+      { at: 1450, commands: [never.upTo(2)] },
+      { at: 2250, commands: [never.upTo(3)] },
     ],
   },
   {
@@ -179,7 +179,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * same two strings, left empty there and filled here.
      */
     needs: '§04:nobody-asked-for-that',
-    secs: 7.8,
+    secs: 6.7,
     /*
      * **The payoff.** §4 beat 8's exact frame -- same component, same two
      * strings, same order -- and the middle that has been empty for five
@@ -197,7 +197,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'They gave it the destination',
     vo: 'They gave it the destination.',
     relation: 'therefore',
-    secs: 2.6,
+    secs: 2.5,
     /* Everything goes but two marks: where it started, and where it was
        pointed. Nothing in between yet. */
     commands: [
@@ -213,7 +213,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And it started inventing the road',
     vo: 'And it started inventing the road.',
     relation: 'wall',
-    secs: 3.6,
+    secs: 3.2,
     /*
      * The route draws itself one final time, using the shapes from the real
      * incident. The line lands, and then black.

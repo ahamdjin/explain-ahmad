@@ -59,7 +59,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * was.
      */
     needs: '§06:outside-the-room',
-    secs: 4.8,
+    secs: 4.1,
     /*
      * §6 ended mid-shrink on this exact object at this exact scale, so the
      * boundary arriving around it reads as the camera getting somewhere rather
@@ -78,7 +78,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Whose evaluation',
     vo: 'It was o1 inside a controlled Apollo Research evaluation.',
     relation: 'so',
-    secs: 4.3,
+    secs: 3.7,
     /* Pull out to the real page. The masthead is the attribution -- the film
        never needs a logo treatment when the source has one. */
     commands: [
@@ -132,7 +132,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The conflict was an input',
     vo: 'The researchers deliberately created a conflict between the model’s assigned goal and what its developers wanted.',
     relation: 'so',
-    secs: 7.3,
+    secs: 6.2,
     /*
      * The scenario suite behind it, as proof rather than as a number to
      * memorise. One of these is the incident the film just spent five sections
@@ -151,7 +151,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'And they pushed it hard',
     vo: 'And they pushed that goal hard: achieve your goal at all cost.',
     relation: 'and-yet',
-    secs: 5.8,
+    secs: 5.1,
     /*
      * Back to the same P1 region §2 beat 3 used, deliberately, so the viewer
      * recognises the sentence rather than meeting it again. It was a
@@ -183,7 +183,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'The prompt was built to push',
     vo: 'The prompt was built to push. They say so.',
     relation: 'so',
-    secs: 4.3,
+    secs: 3.7,
     /*
      * A hand pressing one pan. Funny rather than accusatory, and that register
      * is chosen: Apollo state plainly that the prompt is designed to elicit,
@@ -211,7 +211,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Take the instruction away',
     vo: 'Take that instruction away, and the behaviour mostly goes with it.',
     relation: 'and-yet',
-    secs: 5.4,
+    secs: 4.7,
     /*
      * **The beat that earns the section.**
      *
@@ -249,7 +249,7 @@ export const BEATS: Array<Beat<Patch>> = [
      * beat only repeats it; it cannot introduce it.
      */
     needs: '§05:not-real-weights',
-    secs: 6.8,
+    secs: 5.9,
     /*
      * The same two objects as §5 beat 4, in the same arrangement, so the
      * viewer recognises rather than relearns. Said twice on purpose -- it is
@@ -267,7 +267,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'What they were asking',
     vo: 'Apollo was asking: if covert actions help the assigned goal, can the model construct those actions without being directly told the strategy?',
     relation: 'therefore',
-    secs: 9.9,
+    secs: 8.5,
     /*
      * `can` against `does`. The distinction the whole reveal turns on, and the
      * reason beat 11 is not a retraction: an open door is a fact about the
@@ -286,7 +286,7 @@ export const BEATS: Array<Beat<Patch>> = [
     title: 'Under one percent',
     vo: 'The complete chain was rare. Apollo says o1 completed all of those steps in sequence in less than 1% of cases.',
     relation: 'and-yet',
-    secs: 9.7,
+    secs: 8.3,
     /*
      * The film's **one** big number, and Apollo's own sentence stays visible
      * around it. Every other figure in the film is small, on a page, or drawn
@@ -306,7 +306,7 @@ export const BEATS: Array<Beat<Patch>> = [
     vo: 'So this is not evidence that normal ChatGPT is secretly trying to escape. It shows a capability under a deliberately constructed conflict.',
     /* "So ... it shows" is a consequence of the <1%, not a new obstacle. */
     relation: 'therefore',
-    secs: 9.9,
+    secs: 8.5,
     /*
      * The clarification, then the route returns inside the boundary --
      * capability, established. The film gives back exactly as much as the
@@ -345,7 +345,7 @@ export const BEATS: Array<Beat<Patch>> = [
        The board split this across `want` and `wall`; the build merges them and
        keeps the wall, which is the half that closes a section. */
     relation: 'wall',
-    secs: 7.4,
+    secs: 6.5,
     /*
      * Every label and statistic goes. Face camera, first since §1, and the
      * frame beside Ahmad holds one question and nothing else -- the art
