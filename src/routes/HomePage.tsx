@@ -7,11 +7,15 @@ export default function HomePage() {
   return (
     <main className="home-page">
       <section className="home-hero" aria-labelledby="film-2-title">
-        <p className="home-kicker">In build · 9 chapters · ~11:00</p>
+        {/* Runtime is the sum of every beat's `secs`; `npm run narration:v2`
+            prints it, and the number below is what that last reported. */}
+        <p className="home-kicker">Ready to record · 9 chapters · 9:58</p>
         <p className="home-name">{VIDEO2_NAME}</p>
         <h1 id="film-2-title">{VIDEO2_TITLE}</h1>
         <p className="home-intro">
           The Apollo Research o1 evaluation, drawn from the transcripts and the system card.
+          Read from <code>video-script/video-2/NARRATION.md</code> at about 165 words a minute —
+          every beat is held to its own line at that speed.
         </p>
         <div className="home-actions">
           <Link className="home-button home-button-primary" to={VIDEO2_PATH}>
